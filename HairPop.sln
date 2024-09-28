@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{01978803-FEF4-4A11-AF01-CF0EDD55FF27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairPop.Core", "src\HairPop.Core\HairPop.Core.csproj", "{A1D18BCA-5C5D-40C1-99BF-A41E3D3AC6A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairPop.Developer.Cli", "src\HairPop.Developer.Cli\HairPop.Developer.Cli.csproj", "{6D5E7005-8380-42C6-B99D-C7C08A7283FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairPop.Infrastructure", "src\HairPop.Infrastructure\HairPop.Infrastructure.csproj", "{FE9E2C91-0B19-4D19-904C-83BA6F14AFD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairPop.Api", "src\HairPop.Api\HairPop.Api.csproj", "{9988AF1C-DF12-4146-867B-1CD4FE620037}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1D18BCA-5C5D-40C1-99BF-A41E3D3AC6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1D18BCA-5C5D-40C1-99BF-A41E3D3AC6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1D18BCA-5C5D-40C1-99BF-A41E3D3AC6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1D18BCA-5C5D-40C1-99BF-A41E3D3AC6A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D5E7005-8380-42C6-B99D-C7C08A7283FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D5E7005-8380-42C6-B99D-C7C08A7283FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D5E7005-8380-42C6-B99D-C7C08A7283FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D5E7005-8380-42C6-B99D-C7C08A7283FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE9E2C91-0B19-4D19-904C-83BA6F14AFD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE9E2C91-0B19-4D19-904C-83BA6F14AFD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE9E2C91-0B19-4D19-904C-83BA6F14AFD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE9E2C91-0B19-4D19-904C-83BA6F14AFD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9988AF1C-DF12-4146-867B-1CD4FE620037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9988AF1C-DF12-4146-867B-1CD4FE620037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9988AF1C-DF12-4146-867B-1CD4FE620037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9988AF1C-DF12-4146-867B-1CD4FE620037}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A1D18BCA-5C5D-40C1-99BF-A41E3D3AC6A6} = {01978803-FEF4-4A11-AF01-CF0EDD55FF27}
+		{6D5E7005-8380-42C6-B99D-C7C08A7283FD} = {01978803-FEF4-4A11-AF01-CF0EDD55FF27}
+		{FE9E2C91-0B19-4D19-904C-83BA6F14AFD9} = {01978803-FEF4-4A11-AF01-CF0EDD55FF27}
+		{9988AF1C-DF12-4146-867B-1CD4FE620037} = {01978803-FEF4-4A11-AF01-CF0EDD55FF27}
+	EndGlobalSection
+EndGlobal
