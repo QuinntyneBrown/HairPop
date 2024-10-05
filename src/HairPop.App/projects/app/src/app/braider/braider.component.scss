@@ -1,0 +1,32 @@
+:host {
+    margin:0;
+    padding:0;
+    display: grid;
+    height: 446px;    
+    grid-template-rows: 1fr 1fr;
+    border: none;
+    * {
+        margin:0;
+        padding:0;
+        border: none;
+    }
+
+    .info {
+        display: block;
+        height: 108px;
+        background-color: #fff;
+        padding: 30px;
+        
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 24px;
+            font-weight: 300;
+            font-size: 14px;
+        }
+    }
+}
