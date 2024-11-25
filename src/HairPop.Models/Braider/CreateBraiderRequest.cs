@@ -5,4 +5,7 @@ using MediatR;
 
 namespace HairPop.Models.Braider;
 
-public class CreateBraiderRequest: IRequest<CreateBraiderResponse> { }
+public class CreateBraiderRequest: IRequest<CreateBraiderResponse> {
+
+    public string Name { get; set; }
+}

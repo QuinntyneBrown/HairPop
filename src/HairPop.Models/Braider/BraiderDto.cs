@@ -6,5 +6,6 @@ namespace HairPop.Models.Braider;
 public class BraiderDto
 {
     public Guid BraiderId { get; set; }
+    public string Name { get; set; }
 }
 

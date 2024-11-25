@@ -5,4 +5,7 @@ using MediatR;
 
 namespace HairPop.Models.User;
 
-public class GetUsersRequest: IRequest<GetUsersResponse> { }
+public class GetUsersRequest : IRequest<GetUsersResponse>
+{
+
+}

@@ -8,13 +8,15 @@
     <NoWarn>1998,4014,,SA1101,SA1600,,SA1200,SA1633,1591,SA1309</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <InvariantGlobalization>false</InvariantGlobalization>
+    <NoWarn>1998,4014,,SA1101,SA1600,,SA1200,SA1633,1591,SA1309</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <NoWarn>1998,4014,,SA1101,SA1600,,SA1200,SA1633,1591,SA1309</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HairPop.Models\HairPop.Models.csproj" />
   </ItemGroup>
 </Project>

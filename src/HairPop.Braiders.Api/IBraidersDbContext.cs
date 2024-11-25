@@ -1,11 +1,10 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace HairPop.Models.Braider;
+namespace HairPop.Braiders.Api;
 
-public class Braider
+public interface IBraidersDbContext
 {
-    public Guid BraiderId { get; set; }
-    public string Name { get; set; }
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
 

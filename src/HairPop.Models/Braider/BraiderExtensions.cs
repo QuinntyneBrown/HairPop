@@ -10,9 +10,8 @@ public static class BraiderExtensions
         return new BraiderDto()
         {
             BraiderId = braider.BraiderId,
+            Name = braider.Name,
         };
-
     }
-
 }
 

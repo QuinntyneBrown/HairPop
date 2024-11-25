@@ -10,9 +10,8 @@ public static class UserExtensions
         return new UserDto()
         {
             UserId = user.UserId,
+
+            Username = user.Username,
         };
-
     }
-
 }
-

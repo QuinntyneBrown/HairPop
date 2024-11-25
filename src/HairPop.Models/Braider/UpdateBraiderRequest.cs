@@ -8,5 +8,6 @@ namespace HairPop.Models.Braider;
 public class UpdateBraiderRequest: IRequest<UpdateBraiderResponse>
 {
     public Guid BraiderId { get; set; }
+    public string Name { get; set; }
 }
 

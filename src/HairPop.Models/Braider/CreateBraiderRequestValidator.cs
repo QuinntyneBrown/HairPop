@@ -8,7 +8,9 @@ namespace HairPop.Models.Braider;
 public class CreateBraiderRequestValidator: AbstractValidator<CreateBraiderRequest>
 {
     public CreateBraiderRequestValidator(){
-
+        RuleFor(x => x.Name)
+            .NotNull()
+            .NotEmpty();
     }
 
 }
