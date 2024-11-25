@@ -17,4 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HairPop.Models\HairPop.Models.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
 </Project>

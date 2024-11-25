@@ -20,4 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\HairPop.Braiders.Api\HairPop.Braiders.Api.csproj" />
+  </ItemGroup>
 </Project>

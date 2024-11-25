@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{01978803-FEF4-4A11-AF01-CF0EDD55FF27}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "HairPop.App", "src\HairPop.App\HairPop.App.esproj", "{F13DB65D-121D-41CC-B917-166A5C5C8689}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{782231A7-B1A4-49CE-A673-172D34693CFF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairPop.Models.Tests", "test\HairPop.Models.Tests\HairPop.Models.Tests.csproj", "{54B65CF8-0A26-4498-B7A9-B0850333C859}"
@@ -15,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairPop.Models", "src\HairP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairPop.Braiders.Api", "src\HairPop.Braiders.Api\HairPop.Braiders.Api.csproj", "{2F18A2CF-CE0D-4703-BEF8-C408754A8E75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairPop.ApiGateway", "src\HairPop.ApiGateway\HairPop.ApiGateway.csproj", "{2C7F19EF-6B7F-40FC-A235-C02CA7D90FE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairPop.ApiGateway", "src\HairPop.ApiGateway\HairPop.ApiGateway.csproj", "{2C7F19EF-6B7F-40FC-A235-C02CA7D90FE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairPop.Braiders.Api.Tests", "test\HairPop.Braiders.Api.Tests\HairPop.Braiders.Api.Tests.csproj", "{30C7A2DE-2E57-4555-8221-770756CFEF59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairPop.Braiders.Api.Tests", "test\HairPop.Braiders.Api.Tests\HairPop.Braiders.Api.Tests.csproj", "{30C7A2DE-2E57-4555-8221-770756CFEF59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,12 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F13DB65D-121D-41CC-B917-166A5C5C8689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F13DB65D-121D-41CC-B917-166A5C5C8689}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F13DB65D-121D-41CC-B917-166A5C5C8689}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{F13DB65D-121D-41CC-B917-166A5C5C8689}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F13DB65D-121D-41CC-B917-166A5C5C8689}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F13DB65D-121D-41CC-B917-166A5C5C8689}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{54B65CF8-0A26-4498-B7A9-B0850333C859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54B65CF8-0A26-4498-B7A9-B0850333C859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54B65CF8-0A26-4498-B7A9-B0850333C859}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,7 +48,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F13DB65D-121D-41CC-B917-166A5C5C8689} = {01978803-FEF4-4A11-AF01-CF0EDD55FF27}
 		{54B65CF8-0A26-4498-B7A9-B0850333C859} = {782231A7-B1A4-49CE-A673-172D34693CFF}
 		{AE8A5F02-2885-4710-A041-D1F7436252DF} = {01978803-FEF4-4A11-AF01-CF0EDD55FF27}
 		{2F18A2CF-CE0D-4703-BEF8-C408754A8E75} = {01978803-FEF4-4A11-AF01-CF0EDD55FF27}
