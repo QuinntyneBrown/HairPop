@@ -11,11 +11,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HairPop.Models\HairPop.Models.csproj" />
+    <ProjectReference Include="..\HairPop.Core\HairPop.Core.csproj" />
+    <ProjectReference Include="..\HairPop.Infrastructure\HairPop.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

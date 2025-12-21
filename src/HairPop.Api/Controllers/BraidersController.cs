@@ -4,7 +4,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
-using HairPop.Models.Braider;
+using HairPop.Core.Braider;
 
 namespace HairPop.Api.Controllers;
 
