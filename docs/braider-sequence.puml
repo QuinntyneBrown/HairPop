@@ -1,0 +1,109 @@
+@startuml Braider CRUD Sequence
+
+title Braider Management - Sequence Diagram
+
+skinparam backgroundColor #FEFEFE
+skinparam sequenceMessageAlign center
+skinparam defaultFontName Arial
+
+actor Customer
+participant "Angular SPA" as SPA
+participant "API Gateway" as Gateway
+participant "BraidersController" as Controller
+participant "MediatR" as Mediator
+participant "Handler" as Handler
+participant "Validator" as Validator
+participant "DbContext" as DB
+
+== Get All Braiders ==
+Customer -> SPA : Browse Braiders
+SPA -> Gateway : GET /api/braiders
+Gateway -> Controller : Route Request
+Controller -> Mediator : Send(GetBraidersRequest)
+Mediator -> Handler : Handle Request
+Handler -> DB : Query Braiders
+DB --> Handler : List of Braiders
+Handler --> Mediator : GetBraidersResponse
+Mediator --> Controller : Response
+Controller --> Gateway : 200 OK with Data
+Gateway --> SPA : JSON Response
+SPA --> Customer : Display Braiders Grid
+
+== Get Braider By ID ==
+Customer -> SPA : Select Braider
+SPA -> Gateway : GET /api/braiders/id
+Gateway -> Controller : Route Request
+Controller -> Mediator : Send(GetBraiderByIdRequest)
+Mediator -> Handler : Handle Request
+Handler -> DB : Find Braider
+alt Braider Found
+    DB --> Handler : Braider Entity
+    Handler --> Mediator : GetBraiderByIdResponse
+    Mediator --> Controller : Response
+    Controller --> Gateway : 200 OK
+    Gateway --> SPA : JSON Response
+    SPA --> Customer : Display Braider Details
+else Braider Not Found
+    DB --> Handler : null
+    Handler --> Mediator : Response with null
+    Mediator --> Controller : Response
+    Controller --> Gateway : 404 Not Found
+    Gateway --> SPA : Error Response
+    SPA --> Customer : Show Error Message
+end
+
+== Create Braider ==
+Customer -> SPA : Fill Create Form
+SPA -> Gateway : POST /api/braiders
+Gateway -> Controller : Route Request
+Controller -> Mediator : Send(CreateBraiderRequest)
+Mediator -> Validator : Validate Request
+alt Validation Passes
+    Validator --> Mediator : Valid
+    Mediator -> Handler : Handle Request
+    Handler -> DB : Create Braider
+    DB --> Handler : Saved Entity
+    Handler --> Mediator : CreateBraiderResponse
+    Mediator --> Controller : Response
+    Controller --> Gateway : 200 OK
+    Gateway --> SPA : JSON Response
+    SPA --> Customer : Show Success
+else Validation Fails
+    Validator --> Mediator : Invalid
+    Mediator --> Controller : Validation Error
+    Controller --> Gateway : 400 Bad Request
+    Gateway --> SPA : Error Response
+    SPA --> Customer : Show Validation Errors
+end
+
+== Update Braider ==
+Customer -> SPA : Edit Braider Form
+SPA -> Gateway : PUT /api/braiders
+Gateway -> Controller : Route Request
+Controller -> Mediator : Send(UpdateBraiderRequest)
+Mediator -> Validator : Validate Request
+Validator --> Mediator : Valid
+Mediator -> Handler : Handle Request
+Handler -> DB : Update Braider
+DB --> Handler : Updated Entity
+Handler --> Mediator : UpdateBraiderResponse
+Mediator --> Controller : Response
+Controller --> Gateway : 200 OK
+Gateway --> SPA : JSON Response
+SPA --> Customer : Show Success
+
+== Delete Braider ==
+Customer -> SPA : Confirm Delete
+SPA -> Gateway : DELETE /api/braiders/id
+Gateway -> Controller : Route Request
+Controller -> Mediator : Send(DeleteBraiderRequest)
+Mediator -> Handler : Handle Request
+Handler -> DB : Delete Braider
+DB --> Handler : Confirmation
+Handler --> Mediator : DeleteBraiderResponse
+Mediator --> Controller : Response
+Controller --> Gateway : 200 OK
+Gateway --> SPA : Success Response
+SPA --> Customer : Show Confirmation
+
+@enduml
