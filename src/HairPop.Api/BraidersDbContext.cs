@@ -4,7 +4,7 @@
 using HairPop.Models.Braider;
 using Microsoft.EntityFrameworkCore;
 
-namespace HairPop.Braiders.Api;
+namespace HairPop.Api;
 
 public class BraidersDbContext: DbContext, IBraidersDbContext
 {

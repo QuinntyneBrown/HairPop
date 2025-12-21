@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using HairPop.Models.Braider;
 
-namespace HairPop.Braiders.Api.Controllers;
+namespace HairPop.Api.Controllers;
 
 [ApiController]
 [Route("api/braiders")]
