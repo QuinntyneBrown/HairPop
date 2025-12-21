@@ -1,7 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './e2e',
   fullyParallel: true,
   forbidOnly: !!process.env['CI'],
   retries: process.env['CI'] ? 2 : 0,
@@ -13,7 +12,7 @@ export default defineConfig({
   projects: [
     {
       name: 'hairpop',
-      testDir: './e2e/hairpop',
+      testDir: './projects/hairpop/e2e',
       use: {
         ...devices['Desktop Chrome'],
         baseURL: 'http://localhost:4200',
@@ -21,7 +20,7 @@ export default defineConfig({
     },
     {
       name: 'hairpop-admin',
-      testDir: './e2e/hairpop-admin',
+      testDir: './projects/hairpop-admin/e2e',
       use: {
         ...devices['Desktop Chrome'],
         baseURL: 'http://localhost:4201',
