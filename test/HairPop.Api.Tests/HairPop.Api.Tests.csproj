@@ -21,6 +21,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\HairPop.Braiders.Api\HairPop.Braiders.Api.csproj" />
+    <ProjectReference Include="..\..\src\HairPop.Api\HairPop.Api.csproj" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using HairPop.Braiders.Api;
+using HairPop.Api;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
