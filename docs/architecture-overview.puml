@@ -1,0 +1,72 @@
+@startuml HairPop Architecture Overview
+
+!define RECTANGLE class
+
+title HairPop Platform - Architecture Overview
+
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+
+package "Frontend" {
+    [Angular SPA] as SPA
+    note right of SPA
+        Angular 18
+        Standalone Components
+        NGRX State Management
+        Port 4200
+    end note
+}
+
+package "API Layer" {
+    [API Gateway] as Gateway
+    note right of Gateway
+        ASP.NET Core
+        CORS Enabled
+        Request Routing
+        Port 7023
+    end note
+}
+
+package "Microservices" {
+    [Braiders API] as BraidersAPI
+    [Reviews API] as ReviewsAPI
+    [Users API] as UsersAPI
+
+    note bottom of BraidersAPI
+        MediatR Pattern
+        FluentValidation
+        Entity Framework Core
+    end note
+}
+
+package "Data Layer" {
+    database "SQL Database" as DB
+}
+
+package "External Services" {
+    cloud "Email Service" as Email
+    cloud "Payment Gateway" as Payment
+}
+
+actor "Customer" as Customer
+actor "Braider" as Braider
+
+Customer --> SPA : Uses
+Braider --> SPA : Uses
+
+SPA --> Gateway : HTTPS/JSON
+Gateway --> BraidersAPI : HTTP
+Gateway --> ReviewsAPI : HTTP
+Gateway --> UsersAPI : HTTP
+
+BraidersAPI --> DB : EF Core
+ReviewsAPI --> DB : EF Core
+UsersAPI --> DB : EF Core
+
+BraidersAPI ..> Email : Notifications
+UsersAPI ..> Email : Notifications
+Gateway ..> Payment : Process Payments
+
+@enduml
