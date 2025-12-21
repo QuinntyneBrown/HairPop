@@ -1,11 +1,11 @@
 # Software Requirements Specification (SRS)
-## HairPop System - Implementation Requirements
+## {ProjectName} System - Implementation Requirements
 
 ### Document Information
-- **System Name:** HairPop
+- **System Name:** {ProjectName}
 - **Document Type:** Software Requirements Specification
 - **Version:** 1.0
-- **Last Updated:** 2025-12-21
+- **Last Updated:** {Date}
 
 ---
 
@@ -25,9 +25,9 @@
 **Requirement:** The Backend shall have exactly 3 projects with specific names and responsibilities.
 
 **Acceptance Criteria:**
-- [ ] Project `HairPop.Core` exists and contains domain logic
-- [ ] Project `HairPop.Infrastructure` exists and contains infrastructure concerns
-- [ ] Project `HairPop.Api` exists and contains API endpoints
+- [ ] Project `{ProjectName}.Core` exists and contains domain logic
+- [ ] Project `{ProjectName}.Infrastructure` exists and contains infrastructure concerns
+- [ ] Project `{ProjectName}.Api` exists and contains API endpoints
 - [ ] No additional backend projects are created outside this structure
 - [ ] Each project has appropriate project references
 
@@ -50,13 +50,13 @@
 - [ ] No mapping logic exists in the Core project
 
 #### REQ-SYS-005: Data Access Pattern
-**Requirement:** The system shall not use IRepositories, instead use the IHairPopContext interface.
+**Requirement:** The system shall not use IRepositories, instead use the I{ProjectName}Context interface.
 
 **Acceptance Criteria:**
 - [ ] No IRepository interfaces exist in the codebase
-- [ ] IHairPopContext interface is defined and used for data access
-- [ ] All data access operations use IHairPopContext
-- [ ] IHairPopContext is properly injected via dependency injection
+- [ ] I{ProjectName}Context interface is defined and used for data access
+- [ ] All data access operations use I{ProjectName}Context
+- [ ] I{ProjectName}Context is properly injected via dependency injection
 
 #### REQ-SYS-006: Identifier Naming Convention
 **Requirement:** The system shall include the name of the entity in identifier properties.
@@ -101,28 +101,28 @@ Don't: Id
 
 ---
 
-## 2. Core Project Requirements (HairPop.Core)
+## 2. Core Project Requirements ({ProjectName}.Core)
 
 ### 2.1 Project Setup and Structure
 
 #### REQ-CORE-001: Project Naming
-**Requirement:** The core project shall be named HairPop.Core.
+**Requirement:** The core project shall be named {ProjectName}.Core.
 
 **Acceptance Criteria:**
-- [ ] Project file is named `HairPop.Core.csproj`
-- [ ] Assembly name is `HairPop.Core`
-- [ ] Default namespace is `HairPop.Core`
+- [ ] Project file is named `{ProjectName}.Core.csproj`
+- [ ] Assembly name is `{ProjectName}.Core`
+- [ ] Default namespace is `{ProjectName}.Core`
 
 #### REQ-CORE-002: Aggregate Location
-**Requirement:** Aggregates shall go in the HairPop.Core\Model folder.
+**Requirement:** Aggregates shall go in the {ProjectName}.Core\Model folder.
 
 **Acceptance Criteria:**
-- [ ] `Model` folder exists at the root of HairPop.Core project
+- [ ] `Model` folder exists at the root of {ProjectName}.Core project
 - [ ] All aggregate root folders are contained within the Model folder
 - [ ] No aggregates exist outside the Model folder structure
 
 #### REQ-CORE-003: Aggregate Folder Structure
-**Requirement:** Each aggregate shall have a folder in the HairPop.Core\Model folder called HairPop.Core\Model\{aggregate}Aggregate.
+**Requirement:** Each aggregate shall have a folder in the {ProjectName}.Core\Model folder called {ProjectName}.Core\Model\{aggregate}Aggregate.
 
 **Acceptance Criteria:**
 - [ ] Each aggregate has its own folder following the naming pattern `{Aggregate}Aggregate`
@@ -132,16 +132,16 @@ Don't: Id
 
 **Example:**
 ```
-HairPop.Core\Model\CustomerAggregate
-HairPop.Core\Model\AppointmentAggregate
-HairPop.Core\Model\BraiderAggregate
+{ProjectName}.Core\Model\CustomerAggregate
+{ProjectName}.Core\Model\OrderAggregate
+{ProjectName}.Core\Model\ProductAggregate
 ```
 
 #### REQ-CORE-004: Context Interface
-**Requirement:** The core project shall contain an interface called IHairPopContext with DbSet properties for each entity in the system. The interface represents the persistence surface. The implementation of the interface is in the Infrastructure project.
+**Requirement:** The core project shall contain an interface called I{ProjectName}Context with DbSet properties for each entity in the system. The interface represents the persistence surface. The implementation of the interface is in the Infrastructure project.
 
 **Acceptance Criteria:**
-- [ ] `IHairPopContext` interface exists in HairPop.Core
+- [ ] `I{ProjectName}Context` interface exists in {ProjectName}.Core
 - [ ] Interface contains DbSet<T> properties for all entities
 - [ ] Interface includes SaveChanges and SaveChangesAsync methods
 - [ ] No implementation exists in the Core project
@@ -151,7 +151,7 @@ HairPop.Core\Model\BraiderAggregate
 **Requirement:** The core project shall contain a folder called Services which contains services (interface and classes) with core behavioral logic to the system (Authentication, Emailing, Azure AI Integration, etc.).
 
 **Acceptance Criteria:**
-- [ ] `Services` folder exists at the root of HairPop.Core
+- [ ] `Services` folder exists at the root of {ProjectName}.Core
 - [ ] Each service has both an interface and implementation
 - [ ] Services contain only domain/business logic
 - [ ] Infrastructure concerns are abstracted via interfaces
@@ -160,7 +160,7 @@ HairPop.Core\Model\BraiderAggregate
 ### 2.2 Aggregate Folder Requirements
 
 #### REQ-CORE-006: Aggregate Folder Naming
-**Requirement:** Aggregate folder shall be named HairPop.Core\Model\{aggregate}Aggregate.
+**Requirement:** Aggregate folder shall be named {ProjectName}.Core\Model\{aggregate}Aggregate.
 
 **Acceptance Criteria:**
 - [ ] Folder naming follows the exact pattern
@@ -168,7 +168,7 @@ HairPop.Core\Model\BraiderAggregate
 - [ ] "Aggregate" suffix is always included
 
 #### REQ-CORE-007: Aggregate Contents
-**Requirement:** Inside the HairPop.Core\Model\{aggregate}Aggregate contains all the Entities, Enums, Events and AggregateRoot, etc.
+**Requirement:** Inside the {ProjectName}.Core\Model\{aggregate}Aggregate contains all the Entities, Enums, Events and AggregateRoot, etc.
 
 **Acceptance Criteria:**
 - [ ] All entities belonging to the aggregate are in the aggregate folder
@@ -178,7 +178,7 @@ HairPop.Core\Model\BraiderAggregate
 - [ ] No aggregate-related types exist outside their aggregate folder
 
 #### REQ-CORE-008: Type Organization within Aggregate
-**Requirement:** Each of the types inside of HairPop.Core\Model\{aggregate}Aggregate has their own folder (Events folder, Enums folder, etc.).
+**Requirement:** Each of the types inside of {ProjectName}.Core\Model\{aggregate}Aggregate has their own folder (Events folder, Enums folder, etc.).
 
 **Acceptance Criteria:**
 - [ ] `Events` subfolder exists if the aggregate has events
@@ -189,7 +189,7 @@ HairPop.Core\Model\BraiderAggregate
 
 **Example Structure:**
 ```
-HairPop.Core\Model\CustomerAggregate\
+{ProjectName}.Core\Model\CustomerAggregate\
   ├── Events\
   ├── Enums\
   ├── Customer.cs (Aggregate Root)
@@ -198,25 +198,25 @@ HairPop.Core\Model\CustomerAggregate\
 
 ---
 
-## 3. Infrastructure Project Requirements (HairPop.Infrastructure)
+## 3. Infrastructure Project Requirements ({ProjectName}.Infrastructure)
 
 ### 3.1 Project Structure and Components
 
 #### REQ-INFRA-001: Project Naming
-**Requirement:** The infrastructure project shall be named HairPop.Infrastructure.
+**Requirement:** The infrastructure project shall be named {ProjectName}.Infrastructure.
 
 **Acceptance Criteria:**
-- [ ] Project file is named `HairPop.Infrastructure.csproj`
-- [ ] Assembly name is `HairPop.Infrastructure`
-- [ ] Default namespace is `HairPop.Infrastructure`
+- [ ] Project file is named `{ProjectName}.Infrastructure.csproj`
+- [ ] Assembly name is `{ProjectName}.Infrastructure`
+- [ ] Default namespace is `{ProjectName}.Infrastructure`
 
 #### REQ-INFRA-002: Context Implementation
-**Requirement:** The infrastructure project shall contain the IHairPopContext implementation. The implementation class is called HairPopContext.
+**Requirement:** The infrastructure project shall contain the I{ProjectName}Context implementation. The implementation class is called {ProjectName}Context.
 
 **Acceptance Criteria:**
-- [ ] Class `HairPopContext` exists and implements `IHairPopContext`
-- [ ] HairPopContext inherits from `DbContext`
-- [ ] All DbSet properties from IHairPopContext are implemented
+- [ ] Class `{ProjectName}Context` exists and implements `I{ProjectName}Context`
+- [ ] {ProjectName}Context inherits from `DbContext`
+- [ ] All DbSet properties from I{ProjectName}Context are implemented
 - [ ] Context is registered in dependency injection container
 - [ ] Connection string configuration is properly implemented
 
@@ -252,17 +252,17 @@ HairPop.Core\Model\CustomerAggregate\
 
 ---
 
-## 4. API Project Requirements (HairPop.Api)
+## 4. API Project Requirements ({ProjectName}.Api)
 
 ### 4.1 Project Structure
 
 #### REQ-API-001: Project Naming
-**Requirement:** The API project shall be named HairPop.Api.
+**Requirement:** The API project shall be named {ProjectName}.Api.
 
 **Acceptance Criteria:**
-- [ ] Project file is named `HairPop.Api.csproj`
-- [ ] Assembly name is `HairPop.Api`
-- [ ] Default namespace is `HairPop.Api`
+- [ ] Project file is named `{ProjectName}.Api.csproj`
+- [ ] Assembly name is `{ProjectName}.Api`
+- [ ] Default namespace is `{ProjectName}.Api`
 
 #### REQ-API-002: Features Organization
 **Requirement:** The API project shall have a folder called Features containing all Commands, Queries (using MediatR) grouped in folders by BoundedContext.
@@ -276,14 +276,14 @@ HairPop.Core\Model\CustomerAggregate\
 
 **Example Structure:**
 ```
-HairPop.Api\Features\
+{ProjectName}.Api\Features\
   ├── Customers\
   │   ├── CreateCustomer.cs (Command)
   │   ├── GetCustomerById.cs (Query)
   │   └── UpdateCustomer.cs (Command)
-  └── Appointments\
-      ├── CreateAppointment.cs (Command)
-      └── GetAppointmentsByBraider.cs (Query)
+  └── Orders\
+      ├── CreateOrder.cs (Command)
+      └── GetOrdersByCustomer.cs (Query)
 ```
 
 #### REQ-API-003: DTO Location
@@ -330,8 +330,8 @@ HairPop.Api\Features\
   "CorsPolicy": {
     "AllowedOrigins": [
       "http://localhost:4200",
-      "https://hairpop.com",
-      "https://admin.hairpop.com"
+      "https://{domain}.com",
+      "https://admin.{domain}.com"
     ]
   }
 }
@@ -339,7 +339,7 @@ HairPop.Api\Features\
 
 ---
 
-## 5. Frontend Requirements (HairPop.WebApp)
+## 5. Frontend Requirements ({ProjectName}.WebApp)
 
 ### 5.1 Project Structure and Organization
 
@@ -361,7 +361,7 @@ header.ts
 ```
 
 #### REQ-FE-002: E2E Test Location
-**Requirement:** The e2e folder shall be located in the src folder within the project folder at src/HairPop.WebApp/projects/hairpop/src/e2e.
+**Requirement:** The e2e folder shall be located in the src folder within the project folder at src/{ProjectName}.WebApp/projects/{projectname}/src/e2e.
 
 **Acceptance Criteria:**
 - [ ] E2E tests are located at the specified path
@@ -370,10 +370,10 @@ header.ts
 - [ ] E2E tests are excluded from production builds
 
 #### REQ-FE-003: Frontend Project Naming
-**Requirement:** The frontend shall be named HairPop.WebApp (src\HairPop.WebApp).
+**Requirement:** The frontend shall be named {ProjectName}.WebApp (src\{ProjectName}.WebApp).
 
 **Acceptance Criteria:**
-- [ ] Root folder is named `HairPop.WebApp`
+- [ ] Root folder is named `{ProjectName}.WebApp`
 - [ ] Angular workspace is configured with this name
 - [ ] Package.json reflects the correct project name
 
@@ -387,20 +387,20 @@ header.ts
 - [ ] Build and serve commands work for all projects
 
 #### REQ-FE-005: Standard Frontend Project Naming
-**Requirement:** The frontend project shall be called hairpop if not an admin frontend.
+**Requirement:** The frontend project shall be called {projectname} if not an admin frontend.
 
 **Acceptance Criteria:**
-- [ ] Main frontend project is named `hairpop` (lowercase)
-- [ ] Project is accessible via `ng serve hairpop`
+- [ ] Main frontend project is named `{projectname}` (lowercase)
+- [ ] Project is accessible via `ng serve {projectname}`
 - [ ] Build output goes to appropriate dist folder
 - [ ] Package.json scripts reference correct project name
 
 #### REQ-FE-006: Admin Frontend Project Naming
-**Requirement:** The frontend project shall be called hairpop-admin if it's an admin frontend.
+**Requirement:** The frontend project shall be called {projectname}-admin if it's an admin frontend.
 
 **Acceptance Criteria:**
-- [ ] Admin project is named `hairpop-admin` (lowercase with hyphen)
-- [ ] Project is accessible via `ng serve hairpop-admin`
+- [ ] Admin project is named `{projectname}-admin` (lowercase with hyphen)
+- [ ] Project is accessible via `ng serve {projectname}-admin`
 - [ ] Admin project has separate routing and components
 - [ ] Admin and user frontends can be built independently
 
@@ -592,12 +592,12 @@ header.component.ts
 src/
   ├── pages/
   │   ├── home/
-  │   ├── appointments/
+  │   ├── dashboard/
   │   └── profile/
   └── components/
       ├── header/
       ├── footer/
-      └── appointment-card/
+      └── card/
 ```
 
 #### REQ-FE-022: Barrel Exports
@@ -676,7 +676,36 @@ Each requirement shall be verified through one or more of the following methods:
 
 | Version | Date | Author | Description |
 |---------|------|--------|-------------|
-| 1.0 | 2025-12-21 | System | Initial SRS document created from implementation specifications |
+| 1.0 | {Date} | {Author} | Initial SRS document |
+
+---
+
+### 7.4 Template Usage Instructions
+
+This document is a template for creating project-specific Software Requirements Specifications. To use this template:
+
+1. **Replace Placeholders:**
+   - `{ProjectName}` - Replace with your project name in PascalCase (e.g., "OrderManagement", "InventorySystem")
+   - `{projectname}` - Replace with your project name in lowercase (e.g., "ordermanagement", "inventory")
+   - `{Date}` - Replace with the current date
+   - `{Author}` - Replace with the document author's name
+   - `{domain}` - Replace with your domain name
+
+2. **Review and Customize:**
+   - Review each requirement for applicability to your project
+   - Add project-specific requirements as needed
+   - Remove or modify requirements that don't apply
+   - Update examples to match your domain (e.g., replace "CustomerAggregate" with your actual aggregates)
+
+3. **Track Progress:**
+   - Use the checkboxes to track implementation progress
+   - Update the revision history as the document evolves
+   - Document any deviations from the standard requirements
+
+4. **Maintain:**
+   - Keep the document updated as requirements change
+   - Use version control to track changes over time
+   - Review regularly with stakeholders
 
 ---
 

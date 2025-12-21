@@ -1,6 +1,10 @@
-# HairPop
+<div align="center">
+  <img src="assets/logo.png" alt="HairPop Logo" width="300"/>
 
-A platform for connecting users with professional hair braiders. Users can discover braiders, view their profiles, and leave reviews.
+  # HairPop
+
+  A platform for connecting users with professional hair braiders. Users can discover braiders, view their profiles, and leave reviews.
+</div>
 
 ## Tech Stack
 
@@ -13,9 +17,9 @@ A platform for connecting users with professional hair braiders. Users can disco
 - **Swagger/OpenAPI** - API documentation
 
 ### Frontend
-- **Angular 18** - Frontend framework
-- **Angular Material** - UI component library
-- **RxJS** - Reactive state management
+- **Angular 21** - Frontend framework
+- **NgRx Component Store** - State management
+- **RxJS** - Reactive programming
 - **SignalR** - Real-time communication
 - **Jest** - Unit testing
 - **Playwright** - E2E testing
@@ -25,27 +29,36 @@ A platform for connecting users with professional hair braiders. Users can disco
 ```
 HairPop/
 ├── src/
-│   ├── HairPop.Api/           # ASP.NET Core Web API
-│   │   ├── Controllers/       # API endpoints
-│   │   ├── BraidersDbContext  # EF Core database context
-│   │   └── ConfigureServices  # DI configuration
+│   ├── HairPop.Api/              # ASP.NET Core Web API
+│   │   ├── Controllers/          # API endpoints
+│   │   ├── BraidersDbContext     # EF Core database context
+│   │   └── ConfigureServices     # DI configuration
 │   │
-│   ├── HairPop.Models/        # Domain models and business logic
-│   │   ├── Braider/           # Braider entity, DTOs, validators, handlers
-│   │   ├── User/              # User entity, DTOs, validators, handlers
-│   │   └── Review/            # Review entity, DTOs, validators, handlers
+│   ├── HairPop.Models/           # Domain models and business logic
+│   │   ├── Braider/              # Braider entity, DTOs, validators, handlers
+│   │   ├── User/                 # User entity, DTOs, validators, handlers
+│   │   └── Review/               # Review entity, DTOs, validators, handlers
 │   │
-│   └── HairPop.App/           # Angular frontend workspace
-│       └── projects/app/      # Main Angular application
+│   └── HairPop.App/              # Angular workspace
+│       └── projects/
+│           ├── hairpop/          # Main user-facing application
+│           │   ├── e2e/          # Playwright E2E tests
+│           │   └── src/
+│           └── hairpop-admin/    # Admin dashboard application
+│               ├── e2e/          # Playwright E2E tests
+│               └── src/
 │
 ├── test/
-│   ├── HairPop.Api.Tests/     # API integration tests
-│   └── HairPop.Models.Tests/  # Unit tests for models
+│   ├── HairPop.Api.Tests/        # API integration tests
+│   └── HairPop.Models.Tests/     # Unit tests for models
 │
-└── docs/                      # Architecture documentation
-    ├── specs/                 # Implementation specifications
-    ├── *.puml                 # PlantUML diagrams
-    └── *.drawio               # C4 architecture diagrams
+├── assets/                       # Shared assets
+│   └── logo.png                  # HairPop logo
+│
+└── docs/                         # Architecture documentation
+    └── specs/                    # Implementation specifications
+        ├── *.puml                # PlantUML diagrams
+        └── *.drawio              # C4 architecture diagrams
 ```
 
 ## Domain Entities
@@ -87,17 +100,38 @@ The API will be available at `https://localhost:5001` with Swagger UI at `/swagg
 
 ### Frontend
 ```bash
-# Navigate to the Angular app
+# Navigate to the Angular workspace
 cd src/HairPop.App
 
 # Install dependencies
 npm install
 
-# Start development server
+# Start main application
 npm start
+
+# Or start admin dashboard
+npm run start:admin
 ```
 
-The frontend will be available at `http://localhost:4200`.
+The main app will be available at `http://localhost:4200`.
+The admin dashboard will be available at `http://localhost:4201`.
+
+### Running Tests
+```bash
+# Backend tests
+dotnet test
+
+# Frontend unit tests
+cd src/HairPop.App
+npm test              # Test hairpop
+npm run test:admin    # Test hairpop-admin
+npm run test:all      # Test all projects
+
+# E2E tests
+npm run e2e           # Test hairpop
+npm run e2e:admin     # Test hairpop-admin
+npm run e2e:all       # Test all projects
+```
 
 ## Architecture
 
@@ -112,11 +146,12 @@ See the [docs](./docs) folder for detailed architecture diagrams and specificati
 
 ## Documentation
 
-- [Architecture Overview](./docs/architecture-overview.puml)
-- [Domain Model](./docs/domain-model.puml)
 - [Implementation Specs](./docs/specs/implementation-specs.md)
-- [Backend Specs](./docs/braider-backend-specs.md)
-- [Frontend Specs](./docs/specs/)
+- [Braider Backend Specs](./docs/specs/braider-backend-specs.md)
+- [Review Backend Specs](./docs/specs/review-backend-specs.md)
+- [Architecture Overview](./docs/specs/architecture-overview.puml)
+- [Domain Model](./docs/specs/domain-model.puml)
+- [C4 Diagrams](./docs/specs/) - System context, container, and component diagrams
 
 ## License
 
