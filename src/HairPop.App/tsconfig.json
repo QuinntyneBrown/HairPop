@@ -29,5 +29,13 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "references": [
+    {
+      "path": "./projects/hairpop-admin/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/hairpop-admin/tsconfig.spec.json"
+    }
+  ]
 }

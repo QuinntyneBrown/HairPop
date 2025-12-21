@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "app": {
+    "hairpop": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -14,29 +14,29 @@
           "standalone": true
         }
       },
-      "root": "projects/app",
-      "sourceRoot": "projects/app/src",
+      "root": "projects/hairpop",
+      "sourceRoot": "projects/hairpop/src",
       "prefix": "hp",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/app",
-            "index": "projects/app/src/index.html",
-            "browser": "projects/app/src/main.ts",
+            "outputPath": "dist/hairpop",
+            "index": "projects/hairpop/src/index.html",
+            "browser": "projects/hairpop/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "projects/app/tsconfig.app.json",
+            "tsConfig": "projects/hairpop/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/app/public"
+                "input": "projects/hairpop/public"
               }
             ],
             "styles": [
-              "projects/app/src/styles.scss"
+              "projects/hairpop/src/styles.scss"
             ],
             "scripts": []
           },
@@ -65,19 +65,100 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "app:build:production"
+              "buildTarget": "hairpop:build:production"
             },
             "development": {
-              "buildTarget": "app:build:development"
+              "buildTarget": "hairpop:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n"
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run"
+        }
+      }
+    },
+    "hairpop-admin": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": true,
+          "style": "scss"
+        },
+        "@schematics/angular:directive": {
+          "standalone": true
+        }
+      },
+      "root": "projects/hairpop-admin",
+      "sourceRoot": "projects/hairpop-admin/src",
+      "prefix": "hpa",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/hairpop-admin",
+            "index": "projects/hairpop-admin/src/index.html",
+            "browser": "projects/hairpop-admin/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/hairpop-admin/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/hairpop-admin/public"
+              }
+            ],
+            "styles": [
+              "projects/hairpop-admin/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "hairpop-admin:build:production"
+            },
+            "development": {
+              "buildTarget": "hairpop-admin:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
         },
         "test": {
           "builder": "@angular-builders/jest:run"

@@ -1,0 +1,45 @@
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './e2e',
+  fullyParallel: true,
+  forbidOnly: !!process.env['CI'],
+  retries: process.env['CI'] ? 2 : 0,
+  workers: process.env['CI'] ? 1 : undefined,
+  reporter: 'html',
+  use: {
+    trace: 'on-first-retry',
+  },
+  projects: [
+    {
+      name: 'hairpop',
+      testDir: './e2e/hairpop',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://localhost:4200',
+      },
+    },
+    {
+      name: 'hairpop-admin',
+      testDir: './e2e/hairpop-admin',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://localhost:4201',
+      },
+    },
+  ],
+  webServer: [
+    {
+      command: 'npm run start -- --port 4200',
+      url: 'http://localhost:4200',
+      reuseExistingServer: !process.env['CI'],
+      timeout: 120000,
+    },
+    {
+      command: 'npm run start:admin -- --port 4201',
+      url: 'http://localhost:4201',
+      reuseExistingServer: !process.env['CI'],
+      timeout: 120000,
+    },
+  ],
+});
