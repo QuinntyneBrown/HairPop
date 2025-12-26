@@ -6,6 +6,11 @@
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
+    "paths": {
+      "hairpop-components": [
+        "./dist/hairpop-components"
+      ]
+    },
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -36,6 +41,12 @@
     },
     {
       "path": "./projects/hairpop-admin/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/hairpop-components/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/hairpop-components/tsconfig.spec.json"
     }
   ]
 }

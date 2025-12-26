@@ -1,683 +1,462 @@
 # Software Requirements Specification (SRS)
-## HairPop System - Implementation Requirements
+## HairPop System
 
-### Document Information
-- **System Name:** HairPop
-- **Document Type:** Software Requirements Specification
-- **Version:** 1.0
-- **Last Updated:** 2025-12-21
+**Document Version:** 1.0
+**Date:** 2025-12-21
+**Status:** Final
 
 ---
 
-## 1. System-Wide Requirements
+## 1. Introduction
 
-### 1.1 Architecture and Project Structure
+### 1.1 Purpose
+This Software Requirements Specification (SRS) document provides a comprehensive description of the technical requirements and architectural specifications for the HairPop system. It defines the structural organization, naming conventions, and implementation standards that shall be followed throughout the development lifecycle.
 
-#### REQ-SYS-001: Namespace Organization
-**Requirement:** The system shall use flattened namespaces throughout the codebase.
+### 1.2 Scope
+This specification covers the backend (.NET-based) and frontend (Angular-based) components of the HairPop system, including project structure, architectural patterns, coding conventions, and technology stack requirements.
 
-**Acceptance Criteria:**
-- [ ] All namespaces follow a flat structure without deep nesting
-- [ ] Namespace structure is consistent across all projects
-- [ ] No nested namespaces exceed reasonable depth for the domain
+### 1.3 Definitions, Acronyms, and Abbreviations
+- **SRS**: Software Requirements Specification
+- **API**: Application Programming Interface
+- **DTO**: Data Transfer Object
+- **EF**: Entity Framework
+- **BEM**: Block Element Modifier (CSS naming methodology)
+- **CORS**: Cross-Origin Resource Sharing
+- **DDD**: Domain-Driven Design
 
-#### REQ-SYS-002: Backend Project Structure
-**Requirement:** The Backend shall have exactly 3 projects with specific names and responsibilities.
+### 1.4 Critical Architectural Constraints
 
-**Acceptance Criteria:**
-- [ ] Project `HairPop.Core` exists and contains domain logic
-- [ ] Project `HairPop.Infrastructure` exists and contains infrastructure concerns
-- [ ] Project `HairPop.Api` exists and contains API endpoints
-- [ ] No additional backend projects are created outside this structure
-- [ ] Each project has appropriate project references
+The following architectural constraints are fundamental to the HairPop system and SHALL NOT be violated under any circumstances:
 
-#### REQ-SYS-003: Object Mapping Strategy
-**Requirement:** The system shall NOT use AutoMapper for object mapping.
+1. **No Repository Pattern**: HairPop SHALL NOT use the Repository pattern (IRepository or any repository abstraction) for data persistence. All data access SHALL be performed directly through the `IHairPopContext` interface.
 
-**Acceptance Criteria:**
-- [ ] AutoMapper package is not referenced in any project
-- [ ] No AutoMapper configuration exists in the codebase
-- [ ] Alternative mapping strategy is implemented
+2. **Services in Core (PREFERRED)**: Business logic and domain services SHALL be implemented in `HairPop.Core` whenever possible. This is the **PREFERRED** architectural approach. Services should only be placed outside the Core project when they have explicit infrastructure dependencies.
 
-#### REQ-SYS-004: DTO Mapping Implementation
-**Requirement:** The system shall create and use extension methods of Core models in the Api layer with a ToDto method that returns the mapped DTO.
-
-**Acceptance Criteria:**
-- [ ] Extension methods for Core models exist in the Api layer
-- [ ] Each extension method includes a `ToDto()` method
-- [ ] ToDto methods return appropriately typed DTOs
-- [ ] Extension methods are organized in a consistent location within the Api project
-- [ ] No mapping logic exists in the Core project
-
-#### REQ-SYS-005: Data Access Pattern
-**Requirement:** The system shall not use IRepositories, instead use the IHairPopContext interface.
-
-**Acceptance Criteria:**
-- [ ] No IRepository interfaces exist in the codebase
-- [ ] IHairPopContext interface is defined and used for data access
-- [ ] All data access operations use IHairPopContext
-- [ ] IHairPopContext is properly injected via dependency injection
-
-#### REQ-SYS-006: Identifier Naming Convention
-**Requirement:** The system shall include the name of the entity in identifier properties.
-
-**Acceptance Criteria:**
-- [ ] All entity identifiers follow the pattern `{Entity}Id` (e.g., `CustomerId`, `OrderId`)
-- [ ] No entity uses a generic `Id` property name
-- [ ] Foreign key properties follow the same naming convention
-- [ ] Code review confirms no violations exist
-
-**Examples:**
-```
-Do: CustomerId, OrderId, ProductId
-Don't: Id
-```
-
-#### REQ-SYS-007: File Organization
-**Requirement:** The system shall have exactly one (class, enum, record, etc.) per file.
-
-**Acceptance Criteria:**
-- [ ] Each file contains only one type definition
-- [ ] File names match the type name they contain
-- [ ] No file contains multiple classes, enums, or records
-- [ ] Code analysis rules enforce this constraint
-
-#### REQ-SYS-008: Multiple Object Restriction
-**Requirement:** The system shall NOT have multiple objects defined in a file.
-
-**Acceptance Criteria:**
-- [ ] Static code analysis confirms one type per file
-- [ ] Nested types are only used when semantically required
-- [ ] No file violates the single-type-per-file rule
-
-#### REQ-SYS-009: Database Platform
-**Requirement:** The system shall use SQL Express by default.
-
-**Acceptance Criteria:**
-- [ ] Connection strings are configured for SQL Express
-- [ ] SQL Express is documented as the default database
-- [ ] Development environment uses SQL Express
-- [ ] Migration scripts are compatible with SQL Express
+3. **IHairPopContext as Persistence Surface**: The `IHairPopContext` interface is the single, unified persistence surface for the entire system. No additional abstraction layers SHALL be introduced.
 
 ---
 
-## 2. Core Project Requirements (HairPop.Core)
+## 2. System-Wide Requirements
 
-### 2.1 Project Setup and Structure
+### 2.1 Namespace Architecture
+**REQ-SYS-001**: The system SHALL use flattened namespaces throughout all projects.
 
-#### REQ-CORE-001: Project Naming
-**Requirement:** The core project shall be named HairPop.Core.
+### 2.8 Frontend Theme and Colours
+**REQ-SYS-011**: The frontend SHALL use the default Angular Material colours and theme. No new colours are to be introduced.
 
-**Acceptance Criteria:**
-- [ ] Project file is named `HairPop.Core.csproj`
-- [ ] Assembly name is `HairPop.Core`
-- [ ] Default namespace is `HairPop.Core`
+### 2.2 Backend Project Structure
+**REQ-SYS-002**: The Backend SHALL consist of exactly three (3) projects:
+- HairPop.Core
+- HairPop.Infrastructure
+- HairPop.Api
 
-#### REQ-CORE-002: Aggregate Location
-**Requirement:** Aggregates shall go in the HairPop.Core\Model folder.
+### 2.3 Object Mapping
+**REQ-SYS-003**: The system SHALL NOT use AutoMapper for object mapping.
 
-**Acceptance Criteria:**
-- [ ] `Model` folder exists at the root of HairPop.Core project
-- [ ] All aggregate root folders are contained within the Model folder
-- [ ] No aggregates exist outside the Model folder structure
+**REQ-SYS-004**: The system SHALL create extension methods for Core models in the Api layer with a `ToDto` method that returns the mapped DTO.
 
-#### REQ-CORE-003: Aggregate Folder Structure
-**Requirement:** Each aggregate shall have a folder in the HairPop.Core\Model folder called HairPop.Core\Model\{aggregate}Aggregate.
+### 2.4 Data Access Pattern
+**REQ-SYS-005**: **CRITICAL** - The system SHALL NOT use the Repository pattern (IRepository or any repository abstraction) for persistence. This is a fundamental architectural constraint.
 
-**Acceptance Criteria:**
-- [ ] Each aggregate has its own folder following the naming pattern `{Aggregate}Aggregate`
-- [ ] Folder names end with "Aggregate" suffix
-- [ ] All aggregate-related files are contained within their respective aggregate folder
-- [ ] Folder structure is consistent across all aggregates
+**REQ-SYS-006**: The system SHALL use the `IHairPopContext` interface directly for all data access operations. This interface provides the persistence surface for the entire system.
 
-**Example:**
+### 2.5 Identity Property Naming
+**REQ-SYS-007**: The system SHALL include the name of the entity in identity properties.
+
+**Example (Compliant):**
 ```
-HairPop.Core\Model\CustomerAggregate
-HairPop.Core\Model\AppointmentAggregate
-HairPop.Core\Model\BraiderAggregate
+{Entity}Id
 ```
 
-#### REQ-CORE-004: Context Interface
-**Requirement:** The core project shall contain an interface called IHairPopContext with DbSet properties for each entity in the system. The interface represents the persistence surface. The implementation of the interface is in the Infrastructure project.
-
-**Acceptance Criteria:**
-- [ ] `IHairPopContext` interface exists in HairPop.Core
-- [ ] Interface contains DbSet<T> properties for all entities
-- [ ] Interface includes SaveChanges and SaveChangesAsync methods
-- [ ] No implementation exists in the Core project
-- [ ] Interface is properly documented with XML comments
-
-#### REQ-CORE-005: Core Services
-**Requirement:** The core project shall contain a folder called Services which contains services (interface and classes) with core behavioral logic to the system (Authentication, Emailing, Azure AI Integration, etc.).
-
-**Acceptance Criteria:**
-- [ ] `Services` folder exists at the root of HairPop.Core
-- [ ] Each service has both an interface and implementation
-- [ ] Services contain only domain/business logic
-- [ ] Infrastructure concerns are abstracted via interfaces
-- [ ] Common services include: Authentication, Emailing, Azure AI Integration
-
-### 2.2 Aggregate Folder Requirements
-
-#### REQ-CORE-006: Aggregate Folder Naming
-**Requirement:** Aggregate folder shall be named HairPop.Core\Model\{aggregate}Aggregate.
-
-**Acceptance Criteria:**
-- [ ] Folder naming follows the exact pattern
-- [ ] Aggregate name is in PascalCase
-- [ ] "Aggregate" suffix is always included
-
-#### REQ-CORE-007: Aggregate Contents
-**Requirement:** Inside the HairPop.Core\Model\{aggregate}Aggregate contains all the Entities, Enums, Events and AggregateRoot, etc.
-
-**Acceptance Criteria:**
-- [ ] All entities belonging to the aggregate are in the aggregate folder
-- [ ] All enums specific to the aggregate are in the aggregate folder
-- [ ] All domain events for the aggregate are in the aggregate folder
-- [ ] The aggregate root class is in the aggregate folder
-- [ ] No aggregate-related types exist outside their aggregate folder
-
-#### REQ-CORE-008: Type Organization within Aggregate
-**Requirement:** Each of the types inside of HairPop.Core\Model\{aggregate}Aggregate has their own folder (Events folder, Enums folder, etc.).
-
-**Acceptance Criteria:**
-- [ ] `Events` subfolder exists if the aggregate has events
-- [ ] `Enums` subfolder exists if the aggregate has enums
-- [ ] Each type category has its own dedicated subfolder
-- [ ] Folder structure is consistent across all aggregates
-- [ ] Entity files may be at the root of the aggregate folder or in an Entities subfolder
-
-**Example Structure:**
+**Example (Non-Compliant):**
 ```
-HairPop.Core\Model\CustomerAggregate\
-  ├── Events\
-  ├── Enums\
-  ├── Customer.cs (Aggregate Root)
-  └── CustomerPreference.cs (Entity)
+Id
 ```
+
+### 2.6 File Organization
+**REQ-SYS-008**: The system SHALL have exactly one (1) class, enum, record, or other type definition per file.
+
+**REQ-SYS-009**: The system SHALL NOT have multiple object definitions in a single file.
+
+### 2.7 Database Configuration
+**REQ-SYS-010**: The system SHALL use SQL Server Express as the default database.
+
+### 2.9 Implementation Simplicity
+**REQ-SYS-012**: All implementations in the system SHALL be as simple as possible. Complex solutions SHALL be avoided in favor of straightforward, maintainable approaches that directly solve the problem at hand.
+
+### 2.10 Structured Logging
+**REQ-SYS-013**: **CRITICAL** - The system SHALL implement structured logging using Serilog across all backend areas with appropriate log levels and enrichment.
+
+**REQ-SYS-014**: Information level SHALL log normal operations and API calls.
+
+**REQ-SYS-015**: Warning level SHALL log validation failures and business rule violations.
+
+**REQ-SYS-016**: Error level SHALL log all exceptions and external service failures with complete error details.
+
+**REQ-SYS-017**: Critical level SHALL log system failures and data corruption issues.
+
+**REQ-SYS-018**: Logs SHALL be enriched with CorrelationId, UserId, Timestamp, and relevant context identifiers (e.g., CustomerId, EventId, VenueId).
+
+**REQ-SYS-019**: Environment information SHALL be included in logs.
+
+**REQ-SYS-020**: Logs SHALL be centralized in Azure Log Analytics (production) or appropriate development targets.
+
+**REQ-SYS-021**: Sensitive data (passwords, tokens, credit card information, personal identification numbers) SHALL NOT be logged.
+
+**REQ-SYS-022**: All errors and exceptions SHALL be clearly logged with sufficient context to enable debugging and troubleshooting.
 
 ---
 
-## 3. Infrastructure Project Requirements (HairPop.Infrastructure)
+## 3. Core Project Requirements
 
-### 3.1 Project Structure and Components
+### 3.1 Project Identity
+**REQ-CORE-001**: The Core project SHALL be named `HairPop.Core`.
 
-#### REQ-INFRA-001: Project Naming
-**Requirement:** The infrastructure project shall be named HairPop.Infrastructure.
+### 3.2 Aggregate Organization
+**REQ-CORE-002**: Aggregates SHALL be placed in the `HairPop.Core\Model` folder.
 
-**Acceptance Criteria:**
-- [ ] Project file is named `HairPop.Infrastructure.csproj`
-- [ ] Assembly name is `HairPop.Infrastructure`
-- [ ] Default namespace is `HairPop.Infrastructure`
+**REQ-CORE-003**: Each aggregate SHALL have a dedicated folder in `HairPop.Core\Model` named `HairPop.Core\Model\{Aggregate}Aggregate`.
 
-#### REQ-INFRA-002: Context Implementation
-**Requirement:** The infrastructure project shall contain the IHairPopContext implementation. The implementation class is called HairPopContext.
+### 3.3 Persistence Interface
+**REQ-CORE-004**: The Core project SHALL contain an interface named `IHairPopContext` with DbSet properties for each entity in the system. This interface represents the persistence surface. The implementation of this interface SHALL be located in the Infrastructure project.
 
-**Acceptance Criteria:**
-- [ ] Class `HairPopContext` exists and implements `IHairPopContext`
-- [ ] HairPopContext inherits from `DbContext`
-- [ ] All DbSet properties from IHairPopContext are implemented
-- [ ] Context is registered in dependency injection container
-- [ ] Connection string configuration is properly implemented
+**REQ-CORE-005**: **CRITICAL** - All data access operations throughout the system SHALL use the `IHairPopContext` interface directly. No repository pattern or abstraction layer SHALL be introduced between business logic and the context interface.
 
-#### REQ-INFRA-003: Database Migrations
-**Requirement:** The infrastructure project shall contain EF Migrations.
+### 3.4 Service Layer
+**REQ-CORE-006**: **CRITICAL** - Backend services SHALL be located in a folder named `Services` within the project where they are implemented.
 
-**Acceptance Criteria:**
-- [ ] Migrations folder exists in the project
-- [ ] Initial migration is created
-- [ ] Migrations are properly named and timestamped
-- [ ] All model changes have corresponding migrations
-- [ ] Migration history is maintained in version control
+**REQ-CORE-007**: **CRITICAL** - Backend services SHALL be implemented in `HairPop.Core\Services` whenever possible. This is the **PREFERRED** approach. Business logic, domain services, and application services SHALL reside in the Core project's Services folder unless they have specific infrastructure dependencies that necessitate placement in the Infrastructure project.
 
-#### REQ-INFRA-004: Entity Configurations
-**Requirement:** The infrastructure project shall contain Entity Configurations.
+**REQ-CORE-008**: When infrastructure dependencies require a service to be implemented outside the Core project, the service SHALL be placed in `HairPop.Infrastructure\Services`.
 
-**Acceptance Criteria:**
-- [ ] Entity configurations implement `IEntityTypeConfiguration<T>`
-- [ ] Each entity has its own configuration class
-- [ ] Configurations are organized in a dedicated folder
-- [ ] Configurations are applied in the OnModelCreating method
-- [ ] All relationships, constraints, and indexes are properly configured
+**REQ-CORE-009**: The `HairPop.Core\Services` folder SHALL contain service interfaces and classes with core business logic for the system.
 
-#### REQ-INFRA-005: Data Seeding
-**Requirement:** The infrastructure project shall contain Seeding services.
+**REQ-CORE-010**: Service implementations in `HairPop.Core\Services` SHALL include but are not limited to: Authentication services, Email services, Azure AI Integration services, and other domain-specific business logic services.
 
-**Acceptance Criteria:**
-- [ ] Seed data services are implemented
-- [ ] Seeding logic is separate from migrations
-- [ ] Seed data is environment-aware (dev/staging/production)
-- [ ] Seeding can be executed independently
-- [ ] Seed data includes necessary reference data
+### 3.5 Aggregate Folder Structure
+**REQ-CORE-011**: Aggregate folders SHALL be named `HairPop.Core\Model\{Aggregate}Aggregate`.
+
+**REQ-CORE-012**: The aggregate folder `HairPop.Core\Model\{Aggregate}Aggregate` SHALL contain all related Entities, Enums, Events, AggregateRoot, and other domain objects.
+
+**REQ-CORE-013**: Each type within `HairPop.Core\Model\{Aggregate}Aggregate` SHALL have its own subfolder (e.g., Events folder, Enums folder).
 
 ---
 
-## 4. API Project Requirements (HairPop.Api)
+## 4. Infrastructure Project Requirements
 
-### 4.1 Project Structure
+### 4.1 Project Identity
+**REQ-INFRA-001**: The Infrastructure project SHALL be named `HairPop.Infrastructure`.
 
-#### REQ-API-001: Project Naming
-**Requirement:** The API project shall be named HairPop.Api.
+### 4.2 Context Implementation
+**REQ-INFRA-002**: The Infrastructure project SHALL contain the implementation of `IHairPopContext`. The implementation class SHALL be named `HairPopContext`.
 
-**Acceptance Criteria:**
-- [ ] Project file is named `HairPop.Api.csproj`
-- [ ] Assembly name is `HairPop.Api`
-- [ ] Default namespace is `HairPop.Api`
+### 4.3 Entity Framework Components
+**REQ-INFRA-003**: The Infrastructure project SHALL contain Entity Framework migrations.
 
-#### REQ-API-002: Features Organization
-**Requirement:** The API project shall have a folder called Features containing all Commands, Queries (using MediatR) grouped in folders by BoundedContext.
+**REQ-INFRA-004**: The Infrastructure project SHALL contain Entity Configurations.
 
-**Acceptance Criteria:**
-- [ ] `Features` folder exists at the root of the project
-- [ ] Commands and Queries use MediatR pattern
-- [ ] Features are organized by bounded context
-- [ ] Each bounded context has its own subfolder
-- [ ] CQRS pattern is consistently applied
-
-**Example Structure:**
-```
-HairPop.Api\Features\
-  ├── Customers\
-  │   ├── CreateCustomer.cs (Command)
-  │   ├── GetCustomerById.cs (Query)
-  │   └── UpdateCustomer.cs (Command)
-  └── Appointments\
-      ├── CreateAppointment.cs (Command)
-      └── GetAppointmentsByBraider.cs (Query)
-```
-
-#### REQ-API-003: DTO Location
-**Requirement:** The subfolders within the Features folder shall contain the DTOs.
-
-**Acceptance Criteria:**
-- [ ] DTOs are colocated with their respective features
-- [ ] Each feature folder contains its related DTOs
-- [ ] DTOs follow consistent naming conventions
-- [ ] DTOs are properly documented
-
-#### REQ-API-004: Controllers Organization
-**Requirement:** The API project shall have API Controllers in a Controllers folder.
-
-**Acceptance Criteria:**
-- [ ] `Controllers` folder exists at the root of the project
-- [ ] All API controllers are in the Controllers folder
-- [ ] Controllers follow RESTful conventions
-- [ ] Controller names end with "Controller" suffix
-- [ ] Controllers are thin and delegate to MediatR handlers
-
-#### REQ-API-005: MediatR Behaviors
-**Requirement:** The API project shall optionally have MediatR behaviors in a folder called Behaviours.
-
-**Acceptance Criteria:**
-- [ ] If behaviors are used, they are in a `Behaviours` folder
-- [ ] Common behaviors include: validation, logging, transaction management
-- [ ] Behaviors are registered in the pipeline
-- [ ] Behavior ordering is documented
-
-#### REQ-API-006: CORS Configuration
-**Requirement:** The API shall have a CORS policy defined. The origins allowed in the CorsPolicy should be pulled from configuration and include the URLs the frontend(s) are hosted on.
-
-**Acceptance Criteria:**
-- [ ] CORS policy is configured in Startup/Program.cs
-- [ ] Allowed origins are read from appsettings.json
-- [ ] Configuration supports multiple frontend URLs
-- [ ] CORS policy includes appropriate methods and headers
-- [ ] Different environments can have different CORS configurations
-
-**Example Configuration:**
-```json
-{
-  "CorsPolicy": {
-    "AllowedOrigins": [
-      "http://localhost:4200",
-      "https://hairpop.com",
-      "https://admin.hairpop.com"
-    ]
-  }
-}
-```
+**REQ-INFRA-005**: The Infrastructure project SHALL contain database seeding services.
 
 ---
 
-## 5. Frontend Requirements (HairPop.WebApp)
+## 5. API Project Requirements
 
-### 5.1 Project Structure and Organization
+### 5.1 Project Identity
+**REQ-API-001**: The API project SHALL be named `HairPop.Api`.
 
-#### REQ-FE-001: Component File Separation
-**Requirement:** Component files in the frontend shall be separate.
+### 5.2 Feature Organization
+**REQ-API-002**: The API project SHALL have a folder named `Features` containing all Commands and Queries (using MediatR) grouped in folders by Bounded Context.
 
-**Acceptance Criteria:**
-- [ ] Each component has a separate HTML file
-- [ ] Each component has a separate SCSS file
-- [ ] Each component has a separate TypeScript file
-- [ ] No inline templates or styles are used
-- [ ] File naming is consistent across components
+**REQ-API-003**: The subfolders within the Features folder SHALL contain the DTOs associated with their respective features.
 
-**File Structure:**
-```
-header.html
-header.scss
-header.ts
-```
+### 5.3 Controller Organization
+**REQ-API-004**: The API project SHALL have API Controllers located in a `Controllers` folder.
 
-#### REQ-FE-002: E2E Test Location
-**Requirement:** The e2e folder shall be located in the src folder within the project folder at src/HairPop.WebApp/projects/hairpop/src/e2e.
+### 5.4 MediatR Behaviors
+**REQ-API-005**: The API project MAY optionally have MediatR behaviors in a folder named `Behaviours`.
 
-**Acceptance Criteria:**
-- [ ] E2E tests are located at the specified path
-- [ ] E2E tests are part of the project structure
-- [ ] Playwright configuration references this location
-- [ ] E2E tests are excluded from production builds
+### 5.5 CORS Configuration
+**REQ-API-006**: The API SHALL have a CORS policy defined. The origins allowed in the CORS policy SHALL be retrieved from configuration and SHALL include the URLs where the frontend(s) are hosted.
 
-#### REQ-FE-003: Frontend Project Naming
-**Requirement:** The frontend shall be named HairPop.WebApp (src\HairPop.WebApp).
+---
 
-**Acceptance Criteria:**
-- [ ] Root folder is named `HairPop.WebApp`
-- [ ] Angular workspace is configured with this name
-- [ ] Package.json reflects the correct project name
+## 6. Frontend Requirements
 
-#### REQ-FE-004: Workspace Structure
-**Requirement:** The frontend shall be a workspace with projects.
+### 6.1 Project Identity
+**REQ-FE-001**: The frontend SHALL be named `Vult.WebApp` (located at `src\Vult.WebApp`).
 
-**Acceptance Criteria:**
-- [ ] Angular workspace is configured (angular.json)
-- [ ] Multiple projects can coexist in the workspace
-- [ ] Shared libraries can be created if needed
-- [ ] Build and serve commands work for all projects
+**REQ-FE-002**: The frontend SHALL be configured as an Angular workspace with projects.
 
-#### REQ-FE-005: Standard Frontend Project Naming
-**Requirement:** The frontend project shall be called hairpop if not an admin frontend.
+**REQ-FE-003**: The frontend project SHALL be named `Vult` if it is not an admin frontend.
 
-**Acceptance Criteria:**
-- [ ] Main frontend project is named `hairpop` (lowercase)
-- [ ] Project is accessible via `ng serve hairpop`
-- [ ] Build output goes to appropriate dist folder
-- [ ] Package.json scripts reference correct project name
+**REQ-FE-004**: The frontend project SHALL be named `Vult-admin` if it is an admin frontend.
 
-#### REQ-FE-006: Admin Frontend Project Naming
-**Requirement:** The frontend project shall be called hairpop-admin if it's an admin frontend.
+### 6.2 Technology Stack
+**REQ-FE-005**: The system SHALL use the latest stable version of Angular.
 
-**Acceptance Criteria:**
-- [ ] Admin project is named `hairpop-admin` (lowercase with hyphen)
-- [ ] Project is accessible via `ng serve hairpop-admin`
-- [ ] Admin project has separate routing and components
-- [ ] Admin and user frontends can be built independently
+**REQ-FE-006**: The system SHALL use the latest stable version of Angular Material for all UI elements.
 
-### 5.2 Framework and Technology Requirements
+**REQ-FE-007**: The frontend SHALL NOT use NgRx for state management.
 
-#### REQ-FE-007: Angular Version
-**Requirement:** The system shall use the latest version of Angular.
+**REQ-FE-008**: The frontend SHALL NOT use Angular signals.
 
-**Acceptance Criteria:**
-- [ ] Angular version is the latest stable release at time of development
-- [ ] All Angular dependencies are up to date
-- [ ] No deprecated APIs are used
-- [ ] Application follows current Angular best practices
+**REQ-FE-009**: The frontend SHALL use RxJS for state management.
 
-#### REQ-FE-008: UI Component Library
-**Requirement:** The system shall use the latest version of Angular Material for all UI elements.
+**REQ-FE-010**: The system SHALL strictly adhere to Material 3 guidelines and SHALL NOT use any colors that are not defined in the Angular Material theme.
 
-**Acceptance Criteria:**
-- [ ] Angular Material is installed and configured
-- [ ] All UI components use Angular Material
-- [ ] Custom components are avoided unless necessary
-- [ ] Material theme is properly configured
-- [ ] No other UI libraries (Bootstrap, etc.) are used
+### 6.3 Component File Structure
+**REQ-FE-011**: Component files in the frontend SHALL be separated into distinct files:
+- A file for HTML template
+- A file for SCSS styles
+- A file for TypeScript code
 
-#### REQ-FE-009: State Management Exclusion - NgRx
-**Requirement:** The frontend shall NOT use NgRx.
+### 6.4 Component Naming Conventions
+**REQ-FE-012**: The frontend SHALL NOT add a "Component" suffix to Angular component class names.
 
-**Acceptance Criteria:**
-- [ ] NgRx packages are not installed
-- [ ] No store, actions, or reducers exist in the codebase
-- [ ] Alternative state management is documented
-
-#### REQ-FE-010: Signals Restriction
-**Requirement:** The frontend shall NOT use signals.
-
-**Acceptance Criteria:**
-- [ ] No Angular signals are used in components or services
-- [ ] Traditional reactive patterns (RxJS) are used instead
-- [ ] Code review confirms no signal usage
-
-#### REQ-FE-011: Component Class Naming
-**Requirement:** The frontend shall NOT add a "Component" prefix to Angular component class names.
-
-**Acceptance Criteria:**
-- [ ] Component classes use simple names (e.g., `Header`, `Footer`)
-- [ ] No class names end with "Component" suffix
-- [ ] Linting rules enforce this convention
-- [ ] All existing components follow this pattern
-
-**Examples:**
+**Example (Compliant):**
 ```typescript
-// Do
 export class Header { }
+```
 
-// Don't
+**Example (Non-Compliant):**
+```typescript
 export class HeaderComponent { }
 ```
 
-#### REQ-FE-012: Component File Naming
-**Requirement:** The frontend shall NOT add a "component" prefix to Angular component file names.
+**REQ-FE-013**: The frontend SHALL NOT add a "component" prefix to Angular component file names.
 
-**Acceptance Criteria:**
-- [ ] Component files use simple names (e.g., `header.html`, `header.ts`)
-- [ ] No file names include ".component." in the name
-- [ ] File naming is consistent across all components
-- [ ] Generator/CLI templates are configured to follow this pattern
-
-**Examples:**
+**Example (Compliant):**
 ```
-// Do
 header.html
 header.scss
 header.ts
+```
 
-// Don't
+**Example (Non-Compliant):**
+```
 header.component.html
 header.component.scss
 header.component.ts
 ```
 
-#### REQ-FE-013: State Management with RxJS
-**Requirement:** The frontend shall use RxJS for state management.
+### 6.5 Folder Structure
+**REQ-FE-014**: The e2e folder SHALL be located at `src/Vult.WebApp/projects/Vult/src/e2e`.
 
-**Acceptance Criteria:**
-- [ ] Services use BehaviorSubjects or ReplaySubjects for state
-- [ ] Components subscribe to observables
-- [ ] State updates are immutable
-- [ ] Subscriptions are properly managed (unsubscribe/async pipe)
-- [ ] State management patterns are documented
+**REQ-FE-015**: The frontend SHALL contain a folder named `pages` for components that can appear in the `<router-outlet>`.
 
-### 5.3 Design and UX Requirements
+**REQ-FE-016**: The frontend SHALL contain a folder named `components` for reusable components. Child components of a page SHALL be contained within the components folder.
 
-#### REQ-FE-014: Responsive Design
-**Requirement:** The frontend shall be responsive and mobile first.
+### 6.6 Module Exports
+**REQ-FE-017**: The system SHALL create barrel exports (index.ts) for every folder and SHALL export TypeScript code except test code.
 
-**Acceptance Criteria:**
-- [ ] All layouts work on mobile devices (320px+)
-- [ ] Mobile styles are defined first, then desktop
-- [ ] Media queries use min-width approach
-- [ ] Touch interactions are supported
-- [ ] Application is tested on multiple device sizes
+### 6.7 Design and Responsiveness
+**REQ-FE-018**: The frontend SHALL be responsive and follow a mobile-first design approach.
 
-#### REQ-FE-015: CSS Naming Convention
-**Requirement:** The frontend shall use BEM HTML class naming strategy.
+**REQ-FE-019**: The frontend SHALL use the BEM (Block Element Modifier) HTML class naming strategy.
 
-**Acceptance Criteria:**
-- [ ] CSS classes follow Block__Element--Modifier pattern
-- [ ] Class names are semantic and descriptive
-- [ ] BEM naming is consistent across all components
-- [ ] No generic or utility class names violate BEM
+**REQ-FE-020**: The frontend SHALL use design tokens for consistent spacing throughout the application.
 
-**Example:**
-```html
-<div class="header">
-  <div class="header__logo"></div>
-  <nav class="header__nav">
-    <a class="header__nav-link header__nav-link--active"></a>
-  </nav>
-</div>
-```
+### 6.8 Testing Configuration
+**REQ-FE-021**: The frontend SHALL use Jest for unit tests.
 
-#### REQ-FE-016: Design Tokens
-**Requirement:** The frontend shall use design tokens for consistent spacing.
+**REQ-FE-022**: The frontend SHALL use Playwright for end-to-end (e2e) tests.
 
-**Acceptance Criteria:**
-- [ ] Design tokens are defined (variables/constants)
-- [ ] Spacing values use tokens, not hard-coded values
-- [ ] Tokens include: spacing, typography, colors, shadows
-- [ ] Tokens are centralized in a single location
-- [ ] All components use design tokens
+**REQ-FE-023**: Jest tests SHALL be configured to ignore the e2e folder.
 
-#### REQ-FE-017: Material 3 Compliance
-**Requirement:** The system shall strictly adhere to Material 3 guidelines and not use any colors that are not defined in the Angular Material theme.
+### 6.9 API Integration
+**REQ-FE-024**: The frontend SHALL be configured with a `baseUrl` which is the URL of the backend as specified in the launchSettings.
 
-**Acceptance Criteria:**
-- [ ] All colors come from Material theme palette
-- [ ] No hard-coded color values (hex, rgb) in component styles
-- [ ] Material 3 design patterns are followed
-- [ ] Theme can be changed without breaking layouts
-- [ ] Accessibility contrast ratios meet WCAG standards
+**REQ-FE-025**: The frontend SHALL have a single configuration point for the baseUrl of the backend API.
 
-### 5.4 Testing Requirements
+**REQ-FE-026**: **CRITICAL** - The frontend `baseUrl` configuration SHALL contain ONLY the base URI without the `/api` path segment. Frontend services SHALL append the complete path including `/api` and any additional segments when making HTTP requests.
 
-#### REQ-FE-018: Testing Framework
-**Requirement:** The frontend shall use Jest for unit tests and Playwright for e2e tests. Jest tests are configured to ignore the e2e folder.
-
-**Acceptance Criteria:**
-- [ ] Jest is configured for unit testing
-- [ ] Playwright is configured for e2e testing
-- [ ] Jest configuration excludes e2e folder
-- [ ] Test scripts are defined in package.json
-- [ ] Both test types can run independently
-- [ ] Code coverage reporting is configured
-
-#### REQ-FE-019: Backend URL Configuration
-**Requirement:** Frontend shall be configured with a baseUrl which is the URL of the backend in the launchSettings.
-
-**Acceptance Criteria:**
-- [ ] baseUrl is configurable per environment
-- [ ] Development environment uses launchSettings URL
-- [ ] HTTP interceptors or services use the baseUrl
-- [ ] No hard-coded backend URLs exist in components
-- [ ] Configuration is documented
-
-#### REQ-FE-020: Single API Configuration Point
-**Requirement:** Frontend shall have a single configuration point for the baseurl for the backend API.
-
-**Acceptance Criteria:**
-- [ ] One centralized configuration file/service for API URL
-- [ ] All HTTP calls reference this single source
-- [ ] Environment-specific URLs are supported
-- [ ] Configuration can be changed without code modifications
-- [ ] Build process supports different API URLs per environment
-
-### 5.5 Component Organization
-
-#### REQ-FE-021: Pages and Components Folders
-**Requirement:** Frontend shall contain a folder called "pages" for components that can appear in the <router-outlet> and a folder called components for re-usable components. Child components of a page are contained within the components folder.
-
-**Acceptance Criteria:**
-- [ ] `pages` folder exists for routable page components
-- [ ] `components` folder exists for reusable components
-- [ ] Page components are only in the pages folder
-- [ ] Shared components are in the components folder
-- [ ] Folder structure is clear and documented
-
-**Example Structure:**
-```
-src/
-  ├── pages/
-  │   ├── home/
-  │   ├── appointments/
-  │   └── profile/
-  └── components/
-      ├── header/
-      ├── footer/
-      └── appointment-card/
-```
-
-#### REQ-FE-022: Barrel Exports
-**Requirement:** The system shall create barrels for every folder and export TypeScript code except test code.
-
-**Acceptance Criteria:**
-- [ ] Each folder has an index.ts barrel file
-- [ ] Barrel files export all public TypeScript code
-- [ ] Test files (.spec.ts) are not exported
-- [ ] Imports use barrel files for cleaner import statements
-- [ ] Barrel files are maintained as new files are added
-
-**Example barrel (index.ts):**
+**Example (Compliant):**
 ```typescript
-export * from './header';
-export * from './footer';
-export * from './navigation';
+// Configuration
+baseUrl = "http://localhost:3200"
+
+// Service usage
+this.http.get(`${baseUrl}/api/customers`)
 ```
 
+**Example (Non-Compliant):**
+```typescript
+// Configuration
+baseUrl = "http://localhost:3200/api"
+
+// Service usage
+this.http.get(`${baseUrl}/customers`)
+```
+
+### 6.10 Reactive Data Loading Pattern
+
+**REQ-FE-027**: **CRITICAL** - All components that load and display data from services SHALL use the async pipe pattern with observables exposed directly in the template, rather than manually subscribing and managing state.
+
+**REQ-FE-028**: Components SHALL expose observables (ending with `$` suffix) as public properties that can be consumed directly in templates.
+
+**REQ-FE-029**: Templates SHALL use the Angular `async` pipe to subscribe to observables.
+
+**REQ-FE-030**: Components SHALL NOT manually call `.subscribe()` on observables in lifecycle hooks for data loading purposes.
+
+**REQ-FE-031**: Components SHALL NOT maintain local state properties that duplicate data from observables.
+
+**REQ-FE-032**: Subscriptions SHALL be automatically managed by the async pipe (no manual unsubscription needed).
+
+**REQ-FE-033**: When transformation is needed, components SHOULD use RxJS operators (e.g., `map`, `filter`, `switchMap`) to create view model observables.
+
+**REQ-FE-034**: Components SHALL NOT implement `OnInit` solely for subscribing to data observables.
+
+**REQ-FE-035**: Components SHALL NOT store observable data in component properties manually.
+
+**REQ-FE-036**: Components SHALL NOT create memory leaks by leaving subscriptions unmanaged.
+
+**Example (Compliant - Async Pipe Pattern):**
+```typescript
+import { Component, inject } from '@angular/core';
+import { DataService } from '../data-service';
+import { map } from 'rxjs';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-correct',
+  imports: [CommonModule],
+  templateUrl: './correct.html',
+  styleUrl: './correct.scss',
+})
+export class Correct {
+  _dataService = inject(DataService);
+
+  // ✅ Observable exposed directly for template consumption
+  viewModel$ = this._dataService.get().pipe(
+    map(x => ({ message: x }))
+  );
+}
+```
+
+**Template:**
+```html
+<ng-container *ngIf="viewModel$ | async as vm">
+    <h1>{{ vm.message }}</h1>
+</ng-container>
+```
+
+**Example (Non-Compliant - Manual Subscription):**
+```typescript
+import { Component, inject, OnInit } from '@angular/core';
+import { DataService } from '../data-service';
+
+@Component({
+  selector: 'app-incorrect',
+  imports: [],
+  templateUrl: './incorrect.html',
+  styleUrl: './incorrect.scss',
+})
+export class Incorrect implements OnInit {
+  _dataService = inject(DataService);
+
+  // ❌ Local state property instead of observable
+  message: string = '';
+
+  // ❌ Manual subscription in lifecycle hook
+  ngOnInit(): void {
+    this._dataService.get().subscribe(data => {
+      this.message = data;
+    });
+  }
+}
+```
+
+**Migration Guide:**
+
+If you have components using the incorrect pattern, follow these steps:
+
+1. Remove manual subscriptions from `ngOnInit` or other lifecycle hooks
+2. Remove state properties that store observable data
+3. Expose observables as public properties with `$` suffix
+4. Update templates to use async pipe: `*ngIf="observable$ | async as data"`
+5. Remove lifecycle interfaces if they're only used for subscriptions
+6. Import CommonModule if using structural directives like `*ngIf`
+
+**Before (Incorrect):**
+```typescript
+export class MyComponent implements OnInit {
+  data: any;
+
+  ngOnInit() {
+    this.service.getData().subscribe(result => {
+      this.data = result;
+    });
+  }
+}
+```
+
+**After (Correct):**
+```typescript
+export class MyComponent {
+  data$ = this.service.getData();
+}
+```
+
+Template: `<div *ngIf="data$ | async as data">{{ data }}</div>`
+
 ---
 
-## 6. Compliance and Verification
+## 7. Code Linting and Static Analysis
 
-### 6.1 Verification Methods
+### 7.1 Backend Linting Requirements
+**REQ-LINT-001**: **CRITICAL** - The backend SHALL use StyleCop.Analyzers and Microsoft.CodeAnalysis.NetAnalyzers for code style and quality enforcement.
 
-Each requirement shall be verified through one or more of the following methods:
+**REQ-LINT-002**: All linting warnings in the backend SHALL be treated as errors and SHALL block the build.
 
-1. **Code Review**: Manual inspection of code by development team
-2. **Static Analysis**: Automated tools (linters, analyzers) to verify compliance
-3. **Unit Tests**: Automated tests that verify specific behaviors
-4. **Integration Tests**: Tests that verify component interactions
-5. **E2E Tests**: End-to-end tests that verify complete user flows
-6. **Build Verification**: Successful build process confirms structural requirements
+**REQ-LINT-003**: The backend linting configuration SHALL enforce:
+- Consistent code style and formatting
+- Null safety analysis
+- Code quality best practices
+- Security vulnerability detection
 
-### 6.2 Acceptance Tracking
+**REQ-LINT-004**: A shared `.editorconfig` file SHALL be used at the solution root to define consistent code style rules across all backend projects.
 
-- All acceptance criteria must be met before a requirement is considered complete
-- Checkboxes in acceptance criteria shall be used to track completion status
-- Failed acceptance criteria must be documented with remediation plans
-- Requirements may be verified incrementally as development progresses
+### 7.2 Frontend Linting Requirements
+**REQ-LINT-005**: **CRITICAL** - The frontend SHALL use ESLint with the official Angular ESLint plugin (@angular-eslint) for TypeScript and template linting.
 
-### 6.3 Change Management
+**REQ-LINT-006**: All linting errors in the frontend SHALL block the build.
 
-- Any deviation from these requirements must be documented
-- Requirement changes must go through formal change request process
-- Impact analysis must be performed for all requirement changes
-- All stakeholders must approve significant requirement modifications
+**REQ-LINT-007**: The frontend linting configuration SHALL enforce:
+- TypeScript best practices
+- Angular-specific conventions and best practices
+- Accessibility (a11y) rules
+- Import organization
 
----
+**REQ-LINT-008**: A `lint` script SHALL be added to package.json and SHALL be executed as part of the build process.
 
-## 7. Appendix
+### 7.3 Build Integration
+**REQ-LINT-009**: **CRITICAL** - Both backend and frontend builds SHALL fail if any linting errors are detected. This ensures code quality gates are enforced before code can be merged.
 
-### 7.1 Definitions and Acronyms
-
-- **SRS**: Software Requirements Specification
-- **DTO**: Data Transfer Object
-- **CORS**: Cross-Origin Resource Sharing
-- **BEM**: Block Element Modifier
-- **CQRS**: Command Query Responsibility Segregation
-- **E2E**: End-to-End
-- **API**: Application Programming Interface
-- **UI**: User Interface
-- **UX**: User Experience
-
-### 7.2 References
-
-- Angular Official Documentation
-- Angular Material Documentation
-- Material Design 3 Guidelines
-- Entity Framework Core Documentation
-- MediatR Documentation
-- Clean Architecture Principles
-- Domain-Driven Design (DDD) Patterns
-
-### 7.3 Document Revision History
-
-| Version | Date | Author | Description |
-|---------|------|--------|-------------|
-| 1.0 | 2025-12-21 | System | Initial SRS document created from implementation specifications |
+**REQ-LINT-010**: Linting SHALL be integrated into the CI/CD pipeline as a mandatory quality gate.
 
 ---
 
-**END OF DOCUMENT**
+## 8. Compliance and Standards
+
+### 8.1 Code Quality
+All code SHALL adhere to the requirements specified in this document. Deviations from these requirements SHALL require formal approval and documentation.
+
+### 8.2 Version Control
+All changes to this specification SHALL be tracked and versioned appropriately.
+
+---
+
+## 9. Appendices
+
+### 9.1 Document History
+
+| Version | Date       | Author | Description |
+|---------|------------|--------|-------------|
+| 1.0     | 2025-12-21 | System | Initial SRS document creation |
+| 1.1     | 2025-12-22 | System | Added structured logging requirements (REQ-SYS-013 through REQ-SYS-022) |
+| 1.2     | 2025-12-22 | System | Added code linting and static analysis requirements (REQ-LINT-001 through REQ-LINT-010) |
+| 1.3     | 2025-12-25 | System | Merged reactive data loading pattern requirements from data-loading-specs.md (REQ-FE-027 through REQ-FE-036) |
+
+---
+
+**End of Software Requirements Specification**
