@@ -1,0 +1,28 @@
+<div class="braider-card">
+  <div class="braider-card__image">
+    @if (imageUrl) {
+      <img [src]="imageUrl" [alt]="name">
+    } @else {
+      <span class="braider-card__initials">{{ initials || '👩🏾' }}</span>
+    }
+  </div>
+  <div class="braider-card__info">
+    <div class="braider-card__name">{{ name }}</div>
+    <div class="braider-card__location">📍 {{ location }}</div>
+    <div class="braider-card__rating">
+      <span class="braider-card__stars">{{ stars }}</span>
+      <span class="braider-card__review-count">({{ reviewCount }} reviews)</span>
+    </div>
+    @if (bio) {
+      <p class="braider-card__bio">{{ bio }}</p>
+    }
+    @if (specialties.length > 0) {
+      <div class="braider-card__specialties">
+        @for (specialty of specialties; track specialty) {
+          <span class="braider-card__specialty-tag">{{ specialty }}</span>
+        }
+      </div>
+    }
+    <button class="braider-card__button" (click)="onViewProfile()">View Profile</button>
+  </div>
+</div>

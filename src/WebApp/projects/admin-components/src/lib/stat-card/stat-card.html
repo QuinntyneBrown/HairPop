@@ -1,0 +1,21 @@
+<div class="stat-card">
+  @if (icon) {
+    <div class="stat-card__icon" [class]="'stat-card__icon--' + variant">
+      <span [innerHTML]="icon"></span>
+    </div>
+  }
+  <div class="stat-card__content">
+    <div class="stat-card__value">{{ value }}</div>
+    <div class="stat-card__label">{{ label }}</div>
+    @if (trend) {
+      <div class="stat-card__trend" [class]="'stat-card__trend--' + trendDirection">
+        @if (trendDirection === 'up') {
+          <span class="trend-icon">&#9650;</span>
+        } @else if (trendDirection === 'down') {
+          <span class="trend-icon">&#9660;</span>
+        }
+        <span>{{ trend }}</span>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+  margin-top: 60px;
+
+  &__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: 2.5em;
+    margin: 0 0 20px;
+    font-weight: 600;
+  }
+
+  &__description {
+    font-size: 1.2em;
+    margin: 0 0 30px;
+    opacity: 0.95;
+    line-height: 1.6;
+  }
+
+  &__button {
+    background-color: white;
+    color: #FF6B35;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-family: inherit;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+  }
+}

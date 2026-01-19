@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.review-card {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__name {
+    font-weight: 600;
+    color: #333;
+  }
+
+  &__date {
+    color: #999;
+    font-size: 0.9em;
+  }
+
+  &__rating {
+    margin-bottom: 10px;
+    color: #FFB800;
+  }
+
+  &__text {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+  }
+}

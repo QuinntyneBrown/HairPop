@@ -125,18 +125,13 @@ app.Run();
 /// </summary>
 internal sealed class NullEventPublisher : IEventPublisher
 {
-    public Task PublishAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : class, IEvent
+    public Task PublishAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : class, IMessage
     {
         // No-op for now - events will be published when messaging infrastructure is configured
         return Task.CompletedTask;
     }
 
-    public Task PublishAsync<TEvent>(string channel, TEvent @event, CancellationToken cancellationToken = default) where TEvent : class, IEvent
-    {
-        return Task.CompletedTask;
-    }
-
-    public Task PublishBatchAsync<TEvent>(IEnumerable<TEvent> events, CancellationToken cancellationToken = default) where TEvent : class, IEvent
+    public Task PublishManyAsync<TEvent>(IEnumerable<TEvent> events, CancellationToken cancellationToken = default) where TEvent : class, IMessage
     {
         return Task.CompletedTask;
     }

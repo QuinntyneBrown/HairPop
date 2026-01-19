@@ -1,0 +1,14 @@
+<div class="search-box">
+  <span class="search-box__icon">🔍</span>
+  <input
+    class="search-box__input"
+    type="text"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="onInput($event)"
+    (keydown)="onKeydown($event)"
+  >
+  <button class="search-box__button" (click)="onSearch()">
+    {{ buttonText }}
+  </button>
+</div>

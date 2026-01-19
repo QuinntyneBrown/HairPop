@@ -1,0 +1,13 @@
+<button
+  class="fab"
+  [class.fab--mini]="size === 'mini'"
+  [class.fab--primary]="color === 'primary'"
+  [class.fab--accent]="color === 'accent'"
+  [class.fab--warn]="color === 'warn'"
+  [class.fab--disabled]="disabled"
+  [disabled]="disabled"
+  [attr.aria-label]="ariaLabel"
+  (click)="onClick()"
+>
+  <span class="fab__icon" [innerHTML]="icon"></span>
+</button>

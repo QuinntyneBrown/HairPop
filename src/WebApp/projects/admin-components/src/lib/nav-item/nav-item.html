@@ -1,0 +1,10 @@
+<a
+  class="nav-item"
+  [class.nav-item--active]="active"
+  (click)="onClick()"
+  role="button"
+  tabindex="0"
+>
+  <span class="nav-item__icon" [innerHTML]="icon"></span>
+  <span class="nav-item__text">{{ text }}</span>
+</a>

@@ -1,0 +1,11 @@
+<button
+  class="icon-btn"
+  [class.icon-btn--small]="size === 'small'"
+  [class.icon-btn--large]="size === 'large'"
+  [class.icon-btn--disabled]="disabled"
+  [disabled]="disabled"
+  [attr.aria-label]="ariaLabel"
+  (click)="onClick()"
+>
+  <span class="icon-btn__icon" [innerHTML]="icon"></span>
+</button>

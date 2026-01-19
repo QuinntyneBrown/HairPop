@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+  margin-top: 60px;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+}

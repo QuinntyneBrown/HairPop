@@ -1,0 +1,10 @@
+<button
+  class="chip-filter"
+  [class.chip-filter--active]="active"
+  (click)="onClick()"
+>
+  <span class="chip-filter__label">{{ label }}</span>
+  @if (count !== null) {
+    <span class="chip-filter__count">{{ count }}</span>
+  }
+</button>

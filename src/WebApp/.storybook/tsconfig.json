@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "exclude": [
+    "../projects/app/src/**/*.spec.ts",
+    "../projects/app-admin/src/**/*.spec.ts"
+  ],
+  "include": [
+    "../projects/admin-components/src/**/*.ts",
+    "../projects/app-components/src/**/*.ts"
+  ]
+}

@@ -1,0 +1,16 @@
+<label class="toggle" [class.toggle--disabled]="disabled">
+  <button
+    type="button"
+    class="toggle__switch"
+    [class.toggle__switch--checked]="checked"
+    [disabled]="disabled"
+    (click)="toggle()"
+    role="switch"
+    [attr.aria-checked]="checked"
+  >
+    <span class="toggle__thumb"></span>
+  </button>
+  @if (label) {
+    <span class="toggle__label">{{ label }}</span>
+  }
+</label>

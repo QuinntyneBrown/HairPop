@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+.container {
+  width: 100%;
+  padding: 0 20px;
+
+  &--small {
+    max-width: 600px;
+  }
+
+  &--medium {
+    max-width: 900px;
+  }
+
+  &--large {
+    max-width: 1200px;
+  }
+
+  &--full {
+    max-width: none;
+  }
+
+  &--centered {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

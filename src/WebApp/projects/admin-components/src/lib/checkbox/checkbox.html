@@ -1,0 +1,18 @@
+<label class="checkbox" [class.checkbox--disabled]="disabled">
+  <button
+    type="button"
+    class="checkbox__box"
+    [class.checkbox__box--checked]="checked"
+    [disabled]="disabled"
+    (click)="toggle()"
+    role="checkbox"
+    [attr.aria-checked]="checked"
+  >
+    @if (checked) {
+      <span class="checkbox__checkmark">&#10003;</span>
+    }
+  </button>
+  @if (label) {
+    <span class="checkbox__label">{{ label }}</span>
+  }
+</label>

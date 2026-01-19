@@ -1,0 +1,18 @@
+:host {
+  display: inline-block;
+}
+
+.specialty-tag {
+  background: #f8f9fa;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-size: 1em;
+  color: #555;
+  display: inline-block;
+
+  &--small {
+    padding: 5px 12px;
+    font-size: 0.85em;
+    border-radius: 20px;
+  }
+}
