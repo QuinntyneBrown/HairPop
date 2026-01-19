@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hair Pop Admin - Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="mat-toolbar">
+      <div class="mat-toolbar__logo">
+        <span class="material-icons-outlined mat-toolbar__logo-icon">storefront</span>
+        <div class="mat-toolbar__title">Hair Pop Admin</div>
+      </div>
+      <div class="mat-toolbar__spacer"></div>
+      <button class="icon-btn" title="Notifications"><span class="material-icons-outlined">notifications</span></button>
+      <button class="icon-btn" title="Help"><span class="material-icons-outlined">help_outline</span></button>
+      <div class="avatar" title="Admin">HA</div>
+    </header>
+
+    <div class="mat-sidenav-container">
+      <nav class="mat-sidenav">
+        <div class="nav-section">
+          <ul class="nav-list">
+            <a class="nav-item nav-item--active" href="./index.html"><span class="material-icons-outlined nav-item__icon">dashboard</span><span>Dashboard</span></a>
+            <a class="nav-item" href="./braiders.html"><span class="material-icons-outlined nav-item__icon">content_cut</span><span>Braiders</span></a>
+            <a class="nav-item" href="./users.html"><span class="material-icons-outlined nav-item__icon">people</span><span>Users</span></a>
+            <a class="nav-item" href="./bookings.html"><span class="material-icons-outlined nav-item__icon">event</span><span>Bookings</span></a>
+            <a class="nav-item" href="./reviews.html"><span class="material-icons-outlined nav-item__icon">reviews</span><span>Reviews</span></a>
+            <a class="nav-item" href="./media.html"><span class="material-icons-outlined nav-item__icon">perm_media</span><span>Media</span></a>
+          </ul>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-section">
+          <div class="nav-section__title">Identity</div>
+          <ul class="nav-list">
+            <div class="nav-item"><span class="material-icons-outlined nav-item__icon">security</span><span>Roles</span></div>
+            <div class="nav-item"><span class="material-icons-outlined nav-item__icon">policy</span><span>Permissions</span></div>
+            <div class="nav-item"><span class="material-icons-outlined nav-item__icon">vpn_key</span><span>API Keys</span></div>
+          </ul>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-section">
+          <div class="nav-section__title">System</div>
+          <ul class="nav-list">
+            <div class="nav-item"><span class="material-icons-outlined nav-item__icon">settings</span><span>Settings</span></div>
+            <div class="nav-item"><span class="material-icons-outlined nav-item__icon">account_circle</span><span>Profile</span></div>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="mat-sidenav-content">
+        <div class="page-header">
+          <h1 class="page-title">Dashboard</h1>
+          <div class="actions">
+            <a class="btn btn--stroked" href="./bookings.html"><span class="material-icons-outlined">event</span>View bookings</a>
+            <a class="btn btn--primary" href="./braider-detail.html"><span class="material-icons-outlined">add</span>New braider</a>
+          </div>
+        </div>
+
+        <div class="grid grid--4">
+          <div class="card">
+            <div class="card__content">
+              <div class="kpi">
+                <div class="kpi__value">128</div>
+                <div class="kpi__label">Users</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__content">
+              <div class="kpi">
+                <div class="kpi__value">24</div>
+                <div class="kpi__label">Braiders</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__content">
+              <div class="kpi">
+                <div class="kpi__value">9</div>
+                <div class="kpi__label">Upcoming bookings</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__content">
+              <div class="kpi">
+                <div class="kpi__value">3</div>
+                <div class="kpi__label">Flagged reviews</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: var(--spacing-lg);"></div>
+
+        <div class="grid grid--2">
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <div class="card__title">Quick actions</div>
+                <div class="card__subtitle">Common admin workflows</div>
+              </div>
+            </div>
+            <div class="card__content">
+              <div class="grid" style="gap: var(--spacing-md)">
+                <a class="btn" href="./users.html"><span class="material-icons-outlined">person_search</span>Find user</a>
+                <a class="btn" href="./braiders.html"><span class="material-icons-outlined">content_cut</span>Manage braiders</a>
+                <a class="btn" href="./reviews.html"><span class="material-icons-outlined">reviews</span>Moderate reviews</a>
+                <a class="btn" href="./media.html"><span class="material-icons-outlined">perm_media</span>Review uploads</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <div class="card__title">System status</div>
+                <div class="card__subtitle">Design placeholder for health + queues</div>
+              </div>
+            </div>
+            <div class="card__content">
+              <table class="table">
+                <thead>
+                  <tr><th>Subsystem</th><th>Status</th><th>Notes</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>API Gateway</td><td><span class="badge badge--success">Healthy</span></td><td class="muted">Low latency</td></tr>
+                  <tr><td>Media processing</td><td><span class="badge badge--info">Idle</span></td><td class="muted">No backlog</td></tr>
+                  <tr><td>Review moderation</td><td><span class="badge badge--warning">Attention</span></td><td class="muted">3 flagged items</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
