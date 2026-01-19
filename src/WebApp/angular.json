@@ -190,6 +190,32 @@
           }
         }
       }
+    },
+    "admin-components": {
+      "projectType": "library",
+      "root": "projects/admin-components",
+      "sourceRoot": "projects/admin-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/admin-components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/admin-components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/admin-components/tsconfig.spec.json"
+          }
+        }
+      }
     }
   }
 }

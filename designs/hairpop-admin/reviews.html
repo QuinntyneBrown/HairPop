@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hair Pop Admin - Reviews</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="mat-toolbar">
+      <div class="mat-toolbar__logo">
+        <span class="material-icons-outlined mat-toolbar__logo-icon">reviews</span>
+        <div class="mat-toolbar__title">Hair Pop Admin</div>
+      </div>
+      <div class="mat-toolbar__spacer"></div>
+      <div class="avatar">HA</div>
+    </header>
+
+    <div class="mat-sidenav-container">
+      <nav class="mat-sidenav">
+        <div class="nav-section">
+          <ul class="nav-list">
+            <a class="nav-item" href="./index.html"><span class="material-icons-outlined nav-item__icon">dashboard</span><span>Dashboard</span></a>
+            <a class="nav-item" href="./braiders.html"><span class="material-icons-outlined nav-item__icon">content_cut</span><span>Braiders</span></a>
+            <a class="nav-item" href="./users.html"><span class="material-icons-outlined nav-item__icon">people</span><span>Users</span></a>
+            <a class="nav-item" href="./bookings.html"><span class="material-icons-outlined nav-item__icon">event</span><span>Bookings</span></a>
+            <a class="nav-item nav-item--active" href="./reviews.html"><span class="material-icons-outlined nav-item__icon">reviews</span><span>Reviews</span></a>
+            <a class="nav-item" href="./media.html"><span class="material-icons-outlined nav-item__icon">perm_media</span><span>Media</span></a>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="mat-sidenav-content">
+        <div class="page-header">
+          <h1 class="page-title">Reviews</h1>
+          <div class="actions">
+            <button class="btn btn--stroked"><span class="material-icons-outlined">flag</span>Flagged</button>
+            <button class="btn btn--stroked"><span class="material-icons-outlined">done_all</span>Approved</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__content">
+            <table class="table">
+              <thead>
+                <tr><th>Created</th><th>User</th><th>Braider</th><th>Rating</th><th>Status</th><th></th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="muted">2026-01-17</td>
+                  <td class="muted">alex@example.com</td>
+                  <td class="muted">Janelle B.</td>
+                  <td>5</td>
+                  <td><span class="badge badge--info">Pending</span></td>
+                  <td class="actions"><a class="btn btn--stroked" href="./review-detail.html"><span class="material-icons-outlined">open_in_new</span>Open</a></td>
+                </tr>
+                <tr>
+                  <td class="muted">2026-01-16</td>
+                  <td class="muted">mia@example.com</td>
+                  <td class="muted">Keisha R.</td>
+                  <td>2</td>
+                  <td><span class="badge badge--warning">Flagged</span></td>
+                  <td class="actions"><a class="btn btn--stroked" href="./review-detail.html"><span class="material-icons-outlined">open_in_new</span>Open</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hair Pop Admin - Media</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    .media-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--spacing-lg); }
+    .thumb { height: 140px; border-radius: var(--radius-md); background: linear-gradient(135deg, rgba(33,150,243,0.35), rgba(255,152,0,0.25)); border: 1px solid var(--surface-divider); }
+    @media (max-width: 1100px) { .media-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="mat-toolbar">
+      <div class="mat-toolbar__logo">
+        <span class="material-icons-outlined mat-toolbar__logo-icon">perm_media</span>
+        <div class="mat-toolbar__title">Hair Pop Admin</div>
+      </div>
+      <div class="mat-toolbar__spacer"></div>
+      <div class="avatar">HA</div>
+    </header>
+
+    <div class="mat-sidenav-container">
+      <nav class="mat-sidenav">
+        <div class="nav-section">
+          <ul class="nav-list">
+            <a class="nav-item" href="./index.html"><span class="material-icons-outlined nav-item__icon">dashboard</span><span>Dashboard</span></a>
+            <a class="nav-item" href="./braiders.html"><span class="material-icons-outlined nav-item__icon">content_cut</span><span>Braiders</span></a>
+            <a class="nav-item" href="./users.html"><span class="material-icons-outlined nav-item__icon">people</span><span>Users</span></a>
+            <a class="nav-item" href="./bookings.html"><span class="material-icons-outlined nav-item__icon">event</span><span>Bookings</span></a>
+            <a class="nav-item" href="./reviews.html"><span class="material-icons-outlined nav-item__icon">reviews</span><span>Reviews</span></a>
+            <a class="nav-item nav-item--active" href="./media.html"><span class="material-icons-outlined nav-item__icon">perm_media</span><span>Media</span></a>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="mat-sidenav-content">
+        <div class="page-header">
+          <h1 class="page-title">Media library</h1>
+          <div class="actions">
+            <button class="btn btn--stroked"><span class="material-icons-outlined">filter_list</span>Filters</button>
+            <a class="btn btn--primary" href="./media-detail.html"><span class="material-icons-outlined">add</span>New media</a>
+          </div>
+        </div>
+
+        <div class="media-grid">
+          <div class="card">
+            <div class="thumb"></div>
+            <div class="card__content">
+              <div style="font-weight: 500;">braider-profile.jpg</div>
+              <div class="muted">Uploaded 2h ago • Pending</div>
+              <div class="actions" style="margin-top: var(--spacing-md)">
+                <a class="btn btn--stroked" href="./media-detail.html"><span class="material-icons-outlined">open_in_new</span>Open</a>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="thumb"></div>
+            <div class="card__content">
+              <div style="font-weight: 500;">style-gallery-01.jpg</div>
+              <div class="muted">Uploaded 1d ago • Approved</div>
+              <div class="actions" style="margin-top: var(--spacing-md)">
+                <a class="btn btn--stroked" href="./media-detail.html"><span class="material-icons-outlined">open_in_new</span>Open</a>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="thumb"></div>
+            <div class="card__content">
+              <div style="font-weight: 500;">review-attachment.png</div>
+              <div class="muted">Uploaded 3d ago • Flagged</div>
+              <div class="actions" style="margin-top: var(--spacing-md)">
+                <a class="btn btn--stroked" href="./media-detail.html"><span class="material-icons-outlined">open_in_new</span>Open</a>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="thumb"></div>
+            <div class="card__content">
+              <div style="font-weight: 500;">promo-banner.png</div>
+              <div class="muted">Uploaded 7d ago • Approved</div>
+              <div class="actions" style="margin-top: var(--spacing-md)">
+                <a class="btn btn--stroked" href="./media-detail.html"><span class="material-icons-outlined">open_in_new</span>Open</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

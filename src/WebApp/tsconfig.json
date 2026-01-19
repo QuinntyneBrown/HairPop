@@ -7,6 +7,9 @@
     "strict": true,
     "noImplicitOverride": true,
     "paths": {
+      "admin-components": [
+        "./dist/admin-components"
+      ],
       "hairpop-components": [
         "./dist/hairpop-components"
       ]
@@ -47,6 +50,12 @@
     },
     {
       "path": "./projects/hairpop-components/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/admin-components/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/admin-components/tsconfig.spec.json"
     }
   ]
 }

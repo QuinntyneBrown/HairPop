@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hair Pop Admin - Braiders</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="mat-toolbar">
+      <div class="mat-toolbar__logo">
+        <span class="material-icons-outlined mat-toolbar__logo-icon">content_cut</span>
+        <div class="mat-toolbar__title">Hair Pop Admin</div>
+      </div>
+      <div class="mat-toolbar__spacer"></div>
+      <button class="icon-btn"><span class="material-icons-outlined">search</span></button>
+      <div class="avatar">HA</div>
+    </header>
+
+    <div class="mat-sidenav-container">
+      <nav class="mat-sidenav">
+        <div class="nav-section">
+          <ul class="nav-list">
+            <a class="nav-item" href="./index.html"><span class="material-icons-outlined nav-item__icon">dashboard</span><span>Dashboard</span></a>
+            <a class="nav-item nav-item--active" href="./braiders.html"><span class="material-icons-outlined nav-item__icon">content_cut</span><span>Braiders</span></a>
+            <a class="nav-item" href="./users.html"><span class="material-icons-outlined nav-item__icon">people</span><span>Users</span></a>
+            <a class="nav-item" href="./bookings.html"><span class="material-icons-outlined nav-item__icon">event</span><span>Bookings</span></a>
+            <a class="nav-item" href="./reviews.html"><span class="material-icons-outlined nav-item__icon">reviews</span><span>Reviews</span></a>
+            <a class="nav-item" href="./media.html"><span class="material-icons-outlined nav-item__icon">perm_media</span><span>Media</span></a>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="mat-sidenav-content">
+        <div class="page-header">
+          <h1 class="page-title">Braiders</h1>
+          <div class="actions">
+            <button class="btn btn--stroked"><span class="material-icons-outlined">filter_list</span>Filters</button>
+            <a class="btn btn--primary" href="./braider-detail.html"><span class="material-icons-outlined">add</span>New braider</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__content">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>Hourly rate</th>
+                  <th>Availability</th>
+                  <th>Updated</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Janelle B.</td>
+                  <td class="muted">Atlanta, GA</td>
+                  <td>$85</td>
+                  <td><span class="badge badge--success">Available</span></td>
+                  <td class="muted">2h ago</td>
+                  <td class="actions">
+                    <a class="btn btn--stroked" href="./braider-detail.html"><span class="material-icons-outlined">open_in_new</span>Open</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Keisha R.</td>
+                  <td class="muted">Houston, TX</td>
+                  <td>$70</td>
+                  <td><span class="badge badge--warning">Limited</span></td>
+                  <td class="muted">Yesterday</td>
+                  <td class="actions">
+                    <a class="btn btn--stroked" href="./braider-detail.html"><span class="material-icons-outlined">open_in_new</span>Open</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Nia S.</td>
+                  <td class="muted">Los Angeles, CA</td>
+                  <td>$120</td>
+                  <td><span class="badge badge--error">Unavailable</span></td>
+                  <td class="muted">4d ago</td>
+                  <td class="actions">
+                    <a class="btn btn--stroked" href="./braider-detail.html"><span class="material-icons-outlined">open_in_new</span>Open</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
