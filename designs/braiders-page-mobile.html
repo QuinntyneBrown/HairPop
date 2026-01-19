@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse All Braiders - HairPop (Mobile)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            max-width: 375px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .menu-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            font-size: 1em;
+            color: #666;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        
+        .results-count {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .sort-by select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+        
+        .braiders-list {
+            padding: 15px;
+        }
+        
+        .braider-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .braider-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+        }
+        
+        .braider-info {
+            padding: 15px;
+        }
+        
+        .braider-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .braider-location {
+            color: #666;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+        }
+        
+        .braider-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .stars {
+            color: #FFB800;
+        }
+        
+        .rating-count {
+            color: #666;
+            font-size: 0.85em;
+        }
+        
+        .braider-bio {
+            color: #666;
+            margin: 12px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .braider-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        
+        .specialty-tag {
+            background: #f8f9fa;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: #555;
+        }
+        
+        .view-profile-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .load-more {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .load-more button {
+            padding: 12px 35px;
+            background-color: white;
+            color: #FF6B35;
+            border: 2px solid #FF6B35;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px 15px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="HairPop Logo">
+        </div>
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <section class="page-header">
+        <h1>Professional Braiders</h1>
+        <p>Browse all verified professional hair braiders on HairPop</p>
+    </section>
+
+    <div class="controls">
+        <div class="results-count">
+            <strong>248</strong> braiders
+        </div>
+        <div class="sort-by">
+            <select>
+                <option>Highest Rated</option>
+                <option>Most Reviews</option>
+                <option>Nearest First</option>
+                <option>Newest</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="braiders-list">
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Jasmine Williams</div>
+                <div class="braider-location">📍 Chicago, IL</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(128 reviews)</span>
+                </div>
+                <p class="braider-bio">Specializing in protective styles with 10+ years of experience. Passionate about hair health and beautiful braids.</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Cornrows</span>
+                    <span class="specialty-tag">Twists</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Amara Johnson</div>
+                <div class="braider-location">📍 Chicago, IL</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(95 reviews)</span>
+                </div>
+                <p class="braider-bio">Expert in knotless braids and natural hair care. Making your hair dreams come true, one braid at a time!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Knotless Braids</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Keisha Brown</div>
+                <div class="braider-location">📍 Chicago, IL</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(142 reviews)</span>
+                </div>
+                <p class="braider-bio">Licensed cosmetologist specializing in braiding techniques. Your satisfaction is my priority!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Senegalese Twists</span>
+                    <span class="specialty-tag">Crochet</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Nia Davis</div>
+                <div class="braider-location">📍 Atlanta, GA</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(87 reviews)</span>
+                </div>
+                <p class="braider-bio">Creating stunning protective styles with attention to detail. Book your appointment today!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Goddess Braids</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Zara Thompson</div>
+                <div class="braider-location">📍 Los Angeles, CA</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(156 reviews)</span>
+                </div>
+                <p class="braider-bio">15 years of experience in all braiding styles. Your hair is in good hands with me!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Cornrows</span>
+                    <span class="specialty-tag">Feed-in Braids</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Maya Anderson</div>
+                <div class="braider-location">📍 New York, NY</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(103 reviews)</span>
+                </div>
+                <p class="braider-bio">Passionate about creating beautiful, healthy braided styles. Let's make your vision a reality!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Marley Twists</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="load-more">
+        <button>Load More Braiders</button>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 HairPop. All rights reserved.</p>
+    </footer>
+</body>
+</html>

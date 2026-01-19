@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hair Styles Gallery - HairPop (Mobile)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            max-width: 375px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .menu-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            font-size: 1em;
+            color: #666;
+        }
+        
+        .categories {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 20px 15px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .categories::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category-btn {
+            padding: 8px 20px;
+            background-color: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            white-space: nowrap;
+        }
+        
+        .category-btn.active {
+            background-color: #FF6B35;
+            color: white;
+            border-color: #FF6B35;
+        }
+        
+        .gallery-section {
+            padding: 15px;
+        }
+        
+        .category-title {
+            font-size: 1.5em;
+            margin: 30px 0 15px;
+            color: #333;
+        }
+        
+        .category-title:first-child {
+            margin-top: 0;
+        }
+        
+        .style-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .style-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+        }
+        
+        .style-info {
+            padding: 15px;
+        }
+        
+        .style-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .style-description {
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 0.9em;
+        }
+        
+        .style-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9em;
+        }
+        
+        .duration {
+            color: #666;
+        }
+        
+        .price {
+            color: #FF6B35;
+            font-weight: 600;
+        }
+        
+        .find-braider-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .cta {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+            color: white;
+            margin-top: 30px;
+        }
+        
+        .cta h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .cta p {
+            font-size: 1em;
+            margin-bottom: 25px;
+        }
+        
+        .cta button {
+            padding: 15px 40px;
+            background-color: white;
+            color: #FF6B35;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px 15px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="HairPop Logo">
+        </div>
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <section class="page-header">
+        <h1>Hair Styles Gallery</h1>
+        <p>Explore our collection of beautiful braiding styles</p>
+    </section>
+
+    <div class="categories">
+        <button class="category-btn active">All Styles</button>
+        <button class="category-btn">Box Braids</button>
+        <button class="category-btn">Cornrows</button>
+        <button class="category-btn">Twists</button>
+        <button class="category-btn">Locs</button>
+        <button class="category-btn">Knotless</button>
+    </div>
+
+    <section class="gallery-section">
+        <h2 class="category-title">Box Braids</h2>
+        
+        <div class="style-card">
+            <div class="style-image">💇🏾‍♀️</div>
+            <div class="style-info">
+                <div class="style-name">Classic Box Braids</div>
+                <p class="style-description">Timeless protective style with medium-sized square-shaped sections. Perfect for versatility and low maintenance.</p>
+                <div class="style-meta">
+                    <span class="duration">⏱️ 4-6 hours</span>
+                    <span class="price">$150-$200</span>
+                </div>
+                <button class="find-braider-btn">Find a Braider</button>
+            </div>
+        </div>
+        
+        <div class="style-card">
+            <div class="style-image">✨</div>
+            <div class="style-info">
+                <div class="style-name">Jumbo Box Braids</div>
+                <p class="style-description">Large, bold braids that make a statement. Quicker to install and perfect for a dramatic look.</p>
+                <div class="style-meta">
+                    <span class="duration">⏱️ 2-4 hours</span>
+                    <span class="price">$120-$180</span>
+                </div>
+                <button class="find-braider-btn">Find a Braider</button>
+            </div>
+        </div>
+        
+        <div class="style-card">
+            <div class="style-image">💫</div>
+            <div class="style-info">
+                <div class="style-name">Micro Box Braids</div>
+                <p class="style-description">Tiny, intricate braids that offer maximum styling flexibility and can last for months with proper care.</p>
+                <div class="style-meta">
+                    <span class="duration">⏱️ 8-12 hours</span>
+                    <span class="price">$250-$350</span>
+                </div>
+                <button class="find-braider-btn">Find a Braider</button>
+            </div>
+        </div>
+
+        <h2 class="category-title">Knotless Braids</h2>
+        
+        <div class="style-card">
+            <div class="style-image">👸🏾</div>
+            <div class="style-info">
+                <div class="style-name">Knotless Box Braids</div>
+                <p class="style-description">Lightweight, natural-looking braids that start with your own hair. Less tension and more comfortable.</p>
+                <div class="style-meta">
+                    <span class="duration">⏱️ 6-8 hours</span>
+                    <span class="price">$200-$280</span>
+                </div>
+                <button class="find-braider-btn">Find a Braider</button>
+            </div>
+        </div>
+        
+        <div class="style-card">
+            <div class="style-image">💖</div>
+            <div class="style-info">
+                <div class="style-name">Bohemian Knotless</div>
+                <p class="style-description">Knotless braids with curly ends left out for a free-spirited, bohemian look.</p>
+                <div class="style-meta">
+                    <span class="duration">⏱️ 6-8 hours</span>
+                    <span class="price">$220-$300</span>
+                </div>
+                <button class="find-braider-btn">Find a Braider</button>
+            </div>
+        </div>
+
+        <h2 class="category-title">Cornrows & Feed-ins</h2>
+        
+        <div class="style-card">
+            <div class="style-image">⚡</div>
+            <div class="style-info">
+                <div class="style-name">Classic Cornrows</div>
+                <p class="style-description">Traditional straight-back cornrows. Clean, elegant, and perfect for any occasion.</p>
+                <div class="style-meta">
+                    <span class="duration">⏱️ 2-3 hours</span>
+                    <span class="price">$80-$120</span>
+                </div>
+                <button class="find-braider-btn">Find a Braider</button>
+            </div>
+        </div>
+        
+        <div class="style-card">
+            <div class="style-image">🔥</div>
+            <div class="style-info">
+                <div class="style-name">Lemonade Braids</div>
+                <p class="style-description">Side-swept feed-in cornrows made famous by Beyoncé. Sleek and stylish.</p>
+                <div class="style-meta">
+                    <span class="duration">⏱️ 4-6 hours</span>
+                    <span class="price">$150-$220</span>
+                </div>
+                <button class="find-braider-btn">Find a Braider</button>
+            </div>
+        </div>
+
+        <h2 class="category-title">Twists</h2>
+        
+        <div class="style-card">
+            <div class="style-image">🌺</div>
+            <div class="style-info">
+                <div class="style-name">Senegalese Twists</div>
+                <p class="style-description">Sleek, rope-like twists created with synthetic hair. Smooth texture and elegant appearance.</p>
+                <div class="style-meta">
+                    <span class="duration">⏱️ 5-7 hours</span>
+                    <span class="price">$150-$220</span>
+                </div>
+                <button class="find-braider-btn">Find a Braider</button>
+            </div>
+        </div>
+        
+        <div class="style-card">
+            <div class="style-image">💐</div>
+            <div class="style-info">
+                <div class="style-name">Passion Twists</div>
+                <p class="style-description">Curly, bohemian twists with a water-wave texture. Lightweight and gorgeous.</p>
+                <div class="style-meta">
+                    <span class="duration">⏱️ 5-7 hours</span>
+                    <span class="price">$180-$250</span>
+                </div>
+                <button class="find-braider-btn">Find a Braider</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Try a New Style?</h2>
+        <p>Find a skilled braider near you and book your appointment today</p>
+        <button>Find Braiders</button>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 HairPop. All rights reserved.</p>
+    </footer>
+</body>
+</html>
