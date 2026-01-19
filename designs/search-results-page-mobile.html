@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - HairPop (Mobile)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            max-width: 375px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .menu-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        .search-header {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 20px 15px;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 8px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            font-size: 0.9em;
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 10px 20px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .results-info {
+            text-align: center;
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .filter-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            margin: 0;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .results-count {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .main-content {
+            padding: 15px;
+        }
+        
+        .braider-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .braider-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5em;
+        }
+        
+        .braider-info {
+            padding: 15px;
+        }
+        
+        .braider-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .braider-location {
+            color: #666;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+        }
+        
+        .braider-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .stars {
+            color: #FFB800;
+        }
+        
+        .rating-count {
+            color: #666;
+            font-size: 0.85em;
+        }
+        
+        .braider-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        
+        .specialty-tag {
+            background: #f8f9fa;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: #555;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px 15px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="HairPop Logo">
+        </div>
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <section class="search-header">
+        <div class="search-box">
+            <input type="text" placeholder="Search..." value="Box braids in Toronto">
+            <button>🔍</button>
+        </div>
+        <p class="results-info">Found 24 braiders</p>
+    </section>
+
+    <div class="filter-toggle">
+        <span class="results-count">24 Results</span>
+        <button class="filter-btn">Filters</button>
+    </div>
+
+    <section class="main-content">
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Jasmine Williams</div>
+                <div class="braider-location">📍 Toronto, ON - 2.3 km</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(128 reviews)</span>
+                </div>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Cornrows</span>
+                    <span class="specialty-tag">Twists</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Amara Johnson</div>
+                <div class="braider-location">📍 Toronto, ON - 3.1 km</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(95 reviews)</span>
+                </div>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Knotless Braids</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Keisha Brown</div>
+                <div class="braider-location">📍 Toronto, ON - 4.5 km</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(142 reviews)</span>
+                </div>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Senegalese Twists</span>
+                    <span class="specialty-tag">Crochet</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Nia Davis</div>
+                <div class="braider-location">📍 Toronto, ON - 4.8 km</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(87 reviews)</span>
+                </div>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Goddess Braids</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Zara Thompson</div>
+                <div class="braider-location">📍 Toronto, ON - 5.2 km</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(156 reviews)</span>
+                </div>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Cornrows</span>
+                    <span class="specialty-tag">Feed-in Braids</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Maya Anderson</div>
+                <div class="braider-location">📍 Toronto, ON - 5.9 km</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(103 reviews)</span>
+                </div>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Marley Twists</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 HairPop. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse All Braiders - HairPop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover {
+            color: #FF6B35;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 3em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 40px auto 30px;
+            padding: 0 20px;
+        }
+        
+        .results-count {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .sort-by {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sort-by select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        
+        .braiders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        
+        .braider-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .braider-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .braider-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+        }
+        
+        .braider-info {
+            padding: 25px;
+        }
+        
+        .braider-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .braider-location {
+            color: #666;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .braider-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .stars {
+            color: #FFB800;
+        }
+        
+        .rating-count {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .braider-bio {
+            color: #666;
+            margin: 15px 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .braider-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .specialty-tag {
+            background: #f8f9fa;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #555;
+        }
+        
+        .view-profile-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .view-profile-btn:hover {
+            background-color: #e55a2a;
+        }
+        
+        .load-more {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .load-more button {
+            padding: 15px 50px;
+            background-color: white;
+            color: #FF6B35;
+            border: 2px solid #FF6B35;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .load-more button:hover {
+            background-color: #FF6B35;
+            color: white;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 40px 20px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-nav">
+                <div class="logo">
+                    <img src="logo.png" alt="HairPop Logo">
+                </div>
+                <ul class="nav">
+                    <li><a href="search-page.html">Home</a></li>
+                    <li><a href="braiders-page.html">Find Braiders</a></li>
+                    <li><a href="hair-styles-page.html">Hair Styles</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Professional Braiders</h1>
+            <p>Browse all verified professional hair braiders on HairPop</p>
+        </div>
+    </section>
+
+    <div class="controls">
+        <div class="results-count">
+            Showing <strong>1-12</strong> of <strong>248</strong> braiders
+        </div>
+        <div class="sort-by">
+            <label for="sort">Sort by:</label>
+            <select id="sort">
+                <option>Highest Rated</option>
+                <option>Most Reviews</option>
+                <option>Nearest First</option>
+                <option>Newest</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="braiders-grid">
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Jasmine Williams</div>
+                <div class="braider-location">📍 Toronto, ON</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(128 reviews)</span>
+                </div>
+                <p class="braider-bio">Specializing in protective styles with 10+ years of experience. Passionate about hair health and beautiful braids.</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Cornrows</span>
+                    <span class="specialty-tag">Twists</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Amara Johnson</div>
+                <div class="braider-location">📍 Toronto, ON</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(95 reviews)</span>
+                </div>
+                <p class="braider-bio">Expert in knotless braids and natural hair care. Making your hair dreams come true, one braid at a time!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Knotless Braids</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Keisha Brown</div>
+                <div class="braider-location">📍 Toronto, ON</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(142 reviews)</span>
+                </div>
+                <p class="braider-bio">Licensed cosmetologist specializing in braiding techniques. Your satisfaction is my priority!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Senegalese Twists</span>
+                    <span class="specialty-tag">Crochet</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Nia Davis</div>
+                <div class="braider-location">📍 Vancouver, BC</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(87 reviews)</span>
+                </div>
+                <p class="braider-bio">Creating stunning protective styles with attention to detail. Book your appointment today!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Goddess Braids</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Zara Thompson</div>
+                <div class="braider-location">📍 Montreal, QC</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(156 reviews)</span>
+                </div>
+                <p class="braider-bio">15 years of experience in all braiding styles. Your hair is in good hands with me!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Cornrows</span>
+                    <span class="specialty-tag">Feed-in Braids</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Maya Anderson</div>
+                <div class="braider-location">📍 Calgary, AB</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(103 reviews)</span>
+                </div>
+                <p class="braider-bio">Passionate about creating beautiful, healthy braided styles. Let's make your vision a reality!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Marley Twists</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Aaliyah Wilson</div>
+                <div class="braider-location">📍 Ottawa, ON</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(112 reviews)</span>
+                </div>
+                <p class="braider-bio">Certified braiding specialist with a passion for natural hair. Quality and precision guaranteed!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Knotless Braids</span>
+                    <span class="specialty-tag">Lemonade Braids</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Imani Martinez</div>
+                <div class="braider-location">📍 Edmonton, AB</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(94 reviews)</span>
+                </div>
+                <p class="braider-bio">Expert in intricate braiding patterns and protective styling. Your hair, my masterpiece!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Fulani Braids</span>
+                    <span class="specialty-tag">Cornrows</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Destiny Taylor</div>
+                <div class="braider-location">📍 Winnipeg, MB</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(78 reviews)</span>
+                </div>
+                <p class="braider-bio">Creating beautiful braids with love and care. Book now for a style you'll love!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Passion Twists</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Serena Harris</div>
+                <div class="braider-location">📍 Quebec City, QC</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(121 reviews)</span>
+                </div>
+                <p class="braider-bio">12+ years of braiding experience. Specializing in neat, long-lasting protective styles!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Box Braids</span>
+                    <span class="specialty-tag">Havana Twists</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏾</div>
+            <div class="braider-info">
+                <div class="braider-name">Layla Robinson</div>
+                <div class="braider-location">📍 Hamilton, ON</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(89 reviews)</span>
+                </div>
+                <p class="braider-bio">Bringing style and elegance to every braid. Your satisfaction is my guarantee!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Jumbo Braids</span>
+                    <span class="specialty-tag">Box Braids</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+        
+        <div class="braider-card">
+            <div class="braider-image">👩🏿</div>
+            <div class="braider-info">
+                <div class="braider-name">Ebony Clark</div>
+                <div class="braider-location">📍 Mississauga, ON</div>
+                <div class="braider-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(107 reviews)</span>
+                </div>
+                <p class="braider-bio">Professional braider committed to excellence. Let me help you achieve your hair goals!</p>
+                <div class="braider-specialties">
+                    <span class="specialty-tag">Knotless Braids</span>
+                    <span class="specialty-tag">Bohemian Braids</span>
+                </div>
+                <button class="view-profile-btn">View Profile</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="load-more">
+        <button>Load More Braiders</button>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 HairPop. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

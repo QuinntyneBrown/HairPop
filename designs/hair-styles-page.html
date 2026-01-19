@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hair Styles Gallery - HairPop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover {
+            color: #FF6B35;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 3em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .category-btn {
+            padding: 12px 30px;
+            background-color: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: #555;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: #FF6B35;
+            color: white;
+            border-color: #FF6B35;
+        }
+        
+        .gallery-section {
+            padding: 20px 20px 60px;
+        }
+        
+        .category-title {
+            font-size: 2em;
+            margin: 60px 0 30px;
+            text-align: center;
+            color: #333;
+        }
+        
+        .category-title:first-child {
+            margin-top: 0;
+        }
+        
+        .styles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+        
+        .style-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .style-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .style-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+        }
+        
+        .style-info {
+            padding: 20px;
+        }
+        
+        .style-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .style-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .style-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .duration {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .price {
+            color: #FF6B35;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .find-braider-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .find-braider-btn:hover {
+            background-color: #e55a2a;
+        }
+        
+        .cta {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+            color: white;
+            margin-top: 60px;
+        }
+        
+        .cta h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .cta button {
+            padding: 18px 50px;
+            background-color: white;
+            color: #FF6B35;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .cta button:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 40px 20px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-nav">
+                <div class="logo">
+                    <img src="logo.png" alt="HairPop Logo">
+                </div>
+                <ul class="nav">
+                    <li><a href="search-page.html">Home</a></li>
+                    <li><a href="braiders-page.html">Find Braiders</a></li>
+                    <li><a href="hair-styles-page.html">Hair Styles</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Hair Styles Gallery</h1>
+            <p>Explore our collection of beautiful braiding styles and find your next look</p>
+        </div>
+    </section>
+
+    <div class="categories">
+        <button class="category-btn active">All Styles</button>
+        <button class="category-btn">Box Braids</button>
+        <button class="category-btn">Cornrows</button>
+        <button class="category-btn">Twists</button>
+        <button class="category-btn">Locs</button>
+        <button class="category-btn">Knotless</button>
+        <button class="category-btn">Feed-in</button>
+    </div>
+
+    <section class="gallery-section">
+        <h2 class="category-title">Box Braids</h2>
+        <div class="styles-grid">
+            <div class="style-card">
+                <div class="style-image">💇🏾‍♀️</div>
+                <div class="style-info">
+                    <div class="style-name">Classic Box Braids</div>
+                    <p class="style-description">Timeless protective style with medium-sized square-shaped sections. Perfect for versatility and low maintenance.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 4-6 hours</span>
+                        <span class="price">$150-$200</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">✨</div>
+                <div class="style-info">
+                    <div class="style-name">Jumbo Box Braids</div>
+                    <p class="style-description">Large, bold braids that make a statement. Quicker to install and perfect for a dramatic look.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 2-4 hours</span>
+                        <span class="price">$120-$180</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">💫</div>
+                <div class="style-info">
+                    <div class="style-name">Micro Box Braids</div>
+                    <p class="style-description">Tiny, intricate braids that offer maximum styling flexibility and can last for months with proper care.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 8-12 hours</span>
+                        <span class="price">$250-$350</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">🎨</div>
+                <div class="style-info">
+                    <div class="style-name">Ombre Box Braids</div>
+                    <p class="style-description">Box braids with beautiful color gradients. Add personality with two-tone or multi-colored styles.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 5-7 hours</span>
+                        <span class="price">$180-$250</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Knotless Braids</h2>
+        <div class="styles-grid">
+            <div class="style-card">
+                <div class="style-image">👸🏾</div>
+                <div class="style-info">
+                    <div class="style-name">Knotless Box Braids</div>
+                    <p class="style-description">Lightweight, natural-looking braids that start with your own hair. Less tension and more comfortable.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 6-8 hours</span>
+                        <span class="price">$200-$280</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">💖</div>
+                <div class="style-info">
+                    <div class="style-name">Bohemian Knotless</div>
+                    <p class="style-description">Knotless braids with curly ends left out for a free-spirited, bohemian look.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 6-8 hours</span>
+                        <span class="price">$220-$300</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">🌟</div>
+                <div class="style-info">
+                    <div class="style-name">Goddess Knotless</div>
+                    <p class="style-description">Knotless braids with wavy or curly hair incorporated for a romantic, goddess-like appearance.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 7-9 hours</span>
+                        <span class="price">$230-$320</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">🦋</div>
+                <div class="style-info">
+                    <div class="style-name">Butterfly Knotless</div>
+                    <p class="style-description">Small to medium knotless braids with decorative accessories and curled ends.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 6-8 hours</span>
+                        <span class="price">$240-$310</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Cornrows & Feed-ins</h2>
+        <div class="styles-grid">
+            <div class="style-card">
+                <div class="style-image">⚡</div>
+                <div class="style-info">
+                    <div class="style-name">Classic Cornrows</div>
+                    <p class="style-description">Traditional straight-back cornrows. Clean, elegant, and perfect for any occasion.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 2-3 hours</span>
+                        <span class="price">$80-$120</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">🌈</div>
+                <div class="style-info">
+                    <div class="style-name">Feed-in Braids</div>
+                    <p class="style-description">Natural-looking cornrows with hair gradually added for a seamless, scalp-friendly finish.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 3-5 hours</span>
+                        <span class="price">$120-$180</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">🔥</div>
+                <div class="style-info">
+                    <div class="style-name">Lemonade Braids</div>
+                    <p class="style-description">Side-swept feed-in cornrows made famous by Beyoncé. Sleek and stylish.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 4-6 hours</span>
+                        <span class="price">$150-$220</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">👑</div>
+                <div class="style-info">
+                    <div class="style-name">Fulani Braids</div>
+                    <p class="style-description">Traditional West African style with braids, cornrows, and decorative beads or accessories.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 4-6 hours</span>
+                        <span class="price">$130-$200</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Twists</h2>
+        <div class="styles-grid">
+            <div class="style-card">
+                <div class="style-image">🌺</div>
+                <div class="style-info">
+                    <div class="style-name">Senegalese Twists</div>
+                    <p class="style-description">Sleek, rope-like twists created with synthetic hair. Smooth texture and elegant appearance.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 5-7 hours</span>
+                        <span class="price">$150-$220</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">🌸</div>
+                <div class="style-info">
+                    <div class="style-name">Marley Twists</div>
+                    <p class="style-description">Natural-looking twists with textured Marley hair for an authentic, kinky appearance.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 4-6 hours</span>
+                        <span class="price">$130-$200</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">🍃</div>
+                <div class="style-info">
+                    <div class="style-name">Havana Twists</div>
+                    <p class="style-description">Chunky, textured twists with volume and body. Perfect for a bold, carefree look.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 4-6 hours</span>
+                        <span class="price">$140-$210</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+
+            <div class="style-card">
+                <div class="style-image">💐</div>
+                <div class="style-info">
+                    <div class="style-name">Passion Twists</div>
+                    <p class="style-description">Curly, bohemian twists with a water-wave texture. Lightweight and gorgeous.</p>
+                    <div class="style-meta">
+                        <span class="duration">⏱️ 5-7 hours</span>
+                        <span class="price">$180-$250</span>
+                    </div>
+                    <button class="find-braider-btn">Find a Braider</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Try a New Style?</h2>
+            <p>Find a skilled braider near you and book your appointment today</p>
+            <button>Find Braiders</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 HairPop. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

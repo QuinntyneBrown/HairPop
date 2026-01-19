@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HairPop - Find Your Perfect Braider (Mobile)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            max-width: 375px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .menu-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        }
+        
+        .hero h1 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .search-box input {
+            padding: 12px 20px;
+            border: none;
+            font-size: 1em;
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 12px 30px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .features {
+            padding: 40px 20px;
+            background-color: #ffffff;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+        
+        .cta {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .cta p {
+            font-size: 1em;
+            margin-bottom: 25px;
+        }
+        
+        .cta button {
+            padding: 15px 40px;
+            background-color: white;
+            color: #FF6B35;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="HairPop Logo">
+        </div>
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <section class="hero">
+        <h1>Find Your Perfect Braider</h1>
+        <p>Connect with professional hair braiders in your area</p>
+        <div class="search-box">
+            <input type="text" placeholder="Search by location, style, or braider name...">
+            <button>Search</button>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Why Choose HairPop?</h2>
+        
+        <div class="feature-card">
+            <div class="feature-icon">👩🏾</div>
+            <h3>Expert Braiders</h3>
+            <p>Connect with verified professional braiders who specialize in various braiding styles and techniques.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">⭐</div>
+            <h3>Reviews & Ratings</h3>
+            <p>Read authentic reviews from real customers to find the perfect braider for your needs.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📍</div>
+            <h3>Local & Convenient</h3>
+            <p>Find braiders near you and book appointments at your convenience.</p>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Get Started?</h2>
+        <p>Join thousands of satisfied customers who found their perfect braider</p>
+        <button>Browse Braiders</button>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 HairPop. All rights reserved.</p>
+    </footer>
+</body>
+</html>
