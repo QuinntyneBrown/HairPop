@@ -1,0 +1,44 @@
+:host {
+  display: inline-block;
+}
+
+.chip-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 16px;
+  background: var(--surface-elevated, #383838);
+  border: 1px solid transparent;
+  color: var(--text-primary, rgba(255, 255, 255, 0.87));
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &--active {
+    background: var(--surface-selected, rgba(33, 150, 243, 0.16));
+    border-color: var(--primary-500, #2196f3);
+    color: var(--primary-500, #2196f3);
+  }
+
+  &__label {
+    font-weight: 500;
+  }
+
+  &__count {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+
+    .chip-filter--active & {
+      background: var(--primary-500, #2196f3);
+      color: white;
+    }
+  }
+}

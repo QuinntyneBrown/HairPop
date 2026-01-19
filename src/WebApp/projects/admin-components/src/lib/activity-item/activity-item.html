@@ -1,0 +1,14 @@
+<div class="activity-item">
+  <div class="activity-item__icon" [class]="'activity-item__icon--' + type">
+    <span [innerHTML]="icon"></span>
+  </div>
+  <div class="activity-item__content">
+    <div class="activity-item__title">{{ title }}</div>
+    @if (description) {
+      <div class="activity-item__description">{{ description }}</div>
+    }
+  </div>
+  @if (timestamp) {
+    <div class="activity-item__timestamp">{{ timestamp }}</div>
+  }
+</div>

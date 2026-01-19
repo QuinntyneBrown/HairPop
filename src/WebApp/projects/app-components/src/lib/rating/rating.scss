@@ -1,0 +1,19 @@
+:host {
+  display: inline-block;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &__stars {
+    color: #FFB800;
+    font-size: 1em;
+  }
+
+  &__count {
+    color: #666;
+    font-size: 0.9em;
+  }
+}

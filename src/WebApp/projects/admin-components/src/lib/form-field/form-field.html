@@ -1,0 +1,19 @@
+<div class="form-field" [class.form-field--error]="error" [class.form-field--disabled]="disabled">
+  @if (label) {
+    <label class="form-field__label">{{ label }}</label>
+  }
+  <input
+    class="form-field__input"
+    [type]="type"
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+  >
+  @if (error) {
+    <span class="form-field__error">{{ error }}</span>
+  } @else if (hint) {
+    <span class="form-field__hint">{{ hint }}</span>
+  }
+</div>

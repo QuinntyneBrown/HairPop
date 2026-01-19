@@ -1,0 +1,14 @@
+<section class="cta-section">
+  <div class="cta-section__container">
+    <h2 class="cta-section__title">{{ title }}</h2>
+    @if (description) {
+      <p class="cta-section__description">{{ description }}</p>
+    }
+    @if (buttonText) {
+      <button class="cta-section__button" (click)="onClick()">
+        {{ buttonText }}
+      </button>
+    }
+    <ng-content></ng-content>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+<button
+  [ngClass]="buttonClasses"
+  [disabled]="disabled"
+  [type]="type"
+  (click)="onClick()"
+>
+  @if (icon) {
+    <span class="btn__icon" [innerHTML]="icon"></span>
+  }
+  <ng-content></ng-content>
+</button>

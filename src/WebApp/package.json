@@ -14,7 +14,9 @@
     "test:all": "npm-run-all test test:admin",
     "e2e": "playwright test --project=app",
     "e2e:admin": "playwright test --project=app-admin",
-    "e2e:all": "playwright test"
+    "e2e:all": "playwright test",
+    "storybook": "ng run admin-components:storybook",
+    "build-storybook": "ng run admin-components:build-storybook"
   },
   "private": true,
   "dependencies": {
@@ -41,6 +43,7 @@
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.6",
     "@playwright/test": "^1.49.0",
+    "@storybook/angular": "^10.1.11",
     "@types/jest": "^29.5.13",
     "@types/node": "^22.10.2",
     "jest": "^30.0.0",
@@ -48,6 +51,7 @@
     "jest-preset-angular": "^16.0.0",
     "jsdom": "^27.1.0",
     "ng-packagr": "^21.0.0",
+    "storybook": "^10.1.11",
     "typescript": "~5.9.3",
     "vitest": "^4.0.8"
   }

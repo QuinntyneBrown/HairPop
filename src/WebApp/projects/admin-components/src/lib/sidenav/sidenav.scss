@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.sidenav {
+  width: 256px;
+  background-color: var(--surface-card, #1e1e1e);
+  border-right: 1px solid var(--surface-divider, rgba(255, 255, 255, 0.12));
+  overflow-y: auto;
+  height: 100%;
+  transition: width 0.3s ease;
+
+  &--collapsed {
+    width: 72px;
+
+    ::ng-deep .nav-item__text,
+    ::ng-deep .nav-section__title {
+      display: none;
+    }
+  }
+}

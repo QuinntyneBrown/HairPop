@@ -1,0 +1,6 @@
+<span class="badge" [class]="'badge--' + variant">
+  @if (icon) {
+    <span class="badge__icon" [innerHTML]="icon"></span>
+  }
+  <ng-content></ng-content>
+</span>

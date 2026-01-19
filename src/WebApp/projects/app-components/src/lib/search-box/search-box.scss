@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  max-width: 700px;
+  background: white;
+  padding: 10px;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  &__icon {
+    padding: 0 15px;
+    font-size: 1.2em;
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 10px;
+    font-family: inherit;
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  &__button {
+    background-color: #FF6B35;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: inherit;
+
+    &:hover {
+      background-color: #e55a2a;
+    }
+  }
+}

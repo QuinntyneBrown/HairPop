@@ -1,0 +1,7 @@
+<div class="app-avatar" [class]="'app-avatar--' + size">
+  @if (src) {
+    <img [src]="src" [alt]="alt" class="app-avatar__image">
+  } @else {
+    <span class="app-avatar__initials">{{ initials || '👩🏾' }}</span>
+  }
+</div>

@@ -1,0 +1,32 @@
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo-nav">
+      <div class="header__logo">
+        @if (logoSrc) {
+          <img [src]="logoSrc" [alt]="logoAlt">
+        } @else {
+          <span class="header__logo-text">{{ logoAlt }}</span>
+        }
+      </div>
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          @for (link of navLinks; track link.href) {
+            <li>
+              <a
+                class="header__nav-link"
+                [class.header__nav-link--active]="link.active"
+                [href]="link.href"
+                (click)="onLinkClick(link)"
+              >
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </nav>
+      <button class="header__mobile-menu" (click)="onMenuToggle()" aria-label="Toggle menu">
+        &#9776;
+      </button>
+    </div>
+  </div>
+</header>

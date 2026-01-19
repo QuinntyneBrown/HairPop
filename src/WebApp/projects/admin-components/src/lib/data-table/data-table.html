@@ -1,0 +1,41 @@
+<div class="data-table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        @if (selectable) {
+          <th class="data-table__checkbox-col"></th>
+        }
+        @for (column of columns; track column.key) {
+          <th [style.width]="column.width">{{ column.header }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of data; track $index; let i = $index) {
+        <tr
+          [class.data-table__row--selected]="isSelected(i)"
+          (click)="onRowClick(row, i)"
+        >
+          @if (selectable) {
+            <td class="data-table__checkbox-col">
+              <button
+                class="data-table__checkbox"
+                [class.data-table__checkbox--checked]="isSelected(i)"
+                (click)="toggleRow(i, $event)"
+              >
+                @if (isSelected(i)) {
+                  <span>&#10003;</span>
+                }
+              </button>
+            </td>
+          }
+          @for (column of columns; track column.key) {
+            <td>
+              <ng-container>{{ getCellValue(row, column.key) }}</ng-container>
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

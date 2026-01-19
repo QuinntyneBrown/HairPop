@@ -1,6 +1,6 @@
-# Hair Pop Admin (Mockups)
+# HairPop Admin (Mockups)
 
-These HTML pages are static mockups for **Hair Pop Admin**, intentionally using the same dark Material-like styleguide as the existing NGMAT mockups under the root `designs/` folder.
+These HTML pages are static mockups for **HairPop Admin**, intentionally using the same dark Material-like styleguide as the existing NGMAT mockups under the root `designs/` folder.
 
 ## Start here
 
