@@ -1,0 +1,88 @@
+<div class="dashboard">
+  <header class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Welcome back, {{ user()?.displayName || user()?.email }}</p>
+  </header>
+
+  <div class="stats-grid">
+    @for (stat of stats; track stat.label) {
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-icon" [style.background]="stat.color">
+            <mat-icon>{{ stat.icon }}</mat-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ stat.value }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+
+  <div class="content-grid">
+    <mat-card class="recent-activity">
+      <mat-card-header>
+        <mat-card-title>Recent Activity</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="activity-list">
+          <div class="activity-item">
+            <mat-icon>person_add</mat-icon>
+            <div class="activity-content">
+              <span class="activity-text">New user registered</span>
+              <span class="activity-time">2 minutes ago</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <mat-icon>event</mat-icon>
+            <div class="activity-content">
+              <span class="activity-text">New booking created</span>
+              <span class="activity-time">15 minutes ago</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <mat-icon>star</mat-icon>
+            <div class="activity-content">
+              <span class="activity-text">New 5-star review</span>
+              <span class="activity-time">1 hour ago</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <mat-icon>verified</mat-icon>
+            <div class="activity-content">
+              <span class="activity-text">Braider profile verified</span>
+              <span class="activity-time">3 hours ago</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="quick-actions">
+      <mat-card-header>
+        <mat-card-title>Quick Actions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="action-buttons">
+          <button class="action-btn">
+            <mat-icon>person_add</mat-icon>
+            <span>Add User</span>
+          </button>
+          <button class="action-btn">
+            <mat-icon>how_to_reg</mat-icon>
+            <span>Verify Braider</span>
+          </button>
+          <button class="action-btn">
+            <mat-icon>rate_review</mat-icon>
+            <span>Moderate Reviews</span>
+          </button>
+          <button class="action-btn">
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

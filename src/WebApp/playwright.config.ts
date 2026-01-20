@@ -11,16 +11,16 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'hairpop',
-      testDir: './projects/hairpop/e2e',
+      name: 'app',
+      testDir: './projects/app/e2e',
       use: {
         ...devices['Desktop Chrome'],
         baseURL: 'http://localhost:4200',
       },
     },
     {
-      name: 'hairpop-admin',
-      testDir: './projects/hairpop-admin/e2e',
+      name: 'app-admin',
+      testDir: './projects/app-admin/e2e',
       use: {
         ...devices['Desktop Chrome'],
         baseURL: 'http://localhost:4201',
