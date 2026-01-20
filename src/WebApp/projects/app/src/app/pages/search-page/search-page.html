@@ -1,1 +1,48 @@
-<p>search-page works!</p>
+<hp-header></hp-header>
+
+<section class="hero">
+    <div class="container">
+        <h1>Find Your Perfect Braider</h1>
+        <p>Connect with professional hair braiders in your area</p>
+        <div class="search-box">
+            <input type="text"
+                   placeholder="Search by location, style, or braider name..."
+                   [(ngModel)]="searchQuery"
+                   (keyup.enter)="onSearch()">
+            <button (click)="onSearch()">Search</button>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h2>Why Choose HairPop?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">&#x1F469;&#x1F3FE;</div>
+                <h3>Expert Braiders</h3>
+                <p>Connect with verified professional braiders who specialize in various braiding styles and techniques.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#x2B50;</div>
+                <h3>Reviews & Ratings</h3>
+                <p>Read authentic reviews from real customers to find the perfect braider for your needs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#x1F4CD;</div>
+                <h3>Local & Convenient</h3>
+                <p>Find braiders near you and book appointments at your convenience.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>Ready to Get Started?</h2>
+        <p>Join thousands of satisfied customers who found their perfect braider</p>
+        <button (click)="browseBraiders()">Browse Braiders</button>
+    </div>
+</section>
+
+<hp-footer></hp-footer>

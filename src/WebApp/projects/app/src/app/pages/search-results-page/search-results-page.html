@@ -1,1 +1,99 @@
-<p>search-results-page works!</p>
+<hp-header></hp-header>
+
+<section class="search-header">
+    <div class="container">
+        <div class="search-box">
+            <input type="text"
+                   placeholder="Search by location, style, or braider name..."
+                   [(ngModel)]="searchQuery"
+                   (keyup.enter)="onSearch()">
+            <button (click)="onSearch()">Search</button>
+        </div>
+        <p class="results-info">Found {{filteredBraiders.length}} braiders matching your search</p>
+    </div>
+</section>
+
+<section class="main-content">
+    <div class="filters-results">
+        <aside class="filters">
+            <h3>Filters</h3>
+
+            <div class="filter-group">
+                <h4>Distance</h4>
+                <div class="filter-option">
+                    <input type="radio" name="distance" id="dist1" value="5" [(ngModel)]="selectedDistance">
+                    <label for="dist1">Within 5 km</label>
+                </div>
+                <div class="filter-option">
+                    <input type="radio" name="distance" id="dist2" value="10" [(ngModel)]="selectedDistance">
+                    <label for="dist2">Within 10 km</label>
+                </div>
+                <div class="filter-option">
+                    <input type="radio" name="distance" id="dist3" value="25" [(ngModel)]="selectedDistance">
+                    <label for="dist3">Within 25 km</label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h4>Rating</h4>
+                <div class="filter-option">
+                    <input type="checkbox" id="rate1">
+                    <label for="rate1">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="rate2">
+                    <label for="rate2">&#x2B50;&#x2B50;&#x2B50;&#x2B50; & up</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="rate3">
+                    <label for="rate3">&#x2B50;&#x2B50;&#x2B50; & up</label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h4>Specialties</h4>
+                <div class="filter-option">
+                    <input type="checkbox" id="spec1">
+                    <label for="spec1">Box Braids</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="spec2">
+                    <label for="spec2">Cornrows</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="spec3">
+                    <label for="spec3">Twists</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="spec4">
+                    <label for="spec4">Locs</label>
+                </div>
+            </div>
+        </aside>
+
+        <div class="results-grid">
+            @for (braider of filteredBraiders; track braider.id) {
+                <div class="braider-card" (click)="viewBraider(braider.id)">
+                    <div class="braider-image">
+                        <img [src]="braider.imageUrl" [alt]="braider.name">
+                    </div>
+                    <div class="braider-info">
+                        <div class="braider-name">{{braider.name}}</div>
+                        <div class="braider-location">&#x1F4CD; {{braider.location}} - {{braider.distance}} km</div>
+                        <div class="braider-rating">
+                            <span class="stars">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</span>
+                            <span class="rating-count">({{braider.reviewCount}} reviews)</span>
+                        </div>
+                        <div class="braider-specialties">
+                            @for (specialty of braider.specialties; track specialty) {
+                                <span class="specialty-tag">{{specialty}}</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<hp-footer></hp-footer>

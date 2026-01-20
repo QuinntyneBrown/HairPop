@@ -1,1 +1,54 @@
-<p>braiders-page works!</p>
+<hp-header></hp-header>
+
+<section class="page-header">
+    <div class="container">
+        <h1>Professional Braiders</h1>
+        <p>Browse all verified professional hair braiders on HairPop</p>
+    </div>
+</section>
+
+<div class="controls">
+    <div class="results-count">
+        Showing <strong>1-{{braiders.length}}</strong> of <strong>{{totalBraiders}}</strong> braiders
+    </div>
+    <div class="sort-by">
+        <label for="sort">Sort by:</label>
+        <select id="sort" [(ngModel)]="sortBy">
+            <option value="rating">Highest Rated</option>
+            <option value="reviews">Most Reviews</option>
+            <option value="distance">Nearest First</option>
+            <option value="newest">Newest</option>
+        </select>
+    </div>
+</div>
+
+<section class="braiders-grid">
+    @for (braider of braiders; track braider.id) {
+        <div class="braider-card">
+            <div class="braider-image">
+                <img [src]="braider.imageUrl" [alt]="braider.name">
+            </div>
+            <div class="braider-info">
+                <div class="braider-name">{{braider.name}}</div>
+                <div class="braider-location">&#x1F4CD; {{braider.location}}</div>
+                <div class="braider-rating">
+                    <span class="stars">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</span>
+                    <span class="rating-count">({{braider.reviewCount}} reviews)</span>
+                </div>
+                <p class="braider-bio">{{braider.bio}}</p>
+                <div class="braider-specialties">
+                    @for (specialty of braider.specialties; track specialty) {
+                        <span class="specialty-tag">{{specialty}}</span>
+                    }
+                </div>
+                <button class="view-profile-btn" (click)="viewProfile(braider.id)">View Profile</button>
+            </div>
+        </div>
+    }
+</section>
+
+<div class="load-more">
+    <button (click)="loadMore()">Load More Braiders</button>
+</div>
+
+<hp-footer></hp-footer>

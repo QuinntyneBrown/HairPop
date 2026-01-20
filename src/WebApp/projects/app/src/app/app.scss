@@ -1,28 +1,4 @@
 :host {
     display: block;
-    height: 100vh;
-    .braiders {
-        padding: 100px 0 0 0;
-        display: block;
-        background-image: linear-gradient(rgb(255, 255, 255), rgb(244, 238, 240) 50%);
-        height: 100%;
-        text-align: center;
-        h1 {
-            margin: 0 0 50px 0;
-            font-size: 40px;
-            font-weight: 600;
-            letter-spacing: 2.75px;
-        }
-
-        .container {
-            display: grid;
-            max-width: 1271px;
-            margin: 0 auto;
-            grid-template-columns: 1fr 1fr 1fr;
-            justify-content: center;
-            justify-items: left;
-            column-gap: 10px;
-            row-gap: 20px;
-        }
-    }
+    min-height: 100vh;
 }

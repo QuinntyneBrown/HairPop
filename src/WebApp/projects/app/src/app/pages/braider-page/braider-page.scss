@@ -1,0 +1,317 @@
+:host {
+    display: block;
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .profile-hero {
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        padding: 60px 20px;
+    }
+
+    .profile-header {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: start;
+    }
+
+    .profile-image {
+        width: 250px;
+        height: 250px;
+        background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .profile-details {
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+    }
+
+    .location {
+        color: #666;
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .rating-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .stars {
+        color: #FFB800;
+        font-size: 1.5em;
+    }
+
+    .rating-text {
+        font-size: 1.2em;
+        color: #333;
+    }
+
+    .review-count {
+        color: #666;
+    }
+
+    .specialties {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .specialty-badge {
+        background: white;
+        padding: 8px 18px;
+        border-radius: 25px;
+        font-size: 1em;
+        color: #555;
+        border: 1px solid #ddd;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn-primary {
+        padding: 15px 40px;
+        background-color: #FF6B35;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #e55a2a;
+        }
+    }
+
+    .btn-secondary {
+        padding: 15px 40px;
+        background-color: white;
+        color: #FF6B35;
+        border: 2px solid #FF6B35;
+        border-radius: 8px;
+        font-size: 1.1em;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: #FF6B35;
+            color: white;
+        }
+    }
+
+    .content-section {
+        padding: 60px 20px;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .main-content {
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+    }
+
+    .about-text {
+        color: #666;
+        font-size: 1.1em;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    .portfolio {
+        margin: 40px 0;
+    }
+
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .portfolio-item {
+        aspect-ratio: 1;
+        background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3em;
+    }
+
+    .reviews-section {
+        h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #333;
+        }
+    }
+
+    .review-card {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .reviewer-name {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .review-date {
+        color: #999;
+        font-size: 0.9em;
+    }
+
+    .review-rating {
+        color: #FFB800;
+        margin-bottom: 10px;
+    }
+
+    .review-text {
+        color: #666;
+        line-height: 1.7;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 20px;
+    }
+
+    .info-card {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+
+        h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+    }
+
+    .info-item {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: start;
+        gap: 10px;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #555;
+        min-width: 100px;
+    }
+
+    .info-value {
+        color: #666;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+    }
+
+    .stat-number {
+        font-size: 2em;
+        font-weight: 700;
+        color: #FF6B35;
+    }
+
+    .stat-label {
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+        .profile-header {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+        }
+
+        .profile-details h1 {
+            font-size: 1.8em;
+        }
+
+        .location,
+        .rating-section,
+        .specialties {
+            justify-content: center;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .content-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .portfolio-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
