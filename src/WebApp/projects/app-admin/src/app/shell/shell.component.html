@@ -1,0 +1,76 @@
+<div class="shell-container">
+  <header class="shell-toolbar">
+    <button class="menu-toggle" (click)="toggleSidenav()" aria-label="Toggle menu">
+      <mat-icon>{{ sidenavExpanded() ? 'menu_open' : 'menu' }}</mat-icon>
+    </button>
+
+    <div class="logo">
+      <span class="logo-icon">&#9733;</span>
+      <span class="logo-text">HairPop Admin</span>
+    </div>
+
+    <div class="spacer"></div>
+
+    <button mat-icon-button aria-label="Notifications">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="User menu">
+      <div class="user-avatar">{{ userInitials }}</div>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <div class="user-menu-header">
+        <div class="user-avatar-large">{{ userInitials }}</div>
+        <div class="user-info">
+          <span class="user-name">{{ user()?.displayName || user()?.email }}</span>
+          <span class="user-email">{{ user()?.email }}</span>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item routerLink="/settings">
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()" data-testid="logout-button">
+        <mat-icon>logout</mat-icon>
+        <span>Sign Out</span>
+      </button>
+    </mat-menu>
+  </header>
+
+  <div class="shell-content">
+    <nav class="shell-sidenav" [class.collapsed]="!sidenavExpanded()">
+      @for (section of menuSections; track section.title) {
+        <div class="nav-section">
+          @if (sidenavExpanded()) {
+            <span class="nav-section-title">{{ section.title }}</span>
+          }
+          @for (item of section.items; track item.route) {
+            <a
+              class="nav-item"
+              [routerLink]="item.route"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+              [title]="item.label"
+            >
+              <mat-icon>{{ item.icon }}</mat-icon>
+              @if (sidenavExpanded()) {
+                <span class="nav-item-label">{{ item.label }}</span>
+              }
+            </a>
+          }
+        </div>
+      }
+    </nav>
+
+    <main class="shell-main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
