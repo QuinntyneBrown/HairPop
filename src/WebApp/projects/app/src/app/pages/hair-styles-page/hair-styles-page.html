@@ -1,1 +1,50 @@
-<p>hair-styles-page works!</p>
+<hp-header></hp-header>
+
+<section class="page-header">
+    <div class="container">
+        <h1>Hair Styles Gallery</h1>
+        <p>Explore our collection of beautiful braiding styles and find your next look</p>
+    </div>
+</section>
+
+<div class="categories">
+    @for (category of categories; track category) {
+        <button class="category-btn"
+                [class.active]="selectedCategory === category"
+                (click)="selectCategory(category)">
+            {{category}}
+        </button>
+    }
+</div>
+
+<section class="gallery-section">
+    @for (section of styleSections; track section.title) {
+        <h2 class="category-title">{{section.title}}</h2>
+        <div class="styles-grid">
+            @for (style of section.styles; track style.name) {
+                <div class="style-card">
+                    <div class="style-image">{{style.icon}}</div>
+                    <div class="style-info">
+                        <div class="style-name">{{style.name}}</div>
+                        <p class="style-description">{{style.description}}</p>
+                        <div class="style-meta">
+                            <span class="duration">&#x23F1;&#xFE0F; {{style.duration}}</span>
+                            <span class="price">{{style.price}}</span>
+                        </div>
+                        <button class="find-braider-btn" (click)="findBraider(style.name)">Find a Braider</button>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>Ready to Try a New Style?</h2>
+        <p>Find a skilled braider near you and book your appointment today</p>
+        <button (click)="findBraiders()">Find Braiders</button>
+    </div>
+</section>
+
+<hp-footer></hp-footer>

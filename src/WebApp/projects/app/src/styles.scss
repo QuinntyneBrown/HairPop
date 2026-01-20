@@ -1,6 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles for HairPop */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 html, body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
 }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Primary color: #FF6B35 */
+/* Secondary/hover: #e55a2a */
+/* Star color: #FFB800 */

@@ -1,0 +1,212 @@
+:host {
+    display: block;
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .search-header {
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        padding: 40px 20px;
+    }
+
+    .search-box {
+        max-width: 800px;
+        margin: 0 auto 20px;
+        display: flex;
+        gap: 10px;
+        background: white;
+        padding: 10px;
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+        input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            font-size: 1.1em;
+            outline: none;
+        }
+
+        button {
+            padding: 15px 40px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    }
+
+    .results-info {
+        text-align: center;
+        color: #666;
+        font-size: 1.1em;
+    }
+
+    .main-content {
+        padding: 40px 20px;
+    }
+
+    .filters-results {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .filters {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 15px;
+        height: fit-content;
+
+        h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+    }
+
+    .filter-group {
+        margin-bottom: 25px;
+
+        h4 {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 0.95em;
+        }
+    }
+
+    .filter-option {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+
+        input {
+            margin-right: 8px;
+        }
+
+        label {
+            cursor: pointer;
+        }
+    }
+
+    .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .braider-card {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 15px;
+        padding: 0;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    .braider-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #FF6B35 0%, #ff8555 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .braider-info {
+        padding: 20px;
+    }
+
+    .braider-name {
+        font-size: 1.3em;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .braider-location {
+        color: #666;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .braider-rating {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .stars {
+        color: #FFB800;
+    }
+
+    .rating-count {
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    .braider-specialties {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    .specialty-tag {
+        background: #f8f9fa;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        color: #555;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+        .search-box {
+            flex-direction: column;
+            border-radius: 25px;
+
+            input {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+
+            button {
+                padding: 12px 30px;
+                border-radius: 25px;
+                font-size: 1em;
+            }
+        }
+
+        .filters-results {
+            grid-template-columns: 1fr;
+        }
+
+        .filters {
+            order: -1;
+        }
+    }
+}
