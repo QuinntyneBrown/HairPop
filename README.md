@@ -13,6 +13,7 @@ HairPop is organized as a set of bounded-context services (microservices) behind
 - Requirements: [docs/requirements.md](docs/requirements.md)
 - Microservices overview: [docs/microservices.md](docs/microservices.md)
 - Coding guidelines: [docs/coding-guidelines.md](docs/coding-guidelines.md)
+- **.NET Aspire Integration**: [docs/aspire-integration.md](docs/aspire-integration.md)
 
 ## Architecture
 
