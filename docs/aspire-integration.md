@@ -47,8 +47,9 @@ The AppHost manages:
 - API Gateway (YARP reverse proxy)
 
 **Frontend Applications**
-- Customer App (Angular - main user-facing application)
-- Admin App (Angular - administrative dashboard)
+- Customer App (Angular - main user-facing application, runs on port 4200)
+- Admin App (Angular - administrative dashboard, runs on port 4201)
+- Both apps are served from the same Angular workspace (`src/WebApp`) with different serve configurations
 
 ## Running with Aspire
 
