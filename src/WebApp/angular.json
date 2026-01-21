@@ -110,6 +110,11 @@
             ],
             "tsConfig": "projects/app-admin/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            },
             "assets": [
               {
                 "glob": "**/*",
