@@ -1,27 +1,64 @@
-# HairPopApp
+# HairPop WebApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+Angular workspace for HairPop, containing:
 
-## Development server
+- `app` - customer-facing application
+- `app-admin` - admin application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Prerequisites
 
-## Code scaffolding
+- Node.js (LTS recommended)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Install
+
+```bash
+npm install
+```
+
+## Run (dev)
+
+```bash
+# Customer app
+npm start
+
+# Admin app
+npm run start:admin
+```
+
+By default Angular serves at `http://localhost:4200/` (and will prompt for an alternate port if it is taken).
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm run build        # app
+npm run build:admin  # app-admin
+npm run build:all
+```
 
-## Running unit tests
+## Unit tests (Jest)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm test
+npm run test:admin
+npm run test:all
+```
 
-## Running end-to-end tests
+## E2E tests (Playwright)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm run e2e
+npm run e2e:admin
+npm run e2e:all
+```
 
-## Further help
+## Storybook
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm run storybook
+npm run build-storybook
+```
+
+## Notes
+
+- This repo uses Angular 21 and `@angular-builders/jest` for unit tests.
+- For project configuration, see `angular.json` and `playwright.config.ts`.
