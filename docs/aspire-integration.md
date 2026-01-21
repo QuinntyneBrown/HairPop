@@ -6,11 +6,12 @@ This document explains the .NET Aspire integration in HairPop and how to use it 
 
 HairPop now uses .NET Aspire for cloud-native orchestration, providing:
 
-- **Service Orchestration**: Single command to run all microservices
+- **Service Orchestration**: Single command to run all microservices and frontend apps
 - **Service Discovery**: Automatic service-to-service communication
 - **Observability**: Built-in OpenTelemetry for tracing, metrics, and logs
 - **Azure Deployment**: Simplified deployment to Azure Container Apps
 - **Development Dashboard**: Visual monitoring and debugging tools
+- **Frontend Integration**: Angular apps integrated with backend service discovery
 
 ## Architecture
 
@@ -30,9 +31,24 @@ app.MapDefaultEndpoints();
 ### HairPop.AppHost
 Orchestration host that:
 - Defines all services and their relationships
+- Orchestrates .NET backend services and Angular frontend apps
 - Configures service discovery
 - Launches the Aspire Dashboard
 - Manages service lifecycle
+
+### Orchestrated Applications
+The AppHost manages:
+
+**Backend Services**
+- Identity API (authentication and authorization)
+- Braiders API (braider profiles and services)
+- Users API (user management)
+- Reviews API (reviews and ratings)
+- API Gateway (YARP reverse proxy)
+
+**Frontend Applications**
+- Customer App (Angular - main user-facing application)
+- Admin App (Angular - administrative dashboard)
 
 ## Running with Aspire
 
@@ -51,11 +67,27 @@ dotnet run --project src/HairPop.AppHost/HairPop.AppHost.csproj
 This launches:
 - All API services (Identity, Braiders, Users, Reviews)
 - API Gateway
+- Customer App (Angular - http://localhost:4200)
+- Admin App (Angular - http://localhost:4201)
 - Aspire Dashboard (typically at http://localhost:15888)
+
+### Prerequisites for Node.js Apps
+The Angular apps require Node.js to be installed:
+```bash
+# Install Node.js dependencies (first time only)
+cd src/WebApp
+npm install
+```
+
+The AppHost will automatically:
+- Detect Node.js on your system
+- Install npm dependencies if needed
+- Start the Angular dev servers
+- Configure environment variables for API endpoints
 
 ### Aspire Dashboard Features
 Access the dashboard to:
-- View running services and their status
+- View running services and their status (including Angular apps)
 - Browse structured logs from all services
 - Explore distributed traces across services
 - Monitor metrics and resource usage

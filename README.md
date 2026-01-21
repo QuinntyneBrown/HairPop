@@ -104,24 +104,33 @@ dotnet build HairPop.sln
 
 #### Prerequisites
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Node.js](https://nodejs.org/) (LTS) - for Angular apps
 - Visual Studio 2022 17.9+ or Visual Studio Code with C# Dev Kit
 
 #### Running the AppHost
-The Aspire AppHost orchestrates all services with a single command:
+The Aspire AppHost orchestrates all services and frontend apps with a single command:
 
 ```bash
+# First time: Install Node.js dependencies
+cd src/WebApp
+npm install
+cd ../..
+
+# Start everything
 dotnet run --project src/HairPop.AppHost/HairPop.AppHost.csproj
 ```
 
 This will:
 - Start all backend services (Identity, Braiders, Users, Reviews)
 - Start the API Gateway
+- Start the Customer App (Angular - http://localhost:4200)
+- Start the Admin App (Angular - http://localhost:4201)
 - Launch the Aspire Dashboard for monitoring and telemetry
 - Configure service discovery between services
 - Enable OpenTelemetry tracing and metrics
 
 Access the Aspire Dashboard (typically at `http://localhost:15888`) to:
-- Monitor service health and status
+- Monitor service health and status (including Angular apps)
 - View logs from all services
 - Explore distributed traces
 - Check metrics and performance

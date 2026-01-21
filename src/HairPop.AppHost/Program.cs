@@ -13,10 +13,23 @@ var users = builder.AddProject("users", "../Users/Users.Api/Users.Api.csproj");
 var reviews = builder.AddProject("reviews", "../Reviews/Reviews.Api/Reviews.Api.csproj");
 
 // Add the API Gateway with references to all services
-builder.AddProject("apigateway", "../ApiGateway/ApiGateway.csproj")
+var apiGateway = builder.AddProject("apigateway", "../ApiGateway/ApiGateway.csproj")
     .WithReference(identity)
     .WithReference(braiders)
     .WithReference(users)
     .WithReference(reviews);
+
+// Add Angular apps
+var customerApp = builder.AddNpmApp("app", "../WebApp", "start")
+    .WithHttpEndpoint(port: 4200, env: "PORT")
+    .WithExternalHttpEndpoints()
+    .WithReference(apiGateway)
+    .PublishAsDockerFile();
+
+var adminApp = builder.AddNpmApp("app-admin", "../WebApp", "start:admin")
+    .WithHttpEndpoint(port: 4201, env: "PORT")
+    .WithExternalHttpEndpoints()
+    .WithReference(apiGateway)
+    .PublishAsDockerFile();
 
 builder.Build().Run();
