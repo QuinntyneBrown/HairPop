@@ -1,0 +1,155 @@
+<div class="braider-detail">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">{{ isNew() ? 'New Braider' : 'Braider profile' }}</h1>
+      <div class="muted">Entity fields: Braider, BraiderService, Availability</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn--stroked" routerLink="/braiders">
+        <span class="material-icons-outlined">arrow_back</span>
+        Back
+      </a>
+      @if (!isNew()) {
+        <button class="btn btn--warn" (click)="delete()">
+          <span class="material-icons-outlined">delete</span>
+          Delete
+        </button>
+      }
+      <button class="btn btn--primary" (click)="save()">
+        <span class="material-icons-outlined">save</span>
+        Save
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid--2">
+    <div class="card">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Profile</div>
+          <div class="card__subtitle">Basic information and contact</div>
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-field__label">Name</label>
+            <input class="form-field__input" [value]="name()" (input)="name.set($any($event.target).value)">
+          </div>
+          <div class="form-field">
+            <label class="form-field__label">Location</label>
+            <input class="form-field__input" [value]="location()" (input)="location.set($any($event.target).value)">
+          </div>
+          <div class="form-field">
+            <label class="form-field__label">Hourly Rate ($)</label>
+            <input class="form-field__input" type="number" [value]="hourlyRate()" (input)="hourlyRate.set($any($event.target).value)">
+          </div>
+          <div class="form-field">
+            <label class="form-field__label">Availability Status</label>
+            <div class="toggle-wrapper">
+              <button class="toggle" [class.toggle--active]="isAvailable()" (click)="toggleAvailability()">
+                <span class="toggle__track"></span>
+                <span class="toggle__thumb"></span>
+              </button>
+              <span class="toggle-label">{{ isAvailable() ? 'Available' : 'Unavailable' }}</span>
+            </div>
+          </div>
+          <div class="form-field full-width">
+            <label class="form-field__label">Bio</label>
+            <textarea class="form-field__textarea" [value]="bio()" (input)="bio.set($any($event.target).value)"></textarea>
+          </div>
+          <div class="form-field full-width">
+            <label class="form-field__label">Profile image URL</label>
+            <input class="form-field__input" [value]="profileImageUrl()" (input)="profileImageUrl.set($any($event.target).value)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Services</div>
+          <div class="card__subtitle">Manage braider services</div>
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="actions" style="margin-bottom: var(--spacing-md)">
+          <button class="btn btn--primary" (click)="addService()">
+            <span class="material-icons-outlined">add</span>
+            Add service
+          </button>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Price</th>
+              <th>Duration</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (service of services(); track service.id) {
+              <tr>
+                <td>
+                  <div>{{ service.name }}</div>
+                  @if (service.description) {
+                    <div class="muted" style="font-size: 12px;">{{ service.description }}</div>
+                  }
+                </td>
+                <td>${{ service.price }}</td>
+                <td class="muted">{{ service.durationMinutes }} min</td>
+                <td class="actions">
+                  <button class="btn btn--stroked" (click)="removeService(service.id)">
+                    <span class="material-icons-outlined">delete</span>
+                  </button>
+                </td>
+              </tr>
+            }
+            @empty {
+              <tr>
+                <td colspan="4" class="muted" style="text-align: center; padding: var(--spacing-lg);">No services</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card full-width">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Weekly Schedule</div>
+          <div class="card__subtitle">Manage availability slots</div>
+        </div>
+      </div>
+      <div class="card__content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Active</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (slot of availabilities(); track slot.id) {
+              <tr>
+                <td>{{ slot.dayOfWeek }}</td>
+                <td class="muted">{{ slot.startTime }}</td>
+                <td class="muted">{{ slot.endTime }}</td>
+                <td>
+                  <span class="badge" [class.badge--success]="slot.isActive" [class.badge--error]="!slot.isActive">
+                    {{ slot.isActive ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

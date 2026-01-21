@@ -1,0 +1,29 @@
+<div class="permissions-page">
+  <div class="page-header">
+    <h1 class="page-title">Permissions</h1>
+    <div class="muted">System permissions reference</div>
+  </div>
+
+  <div class="permissions-grid">
+    @for (category of categories(); track category.name) {
+      <div class="card">
+        <div class="card__header">
+          <div>
+            <div class="card__title">{{ category.name }}</div>
+            <div class="card__subtitle">{{ category.permissions.length }} permissions</div>
+          </div>
+        </div>
+        <div class="card__content">
+          <div class="permissions-list">
+            @for (permission of category.permissions; track permission.id) {
+              <div class="permission-item">
+                <div class="permission-name">{{ permission.name }}</div>
+                <div class="permission-description">{{ permission.description }}</div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

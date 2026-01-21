@@ -1,0 +1,102 @@
+<div class="media-detail">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Media Details</h1>
+      <div class="muted">{{ filename() }}</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn--stroked" routerLink="/media">
+        <span class="material-icons-outlined">arrow_back</span>
+        Back
+      </a>
+    </div>
+  </div>
+
+  <div class="grid grid--2">
+    <div class="card">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Preview</div>
+          <div class="card__subtitle">Media preview</div>
+        </div>
+        <span class="badge" [class]="getStatusClass()">{{ status() }}</span>
+      </div>
+      <div class="card__content">
+        <div class="preview-placeholder">
+          <span class="material-icons-outlined preview-icon">{{ type() === 'video' ? 'videocam' : 'image' }}</span>
+          <div class="preview-text">Preview not available</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header">
+        <div>
+          <div class="card__title">File Information</div>
+          <div class="card__subtitle">Metadata and details</div>
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-item__label">Filename</div>
+            <div class="info-item__value">{{ filename() }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item__label">Type</div>
+            <div class="info-item__value">{{ type() }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item__label">Size</div>
+            <div class="info-item__value">{{ size() }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item__label">Dimensions</div>
+            <div class="info-item__value">{{ dimensions() }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item__label">Braider</div>
+            <div class="info-item__value">{{ braiderName() }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item__label">Uploaded</div>
+            <div class="info-item__value">{{ uploadedAt() }}</div>
+          </div>
+          <div class="info-item full-width">
+            <div class="info-item__label">URL</div>
+            <div class="info-item__value url-value">{{ url() }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card full-width">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Actions</div>
+          <div class="card__subtitle">Manage media file</div>
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="actions">
+          @if (status() !== 'active') {
+            <button class="btn btn--primary" (click)="activate()">
+              <span class="material-icons-outlined">check_circle</span>
+              Activate
+            </button>
+          }
+          @if (status() !== 'archived') {
+            <button class="btn btn--stroked" (click)="archive()">
+              <span class="material-icons-outlined">archive</span>
+              Archive
+            </button>
+          }
+          <button class="btn btn--warn" (click)="delete()">
+            <span class="material-icons-outlined">delete</span>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

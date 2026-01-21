@@ -1,0 +1,14 @@
+.user-detail {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.table {
+  td:last-child {
+    width: 120px;
+  }
+}

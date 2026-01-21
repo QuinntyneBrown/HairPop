@@ -1,0 +1,54 @@
+<div class="roles-list">
+  <div class="page-header">
+    <h1 class="page-title">Roles</h1>
+    <div class="actions">
+      <a class="btn btn--primary" routerLink="/roles/new">
+        <span class="material-icons-outlined">add</span>
+        New role
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Users</th>
+            <th>Permissions</th>
+            <th>Type</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (role of roles(); track role.id) {
+            <tr>
+              <td>
+                <div class="role-name">
+                  <span class="material-icons-outlined role-icon">security</span>
+                  {{ role.name }}
+                </div>
+              </td>
+              <td class="muted">{{ role.description }}</td>
+              <td>{{ role.userCount }}</td>
+              <td>{{ role.permissionCount }}</td>
+              <td>
+                <span class="badge" [class.badge--info]="role.isSystem" [class.badge--success]="!role.isSystem">
+                  {{ role.isSystem ? 'System' : 'Custom' }}
+                </span>
+              </td>
+              <td class="actions">
+                <a class="btn btn--stroked" [routerLink]="['/roles', role.id]">
+                  <span class="material-icons-outlined">open_in_new</span>
+                  Open
+                </a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+.braider-detail {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.table {
+  td:last-child {
+    width: 80px;
+  }
+}
+
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) 0;
+}
+
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  &__track {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 44px;
+    height: 14px;
+    background-color: var(--surface-elevated);
+    border-radius: 7px;
+    transition: background-color 0.2s;
+  }
+
+  &__thumb {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #fafafa;
+    border-radius: 50%;
+    box-shadow: var(--elevation-1);
+    transition: all 0.2s;
+  }
+
+  &--active {
+    .toggle__track {
+      background-color: rgba(33, 150, 243, 0.5);
+    }
+
+    .toggle__thumb {
+      left: 24px;
+      background-color: var(--primary-500);
+    }
+  }
+}
+
+.toggle-label {
+  color: var(--text-secondary);
+  font-size: 14px;
+}

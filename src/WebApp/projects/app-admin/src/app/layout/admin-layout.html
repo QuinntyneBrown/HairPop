@@ -1,0 +1,59 @@
+<div class="admin-layout">
+  <header class="toolbar">
+    <button class="toolbar__menu-btn">
+      <span class="material-icons-outlined">menu</span>
+    </button>
+    <a routerLink="/dashboard" class="toolbar__logo">
+      <span class="material-icons-outlined toolbar__logo-icon">content_cut</span>
+      <span class="toolbar__title">HairPop Admin</span>
+    </a>
+    <div class="toolbar__spacer"></div>
+    <div class="toolbar__search">
+      <span class="material-icons-outlined toolbar__search-icon">search</span>
+      <input type="text" class="toolbar__search-input" placeholder="Search...">
+    </div>
+    <div class="toolbar__actions">
+      <button class="icon-btn">
+        <span class="material-icons-outlined">help_outline</span>
+      </button>
+      <button class="icon-btn">
+        <span class="material-icons-outlined">notifications</span>
+        @if (notificationCount() > 0) {
+          <span class="icon-btn__badge">{{ notificationCount() }}</span>
+        }
+      </button>
+      <div class="avatar">{{ userInitials() }}</div>
+    </div>
+  </header>
+
+  <div class="sidenav-container">
+    <nav class="sidenav">
+      @for (section of navSections(); track section.title) {
+        <div class="nav-section">
+          @if (section.title) {
+            <div class="nav-section__title">{{ section.title }}</div>
+          }
+          <ul class="nav-list">
+            @for (item of section.items; track item.route) {
+              <li>
+                <a class="nav-item"
+                   [routerLink]="item.route"
+                   routerLinkActive="nav-item--active">
+                  <span class="material-icons-outlined nav-item__icon">{{ item.icon }}</span>
+                  <span class="nav-item__text">{{ item.label }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+        @if (!$last) {
+          <div class="nav-divider"></div>
+        }
+      }
+    </nav>
+
+    <main class="sidenav-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="media-list">
+  <div class="page-header">
+    <h1 class="page-title">Media</h1>
+    <div class="actions">
+      <button class="btn btn--stroked">
+        <span class="material-icons-outlined">filter_list</span>
+        Filters
+      </button>
+      <button class="btn btn--primary">
+        <span class="material-icons-outlined">upload</span>
+        Upload
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Type</th>
+            <th>Braider</th>
+            <th>Size</th>
+            <th>Uploaded</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of media(); track item.id) {
+            <tr>
+              <td>
+                <div class="file-cell">
+                  <span class="material-icons-outlined file-icon">{{ getTypeIcon(item.type) }}</span>
+                  {{ item.filename }}
+                </div>
+              </td>
+              <td class="muted">{{ item.type }}</td>
+              <td class="muted">{{ item.braiderName }}</td>
+              <td class="muted">{{ item.size }}</td>
+              <td class="muted">{{ item.uploadedAt }}</td>
+              <td>
+                <span class="badge" [class]="getStatusClass(item.status)">
+                  {{ item.status }}
+                </span>
+              </td>
+              <td class="actions">
+                <a class="btn btn--stroked" [routerLink]="['/media', item.id]">
+                  <span class="material-icons-outlined">open_in_new</span>
+                  Open
+                </a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

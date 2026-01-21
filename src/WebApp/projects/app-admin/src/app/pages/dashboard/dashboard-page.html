@@ -1,0 +1,120 @@
+<div class="dashboard">
+  <div class="page-header">
+    <h1 class="page-title">Dashboard</h1>
+    <button class="btn btn--primary" routerLink="/braiders/new">
+      <span class="material-icons-outlined">add</span>
+      New Braider
+    </button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat-card">
+        <div class="stat-card__header">
+          <div class="stat-card__icon" [class]="stat.iconClass">
+            <span class="material-icons-outlined">{{ stat.icon }}</span>
+          </div>
+        </div>
+        <div class="stat-card__value">{{ stat.value }}</div>
+        <div class="stat-card__label">{{ stat.label }}</div>
+        @if (stat.trend) {
+          <div class="stat-card__trend" [class.stat-card__trend--up]="stat.trend.direction === 'up'" [class.stat-card__trend--down]="stat.trend.direction === 'down'">
+            <span class="material-icons-outlined">{{ stat.trend.direction === 'up' ? 'trending_up' : 'trending_down' }}</span>
+            {{ stat.trend.text }}
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Filter Toolbar -->
+  <div class="toolbar-section">
+    <div class="filter-chips">
+      @for (filter of filterOptions(); track filter) {
+        <button
+          class="chip"
+          [class.chip--active]="activeFilter() === filter"
+          (click)="setFilter(filter)">
+          {{ filter }}
+        </button>
+      }
+    </div>
+    <div class="view-toggle">
+      <button class="view-toggle__btn view-toggle__btn--active">
+        <span class="material-icons-outlined">grid_view</span>
+      </button>
+      <button class="view-toggle__btn">
+        <span class="material-icons-outlined">view_list</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quick Actions Grid -->
+  <div class="grid grid--4">
+    <a class="quick-action-card" routerLink="/braiders">
+      <div class="quick-action-card__icon quick-action-card__icon--primary">
+        <span class="material-icons-outlined">content_cut</span>
+      </div>
+      <div class="quick-action-card__content">
+        <div class="quick-action-card__title">Manage Braiders</div>
+        <div class="quick-action-card__subtitle">48 total braiders</div>
+      </div>
+      <span class="material-icons-outlined quick-action-card__arrow">chevron_right</span>
+    </a>
+
+    <a class="quick-action-card" routerLink="/users">
+      <div class="quick-action-card__icon quick-action-card__icon--success">
+        <span class="material-icons-outlined">people</span>
+      </div>
+      <div class="quick-action-card__content">
+        <div class="quick-action-card__title">Manage Users</div>
+        <div class="quick-action-card__subtitle">312 active users</div>
+      </div>
+      <span class="material-icons-outlined quick-action-card__arrow">chevron_right</span>
+    </a>
+
+    <a class="quick-action-card" routerLink="/bookings">
+      <div class="quick-action-card__icon quick-action-card__icon--warning">
+        <span class="material-icons-outlined">event</span>
+      </div>
+      <div class="quick-action-card__content">
+        <div class="quick-action-card__title">View Bookings</div>
+        <div class="quick-action-card__subtitle">89 pending</div>
+      </div>
+      <span class="material-icons-outlined quick-action-card__arrow">chevron_right</span>
+    </a>
+
+    <a class="quick-action-card" routerLink="/reviews">
+      <div class="quick-action-card__icon quick-action-card__icon--accent">
+        <span class="material-icons-outlined">reviews</span>
+      </div>
+      <div class="quick-action-card__content">
+        <div class="quick-action-card__title">Moderate Reviews</div>
+        <div class="quick-action-card__subtitle">5 pending</div>
+      </div>
+      <span class="material-icons-outlined quick-action-card__arrow">chevron_right</span>
+    </a>
+  </div>
+
+  <!-- Recent Activity -->
+  <h2 class="section-title">Recent Activity</h2>
+  <div class="activity-list">
+    @for (activity of recentActivity(); track activity.time) {
+      <div class="activity-item">
+        <div class="activity-item__icon" [class]="activity.iconClass">
+          <span class="material-icons-outlined">{{ activity.icon }}</span>
+        </div>
+        <div class="activity-item__content">
+          <div class="activity-item__text">
+            {{ activity.text }}
+            @if (activity.highlight) {
+              <strong>{{ activity.highlight }}</strong>
+            }
+          </div>
+          <div class="activity-item__time">{{ activity.time }}</div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

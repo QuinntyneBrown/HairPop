@@ -1,0 +1,100 @@
+<div class="login-container">
+  <div class="stars">
+    @for (i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]; track i) {
+      <div class="star"></div>
+    }
+  </div>
+
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-logo">
+        <div class="login-logo__icon">
+          <span class="material-icons-outlined">content_cut</span>
+        </div>
+        <span class="login-logo__text">HairPop Admin</span>
+      </div>
+      <div class="login-subtitle">Hair Braiding Platform Management</div>
+    </div>
+
+    <div class="login-body">
+      <div class="mfa-banner">
+        <span class="material-icons-outlined mfa-banner__icon">security</span>
+        <span class="mfa-banner__text">Secure login with optional two-factor authentication</span>
+      </div>
+
+      <form (submit)="onSubmit($event)">
+        <div class="form-field">
+          <label class="form-field__label">Email Address</label>
+          <div class="form-field__wrapper">
+            <span class="material-icons-outlined form-field__icon">email</span>
+            <input
+              type="email"
+              class="form-field__input"
+              placeholder="Enter your email"
+              [value]="email()"
+              (input)="email.set($any($event.target).value)">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-field__label">Password</label>
+          <div class="form-field__wrapper">
+            <span class="material-icons-outlined form-field__icon">lock</span>
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              class="form-field__input"
+              placeholder="Enter your password"
+              [value]="password()"
+              (input)="password.set($any($event.target).value)">
+            <button type="button" class="form-field__toggle" (click)="togglePassword()">
+              <span class="material-icons-outlined">{{ showPassword() ? 'visibility' : 'visibility_off' }}</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-wrapper" (click)="toggleRememberMe()">
+            <div class="checkbox" [class.checkbox--checked]="rememberMe()"></div>
+            <span class="checkbox-label">Remember me</span>
+          </label>
+          <a href="#" class="link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full" [disabled]="isLoading()">
+          @if (isLoading()) {
+            <span class="material-icons-outlined spinning">sync</span>
+            Signing in...
+          } @else {
+            <span class="material-icons-outlined">login</span>
+            Sign In
+          }
+        </button>
+      </form>
+
+      <div class="divider-text">
+        <span class="divider-text__text">or continue with</span>
+      </div>
+
+      <div class="social-login">
+        <button class="social-btn" (click)="socialLogin('google')">
+          <div class="social-icon google-icon"></div>
+          Google
+        </button>
+        <button class="social-btn" (click)="socialLogin('microsoft')">
+          <div class="social-icon microsoft-icon"></div>
+          Microsoft
+        </button>
+        <button class="social-btn" (click)="socialLogin('github')">
+          <div class="social-icon github-icon"></div>
+          GitHub
+        </button>
+      </div>
+    </div>
+
+    <div class="login-footer">
+      <p class="login-footer__text">
+        Don't have an account? <a href="#" class="link">Create one</a>
+      </p>
+    </div>
+  </div>
+</div>

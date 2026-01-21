@@ -1,0 +1,118 @@
+.api-keys-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.table {
+  td:last-child {
+    width: 120px;
+  }
+}
+
+.key-name {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.key-icon {
+  color: var(--primary-500);
+}
+
+.key-prefix {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  background-color: var(--surface-elevated);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}
+
+.scopes {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.scope-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  background-color: var(--surface-elevated);
+  border-radius: 12px;
+  color: var(--text-secondary);
+}
+
+// Modal
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--surface-dialog);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-8);
+  width: 100%;
+  max-width: 480px;
+  z-index: 1001;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--surface-divider);
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &__content {
+    padding: var(--spacing-lg);
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+  }
+}
+
+.key-generated {
+  text-align: center;
+
+  &__icon {
+    .material-icons-outlined {
+      font-size: 48px;
+      color: var(--status-success);
+    }
+  }
+
+  &__message {
+    color: var(--text-secondary);
+    margin: var(--spacing-md) 0;
+  }
+
+  &__value {
+    background-color: var(--surface-elevated);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-lg);
+
+    code {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      word-break: break-all;
+    }
+  }
+}

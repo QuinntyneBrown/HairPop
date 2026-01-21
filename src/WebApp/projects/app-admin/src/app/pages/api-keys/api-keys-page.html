@@ -1,0 +1,101 @@
+<div class="api-keys-page">
+  <div class="page-header">
+    <h1 class="page-title">API Keys</h1>
+    <div class="actions">
+      <button class="btn btn--primary" (click)="showNewKeyModal.set(true)">
+        <span class="material-icons-outlined">add</span>
+        Create API Key
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Prefix</th>
+            <th>Scopes</th>
+            <th>Created</th>
+            <th>Last Used</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (key of apiKeys(); track key.id) {
+            <tr>
+              <td>
+                <div class="key-name">
+                  <span class="material-icons-outlined key-icon">vpn_key</span>
+                  {{ key.name }}
+                </div>
+              </td>
+              <td>
+                <code class="key-prefix">{{ key.prefix }}***</code>
+              </td>
+              <td>
+                <div class="scopes">
+                  @for (scope of key.scopes; track scope) {
+                    <span class="scope-badge">{{ scope }}</span>
+                  }
+                </div>
+              </td>
+              <td class="muted">{{ key.createdAt }}</td>
+              <td class="muted">{{ key.lastUsed || 'Never' }}</td>
+              <td>
+                <span class="badge" [class]="getStatusClass(key.status)">
+                  {{ key.status }}
+                </span>
+              </td>
+              <td class="actions">
+                @if (key.status === 'active') {
+                  <button class="btn btn--warn" (click)="revokeKey(key.id)">
+                    <span class="material-icons-outlined">block</span>
+                    Revoke
+                  </button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+@if (showNewKeyModal()) {
+  <div class="modal-backdrop" (click)="closeModal()"></div>
+  <div class="modal">
+    <div class="modal__header">
+      <h2 class="modal__title">Create API Key</h2>
+      <button class="icon-btn" (click)="closeModal()">
+        <span class="material-icons-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal__content">
+      @if (!generatedKey()) {
+        <div class="form-field">
+          <label class="form-field__label">Key Name</label>
+          <input class="form-field__input" placeholder="e.g., Production API" [value]="newKeyName()" (input)="newKeyName.set($any($event.target).value)">
+        </div>
+        <div class="modal__actions">
+          <button class="btn btn--stroked" (click)="closeModal()">Cancel</button>
+          <button class="btn btn--primary" (click)="createKey()">Create Key</button>
+        </div>
+      } @else {
+        <div class="key-generated">
+          <div class="key-generated__icon">
+            <span class="material-icons-outlined">check_circle</span>
+          </div>
+          <p class="key-generated__message">Your API key has been created. Copy it now - you won't be able to see it again!</p>
+          <div class="key-generated__value">
+            <code>{{ generatedKey() }}</code>
+          </div>
+          <button class="btn btn--primary" (click)="closeModal()">Done</button>
+        </div>
+      }
+    </div>
+  </div>
+}
