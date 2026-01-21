@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Reviews.Core\Reviews.Core.csproj" />
     <ProjectReference Include="..\Reviews.Infrastructure\Reviews.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\HairPop.ServiceDefaults\HairPop.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>
