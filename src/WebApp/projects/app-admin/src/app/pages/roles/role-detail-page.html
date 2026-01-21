@@ -1,0 +1,74 @@
+<div class="role-detail">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">{{ isNew() ? 'New Role' : 'Role Details' }}</h1>
+      <div class="muted">Manage role and permissions</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn--stroked" routerLink="/roles">
+        <span class="material-icons-outlined">arrow_back</span>
+        Back
+      </a>
+      @if (!isNew() && !isSystem()) {
+        <button class="btn btn--warn" (click)="delete()">
+          <span class="material-icons-outlined">delete</span>
+          Delete
+        </button>
+      }
+      <button class="btn btn--primary" (click)="save()">
+        <span class="material-icons-outlined">save</span>
+        Save
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid--2">
+    <div class="card">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Role Information</div>
+          <div class="card__subtitle">Basic role settings</div>
+        </div>
+        @if (isSystem()) {
+          <span class="badge badge--info">System Role</span>
+        }
+      </div>
+      <div class="card__content">
+        <div class="form-field">
+          <label class="form-field__label">Name</label>
+          <input class="form-field__input" [value]="name()" (input)="name.set($any($event.target).value)" [disabled]="isSystem()">
+        </div>
+        <div class="form-field">
+          <label class="form-field__label">Description</label>
+          <textarea class="form-field__textarea" [value]="description()" (input)="description.set($any($event.target).value)"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Permissions</div>
+          <div class="card__subtitle">Select permissions for this role</div>
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="permissions-list">
+          @for (permission of permissions(); track permission.id) {
+            <div class="permission-item" (click)="togglePermission(permission.id)">
+              <div class="permission-checkbox" [class.permission-checkbox--checked]="permission.granted">
+                @if (permission.granted) {
+                  <span class="material-icons-outlined">check</span>
+                }
+              </div>
+              <div class="permission-info">
+                <div class="permission-name">{{ permission.name }}</div>
+                <div class="permission-description">{{ permission.description }}</div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

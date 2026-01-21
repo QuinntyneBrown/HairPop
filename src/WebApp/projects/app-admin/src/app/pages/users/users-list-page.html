@@ -1,0 +1,49 @@
+<div class="users-list">
+  <div class="page-header">
+    <h1 class="page-title">Users</h1>
+    <div class="actions">
+      <button class="btn btn--stroked">
+        <span class="material-icons-outlined">tune</span>
+        Filters
+      </button>
+      <a class="btn btn--primary" routerLink="/users/new">
+        <span class="material-icons-outlined">add</span>
+        New user
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Display name</th>
+            <th>Phone</th>
+            <th>Location</th>
+            <th>Updated</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users(); track user.id) {
+            <tr>
+              <td>{{ user.email }}</td>
+              <td class="muted">{{ user.displayName }}</td>
+              <td class="muted">{{ user.phone }}</td>
+              <td class="muted">{{ user.location }}</td>
+              <td class="muted">{{ user.updatedAt }}</td>
+              <td class="actions">
+                <a class="btn btn--stroked" [routerLink]="['/users', user.id]">
+                  <span class="material-icons-outlined">open_in_new</span>
+                  Open
+                </a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

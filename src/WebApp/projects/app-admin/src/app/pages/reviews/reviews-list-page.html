@@ -1,0 +1,57 @@
+<div class="reviews-list">
+  <div class="page-header">
+    <h1 class="page-title">Reviews</h1>
+    <div class="actions">
+      <button class="btn btn--stroked">
+        <span class="material-icons-outlined">filter_list</span>
+        Filters
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Braider</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (review of reviews(); track review.id) {
+            <tr>
+              <td>{{ review.userName }}</td>
+              <td class="muted">{{ review.braiderName }}</td>
+              <td>
+                <div class="stars">
+                  @for (star of getStars(review.rating); track $index) {
+                    <span class="material-icons-outlined star" [class.star--filled]="star">star</span>
+                  }
+                </div>
+              </td>
+              <td class="muted comment-cell">{{ review.comment }}</td>
+              <td class="muted">{{ review.date }}</td>
+              <td>
+                <span class="badge" [class]="getStatusClass(review.status)">
+                  {{ review.status }}
+                </span>
+              </td>
+              <td class="actions">
+                <a class="btn btn--stroked" [routerLink]="['/reviews', review.id]">
+                  <span class="material-icons-outlined">open_in_new</span>
+                  Open
+                </a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.reviews-list {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.table {
+  td:last-child {
+    width: 120px;
+  }
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 16px;
+  color: var(--surface-elevated);
+
+  &--filled {
+    color: var(--status-warning);
+  }
+}
+
+.comment-cell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
