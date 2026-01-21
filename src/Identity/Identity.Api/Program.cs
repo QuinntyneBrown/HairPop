@@ -9,6 +9,8 @@ using Shared.Messaging.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Configuration
 var connectionString = builder.Configuration.GetConnectionString("IdentityDb")
     ?? "Server=localhost;Database=NGMAT_Identity;Trusted_Connection=True;TrustServerCertificate=True";
@@ -91,6 +93,8 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())

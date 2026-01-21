@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Braiders.Core\Braiders.Core.csproj" />
     <ProjectReference Include="..\Braiders.Infrastructure\Braiders.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\HairPop.ServiceDefaults\HairPop.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

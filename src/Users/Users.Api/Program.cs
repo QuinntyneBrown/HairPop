@@ -4,6 +4,8 @@ using Users.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 var connectionString = builder.Configuration.GetConnectionString("UsersDb")
     ?? "Server=localhost;Database=HairPop_Users;Trusted_Connection=True;TrustServerCertificate=True";
 
@@ -24,6 +26,8 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 if (app.Environment.IsDevelopment())
 {

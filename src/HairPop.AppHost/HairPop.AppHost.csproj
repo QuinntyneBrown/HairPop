@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>hairpop-apphost-secrets</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
+    <PackageReference Include="Aspire.Hosting.NodeJs" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HairPop.ServiceDefaults\HairPop.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Identity\Identity.Api\Identity.Api.csproj" />
+    <ProjectReference Include="..\Braiders\Braiders.Api\Braiders.Api.csproj" />
+    <ProjectReference Include="..\Users\Users.Api\Users.Api.csproj" />
+    <ProjectReference Include="..\Reviews\Reviews.Api\Reviews.Api.csproj" />
+    <ProjectReference Include="..\ApiGateway\ApiGateway.csproj" />
+  </ItemGroup>
+
+</Project>

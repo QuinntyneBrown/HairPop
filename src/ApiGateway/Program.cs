@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularAdmin", policy =>
@@ -24,6 +26,8 @@ builder.Services
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 app.UseCors("AllowAngularAdmin");
 
