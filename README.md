@@ -45,6 +45,7 @@ Through the gateway (when the target service is running):
 - **ASP.NET Core Web API** - REST APIs
 - **Entity Framework Core 8** - data access (SqlServer + InMemory)
 - **YARP** - API Gateway / reverse proxy
+- **.NET Aspire** - cloud-native orchestration, service discovery, and telemetry
 - **Swagger/OpenAPI** - API documentation
 
 ### Frontend
@@ -96,7 +97,41 @@ HairPop/
 dotnet build HairPop.sln
 ```
 
-### Backend (run services)
+### Running with .NET Aspire (Recommended)
+
+.NET Aspire provides orchestration, service discovery, and observability for the platform.
+
+#### Prerequisites
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- Visual Studio 2022 17.9+ or Visual Studio Code with C# Dev Kit
+
+#### Running the AppHost
+The Aspire AppHost orchestrates all services with a single command:
+
+```bash
+dotnet run --project src/HairPop.AppHost/HairPop.AppHost.csproj
+```
+
+This will:
+- Start all backend services (Identity, Braiders, Users, Reviews)
+- Start the API Gateway
+- Launch the Aspire Dashboard for monitoring and telemetry
+- Configure service discovery between services
+- Enable OpenTelemetry tracing and metrics
+
+Access the Aspire Dashboard (typically at `http://localhost:15888`) to:
+- Monitor service health and status
+- View logs from all services
+- Explore distributed traces
+- Check metrics and performance
+
+**Note**: The Aspire AppHost requires the .NET Aspire workload. Install it with:
+```bash
+dotnet workload update
+dotnet workload install aspire
+```
+
+### Backend (run services individually)
 Run any combination of services + the gateway. Each service exposes Swagger at `/swagger`.
 
 ```bash
@@ -144,6 +179,40 @@ npm run e2e           # Test hairpop
 npm run e2e:admin     # Test hairpop-admin
 npm run e2e:all       # Test all projects
 ```
+
+## Deployment to Azure
+
+HairPop is designed with .NET Aspire for easy deployment to Azure. The Aspire integration provides:
+
+- **Service Discovery**: Automatic service-to-service communication
+- **Observability**: Built-in OpenTelemetry for tracing, metrics, and logging
+- **Azure Integration**: Simplified deployment to Azure Container Apps
+- **Configuration**: Environment-based configuration with Azure App Configuration support
+
+### Deploy with Azure Developer CLI (azd)
+
+1. Install [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+
+2. Initialize and deploy:
+```bash
+azd init
+azd up
+```
+
+The `azd up` command will:
+- Package and containerize all services
+- Provision Azure resources (Container Apps, Service Bus, App Configuration, etc.)
+- Deploy the application to Azure Container Apps
+- Configure service discovery and ingress
+
+### Manual Deployment Options
+
+You can also deploy individual services to:
+- **Azure Container Apps**: Recommended for microservices with Aspire
+- **Azure App Service**: For simpler deployments
+- **Azure Kubernetes Service (AKS)**: For advanced orchestration needs
+
+See the [Aspire deployment documentation](https://learn.microsoft.com/dotnet/aspire/deployment/overview) for detailed guidance.
 
 ## Documentation
 
