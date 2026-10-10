@@ -273,7 +273,7 @@ Forced colours: `components.css` gives the current link a `Highlight` outline; t
 
 ### Role and pattern
 
-`<nav aria-label="Account">` landmark of plain links. Collapsible groups use native `<details>`/`<summary>` ([APG Disclosure](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)). The drawer covers the content, so it follows the [APG Dialog (Modal) pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) through CDK Dialog (design system *Accessibility*: "follows the dialog rules when it covers content").
+`<nav aria-label="Account">` landmark of plain links. Collapsible groups use native `<details>`/`<summary>` ([APG Disclosure](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)). The drawer covers the content, so it follows the [APG Dialog (Modal) pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) through CDK Dialog (design system *Accessibility*: the drawer "covers the content, so it follows the dialog rules as a modal").
 
 ### Keyboard
 
