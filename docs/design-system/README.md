@@ -108,21 +108,55 @@ Every deviation corrected during extraction. "Resolution" says what the system n
 | `pages/appointment-detail/default`, `pages/my-appointments/default`, all detail cards | Badges stretched to full width inside `.stack`. | `.badge` sets `align-self: flex-start; width: fit-content`. |
 | `pages/appointment-detail/default`, `pages/style-detail/default`, `pages/braider-profile/default` | Section headings inside cards rendered at the 36px light page `h2`. | `.card h2` uses `--text-h3`; story cards keep `.card__title`. |
 | `pages/style-gallery/default`, `pages/matching-braiders/default` | Art panels were shorter than photo cards in the same row. | Photo and art share `aspect-ratio: 3 / 2`. |
+| `assets/ui.css` | `.progress__bar` transition used `--duration-slow`; skeleton lines `0.9em`/`0.3em`; chip remove button 20px; circles drawn with `50%`. | `--duration-deliberate`; `0.875em`/`0.375em`; 24px (`--target-min`); `--radius-full`. |
+| all pages (top bar) | Below 768px the nav links disappear and there is no menu button, so Braiders, Appointments and Help are unreachable on phones. | `.topbar__menu` button with `aria-expanded` + `aria-controls` revealing the same `<nav>` (mock markup change needed in `build.py`). |
+| all pages (top bar) | "Updates" link is labelled "Notifications, 2 unread", which does not contain its visible text (WCAG 2.5.3); the count badge has its own `aria-label` inside it. | Visible "Updates" plus visually hidden ", 2 unread"; no nested label. |
+| all pages and dialogs | Text glyphs as icons: ✦ brand, × close, ⌕ ! ✓ empty states, → links, ★ ratings, ⚠ errors. | SVG icon set on [Iconography](foundations/iconography.html); decorative icons `aria-hidden`. |
+| all forms (`build.py` `field()`) | `.field__error` sits inside `<label class="field">`, so the error becomes part of the field's accessible name. | `<div class="field">` + `<label for>` + `aria-describedby`. |
+| `pages/*/invalid`, `dialogs/*/invalid` | Error summary names no field, links nowhere and relies on `autofocus`; fallback error "Enter a valid value to continue." says nothing about the fix. | Summary "Check N answers" with one link per field, focused by script on submit; errors name the fix with an example. |
+| `pages/*/submitting`, `dialogs/*/busy`, `pages/booking-request/offline` | Submit buttons are `disabled` and relabelled "Working…"; offline disables the submit. | Label kept, only `aria-busy`, focus kept, progress in a live region; offline keeps the button enabled and the banner explains. |
+| `pages/booking-request/default`, `dialogs/request-review`, `dialogs/change-appointment` | "Preferred time" is a free `datetime-local` / free text although only offered times are valid. | Radio group or select of the braider's offered times. |
+| `pages/care-and-review/default` | Rating is a number input (accepts 0, 7, 4.5); the review and hair details are single-line inputs. | Radio group 1–5; textarea for multi-line answers. |
+| `dialogs/filter-braiders/default` | Distance is free text "10 km". | Select, or number input with a km addon. |
+| all forms | No `autocomplete` on name, email, phone or password (SC 1.3.5). | `autocomplete` documented on [Text field](components/text-field.html). |
+| `dialogs/*` | Close is a "×" glyph; the safe action is an `<a autofocus>` "Keep browsing" that navigates away; the skip link stays focusable behind the modal. | Close icon with `aria-label`; safe action is a button that closes and restores focus; initial focus on the first field or the safe action; skip link inert with the page. |
+| `dialogs/cancel-appointment/*`, `dialogs/sign-out/*` | Destructive dialogs have no danger icon, use `role="dialog"`, and the confirm state stacks a warning alert on the danger dialog. | Danger icon, `role="alertdialog"`, consequence stated in the description. |
+| `notifications/*/stacked`, `*/danger` | `role="alert"` toasts nested inside the `role="status"` region. | Two sibling live regions, polite and assertive. |
+| `notifications/*/*` | Toasts have no status icon (tone is colour-only on the dark toast); text dimmed to 90%; generic "View update" action; "Undo" offered on "Time confirmed", which cannot be undone. | Tone icon (`--color-*-icon-inverse`) + title; full-opacity text; actions name their result; Undo only when reversible. |
+| `notifications/cookie-consent/*` | Cookie consent shown as a transient toast. | Persistent banner with the choices. |
+| `pages/notification-center/unread`, `read` | Unread used the warning tone, Read used info; each notification is a card with its own primary button. | Unread is an accent dot + bold title, Read is neutral; a list of link rows. |
+| `pages/my-appointments/default` | "Completed" used the success tone although nothing is pending. | Neutral badge. |
+| `pages/style-gallery/default` | Filter chips: only the pressed chip states `aria-pressed`; the row has no group label; search has both a hidden label and an `aria-label`. | Every chip states `aria-pressed`, `role="group"` with a label, one pressed at a time; one label for search. |
+| `pages/*/no-results` | Applied filters shown as one static badge ("Knotless · Toronto · under $150"). | One removable input chip per filter. |
+| `pages/style-gallery/default`, `pages/matching-braiders/default` | Only "Explore X →" is clickable; braider cards say "Explore Nia Okafor"; Nia's photo alt is "Portrait of a braider". | `.card--interactive` with a stretched `.card__link`; "View Nia's profile"; alt names her or is empty beside the visible name. |
+| `pages/*/long` | Ad-hoc `.pagination-row`; Previous is live on page 1. | `.pagination` (alias kept), Previous `aria-disabled`, `.pagination__summary`. |
+| `pages/style-detail`, `braider-profile`, `appointment-detail` | No path back to the parent list; appointment facts written as prose; list numbers outside the card padding. | Breadcrumb (parent only below 768px); `.dl` for facts. |
+| all non-browsing pages | Eyebrow "Your HairPop" on every account, legal and error screen; generic "Details" panel heading. | Area name or no eyebrow; name the section ("Your details"). |
+| all pages (footer) | Links in a span joined by typed "·"; no route back to cookie preferences. | `ul.site-footer__links` with a cluster gap; Cookie preferences link recommended. |
+| `pages/*/loading` | The same three generic skeleton cards on every screen; region has `aria-label` but no `aria-busy` or status text. | Skeleton mirrors the loaded layout; `aria-busy="true"` + one `role="status"` message. |
+| `pages/*/empty` | "Nothing here yet" and a ✦ on every empty screen; empty profile offers "Explore styles" instead of continuing to book. | Screen-specific title and icon; the action continues the task ("Request with Nia"). |
+| `pages/not-found`, `forbidden`, `server-error`, `offline` | Same glyph and accent tint for every cause; empty title is an `h2` repeating the page `h1`; loading/error states on static error responses; 500 has no reference id. | Icon and tint per cause; the empty title is the page's `h1`; those states dropped; `.empty__reference` with id and time. |
+| `pages/booking-request/offline`, `pages/*/partial` | Offline and partial banners have no icon and use a bold run-in instead of `.alert__title`. | Icon + title + text. |
 
 ## Verification
 
-Verified on 2026-10-10 from the repository root:
+Run on 2026-10-10 from the repository root.
 
-| Check | Result |
-|---|---|
-| `python .agents/skills/writing-html-mocks/scripts/check_mocks.py docs/mocks` | 33 screens, 181 mocks, 0 errors, 0 warnings. |
-| `python docs/design-system/build.py` | Generated 12 foundations, 39 components, 8 patterns, the index, and this README from source fragments. |
-| `python .agents/skills/extracting-design-systems/scripts/check_design_system.py docs/design-system` | 60 published pages checked; 0 errors, 0 warnings. |
-| `python .agents/skills/extracting-design-systems/scripts/check_contrast.py docs/design-system/tokens/tokens.css` | 148 light/dark foreground-background checks passed; 0 failed or unresolved. |
-| `python .agents/skills/extracting-design-systems/scripts/tokens_to_json.py docs/design-system/tokens/tokens.css` | Regenerated the DTCG export (270 entries). |
-| Foundation token inventory | All 213 CSS custom properties appear on one foundation page; none are missing or assigned to two foundations. |
-| Chromium page reflow | All 60 published pages checked at 360px in light and dark themes; no horizontal page overflow or failing live contrast badge. |
-| Design-system screenshots | Index, color, Button, Dialog, and Text field captured at 360×800 and 1280×800 in light and dark themes; reviewed for clipping, hierarchy, and theme surfaces. |
-| Mock screenshots | All 181 mocks captured at 360×800, 768×1024, and 1280×800 in light and dark themes (1,086 images). Reviewed representative discovery, booking validation, appointment dialog, and matching states after the mocks switched to the shared stylesheets. |
+| Check | Command | Result |
+|---|---|---|
+| Mocks gate | `python .claude/skills/writing-html-mocks/scripts/check_mocks.py docs/mocks` | 33 screens, 181 mocks, 0 errors, 0 warnings, before extraction and again after the mocks were pointed at the system. |
+| Contrast, both themes | `python .claude/skills/extracting-design-systems/scripts/check_contrast.py docs/design-system/tokens/tokens.css` | 148 passed, 0 failed (77 declared pairs; 6 are theme-specific, so 74 checks per theme). |
+| Structure | `python .claude/skills/extracting-design-systems/scripts/check_design_system.py docs/design-system` | 60 pages (12 foundations, 39 components, 8 patterns, index), 0 errors, 0 warnings. |
+| Token coverage | script over `tokens.css` and `foundations/*.html` | All 213 tokens appear as a `data-token` cell on exactly one foundation page. |
+| Reflow and runtime | Playwright, every page at 360 and 1280px in light and dark | No horizontal page scroll and no script errors on any page. |
+| Visual review | `screenshot_mocks.py docs/design-system --out docs/design-system/.cache/...` | Index, Color, Button, Dialog, Text field and Toast reviewed at 360 and 1280px in both themes. Fixed during review: light previews inside a dark page rendered dark (themed tokens moved to `:root, [data-theme="light"]`), unreadable 10px ramp labels, stacked example canvases stretching fields to 18rem, visually hidden text widening state matrices. |
+| Mocks on the system | `docs/mocks/assets/tokens.css` and `ui.css` now `@import` `tokens/tokens.css` and `assets/components.css`; re-screenshotted all default and invalid states | Mocks render with the system; the CSS-level drift above is fixed in them. |
 
-Screenshots and the contact sheet are local under the ignored `.cache/` directories. The checked-in mocks import [`tokens/tokens.css`](tokens/tokens.css) and [`assets/components.css`](assets/components.css), so subsequent token and component changes appear in both the design system and design references.
+Remaining differences: the drift rows that need a **markup** change (mobile menu button, label/error structure, linked error summary, busy buttons, offered-time and rating controls, SVG icons, toast regions, dialog focus and roles, notification list, breadcrumbs, skeleton layouts, per-screen empty copy) are documented in the system but not yet applied to `docs/mocks/build.py`.
+
+Rebuild after editing a fragment:
+
+```powershell
+python docs/design-system/build.py
+python .claude/skills/extracting-design-systems/scripts/tokens_to_json.py docs/design-system/tokens/tokens.css
+```

@@ -198,3 +198,5 @@ pre code { background: none; padding: 0; }
 /* Keep visually hidden text inside a scrolling matrix from widening the page. */
 .ds-matrix { position: relative; }
 .ds-example__canvas { position: relative; }
+/* Ramp step labels: a small surface chip, legible on every step in both themes. */
+.ds-ramp span::after { left: 50%; right: auto; bottom: var(--space-1); translate: -50% 0; width: max-content; padding: 0 var(--space-1); border-radius: var(--radius-sm); font: var(--text-caption); mix-blend-mode: normal; background: var(--color-bg-surface); color: var(--color-fg-muted); }
