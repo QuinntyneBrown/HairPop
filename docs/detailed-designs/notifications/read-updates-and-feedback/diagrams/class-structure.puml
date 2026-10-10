@@ -1,0 +1,41 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure — Read updates and feedback
+class ReadCustomerUpdates {
+  +execute(request: FeatureRequest): FeatureResult
+}
+class FeatureRequest {
+  +string actorId
+  +string resourceId
+}
+class FeatureResult {
+  +string status
+  +string reference
+}
+class CustomerNotification {
+  +string id
+  +string status
+}
+interface FeatureRepository {
+  +find(id: string): CustomerNotification
+  +save(record: CustomerNotification): void
+}
+ReadCustomerUpdates ..> FeatureRequest : accepts
+ReadCustomerUpdates ..> FeatureResult : returns
+ReadCustomerUpdates ..> FeatureRepository : uses
+ReadCustomerUpdates --> CustomerNotification : checks or changes
+FeatureRepository ..> CustomerNotification : persists
+@enduml

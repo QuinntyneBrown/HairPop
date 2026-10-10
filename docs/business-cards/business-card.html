@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HairPop business card</title>
+<!--
+  Print source for Quinntyne Brown's HairPop business card.
+
+  Trim:   3.5 in × 2 in (North American standard)
+  Bleed:  0.125 in on every side → 3.75 in × 2.25 in pages
+  Safe:   0.125 in inside the trim → keep all copy inside it
+  Pages:  1 = front (brand), 2 = back (contact)
+
+  Query flags (used by render.py):
+    ?guides=1  draw trim (solid) and safe (dashed) lines for proofing
+    ?marks=1   place each card on a larger sheet with crop marks
+-->
+<link rel="stylesheet" href="../mocks/assets/fonts/fonts.css">
+<link rel="stylesheet" href="../mocks/assets/tokens.css">
+<style>
+  :root {
+    --card-trim-w: 3.5in;
+    --card-trim-h: 2in;
+    --card-bleed: 0.125in;
+    --card-safe: 0.125in;
+    --card-slug: 0.375in; /* extra sheet margin around the bleed when crop marks are on */
+
+    --card-brand-bg: var(--palette-blue-900);
+    --card-brand-fg: var(--palette-white);
+    --card-brand-spark: var(--palette-blue-300);
+    --card-brand-watermark: var(--palette-blue-800);
+    --card-brand-muted: var(--palette-blue-200);
+    --card-contact-bg: var(--palette-white);
+    --card-contact-fg: var(--palette-gray-900);
+    --card-contact-muted: var(--palette-gray-600);
+    --card-contact-accent: var(--palette-blue-600);
+    --card-contact-rule: var(--palette-blue-200);
+    --card-mark: var(--palette-black);
+  }
+
+  @page { size: 3.75in 2.25in; margin: 0; }
+  html.has-marks { --sheet-pad: var(--card-slug); }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--palette-white); }
+  body {
+    font-family: var(--font-family-sans);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    text-rendering: geometricPrecision;
+  }
+
+  /* One sheet per printed page. Without marks a sheet is exactly the bleed box. */
+  .sheet {
+    position: relative;
+    width: calc(var(--card-trim-w) + 2 * var(--card-bleed) + 2 * var(--sheet-pad, 0in));
+    height: calc(var(--card-trim-h) + 2 * var(--card-bleed) + 2 * var(--sheet-pad, 0in));
+    padding: var(--sheet-pad, 0in);
+    break-after: page;
+    overflow: hidden;
+  }
+  .sheet:last-child { break-after: auto; }
+
+  /* The bleed box: background art runs to its edges. */
+  .card {
+    position: relative;
+    width: calc(var(--card-trim-w) + 2 * var(--card-bleed));
+    height: calc(var(--card-trim-h) + 2 * var(--card-bleed));
+    overflow: hidden;
+  }
+
+  /* The live area: trim inset by the safe margin. All copy sits here. */
+  .card__safe {
+    position: absolute;
+    inset: calc(var(--card-bleed) + var(--card-safe));
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---------- Front: brand ---------- */
+  .card--front { background: var(--card-brand-bg); color: var(--card-brand-fg); }
+
+  .card__watermark {
+    position: absolute;
+    width: 2.6in;
+    height: 2.6in;
+    right: -0.95in;
+    top: -0.2in;
+    fill: var(--card-brand-watermark);
+  }
+
+  .card--front .card__safe { justify-content: center; padding-left: 0.12in; }
+
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.09in;
+    margin: 0;
+    font-weight: var(--font-weight-light);
+    font-size: 27pt;
+    line-height: 1;
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  .wordmark__spark { width: 0.26in; height: 0.26in; fill: var(--card-brand-spark); flex: none; }
+  .wordmark strong { font-weight: var(--font-weight-bold); }
+
+  .card__tagline {
+    margin: 0.12in 0 0 calc(0.26in + 0.09in);
+    font-size: 7.5pt;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    color: var(--card-brand-muted);
+  }
+
+  /* ---------- Back: contact ---------- */
+  .card--back { background: var(--card-contact-bg); color: var(--card-contact-fg); }
+
+  .card--back::before {
+    /* Plum band along the left edge, running into the bleed. */
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--card-bleed) + 0.22in);
+    background: var(--card-brand-bg);
+  }
+
+  .card--back .card__safe { padding: 0.08in 0.04in 0.04in 0.3in; justify-content: space-between; }
+
+  .contact__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.05in;
+    font-size: 8pt;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    color: var(--card-contact-accent);
+  }
+  .contact__brand svg { width: 0.1in; height: 0.1in; fill: currentColor; }
+
+  .contact__name {
+    margin: 0;
+    font-size: 16pt;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+
+  .contact__title {
+    margin: 0.06in 0 0;
+    font-size: 7.25pt;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.35;
+    color: var(--card-contact-muted);
+  }
+
+  .contact__rule {
+    width: 0.4in;
+    height: 1.5pt;
+    margin: 0 0 0.08in;
+    border: 0;
+    background: var(--card-contact-rule);
+  }
+
+  .contact__site {
+    margin: 0;
+    font-size: 9pt;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.01em;
+    color: var(--card-contact-accent);
+  }
+
+  /* ---------- Proof guides ---------- */
+  .guide { position: absolute; pointer-events: none; }
+  .guide--trim { inset: var(--card-bleed); outline: 0.5pt solid #00b7eb; }
+  .guide--safe { inset: calc(var(--card-bleed) + var(--card-safe)); outline: 0.5pt dashed #ec008c; }
+  html:not(.has-guides) .guide { display: none; }
+
+  /* ---------- Crop marks ---------- */
+  .crop { position: absolute; background: var(--card-mark); }
+  html:not(.has-marks) .crop { display: none; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- Four-point sparkle: the ✦ from the HairPop wordmark, drawn as a path so it never depends on a fallback font. -->
+  <symbol id="spark" viewBox="0 0 100 100">
+    <path d="M50 0 C53 30 70 47 100 50 C70 53 53 70 50 100 C47 70 30 53 0 50 C30 47 47 30 50 0 Z"/>
+  </symbol>
+</svg>
+
+<section class="sheet" aria-label="Front">
+  <div class="card card--front">
+    <svg class="card__watermark" aria-hidden="true"><use href="#spark"/></svg>
+    <div class="card__safe">
+      <h1 class="wordmark">
+        <svg class="wordmark__spark" aria-hidden="true"><use href="#spark"/></svg>
+        <span>Hair<strong>Pop</strong></span>
+      </h1>
+      <p class="card__tagline">Choose your style and your braider with confidence.</p>
+    </div>
+    <div class="guide guide--trim"></div>
+    <div class="guide guide--safe"></div>
+  </div>
+</section>
+
+<section class="sheet" aria-label="Back">
+  <div class="card card--back">
+    <div class="card__safe">
+      <div class="contact__brand">
+        <svg aria-hidden="true"><use href="#spark"/></svg>
+        HairPop
+      </div>
+      <div>
+        <p class="contact__name">Quinntyne Brown</p>
+        <p class="contact__title">CEO, Founder and Principal Product Engineer</p>
+      </div>
+      <div>
+        <hr class="contact__rule">
+        <p class="contact__site">hairpop.ca</p>
+      </div>
+    </div>
+    <div class="guide guide--trim"></div>
+    <div class="guide guide--safe"></div>
+  </div>
+</section>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const root = document.documentElement;
+  if (params.get('guides') === '1') root.classList.add('has-guides');
+  if (params.get('marks') === '1') {
+    root.classList.add('has-marks');
+    const page = document.createElement('style');
+    page.textContent = '@page { size: 4.5in 3in; margin: 0; }';
+    document.head.appendChild(page);
+    // Crop marks: 0.25in long, 0.25pt thick, offset from the trim by the bleed so they never touch the art.
+    const len = 0.25, gap = 0.125, slug = 0.375, bleed = 0.125, w = 3.5, h = 2;
+    const x0 = slug + bleed, y0 = slug + bleed, x1 = x0 + w, y1 = y0 + h;
+    const marks = [
+      // horizontal marks at top and bottom trim lines, left and right of the card
+      [x0 - gap - len, y0, len, 0], [x1 + gap, y0, len, 0],
+      [x0 - gap - len, y1, len, 0], [x1 + gap, y1, len, 0],
+      // vertical marks at left and right trim lines, above and below the card
+      [x0, y0 - gap - len, 0, len], [x1, y0 - gap - len, 0, len],
+      [x0, y1 + gap, 0, len], [x1, y1 + gap, 0, len],
+    ];
+    document.querySelectorAll('.sheet').forEach(sheet => {
+      for (const [x, y, mw, mh] of marks) {
+        const m = document.createElement('div');
+        m.className = 'crop';
+        m.style.left = (mw ? x : x - 0.25 / 144) + 'in';
+        m.style.top = (mh ? y : y - 0.25 / 144) + 'in';
+        m.style.width = mw ? mw + 'in' : '0.25pt';
+        m.style.height = mh ? mh + 'in' : '0.25pt';
+        sheet.appendChild(m);
+      }
+    });
+  }
+</script>
+</body>
+</html>

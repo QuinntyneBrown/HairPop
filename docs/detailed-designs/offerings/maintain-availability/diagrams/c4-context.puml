@@ -1,0 +1,8 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context — Maintain availability
+Person(person, "Braider", "Uses maintain availability")
+System(hairpop, "HairPop", "Customer and braider platform")
+Rel(person, hairpop, "Uses", "HTTPS")
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components — Maintain availability
+Container_Boundary(api, "HairPop API") {
+  Component(endpoint, "Feature endpoint", "Laravel controller", "Validates HTTP input")
+  Component(action, "MaintainOfferedSlot", "Application action", "Publish or withdraw owned slots and prevent conflicting confirmations")
+  Component(model, "OfferedSlot", "Domain model", "Holds slice state")
+  ComponentDb(db, "HairPop database", "<TO SUPPLY>", "Stores records")
+}
+Rel(endpoint, action, "Delegates")
+Rel(action, model, "Applies rules")
+Rel(action, db, "Reads or persists")
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure — Review visit
+class SubmitVisitReview {
+  +execute(request: FeatureRequest): FeatureResult
+}
+class FeatureRequest {
+  +string actorId
+  +string resourceId
+}
+class FeatureResult {
+  +string status
+  +string reference
+}
+class Review {
+  +string id
+  +string status
+}
+interface FeatureRepository {
+  +find(id: string): Review
+  +save(record: Review): void
+}
+SubmitVisitReview ..> FeatureRequest : accepts
+SubmitVisitReview ..> FeatureResult : returns
+SubmitVisitReview ..> FeatureRepository : uses
+SubmitVisitReview --> Review : checks or changes
+FeatureRepository ..> Review : persists
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components — Update account details
+Container_Boundary(api, "HairPop API") {
+  Component(endpoint, "Feature endpoint", "Laravel controller", "Validates HTTP input")
+  Component(action, "UpdateCustomerDetails", "Application action", "Save owned contact details and invalidate verification after an email change")
+  Component(model, "CustomerAccount", "Domain model", "Holds slice state")
+  ComponentDb(db, "HairPop database", "<TO SUPPLY>", "Stores records")
+}
+Rel(endpoint, action, "Delegates")
+Rel(action, model, "Applies rules")
+Rel(action, db, "Reads or persists")
+@enduml

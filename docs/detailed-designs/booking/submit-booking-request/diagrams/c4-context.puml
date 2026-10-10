@@ -1,0 +1,8 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context — Submit booking request
+Person(person, "Customer", "Uses submit booking request")
+System(hairpop, "HairPop", "Customer and braider platform")
+Rel(person, hairpop, "Uses", "HTTPS")
+@enduml

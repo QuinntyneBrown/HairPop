@@ -1,0 +1,14 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components — Inspect style
+Container_Boundary(api, "HairPop API") {
+  Component(endpoint, "Feature endpoint", "Laravel controller", "Validates HTTP input")
+  Component(action, "GetPublishedStyle", "Application action", "Load the selected published style and available editorial facts")
+  Component(model, "Style", "Domain model", "Holds slice state")
+  ComponentDb(db, "HairPop database", "<TO SUPPLY>", "Stores records")
+}
+Rel(endpoint, action, "Delegates")
+Rel(action, model, "Applies rules")
+Rel(action, db, "Reads or persists")
+@enduml

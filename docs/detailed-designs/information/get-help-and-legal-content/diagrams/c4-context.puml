@@ -1,0 +1,8 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context — Get help and legal content
+Person(person, "Customer", "Uses get help and legal content")
+System(hairpop, "HairPop", "Customer and braider platform")
+Rel(person, hairpop, "Uses", "HTTPS")
+@enduml

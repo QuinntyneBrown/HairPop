@@ -1,0 +1,41 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure — Respond to request
+class RespondToBookingRequest {
+  +execute(request: FeatureRequest): FeatureResult
+}
+class FeatureRequest {
+  +string actorId
+  +string resourceId
+}
+class FeatureResult {
+  +string status
+  +string reference
+}
+class BookingRequest {
+  +string id
+  +string status
+}
+interface FeatureRepository {
+  +find(id: string): BookingRequest
+  +save(record: BookingRequest): void
+}
+RespondToBookingRequest ..> FeatureRequest : accepts
+RespondToBookingRequest ..> FeatureResult : returns
+RespondToBookingRequest ..> FeatureRepository : uses
+RespondToBookingRequest --> BookingRequest : checks or changes
+FeatureRepository ..> BookingRequest : persists
+@enduml

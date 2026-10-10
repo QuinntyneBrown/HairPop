@@ -1,0 +1,41 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure — Protect resources and input
+class AuthorizeAndValidate {
+  +execute(request: FeatureRequest): FeatureResult
+}
+class FeatureRequest {
+  +string actorId
+  +string resourceId
+}
+class FeatureResult {
+  +string status
+  +string reference
+}
+class ProtectedResource {
+  +string id
+  +string status
+}
+interface FeatureRepository {
+  +find(id: string): ProtectedResource
+  +save(record: ProtectedResource): void
+}
+AuthorizeAndValidate ..> FeatureRequest : accepts
+AuthorizeAndValidate ..> FeatureResult : returns
+AuthorizeAndValidate ..> FeatureRepository : uses
+AuthorizeAndValidate --> ProtectedResource : checks or changes
+FeatureRepository ..> ProtectedResource : persists
+@enduml

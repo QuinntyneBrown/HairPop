@@ -1,0 +1,41 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure — Get help and legal content
+class GetPublishedContent {
+  +execute(request: FeatureRequest): FeatureResult
+}
+class FeatureRequest {
+  +string actorId
+  +string resourceId
+}
+class FeatureResult {
+  +string status
+  +string reference
+}
+class PublishedContent {
+  +string id
+  +string status
+}
+interface FeatureRepository {
+  +find(id: string): PublishedContent
+
+}
+GetPublishedContent ..> FeatureRequest : accepts
+GetPublishedContent ..> FeatureResult : returns
+GetPublishedContent ..> FeatureRepository : uses
+GetPublishedContent --> PublishedContent : checks or changes
+FeatureRepository ..> PublishedContent : persists
+@enduml

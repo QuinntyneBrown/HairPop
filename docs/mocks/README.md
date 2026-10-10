@@ -6,7 +6,7 @@ Open [the gallery](index.html) from disk. Each screen has sibling state links an
 
 ## Scope and open questions
 
-The source of product direction is [`docs/7-star-redesign.md`](../7-star-redesign.md). There are no L1/L2 requirement IDs or design system files, so the manifest uses routes and the redesign document as traceability. The redesign's eight customer journey screens are the core. Entry, account, help, legal and error screens complete the customer facing path. Admin screens and a new braider studio are outside the redesign's stated scope.
+The source of product direction is [`docs/7-star-redesign.md`](../7-star-redesign.md). Platform requirements now live in [`docs/specs/L1.md`](../specs/L1.md) and [`docs/specs/L2.md`](../specs/L2.md); L2 includes a mock-to-requirement map. The redesign's eight customer journey screens are the core. Entry, account, help, legal and error screens complete the customer facing path. Admin screens and a new braider studio are outside the redesign's stated scope.
 
 The current Angular routes use `/hair-styles`, `/braiders` and `/braider/:id`; the proposed route paths in the manifest represent the redesigned navigation, not implemented URLs. Exact pricing, availability, cancellation terms and studio address are illustrative content for review. Final product copy needs agreed policies and live braider data. Terms and privacy are structural mock copy, not approved legal text.
 

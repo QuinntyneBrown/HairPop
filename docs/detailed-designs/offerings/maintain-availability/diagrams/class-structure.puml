@@ -1,0 +1,41 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure — Maintain availability
+class MaintainOfferedSlot {
+  +execute(request: FeatureRequest): FeatureResult
+}
+class FeatureRequest {
+  +string actorId
+  +string resourceId
+}
+class FeatureResult {
+  +string status
+  +string reference
+}
+class OfferedSlot {
+  +string id
+  +string status
+}
+interface FeatureRepository {
+  +find(id: string): OfferedSlot
+  +save(record: OfferedSlot): void
+}
+MaintainOfferedSlot ..> FeatureRequest : accepts
+MaintainOfferedSlot ..> FeatureResult : returns
+MaintainOfferedSlot ..> FeatureRepository : uses
+MaintainOfferedSlot --> OfferedSlot : checks or changes
+FeatureRepository ..> OfferedSlot : persists
+@enduml

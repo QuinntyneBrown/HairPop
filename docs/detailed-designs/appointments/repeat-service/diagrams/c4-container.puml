@@ -1,0 +1,14 @@
+@startuml
+!include <C4/C4_Container>
+LAYOUT_WITH_LEGEND()
+title Containers — Repeat service
+Person(person, "Customer", "Uses this capability")
+System_Boundary(hairpop, "HairPop") {
+  Container(web, "Customer web application", "Angular", "Presents the workflow")
+  Container(api, "HairPop API", "Laravel 11", "Applies application and domain rules")
+  ContainerDb(db, "HairPop database", "<TO SUPPLY>", "Persists domain records")
+}
+Rel(person, web, "Uses", "HTTPS")
+Rel(web, api, "Requests", "JSON/HTTPS")
+Rel(api, db, "Reads and writes")
+@enduml

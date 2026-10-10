@@ -1,0 +1,8 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context — Adapt accessible interface
+Person(person, "Customer", "Uses adapt accessible interface")
+System(hairpop, "HairPop", "Customer and braider platform")
+Rel(person, hairpop, "Uses", "HTTPS")
+@enduml

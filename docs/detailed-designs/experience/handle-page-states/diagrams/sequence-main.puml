@@ -1,0 +1,52 @@
+@startuml
+title UML sequence behaviour — Handle page states
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+actor "Customer" as actor
+box "Frontend — Customer web application" #E0F2FE
+  participant "CustomerRouteShell" as page
+  participant "Feature API client" as client
+end box
+box "Backend — HairPop API application" #D1FADF
+  participant "Feature endpoint" as endpoint
+end box
+box "Backend — HairPop Application and Domain" #ECFDF3
+  participant "ResolvePageState" as action
+  participant "PageState" as model
+end box
+box "Backend — HairPop Infrastructure" #FFF4E5
+  database "HairPop database" as db
+end box
+actor -> page : Start handle page states
+page -> client : Submit or load current criteria
+client -> endpoint : HTTPS request
+endpoint -> endpoint : Validate and authorize
+endpoint -> action : Execute L2-035, L2-036, L2-037
+action -> db : Read current permitted state
+db --> action : Current record or absence
+alt Valid and available
+  action -> model : Interpret L2-035, L2-036, L2-037 published or owned state
+  model --> action : Permitted view
+  action --> endpoint : Current result
+  endpoint --> client : HTTP success
+  client --> page : Typed result
+  page --> actor : Present current state
+else Invalid, unavailable, or forbidden
+  action --> endpoint : Failure without unintended change
+  endpoint --> client : HTTP error and safe details
+  client --> page : Typed error
+  page --> actor : Preserve work and show next action
+end
+@enduml

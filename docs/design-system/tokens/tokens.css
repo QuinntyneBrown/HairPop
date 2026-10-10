@@ -1,0 +1,469 @@
+/* ==========================================================================
+   HairPop design tokens — the single source of truth for colour, type,
+   space, shape, elevation, motion, layout, z-order and interaction.
+
+   Extracted from docs/mocks (assets/tokens.css + assets/ui.css + 181 mocks)
+   on 2026-10-10. Every value traces to a mock or to a correction logged in
+   docs/design-system/README.md ("Drift found in the mocks").
+
+   Three tiers:
+     1. Primitives  (--palette-*, --font-*)  raw values. Only semantic tokens
+                    read them; never a component, never a page.
+     2. Semantic    (--color-*, --text-*, --space-*, --radius-*, --shadow-*,
+                    --duration-*, --ease-*, --z-*, --layout-*, --target-*,
+                    --control-height-*) meaning-based aliases. Themes override
+                    this tier only.
+     3. Component   (--btn-*, --field-*, --dialog-*, ...) declared in
+                    assets/components.css; always alias a semantic token.
+
+   Themes: light is :root. Dark applies with [data-theme="dark"], or
+   automatically when the OS prefers dark and the page has not forced
+   [data-theme="light"]. The two dark blocks are identical by rule.
+   ========================================================================== */
+
+:root {
+  /* ---------- Primitives: colour --------------------------------------- */
+  --palette-white: #ffffff;
+  --palette-black: #000000;
+
+  /* Neutral ramp (cool grey). 150/350/450/750/925 are the in-between steps
+     the dark theme needs for text and edges. */
+  --palette-gray-25: #fbfbfc;
+  --palette-gray-50: #f6f7f9;
+  --palette-gray-100: #eef0f3;
+  --palette-gray-150: #e9ecf1;
+  --palette-gray-200: #dfe3e8;
+  --palette-gray-300: #c9cfd8;
+  --palette-gray-350: #b3bac5;
+  --palette-gray-400: #a3abb8;
+  --palette-gray-450: #8d97a5;
+  --palette-gray-500: #677080;
+  --palette-gray-600: #5e6675;
+  --palette-gray-700: #444b58;
+  --palette-gray-750: #2f3640;
+  --palette-gray-800: #2c323c;
+  --palette-gray-900: #1a1e26;
+  --palette-gray-925: #14181e;
+  --palette-gray-950: #0f1216;
+
+  /* Brand ramp: HairPop plum. (The mocks named this ramp "blue"; renamed.) */
+  --palette-plum-50: #f7f0fb;
+  --palette-plum-100: #efdef7;
+  --palette-plum-200: #dfbfee;
+  --palette-plum-300: #cc9ee4;
+  --palette-plum-400: #b47ad4;
+  --palette-plum-500: #9252bb;
+  --palette-plum-600: #73349c;
+  --palette-plum-700: #5f2983;
+  --palette-plum-800: #4c2269;
+  --palette-plum-900: #371a4c;
+  --palette-plum-950: #261334;
+
+  --palette-green-50: #e9f8ee;
+  --palette-green-100: #cdf0d9;
+  --palette-green-300: #7ed69a;
+  --palette-green-500: #2a8f52;
+  --palette-green-700: #1b6b3c;
+  --palette-green-900: #0f3b22;
+  --palette-green-950: #0b2918;
+
+  --palette-amber-50: #fff6e5;
+  --palette-amber-100: #ffe9c2;
+  --palette-amber-300: #f7c15c;
+  --palette-amber-500: #b26f00;
+  --palette-amber-700: #8a5300;
+  --palette-amber-900: #4d2f00;
+  --palette-amber-950: #2e1d05;
+
+  --palette-red-50: #fdecec;
+  --palette-red-100: #fbd5d4;
+  --palette-red-300: #f59b96;
+  --palette-red-500: #d93a30;
+  --palette-red-600: #c42c22;
+  --palette-red-700: #a0221b;
+  --palette-red-900: #5a1410;
+  --palette-red-950: #3a110d;
+
+  /* ---------- Primitives: typography ----------------------------------- */
+  /* Manrope and JetBrains Mono ship locally in assets/fonts (SIL OFL 1.1). */
+  --font-family-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-family-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --font-size-xs: 0.75rem;    /* 12px  captions, badges, overlines */
+  --font-size-sm: 0.875rem;   /* 14px  labels, secondary text */
+  --font-size-md: 1rem;       /* 16px  body */
+  --font-size-lg: 1.1875rem;  /* 19px  lead, large buttons */
+  --font-size-xl: 1.375rem;   /* 22px  h3 */
+  --font-size-2xl: 1.75rem;   /* 28px  empty-state and dialog titles on large screens */
+  --font-size-3xl: 2.25rem;   /* 36px  h2 */
+  --font-size-4xl: clamp(2.5rem, 1.6rem + 3.6vw, 4.25rem);   /* 40-68px h1, fluid */
+  --font-size-5xl: clamp(2.75rem, 1.5rem + 5vw, 5.25rem);    /* 44-84px display, fluid */
+
+  --font-weight-light: 300;     /* display headings (brand voice) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.08;    /* display, h1, h2 */
+  --line-height-snug: 1.3;      /* h3, h4, labels in controls */
+  --line-height-normal: 1.65;   /* body */
+  --line-height-relaxed: 1.85;  /* lead paragraphs */
+
+  --letter-spacing-tight: -0.03em;  /* display headings */
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.14em;    /* uppercase overlines, eyebrows, badges */
+
+  /* ---------- Semantic: colour (light) --------------------------------- */
+  --color-bg-canvas: var(--palette-gray-50);         /* page background */
+  --color-bg-surface: var(--palette-white);          /* cards, panels, inputs */
+  --color-bg-surface-raised: var(--palette-white);   /* dialogs, menus, toasts' light twin */
+  --color-bg-surface-sunken: var(--palette-gray-100);/* wells, code blocks, table headers */
+  --color-bg-subtle: var(--palette-gray-100);        /* hover rows, fact tiles, skeleton base */
+  --color-bg-subtle-hover: var(--palette-gray-200);
+  --color-bg-inverse: var(--palette-gray-900);       /* toasts, tooltips */
+  --color-bg-backdrop: rgba(15, 18, 22, 0.55);       /* modal scrim */
+
+  --color-fg-default: var(--palette-gray-900);       /* body text */
+  --color-fg-muted: var(--palette-gray-600);         /* secondary text, subtitles */
+  --color-fg-subtle: var(--palette-gray-500);        /* placeholders, metadata (>= 4.5:1) */
+  --color-fg-disabled: var(--palette-gray-400);      /* disabled text; exempt from contrast */
+  --color-fg-inverse: var(--palette-white);          /* text on inverse backgrounds */
+  --color-fg-link: var(--palette-plum-700);
+  --color-fg-link-hover: var(--palette-plum-800);
+
+  --color-border-default: var(--palette-gray-200);   /* dividers, card edges (decorative) */
+  --color-border-strong: var(--palette-gray-500);    /* control edges (>= 3:1) */
+  --color-border-inverse: var(--palette-gray-700);
+
+  --color-accent: var(--palette-plum-600);           /* primary actions, selected states */
+  --color-accent-hover: var(--palette-plum-700);
+  --color-accent-active: var(--palette-plum-800);
+  --color-accent-subtle: var(--palette-plum-50);     /* current nav item, selected chip, art panels */
+  --color-accent-subtle-hover: var(--palette-plum-100);
+  --color-fg-on-accent: var(--palette-white);
+  --color-fg-accent: var(--palette-plum-700);        /* brand, eyebrows, selected labels */
+
+  --color-focus-ring: var(--palette-plum-600);
+  --color-focus-ring-offset: var(--color-bg-surface);
+
+  --color-info-bg: var(--palette-plum-50);
+  --color-info-fg: var(--palette-plum-800);
+  --color-info-border: var(--palette-plum-300);
+  --color-info-icon: var(--palette-plum-600);
+  --color-info-icon-inverse: var(--palette-plum-300);    /* icon on toast (inverse) */
+  --color-info-solid: var(--palette-plum-600);
+
+  --color-success-bg: var(--palette-green-50);
+  --color-success-fg: var(--palette-green-700);
+  --color-success-border: var(--palette-green-300);
+  --color-success-icon: var(--palette-green-500);
+  --color-success-icon-inverse: var(--palette-green-300);
+  --color-success-solid: var(--palette-green-700);
+
+  --color-warning-bg: var(--palette-amber-50);
+  --color-warning-fg: var(--palette-amber-700);
+  --color-warning-border: var(--palette-amber-300);
+  --color-warning-icon: var(--palette-amber-500);
+  --color-warning-icon-inverse: var(--palette-amber-300);
+  --color-warning-solid: var(--palette-amber-700);
+
+  --color-danger-bg: var(--palette-red-50);
+  --color-danger-fg: var(--palette-red-700);
+  --color-danger-border: var(--palette-red-300);
+  --color-danger-icon: var(--palette-red-500);
+  --color-danger-icon-inverse: var(--palette-red-300);
+  --color-danger-solid: var(--palette-red-600);      /* destructive buttons, unread count */
+  --color-danger-solid-hover: var(--palette-red-700);
+  --color-fg-on-danger: var(--palette-white);
+
+  /* ---------- Semantic: typography roles ------------------------------- */
+  --text-display: var(--font-weight-light) var(--font-size-5xl) / var(--line-height-tight) var(--font-family-display);
+  --text-h1: var(--font-weight-light) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-display);
+  --text-h2: var(--font-weight-light) var(--font-size-3xl) / var(--line-height-tight) var(--font-family-display);
+  --text-h3: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-snug) var(--font-family-sans);
+  --text-h4: var(--font-weight-semibold) var(--font-size-md) / var(--line-height-snug) var(--font-family-sans);
+  --text-body-lg: var(--font-weight-regular) var(--font-size-lg) / var(--line-height-relaxed) var(--font-family-sans);
+  --text-body: var(--font-weight-regular) var(--font-size-md) / var(--line-height-normal) var(--font-family-sans);
+  --text-body-sm: var(--font-weight-regular) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
+  --text-caption: var(--font-weight-medium) var(--font-size-xs) / var(--line-height-normal) var(--font-family-sans);
+  --text-label: var(--font-weight-semibold) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
+  --text-overline: var(--font-weight-semibold) var(--font-size-xs) / var(--line-height-normal) var(--font-family-sans);
+  --text-code: var(--font-weight-regular) var(--font-size-sm) / var(--line-height-normal) var(--font-family-mono);
+
+  /* ---------- Semantic: spacing (4px base) ----------------------------- */
+  --space-0: 0;
+  --space-0-5: 0.125rem; /* 2px  hairline gaps */
+  --space-1: 0.25rem;    /* 4px  icon-to-label, label-to-input */
+  --space-2: 0.5rem;     /* 8px  inside chips, between inline items */
+  --space-3: 0.75rem;    /* 12px compact padding, cluster gap */
+  --space-4: 1rem;       /* 16px default padding, stack gap */
+  --space-5: 1.25rem;    /* 20px */
+  --space-6: 1.5rem;     /* 24px card padding, dialog padding */
+  --space-8: 2rem;       /* 32px section gap */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px page bottom padding, empty-state padding */
+  --space-16: 4rem;      /* 64px hero spacing */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+
+  /* ---------- Semantic: layout ----------------------------------------- */
+  --layout-breakpoint-sm: 40rem;   /* 640px  large phones: dialogs centre, toasts dock right */
+  --layout-breakpoint-md: 48rem;   /* 768px  tablets: top nav links, 2-column grids */
+  --layout-breakpoint-lg: 64rem;   /* 1024px laptops: 3-column grids, 12 columns */
+  --layout-breakpoint-xl: 80rem;   /* 1280px desktops: container max */
+  --layout-breakpoint-2xl: 96rem;  /* 1536px wide: content stays at container max */
+
+  --layout-columns: 4;              /* grid columns at the current breakpoint */
+  --layout-gutter: var(--space-4);  /* gap between columns */
+  --layout-margin: var(--space-4);  /* viewport edge to content */
+  --layout-container-max: 80rem;    /* 1280px */
+  --layout-form-max: 38rem;         /* 608px  single-column form panels, auth cards */
+  --layout-measure: 65ch;           /* max line length for prose */
+  --layout-sidebar-width: 16rem;    /* 256px */
+  --layout-topbar-height: 3.5rem;   /* 56px */
+  --layout-card-min: 18rem;         /* 288px  smallest card in an auto-fill grid */
+
+  /* ---------- Semantic: shape ------------------------------------------ */
+  --radius-xs: 0.125rem;  /* 2px  checkbox */
+  --radius-sm: 0.25rem;   /* 4px  inline code, tooltips, skeleton text */
+  --radius-md: 0.5rem;    /* 8px  buttons, inputs, nav links, media */
+  --radius-lg: 0.75rem;   /* 12px cards, dialogs, tables */
+  --radius-xl: 1rem;      /* 16px bottom sheets */
+  --radius-full: 9999px;  /* pills, chips, badges, avatars */
+
+  --border-width-hairline: 1px;
+  --border-width-thick: 2px;
+  --border-width-accent: 4px;   /* alert and error-summary leading edge */
+
+  /* ---------- Semantic: elevation -------------------------------------- */
+  --shadow-color: 20 25 35;
+  --shadow-1: 0 1px 2px rgb(var(--shadow-color) / 0.08);                                             /* cards */
+  --shadow-2: 0 2px 6px rgb(var(--shadow-color) / 0.10), 0 1px 2px rgb(var(--shadow-color) / 0.06);   /* hovered cards, tooltips */
+  --shadow-3: 0 8px 24px rgb(var(--shadow-color) / 0.14), 0 2px 6px rgb(var(--shadow-color) / 0.08);  /* menus, popovers, toasts */
+  --shadow-4: 0 20px 48px rgb(var(--shadow-color) / 0.22), 0 4px 12px rgb(var(--shadow-color) / 0.10); /* dialogs, sheets */
+  --shadow-focus: 0 0 0 2px var(--color-focus-ring-offset), 0 0 0 4px var(--color-focus-ring);
+
+  /* ---------- Semantic: motion ----------------------------------------- */
+  --duration-instant: 0ms;
+  --duration-fast: 120ms;       /* hover, colour changes */
+  --duration-base: 200ms;       /* reveal, menus, tooltips, toasts */
+  --duration-slow: 320ms;       /* dialogs, sheets */
+  --duration-deliberate: 500ms; /* progress fill */
+  --duration-loop-spin: 800ms;      /* one spinner revolution; keeps running under reduced motion */
+  --duration-loop-shimmer: 1400ms;  /* one skeleton shimmer / indeterminate sweep */
+  --duration-loop-pulse: 1600ms;    /* one live-dot pulse */
+  --motion-loop-state: running;     /* paused under prefers-reduced-motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---------- Semantic: z-order ---------------------------------------- */
+  --z-base: 0;
+  --z-raised: 1;
+  --z-sticky: 100;
+  --z-dropdown: 1000;
+  --z-overlay: 1200;
+  --z-modal: 1300;
+  --z-popover: 1400;
+  --z-toast: 1500;
+  --z-tooltip: 1600;
+
+  /* ---------- Semantic: interaction ------------------------------------ */
+  --target-min: 1.5rem;          /* 24px WCAG 2.2 AA minimum target size */
+  --target-comfortable: 2.75rem; /* 44px nav links, tabs, primary mobile actions */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --control-height-sm: 2rem;     /* 32px chips, small buttons, pagination */
+  --control-height-md: 2.5rem;   /* 40px default buttons and inputs */
+  --control-height-lg: 3rem;     /* 48px large buttons, hero search */
+
+  color-scheme: light;
+}
+
+/* Responsive layout tokens: columns, gutters and margins grow with the viewport. */
+@media (min-width: 48rem) {
+  :root {
+    --layout-columns: 8;
+    --layout-gutter: var(--space-6);
+    --layout-margin: var(--space-8);
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --layout-columns: 12;
+    --layout-gutter: var(--space-8);
+    --layout-margin: var(--space-12);
+  }
+}
+
+/* ---------- Dark theme ----------------------------------------------------- */
+[data-theme="dark"] {
+  --color-bg-canvas: var(--palette-gray-950);
+  --color-bg-surface: var(--palette-gray-900);
+  --color-bg-surface-raised: var(--palette-gray-800);
+  --color-bg-surface-sunken: var(--palette-gray-925);
+  --color-bg-subtle: var(--palette-gray-800);
+  --color-bg-subtle-hover: var(--palette-gray-700);
+  --color-bg-inverse: var(--palette-gray-100);
+  --color-bg-backdrop: rgba(0, 0, 0, 0.65);
+
+  --color-fg-default: var(--palette-gray-150);
+  --color-fg-muted: var(--palette-gray-350);
+  --color-fg-subtle: var(--palette-gray-400);
+  --color-fg-disabled: var(--palette-gray-600);
+  --color-fg-inverse: var(--palette-gray-900);
+  --color-fg-link: var(--palette-plum-300);
+  --color-fg-link-hover: var(--palette-plum-200);
+
+  --color-border-default: var(--palette-gray-750);
+  --color-border-strong: var(--palette-gray-450);
+  --color-border-inverse: var(--palette-gray-300);
+
+  --color-accent: var(--palette-plum-300);
+  --color-accent-hover: var(--palette-plum-200);
+  --color-accent-active: var(--palette-plum-100);
+  --color-accent-subtle: var(--palette-plum-950);
+  --color-accent-subtle-hover: var(--palette-plum-900);
+  --color-fg-on-accent: var(--palette-plum-950);
+  --color-fg-accent: var(--palette-plum-300);
+
+  --color-focus-ring: var(--palette-plum-300);
+
+  --color-info-bg: var(--palette-plum-950);
+  --color-info-fg: var(--palette-plum-200);
+  --color-info-border: var(--palette-plum-800);
+  --color-info-icon: var(--palette-plum-300);
+  --color-info-icon-inverse: var(--palette-plum-600);
+  --color-info-solid: var(--palette-plum-300);
+
+  --color-success-bg: var(--palette-green-950);
+  --color-success-fg: var(--palette-green-300);
+  --color-success-border: var(--palette-green-700);
+  --color-success-icon: var(--palette-green-300);
+  --color-success-icon-inverse: var(--palette-green-700);
+  --color-success-solid: var(--palette-green-300);
+
+  --color-warning-bg: var(--palette-amber-950);
+  --color-warning-fg: var(--palette-amber-300);
+  --color-warning-border: var(--palette-amber-700);
+  --color-warning-icon: var(--palette-amber-300);
+  --color-warning-icon-inverse: var(--palette-amber-700);
+  --color-warning-solid: var(--palette-amber-300);
+
+  --color-danger-bg: var(--palette-red-950);
+  --color-danger-fg: var(--palette-red-300);
+  --color-danger-border: var(--palette-red-700);
+  --color-danger-icon: var(--palette-red-300);
+  --color-danger-icon-inverse: var(--palette-red-700);
+  --color-danger-solid: var(--palette-red-300);
+  --color-danger-solid-hover: var(--palette-red-100);
+  --color-fg-on-danger: var(--palette-red-950);
+
+  --shadow-color: 0 0 0;
+  --shadow-1: 0 1px 2px rgb(var(--shadow-color) / 0.4);
+  --shadow-2: 0 2px 6px rgb(var(--shadow-color) / 0.45), 0 1px 2px rgb(var(--shadow-color) / 0.3);
+  --shadow-3: 0 8px 24px rgb(var(--shadow-color) / 0.5), 0 2px 6px rgb(var(--shadow-color) / 0.35);
+  --shadow-4: 0 20px 48px rgb(var(--shadow-color) / 0.6), 0 4px 12px rgb(var(--shadow-color) / 0.4);
+
+  color-scheme: dark;
+}
+
+/* Follow the OS preference unless the page has explicitly chosen light.
+   Keep this block identical to [data-theme="dark"] above. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg-canvas: var(--palette-gray-950);
+    --color-bg-surface: var(--palette-gray-900);
+    --color-bg-surface-raised: var(--palette-gray-800);
+    --color-bg-surface-sunken: var(--palette-gray-925);
+    --color-bg-subtle: var(--palette-gray-800);
+    --color-bg-subtle-hover: var(--palette-gray-700);
+    --color-bg-inverse: var(--palette-gray-100);
+    --color-bg-backdrop: rgba(0, 0, 0, 0.65);
+    --color-fg-default: var(--palette-gray-150);
+    --color-fg-muted: var(--palette-gray-350);
+    --color-fg-subtle: var(--palette-gray-400);
+    --color-fg-disabled: var(--palette-gray-600);
+    --color-fg-inverse: var(--palette-gray-900);
+    --color-fg-link: var(--palette-plum-300);
+    --color-fg-link-hover: var(--palette-plum-200);
+    --color-border-default: var(--palette-gray-750);
+    --color-border-strong: var(--palette-gray-450);
+    --color-border-inverse: var(--palette-gray-300);
+    --color-accent: var(--palette-plum-300);
+    --color-accent-hover: var(--palette-plum-200);
+    --color-accent-active: var(--palette-plum-100);
+    --color-accent-subtle: var(--palette-plum-950);
+    --color-accent-subtle-hover: var(--palette-plum-900);
+    --color-fg-on-accent: var(--palette-plum-950);
+    --color-fg-accent: var(--palette-plum-300);
+    --color-focus-ring: var(--palette-plum-300);
+    --color-info-bg: var(--palette-plum-950);
+    --color-info-fg: var(--palette-plum-200);
+    --color-info-border: var(--palette-plum-800);
+    --color-info-icon: var(--palette-plum-300);
+    --color-info-icon-inverse: var(--palette-plum-600);
+    --color-info-solid: var(--palette-plum-300);
+    --color-success-bg: var(--palette-green-950);
+    --color-success-fg: var(--palette-green-300);
+    --color-success-border: var(--palette-green-700);
+    --color-success-icon: var(--palette-green-300);
+    --color-success-icon-inverse: var(--palette-green-700);
+    --color-success-solid: var(--palette-green-300);
+    --color-warning-bg: var(--palette-amber-950);
+    --color-warning-fg: var(--palette-amber-300);
+    --color-warning-border: var(--palette-amber-700);
+    --color-warning-icon: var(--palette-amber-300);
+    --color-warning-icon-inverse: var(--palette-amber-700);
+    --color-warning-solid: var(--palette-amber-300);
+    --color-danger-bg: var(--palette-red-950);
+    --color-danger-fg: var(--palette-red-300);
+    --color-danger-border: var(--palette-red-700);
+    --color-danger-icon: var(--palette-red-300);
+    --color-danger-icon-inverse: var(--palette-red-700);
+    --color-danger-solid: var(--palette-red-300);
+    --color-danger-solid-hover: var(--palette-red-100);
+    --color-fg-on-danger: var(--palette-red-950);
+    --shadow-color: 0 0 0;
+    --shadow-1: 0 1px 2px rgb(var(--shadow-color) / 0.4);
+    --shadow-2: 0 2px 6px rgb(var(--shadow-color) / 0.45), 0 1px 2px rgb(var(--shadow-color) / 0.3);
+    --shadow-3: 0 8px 24px rgb(var(--shadow-color) / 0.5), 0 2px 6px rgb(var(--shadow-color) / 0.35);
+    --shadow-4: 0 20px 48px rgb(var(--shadow-color) / 0.6), 0 4px 12px rgb(var(--shadow-color) / 0.4);
+    color-scheme: dark;
+  }
+}
+
+/* ---------- Preference overrides ------------------------------------------ */
+/* Reduced motion: transitions and entrances become instant; looping
+   decoration (shimmer, pulse) pauses. Spinners keep turning because they
+   are the only sign that work is in progress. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0.01ms;
+    --duration-base: 0.01ms;
+    --duration-slow: 0.01ms;
+    --duration-deliberate: 0.01ms;
+    --motion-loop-state: paused;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --color-border-default: var(--color-border-strong);
+    --color-fg-muted: var(--color-fg-default);
+    --color-fg-subtle: var(--color-fg-muted);
+  }
+}
+
+/* Windows High Contrast / forced colours: hand control to system colours. */
+@media (forced-colors: active) {
+  :root {
+    --color-focus-ring: Highlight;
+    --color-border-default: CanvasText;
+    --color-border-strong: CanvasText;
+  }
+}

@@ -1,0 +1,8 @@
+@startuml
+!include <C4/C4_Context>
+LAYOUT_WITH_LEGEND()
+title System context — Find braiders for style
+Person(person, "Customer", "Uses find braiders for style")
+System(hairpop, "HairPop", "Customer and braider platform")
+Rel(person, hairpop, "Uses", "HTTPS")
+@enduml

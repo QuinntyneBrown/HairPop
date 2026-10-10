@@ -1,157 +1,72 @@
-<div align="center">
-  <img src="assets/logo.png" alt="HairPop Logo" width="300"/>
+<p align="center">
+  <img src="assets/logo.png" alt="HairPop logo" width="300">
+</p>
 
-  # HairPop
+# HairPop
 
-  A platform for connecting customers with professional hair braiders.
-</div>
+HairPop helps customers discover hairstyles, find professional braiders who offer them, and choose with confidence through service details, portfolios, and reviews.
 
-HairPop is organized as a set of bounded-context services (microservices) behind an API Gateway, with an Angular web application.
+The customer journey also covers appointment requests, updates, and care after a visit. The [requirements](docs/specs/L1.md) define the planned product; the [HTML mocks](docs/mocks/README.md) show its intended experience.
 
-## Quick Links
+## Project status
 
-- Requirements: [docs/requirements.md](docs/requirements.md)
-- Microservices overview: [docs/microservices.md](docs/microservices.md)
-- Coding guidelines: [docs/coding-guidelines.md](docs/coding-guidelines.md)
+HairPop is being redesigned. The requirements, detailed designs, and customer journey mocks are in the repository. The existing Angular workspace is an earlier prototype and does not yet implement the full redesigned journey. The Laravel backend described in [AGENTS.md](AGENTS.md) has not landed.
 
-## Architecture
+| Area | Location | Status |
+| --- | --- | --- |
+| Product requirements | [L1](docs/specs/L1.md) and [L2](docs/specs/L2.md) | Written for the customer journey |
+| Feature designs | [`docs/detailed-designs/`](docs/detailed-designs/) | In progress |
+| Screen and state mocks | [`docs/mocks/`](docs/mocks/README.md) | Available for review |
+| Design tokens | [`docs/design-system/`](docs/design-system/) | In progress |
+| Angular applications | [`src/WebApp/`](src/WebApp/README.md) | Earlier prototype |
+| Laravel API and Playwright suite for the redesign | Planned | Not yet available |
 
-- **API Gateway**: [src/ApiGateway](src/ApiGateway) uses **YARP** (reverse proxy) and routes requests like `/identity/*` → Identity service.
-- **Services**: each bounded context lives under [src](src) and typically contains `*.Api`, `*.Core`, and `*.Infrastructure` projects.
-- **Shared**: cross-cutting primitives live in [src/Shared](src/Shared).
-- **Web**: the Angular workspace lives in [src/WebApp](src/WebApp).
+## Explore the project
 
-### Implemented Services
+- Browse the [mock gallery](docs/mocks/index.html) to review customer screens, dialogs, and states. The mocks are static HTML and can be opened locally in a browser.
+- Read the [high-level requirements](docs/specs/L1.md) and [detailed acceptance criteria](docs/specs/L2.md).
+- Review [feature designs](docs/detailed-designs/) and [design tokens](docs/design-system/tokens/).
 
-| Service | Project | Default URL | Swagger |
-|---|---|---|---|
-| API Gateway | `src/ApiGateway/ApiGateway.csproj` | `http://localhost:5100` | (gateway itself has no Swagger) |
-| Identity | `src/Identity/Identity.Api/Identity.Api.csproj` | `http://localhost:5200` | `http://localhost:5200/swagger` |
-| Braiders | `src/Braiders/Braiders.Api/Braiders.Api.csproj` | `http://localhost:5201` | `http://localhost:5201/swagger` |
-| Users | `src/Users/Users.Api/Users.Api.csproj` | `http://localhost:5202` | `http://localhost:5202/swagger` |
-| Reviews | `src/Reviews/Reviews.Api/Reviews.Api.csproj` | `http://localhost:5203` | `http://localhost:5203/swagger` |
+The mock names, prices, dates, availability, and legal text are illustrative. See the [mock guide](docs/mocks/README.md) for scope and open questions.
 
-Through the gateway (when the target service is running):
+## Run the existing web prototype
 
-- `http://localhost:5100/identity/swagger`
-- `http://localhost:5100/braiders/swagger`
-- `http://localhost:5100/users/swagger`
-- `http://localhost:5100/reviews/swagger`
+You need [Node.js](https://nodejs.org/) and npm. From the repository root:
 
-## Tech Stack
-
-### Backend
-- **.NET 8** - target framework
-- **ASP.NET Core Web API** - REST APIs
-- **Entity Framework Core 8** - data access (SqlServer + InMemory)
-- **YARP** - API Gateway / reverse proxy
-- **Swagger/OpenAPI** - API documentation
-
-### Frontend
-- **Angular 21** - frontend framework
-- **NgRx Component Store** + **RxJS** - state + reactive flows
-- **@microsoft/signalr** - real-time communication
-- **Jest** - unit tests
-- **Playwright** - E2E tests
-- **Storybook** - component development
-
-## Project Structure
-
-```
-HairPop/
-├── src/
-│   ├── ApiGateway/               # YARP reverse proxy
-│   ├── Identity/                 # Identity bounded context
-│   │   ├── Identity.Api/
-│   │   ├── Identity.Core/
-│   │   └── Identity.Infrastructure/
-│   ├── Braiders/                 # Braiders bounded context
-│   │   ├── Braiders.Api/
-│   │   ├── Braiders.Core/
-│   │   └── Braiders.Infrastructure/
-│   ├── Users/                    # Users bounded context
-│   │   ├── Users.Api/
-│   │   ├── Users.Core/
-│   │   └── Users.Infrastructure/
-│   ├── Reviews/                  # Reviews bounded context
-│   │   ├── Reviews.Api/
-│   │   ├── Reviews.Core/
-│   │   └── Reviews.Infrastructure/
-│   ├── Shared/                   # Shared contracts + domain primitives
-│   └── WebApp/                   # Angular workspace (app + admin)
-├── tests/                        # Service-level unit/integration tests
-├── designs/                      # HTML mockups + admin UI prototypes
-├── docs/                         # Requirements + architecture docs
-└── assets/                       # Shared assets
-```
-
-## Getting Started
-
-### Prerequisites
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [Node.js](https://nodejs.org/) (LTS)
-
-### Build
-```bash
-dotnet build HairPop.sln
-```
-
-### Backend (run services)
-Run any combination of services + the gateway. Each service exposes Swagger at `/swagger`.
-
-```bash
-dotnet run --project src/Identity/Identity.Api/Identity.Api.csproj
-dotnet run --project src/Braiders/Braiders.Api/Braiders.Api.csproj
-dotnet run --project src/Users/Users.Api/Users.Api.csproj
-dotnet run --project src/Reviews/Reviews.Api/Reviews.Api.csproj
-
-# Run the gateway (routes /identity, /braiders, /users, /reviews, ...)
-dotnet run --project src/ApiGateway/ApiGateway.csproj
-```
-
-Gateway health check: `http://localhost:5100/health`.
-
-### Frontend
-```bash
+```sh
 cd src/WebApp
-
-# Install dependencies
-npm install
-
-# Start customer app
+npm ci
 npm start
-
-# Start admin app (if 4200 is in use, Angular CLI will prompt for another port)
-npm run start:admin
 ```
 
-### Running Tests
-```bash
-# Backend tests (all .NET tests in the solution)
-dotnet test HairPop.sln
+Open <http://localhost:4200/>. To run the admin prototype instead, use `npm run start:admin`. The Angular workspace has its own [setup and command guide](src/WebApp/README.md).
 
-# Or run the current Braiders test suite only
-dotnet test tests/Braiders/Braiders.Api.Tests/Braiders.Api.Tests.csproj
+## Architecture and repository layout
 
-# Frontend unit tests
-cd src/WebApp
-npm test              # Test hairpop
-npm run test:admin    # Test hairpop-admin
-npm run test:all      # Test all projects
+The intended platform uses an Angular frontend and a PHP 8.3 / Laravel 11 backend. Laravel owns persistence, authentication, and business workflows. Playwright covers the browser journey. The [feature designs](docs/detailed-designs/) describe the planned behavior in more detail.
 
-# E2E tests
-npm run e2e           # Test hairpop
-npm run e2e:admin     # Test hairpop-admin
-npm run e2e:all       # Test all projects
+```text
+.
+├── assets/                  Logo and shared assets
+├── docs/
+│   ├── specs/               Product and component requirements
+│   ├── detailed-designs/    Feature designs
+│   ├── mocks/               Static customer journey references
+│   └── design-system/       Design tokens and foundations
+├── src/WebApp/              Existing Angular prototype
+└── AGENTS.md                Project conventions and workflow
 ```
 
-## Documentation
+## Contributing
 
-- [Requirements](docs/requirements.md)
-- [Microservices Architecture Notes](docs/microservices.md)
-- [Coding Guidelines](docs/coding-guidelines.md)
-- [Coding Violations](docs/coding-violations.md)
-- UI mockups: [designs/README.md](designs/README.md)
+Contributions to requirements, designs, mocks, documentation, and implementation are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change. Production behavior changes require a requirement, detailed design, mock, and acceptance tests before implementation; [AGENTS.md](AGENTS.md) has the full workflow.
+
+## Community and support
+
+- Follow the [code of conduct](CODE_OF_CONDUCT.md) in project spaces.
+- Use [SUPPORT.md](SUPPORT.md) for questions and bug reports.
+- Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
 
 ## License
-No license file is currently included in this repository.
+
+No license has been published for this repository. Until one is added, the repository should not be treated as granting permission to reuse or redistribute its contents.

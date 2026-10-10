@@ -1,0 +1,41 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam defaultFontName Arial
+skinparam ArrowColor #344054
+skinparam rectangle {
+  BorderColor #344054
+  FontColor #101828
+}
+skinparam package {
+  BorderColor #667085
+  FontColor #101828
+  BackgroundColor #F9FAFB
+}
+title Class structure — Manage session
+class ManageCustomerSession {
+  +execute(request: FeatureRequest): FeatureResult
+}
+class FeatureRequest {
+  +string actorId
+  +string resourceId
+}
+class FeatureResult {
+  +string status
+  +string reference
+}
+class CustomerSession {
+  +string id
+  +string status
+}
+interface FeatureRepository {
+  +find(id: string): CustomerSession
+  +save(record: CustomerSession): void
+}
+ManageCustomerSession ..> FeatureRequest : accepts
+ManageCustomerSession ..> FeatureResult : returns
+ManageCustomerSession ..> FeatureRepository : uses
+ManageCustomerSession --> CustomerSession : checks or changes
+FeatureRepository ..> CustomerSession : persists
+@enduml

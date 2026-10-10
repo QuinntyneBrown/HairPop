@@ -1,0 +1,14 @@
+@startuml
+!include <C4/C4_Component>
+LAYOUT_WITH_LEGEND()
+title Components — Respond to request
+Container_Boundary(api, "HairPop API") {
+  Component(endpoint, "Feature endpoint", "Laravel controller", "Validates HTTP input")
+  Component(action, "RespondToBookingRequest", "Application action", "Accept or decline an assigned pending request against its current version")
+  Component(model, "BookingRequest", "Domain model", "Holds slice state")
+  ComponentDb(db, "HairPop database", "<TO SUPPLY>", "Stores records")
+}
+Rel(endpoint, action, "Delegates")
+Rel(action, model, "Applies rules")
+Rel(action, db, "Reads or persists")
+@enduml
