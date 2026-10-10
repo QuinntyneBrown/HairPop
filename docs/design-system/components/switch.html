@@ -17,7 +17,7 @@
 <main id="main" class="ds-main">
 <header class="ds-header"><p class="ds-kicker">Component · Inputs</p><h1>Switch</h1><p class="ds-lead">A switch turns a setting on or off immediately, with no save button: email updates about requests, a reminder the day before an appointment.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill"><code>role="switch"</code> on a checkbox</span><span class="ds-pill">Status: core set</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
-  <p>Use a switch for a setting that takes effect the moment it changes, like notification preferences in account settings. If the change only applies after "Save changes", use a <a href="checkbox.html">checkbox</a> instead; the cookie-preferences dialog, which saves on "Save preferences", correctly uses a checkbox. The switch is part of the core set; no mock uses one yet.</p>
+  <p>Use a switch for a setting that takes effect the moment it changes, like notification preferences in account settings. If the change only applies after "Save changes", use a <a href="checkbox.html">checkbox</a> instead; the cookie-preferences dialog, which saves on "Save preferences", correctly uses a checkbox. Its home is the notification preferences card in account settings.</p>
 </section>
 
 <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
@@ -67,8 +67,8 @@
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
-    <li>In settings lists the switch sits at the end of a full-width row (<code>.switch--end</code>) at every breakpoint, so labels align on the left.</li>
-    <li>Descriptions wrap under the label; the switch stays vertically centred.</li>
+    <li>In settings lists the switch sits at the end of a full-width row (<code>.switch--end</code>), so labels align on the left. The label keeps at least 10em beside the switch; when it cannot (a narrow card, 200% text) the switch wraps beneath the label at the start instead of pushing the label off the card. The DOM order stays input, then text.</li>
+    <li>Descriptions wrap under the label; the switch stays vertically centred while it shares the row.</li>
   </ul>
 </section>
 
@@ -94,6 +94,8 @@
     <div class="ds-pair"><span>Thumb on off track</span><span class="ds-pair__ratio" data-contrast="--color-bg-surface|--color-border-strong" data-min="3"></span></div>
     <div class="ds-pair"><span>Thumb on on track</span><span class="ds-pair__ratio" data-contrast="--color-bg-surface|--color-accent" data-min="3"></span></div>
   </div>
+  <h3>Forced colours</h3>
+  <p>System colours would erase the track and thumb backgrounds, so the switch sets its own: a <code>CanvasText</code> hairline edge on the track and a <code>CanvasText</code> thumb; on, the track is <code>Highlight</code> with a <code>HighlightText</code> thumb (<code>forced-color-adjust: none</code>). The focus ring maps to <code>Highlight</code>.</p>
   <h3>Motion</h3>
   <p>The thumb slides and the track recolours over <code>--duration-base</code> (200ms); reduced motion makes both instant. Position, not just colour, shows the state.</p>
   <h3>Touch</h3>
@@ -140,20 +142,20 @@
 &lt;/label&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.switch</code></td><td>Track, thumb and label row.</td></tr>
-    <tr><td><code>.switch--end</code></td><td>Full-width settings row, switch at the end.</td></tr>
+    <tr><td><code>.switch--end</code></td><td>Full-width settings row, switch at the end; wraps beneath the label when the label would have less than 10em.</td></tr>
     <tr><td><code>role="switch"</code></td><td>Announced as a switch.</td></tr>
     <tr><td><code>checked</code> / <code>disabled</code></td><td>On / disabled.</td></tr>
-    <tr><td><code>data-state="hover|focus|checked"</code></td><td>Documentation only.</td></tr>
+    <tr><td><code>data-state="hover|focus|checked|disabled"</code></td><td>Documentation only.</td></tr>
   </tbody></table>
 </section>
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
-  <p>Core-set component: no mock uses a switch. Its look comes from the mocks' kit (<code>.switch</code>); its likely first home is account settings.</p>
+  <p>Core-set component. Its look comes from the mocks' kit (<code>.switch</code>); account settings uses it for notification preferences that save as soon as they change.</p>
   <ul>
-    <li><a href="../../mocks/pages/account-settings/default.html">pages/account-settings/default</a> (future notification preferences)</li>
+    <li><a href="../../mocks/pages/account-settings/default.html">pages/account-settings/default</a> (notification preferences: settings rows with descriptions)</li>
     <li><a href="../../mocks/dialogs/cookie-preferences/default.html">dialogs/cookie-preferences/default</a> (correctly a checkbox, not a switch)</li>
   </ul>
-  <p>Drift fixed during extraction: the kit's switch had no hover state and no <code>role="switch"</code> in its markup; the thumb travel was a raw 1.25rem (now computed from the component tokens).</p>
+  <p>Drift fixed during extraction: the kit's switch had no hover state and no <code>role="switch"</code> in its markup; the thumb travel was a raw 1.25rem (now computed from the component tokens); the <code>row-reverse</code> settings row pushed a long label off the card at 200% text (now it wraps); the on switch vanished in forced colours (now it has its own forced-colours rules).</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

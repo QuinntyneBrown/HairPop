@@ -78,8 +78,9 @@
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
-    <li>Groups stack vertically below 768px; a short group of one-word options may run inline (<code>.choice-group--inline</code>) from 768px.</li>
+    <li>Groups stack vertically at every width. A short group of two to four one-word options ("Braids", "Twists") may run inline with <code>.choice-group--inline</code>, which wraps at every width, the same rule the radio group's rating uses.</li>
     <li>Labels wrap under themselves, never under the box (flex row, box aligned to the first line).</li>
+    <li>A word longer than the column, such as an email address, breaks (<code>overflow-wrap: anywhere</code> on the text). In a card the text moves under the box when fewer than 8em remain beside it, so 200% text at 320px never scrolls the page.</li>
   </ul>
 </section>
 
@@ -121,8 +122,8 @@
 
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
-    <figure class="ds-do"><div class="ds-example__canvas"><label class="choice"><input type="checkbox" checked><span class="choice__text"><span>Remember my optional usage choices</span><small>Helps us improve search. Turn it off any time in settings.</small></span></label></div><figcaption>Say what an optional data choice does.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><label class="choice"><input type="checkbox" checked><span>Remember my optional usage choices</span></label></div><figcaption>The cookie-preferences mock gives no description, so people cannot tell what they agree to.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><label class="choice"><input type="checkbox" checked><span class="choice__text"><span>Remember my optional usage choices</span><small>Helps us improve search. You can change this any time.</small></span></label></div><figcaption>Say what an optional data choice does.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><label class="choice"><input type="checkbox" checked><span>Remember my optional usage choices</span></label></div><figcaption>Without a description, people cannot tell what optional usage data they agree to.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><fieldset><legend>Styles to include</legend><div class="choice-group"><label class="choice"><input type="checkbox" checked><span>Braids</span></label><label class="choice"><input type="checkbox"><span>Twists</span></label></div></fieldset></div><figcaption>Group related checkboxes under a legend.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><label class="choice"><input type="checkbox"><span>Don’t share my data</span></label></div><figcaption>Negative labels make "checked" mean "off".</figcaption></figure>
   </div>
@@ -157,7 +158,7 @@
     <tr><td><code>.choice</code></td><td>Label row with a styled native checkbox or radio.</td></tr>
     <tr><td><code>.choice__text</code></td><td>Label plus description.</td></tr>
     <tr><td><code>.choice--card</code></td><td>Bordered card; highlights when checked.</td></tr>
-    <tr><td><code>.choice-group</code>, <code>.choice-group--inline</code></td><td>Vertical or wrapped inline group.</td></tr>
+    <tr><td><code>.choice-group</code>, <code>.choice-group--inline</code></td><td>Vertical group, or an inline group that wraps at every width.</td></tr>
     <tr><td><code>aria-invalid="true"</code></td><td>Invalid edge.</td></tr>
     <tr><td><code>data-state="hover|focus|checked|indeterminate|disabled"</code></td><td>Documentation only.</td></tr>
   </tbody></table>
@@ -165,10 +166,12 @@
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
   <ul>
-    <li><a href="../../mocks/dialogs/cookie-preferences/default.html">dialogs/cookie-preferences/default</a> (single checkbox)</li>
+    <li><a href="../../mocks/dialogs/cookie-preferences/default.html">dialogs/cookie-preferences/default</a> (single checkbox with its description)</li>
+    <li><a href="../../mocks/dialogs/cookie-preferences/busy.html">dialogs/cookie-preferences/busy</a> (checkbox stays enabled while saving)</li>
     <li><a href="../../mocks/dialogs/cookie-preferences/invalid.html">dialogs/cookie-preferences/invalid</a> (checkbox under an error summary)</li>
+    <li><a href="../../mocks/dialogs/cookie-preferences/failed.html">dialogs/cookie-preferences/failed</a> (checkbox keeps its value under the failure alert)</li>
   </ul>
-  <p>Drift fixed during extraction: the cookie checkbox had no description; the indeterminate bar was 0.65rem (off grid, now 0.75rem); the box had no hover state (now an accent edge); the kit's <code>.choice input:disabled + *</code> missed descriptions (now <code>~ *</code>).</p>
+  <p>Drift fixed during extraction: the cookie checkbox had no description (the mock now shows "Helps us improve search. You can change this any time."); the indeterminate bar was 0.65rem (off grid, now 0.75rem); the box had no hover state (now an accent edge); the kit's <code>.choice input:disabled + *</code> missed descriptions (now <code>~ *</code>).</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

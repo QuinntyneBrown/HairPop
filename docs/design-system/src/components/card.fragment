@@ -68,7 +68,7 @@
   </div>
 </article>
 <article class="card story-card">
-  <div class="story-card__art" aria-hidden="true">✦</div>
+  <div class="story-card__art" aria-hidden="true">{{icon:sparkle|icon--fill}}</div>
   <div class="stack">
     <p class="eyebrow">Protective style</p>
     <h3 class="card__title">Passion twists</h3>
@@ -91,13 +91,25 @@
   <h3>Row, selected and flush</h3>
   {{example:[stack]Row cards wrap their action below the summary on phones; selected uses the accent edge; flush drops the padding for media or tables.}}
 <div class="card appointment-row">
-  <div><span class="badge badge--success">Completed</span><h3 class="card__title">Nia Okafor · knotless braids</h3><p class="text-muted">Sat 3 Oct · review ready</p></div>
+  <div><span class="badge">Completed</span><h3 class="card__title">Nia Okafor · knotless braids</h3><p class="text-muted">Sat 3 Oct · review ready</p></div>
   <a class="btn" href="../../mocks/pages/care-and-review/default.html">View care and review</a>
 </div>
 <div class="card card--selected">
   <h3 class="card__title">Sat 24 Oct · 10:00 am</h3><p class="text-muted">Selected · Nia’s first offered time · about 5 hours</p>
 </div>
 <div class="card card--flush"><img class="story-card__photo" src="../../mocks/assets/photos/knotless-braids.png" alt="Long medium knotless braids with neat, visible parting"></div>
+  {{/example}}
+  <h3>Long names, wrapping header and a divider</h3>
+  {{example:[start]The header wraps, so a badge moves under a long title instead of crossing the card edge; card headings break a word longer than their line. A divider inside a card keeps its own 24px above and below.}}
+<section class="card" style="flex: 0 1 16rem;" aria-labelledby="card-long">
+  <div class="card__header"><h3 id="card-long">Amara Nkiruka Adeyemi-Williams</h3><span class="badge badge--warning">Awaiting reply</span></div>
+  <p class="text-muted">Sat 24 Oct · 10:00 am · estimate $180–$240</p>
+</section>
+<div class="card" style="flex: 1 1 18rem;">
+  <div class="profile-head"><span class="avatar avatar--xl" aria-hidden="true">AA</span><div><h3>Amara Nkiruka Adeyemi-Williams</h3><p class="text-muted">Etobicoke · 4.9 ★ from 1,284 reviews</p></div></div>
+  <hr class="divider">
+  <p class="text-muted">Senior knotless braid specialist.</p>
+</div>
   {{/example}}
 </section>
 
@@ -137,6 +149,7 @@
     <li>Padding stays 24px at every width; on a 360px phone with 16px page margins that leaves 278px of content, enough for every card in the mocks.</li>
     <li>Row cards (<code>.appointment-row</code>) wrap: the action drops below the summary when the line is too narrow.</li>
     <li>Media keeps its 3:2 ratio at every width, so the grid does not jump while images load.</li>
+    <li>Headers wrap: when a title and its badge do not fit on one line the badge moves under the title. Headings break a word longer than their line, and the row's and profile head's text blocks may shrink (<code>min-width: 0</code>), so "Amara Nkiruka Adeyemi-Williams" stays inside the card at 320px and at 200% text.</li>
   </ul>
 </section>
 
@@ -155,7 +168,7 @@
     <tr><td><kbd>Enter</kbd></td><td>Follows the card's link.</td></tr>
   </tbody></table>
   <h3>Focus</h3>
-  <p>When <code>.card__link</code> has focus the ring is drawn around the whole card (<code>:has(.card__link:focus-visible)</code>), so the target and the ring match.</p>
+  <p>When <code>.card__link</code> has keyboard focus, its stretched <code>::after</code> draws the shared ring around the whole card with the card's <code>--radius-lg</code> corners, so the target and the ring match; the link draws no second ring.</p>
   <h3>Labelling</h3>
   <p>The card title is a real heading at the right level for the page (h2 in a grid under the page h1, h3 inside a section). Link text names the target ("Explore Knotless braids", not "Learn more"); a decorative arrow is <code>aria-hidden</code>. Photos have <code>alt</code> describing the hair, not "image". Selected state is said in text or <code>aria-current</code>, never only by the accent edge.</p>
   <h3>Contrast</h3>
@@ -167,7 +180,7 @@
     {{pair:Selected edge on card|--color-accent|--color-bg-surface|3}}
     {{pair:Focus ring on card|--color-focus-ring|--color-bg-surface|3}}
   </div>
-  <p>The default card border is decorative: the surface and shadow separate the card.</p>
+  <p>The default card border is decorative: the surface and shadow separate the card. In forced colours every card has a <code>CanvasText</code> border and a selected card a <code>Highlight</code> one, and the word "Selected" still says it.</p>
   <h3>Motion</h3>
   <p>Hover lift, shadow and border transition over <code>--duration-fast</code>; reduced motion makes them instant.</p>
   <h3>Touch</h3>
@@ -188,7 +201,7 @@
   <div class="ds-dodont">
     <figure class="ds-do"><div class="ds-example__canvas"><section class="card" style="flex: 1;" aria-label="Do example"><h3>Prepare for your visit</h3><p class="text-muted">Wash and detangle your hair.</p></section></div><figcaption>Use the h3 role for a section heading inside a card.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><div class="card" style="flex: 1;"><p style="font: var(--text-h2); letter-spacing: var(--letter-spacing-tight);">Prepare for your visit</p></div></div><figcaption>Render a card heading at the 36px page h2, as the appointment and profile mocks did; it competes with the page title.</figcaption></figure>
-    <figure class="ds-do"><div class="ds-example__canvas"><div class="card story-card" style="flex: 1;"><div class="story-card__art" aria-hidden="true">✦</div><b>Cornrows</b></div><div class="card story-card" style="flex: 1;"><img class="story-card__photo" src="../../mocks/assets/photos/knotless-braids.png" alt="Medium knotless braids"><b>Knotless braids</b></div></div><figcaption>Give art panels and photos the same 3:2 ratio so titles line up.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="card story-card" style="flex: 1;"><div class="story-card__art" aria-hidden="true">{{icon:sparkle|icon--fill}}</div><b>Cornrows</b></div><div class="card story-card" style="flex: 1;"><img class="story-card__photo" src="../../mocks/assets/photos/knotless-braids.png" alt="Medium knotless braids"><b>Knotless braids</b></div></div><figcaption>Give art panels and photos the same 3:2 ratio so titles line up.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><div class="card" style="flex: 1;"><div class="card"><b>Nested card</b></div></div></div><figcaption>Put a card inside a card. Use a <code>.well</code> or a divider instead.</figcaption></figure>
   </div>
 </section>
@@ -229,7 +242,7 @@
     <tr><td><code>.card--interactive</code> + <code>.card__link</code></td><td>Whole card is the link's target; hover lift; focus ring on the card.</td></tr>
     <tr><td><code>.card--selected</code> (or <code>aria-selected="true"</code> on a <code>role="option"</code> card)</td><td>Accent edge for the chosen option.</td></tr>
     <tr><td><code>.card--flush</code></td><td>No padding; clips media to the radius.</td></tr>
-    <tr><td><code>.card__header</code> <code>.card__title</code> <code>.card__footer</code></td><td>Title row with a trailing badge or action; h4-role title; footer actions with a top divider.</td></tr>
+    <tr><td><code>.card__header</code> <code>.card__title</code> <code>.card__footer</code></td><td>Title row with a trailing badge or action that wraps under a long title; h4-role title; footer actions with a top divider. Card headings break long words (<code>overflow-wrap: anywhere</code>).</td></tr>
     <tr><td><code>.appointment-row</code> <code>.profile-head</code></td><td>Row layouts used inside cards.</td></tr>
     <tr><td><code>.well</code></td><td>Sunken box inside a card.</td></tr>
     <tr><td><code>data-state="hover|focus|selected"</code></td><td>Documentation only: forces a state.</td></tr>
@@ -246,5 +259,5 @@
     {{mock:pages/appointment-detail/default|appointment summary card}}
     {{mock:pages/my-appointments/default|row cards}}
   </ul>
-  <p>Drift fixed during extraction: section headings inside detail cards rendered at the 36px light page h2 (system uses the h3 role); story-card art panels were a fixed 48px min-height plus a 5xl glyph, so they came out shorter than photo cards (both are now 3:2); only the "Explore X →" link was clickable with no whole-card option (system adds <code>.card--interactive</code> with a stretched <code>.card__link</code>); a badge inside a <code>.stack</code> card stretched full width (badges now align to the start).</p>
+  <p>Drift fixed during extraction: section headings inside detail cards rendered at the 36px light page h2 (system uses the h3 role); story-card art panels were a fixed 48px min-height plus a 5xl glyph, so they came out shorter than photo cards (both are now 3:2); only the "Explore X →" link was clickable with no whole-card option (system adds <code>.card--interactive</code> with a stretched <code>.card__link</code>); a badge inside a <code>.stack</code> card stretched full width (badges now keep their own width); the header did not wrap and long names ran past the card at 320px (header wraps, headings use <code>overflow-wrap: anywhere</code>); the block flow cut a divider's top margin to 16px (dividers now keep 24px); the art panel used the "✦" glyph (now the <code>sparkle</code> icon).</p>
 </section>

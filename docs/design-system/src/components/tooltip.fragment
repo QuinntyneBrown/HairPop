@@ -1,9 +1,10 @@
-<!--meta {"lead": "A tooltip names an icon-only control or adds a short hint, on hover and on keyboard focus. It never holds anything the person must read to finish a task.", "description": "Text and shortcut tooltips on the inverse surface, shown on hover and focus, in both themes.", "pills": ["APG Tooltip", "Status: stable"], "variants": "text, with shortcut", "states": "hidden, visible on hover, visible on focus", "sources": []} -->
+<!--meta {"lead": "A tooltip names an icon-only control or adds a short hint, on hover and on keyboard focus. It never holds anything the person must read to finish a task.", "description": "Text and shortcut tooltips on the inverse surface, shown on hover and focus, in both themes.", "pills": ["APG Tooltip", "Status: stable"], "variants": "text, with shortcut; above (default) or below", "states": "hidden, visible on hover, visible on focus", "sources": ["dialogs/filter-braiders/default", "dialogs/change-appointment/default"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use a tooltip to show the name of an icon-only button ("Close dialog", "Edit request") or a short supplementary hint. If the information is needed to complete a task (a price rule, a cancellation policy) put it on the page as text or a <a href="inline-message.html">field hint</a>; tooltips need hover or focus and are easy to miss on touch. Never put links, buttons or form fields in a tooltip; use a menu or dialog instead.</p>
   <ul>
     <li><b>Text</b>: two to five words, no full stop.</li>
     <li><b>With shortcut</b>: the label followed by a <code>&lt;kbd&gt;</code> shortcut, for desktop power features.</li>
+    <li><b>Below</b> (<code>.tooltip--below</code>): when there is no room above the trigger (a dialog's close button near the top of the panel or viewport) the bubble opens below and its arrow points up.</li>
   </ul>
 </section>
 
@@ -31,6 +32,9 @@
   <span class="has-tooltip" data-state="open"><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog">{{icon:close}}</button><span class="tooltip" role="tooltip" id="var-tip-1">Close dialog</span></span>
   <span class="has-tooltip" data-state="open"><button class="btn btn--icon" type="button" aria-label="Search styles" aria-describedby="var-tip-2">{{icon:search}}</button><span class="tooltip" role="tooltip" id="var-tip-2">Search styles<kbd>/</kbd></span></span>
 </div>
+<div class="cluster" style="padding-bottom: var(--space-10);">
+  <span class="has-tooltip" data-state="open"><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog" aria-describedby="var-tip-3">{{icon:close}}</button><span class="tooltip tooltip--below" role="tooltip" id="var-tip-3">Close dialog</span></span>
+</div>
   {{/example}}
 </section>
 
@@ -56,7 +60,8 @@
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
-    <li>Tooltips sit above the trigger, centred. Near a viewport edge the product flips or shifts them with the CDK Overlay so they never clip.</li>
+    <li>Tooltips sit above the trigger, centred. Near a viewport edge the product flips them below (<code>.tooltip--below</code>, arrow pointing up) or shifts them along the edge with the CDK Overlay so they never clip; when shifted, the arrow follows the trigger through <code>--tooltip-arrow-x</code>.</li>
+    <li>In the product the bubble renders in the CDK overlay, outside any scrolling panel, and takes pointer events so it can be hovered (WCAG 1.4.13). The in-place <code>.has-tooltip</code> reveal on this page and in the mocks is a static stand-in; inside a dialog panel the mocks open it below so the panel does not clip it.</li>
     <li>On touch devices (<code>hover: none</code>) tooltips are never the only label: icon-only buttons keep an <code>aria-label</code>, and important hints are shown inline.</li>
     <li>Text never wraps; a hint that needs a second line belongs on the page.</li>
   </ul>
@@ -81,7 +86,9 @@
   <h3>Contrast</h3>
   <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
     {{pair:Tooltip text|--color-fg-inverse|--color-bg-inverse|4.5}}
+    {{pair:Bubble edge on page|--color-bg-inverse|--color-bg-canvas|3}}
   </div>
+  <p>Forced colours replace the inverse background, so the bubble gets a 1px <code>CanvasText</code> border.</p>
   <h3>Motion</h3>
   <p>Fades in over <code>--duration-fast</code> after a 300ms hover delay and hides immediately; reduced motion removes the fade. Focus shows it without delay.</p>
   <h3>Touch</h3>
@@ -132,15 +139,18 @@
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.has-tooltip</code></td><td>Positioning context; shows the tooltip on hover and <code>:focus-within</code>.</td></tr>
     <tr><td><code>.tooltip</code> + <code>role="tooltip"</code></td><td>The bubble and arrow.</td></tr>
+    <tr><td><code>.tooltip--below</code></td><td>Bubble below the trigger, arrow pointing up.</td></tr>
+    <tr><td><code>--tooltip-arrow-x</code></td><td>Arrow position along the bubble (default 50%); set by the product when the bubble is shifted along an edge.</td></tr>
     <tr><td><code>aria-describedby</code></td><td>Links the trigger to the tooltip.</td></tr>
     <tr><td><code>data-state="open|hover"</code> on <code>.has-tooltip</code></td><td>Documentation only: shows the tooltip statically.</td></tr>
   </tbody></table>
 </section>
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
-  <p>Core-set component: no mock shows a tooltip yet. It is needed by the icon-only controls the mocks already use:</p>
+  <p>Core-set component. The dialog mocks name their icon-only close button with it:</p>
   <ul>
-    {{mock:dialogs/filter-braiders/default|icon-only close button}}
+    {{mock:dialogs/filter-braiders/default|"Close dialog" on the close button, opening below}}
+    {{mock:dialogs/change-appointment/default|"Close dialog" on the close button, opening below}}
     {{mock:pages/booking-request/default|price rule shown as text, not a tooltip}}
   </ul>
   <p>Drift fixed during extraction: the tooltip arrow was a raw 5px border (now <code>--space-1</code>) and its offset a raw 8px (now <code>--space-2</code>); dialog close buttons relied on a "×" glyph with no tooltip.</p>

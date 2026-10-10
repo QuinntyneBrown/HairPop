@@ -69,36 +69,40 @@
 &lt;/div&gt;
 &lt;span class=&quot;skeleton skeleton--hero&quot; aria-hidden=&quot;true&quot; style=&quot;max-width: 18rem;&quot;&gt;&lt;/span&gt;</code></pre></details></div>
   <h3>Composed: style gallery</h3>
-  <p>The gallery skeleton is the gallery: the same <code>.feature-grid</code> of <code>.story-card</code>s, with media, eyebrow, title and summary blocks.</p>
+  <p>The gallery skeleton is the gallery: the same <code>.feature-grid</code> of <code>.story-card</code>s, with media, eyebrow, title, a two-line summary and a link line. Inside a story card the title bar is one heading line with no margin and the media has no bottom margin, so a placeholder measures within 2px of the loaded card. The cards sit in a <code>.skeleton-group</code> (<code>display: contents</code>), which hides placeholders after the second below 1024px.</p>
   <div class="ds-example"><div class="ds-example__canvas"><section class="feature-grid" style="width: 100%;" aria-busy="true" aria-label="Styles">
+  <div class="skeleton-group">
   <span class="visually-hidden" role="status">Loading styles</span>
-  <div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div></div>
-  <div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div></div>
-  <div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div></div>
-</section></div><div class="ds-example__caption"><span>Three story-card skeletons in the real grid; the grid region is <code>aria-busy</code> with one status message.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;section class=&quot;feature-grid&quot; style=&quot;width: 100%;&quot; aria-busy=&quot;true&quot; aria-label=&quot;Styles&quot;&gt;
+  <div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div class="stack"><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><div><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div><span class="skeleton skeleton--text" style="width: 40%;"></span></div></div>
+  <div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div class="stack"><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><div><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div><span class="skeleton skeleton--text" style="width: 40%;"></span></div></div>
+  <div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div class="stack"><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><div><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div><span class="skeleton skeleton--text" style="width: 40%;"></span></div></div>
+  </div>
+</section></div><div class="ds-example__caption"><span>Three story-card skeletons in the real grid; the grid region keeps its name, is <code>aria-busy</code> and holds one status message. Resize below 1024px and the third hides.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;section class=&quot;feature-grid&quot; style=&quot;width: 100%;&quot; aria-busy=&quot;true&quot; aria-label=&quot;Styles&quot;&gt;
+  &lt;div class=&quot;skeleton-group&quot;&gt;
   &lt;span class=&quot;visually-hidden&quot; role=&quot;status&quot;&gt;Loading styles&lt;/span&gt;
-  &lt;div class=&quot;card story-card&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;skeleton skeleton--hero&quot;&gt;&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 30%;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--title&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-  &lt;div class=&quot;card story-card&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;skeleton skeleton--hero&quot;&gt;&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 30%;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--title&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-  &lt;div class=&quot;card story-card&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;skeleton skeleton--hero&quot;&gt;&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 30%;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--title&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;card story-card&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;skeleton skeleton--hero&quot;&gt;&lt;/span&gt;&lt;div class=&quot;stack&quot;&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 30%;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--title&quot;&gt;&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 40%;&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;card story-card&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;skeleton skeleton--hero&quot;&gt;&lt;/span&gt;&lt;div class=&quot;stack&quot;&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 30%;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--title&quot;&gt;&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 40%;&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;card story-card&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;skeleton skeleton--hero&quot;&gt;&lt;/span&gt;&lt;div class=&quot;stack&quot;&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 30%;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--title&quot;&gt;&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 40%;&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
 &lt;/section&gt;</code></pre></details></div>
   <h3>Composed: list row and appointment card</h3>
-  <div class="ds-example"><div class="ds-example__canvas"><div class="card card--flush" style="width: 100%;"><ul class="list" aria-busy="true" aria-label="Notifications">
+  <div class="ds-example"><div class="ds-example__canvas"><section aria-busy="true" aria-label="Updates" style="width: 100%;"><span class="visually-hidden" role="status">Loading your updates</span><div class="card card--flush" aria-hidden="true"><ul class="list">
   <li class="list__item" aria-hidden="true"><span class="skeleton skeleton--circle"></span><div class="list__body"><span class="skeleton skeleton--text" style="width: 50%;"></span><span class="skeleton skeleton--text"></span></div></li>
   <li class="list__item" aria-hidden="true"><span class="skeleton skeleton--circle"></span><div class="list__body"><span class="skeleton skeleton--text" style="width: 50%;"></span><span class="skeleton skeleton--text"></span></div></li>
-</ul></div>
-<div class="card appointment-row" style="width: 100%;" aria-busy="true">
+</ul></div></section>
+<section class="stack" style="width: 100%;" aria-busy="true" aria-label="My appointments"><div class="skeleton-group">
   <span class="visually-hidden" role="status">Loading your appointments</span>
-  <div style="flex: 1;" aria-hidden="true"><span class="skeleton skeleton--rect" style="width: 7rem; height: 1.5rem;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div>
-  <span class="skeleton skeleton--rect" style="width: 8rem; height: var(--control-height-md);" aria-hidden="true"></span>
-</div></div><div class="ds-example__caption"><span>A notification list row (avatar, two lines) and an appointment row (badge, title, meta, action).</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;card card--flush&quot; style=&quot;width: 100%;&quot;&gt;&lt;ul class=&quot;list&quot; aria-busy=&quot;true&quot; aria-label=&quot;Notifications&quot;&gt;
+  <div class="card appointment-row" aria-hidden="true"><div><span class="skeleton skeleton--rect" style="width: 7rem; height: 1.5rem;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div>
+  <span class="skeleton skeleton--rect" style="width: 8rem; height: var(--control-height-md);"></span></div>
+</div></section></div><div class="ds-example__caption"><span>A notification list row (avatar, two lines) and an appointment row (badge, title, meta, action).</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;section aria-busy=&quot;true&quot; aria-label=&quot;Updates&quot; style=&quot;width: 100%;&quot;&gt;&lt;span class=&quot;visually-hidden&quot; role=&quot;status&quot;&gt;Loading your updates&lt;/span&gt;&lt;div class=&quot;card card--flush&quot; aria-hidden=&quot;true&quot;&gt;&lt;ul class=&quot;list&quot;&gt;
   &lt;li class=&quot;list__item&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;skeleton skeleton--circle&quot;&gt;&lt;/span&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 50%;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/li&gt;
   &lt;li class=&quot;list__item&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;skeleton skeleton--circle&quot;&gt;&lt;/span&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;span class=&quot;skeleton skeleton--text&quot; style=&quot;width: 50%;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-&lt;div class=&quot;card appointment-row&quot; style=&quot;width: 100%;&quot; aria-busy=&quot;true&quot;&gt;
+&lt;/ul&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;stack&quot; style=&quot;width: 100%;&quot; aria-busy=&quot;true&quot; aria-label=&quot;My appointments&quot;&gt;&lt;div class=&quot;skeleton-group&quot;&gt;
   &lt;span class=&quot;visually-hidden&quot; role=&quot;status&quot;&gt;Loading your appointments&lt;/span&gt;
-  &lt;div style=&quot;flex: 1;&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;skeleton skeleton--rect&quot; style=&quot;width: 7rem; height: 1.5rem;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--title&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-  &lt;span class=&quot;skeleton skeleton--rect&quot; style=&quot;width: 8rem; height: var(--control-height-md);&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
-&lt;/div&gt;</code></pre></details></div>
+  &lt;div class=&quot;card appointment-row&quot; aria-hidden=&quot;true&quot;&gt;&lt;div&gt;&lt;span class=&quot;skeleton skeleton--rect&quot; style=&quot;width: 7rem; height: 1.5rem;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--title&quot;&gt;&lt;/span&gt;&lt;span class=&quot;skeleton skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;span class=&quot;skeleton skeleton--rect&quot; style=&quot;width: 8rem; height: var(--control-height-md);&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;</code></pre></details></div>
 </section>
 
 <section class="ds-section" id="sizes" data-na="Skeletons have no sizes of their own: each block takes the size of the content it stands for (em-based text, 3:2 media, control heights)."><h2><a href="#sizes">Sizes</a></h2><p class="ds-na">Skeletons have no sizes of their own: each block takes the size of the content it stands for (em-based text, 3:2 media, control heights).</p></section>
@@ -126,7 +130,8 @@
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
     <li>Skeletons live inside the real layout classes (<code>.feature-grid</code>, <code>.detail-grid</code>, <code>.stack</code>), so they reflow exactly like the content: one column on phones, two from 768px, three from 1024px.</li>
-    <li>Render as many skeleton cards as fill the first viewport for that breakpoint (one or two on phones, three on desktop), not a fixed number.</li>
+    <li>Fill the first viewport, not a fixed number: the story-card pattern renders three placeholders and hides those after the second below 1024px (<code>.skeleton-group &gt; .story-card:nth-of-type(n+3)</code>), so phones show two, tablets one row of two and desktops one row of three.</li>
+    <li>The appointment-row placeholder's body grows from a 21rem basis, so its button drops below at the same width as the loaded row's action.</li>
     <li>Media blocks keep the 3:2 aspect ratio at every width, so the loaded photo lands in exactly the same box (no layout shift).</li>
   </ul>
 </section>
@@ -156,6 +161,8 @@
   </div>
   <h3>Motion</h3>
   <p>The shimmer loops on <code>--duration-loop-shimmer</code> with <code>animation-play-state: var(--motion-loop-state)</code>; under <code>prefers-reduced-motion</code> it pauses and the blocks stay still. The shimmer is low contrast and slow, far below flash thresholds.</p>
+  <h3>Forced colours</h3>
+  <p>Backgrounds are removed in forced colours, so every block draws a <code>CanvasText</code> hairline outline and the loading layout stays visible.</p>
   <h3>Touch</h3>
   <p>Not a target. Do not make skeleton cards tappable; links appear only when content loads.</p>
 </section>
@@ -194,20 +201,25 @@
 
 <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
   <pre><code>&lt;section class="feature-grid" aria-busy="true" aria-label="Styles"&gt;
-  &lt;span class="visually-hidden" role="status"&gt;Loading styles&lt;/span&gt;
-  &lt;div class="card story-card" aria-hidden="true"&gt;
-    &lt;span class="skeleton skeleton--hero"&gt;&lt;/span&gt;
-    &lt;div&gt;
-      &lt;span class="skeleton skeleton--title"&gt;&lt;/span&gt;
-      &lt;span class="skeleton skeleton--text"&gt;&lt;/span&gt;
-      &lt;span class="skeleton skeleton--text"&gt;&lt;/span&gt;
+  &lt;div class="skeleton-group"&gt;
+    &lt;span class="visually-hidden" role="status"&gt;Loading styles&lt;/span&gt;
+    &lt;div class="card story-card" aria-hidden="true"&gt;
+      &lt;span class="skeleton skeleton--hero"&gt;&lt;/span&gt;
+      &lt;div class="stack"&gt;
+        &lt;span class="skeleton skeleton--text" style="width: 30%"&gt;&lt;/span&gt;
+        &lt;span class="skeleton skeleton--title"&gt;&lt;/span&gt;
+        &lt;div&gt;&lt;span class="skeleton skeleton--text"&gt;&lt;/span&gt;&lt;span class="skeleton skeleton--text"&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;span class="skeleton skeleton--text" style="width: 40%"&gt;&lt;/span&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
+    &lt;!-- two more; the third hides below 1024px --&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.skeleton</code></td><td>Base block with shimmer; min-height 1em.</td></tr>
     <tr><td><code>.skeleton--text</code></td><td>One line of text; the last in a group is 60% wide.</td></tr>
-    <tr><td><code>.skeleton--title</code></td><td>Heading bar, 1.5em tall, 40% wide.</td></tr>
+    <tr><td><code>.skeleton--title</code></td><td>Heading bar, 1.5em tall, 40% wide; one heading line with no margin inside <code>.story-card</code> and <code>.appointment-row</code>.</td></tr>
+    <tr><td><code>.skeleton-group</code></td><td><code>display: contents</code> wrapper for one region's status message and placeholders; hides story cards after the second below 1024px.</td></tr>
     <tr><td><code>.skeleton--circle</code></td><td>Round block (avatar), 40px by default.</td></tr>
     <tr><td><code>.skeleton--rect</code></td><td>Rounded block; set width and height for buttons, badges, fields.</td></tr>
     <tr><td><code>.skeleton--hero</code></td><td>Full-width 3:2 media block.</td></tr>
@@ -223,7 +235,6 @@
     <li><a href="../../mocks/pages/matching-braiders/loading.html">pages/matching-braiders/loading</a> (same generic skeleton)</li>
     <li><a href="../../mocks/pages/braider-profile/loading.html">pages/braider-profile/loading</a> (same generic skeleton for a detail layout)</li>
     <li><a href="../../mocks/pages/my-appointments/loading.html">pages/my-appointments/loading</a> (same generic skeleton for a list)</li>
-    <li><a href="../../mocks/pages/not-found/loading.html">pages/not-found/loading</a> (skeleton on a static error page)</li>
   </ul>
   <p>Drift fixed during extraction: every loading mock shows the same three generic skeleton cards whatever the real layout (system: the skeleton mirrors the loaded layout); the hero block had a fixed <code>min-height</code> of three times <code>--space-12</code> (now a 3:2 aspect ratio matching the photo, no layout shift); the loading region had only <code>aria-label="Loading content"</code> (now <code>aria-busy</code> plus a named status message, blocks <code>aria-hidden</code>); text lines were 0.9em with 0.3em margins, off-scale (now 0.875em and 0.375em); the shimmer used a raw 1.4s duration and stopped through a global <code>!important</code> override (now <code>--duration-loop-shimmer</code>, paused through <code>--motion-loop-state</code>).</p>
 </section>

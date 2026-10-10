@@ -1,4 +1,4 @@
-<!--meta {"lead": "Fact tiles answer the questions people ask before they book: how long, how much, how long it lasts. One number, one label, side by side.", "description": "The fact tile and fact grid from style and braider pages, plus the larger stat with a delta.", "pills": ["Tabular numbers", "Status: stable"], "variants": "fact tile in a fact grid; stat with label, value and delta", "states": "default, loading, not listed, long value", "sources": ["pages/style-detail/default", "pages/braider-profile/default", "pages/style-detail/loading"]} -->
+<!--meta {"lead": "Fact tiles answer the questions people ask before they book: how long, how much, how long it lasts. One number, one label, side by side.", "description": "The fact tile and fact grid from style and braider pages, plus the larger stat with a delta.", "pills": ["Tabular numbers", "Status: stable"], "variants": "fact tile in a fact grid; stat with label, value and delta", "states": "default, loading, not listed (omitted), long value", "sources": ["pages/style-detail/default", "pages/braider-profile/default", "pages/style-detail/loading"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use a <b>fact tile</b> for a short, comparable figure that helps a decision: "4–7 hours · Typical time", "$160–$300 · Typical price", "From $180 · Knotless braids". Group two to four in a <code>.fact-grid</code>. Use a <b>stat</b> (large value, label, optional delta) for summaries with a trend, such as a braider's requests this month. Use a <a href="description-list.html">description list</a> when the labels matter more than the values or there are more than four facts.</p>
   <ul>
@@ -38,9 +38,9 @@
 </div>
   {{/example}}
   <h3>Stat with delta</h3>
-  {{example:Delta = arrow + sign + colour + words; colour is never the only cue.}}
-<div class="stat"><span class="stat__label">Requests this month</span><span class="stat__value">24</span><span class="stat__delta stat__delta--up"><span aria-hidden="true">↑</span> +6 from September</span></div>
-<div class="stat"><span class="stat__label">Average reply time</span><span class="stat__value">3 h</span><span class="stat__delta stat__delta--down"><span aria-hidden="true">↓</span> 1 h slower than September</span></div>
+  {{example:Delta = <code>arrow-up</code> or <code>arrow-down</code> icon + sign + colour + words; colour and arrow are never the only cue. Up means better, down worse, whatever the number did.}}
+<div class="stat"><span class="stat__label">Requests this month</span><span class="stat__value">24</span><span class="stat__delta stat__delta--up">{{icon:arrow-up|icon--sm}}+6 from September</span></div>
+<div class="stat"><span class="stat__label">Average reply time</span><span class="stat__value">3 h</span><span class="stat__delta stat__delta--down">{{icon:arrow-down|icon--sm}}1 h slower than September</span></div>
   {{/example}}
 </section>
 
@@ -49,24 +49,25 @@
 <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
   <p>Facts are read-only and not focusable, so they have no hover, focus, active or disabled state. They change with the data:</p>
   <div class="ds-matrix"><table>
-    <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Loading</th><th scope="col">Not listed</th><th scope="col">Long value</th></tr></thead>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Loading</th><th scope="col">Not listed / zero</th><th scope="col">Long value</th></tr></thead>
     <tbody>
-      <tr><th scope="row">Fact tile</th><td><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></td><td><div class="fact" aria-hidden="true"><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div></td><td><div class="fact"><span class="fact__value">Ask Nia</span><span class="fact__label">Typical wear</span></div></td><td><div class="fact"><span class="fact__value">From $1,240</span><span class="fact__label">Waist-length knotless, extra small</span></div></td></tr>
-      <tr><th scope="row">Stat</th><td><div class="stat"><span class="stat__label">Requests</span><span class="stat__value">24</span></div></td><td><div class="stat" aria-hidden="true"><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--title"></span></div></td><td><div class="stat"><span class="stat__label">Requests</span><span class="stat__value">0</span><span class="stat__delta">No requests yet</span></div></td><td><div class="stat"><span class="stat__label">Reviews</span><span class="stat__value">1,284</span></div></td></tr>
+      <tr><th scope="row">Fact tile</th><td><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></td><td><div class="fact" aria-hidden="true"><span class="fact__value"><span class="skeleton skeleton--text"></span></span><span class="fact__label"><span class="skeleton skeleton--text"></span></span></div></td><td><div class="fact-grid" style="margin: 0;"><div class="fact"><span class="fact__value">4–7 hours</span><span class="fact__label">Typical time</span></div><div class="fact" hidden></div></div></td><td><div class="fact"><span class="fact__value">From $1,240</span><span class="fact__label">Waist-length knotless, extra small</span></div></td></tr>
+      <tr><th scope="row">Stat</th><td><div class="stat"><span class="stat__label">Requests</span><span class="stat__value">24</span></div></td><td><div class="stat" aria-hidden="true"><span class="stat__label"><span class="skeleton skeleton--text"></span></span><span class="stat__value"><span class="skeleton skeleton--text"></span></span></div></td><td><div class="stat"><span class="stat__label">Requests</span><span class="stat__value">0</span><span class="stat__delta">No requests yet</span></div></td><td><div class="stat"><span class="stat__label">Reviews</span><span class="stat__value">1,284</span></div></td></tr>
     </tbody>
   </table></div>
   <h3>Both themes</h3>
-  {{themes:stack}}<div class="fact-grid" style="margin: 0;"><div class="fact"><span class="fact__value">4–7 hours</span><span class="fact__label">Typical time</span></div><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></div><div class="stat"><span class="stat__label">Requests this month</span><span class="stat__value">24</span><span class="stat__delta stat__delta--up"><span aria-hidden="true">↑</span> +6 from September</span></div>{{/themes}}
+  {{themes:stack}}<div class="fact-grid" style="margin: 0;"><div class="fact"><span class="fact__value">4–7 hours</span><span class="fact__label">Typical time</span></div><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></div><div class="stat"><span class="stat__label">Requests this month</span><span class="stat__value">24</span><span class="stat__delta stat__delta--up">{{icon:arrow-up|icon--sm}}+6 from September</span></div>{{/themes}}
   <ul>
-    <li><b>Loading</b>: the tile keeps its size with a title and a text skeleton; the grid's container sets <code>aria-busy="true"</code>.</li>
-    <li><b>Not listed</b>: say who can answer ("Ask Nia") rather than a dash or "N/A".</li>
+    <li><b>Loading</b>: one skeleton bar sits inside each of the value and label line boxes, so the loading tile is exactly as tall as the loaded one (70px) and nothing below moves when facts arrive; the bar's shimmer runs lighter than the tile's own fill. The tile is <code>aria-hidden</code> and the grid sets <code>aria-busy="true"</code>.</li>
+    <li><b>Not listed</b>: a fact the style or braider has not published is left out (<code>hidden</code>), and the other tiles fill the row. Never a dash, "N/A" or stand-in copy. A stat's zero is a value ("0").</li>
     <li><b>Long value</b>: the value wraps inside its tile; tiles in the same row stretch to equal height.</li>
   </ul>
 </section>
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
-    <li>The grid is <code>repeat(auto-fit, minmax(8rem, 1fr))</code>: two tiles per row at 360px inside a card, three or four on wider cards. No breakpoints needed.</li>
+    <li>The grid is <code>repeat(auto-fit, minmax(min(8rem, 100%), 1fr))</code>: two tiles per row at 360px inside a card, three or four on wider cards, and one column when enlarged text makes 8rem wider than the grid. No breakpoints needed.</li>
+    <li>Values and labels break inside their tile (<code>overflow-wrap: anywhere</code>); tiles in a row stretch to equal height.</li>
     <li>Values never truncate; they wrap. Keep them under about 12 characters so they stay on one line at 360px.</li>
     <li>A stat's value keeps the h2 role, 36px at every width.</li>
   </ul>
@@ -74,8 +75,7 @@
 
 <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
   <p>The tile reads <code>--color-bg-subtle</code> for its fill, <code>--color-fg-default</code> for the value and <code>--color-fg-muted</code> for the label; deltas read <code>--color-success-fg</code> and <code>--color-danger-fg</code>. In dark mode the tile becomes grey-800 on a grey-900 card, so it still reads as inset.</p>
-  <pre><code>/* Facts on a sunken well use the surface instead */
-.well .fact { background: var(--color-bg-surface); }</code></pre>
+  <p>On a sunken <code>.well</code> the tile uses <code>--color-bg-surface</code> instead (<code>.well .fact</code> in the stylesheet). In forced colours the fill disappears, so each tile gains a <code>CanvasText</code> hairline border.</p>
 </section>
 
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
@@ -115,8 +115,8 @@
   <div class="ds-dodont">
     <figure class="ds-do"><div class="ds-example__canvas"><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></div><figcaption>A range with an en dash and a label that says it is typical.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><div class="fact"><span class="fact__value">$160 - $300</span><span class="fact__label">Price</span></div></div><figcaption>A spaced hyphen and an unqualified "Price" read as a quote the braider has not given.</figcaption></figure>
-    <figure class="ds-do"><div class="ds-example__canvas"><div class="fact"><span class="fact__value">Ask Nia</span><span class="fact__label">Typical wear</span></div></div><figcaption>When a fact is missing, say who can answer.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><div class="fact"><span class="fact__value">N/A</span><span class="fact__label">Typical wear</span></div></div><figcaption>"N/A" or a lone dash leaves the person guessing.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="fact-grid" style="margin: 0;"><div class="fact"><span class="fact__value">4–7 hours</span><span class="fact__label">Typical time</span></div><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></div></div><figcaption>Leave out a fact that is not published; the other tiles fill the row.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="fact"><span class="fact__value">N/A</span><span class="fact__label">Typical wear</span></div></div><figcaption>Fill a missing fact with "N/A", a lone dash or stand-in copy such as "Ask Nia"; it invents a value.</figcaption></figure>
   </div>
 </section>
 
@@ -143,13 +143,14 @@
 &lt;/div&gt;
 &lt;div class="stat"&gt;
   &lt;span class="stat__label"&gt;Requests this month&lt;/span&gt;&lt;span class="stat__value"&gt;24&lt;/span&gt;
-  &lt;span class="stat__delta stat__delta--up"&gt;&lt;span aria-hidden="true"&gt;↑&lt;/span&gt; +6 from September&lt;/span&gt;
+  &lt;span class="stat__delta stat__delta--up"&gt;&lt;svg class="icon icon--sm" aria-hidden="true" viewBox="0 0 24 24"&gt;&lt;path d="M12 19V5M6 11l6-6 6 6"/&gt;&lt;/svg&gt;+6 from September&lt;/span&gt;
 &lt;/div&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.fact-grid</code></td><td>Auto-fit grid of tiles, 8rem minimum, 16px gap, 24px block margin.</td></tr>
-    <tr><td><code>.fact</code>, <code>.fact__value</code>, <code>.fact__label</code></td><td>Tile, value, label. The mocks' <code>.fact-grid &gt; div &gt; strong/span</code> markup is styled the same for parity.</td></tr>
+    <tr><td><code>.fact</code>, <code>.fact__value</code>, <code>.fact__label</code></td><td>Tile, value, label. The mocks' unclassed <code>.fact-grid &gt; div &gt; strong/span</code> markup is matched inside <code>:where()</code>, at zero specificity, so it never outranks the part classes.</td></tr>
     <tr><td><code>.stat</code>, <code>.stat__label</code>, <code>.stat__value</code></td><td>Large stat.</td></tr>
-    <tr><td><code>.stat__delta--up</code> <code>.stat__delta--down</code></td><td>Delta colour; add an arrow and words.</td></tr>
+    <tr><td><code>.stat__delta--up</code> <code>.stat__delta--down</code></td><td>Delta colour; add the <code>arrow-up</code> or <code>arrow-down</code> icon (<code>.icon--sm</code>) and words.</td></tr>
+    <tr><td><code>hidden</code> on <code>.fact</code></td><td>Omits a fact that is not published.</td></tr>
     <tr><td><code>aria-busy="true"</code> on the container</td><td>While skeleton tiles show.</td></tr>
   </tbody></table>
 </section>
@@ -161,5 +162,5 @@
     {{mock:pages/braider-profile/default|starting price and duration}}
     {{mock:pages/style-detail/loading|skeleton cards}}
   </ul>
-  <p>Drift fixed during extraction: values used <code>&lt;strong&gt;</code> for visual weight (system: <code>.fact__value</code>, no emphasis semantics); tiles had no class of their own (system adds <code>.fact</code> and keeps the old selectors working); a missing fact had no defined copy (system: "Ask Nia"); the stat with delta was added from the core set.</p>
+  <p>Drift fixed during extraction: values used <code>&lt;strong&gt;</code> for visual weight (system: <code>.fact__value</code>, no emphasis semantics); tiles had no class of their own (system adds <code>.fact</code> and keeps the old selectors working); a missing fact had no defined behaviour (system: the tile is omitted); the parity selectors outranked <code>.fact__value</code> and painted values as labels (now zero specificity); the loading tile was 10px taller than the loaded one (now bars inside the line boxes); tiles overflowed the card at 200% text (now <code>min(8rem, 100%)</code>); the stat with delta was added from the core set.</p>
 </section>

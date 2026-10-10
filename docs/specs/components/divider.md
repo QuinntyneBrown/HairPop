@@ -7,12 +7,12 @@
 | Status | planned |
 | Traces to | L2-041, L2-042 |
 | Design system | [`divider.html`](../../design-system/components/divider.html) |
-| Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/notification-center/default`](../../mocks/pages/notification-center/default.html), [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html) |
+| Source mocks | [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html), [`pages/sign-in/invalid`](../../mocks/pages/sign-in/invalid.html), [`pages/sign-in/submitting`](../../mocks/pages/sign-in/submitting.html) |
 | Rendering | [`divider.html`](divider.html) |
 
 ## Purpose and scope
 
-A divider is a hairline that separates two adjacent groups when space alone would let them read as one: older notifications under "Earlier", a closing note under a card's content, the tagline and the legal links in a footer row, two sign-in methods split by "or". It comes in three forms: a horizontal rule (a thematic break between topics), a labelled divider (a short label centred between two rules) and a vertical divider (between inline groups in a row that stays on one line). It is a core-set component: the mocks draw hairlines only as borders of other components (the top bar's bottom edge, the footer's top edge) and type " · " between footer links, which the design system records as drift.
+A divider is a hairline that separates two adjacent groups when space alone would let them read as one: older notifications under "Earlier", a closing note under a card's content, the tagline and the legal links in a footer row, two sign-in methods split by "or". It comes in three forms: a horizontal rule (a thematic break between topics), a labelled divider (a short label centred between two rules) and a vertical divider (between inline groups in a row that stays on one line). The mocks use the labelled form between signing in and creating an account ("or"); every other hairline in the mocks is a border of another component (the top bar's bottom edge, the footer's top edge, table and list rules).
 
 Use something else when:
 
@@ -29,14 +29,14 @@ Out of scope:
 
 ## Usage
 
-There is no `<hr>` or `.divider` element in `docs/mocks/` (inventory: `usage_inventory.py docs/mocks divider` finds none); the mocks' hairlines are borders. The rows below are the uses the design system defines, placed on the screens it names.
+Every `.divider` in `docs/mocks/` (inventory: `usage_inventory.py docs/mocks divider`), plus the uses the design system defines for later screens.
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| `pages/notification-center/default` (between today's and older updates) | `div[hp-divider]`, labelled | "Earlier" | default | flush card or canvas |
-| Card content (design system *Variants*; `pages/appointment-detail/default` cards have no in-card rule yet) | `hr[hp-divider]` inside a block card | before "Notifications older than 30 days are archived." | default | surface (card) |
-| Footer row (footer CRD; `pages/style-gallery/default` footer types " · ": drift) | `span[hp-divider] orientation="vertical"` between "HairPop · Made for confident hair decisions" and the Terms and Privacy links, from 768 px | — | default | canvas |
-| Sign-in methods (design system *Overview*; `pages/sign-in/default` has one method today) | `div[hp-divider]`, labelled | "or" | default | surface (form panel) |
+| `pages/sign-in/default`, `invalid`, `submitting` (after the sign-in form, before "Create account") | `div[hp-divider]`, labelled, in the form panel card's block flow | "or" | default | surface (form panel) |
+| Notification groups once older updates are grouped (design system *Variants*, list CRD) | `div[hp-divider]`, labelled, between two lists in a flush card | "Earlier" | default | surface (flush card) |
+| Card content (design system *Variants*) | `hr[hp-divider]` inside a block card | before "Notifications older than 30 days are archived." | default | surface (card) |
+| Footer row (footer CRD) | `span[hp-divider] orientation="vertical"` between "HairPop · Made for confident hair decisions" and the Terms and Privacy links, from 768 px | — | default | canvas |
 | Long settings form split into topics (design system *Overview*) | `hr[hp-divider]` between field groups | — | default | surface |
 | Inside a well (design system *States*) | `hr[hp-divider]` or labelled | "or" | default | sunken surface |
 
@@ -274,5 +274,5 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - **D-1** *Is the host the native element or a wrapper?* The native element, through attribute selectors, so a rule keeps `<hr>`'s separator semantics and a vertical divider can sit directly in a flex row (`align-self: stretch` needs the divider to be the row's own child).
 - **D-2** *How does the component know which form to render?* From the host element and `orientation`: `hr` is the rule, a horizontal `div` is the labelled form, a vertical `span` or `div` is the vertical form. A horizontal divider without a label is always an `<hr>`, which gives it the right semantics for free, so an unlabelled horizontal `div` is a development-mode error rather than a fourth form.
 - **D-3** *Does a divider ever take `aria-label`?* No. The design system forbids labels on decorative rules, and a labelled divider's text is already its content; an `aria-label` would read the label twice or name something that is not interactive.
-- **D-4** *How much space surrounds a divider?* `--space-6` above and below in block flow, as the design system states, including inside cards: measured, the card's flow rule had cut the space above a divider to 16 px while the space below stayed 24 px, so the card CRD excludes dividers from that rule. In a flex or grid container with a gap the gap adds to the margin, so horizontal dividers belong in block flow.
-- **D-5** *Does the footer use a vertical divider between its links?* No: between the tagline and the group of legal links only, where the row stays on one line. The design system's do and don't separate individual footer links with the cluster gap and forbid the mocks' typed " · ", which screen readers read aloud.
+- **D-4** *How much space surrounds a divider?* `--space-6` above and below in block flow, as the design system states, including inside cards: measured, a card flow rule applied to every child cut the space above a divider to 16 px while the space below stayed 24 px, so the card's flow rule skips dividers (card CRD D-4). In a flex or grid container with a gap the gap adds to the margin, so horizontal dividers belong in block flow.
+- **D-5** *Does the footer use a vertical divider between its links?* No: between the tagline and the group of legal links only, where the row stays on one line. The design system's do and don't separate individual footer links with the cluster gap and forbid a typed " · ", which screen readers read aloud.

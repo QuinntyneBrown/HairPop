@@ -82,7 +82,7 @@
         <td><div class="tabs" role="tablist" aria-label="Count disabled"><button class="tab" type="button" role="tab" aria-selected="false" disabled>Reviews<span class="badge">86</span></button></div></td></tr>
     </tbody>
   </table></div>
-  <p>Hover darkens the label and shows a grey indicator; the pointer-down state keeps the hover look and selection happens on click. Disabled tabs are rare: prefer showing the tab with an empty panel that explains why ("No cancelled appointments").</p>
+  <p>Hover darkens the label and shows a grey indicator; the pointer-down state keeps the hover look and selection happens on click. A disabled tab shows no hover change (no indicator, label stays disabled), and a count badge is centred vertically on the label. Disabled tabs are rare: prefer showing the tab with an empty panel that explains why ("No cancelled appointments").</p>
   <h3>Both themes</h3>
   <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="tabs" role="tablist" aria-label="Themes example"><button class="tab" type="button" role="tab" aria-selected="true" tabindex="0">Upcoming<span class="badge badge--info">1</span></button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Past</button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-state="hover">Cancelled</button></div></div></div><div data-theme="dark"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="tabs" role="tablist" aria-label="Themes example"><button class="tab" type="button" role="tab" aria-selected="true" tabindex="0">Upcoming<span class="badge badge--info">1</span></button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Past</button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-state="hover">Cancelled</button></div></div></div></div>
 </section>
@@ -176,7 +176,8 @@
     <tr><td><code>.tabs--sm</code></td><td>32px tabs with extra-small labels.</td></tr>
     <tr><td><code>.tab</code> + <code>role="tab"</code></td><td>One tab; <code>aria-selected="true"</code> shows the accent label and bar.</td></tr>
     <tr><td><code>tabindex="-1"</code></td><td>On every tab except the selected one (roving tabindex).</td></tr>
-    <tr><td><code>disabled</code></td><td>Disabled tab; skipped by arrow keys.</td></tr>
+    <tr><td><code>disabled</code></td><td>Disabled tab; skipped by arrow keys; no hover indicator.</td></tr>
+    <tr><td><code>.tab .badge</code></td><td>Count after the label, <code>--space-1</code> before it, centred vertically.</td></tr>
     <tr><td><code>--tab-fg</code>, <code>--tab-indicator</code></td><td>Component tokens for label and bar.</td></tr>
     <tr><td><code>data-state="hover|focus|selected"</code></td><td>Documentation only.</td></tr>
   </tbody></table>
@@ -188,7 +189,7 @@
     <li><a href="../../mocks/pages/my-appointments/default.html">pages/my-appointments/default</a> (awaiting and completed appointments in one list)</li>
     <li><a href="../../mocks/pages/braider-profile/default.html">pages/braider-profile/default</a> (about, reviews and policies stacked in cards)</li>
   </ul>
-  <p>Drift fixed during extraction: the starter kit's tab indicator used a raw <code>2px 2px 0 0</code> radius (now <code>--radius-xs</code>) and a raw 2px height (now <code>--border-width-thick</code>); hover now also shows a grey indicator so the target is visible without relying on colour alone.</p>
+  <p>Drift fixed during extraction: the starter kit's tab indicator used a raw <code>2px 2px 0 0</code> radius (now <code>--radius-xs</code>) and a raw 2px height (now <code>--border-width-thick</code>); hover now also shows a grey indicator so the target is visible without relying on colour alone, except on a disabled tab; counts sat at the top of the tab (now centred).</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

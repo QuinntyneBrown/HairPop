@@ -1,17 +1,17 @@
-<!--meta {"lead": "A textarea collects a few sentences in the person's own words: a review of their visit with Nia, hair details for a request, a reason for a report.", "description": "Multi-line text with auto-grow and an optional counter; every state in both themes.", "pills": ["Native <code>&lt;textarea&gt;</code>", "Status: stable"], "variants": "default, auto-grow, with counter", "states": "default, hover, focus, disabled, read-only, invalid, over limit", "sources": ["pages/care-and-review/default", "pages/booking-request/default", "dialogs/report-review/default"]} -->
+<!--meta {"lead": "A textarea collects a few sentences in the person's own words: a review of their visit with Nia, hair details for a request, a reason for a report.", "description": "Multi-line text with auto-grow and an optional counter; every state in both themes.", "pills": ["Native <code>&lt;textarea&gt;</code>", "Status: stable"], "variants": "default, auto-grow, with counter", "states": "default, hover, focus, disabled, read-only, invalid, over limit", "sources": ["pages/care-and-review/default", "pages/care-and-review/invalid", "pages/booking-request/default", "dialogs/report-review/default", "dialogs/report-review/invalid"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
-  <p>Use a textarea when the answer is more than one line: "Your review", "Hair details", "Anything Nia should know?". For a single value use a <a href="text-field.html">text field</a>. The textarea always sits inside a <a href="form-field.html">form field</a>.</p>
+  <p>Use a textarea when the answer is more than one line: "Your review", "Hair details", the "Reason" for a report. For a single value use a <a href="text-field.html">text field</a>. The textarea always sits inside a <a href="form-field.html">form field</a>.</p>
   <ul>
-    <li><b>Default</b> starts at 100px (2.5× the control height) and can be resized vertically.</li>
-    <li><b>Auto-grow</b> grows with the text up to about ten lines, then scrolls; use it for reviews.</li>
-    <li><b>With counter</b> shows "used / limit" when a limit exists and turns red beyond it.</li>
+    <li><b>Default</b> starts at 100px (2.5× the control height) and can be resized vertically; kept for wide-screen tools.</li>
+    <li><b>Auto-grow</b> (<code>.textarea--auto-grow</code>) grows with the text up to 6× the control height (240px, about eight lines of 16px text), then scrolls, with no resize handle. Every customer textarea uses it: "Your review", "Hair details", "Reason".</li>
+    <li><b>With counter</b> shows "56 of 500 characters" when a limit exists and turns red beyond it; what was typed is never cut off, so there is no native <code>maxlength</code>.</li>
   </ul>
 </section>
 
 <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
   <div class="ds-anatomy">
     <figure class="ds-anatomy__figure">
-      <div class="field" style="width: min(100%, 22rem);"><label class="field__label" for="ta-anat">Your review</label><textarea class="textarea" id="ta-anat" maxlength="500" aria-describedby="ta-anat-help ta-anat-count">Nia explained each step and the braids feel comfortable.</textarea><span class="field__help" id="ta-anat-help">What should others know about your visit?</span><span class="field__counter" id="ta-anat-count">56 / 500</span></div>
+      <div class="field" style="width: min(100%, 22rem);"><label class="field__label" for="ta-anat">Your review</label><textarea class="textarea textarea--auto-grow" id="ta-anat" aria-describedby="ta-anat-help ta-anat-count">Nia explained each step and the braids feel comfortable.</textarea><span class="field__help" id="ta-anat-help">What should others know about your visit?</span><span class="field__counter" id="ta-anat-count">56 of 500 characters</span></div>
       <span class="ds-callout" style="left: 14%; top: 12%;" aria-hidden="true">1</span>
       <span class="ds-callout" style="left: 48%; top: 36%;" aria-hidden="true">2</span>
       <span class="ds-callout" style="left: 40%; top: 74%;" aria-hidden="true">3</span>
@@ -19,7 +19,7 @@
     </figure>
     <ol class="ds-anatomy__list">
       <li><div><b>Label</b><small>Visible, from the form field.</small></div></li>
-      <li><div><b>Text area</b><small>Body font, 8 × 12px padding, <code>--radius-md</code>, at least 100px tall.</small></div></li>
+      <li><div><b>Text area</b><small>Body font at the body line height (several lines read as a paragraph), 8 × 12px padding, <code>--radius-md</code>, at least 100px tall.</small></div></li>
       <li><div><b>Help</b><small>One sentence; linked by <code>aria-describedby</code>.</small></div></li>
       <li><div><b>Counter (optional)</b><small>Caption, tabular numbers, right aligned.</small></div></li>
     </ol>
@@ -27,14 +27,14 @@
 </section>
 
 <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
-  {{example:[stack]Default (resizable), auto-grow with <code>field-sizing: content</code>, and with a counter.}}
+  {{example:[stack]Default (resizable), auto-grow (<code>.textarea--auto-grow</code>: <code>field-sizing: content</code> up to 240px, no handle), and auto-grow with a counter.}}
 <div class="field"><label class="field__label" for="ta-hair">Hair details <span class="optional">(optional)</span></label><textarea class="textarea" id="ta-hair" rows="3">Shoulder length; bringing my own extensions.</textarea></div>
-<div class="field"><label class="field__label" for="ta-grow">Your review</label><textarea class="textarea" id="ta-grow" rows="2" style="field-sizing: content; max-height: calc(var(--control-height-md) * 6);">The parts were so neat and Nia checked that nothing felt too tight. I would book her again for my next set.</textarea></div>
-<div class="field"><label class="field__label" for="ta-why">Why does this review need a closer look?</label><textarea class="textarea" id="ta-why" maxlength="300" aria-describedby="ta-why-count">It describes a service Nia does not offer.</textarea><span class="field__counter" id="ta-why-count">42 / 300</span></div>
+<div class="field"><label class="field__label" for="ta-grow">Your review</label><textarea class="textarea textarea--auto-grow" id="ta-grow">The parts were so neat and Nia checked that nothing felt too tight. I would book her again for my next set.</textarea></div>
+<div class="field"><label class="field__label" for="ta-why">Reason</label><textarea class="textarea textarea--auto-grow" id="ta-why" aria-describedby="ta-why-count">Inaccurate service details</textarea><span class="field__counter" id="ta-why-count">26 of 300 characters</span></div>
   {{/example}}
 </section>
 
-<section class="ds-section" id="sizes" data-na="Textareas come in one size (medium text); the number of rows sets the height."><h2><a href="#sizes">Sizes</a></h2></section>
+<section class="ds-section" id="sizes" data-na="Textareas come in one size (medium text); rows set the default variant's starting height above the 100px minimum, and auto-grow follows the text."><h2><a href="#sizes">Sizes</a></h2></section>
 
 <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
   <div class="ds-matrix"><table>
@@ -50,9 +50,9 @@
     </tbody>
   </table></div>
   <h3>Invalid and over the limit</h3>
-  {{example:[stack]Empty required review, and a counter over its limit.}}
-<div class="field"><label class="field__label" for="ta-inv">Your review</label><textarea class="textarea" id="ta-inv" aria-invalid="true" aria-describedby="ta-inv-error"></textarea><span class="field__error" id="ta-inv-error">Write a few words about your visit with Nia.</span></div>
-<div class="field"><label class="field__label" for="ta-over">Anything Nia should know?</label><textarea class="textarea" id="ta-over" aria-invalid="true" aria-describedby="ta-over-error ta-over-count">I have very thick, waist-length hair and would like small knotless braids with curled ends, a middle part and a few gold cuffs. Could you also bring 1B extensions? I can arrive early if that helps with the five-hour estimate.</textarea><span class="field__error" id="ta-over-error">Shorten this to 200 characters or fewer.</span><span class="field__counter" id="ta-over-count" data-over="true">231 / 200</span></div>
+  {{example:[stack]Empty required review, and a note over its limit: every character is kept, the counter turns red at once and the error follows when Maya leaves the field.}}
+<div class="field"><label class="field__label" for="ta-inv">Your review</label><textarea class="textarea textarea--auto-grow" id="ta-inv" aria-invalid="true" aria-describedby="ta-inv-error"></textarea><span class="field__error" id="ta-inv-error">Write a few words about your visit with Nia.</span></div>
+<div class="field"><label class="field__label" for="ta-over">Hair details <span class="optional">(optional)</span></label><textarea class="textarea textarea--auto-grow" id="ta-over" aria-invalid="true" aria-describedby="ta-over-error ta-over-count">I have very thick, waist-length hair and would like small knotless braids with curled ends, a middle part and a few gold cuffs. Could you also bring 1B extensions? I can arrive early if that helps with the five-hour estimate.</textarea><span class="field__error" id="ta-over-error">Shorten this to 200 characters or fewer.</span><span class="field__counter" id="ta-over-count" data-over="true">225 of 200 characters</span></div>
   {{/example}}
   <h3>Both themes</h3>
   {{themes:stack}}<textarea class="textarea" rows="2" aria-label="Review preview">Nia explained each step.</textarea><textarea class="textarea" rows="2" aria-label="Invalid review preview" aria-invalid="true"></textarea>{{/themes}}
@@ -90,13 +90,15 @@
   </div>
   <h3>Motion</h3>
   <p>Border and ring transition over <code>--duration-fast</code>; auto-grow is immediate.</p>
+  <h3>Forced colours</h3>
+  <p><code>CanvasText</code> border and <code>Highlight</code> focus ring; the invalid edge colour is lost and the error text carries the state.</p>
   <h3>Touch</h3>
   <p>At least two rows tall (well over 44px); tapping the label also focuses it.</p>
 </section>
 
 <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
   <ul>
-    <li>Label as a question or noun phrase: "Your review", "Anything Nia should know?".</li>
+    <li>Label as a question or noun phrase: "Your review", "Hair details", "Reason".</li>
     <li>Help text suggests what a useful answer covers, not rules.</li>
     <li>State limits in characters: "Shorten this to 200 characters or fewer."</li>
   </ul>
@@ -121,7 +123,8 @@
       {{tok:Invalid edge|--color-danger-solid}}
       {{tok:Counter|--color-fg-subtle}}
       {{tok:Over-limit counter|--color-danger-fg}}
-      {{tok:Minimum height base|--control-height-md}}
+      {{tok:Minimum height base (× 2.5; auto-grow cap × 6)|--control-height-md}}
+      {{tok:Line height|--line-height-normal}}
       {{tok:Padding block / inline|--space-2|--space-3}}
       {{tok:Radius|--radius-md}}
       {{tok:Counter font|--text-caption}}
@@ -132,14 +135,14 @@
 <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
   <pre><code>&lt;div class="field"&gt;
   &lt;label class="field__label" for="review"&gt;Your review&lt;/label&gt;
-  &lt;textarea class="textarea" id="review" name="review" maxlength="500"
+  &lt;textarea class="textarea textarea--auto-grow" id="review" name="review"
             aria-describedby="review-help review-count"&gt;&lt;/textarea&gt;
   &lt;span class="field__help" id="review-help"&gt;What should others know about your visit?&lt;/span&gt;
-  &lt;span class="field__counter" id="review-count"&gt;0 / 500&lt;/span&gt;
+  &lt;span class="field__counter" id="review-count"&gt;0 of 500 characters&lt;/span&gt;
 &lt;/div&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.textarea</code></td><td>Multi-line field, 100px minimum, vertical resize.</td></tr>
-    <tr><td><code>style="field-sizing: content"</code></td><td>Auto-grow (progressive; falls back to manual resize).</td></tr>
+    <tr><td><code>.textarea--auto-grow</code></td><td>Auto-grow: <code>field-sizing: content</code> from 100px to 240px, then scrolls; no resize handle. Browsers without <code>field-sizing</code> keep the 100px minimum and scroll.</td></tr>
     <tr><td><code>.field__counter[data-over="true"]</code></td><td>Counter in danger colour.</td></tr>
     <tr><td><code>aria-invalid</code> / <code>readonly</code> / <code>disabled</code></td><td>States, as for text fields.</td></tr>
     <tr><td><code>data-state="hover|focus"</code></td><td>Documentation only.</td></tr>
@@ -148,9 +151,11 @@
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
   <ul>
-    {{mock:pages/care-and-review/default|"Your review"}}
-    {{mock:pages/booking-request/default|"Hair details"}}
-    {{mock:dialogs/report-review/default|"Reason"}}
+    {{mock:pages/care-and-review/default|"Your review" with hint and counter}}
+    {{mock:pages/care-and-review/invalid|empty review with its error}}
+    {{mock:pages/booking-request/default|"Hair details (optional)" with counter}}
+    {{mock:dialogs/report-review/default|"Reason" with counter}}
+    {{mock:dialogs/report-review/invalid|blank reason with its error}}
   </ul>
-  <p>Drift fixed during extraction: every multi-line answer in the mocks ("Your review", "Hair details", the report "Reason") used a single-line <code>&lt;input&gt;</code>; the system uses a textarea. The kit's <code>.textarea</code> class existed but no mock used it.</p>
+  <p>Drift fixed during extraction: every multi-line answer in the mocks ("Your review", "Hair details", the report "Reason") used a single-line <code>&lt;input&gt;</code>; the system uses a textarea. The kit's <code>.textarea</code> class existed but no mock used it. Auto-grow was an inline <code>style</code> (now the <code>.textarea--auto-grow</code> modifier); counters read "56 / 500", which is read aloud as a fraction (now "56 of 500 characters"), and used native <code>maxlength</code>, which cuts off typing and pasting (now a validator and the counter).</p>
 </section>

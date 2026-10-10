@@ -1,4 +1,4 @@
-<!--meta {"lead": "A dialog interrupts the page to finish one short task or confirm one decision: filter braiders, review a request, cancel an appointment. Everything behind it waits.", "description": "Modal dialog with form, confirmation and destructive variants, three widths, busy, invalid and failed states, and a bottom sheet on phones.", "pills": ["APG Dialog (modal)", "Angular CDK Dialog", "Status: stable"], "variants": "form, confirmation, destructive (danger icon + danger confirm); bottom sheet below 640px", "states": "default, focus, busy, invalid, failed", "sources": ["dialogs/filter-braiders/default", "dialogs/filter-braiders/invalid", "dialogs/cancel-appointment/default", "dialogs/cancel-appointment/busy", "dialogs/cancel-appointment/failed", "dialogs/sign-out/confirm", "dialogs/cookie-preferences/default"]} -->
+<!--meta {"lead": "A dialog interrupts the page to finish one short task or confirm one decision: filter braiders, review a request, cancel an appointment. Everything behind it waits.", "description": "Modal dialog with form, confirmation and destructive variants, three widths, busy, invalid and failed states, and a bottom sheet on phones.", "pills": ["APG Dialog (modal)", "Angular CDK Dialog", "Status: stable"], "variants": "form, confirmation, destructive (danger icon + danger confirm); bottom sheet below 640px", "states": "default, focus, busy, invalid, failed", "sources": ["dialogs/filter-braiders/default", "dialogs/filter-braiders/invalid", "dialogs/cancel-appointment/default", "dialogs/cancel-appointment/busy", "dialogs/cancel-appointment/failed", "dialogs/sign-out/default", "dialogs/cookie-preferences/default"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use a dialog when the person must finish or decide something before going on, and the task fits on one short screen: two or three fields, or one decision with consequences. Use a page for anything longer (booking a request is a page, not a dialog), a <a href="toast.html">toast</a> to report an outcome, and an <a href="alert.html">inline alert</a> for information that needs no decision. In the product, dialogs open through the Angular CDK Dialog; never hand-roll a modal.</p>
   <ul>
@@ -27,7 +27,7 @@
     <ol class="ds-anatomy__list">
       <li><div><b>Backdrop</b><small><code>--color-bg-backdrop</code> scrim at <code>--z-overlay</code>; the page behind is <code>inert</code>.</small></div></li>
       <li><div><b>Header: title and description</b><small><code>.dialog__title</code> (h3 role) is the accessible name; the sentence under it is the description.</small></div></li>
-      <li><div><b>Close button</b><small>Ghost icon button, <code>aria-label="Close dialog"</code>; same as Esc.</small></div></li>
+      <li><div><b>Close button</b><small>Ghost icon button, <code>aria-label="Close dialog"</code>, with a "Close dialog" <a href="tooltip.html">tooltip</a>; same as Esc. Form and confirmation dialogs only.</small></div></li>
       <li><div><b>Body</b><small>Fields, alerts or a short paragraph; <code>--space-4</code> × <code>--space-6</code> padding; scrolls when tall.</small></div></li>
       <li><div><b>Footer</b><small>Safe action then the confirm; sticky at the bottom; top divider.</small></div></li>
     </ol>
@@ -39,7 +39,7 @@
   {{example:[stack]Initial focus goes to the first field. The confirm names the result ("Show braiders").}}
 <div class="dialog dialog--inline">
   <div class="dialog__panel" role="dialog" aria-labelledby="v-filter-title" aria-describedby="v-filter-desc">
-    <div class="dialog__header"><div><h2 class="dialog__title" id="v-filter-title">Filter braiders</h2><p id="v-filter-desc" class="text-muted">Choose the travel distance and price range that work for you.</p></div><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog">{{icon:close}}</button></div>
+    <div class="dialog__header"><div><h2 class="dialog__title" id="v-filter-title">Filter braiders</h2><p id="v-filter-desc" class="text-muted">Choose the travel distance and price range that work for you.</p></div><span class="has-tooltip"><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog" aria-describedby="v-filter-tip">{{icon:close}}</button><span class="tooltip tooltip--below" role="tooltip" id="v-filter-tip">Close dialog</span></span></div>
     <div class="dialog__body stack">
       <div class="field"><label class="field__label" for="v-price">Maximum price</label><div class="input-group"><span class="addon">$</span><input class="input" id="v-price" type="number" value="240"></div></div>
       <div class="field"><label class="field__label" for="v-distance">Distance from Toronto</label><input class="input" id="v-distance" type="text" value="10 km"></div>
@@ -86,7 +86,7 @@
       <tr><th scope="row">Default</th><td>Initial focus on the first field, or on the safe action in a destructive dialog.</td><td><button class="btn" type="button">Keep request</button> <button class="btn btn--danger" type="button">Cancel request</button></td></tr>
       <tr><th scope="row">Hover</th><td>Only the hovered control changes.</td><td><button class="btn" type="button">Keep request</button> <button class="btn btn--danger" type="button" data-state="hover">Cancel request</button></td></tr>
       <tr><th scope="row">Focus</th><td>The shared ring on the focused control; focus is trapped inside the panel.</td><td><button class="btn" type="button" data-state="focus">Keep request</button> <button class="btn btn--danger" type="button">Cancel request</button></td></tr>
-      <tr><th scope="row">Busy</th><td>Confirm sets <code>aria-busy="true"</code> and keeps its label; Esc, close and backdrop are ignored until the request settles.</td><td><button class="btn" type="button">Keep request</button> <button class="btn btn--danger" type="button" aria-busy="true">Cancel request</button></td></tr>
+      <tr><th scope="row">Busy</th><td>Confirm sets <code>aria-busy="true"</code> and keeps its label; a visually hidden status region in the panel announces what is happening ("Cancelling your request…"); Esc, close and backdrop are ignored until the request settles.</td><td><button class="btn" type="button">Keep request</button> <button class="btn btn--danger" type="button" aria-busy="true">Cancel request</button></td></tr>
       <tr><th scope="row">Invalid</th><td>An error summary at the top of the body takes focus; each field gets <code>aria-invalid</code> and its message.</td><td><button class="btn" type="button">Clear filters</button> <button class="btn btn--primary" type="button">Show braiders</button></td></tr>
       <tr><th scope="row">Failed</th><td>A danger alert at the top of the body says the change was not made and entries are kept; the confirm becomes "Try again".</td><td><button class="btn" type="button">Keep request</button> <button class="btn btn--danger" type="button">Try again</button></td></tr>
       <tr><th scope="row">Disabled confirm</th><td>Avoid. Keep the confirm enabled and explain on activation.</td><td><button class="btn" type="button">Clear filters</button> <button class="btn btn--primary" type="button" disabled>Show braiders</button></td></tr>
@@ -158,10 +158,11 @@
     {{pair:Danger confirm label|--color-fg-on-danger|--color-danger-solid|4.5}}
     {{pair:Danger icon on chip|--color-danger-icon|--color-danger-bg|3}}
   </div>
+  <p>Forced colours remove the shadow, so the panel gets a 1px <code>CanvasText</code> border to keep its edge.</p>
   <h3>Motion</h3>
   <p>The backdrop fades in over <code>--duration-base</code>; the panel scales in (or slides up as a sheet) over <code>--duration-slow</code> with <code>--ease-enter</code>. Reduced motion makes both instant.</p>
   <h3>Touch</h3>
-  <p>The close button is 40px square; footer buttons stretch on phones and are 40px tall. Tapping the backdrop closes a form dialog but not a busy or destructive one.</p>
+  <p>The close button is 40px square; footer buttons stretch on phones and are 40px tall (labels wrap inside them when text is enlarged). Tapping the backdrop closes a form dialog but not a busy or destructive one.</p>
 </section>
 
 <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
@@ -179,7 +180,7 @@
     <figure class="ds-do"><div class="ds-example__canvas"><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button">Cancel request</button></div><figcaption>Put initial focus on the safe action in a destructive dialog, and name it by what it keeps.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><a class="btn" href="../../mocks/pages/appointment-detail/default.html">Keep browsing</a><button class="btn btn--danger" type="button">Cancel request</button></div><figcaption>Autofocus a "Keep browsing" link that navigates away, as the dialog mocks did; it leaves the task instead of closing the dialog.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--danger" type="button" aria-busy="true">Cancel request</button></div><figcaption>While busy, keep the label and set <code>aria-busy</code>.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="alert alert--warning">{{icon:warning}}<div><p class="alert__title">Check before continuing.</p></div></div><button class="btn btn--danger" type="button" disabled>Working…</button></div><figcaption>Stack a warning alert on a destructive dialog, or disable and relabel the confirm while busy (the cancel and sign-out mocks). The dialog already is the warning.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="alert alert--warning">{{icon:warning}}<div><p class="alert__title">Check before continuing.</p></div></div><button class="btn btn--danger" type="button" disabled>Working…</button></div><figcaption>Stack a warning alert on a destructive dialog, or disable and relabel the confirm while busy (the first cancel and sign-out mocks). The dialog already is the warning.</figcaption></figure>
   </div>
 </section>
 
@@ -239,7 +240,7 @@
     {{mock:dialogs/cancel-appointment/default|destructive confirm}}
     {{mock:dialogs/cancel-appointment/busy|busy confirm}}
     {{mock:dialogs/cancel-appointment/failed|failure alert in body}}
-    {{mock:dialogs/sign-out/confirm|warning alert stacked on a danger dialog}}
+    {{mock:dialogs/sign-out/default|destructive dialog with the log-out chip}}
     {{mock:dialogs/cookie-preferences/default|checkbox in a dialog}}
   </ul>
   <p>Drift fixed during extraction: the close button was a "×" text glyph (now the close icon); the footer's secondary action was an <code>&lt;a autofocus&gt;</code> "Keep browsing" that navigated away (now a button that closes, with initial focus on the first field or the safe action); busy states disabled the confirm and relabelled it "Working…" (now <code>aria-busy</code> with the label kept); confirm states stacked a warning alert on a danger dialog (the description carries the consequence); destructive dialogs had no danger icon and used <code>role="dialog"</code> (now the danger chip and <code>role="alertdialog"</code>); the error summary had no links to fields (now it links each field).</p>

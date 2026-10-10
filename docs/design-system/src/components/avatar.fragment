@@ -1,4 +1,4 @@
-<!--meta {"lead": "An avatar puts a face, or the initials, beside a braider's or customer's name, so people recognise who they are booking with at a glance.", "description": "Image, initials and icon avatars in four sizes, with a status dot and a stacked group.", "pills": ["Decorative beside a name", "Status: stable"], "variants": "image, initials, icon; with status dot; group with overflow", "states": "image loaded, image missing (initials fallback), unknown person, with status", "sources": ["pages/braider-profile/default", "pages/matching-braiders/default", "pages/braider-profile/edge"]} -->
+<!--meta {"lead": "An avatar puts a face, or the initials, beside a braider's or customer's name, so people recognise who they are booking with at a glance.", "description": "Image, initials and icon avatars in four sizes, with a status dot and a stacked group.", "pills": ["Decorative beside a name", "Status: stable"], "variants": "image, initials, icon; with status dot; group with overflow", "states": "image loaded, image missing (initials fallback), unknown person, with status", "sources": ["pages/braider-profile/default", "pages/braider-profile/edge"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use an avatar next to a person's name: Nia's profile header, a braider row in matching results, the reviewer on a review. It helps recognition; it never carries information on its own, so the name always sits beside it. Use a <a href="card.html">story card photo</a> when the picture shows work (the braids themselves), not the person.</p>
   <ul>
@@ -20,7 +20,7 @@
     <ol class="ds-anatomy__list">
       <li><div><b>Frame</b><small>Circle (<code>--radius-full</code>) sized by <code>--avatar-size</code>; the plum-50 fill shows while the image loads.</small></div></li>
       <li><div><b>Content</b><small>An <code>&lt;img&gt;</code> cropped with <code>object-fit: cover</code>, or two initials, or a 24-unit icon.</small></div></li>
-      <li><div><b>Status dot (optional)</b><small>A quarter of the size, success colour, with a 2px ring in the surface colour. Never the only signal.</small></div></li>
+      <li><div><b>Status dot (optional)</b><small>A quarter of the size, success colour, with a <code>--border-width-thick</code> (2px) ring in the surface colour. Never the only signal.</small></div></li>
     </ol>
   </div>
 </section>
@@ -73,7 +73,7 @@
     </tbody>
   </table></div>
   <h3>Both themes</h3>
-  {{themes}}<span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span><span class="avatar avatar--lg" aria-hidden="true">NO</span><span class="avatar avatar--lg" aria-hidden="true">{{icon:user}}</span><div class="avatar-group" role="img" aria-label="Nia Okafor, Aisha Mensah and 9 more braiders"><span class="avatar" aria-hidden="true">NO</span><span class="avatar" aria-hidden="true">AM</span><span class="avatar" aria-hidden="true">+9</span></div>{{/themes}}
+  {{themes}}<span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span><span class="avatar avatar--lg" aria-hidden="true">NO</span><span class="avatar avatar--lg" aria-hidden="true">{{icon:user|icon--lg}}</span><div class="avatar-group" role="img" aria-label="Nia Okafor, Aisha Mensah and 9 more braiders"><span class="avatar" aria-hidden="true">NO</span><span class="avatar" aria-hidden="true">AM</span><span class="avatar" aria-hidden="true">+9</span></div>{{/themes}}
   <ul>
     <li><b>Loading</b>: the plum-50 frame shows while the image downloads and reserves the size, so nothing shifts. In a loading list use a <a href="skeleton.html">circle skeleton</a> instead.</li>
     <li><b>Failed image</b>: swap to initials on the image's <code>error</code> event; never show a broken-image icon.</li>
@@ -85,7 +85,7 @@
   <ul>
     <li>Only <code>.avatar--xl</code> changes with the viewport: 48px on phones, 64px from <code>--layout-breakpoint-md</code> (768px), so the profile head keeps the name readable at 360px.</li>
     <li>In a <code>.profile-head</code> the avatar and name wrap onto two lines when the name is long ("Amara Nkiruka Adeyemi-Williams"); the avatar never shrinks (<code>flex: none</code>).</li>
-    <li>Groups show at most three faces plus the overflow at every width.</li>
+    <li>Groups show at most three faces plus the overflow at every width. When the row is wider than its container (text at 200% on a phone), the group wraps onto a second row: each avatar overlaps the next with a negative inline-end margin and the group adds matching inline-end padding, so every row starts flush with the container.</li>
   </ul>
 </section>
 
@@ -111,10 +111,12 @@
   <h3>Contrast</h3>
   <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
     {{pair:Initials on avatar|--color-fg-accent|--color-accent-subtle|4.5}}
-    {{pair:Status dot on surface|--color-success-solid|--color-bg-surface|3}}
+    {{pair:Status dot on surface|--color-success-icon|--color-bg-surface|3}}
   </div>
   <h3>Motion</h3>
   <p>None. Images do not fade in; the frame is visible from the first paint.</p>
+  <h3>Forced colours</h3>
+  <p>Backgrounds are replaced, so the avatar draws a <code>CanvasText</code> hairline border to keep its circle, and the status dot is drawn in <code>CanvasText</code> with <code>forced-color-adjust: none</code>.</p>
   <h3>Touch</h3>
   <p>Not a target. When an avatar is the only visible part of a link (an account menu), the link is at least 44px square.</p>
 </section>
@@ -131,7 +133,7 @@
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
     <figure class="ds-do"><div class="ds-example__canvas"><div class="profile-head"><span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span><p class="card__title">Nia Okafor</p></div></div><figcaption>Next to the name, mark the avatar decorative so the name is read once.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt="Portrait of a braider"></span></div><figcaption>Generic alt text such as "Portrait of a braider" (the matching-braiders card) tells nobody who it is. Use the name, or <code>alt=""</code> beside it.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt="Portrait of a braider"></span></div><figcaption>Generic alt text such as "Portrait of a braider" tells nobody who it is. Use the name, or <code>alt=""</code> beside it.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><span class="avatar avatar--xl" aria-hidden="true">NO</span></div><figcaption>Use <code>.avatar--xl</code> for the profile header; it already grows at 768px.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><span class="avatar" aria-hidden="true">Nia</span></div><figcaption>Do not squeeze a first name into the circle, or size an avatar with spacing tokens as <code>.profile-avatar</code> did. Two initials, sized by <code>--avatar-size</code>.</figcaption></figure>
   </div>
@@ -161,9 +163,8 @@
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.avatar</code></td><td>Base: 40px circle with initials or an image.</td></tr>
     <tr><td><code>.avatar--sm</code> <code>.avatar--lg</code> <code>.avatar--xl</code></td><td>Size; omit for medium.</td></tr>
-    <tr><td><code>.profile-avatar</code></td><td>Alias of <code>.avatar--xl</code>, kept for parity with the mocks.</td></tr>
     <tr><td><code>.avatar__status</code></td><td>Status dot, bottom right.</td></tr>
-    <tr><td><code>.avatar-group</code></td><td>Overlapping stack with surface rings.</td></tr>
+    <tr><td><code>.avatar-group</code></td><td>Overlapping stack with surface rings; wraps onto a second row instead of overflowing.</td></tr>
     <tr><td><code>alt=""</code> / <code>aria-hidden="true"</code></td><td>Decorative beside a visible name.</td></tr>
   </tbody></table>
 </section>
@@ -173,7 +174,6 @@
   <ul>
     {{mock:pages/braider-profile/default|initials avatar in the profile head}}
     {{mock:pages/braider-profile/edge|long braider name}}
-    {{mock:pages/matching-braiders/default|braider photo on the result card}}
   </ul>
-  <p>Drift fixed during extraction: <code>.profile-avatar</code> duplicated the avatar with its own rules and sized itself with <code>--space-12</code> (now an alias of <code>.avatar--xl</code>, sized by <code>--avatar-size</code>); Nia's photo used the generic alt "Portrait of a braider" (system: the name, or <code>alt=""</code> beside it); the image, group and status variants were added from the core set.</p>
+  <p>Drift fixed during extraction: <code>.profile-avatar</code> duplicated the avatar with its own rules and sized itself with <code>--space-12</code> (removed: the profile head renders <code>span.avatar.avatar--xl</code>, sized by <code>--avatar-size</code>); Nia's photo on the matching-braiders result card used the generic alt "Portrait of a braider" (system: that photo is card media, not an avatar, with <code>alt=""</code> beside the name); the image, group and status variants were added from the core set.</p>
 </section>

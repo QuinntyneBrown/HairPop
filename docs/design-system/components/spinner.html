@@ -87,8 +87,11 @@
 
 <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
   <p>The arc reads <code>--color-accent</code> and the track <code>--color-border-default</code>; the size is the component token <code>--spinner-size</code>. In the dark theme the arc becomes plum 300 on a grey 750 track. Inside a button the spinner is drawn by the button in <code>--btn-fg</code>, so it always matches the label colour.</p>
-  <pre><code>/* A spinner on an inverse toast */
-.toast .spinner { border-color: var(--color-border-inverse); border-top-color: var(--color-fg-inverse); }</code></pre>
+  <p>Two rules are built into <code>components.css</code>: inside a toast the ring switches to the inverse tokens, and in forced colours the ring opts out of adjustment and draws its track in <code>GrayText</code> and its arc in <code>Highlight</code>, so the turning arc stays visible. The large ring is <code>calc(var(--border-width-thick) * 1.5)</code> (3px) wide.</p>
+  <pre><code>/* Built in: a spinner on an inverse toast */
+.toast .spinner { border-color: var(--color-border-inverse); border-top-color: var(--color-fg-inverse); }
+/* Built in: forced colours */
+@media (forced-colors: active) { .spinner { forced-color-adjust: none; border-color: GrayText; border-top-color: Highlight; } }</code></pre>
 </section>
 
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>

@@ -1,6 +1,6 @@
-<!--meta {"lead": "A divider is a hairline that separates groups when space alone is not enough: a card footer, a menu group, the line above the site footer.", "description": "Horizontal, vertical and labelled hairline dividers in the decorative border colour.", "pills": ["<code>&lt;hr&gt;</code> / <code>role=\"separator\"</code>", "Status: stable"], "variants": "horizontal, vertical, with label", "states": "none (static)", "sources": ["pages/style-gallery/default", "pages/appointment-detail/default"]} -->
+<!--meta {"lead": "A divider is a hairline that separates groups when space alone is not enough: a card footer, a menu group, the line above the site footer.", "description": "Horizontal, vertical and labelled hairline dividers in the decorative border colour.", "pills": ["<code>&lt;hr&gt;</code> / <code>role=\"separator\"</code>", "Status: stable"], "variants": "horizontal, vertical, with label", "states": "none (static)", "sources": ["pages/sign-in/default", "pages/style-gallery/default"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
-  <p>Reach for spacing first: the 4px scale already separates most groups. Use a divider when two adjacent groups would otherwise read as one, such as a card's footer actions, a menu's destructive group, or a long settings form split into topics. Do not add a rule under every list item inside a bordered card; one edge is enough.</p>
+  <p>Reach for spacing first: the 4px scale already separates most groups. Use a divider when two adjacent groups would otherwise read as one, such as a card's footer actions, a menu's destructive group, or a long settings form split into topics. Do not add a divider element under every list item; the <a href="list.html">list</a> draws its own row rules.</p>
   <ul>
     <li><b>Horizontal</b>: <code>&lt;hr&gt;</code> or <code>.divider</code> between blocks; 24px above and below.</li>
     <li><b>Vertical</b>: separates inline groups in a toolbar or footer row.</li>
@@ -23,12 +23,12 @@
 </section>
 
 <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
-  {{example:[stack]Horizontal and labelled dividers inside a card.}}
+  {{example:[stack]Horizontal and labelled dividers inside a card keep 24px above and below; the card's 16px block flow skips them.}}
 <div class="card">
   <p><strong>Nia received your request</strong><br><span class="text-muted">Today at 9:42 am</span></p>
   <div class="divider divider--label"><span>Earlier</span></div>
   <p><strong>How to prepare for knotless braids</strong><br><span class="text-muted">Yesterday</span></p>
-  <hr>
+  <hr class="divider">
   <p class="text-muted">Notifications older than 30 days are archived.</p>
 </div>
   {{/example}}
@@ -117,11 +117,11 @@
 </section>
 
 <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
-  <pre><code>&lt;hr&gt;
+  <pre><code>&lt;hr class="divider"&gt;
 &lt;div class="divider divider--label"&gt;&lt;span&gt;Earlier&lt;/span&gt;&lt;/div&gt;
 &lt;span class="divider divider--vertical" role="separator" aria-orientation="vertical"&gt;&lt;/span&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
-    <tr><td><code>hr</code> / <code>.divider</code></td><td>Horizontal hairline with <code>--space-6</code> above and below.</td></tr>
+    <tr><td><code>hr</code> / <code>.divider</code></td><td>Horizontal hairline with <code>--space-6</code> above and below, inside a card too. In a flex or grid container with a gap the gap adds to the margin, so put horizontal dividers in block flow.</td></tr>
     <tr><td><code>.divider--vertical</code></td><td>Vertical hairline in a flex row.</td></tr>
     <tr><td><code>.divider--label</code></td><td>Centred label between two rules.</td></tr>
     <tr><td><code>role="separator"</code> <code>aria-orientation="vertical"</code></td><td>Semantics for a non-<code>hr</code> separator.</td></tr>
@@ -129,10 +129,10 @@
 </section>
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
-  <p>The mocks use hairlines as borders rather than elements:</p>
+  <p>Labelled dividers in the mocks; every other hairline there is a border of another component:</p>
   <ul>
-    {{mock:pages/style-gallery/default|topbar bottom edge and site-footer top edge}}
-    {{mock:pages/appointment-detail/default|card edges separate the summary from the preparation list; no in-card rules yet}}
+    {{mock:pages/sign-in/default|"or" between the sign-in form and "Create account"}}
+    {{mock:pages/style-gallery/default|topbar bottom edge and site-footer top edge as borders}}
   </ul>
-  <p>Drift fixed during extraction: the footer separated Terms and Privacy with a typed " · " (now a cluster gap); <code>hr</code> and <code>.divider</code> had no labelled or vertical form.</p>
+  <p>Drift fixed during extraction: the footer separated Terms and Privacy with a typed " · " (now a cluster gap); <code>hr</code> and <code>.divider</code> had no labelled or vertical form; the card's block flow cut the space above a divider to 16px (cards now skip dividers).</p>
 </section>

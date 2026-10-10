@@ -74,6 +74,8 @@ ICONS = {
     "warning": "M12 4L2.5 20h19zM12 10v4M12 17v.01",
     "arrow-right": "M5 12h14M13 6l6 6-6 6",
     "arrow-left": "M19 12H5M11 6l-6 6 6 6",
+    "arrow-up": "M12 19V5M6 11l6-6 6 6",
+    "arrow-down": "M12 5v14M6 13l6 6 6-6",
     "chevron-down": "M6 9l6 6 6-6",
     "chevron-left": "M15 6l-6 6 6 6",
     "chevron-right": "M9 6l6 6-6 6",

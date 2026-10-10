@@ -31,7 +31,8 @@
     <dt>Braider</dt><dd><a href="../../mocks/pages/braider-profile/default.html">Nia Okafor</a></dd>
     <dt>Preferred time</dt><dd>Sat 24 Oct · 10:00 am · about 5 hours</dd>
     <dt>Estimate</dt><dd>$180–$240</dd>
-    <dt>Location</dt><dd>Shared after Nia accepts</dd>
+    <dt>Final price</dt><dd class="text-muted">Nia confirms after accepting</dd>
+    <dt>Location</dt><dd class="text-muted">Shared after Nia accepts</dd>
   </dl>
 </section>
 <aside class="card" style="flex: 1 1 12rem;" aria-labelledby="dl-ex-2">
@@ -48,18 +49,18 @@
 <section class="ds-section" id="sizes" data-na="One size; type follows the body and label roles."><h2><a href="#sizes">Sizes</a></h2></section>
 
 <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
-  <p>Description lists are static. Values have three content states: present, pending (not known yet, said in words) and missing (couldn't load, with a retry nearby). Never leave a value blank or show a dash alone.</p>
+  <p>Description lists are static. Values have three content states: present, pending (not known yet, said in words, muted) and missing (an inline danger status, then a retry link that names what it retries). A fact the record does not have is omitted, term and value. Never leave a value blank or show a dash alone.</p>
   <div class="ds-matrix"><table>
     <thead><tr><th scope="col">Variant</th><th scope="col">Present</th><th scope="col">Pending</th><th scope="col">Missing</th></tr></thead>
     <tbody>
       <tr><th scope="row">Horizontal</th>
         <td><dl class="dl"><dt>Estimate</dt><dd>$180–$240</dd></dl></td>
         <td><dl class="dl"><dt>Final price</dt><dd class="text-muted">Nia confirms after accepting</dd></dl></td>
-        <td><dl class="dl"><dt>Reviews</dt><dd><span class="inline-status inline-status--danger">Couldn’t load · <a href="../../mocks/pages/braider-profile/partial.html">Retry reviews</a></span></dd></dl></td></tr>
+        <td><dl class="dl"><dt>Reviews</dt><dd><span class="inline-status inline-status--danger">Couldn’t load</span> · <a href="../../mocks/pages/braider-profile/partial.html">Retry reviews</a></dd></dl></td></tr>
       <tr><th scope="row">Stacked</th>
         <td><dl class="dl dl--stacked"><dt>Estimate</dt><dd>$180–$240</dd></dl></td>
         <td><dl class="dl dl--stacked"><dt>Final price</dt><dd class="text-muted">Nia confirms after accepting</dd></dl></td>
-        <td><dl class="dl dl--stacked"><dt>Reviews</dt><dd><span class="inline-status inline-status--danger">Couldn’t load</span></dd></dl></td></tr>
+        <td><dl class="dl dl--stacked"><dt>Reviews</dt><dd><span class="inline-status inline-status--danger">Couldn’t load</span> · <a href="../../mocks/pages/braider-profile/partial.html">Retry reviews</a></dd></dl></td></tr>
     </tbody>
   </table></div>
   <h3>Both themes</h3>
@@ -111,7 +112,7 @@
 
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
-    <figure class="ds-do"><div class="ds-example__canvas"><dl class="dl"><dt>Preferred time</dt><dd>Sat 24 Oct · 10:00 am</dd><dt>Estimate</dt><dd>$180–$240</dd><dt>Location</dt><dd>Shared after Nia accepts</dd></dl></div><figcaption>Lay appointment facts out as pairs.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><dl class="dl"><dt>Preferred time</dt><dd>Sat 24 Oct · 10:00 am</dd><dt>Estimate</dt><dd>$180–$240</dd><dt>Location</dt><dd class="text-muted">Shared after Nia accepts</dd></dl></div><figcaption>Lay appointment facts out as pairs.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><p><strong>Sat 24 Oct · 10:00 am</strong> with Nia Okafor</p><p>Estimated price: $180–$240. Nia will confirm the final price.</p><p>Location shared after Nia accepts.</p></div><figcaption>Bury the facts in sentences, as the appointment-detail mock does; time, price and place are hard to scan.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><dl class="dl"><dt>Final price</dt><dd class="text-muted">Nia confirms after accepting</dd></dl></div><figcaption>Explain a pending value.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><dl class="dl"><dt>Final price</dt><dd>—</dd></dl></div><figcaption>Show a lone dash; it is read as "dash" and says nothing.</figcaption></figure>

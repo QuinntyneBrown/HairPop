@@ -27,7 +27,7 @@ Out of scope:
 
 ## Usage
 
-The mocks collect every multi-line answer in a single-line `<input>`; the design system records that as drift and uses a textarea for all three. Configurations after the fix:
+Every `textarea.textarea` in `docs/mocks/`, plus the configurations the design system adds:
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
@@ -308,7 +308,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - Folder `frontend/projects/components/src/lib/textarea/`; file `textarea.ts` exporting the standalone component `Textarea` with `selector: 'textarea[hp-textarea]'`, `template: ''`, `changeDetection: OnPush`. Export it from `public-api.ts`.
 - Host bindings: `class.textarea`; `class.textarea--auto-grow`; `attr.id`; `attr.aria-describedby`; `attr.aria-invalid` (`'true'` or `null`).
 - Injections and registration exactly as the text field (`HP_FORM_FIELD` optional, `NgControl` self optional).
-- Styles: port `.textarea` and the shared `.input, .select, .textarea` rules from `docs/design-system/assets/components.css` as `:host(...)` rules; add `:host(.textarea--auto-grow) { field-sizing: content; max-height: calc(var(--control-height-md) * 6); resize: none; }`. Add the modifier to `components.css` and the design-system page (replacing its inline `style`) in the same slice.
+- Styles: port `.textarea`, `.textarea--auto-grow` (`field-sizing: content; max-height: calc(var(--control-height-md) * 6); resize: none`) and the shared `.input, .select, .textarea` rules from `docs/design-system/assets/components.css` as `:host(...)` rules.
 - No CDK primitive.
 - Perf-test scenario `frontend/projects/perf-test/src/scenarios/Textarea.ts`, exported from `src/scenarios/index.ts`, with iterations in `e2e/perf-test/config/scenario-iterations.mjs`.
 
@@ -316,11 +316,11 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 
 - **D-1** *Wrapper or native host?* A component on the native `<textarea>` with an empty template, as the text field (text field D-1). Content between the tags is not projected, because a textarea's text content is only its default value; the value always comes from the forms directive, which also keeps it through errors and retries.
 - **D-2** *How does it work with Angular forms?* `DefaultValueAccessor` on the same element; no value accessor of its own (form field D-2).
-- **D-3** *How is auto-grow built?* CSS `field-sizing: content` behind a `.textarea--auto-grow` modifier, with no script. The design system specifies it ("progressive; falls back to manual resize") but writes it as an inline `style`; a modifier class keeps the markup to classes the e2e locators can read. Browsers without `field-sizing` fall back to the 100 px minimum and a scrollbar; the product is tested in Chromium, which supports it.
-- **D-4** *How tall may it grow?* To 6 × `--control-height-md` (240 px), the design system's own value. Its overview says "about ten lines"; measured at 16 px text the cap holds about eight, so the CRD states the token value, not the line count.
+- **D-3** *How is auto-grow built?* CSS `field-sizing: content` behind the `.textarea--auto-grow` modifier in `components.css`, with no script. A modifier class rather than an inline `style` (the design system's first draft) keeps the markup to classes the e2e locators can read. Browsers without `field-sizing` fall back to the 100 px minimum and a scrollbar; the product is tested in Chromium, which supports it.
+- **D-4** *How tall may it grow?* To 6 × `--control-height-md` (240 px), the design system's value. Measured at 16 px text the cap holds about eight lines (an earlier design-system draft said "about ten"), so requirements state the token value, not a line count.
 - **D-5** *Resize handle on auto-grow?* None (`resize: none`). A manual height would freeze the auto-grow, and the design system calls the handle hard to drag on phones.
 - **D-6** *Sizes?* One. The design system defines no textarea sizes; `rows` sets the default variant's starting height above the 100 px minimum.
 - **D-7** *Native `maxlength`?* Never (form field D-8). The design system's over-limit example ("231 / 200") requires the text to be kept.
 - **D-8** *Line height?* `--line-height-normal`, the body value, unlike the single-line fields (text field D-4): several lines of a review are read as a paragraph.
-- **D-9** *The mocks collect "Your review", "Hair details" and "Reason" in one-line inputs. Which wins?* The textarea, as the design system fixed.
+- **D-9** *Textarea or one-line input for "Your review", "Hair details" and "Reason"?* The textarea, as the design system requires: a one-line input hides most of what was typed (the mocks' first version).
 - **D-10** *Which customer textareas auto-grow?* All three. The design system recommends auto-grow for reviews and, on phones, over the resize handle; since a page does not switch variants by viewport, the customer screens use auto-grow everywhere and the default variant stays for wide-screen tools.

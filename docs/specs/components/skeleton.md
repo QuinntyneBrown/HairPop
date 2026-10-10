@@ -7,7 +7,7 @@
 | Status | planned |
 | Traces to | L2-001, L2-035, L2-036, L2-041, L2-042, L2-043 |
 | Design system | [`skeleton.html`](../../design-system/components/skeleton.html) |
-| Source mocks | [`pages/style-gallery/loading`](../../mocks/pages/style-gallery/loading.html), [`pages/matching-braiders/loading`](../../mocks/pages/matching-braiders/loading.html), [`pages/help/loading`](../../mocks/pages/help/loading.html), [`pages/my-appointments/loading`](../../mocks/pages/my-appointments/loading.html), [`pages/notification-center/loading`](../../mocks/pages/notification-center/loading.html), [`pages/style-detail/loading`](../../mocks/pages/style-detail/loading.html), [`pages/braider-profile/loading`](../../mocks/pages/braider-profile/loading.html), [`pages/appointment-detail/loading`](../../mocks/pages/appointment-detail/loading.html), [`pages/booking-request/loading`](../../mocks/pages/booking-request/loading.html), [`pages/care-and-review/loading`](../../mocks/pages/care-and-review/loading.html), [`pages/account-settings/loading`](../../mocks/pages/account-settings/loading.html), [`pages/sign-in/loading`](../../mocks/pages/sign-in/loading.html), [`pages/terms/loading`](../../mocks/pages/terms/loading.html), [`pages/not-found/loading`](../../mocks/pages/not-found/loading.html) |
+| Source mocks | [`pages/style-gallery/loading`](../../mocks/pages/style-gallery/loading.html), [`pages/matching-braiders/loading`](../../mocks/pages/matching-braiders/loading.html), [`pages/help/loading`](../../mocks/pages/help/loading.html), [`pages/my-appointments/loading`](../../mocks/pages/my-appointments/loading.html), [`pages/notification-center/loading`](../../mocks/pages/notification-center/loading.html), [`pages/style-detail/loading`](../../mocks/pages/style-detail/loading.html), [`pages/braider-profile/loading`](../../mocks/pages/braider-profile/loading.html), [`pages/appointment-detail/loading`](../../mocks/pages/appointment-detail/loading.html), [`pages/booking-request/loading`](../../mocks/pages/booking-request/loading.html), [`pages/care-and-review/loading`](../../mocks/pages/care-and-review/loading.html), [`pages/account-settings/loading`](../../mocks/pages/account-settings/loading.html), [`pages/sign-in/loading`](../../mocks/pages/sign-in/loading.html), [`pages/terms/loading`](../../mocks/pages/terms/loading.html) |
 | Rendering | [`skeleton.html`](skeleton.html) |
 
 ## Purpose and scope
@@ -36,7 +36,7 @@ Out of scope:
 
 ## Usage
 
-Every loading mock in `docs/mocks/` shows the same three generic cards in a `.feature-grid` with `aria-label="Loading content"`; the design system records that as drift and requires each screen's skeleton to mirror its loaded layout (D-1). The configuration each screen needs:
+Every loading mock in `docs/mocks/` mirrors its screen's loaded layout inside the screen's real region, which keeps its own name and carries `aria-busy="true"` and one `role="status"` message (D-1). The configuration each screen uses:
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
@@ -46,19 +46,19 @@ Every loading mock in `docs/mocks/` shows the same three generic cards in a `.fe
 | `pages/my-appointments/loading` | group, `pattern="appointment-row"`, `count` 3, in `section.stack` named "My appointments" | label "Loading your appointments" | loading, slow, loaded, failed, empty, no-results | canvas, row cards |
 | `pages/notification-center/loading` | group, `pattern="list-row"`, `count` 4, the list the design system recommends for notifications (D-7) | label "Loading your updates" | loading, slow, loaded, failed, empty | canvas, flush card |
 | `pages/style-detail/loading` | group without a pattern inside `.detail-grid`: main card with a `hero` block, a `title`, two `text` lines, a `.fact-grid` of three `rect` tiles and one `text` line; aside card with a `title`, two `text` lines and a `rect` button | label "Loading knotless braids" | loading, slow, loaded, partial (alert), failed, empty | canvas, cards |
-| `pages/braider-profile/loading` | group without a pattern inside `.detail-grid`: a `.stack` of a profile card (`circle` at the profile-avatar size, `title`, `text` lines, a `.fact-grid` of two `rect` tiles, a `rect` button) and a reviews card (`title`, three `text` lines); aside card (`title`, three `text` lines) | label "Loading Nia’s profile" | loading, slow, loaded, partial, failed, empty | canvas, cards |
+| `pages/braider-profile/loading` | group without a pattern inside `.detail-grid`: a `.stack` of a profile card (`circle` with `width="3rem"`, the `xl` avatar's phone size, `title`, `text` lines, a `.fact-grid` of two `rect` tiles, a `rect` button) and a reviews card (`title`, three `text` lines); aside card (`title`, three `text` lines) | label "Loading Nia’s profile" | loading, slow, loaded, partial, failed, empty | canvas, cards |
 | `pages/appointment-detail/loading` | group without a pattern inside `.detail-grid`: card (`rect` badge, `title`, three `text` lines, a `.cluster` of two `rect` buttons); aside card (`title`, three `text` lines) | label "Loading your appointment" | loading, slow, loaded, partial, failed | canvas, cards |
 | `pages/booking-request/loading`, `care-and-review/loading`, `account-settings/loading`, `sign-in/loading`, `sign-up/loading`, `forgot-password/loading`, `reset-password/loading`, `verify-email/loading` | group without a pattern inside `section.form-panel`: a `title`, then per field a `text` line at 30 % (the label) and a `rect` of `--control-height-md` at full width, then a `rect` button | labels "Loading your booking request", "Loading care and review", "Loading account settings", "Loading sign in", "Loading create account", "Loading forgot password", "Loading reset password", "Loading verify email" | loading, slow, loaded, failed | form panel card |
 | `pages/terms/loading`, `pages/privacy/loading` | group without a pattern inside `section.legal-copy`: two groups of a `title` and four `text` lines | labels "Loading terms of use", "Loading privacy" | loading, slow, loaded, failed (L2-033) | card |
 | Braider profile reviews card (design system *Overview*: a known layout) | not used: a region already on screen refreshing in place uses the spinner | — | — | — |
-| `pages/not-found/loading`, `forbidden/loading`, `server-error/loading`, `offline/loading` | not used: error pages are static responses with no loading state (error-page D-4) | — | — | — |
+| `not-found`, `forbidden`, `server-error`, `offline` | not used: error pages are static responses with no loading state (error-page D-4); their mocks have no `loading` state | — | — | — |
 
 Every row is buildable with the API below: three patterns rendered by the group, or the page's own composition of the five block shapes inside the group, with one status label and the slow-read line.
 
 ## Anatomy
 
 1. **Block** — `span[hp-skeleton]`, host classes `.skeleton` plus one shape: `.skeleton--text`, `.skeleton--title`, `.skeleton--circle`, `.skeleton--rect` or `.skeleton--hero`; always `aria-hidden="true"`. Fill is the shimmer gradient of `--color-bg-subtle` and `--color-bg-subtle-hover`.
-2. **Group** — `hp-skeleton-group`, `display: contents`, so its children are direct children of the consumer's grid, stack or card.
+2. **Group** — `hp-skeleton-group` with `.skeleton-group` on the host, `display: contents`, so its children are direct children of the consumer's grid, stack or card.
 3. **Status message** — the group's first child, `<span class="visually-hidden" role="status">`, holding the `label` ("Loading styles"), or the slow message while the read is slow.
 4. **Placeholder shells (patterns only)** — `div[hp-card]` hosts with `aria-hidden="true"`: a story card (`.card.story-card`), a row card (`.card.appointment-row`) or one flush card holding a `ul[hp-list]` (`.list`) of `li[hp-list-item]` (`.list__item`) rows, as the list CRD specifies for the notification centre's loading state. Each mirrors the loaded card's structure (below).
 5. **Slow-read line (after 10 seconds)** — `<p class="span-full cluster text-sm text-muted">`: the slow message (hidden from assistive technology, which hears it through the status message) and a link-variant Button with the retry label.
@@ -149,7 +149,7 @@ Rendered DOM. Classes and attributes are the e2e contract.
 ```html
 <!-- rendered: style gallery loading (the region is the page's) -->
 <section class="feature-grid" aria-label="Styles" aria-busy="true">
-  <hp-skeleton-group>
+  <hp-skeleton-group class="skeleton-group">
     <span class="visually-hidden" role="status">Loading styles</span>
     <div class="card story-card" aria-hidden="true">
       <span class="skeleton skeleton--hero"></span>
@@ -168,7 +168,7 @@ Rendered DOM. Classes and attributes are the e2e contract.
 ```html
 <!-- rendered: my appointments loading -->
 <section class="stack" aria-label="My appointments" aria-busy="true">
-  <hp-skeleton-group>
+  <hp-skeleton-group class="skeleton-group">
     <span class="visually-hidden" role="status">Loading your appointments</span>
     <div class="card appointment-row" aria-hidden="true">
       <div>
@@ -186,7 +186,7 @@ Rendered DOM. Classes and attributes are the e2e contract.
 ```html
 <!-- rendered: notification centre loading -->
 <section aria-label="Updates" aria-busy="true">
-  <hp-skeleton-group>
+  <hp-skeleton-group class="skeleton-group">
     <span class="visually-hidden" role="status">Loading your updates</span>
     <div class="card card--flush" aria-hidden="true">
       <ul class="list">
@@ -389,7 +389,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 
 - Folder `frontend/projects/components/src/lib/skeleton/`; files `skeleton.ts` (standalone component `Skeleton`, `selector: 'span[hp-skeleton]'`, `template: ''`) and `skeleton-group.ts` (standalone component `SkeletonGroup`, `selector: 'hp-skeleton-group'`). Both `OnPush`; export both from `public-api.ts`.
 - `Skeleton` host bindings: `class.skeleton` always; `class.skeleton--{shape}`; `attr.aria-hidden="true"`; `style.width` from `width`; `style.height` from `height` when `shape` is rect. Styles port `.skeleton*` and `@keyframes shimmer` from `docs/design-system/assets/components.css` as `:host` rules, plus the forced-colours outline (D-9).
-- `SkeletonGroup`: `:host { display: contents; }`. Template: the status span; then `@switch (pattern())` rendering the three patterns with `@for` over `computed(() => Array.from({ length: count() }))`, or `<ng-content />` when null; then the slow-read line `@if (slow())`. Pattern-scoped rules (D-4, D-5): `.story-card > .skeleton--hero { margin-bottom: 0 }`, `.story-card .skeleton--title { height: calc(var(--line-height-snug) * 1em); margin: 0; }`, `.appointment-row > div { flex: 1 1 21rem; }`, `.appointment-row .skeleton--title { font-size: var(--font-size-xl); height: calc(var(--line-height-snug) * 1em); margin: 0; }`, and, mobile-first, `.story-card:nth-of-type(n+3) { display: none; }` with `@media (min-width: 64rem) { .story-card:nth-of-type(n+3) { display: flex; } }`.
+- `SkeletonGroup`: host class `skeleton-group` (`display: contents` in `components.css`, D-3). Template: the status span; then `@switch (pattern())` rendering the three patterns with `@for` over `computed(() => Array.from({ length: count() }))`, or `<ng-content />` when null; then the slow-read line `@if (slow())`. The pattern rules (D-4, D-5) are product CSS in `components.css` and are ported as they are: `.story-card .skeleton--hero { margin-bottom: 0 }`, `.story-card .skeleton--title { height: calc(var(--line-height-snug) * 1em); margin: 0; }`, `.appointment-row .skeleton--title { font-size: var(--font-size-xl); height: calc(var(--line-height-snug) * 1em); margin: 0; }`, `.skeleton-group > .appointment-row > div { flex: 1 1 21rem; }`, and, mobile-first, `.skeleton-group > .story-card:nth-of-type(n+3) { display: none; }` with `@media (min-width: 64rem) { … { display: flex; } }`.
 - Shells compose the Card component (`<div hp-card layout="story">`, `<div hp-card layout="row">`, `<div hp-card flush>`, card CRD) and, for the list-row pattern, the List component (`<ul hp-list>` with `<li hp-list-item>` rows, list CRD); the slow-read line composes Button (`button[hp-button] variant="link" size="sm" [busy]="retrying()"`).
 - Slow timer: started in `afterNextRender` (browser only), 10 000 ms, restarted on `retried`; cleared on destroy. `retrying` resets when the timer fires again.
 - Focus return: on destroy, if `document.activeElement` is inside the slow-read line and `returnFocusTo` is set, call `returnFocusTo.focus()`.
@@ -399,13 +399,13 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 
 - **D-1** *Every loading mock shows the same three generic cards with `aria-label="Loading content"`. Which wins?* The design system: each screen's skeleton mirrors its loaded layout, the region is `aria-busy` with one named status message, and every block is `aria-hidden`. The skeleton page and the feedback-and-loading pattern both record the mocks' version as drift fixed during extraction.
 - **D-2** *Attribute or element selector for the block?* An attribute selector on a native `<span>`, so the host carries `.skeleton` and its shape: `.skeleton--text:last-child`, `.stack`, `.list__item` and `.fact-grid` rules then apply to it directly, as in the design system's markup. The group is a composite with an element selector.
-- **D-3** *Why a group component rather than blocks alone?* The status message, the slow-read line, the timer and three repeated patterns would otherwise be rewritten on 18 pages. The group renders them with `display: contents`, so the consumer's real container stays the grid or stack and the placeholders are its direct children.
+- **D-3** *Why a group component rather than blocks alone?* The status message, the slow-read line, the timer and three repeated patterns would otherwise be rewritten on 18 pages. The group renders them with `display: contents` (the `.skeleton-group` class in `components.css`, which the mocks use as a plain `<div class="skeleton-group">`), so the consumer's real container stays the grid or stack and the placeholders are its direct children.
 - **D-4** *The design system's composed story card (title bar 1.5em plus margin, hero with a bottom margin inside a gapped card) measured 56 px shorter than the loaded card, and its appointment row 4 px shorter. Is that acceptable?* No: the design system requires that the page settles into place without jumping. Inside the story-card pattern the hero drops its bottom margin and the title bar is one heading line with no margin; the summary is two lines and a link line is added. Measured in Chromium against the loaded "Knotless braids" card: 399.5 vs 400.4 px at 320, 426.1 vs 427.1 at 360, 436.8 vs 437.8 at 768 and 463.5 vs 464.4 at 1280. Inside the appointment-row pattern the title bar is one `--font-size-xl` heading line and the body grows from 21rem: 130.6 vs 132 px from 560 px up and 182.6 vs 184 px from 440 to 557 px; the placeholder and the loaded row wrap within 2 px of the same viewport width (558 and 560 px). The 21rem basis is the width of the loaded HP-1048 row's text; with a 20rem basis the placeholder stayed on one line from 545 to 557 px while the loaded row had already wrapped. The primitives keep the design system's sizes everywhere else.
 - **D-5** *How many story-card placeholders?* The design system says to fill the first viewport, one or two on phones and three on desktop. The pattern renders `count` (three) and hides those after the second below 1024 px: one card row on tablets, two cards on phones, one row of three on desktops.
 - **D-6** *A loaded appointment row whose title or date wraps on a phone is taller than its placeholder. Does the placeholder predict that?* No. Wrapping depends on the braider's name and the date, which are unknown while loading; reserving two title lines would make every one-line row shift instead. The shift is limited to the rows below and to one line per wrapped field.
 - **D-7** *The notification-centre mock renders notifications as cards with a primary button each. Which skeleton?* The list-row pattern: the design system's list page records the cards as drift and its skeleton page composes the notification skeleton as list rows, and the [list CRD](list.md) (D-1, D-9) renders the notification centre as a list in a flush card with skeleton rows in its loading state.
 - **D-8** *Where does focus go when the slow-read "Try again" disappears with the group?* To `returnFocusTo`, the region's heading, matching the design system's rule that focus inside a reloading region returns to its heading. Without it focus would fall to the page body.
-- **D-9** *Forced colours remove backgrounds, so blocks vanish. Is that acceptable?* No: sighted forced-colours users would see an empty region. Each block gets a `CanvasText` hairline outline under `(forced-colors: active)`; `components.css` gains the rule in the slice that builds the component.
+- **D-9** *Forced colours remove backgrounds, so blocks vanish. Is that acceptable?* No: sighted forced-colours users would see an empty region. Each block gets a `CanvasText` hairline outline under `(forced-colors: active)`, a rule in `components.css`.
 - **D-10** *Should skeletons wait 300 ms before showing, like the spinner?* No. A skeleton reserves the loaded layout and is the server-rendered first paint; hiding it for 300 ms would show a blank region that then fills, the flash the delay is meant to avoid.
 - **D-11** *What does "slow" mean, and does the skeleton ever give up?* Ten seconds, from the design system's *Content* rule. The skeleton never gives up on its own: L2-043 requires the loading state to remain while a read is slow, so only the consumer replaces it with content or an error.
 - **D-12** *Status message: `aria-label` on the region (feedback-and-loading pattern) or a `role="status"` message (skeleton page)?* Both, with different jobs: the region keeps its own name ("Styles"), which identifies it before and after loading, and the status message says it is loading. The skeleton page's markup is the component's contract; the pattern page's `aria-label="Loading styles"` would rename the region and is not used.

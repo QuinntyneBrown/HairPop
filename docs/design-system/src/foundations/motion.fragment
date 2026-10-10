@@ -73,8 +73,8 @@
   {{example:Spinner (<code>--duration-loop-spin</code> per turn), skeleton shimmer and indeterminate progress (<code>--duration-loop-shimmer</code>), live dot (<code>--duration-loop-pulse</code>).}}
 <span class="spinner" role="status"><span class="visually-hidden">Loading braiders</span></span>
 <span class="skeleton skeleton--text" style="width: 10rem;" aria-hidden="true"></span>
-<div class="progress progress--indeterminate" style="width: 10rem;" role="progressbar" aria-label="Sending your request"><div class="progress__bar"></div></div>
-<span class="inline-status inline-status--success"><span class="dot dot--pulse" aria-hidden="true"></span>Nia is online</span>
+<div class="progress progress--indeterminate" style="width: 10rem;" role="progressbar" aria-label="Importing your past appointments"><div class="progress__bar"></div></div>
+<span class="inline-status"><span class="dot dot--pulse" aria-hidden="true"></span>Saving…</span>
   {{/example}}
 </section>
 

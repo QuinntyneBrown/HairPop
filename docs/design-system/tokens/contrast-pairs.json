@@ -480,6 +480,24 @@
       "note": "destructive button edge in dialogs",
       "bg": "--color-bg-surface-raised",
       "min": 3
+    },
+    {
+      "fg": "--color-danger-fg",
+      "bg": "--color-bg-surface-raised",
+      "min": 4.5,
+      "note": "field error in a dialog (inline message)"
+    },
+    {
+      "fg": "--color-success-fg",
+      "bg": "--color-bg-surface-raised",
+      "min": 4.5,
+      "note": "success inline status in a dialog (inline message)"
+    },
+    {
+      "fg": "--color-warning-fg",
+      "bg": "--color-bg-surface-raised",
+      "min": 4.5,
+      "note": "warning inline status in a dialog (inline message)"
     }
   ]
 }

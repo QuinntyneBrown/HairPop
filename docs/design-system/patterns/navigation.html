@@ -17,7 +17,7 @@
 <main id="main" class="ds-main">
 <header class="ds-header"><p class="ds-kicker">Pattern</p><h1>Navigation and page structure</h1><p class="ds-lead">The shell is the same on every customer screen: top bar, page header, content, footer. Maya always knows where she is and how to get back.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#when">When to use which</a></li><li><a href="#structure">Structure</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#sources">Sources</a></li></ul></header>
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
-  <p>Every HairPop page uses the same shell: a <a href="../components/skip-link.html">skip link</a>, the sticky <a href="../components/top-bar.html">top bar</a> with Styles, Braiders, Appointments and Help, the account links (Updates with an unread count, Maya), a <a href="../components/page-header.html">page header</a> (eyebrow, h1, subtitle), the content, and the <a href="../components/footer.html">footer</a> with Terms and Privacy. The order and names never change between pages (3.2.3, 3.2.4).</p>
+  <p>Every HairPop page uses the same shell: a <a href="../components/skip-link.html">skip link</a>, the sticky <a href="../components/top-bar.html">top bar</a> with Styles, Braiders, Appointments and Help, the account links (Updates with an unread count, Maya; "Sign in" when signed out), an optional <a href="../components/breadcrumb.html">breadcrumb</a> on detail pages, a <a href="../components/page-header.html">page header</a> (eyebrow, h1, subtitle), the content, and the <a href="../components/footer.html">footer</a> with Help, Cookie preferences, Terms and Privacy. The order and names never change between pages (3.2.3, 3.2.4).</p>
 </section>
 
 <section class="ds-section" id="when"><h2><a href="#when">When to use which</a></h2>
@@ -36,13 +36,13 @@
 
 <section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
   <div class="ds-frame">
-    <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a><nav class="topbar__nav" aria-label="Primary"><a class="nav-link" href="../../mocks/pages/style-gallery/default.html" aria-current="page">Styles</a><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">Appointments</a><a class="nav-link" href="../../mocks/pages/help/default.html">Help</a></nav><span class="topbar__spacer"></span><button class="btn btn--ghost btn--icon topbar__menu" type="button" aria-label="Open menu" aria-expanded="false"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><a class="account-link" href="../../mocks/pages/notification-center/default.html" aria-label="Updates, 2 unread">Updates <span class="badge badge--count" aria-hidden="true">2</span></a><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
+    <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a><nav class="topbar__nav" aria-label="Primary"><a class="nav-link" href="../../mocks/pages/style-gallery/default.html" aria-current="page">Styles</a><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">Appointments</a><a class="nav-link" href="../../mocks/pages/help/default.html">Help</a></nav><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a><button class="btn btn--ghost btn--icon topbar__menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="structure-panel"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><a class="account-link topbar__account" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
     <div class="ds-frame__body">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../mocks/pages/style-gallery/default.html">Styles</a></li><li><a href="../../mocks/pages/style-detail/default.html">Knotless braids</a></li><li><span aria-current="page">Braiders</span></li></ol></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../mocks/pages/style-gallery/default.html">Styles</a></li><li><a href="../../mocks/pages/style-detail/default.html"><svg class="icon icon--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Knotless braids</a></li><li><span aria-current="page">Braiders</span></li></ol></nav>
       <div class="page-header"><div><p class="eyebrow">Discover</p><p style="font: var(--text-h1); letter-spacing: var(--letter-spacing-tight);">Braiders for knotless braids</p><p class="subtitle">12 braiders offer this style near Toronto · prices and availability vary.</p></div></div>
       <p class="text-muted">Content…</p>
     </div>
-    <footer class="site-footer"><span>HairPop · Made for confident hair decisions</span><span><a href="../../mocks/pages/terms/default.html">Terms</a> · <a href="../../mocks/pages/privacy/default.html">Privacy</a></span></footer>
+    <footer class="site-footer"><p>HairPop · Made for confident hair decisions</p><ul class="site-footer__links"><li><a class="link link--inherit" href="../../mocks/pages/help/default.html">Help</a></li><li><a class="link link--inherit" href="../../mocks/dialogs/cookie-preferences/default.html" aria-haspopup="dialog">Cookie preferences</a></li><li><a class="link link--inherit" href="../../mocks/pages/terms/default.html">Terms</a></li><li><a class="link link--inherit" href="../../mocks/pages/privacy/default.html">Privacy</a></li></ul></footer>
   </div>
 </section>
 
@@ -61,18 +61,19 @@
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
   <ul>
-    <li>From 768px the four area links sit in the top bar. Below 768px they move into a menu opened by a menu button (<code>.topbar__menu</code>) with <code>aria-expanded</code> and <code>aria-controls</code>; the account links stay visible.</li>
+    <li>From 768px the four area links sit in the top bar. Below 768px they move into a panel opened by a menu button (<code>.topbar__menu</code>) with <code>aria-expanded</code> and <code>aria-controls</code>; the account link moves into the panel too, while Updates and its count stay in the bar.</li>
     <li>Breadcrumbs collapse to the parent link only below 768px ("‹ Knotless braids").</li>
-    <li>The page header stacks title over actions below 768px; the primary action becomes full width.</li>
-    <li>The footer wraps its two groups onto two lines on phones.</li>
+    <li>The page header stacks title over actions below 768px; the primary action, placed last, becomes full width on its own row.</li>
+    <li>The footer wraps its brand line and link list onto separate lines when they do not fit side by side (no breakpoint; <code>flex-wrap</code>).</li>
   </ul>
 </section>
 
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
   <ul>
-    <li>Landmarks: <code>header</code>, <code>nav aria-label="Primary"</code>, <code>main id="main"</code>, <code>footer</code>; the skip link is the first focusable element.</li>
+    <li>Landmarks: <code>header</code>, <code>nav aria-label="Primary"</code>, <code>main id="main"</code>, <code>footer</code>; the skip link is the first focusable element, and it is inert with the page while a modal dialog is open.</li>
     <li>One h1 per page, in the page header; the eyebrow is a paragraph, not a heading.</li>
-    <li>The Updates link’s name includes the count ("Updates, 2 unread"); the visual count badge is <code>aria-hidden</code> so it is not read twice.</li>
+    <li>The Updates link’s name starts with its visible text and includes the count: "Updates" + the badge "2" + visually hidden ", 2 unread" reads "Updates 2, 2 unread". Neither the link nor the badge carries an <code>aria-label</code>.</li>
+    <li>After a client-side route change, focus moves to the new page’s <code>&lt;h1&gt;</code>; a full page load starts at the skip link.</li>
     <li><code>scroll-padding-top</code> matches the sticky top bar so focused elements are never hidden under it (2.4.11).</li>
     <li>Nav links are 44px tall targets.</li>
   </ul>
@@ -86,7 +87,7 @@
 <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
   <ul>
     <li>Area names are single nouns: Styles, Braiders, Appointments, Help.</li>
-    <li>Eyebrows group pages: "Discover" for browsing screens, "Your HairPop" for Maya’s own data.</li>
+    <li>Eyebrows name the area: "Discover" for browsing screens, "Appointments" or "Account" for Maya’s own data, and none on auth, legal, help and error pages.</li>
     <li>Page titles speak to Maya: "Find a style that feels like you", "Your appointment with Nia". The <code>&lt;title&gt;</code> puts the specific part first: "Request HP-1048 · HairPop".</li>
     <li>Subtitles carry the key facts in one line, separated by " · ".</li>
   </ul>
@@ -94,9 +95,9 @@
 
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
-    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--ghost btn--icon" type="button" aria-label="Open menu" aria-expanded="false"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="text-muted">Styles, Braiders, Appointments, Help in a menu</span></div><figcaption>Below 768px, area links move behind a labelled menu button.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Top bar with only the brand and account links</span></div><figcaption>The mocks hide the nav links on phones with no menu, so Styles and Help are unreachable from the bar.</figcaption></figure>
-    <figure class="ds-do"><div class="ds-example__canvas"><a class="account-link" href="#do-dont" aria-label="Updates, 2 unread">Updates <span class="badge badge--count" aria-hidden="true">2</span></a></div><figcaption>The count is in the link’s name once.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--ghost btn--icon" type="button" aria-label="Menu" aria-expanded="false"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="text-muted">Styles, Braiders, Appointments, Help in a menu</span></div><figcaption>Below 768px, area links move behind a labelled menu button.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Top bar with only the brand and account links</span></div><figcaption>Hide the nav links on phones with no menu, as the first mocks did: Styles and Help become unreachable from the bar.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><a class="account-link" href="#do-dont">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a></div><figcaption>The name starts with the visible word and says what the count means: "Updates 2, 2 unread".</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><a class="account-link" href="#do-dont" aria-label="Notifications, 2 unread">Updates <span class="badge badge--count" aria-label="2 unread">2</span></a></div><figcaption>A label that renames the link ("Notifications" vs visible "Updates", 2.5.3) and a second label on the badge.</figcaption></figure>
   </div>
 </section>
@@ -106,10 +107,10 @@
     <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (shell, current nav link)</li>
     <li><a href="../../mocks/pages/matching-braiders/default.html">pages/matching-braiders/default</a> (page header with facts subtitle)</li>
     <li><a href="../../mocks/pages/matching-braiders/long.html">pages/matching-braiders/long</a> (pagination)</li>
-    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> ("Your HairPop" eyebrow)</li>
+    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> ("Appointments" eyebrow, breadcrumb)</li>
     <li><a href="../../mocks/pages/help/default.html">pages/help/default</a> (help in the same place)</li>
   </ul>
-  <p>Drift fixed: below 768px the mocks hide the area links with no menu button (system adds <code>.topbar__menu</code>); the Updates link was labelled "Notifications, 2 unread", which does not contain its visible text (now "Updates, 2 unread"), and its badge carried a second label (now <code>aria-hidden</code>); the brand mark was a "✦" text glyph (now the sparkle icon); detail pages had no breadcrumb.</p>
+  <p>Drift fixed: below 768px the mocks hid the area links with no menu button (system adds <code>.topbar__menu</code> and a panel); the Updates link was labelled "Notifications, 2 unread", which does not contain its visible text (now visible "Updates 2" plus hidden ", 2 unread"), and its badge carried a second label (removed); the brand mark was a "✦" text glyph (now the sparkle icon); detail pages had no breadcrumb; every non-browsing page used the eyebrow "Your HairPop" (now the area name or none); the footer separated two links with "·" glyphs (now a list of four). The mocks’ shared shell now renders these fixes.</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

@@ -7,7 +7,7 @@
 | Status | planned |
 | Traces to | L2-003, L2-007, L2-019, L2-029, L2-036, L2-037, L2-041, L2-042, L2-044, L2-045 |
 | Design system | [`error-page.html`](../../design-system/components/error-page.html) |
-| Source mocks | [`pages/not-found/default`](../../mocks/pages/not-found/default.html), [`pages/forbidden/default`](../../mocks/pages/forbidden/default.html), [`pages/server-error/default`](../../mocks/pages/server-error/default.html), [`pages/offline/default`](../../mocks/pages/offline/default.html), [`pages/not-found/loading`](../../mocks/pages/not-found/loading.html), [`pages/not-found/error`](../../mocks/pages/not-found/error.html), [`pages/forbidden/loading`](../../mocks/pages/forbidden/loading.html), [`pages/forbidden/error`](../../mocks/pages/forbidden/error.html), [`pages/server-error/loading`](../../mocks/pages/server-error/loading.html), [`pages/server-error/error`](../../mocks/pages/server-error/error.html), [`pages/offline/loading`](../../mocks/pages/offline/loading.html), [`pages/offline/error`](../../mocks/pages/offline/error.html) |
+| Source mocks | [`pages/not-found/default`](../../mocks/pages/not-found/default.html), [`pages/forbidden/default`](../../mocks/pages/forbidden/default.html), [`pages/server-error/default`](../../mocks/pages/server-error/default.html), [`pages/offline/default`](../../mocks/pages/offline/default.html) |
 | Rendering | [`error-page.html`](error-page.html) |
 
 ## Purpose and scope
@@ -29,7 +29,7 @@ Out of scope:
 
 ## Usage
 
-The four `default` mocks, corrected by the design system, plus the mocks' `loading` and `error` states, which the design system drops (D-4).
+The four `default` mocks. These screens have no `loading` or `error` mock; the manifest marks both not applicable (D-4).
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
@@ -37,7 +37,7 @@ The four `default` mocks, corrected by the design system, plus the mocks' `loadi
 | `pages/forbidden/default`: another customer's appointment, and an unknown appointment reference (L2-019, L2-037) | `kind="forbidden"`: warning tint, lock icon | h1 "You can’t open this page"; "Sign in with the account you use for your appointments." (D-3); primary link "Sign in" | default, focused | canvas; top bar shows "Sign in" or "Maya" |
 | `pages/server-error/default` (L2-037, L2-044) | `kind="server-error"`: error tint, alert-circle icon, `reference` | h1 "HairPop needs a moment"; "We couldn’t load this page. Your booking request has not been resent."; primary `<button>` "Try again" (`busy` while retrying); secondary link "Contact support"; reference "Reference: HP-ERR-7F3K2Q · Sat 10 Oct, 9:42 am" | default, focused, retrying, retry failed, recovered (the page loads in place) | canvas |
 | `pages/offline/default` (L2-036, L2-045) | `kind="offline"`: warning tint, wifi-off icon | h1 "You’re offline"; "Saved appointment details remain available. Requests need a connection."; primary `<button>` "Try again" (`busy` while retrying); secondary link "View saved appointments" | default, focused, retrying, still offline, recovered | canvas |
-| `pages/*/loading` and `pages/*/error` for the four error pages | not rendered: an error page is a static response (D-4) | — | — | — |
+| `loading` and `error` for the four error pages | not applicable: an error page is a static response (D-4) | — | — | — |
 
 Every row is buildable with the API below: four kinds, heading and text inputs, an optional reference, an actions slot for Buttons, and the retry inputs passed to the empty state.
 
@@ -113,7 +113,7 @@ Rendered DOM inside the shell. Classes and attributes are the e2e contract.
 <!-- rendered: not found -->
 <main id="main" class="container product-main">
   <hp-error-page>
-    <hp-empty-state class="empty">
+    <hp-empty-state class="empty empty--stack-actions">
       <div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4"/></svg></div>
       <h1 class="empty__title" tabindex="-1">We couldn’t find that page</h1>
       <p class="empty__text">The link may be old, or the address may have changed.</p>
@@ -127,7 +127,7 @@ Rendered DOM inside the shell. Classes and attributes are the e2e contract.
 ```html
 <!-- rendered: server error, with reference -->
 <hp-error-page>
-  <hp-empty-state class="empty empty--error">
+  <hp-empty-state class="empty empty--error empty--stack-actions">
     <div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg></div>
     <h1 class="empty__title" tabindex="-1">HairPop needs a moment</h1>
     <p class="empty__text">We couldn’t load this page. Your booking request has not been resent.</p>
@@ -143,13 +143,13 @@ Rendered DOM inside the shell. Classes and attributes are the e2e contract.
 
 ```html
 <!-- rendered: forbidden and offline differ in the modifier, icon, copy and actions -->
-<hp-empty-state class="empty empty--warning">… lock icon … <h1 class="empty__title" tabindex="-1">You can’t open this page</h1> …
+<hp-empty-state class="empty empty--warning empty--stack-actions">… lock icon … <h1 class="empty__title" tabindex="-1">You can’t open this page</h1> …
   <div class="empty__actions"><a class="btn btn--primary" href="/sign-in">Sign in</a></div> …</hp-empty-state>
-<hp-empty-state class="empty empty--warning" aria-busy="true">… wifi-off icon … <h1 class="empty__title" tabindex="-1">You’re offline</h1> …
+<hp-empty-state class="empty empty--warning empty--stack-actions" aria-busy="true">… wifi-off icon … <h1 class="empty__title" tabindex="-1">You’re offline</h1> …
   <div class="empty__actions"><button class="btn btn--primary" type="button" aria-busy="true">Try again</button><a class="btn" href="/appointments">View saved appointments</a></div> …</hp-empty-state>
 ```
 
-The empty state also carries the modifier that stacks actions on phones (empty-state `stackActions`, D-5); it is omitted above for brevity.
+Every error page's empty state carries `.empty--stack-actions` (empty-state `stackActions`, D-5).
 
 Consumer templates:
 
@@ -317,10 +317,10 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 
 ## Decisions
 
-- **D-1** *Every error-page mock uses the ✦ glyph and the accent tint, and the 500 mock has no reference. Which wins?* The design system: an icon and tint per cause (404 accent, 403 and offline warning, 500 danger) and `.empty__reference` on the 500 page, recorded as drift fixed during extraction.
-- **D-2** *The mocks repeat the title as a page-header `h1` and an empty-state `h2`. How many headings?* One: the empty-state title is the page's only `h1`, as the design system records. A repeated heading reads twice and splits the outline.
+- **D-1** *The first error-page mocks used the ✦ glyph and the accent tint, and the 500 mock had no reference. Which wins?* The design system: an icon and tint per cause (404 accent, 403 and offline warning, 500 danger) and `.empty__reference` on the 500 page, recorded as drift fixed during extraction.
+- **D-2** *The first mocks repeated the title as a page-header `h1` and an empty-state `h2`. How many headings?* One: the empty-state title is the page's only `h1`, as the design system records. A repeated heading reads twice and splits the outline.
 - **D-3** *The forbidden copy "Sign in with the account used for this appointment." (mock and design system) and the design system's permission example "This appointment belongs to another account" both tell Maya that the appointment exists. L2-037 says the access-unavailable page must not reveal whether another customer's appointment exists. Which copy?* The heading stays "You can’t open this page"; the sentence becomes "Sign in with the account you use for your appointments.", which presupposes nothing about the requested appointment, and an unknown appointment reference renders the same page so the two cases cannot be told apart. (needs product confirmation)
-- **D-4** *The not-found, forbidden, server-error and offline mocks each have `loading` and `error` states, and L2-035 asks pages to implement the applicable states the manifest lists. Does the error page implement them?* No. The design system drops them as drift: an error page is a static response with nothing to load and nothing that can fail, so those states are not applicable in L2-035's sense, and a "We couldn’t load page not found" state would be an error about an error. The manifest should mark them not applicable.
+- **D-4** *The not-found, forbidden, server-error and offline mocks each had `loading` and `error` states, and L2-035 asks pages to implement the applicable states the manifest lists. Does the error page implement them?* No. The design system drops them as drift: an error page is a static response with nothing to load and nothing that can fail, so those states are not applicable in L2-035's sense, and a "We couldn’t load page not found" state would be an error about an error. The mocks drop them and the manifest marks them not applicable.
 - **D-5** *Do the recovery actions go full width on phones?* Yes. The design system's error page states it twice (responsive: "on phones its actions stack"; touch: "full width on phones when it is the only action"). Below 640 px (`--layout-breakpoint-sm`) the actions stack at the empty state's full content width, primary first, through the empty state's `stackActions` input; from 640 px they sit side by side and centred.
 - **D-6** *Should the component set the HTTP status and the document title?* No. They belong to the route configuration and the SSR server, which know the response; the component renders the same DOM on the server and in the browser.
 - **D-7** *How does the component tell a full page load from client-side navigation?* By asking the router whether a previous successful navigation exists. A full load keeps focus at the top so the skip link is first; a client-side navigation moves focus to the `h1`, as the design system requires.

@@ -1,9 +1,9 @@
-<!--meta {"lead": "Buttons let people act: send a request, find braiders, cancel an appointment. One primary button per view tells them which action matters most.", "description": "Five variants, three sizes, icon and block forms, every state in both themes.", "pills": ["Native <code>&lt;button&gt;</code>", "Status: stable"], "variants": "primary, secondary, ghost, link, danger; leading/trailing icon; icon-only; block", "states": "default, hover, focus, active, disabled, loading, pressed", "sources": ["pages/booking-request/default", "pages/appointment-detail/default", "dialogs/cancel-appointment/default", "pages/booking-request/submitting"]} -->
+<!--meta {"lead": "Buttons let people act: send a request, find braiders, cancel an appointment. One primary button per view tells them which action matters most.", "description": "Five variants, three sizes, icon and block forms, every state in both themes.", "pills": ["Native <code>&lt;button&gt;</code>", "Status: stable"], "variants": "primary, secondary, ghost, link, danger; leading/trailing icon; icon-only; block", "states": "default, hover, focus, active, disabled, loading, pressed, expanded", "sources": ["pages/booking-request/default", "pages/appointment-detail/default", "dialogs/cancel-appointment/default", "pages/booking-request/submitting"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use a button when activating it changes something: it submits, sends, cancels, opens a dialog or starts a process. Use a <a href="link.html">link</a> when it only takes the person somewhere; a link that looks like a button (<code>&lt;a class="btn"&gt;</code>) is still a link. Use a <a href="menu.html">menu</a> when one trigger offers several actions.</p>
   <ul>
     <li><b>Primary</b> is the one action the view exists for: "Send request", "See braiders for this style", "Post review". Never two per view.</li>
-    <li><b>Secondary</b> (the default look) is every other action: "Find braiders", "Request a change", "Keep browsing".</li>
+    <li><b>Secondary</b> (the default look) is every other action: "Find braiders", "Request a change", "Keep request".</li>
     <li><b>Ghost</b> sits inside dense surfaces: the dialog close button, toolbar and row actions.</li>
     <li><b>Link</b> looks like a link but is a low-emphasis action beside other buttons: "Cancel request" on the appointment card.</li>
     <li><b>Danger</b> is for destructive confirmations and appears only inside a confirmation dialog: "Cancel request", "Sign out".</li>
@@ -77,6 +77,12 @@
 <button class="btn" type="button" aria-pressed="true">Saved</button>
 <button class="btn" type="button" aria-pressed="false">Save braider</button>
   {{/example}}
+  <h3>Expanded (menu trigger)</h3>
+  {{example:<code>aria-expanded="true"</code> on a menu trigger holds the variant's active fill while the menu is open, without the 1px press offset.}}
+<button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="false">More actions</button>
+<button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="true">More actions</button>
+<button class="btn" type="button" aria-haspopup="menu" aria-expanded="true">Sort: Best match</button>
+  {{/example}}
   <h3>Both themes</h3>
   {{themes}}<button class="btn btn--primary" type="button">Send request</button><button class="btn" type="button">Filters</button><button class="btn btn--ghost" type="button">Edit</button><button class="btn btn--link" type="button">Cancel request</button><button class="btn btn--danger" type="button">Sign out</button>{{/themes}}
   <ul>
@@ -91,7 +97,7 @@
     <li>Below <code>--layout-breakpoint-md</code> (768px) the primary action in a page header or form becomes full width; secondary actions follow beneath it (<code>.form-actions</code>, <code>.page-header__actions</code> do this for you).</li>
     <li>In dialog footers, buttons share the row and wrap with the primary first in reading order on phones (<code>flex-wrap: wrap-reverse</code>) and last (rightmost) from 640px.</li>
     <li>Medium (40px) and large (48px) buttons meet the 24px minimum target; on phones the primary action of a screen is large or full width so it reaches 44px.</li>
-    <li>Labels never truncate or wrap. If a label wraps at 360px, shorten the verb phrase.</li>
+    <li>Labels never truncate. Write them to fit one line at 360px (shorten the verb phrase if one does not). When text is enlarged, a label wraps inside the button (<code>overflow-wrap: anywhere</code>, <code>--line-height-snug</code>, <code>--space-1</code> block padding) and the button grows in height, so nothing overflows the page (WCAG 1.4.4, 1.4.10).</li>
   </ul>
 </section>
 
@@ -133,7 +139,7 @@
   <ul>
     <li>Labels are verb phrases in sentence case: "Send request", "Request a change", "Post review". Never "OK", "Submit", "Yes" or "Click here".</li>
     <li>Name the object when context does not: "Cancel request" in the dialog footer, not "Cancel".</li>
-    <li>Pair a destructive action with a safe one that says what staying means: "Keep browsing" beside "Cancel request".</li>
+    <li>Pair a destructive action with a safe one that says what staying means: "Keep request" beside "Cancel request".</li>
     <li>Keep labels to three or four words. Use the braider's first name when it adds confidence: "Request with Nia".</li>
     <li>Do not swap the label for "Working…" while loading; the spinner and live region carry progress.</li>
   </ul>
@@ -141,10 +147,10 @@
 
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
-    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn" type="button">Keep browsing</button><button class="btn btn--danger" type="button">Cancel request</button></div><figcaption>One emphasised action, placed last, with a safe action that says what staying means.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button">Cancel request</button></div><figcaption>One emphasised action, placed last, with a safe action that says what staying means.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><button class="btn btn--primary" type="button">Try again</button><button class="btn btn--primary" type="button">Explore styles</button></div><figcaption>Two primary buttons compete. Make the recovery action primary and the other secondary.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog">{{icon:close}}</button></div><figcaption>Icon-only buttons use an SVG icon and an <code>aria-label</code>.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><button class="btn btn--primary" type="button" disabled>Working…</button></div><figcaption>Disable the button and replace its label while sending (as the mocks' submitting states do). Keep the label, set <code>aria-busy</code>, keep focus.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><button class="btn btn--primary" type="button" disabled>Working…</button></div><figcaption>Disable the button and replace its label while sending (as the first mocks' submitting states did). Keep the label, set <code>aria-busy</code>, keep focus.</figcaption></figure>
   </div>
 </section>
 
@@ -187,6 +193,7 @@
     <tr><td><code>disabled</code> / <code>aria-disabled="true"</code></td><td>Disabled look; the native attribute also removes it from the tab order.</td></tr>
     <tr><td><code>aria-busy="true"</code></td><td>Loading: spinner, label kept but painted transparent, clicks ignored, width kept.</td></tr>
     <tr><td><code>aria-pressed</code></td><td>Toggle state.</td></tr>
+    <tr><td><code>aria-expanded="true"</code></td><td>Open menu trigger: holds the active fill, no press offset.</td></tr>
     <tr><td><code>data-state="hover|focus|active|loading|pressed"</code></td><td>Documentation and mocks only: forces a state in a static page.</td></tr>
   </tbody></table>
 </section>
@@ -197,6 +204,7 @@
     {{mock:pages/style-gallery/default|secondary "Find braiders" beside search}}
     {{mock:pages/booking-request/default|primary submit}}
     {{mock:pages/booking-request/submitting|busy submit}}
+    {{mock:pages/braider-profile/default|primary link with a leading calendar icon}}
     {{mock:pages/appointment-detail/default|secondary and link actions on the appointment card}}
     {{mock:dialogs/cancel-appointment/default|danger confirm, ghost icon close}}
     {{mock:pages/style-gallery/error|primary recovery with secondary alternative}}

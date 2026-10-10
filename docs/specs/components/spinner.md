@@ -7,7 +7,7 @@
 | Status | planned |
 | Traces to | L2-035, L2-036, L2-041, L2-042, L2-043 |
 | Design system | [`spinner.html`](../../design-system/components/spinner.html) |
-| Source mocks | [`pages/braider-profile/partial`](../../mocks/pages/braider-profile/partial.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`pages/booking-request/submitting`](../../mocks/pages/booking-request/submitting.html) (busy button only, not this component), [`dialogs/cancel-appointment/busy`](../../mocks/dialogs/cancel-appointment/busy.html) (busy button only, not this component) |
+| Source mocks | [`pages/braider-profile/partial`](../../mocks/pages/braider-profile/partial.html) (the reviews retry the spinner serves; no spinner is drawn in the static mock), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html) (the results the inline spinner refreshes; no spinner is drawn in the static mock), [`pages/booking-request/submitting`](../../mocks/pages/booking-request/submitting.html) (busy button only, not this component), [`dialogs/cancel-appointment/busy`](../../mocks/dialogs/cancel-appointment/busy.html) (busy button only, not this component) |
 | Rendering | [`spinner.html`](spinner.html) |
 
 ## Purpose and scope
@@ -300,9 +300,9 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - Host bindings: `role="status"`; `class.spinner-inline` from `inline`.
 - Template: `@if (revealed()) { <span class="spinner" [class.spinner--sm]=… [class.spinner--lg]=… aria-hidden="true"></span> @if (inline()) { {{ label() }} } @else { <span class="visually-hidden">{{ label() }}</span> } }`. The ring and label render only when revealed, so the region is empty before.
 - Timing: an `effect` on `active` that, in the browser only (start it from `afterNextRender`), sets a 300 ms timer to reveal and, on deactivation, keeps `revealed` true until 500 ms after the reveal. Clear timers in `DestroyRef.onDestroy`. The delays come from the `SPINNER_TIMING` injection token, whose default factory returns `{ showDelayMs: 300, minVisibleMs: 500 }` with a comment citing the design-system *States* rules.
-- Toast context: `:host-context(.toast) .spinner { border-color: var(--color-border-inverse); border-top-color: var(--color-fg-inverse); }`, the design-system *Theming* rule.
-- Forced colours (D-7): `@media (forced-colors: active) { .spinner { forced-color-adjust: none; border-color: GrayText; border-top-color: Highlight; } }`. `docs/design-system/assets/components.css` gains the same rule in the slice that builds it.
-- Large ring width (D-6): `.spinner--lg { border-width: calc(var(--border-width-thick) * 1.5); }` replaces the raw `3px`; the design-system stylesheet changes in the same slice.
+- Toast context: `:host-context(.toast) .spinner { border-color: var(--color-border-inverse); border-top-color: var(--color-fg-inverse); }`, ported from the `.toast .spinner` rule in `components.css` (design-system *Theming*).
+- Forced colours (D-7): `@media (forced-colors: active) { .spinner { forced-color-adjust: none; border-color: GrayText; border-top-color: Highlight; } }`, ported from `docs/design-system/assets/components.css`.
+- Large ring width (D-6): `.spinner--lg { border-width: calc(var(--border-width-thick) * 1.5); }`, as in `components.css`.
 - No CDK primitive; composes nothing.
 - Perf-test scenario `frontend/projects/perf-test/src/scenarios/Spinner.ts`, exported from `src/scenarios/index.ts`, with iterations in `e2e/perf-test/config/scenario-iterations.mjs`.
 
@@ -313,7 +313,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - **D-3** *How is the live region made reliable?* The host is the `role="status"` region from the first render and stays empty until the reveal, then the label is written into it. The design-system page warns that a region inserted together with its text is often not announced; this order avoids that.
 - **D-4** *Does the spinner set `aria-busy` on the region it refreshes?* No. The region is the consumer's element, outside the component; the consumer binds `aria-busy` to the same signal as `active` (AC-10). The spinner's own host is never `aria-busy`, which would suppress its announcement.
 - **D-5** *May a spinner sit inside a busy button?* Never. Button's `busy` state draws the ring as a pseudo-element in `--btn-fg`, keeps the label and announces through `aria-busy`; a second ring would double the noise, as the design-system *Do and don't* shows for the mocks' "Working…" state.
-- **D-6** *The large ring is a raw `3px` in `components.css`. Which token?* `calc(var(--border-width-thick) * 1.5)`, which is exactly 3 px and keeps the value tied to the border scale; no 3 px token exists.
-- **D-7** *What happens in forced colours?* The stylesheet has no rule, so every border becomes `CanvasText` and the arc disappears into a still circle. The ring opts out of forced colour adjustment and uses system colours: track `GrayText`, arc `Highlight`.
+- **D-6** *The large ring was a raw `3px` in `components.css`. Which token?* `calc(var(--border-width-thick) * 1.5)`, which is exactly 3 px and keeps the value tied to the border scale; no 3 px token exists. `components.css` now uses it.
+- **D-7** *What happens in forced colours?* Without a rule every border becomes `CanvasText` and the arc disappears into a still circle. The ring opts out of forced colour adjustment and uses system colours: track `GrayText`, arc `Highlight`; `components.css` carries the rule and the spinner page documents it.
 - **D-8** *Is a done or error look part of the spinner?* No. The design system's *States* matrix ends a spinner by replacing it with an inline message ("Saved", "Couldn’t refresh") or with content; the spinner only spins.
 - **D-9** *How does the perf test measure a spinner that waits 300 ms before painting?* Through the `SPINNER_TIMING` injection token, which the scenario sets to zero. The timing stays a design-system rule for every application; acceptance tests keep the real delays and drive them with Playwright's clock.

@@ -20,7 +20,7 @@
   <p>An error page replaces the page content, not the page: the top bar, navigation and footer stay, so the person can still go anywhere. Inside the main region it is a full-size <a href="empty-state.html">empty state</a> whose title is the page's <code>h1</code>, with one sentence and one recovery action.</p>
   <ul>
     <li><b>Not found (404)</b>: the address is wrong or old. Recover with "Explore styles".</li>
-    <li><b>Forbidden (403)</b>: the page exists but belongs to another account (someone else's appointment). Recover with "Sign in".</li>
+    <li><b>Forbidden (403)</b>: this account cannot open the page, for example another customer's appointment. The page never says whether that appointment exists, and an unknown appointment reference shows the same page. Recover with "Sign in".</li>
     <li><b>Server error (500)</b>: HairPop failed. Say what did not happen ("Your booking request has not been resent"), offer "Try again" and show a reference id for support.</li>
     <li><b>Offline</b>: the device has no connection. Say what still works ("Saved appointment details remain available") and offer "Try again".</li>
   </ul>
@@ -53,22 +53,22 @@
   <h3>Not found (404)</h3>
   <div class="ds-frame">
     <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a><nav class="topbar__nav" aria-label="Primary, not found example"><a class="nav-link" href="../../mocks/pages/style-gallery/default.html">Styles</a><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">Appointments</a></nav><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
-    <div class="ds-frame__body"><section class="empty"><div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4"/></svg></div><p class="empty__title">We couldn’t find that page</p><p class="empty__text">The link may be old, or the address may have changed.</p><div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></div></section></div>
+    <div class="ds-frame__body"><section class="empty empty--stack-actions"><div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4"/></svg></div><p class="empty__title">We couldn’t find that page</p><p class="empty__text">The link may be old, or the address may have changed.</p><div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></div></section></div>
   </div>
   <h3>Forbidden (403)</h3>
   <div class="ds-frame">
     <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/sign-in/default.html">Sign in</a></header>
-    <div class="ds-frame__body"><section class="empty empty--warning"><div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3"/></svg></div><p class="empty__title">You can’t open this page</p><p class="empty__text">Sign in with the account used for this appointment.</p><div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/sign-in/default.html">Sign in</a></div></section></div>
+    <div class="ds-frame__body"><section class="empty empty--warning empty--stack-actions"><div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3"/></svg></div><p class="empty__title">You can’t open this page</p><p class="empty__text">Sign in with the account you use for your appointments.</p><div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/sign-in/default.html">Sign in</a></div></section></div>
   </div>
   <h3>Server error (500)</h3>
   <div class="ds-frame">
     <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
-    <div class="ds-frame__body"><section class="empty empty--error"><div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg></div><p class="empty__title">HairPop needs a moment</p><p class="empty__text">We couldn’t load this page. Your booking request has not been resent.</p><div class="empty__actions"><button class="btn btn--primary" type="button">Try again</button><a class="btn" href="../../mocks/pages/help/default.html">Contact support</a></div><p class="empty__reference">Reference: HP-ERR-7F3K2Q · Sat 10 Oct, 9:42 am</p></section></div>
+    <div class="ds-frame__body"><section class="empty empty--error empty--stack-actions"><div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg></div><p class="empty__title">HairPop needs a moment</p><p class="empty__text">We couldn’t load this page. Your booking request has not been resent.</p><div class="empty__actions"><button class="btn btn--primary" type="button">Try again</button><a class="btn" href="../../mocks/pages/help/default.html">Contact support</a></div><p class="empty__reference">Reference: HP-ERR-7F3K2Q · Sat 10 Oct, 9:42 am</p></section></div>
   </div>
   <h3>Offline</h3>
   <div class="ds-frame">
     <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
-    <div class="ds-frame__body"><section class="empty empty--warning"><div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 3l18 18M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M12 20h.01M16.7 11.3A10 10 0 0 1 19 13M2 9a15 15 0 0 1 4.6-2.9M10.7 5.1A15 15 0 0 1 22 9"/></svg></div><p class="empty__title">You’re offline</p><p class="empty__text">Saved appointment details remain available. Requests need a connection.</p><div class="empty__actions"><button class="btn btn--primary" type="button">Try again</button><a class="btn" href="../../mocks/pages/my-appointments/default.html">View saved appointments</a></div></section></div>
+    <div class="ds-frame__body"><section class="empty empty--warning empty--stack-actions"><div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 3l18 18M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M12 20h.01M16.7 11.3A10 10 0 0 1 19 13M2 9a15 15 0 0 1 4.6-2.9M10.7 5.1A15 15 0 0 1 22 9"/></svg></div><p class="empty__title">You’re offline</p><p class="empty__text">Saved appointment details remain available. Requests need a connection.</p><div class="empty__actions"><button class="btn btn--primary" type="button">Try again</button><a class="btn" href="../../mocks/pages/my-appointments/default.html">View saved appointments</a></div></section></div>
   </div>
 </section>
 
@@ -98,7 +98,7 @@
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
     <li>The shell behaves as on every page: top-bar links collapse below 768px; the footer wraps.</li>
-    <li>The empty state centres in <code>.product-main</code> with the full padding; on phones its actions stack and the primary action may be full width.</li>
+    <li>The empty state centres in <code>.product-main</code> with the full padding. It always carries <code>.empty--stack-actions</code>: below 640px the recovery actions stack at the empty state's full content width, primary first; from 640px they sit side by side and centred.</li>
     <li>The reference id wraps rather than overflowing; it is selectable text so it can be copied into a support email.</li>
   </ul>
 </section>
@@ -130,7 +130,7 @@
   <h3>Motion</h3>
   <p>None beyond the shell. The page does not animate in, and "Try again" shows the button's loading state.</p>
   <h3>Touch</h3>
-  <p>The recovery action is at least 40px tall and full width on phones when it is the only action.</p>
+  <p>The recovery actions are at least 40px tall and full width below 640px.</p>
 </section>
 
 <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
@@ -169,7 +169,7 @@
 
 <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
   <pre><code>&lt;main id="main" class="container product-main"&gt;
-  &lt;section class="empty empty--error"&gt;
+  &lt;section class="empty empty--error empty--stack-actions"&gt;
     &lt;div class="empty__icon" aria-hidden="true"&gt;&lt;svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"&gt;…&lt;/svg&gt;&lt;/div&gt;
     &lt;h1 class="empty__title" tabindex="-1"&gt;HairPop needs a moment&lt;/h1&gt;
     &lt;p class="empty__text"&gt;We couldn’t load this page. Your booking request has not been resent.&lt;/p&gt;
@@ -183,6 +183,7 @@
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.product-shell</code> / <code>.product-main</code></td><td>The normal shell; error pages never drop it.</td></tr>
     <tr><td><code>.empty</code> + <code>.empty--error</code> / <code>.empty--warning</code></td><td>Full-size empty state with the cause's tint (404 uses the default).</td></tr>
+    <tr><td><code>.empty--stack-actions</code></td><td>Always on an error page: stacks the recovery actions at full width below 640px.</td></tr>
     <tr><td><code>h1.empty__title</code></td><td>The page heading; <code>tabindex="-1"</code> so client-side routes can focus it.</td></tr>
     <tr><td><code>.empty__reference</code></td><td>Reference id for 500 pages.</td></tr>
   </tbody></table>
@@ -195,10 +196,8 @@
     <li><a href="../../mocks/pages/forbidden/default.html">pages/forbidden/default</a> (403)</li>
     <li><a href="../../mocks/pages/server-error/default.html">pages/server-error/default</a> (500)</li>
     <li><a href="../../mocks/pages/offline/default.html">pages/offline/default</a> (offline)</li>
-    <li><a href="../../mocks/pages/not-found/loading.html">pages/not-found/loading</a> (loading state on a static page)</li>
-    <li><a href="../../mocks/pages/server-error/error.html">pages/server-error/error</a> (error state of an error page)</li>
   </ul>
-  <p>Drift fixed during extraction: every error page used the ✦ glyph and the accent tint (now an icon and tint per cause); the 500 page had no reference id (now <code>.empty__reference</code>); the empty title was an <code>h2</code> repeating the page header's <code>h1</code> word for word (now the empty title is the page's only <code>h1</code>); the not-found, forbidden, server-error and offline mocks carry loading and error states that a static error response cannot have (dropped).</p>
+  <p>Drift fixed during extraction: every error page used the ✦ glyph and the accent tint (now an icon and tint per cause); the 500 page had no reference id (now <code>.empty__reference</code>); the empty title was an <code>h2</code> repeating the page header's <code>h1</code> word for word (now the empty title is the page's only <code>h1</code>); the not-found, forbidden, server-error and offline mocks carried loading and error states that a static error response cannot have (dropped; the manifest marks them not applicable); the forbidden sentence "Sign in with the account used for this appointment." implied the appointment exists (now "Sign in with the account you use for your appointments.").</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

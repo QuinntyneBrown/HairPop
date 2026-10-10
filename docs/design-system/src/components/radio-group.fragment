@@ -27,7 +27,7 @@
 <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
   {{example:[stack,start]Horizontal rating and card-style offered times.}}
 <fieldset><legend>Rating, 1 to 5</legend><div class="choice-group choice-group--inline"><label class="choice"><input type="radio" name="rg-rate"><span>1</span></label><label class="choice"><input type="radio" name="rg-rate"><span>2</span></label><label class="choice"><input type="radio" name="rg-rate"><span>3</span></label><label class="choice"><input type="radio" name="rg-rate"><span>4</span></label><label class="choice"><input type="radio" name="rg-rate" checked><span>5 (excellent)</span></label></div></fieldset>
-<fieldset><legend>Preferred time</legend><div class="choice-group" style="gap: var(--space-2);"><label class="choice choice--card"><input type="radio" name="rg-time" checked><span class="choice__text"><span>Sat 24 Oct · 10:00 am</span><small>About 5 hours · estimate $180–$240</small></span></label><label class="choice choice--card"><input type="radio" name="rg-time"><span class="choice__text"><span>Sun 25 Oct · 11:00 am</span><small>About 5 hours · estimate $180–$240</small></span></label></div></fieldset>
+<fieldset><legend>Preferred time</legend><div class="choice-group"><label class="choice choice--card"><input type="radio" name="rg-time" checked><span class="choice__text"><span>Sat 24 Oct · 10:00 am</span><small>About 5 hours · estimate $180–$240</small></span></label><label class="choice choice--card"><input type="radio" name="rg-time"><span class="choice__text"><span>Sun 25 Oct · 11:00 am</span><small>About 5 hours · estimate $180–$240</small></span></label></div></fieldset>
   {{/example}}
 </section>
 
@@ -74,7 +74,8 @@
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
     <li>Horizontal groups wrap; if options wrap onto three lines at 360px, switch to vertical.</li>
-    <li>Card options are full width on phones and may sit two per row from 768px.</li>
+    <li>Card options are one per row at every width: two per row wrapped "About 5 hours · estimate $180–$240" onto two lines in the form panel at 768 and 1280px.</li>
+    <li>With 200% text, a card's time and estimate move under the radio when fewer than 8em remain beside it, and long words break, so nothing runs past the card's edge.</li>
   </ul>
 </section>
 
@@ -119,9 +120,9 @@
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
     <figure class="ds-do"><div class="ds-example__canvas"><fieldset><legend>Rating, 1 to 5</legend><div class="choice-group choice-group--inline"><label class="choice"><input type="radio" name="dd-r1"><span>1</span></label><label class="choice"><input type="radio" name="dd-r1"><span>2</span></label><label class="choice"><input type="radio" name="dd-r1"><span>3</span></label><label class="choice"><input type="radio" name="dd-r1"><span>4</span></label><label class="choice"><input type="radio" name="dd-r1" checked><span>5</span></label></div></fieldset></div><figcaption>Five ratings, all visible, one choice.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="dd-rnum">Rating, 1 to 5</label><input class="input" id="dd-rnum" type="number" value="5"></div></div><figcaption>The care-and-review mock asks for the rating in a number input, which accepts 0, 7 or 4.5.</figcaption></figure>
-    <figure class="ds-do"><div class="ds-example__canvas"><label class="choice choice--card"><input type="radio" name="dd-t" checked><span class="choice__text"><span>Sat 24 Oct · 10:00 am</span><small>Offered by Nia</small></span></label></div><figcaption>Offer Nia’s available times as choices.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="dd-dt">Preferred time</label><input class="input" id="dd-dt" type="datetime-local" value="2026-10-24T10:00"></div></div><figcaption>The booking-request mock uses a free date-time picker, so Maya can ask for a time Nia never offered.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="dd-rnum">Rating, 1 to 5</label><input class="input" id="dd-rnum" type="number" value="5"></div></div><figcaption>A number input for a rating accepts 0, 7 or 4.5.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><label class="choice choice--card"><input type="radio" name="dd-t" checked><span class="choice__text"><span>Sat 24 Oct · 10:00 am</span><small>About 5 hours · estimate $180–$240</small></span></label></div><figcaption>Offer Nia’s available times as choices.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="dd-dt">Preferred time</label><input class="input" id="dd-dt" type="datetime-local" value="2026-10-24T10:00"></div></div><figcaption>A free date-time picker lets Maya ask for a time Nia never offered.</figcaption></figure>
   </div>
 </section>
 
@@ -137,6 +138,7 @@
       {{tok:Radius|--radius-full}}
       {{tok:Card padding / radius|--space-4|--radius-md}}
       {{tok:Inline gap row / column|--space-2|--space-6}}
+      {{tok:Card group gap|--space-2}}
     </tbody>
   </table></div>
 </section>
@@ -153,7 +155,7 @@
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.choice</code> with <code>type="radio"</code></td><td>Round control.</td></tr>
     <tr><td><code>.choice-group</code> / <code>--inline</code></td><td>Vertical / wrapping horizontal group.</td></tr>
-    <tr><td><code>.choice--card</code></td><td>Card option; highlights with <code>:has(input:checked)</code>.</td></tr>
+    <tr><td><code>.choice--card</code></td><td>Card option; highlights with <code>:has(input:checked)</code>. A group of cards spaces them <code>--space-2</code> apart (<code>.choice-group:has(&gt; .choice--card)</code>).</td></tr>
     <tr><td><code>aria-invalid="true"</code> + <code>fieldset[aria-describedby]</code></td><td>Invalid group with its message.</td></tr>
     <tr><td><code>data-state="hover|focus|checked"</code></td><td>Documentation only.</td></tr>
   </tbody></table>
@@ -161,10 +163,10 @@
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
   <ul>
-    {{mock:pages/care-and-review/default|rating as a number input}}
-    {{mock:pages/care-and-review/invalid|"Choose a rating from 1 to 5."}}
-    {{mock:pages/booking-request/default|preferred time as <code>datetime-local</code>}}
-    {{mock:pages/booking-request/invalid|"Choose an offered time."}}
+    {{mock:pages/care-and-review/default|rating as a horizontal radio group}}
+    {{mock:pages/care-and-review/invalid|invalid rating group, "Choose a rating from 1 to 5."}}
+    {{mock:pages/booking-request/default|offered times as card radios}}
+    {{mock:pages/booking-request/invalid|invalid offered-times group}}
   </ul>
-  <p>Drift fixed during extraction: no mock used radios. The rating was a number input and the preferred time a free <code>datetime-local</code> although only 1–5 and Nia’s offered times are valid; both become radio groups. The card variant was added for offered times.</p>
+  <p>Drift fixed during extraction: no mock used radios. The rating was a number input and the preferred time a free <code>datetime-local</code> although only 1–5 and Nia’s offered times are valid; both are now radio groups in the mocks. The card variant was added for offered times.</p>
 </section>

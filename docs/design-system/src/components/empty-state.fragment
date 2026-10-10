@@ -5,7 +5,7 @@
     <li><b>First-run</b>: nothing exists yet ("No appointments yet"). Point to how things get here.</li>
     <li><b>No results</b>: search or filters excluded everything. Offer to widen or clear them.</li>
     <li><b>Error</b>: the content could not load. Say the person's work is safe and offer "Try again".</li>
-    <li><b>Permission</b>: the content exists but this account cannot see it. Offer to sign in with the right account.</li>
+    <li><b>Permission</b>: this account cannot open the content. Offer to sign in with the right account, and never say whether the content exists (another customer's appointment); use the forbidden copy of the <a href="error-page.html">error page</a>.</li>
     <li><b>Success</b>: a form's job is done (request sent, review posted). The region becomes a confirmation with the next step.</li>
   </ul>
   <p>Full-page errors inside the shell (404, 403, 500, offline) are documented as <a href="error-page.html">Error page</a>.</p>
@@ -45,7 +45,7 @@
 </section>
 <section class="empty">
   <div class="empty__icon" aria-hidden="true">{{icon:search|icon--lg}}</div>
-  <p class="empty__title">No matches for these filters</p>
+  <p class="empty__title">No braiders match these filters</p>
   <p class="empty__text">Try a wider price range or distance to see more options.</p>
   <div class="empty__actions"><button class="btn btn--primary" type="button">Clear filters</button></div>
 </section>
@@ -57,8 +57,8 @@
 </section>
 <section class="empty empty--warning">
   <div class="empty__icon" aria-hidden="true">{{icon:lock|icon--lg}}</div>
-  <p class="empty__title">This appointment belongs to another account</p>
-  <p class="empty__text">Sign in with the account used for this appointment.</p>
+  <p class="empty__title">You can’t open this page</p>
+  <p class="empty__text">Sign in with the account you use for your appointments.</p>
   <div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/sign-in/default.html">Sign in</a></div>
 </section>
 <section class="empty">
@@ -112,15 +112,16 @@
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
     <li>Centred at every width. The title grows from 22px to 28px at 768px; the text stays capped at 36ch so it never runs the full card width.</li>
-    <li>Actions wrap and centre; on phones a single primary action may be full width when the empty state fills the screen.</li>
+    <li>Actions wrap and centre. When the empty state fills the screen (every error page), add <code>.empty--stack-actions</code>: below 640px the actions stack in a column at the empty state's full content width, primary first; from 640px they sit side by side again.</li>
     <li>Below 640px, use the compact size inside cards and dialogs so the action stays above the fold.</li>
   </ul>
 </section>
 
 <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
-  <p>The icon circle reads <code>--empty-icon-bg</code> and <code>--empty-icon-fg</code>, which the variants map to the accent, danger or warning tokens. In the dark theme those become deep tints (plum 950, red 950, amber 950) with light icons, so the circle reads as part of the surface rather than a bright spot.</p>
-  <pre><code>/* A success variant with the success tint */
-.empty--success .empty__icon { --empty-icon-bg: var(--color-success-bg); --empty-icon-fg: var(--color-success-icon); }</code></pre>
+  <p>The icon circle reads <code>--empty-icon-bg</code> and <code>--empty-icon-fg</code>, which the variants map to the accent, danger or warning tokens. In the dark theme those become deep tints (plum 950, red 950, amber 950) with light icons, so the circle reads as part of the surface rather than a bright spot. There is no success tint: success states use the default accent circle with a <code>check</code> icon.</p>
+  <p>The circle sizes the icon inside it, whatever size class the icon carries: 24px in the full size and 20px in <code>.empty--compact</code>. In forced colours the circle's fill is removed, so it draws a <code>CanvasText</code> hairline outline and the icon follows the system text colour.</p>
+  <pre><code>/* Re-skin the circle on a sunken well (an override, not a variant) */
+.well .empty__icon { --empty-icon-bg: var(--color-bg-surface); }</code></pre>
 </section>
 
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
@@ -200,7 +201,8 @@
     <tr><td><code>.empty</code></td><td>Centred column, full padding.</td></tr>
     <tr><td><code>.empty--compact</code></td><td>Less padding, 48px icon; for cards, panels and dialogs.</td></tr>
     <tr><td><code>.empty--error</code> <code>.empty--warning</code></td><td>Danger or warning icon tint.</td></tr>
-    <tr><td><code>.empty__icon</code>, <code>.empty__title</code>, <code>.empty__text</code>, <code>.empty__actions</code></td><td>The four parts; the title is a heading in production.</td></tr>
+    <tr><td><code>.empty--stack-actions</code></td><td>Below 640px, stacks the actions at full width, primary first (error pages).</td></tr>
+    <tr><td><code>.empty__icon</code>, <code>.empty__title</code>, <code>.empty__text</code>, <code>.empty__actions</code></td><td>The four parts; the title is a heading in production. The circle sizes its <code>svg.icon</code> (24px, 20px compact); an empty <code>.empty__actions</code> is hidden.</td></tr>
     <tr><td><code>.empty__reference</code></td><td>Monospace reference id for support (error pages).</td></tr>
     <tr><td><code>role="status"</code></td><td>Optional; announces an empty state that replaces content after an action.</td></tr>
   </tbody></table>
@@ -212,11 +214,10 @@
     {{mock:pages/my-appointments/empty|first-run}}
     {{mock:pages/notification-center/empty|first-run}}
     {{mock:pages/braider-profile/empty|first-run in a detail page}}
-    {{mock:pages/style-gallery/no-results|no results with a filter badge}}
+    {{mock:pages/style-gallery/no-results|no results under the applied-filter chips}}
     {{mock:pages/my-appointments/no-results|no results}}
     {{mock:pages/style-gallery/error|error with retry}}
     {{mock:pages/booking-request/success|success replaces the form}}
-    {{mock:pages/forbidden/default|permission}}
   </ul>
-  <p>Drift fixed during extraction: icons were text glyphs (✦, !, ⌕, ✓) that some screen readers announce (now SVG icons, <code>aria-hidden</code>); every first-run screen used the same title "Nothing here yet" (now a specific title per screen); the empty braider profile offered "Explore styles" instead of continuing to book; the empty title used the 36px light <code>h2</code> role (now <code>--text-h3</code>, 28px from 768px); success states reused <code>.empty</code> with a ✓ glyph (kept as the success variant, with a check icon and focus moved to the title).</p>
+  <p>Drift fixed during extraction: icons were text glyphs (✦, !, ⌕, ✓) that some screen readers announce (now SVG icons, <code>aria-hidden</code>); every first-run screen used the same title "Nothing here yet" (now a specific title per screen); the empty braider profile offered "Explore styles" instead of continuing to book; the empty title used the 36px light <code>h2</code> role (now <code>--text-h3</code>, 28px from 768px); success states reused <code>.empty</code> with a ✓ glyph (kept on the default variant with a <code>check</code> icon and focus moved to the title; there is no success tint); permission is the error page's forbidden copy, which never says whether the content exists.</p>
 </section>

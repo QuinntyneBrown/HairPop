@@ -19,7 +19,7 @@
     <ol class="ds-anatomy__list">
       <li><div><b>Dot</b><small>8px, <code>currentColor</code>; a shape cue beside the colour. Hidden on count badges.</small></div></li>
       <li><div><b>Label</b><small>Overline style: 12px semibold, uppercase, 0.14em tracking. One to three words.</small></div></li>
-      <li><div><b>Pill</b><small>24px tall, <code>--radius-full</code>, 8px horizontal padding; hugs its content and never stretches.</small></div></li>
+      <li><div><b>Pill</b><small>24px tall, <code>--radius-full</code>, 8px horizontal padding; hugs its content and never stretches. A label wider than its container wraps inside the pill.</small></div></li>
     </ol>
   </div>
 </section>
@@ -34,9 +34,9 @@
 <span class="badge badge--danger">Cancelled</span>
   {{/example}}
   <h3>Solid and count</h3>
-  {{example:Solid is for emphasis on a photo; the count sits inside the "Updates" link and reads as part of its name.}}
+  {{example:Solid is for emphasis on a photo; the count sits inside the "Updates" link, followed by hidden words that give it meaning: the link reads "Updates 2, 2 unread".}}
 <span class="badge badge--solid">New</span>
-<a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2<span class="visually-hidden"> unread</span></span></a>
+<a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a>
   {{/example}}
   <h3>The request lifecycle</h3>
   <p>One appointment moves through these badges; keep the words and tones identical on every screen (my appointments, appointment detail, notifications).</p>
@@ -60,7 +60,7 @@
       <tr><th scope="row">Success</th><td><div class="card"><span class="badge badge--success">Confirmed</span></div></td><td><span class="badge badge--success">Confirmed</span></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/success.html">HP-1048 <span class="badge badge--success">Confirmed</span></a></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/success.html" data-state="hover">HP-1048 <span class="badge badge--success">Confirmed</span></a></td></tr>
       <tr><th scope="row">Warning</th><td><div class="card"><span class="badge badge--warning">Awaiting reply</span></div></td><td><span class="badge badge--warning">Awaiting reply</span></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/default.html">HP-1048 <span class="badge badge--warning">Awaiting reply</span></a></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/default.html" data-state="hover">HP-1048 <span class="badge badge--warning">Awaiting reply</span></a></td></tr>
       <tr><th scope="row">Danger</th><td><div class="card"><span class="badge badge--danger">Cancelled</span></div></td><td><span class="badge badge--danger">Cancelled</span></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">HP-0921 <span class="badge badge--danger">Cancelled</span></a></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" data-state="hover">HP-0921 <span class="badge badge--danger">Cancelled</span></a></td></tr>
-      <tr><th scope="row">Count</th><td><div class="card"><span class="badge badge--count">2</span></div></td><td><span class="badge badge--count">2</span></td><td><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2<span class="visually-hidden"> unread</span></span></a></td><td><a class="account-link" href="../../mocks/pages/notification-center/default.html" data-state="hover">Updates <span class="badge badge--count">2<span class="visually-hidden"> unread</span></span></a></td></tr>
+      <tr><th scope="row">Count</th><td><div class="card"><span class="badge badge--count">2</span></div></td><td><span class="badge badge--count">2</span></td><td><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a></td><td><a class="account-link" href="../../mocks/pages/notification-center/default.html" data-state="hover">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a></td></tr>
     </tbody>
   </table></div>
   <h3>Both themes</h3>
@@ -73,8 +73,8 @@
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
-    <li>The badge never wraps (<code>white-space: nowrap</code>) and never stretches: inside a <code>.stack</code> it keeps its own width (<code>align-self: flex-start</code>).</li>
-    <li>At 360px, keep labels short enough to sit beside a title: "Awaiting reply" is the longest status in the product.</li>
+    <li>The badge never stretches: <code>width: fit-content</code> keeps its own width inside a <code>.stack</code>, and it takes its parent's alignment, so it is centred in a link or tab and starts the line in a column.</li>
+    <li>At 360px, keep labels short enough to sit on one line beside a title: "Awaiting reply" is the longest status in the product. As a safety net, a label wider than its container (text enlarged to 200%) wraps inside the pill, which grows in height and never overflows (<code>max-width: 100%</code>). The count form never wraps.</li>
     <li>The count badge stays visible at every width, even when "Updates" is the only nav item left in the top bar.</li>
   </ul>
 </section>
@@ -95,7 +95,9 @@
   <h3>Focus</h3>
   <p>None on the badge. The containing link or card shows the shared ring.</p>
   <h3>Labelling</h3>
-  <p>Text badges need nothing extra. A count badge adds visually hidden words so it makes sense: <code>2&lt;span class="visually-hidden"&gt; unread&lt;/span&gt;</code>. Do not put <code>aria-label</code> on the link around it: "Updates 2 unread" keeps the visible label inside the accessible name (WCAG 2.5.3), where "Notifications, 2 unread" would not.</p>
+  <p>Text badges need nothing extra. A count badge shows only the number; the link places visually hidden words with the full count right after it: <code>&lt;span class="badge badge--count"&gt;2&lt;/span&gt;&lt;span class="visually-hidden"&gt;, 2 unread&lt;/span&gt;</code>. Above 99 the badge shows "99+" and the hidden words keep the full number (", 120 unread"). Put <code>aria-label</code> on neither the badge nor the link: "Updates 2, 2 unread" keeps the visible label at the start of the accessible name (WCAG 2.5.3), where "Notifications, 2 unread" would not. A count of zero is not shown: the badge gets the <code>hidden</code> attribute (<code>.badge[hidden]</code> is <code>display: none</code>).</p>
+  <h3>Forced colours</h3>
+  <p>Every badge gets a <code>CanvasText</code> hairline border, and the dot is drawn in <code>CanvasText</code> with <code>forced-color-adjust: none</code>, so the shape cue survives; all tones then look alike and the words carry the status.</p>
   <h3>Contrast</h3>
   <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
     {{pair:Neutral label|--color-fg-muted|--color-bg-subtle|4.5}}
@@ -117,7 +119,7 @@
     <li>One to three words, written in sentence case in the source ("Awaiting reply"); CSS uppercases it.</li>
     <li>Describe the state, not the action: "Confirmed", not "Confirm".</li>
     <li>Use the same word for the same state everywhere: Awaiting reply, Confirmed, Completed, Cancelled.</li>
-    <li>Counts above 99 show "99+" with the hidden text " unread".</li>
+    <li>Counts above 99 show "99+"; the hidden text after the badge keeps the full number (", 120 unread").</li>
   </ul>
 </section>
 
@@ -156,14 +158,15 @@
   <pre><code>&lt;span class="badge badge--warning"&gt;Awaiting reply&lt;/span&gt;
 &lt;span class="badge badge--success"&gt;Confirmed&lt;/span&gt;
 &lt;a class="account-link" href="/notifications"&gt;Updates
-  &lt;span class="badge badge--count"&gt;2&lt;span class="visually-hidden"&gt; unread&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="badge badge--count"&gt;2&lt;/span&gt;&lt;span class="visually-hidden"&gt;, 2 unread&lt;/span&gt;
 &lt;/a&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.badge</code></td><td>Base: neutral tone, dot, uppercase overline label.</td></tr>
     <tr><td><code>.badge--info</code> <code>.badge--success</code> <code>.badge--warning</code> <code>.badge--danger</code></td><td>Status tone.</td></tr>
     <tr><td><code>.badge--solid</code></td><td>Filled accent, for emphasis on media.</td></tr>
     <tr><td><code>.badge--count</code></td><td>Numeric count on danger red; no dot, tabular figures.</td></tr>
-    <tr><td><code>.visually-hidden</code> inside</td><td>Gives a count its meaning for screen readers.</td></tr>
+    <tr><td><code>.visually-hidden</code> after a count</td><td>Gives a count its meaning for screen readers (", 2 unread").</td></tr>
+    <tr><td><code>hidden</code></td><td>A count of zero; the badge takes no space and is not read.</td></tr>
   </tbody></table>
 </section>
 
@@ -175,7 +178,6 @@
     {{mock:pages/appointment-detail/success|Confirmed}}
     {{mock:pages/notification-center/unread|Unread and Read badges}}
     {{mock:pages/style-gallery/default|count badge on Updates}}
-    {{mock:pages/matching-braiders/no-results|badge used as a filter summary}}
   </ul>
-  <p>Drift fixed during extraction: badges stretched to full width inside <code>.stack</code> (now <code>align-self: flex-start</code>); the dot was 6px and the pill 22px, both off the 4px grid (now 8px and 24px); Unread used warning and Read used info (system: Unread is info plus a bold title, Read is neutral or no badge); the Updates link's <code>aria-label</code> "Notifications, 2 unread" did not contain its visible label (system: visible text plus hidden " unread"); "Completed" used success although nothing is pending (system: neutral); the filter-summary badge should be chips.</p>
+  <p>Drift fixed during extraction: badges stretched to full width inside <code>.stack</code> (now <code>width: fit-content</code>); the dot was 6px and the pill 22px, both off the 4px grid (now 8px and 24px); Unread used warning and Read used info (system: Unread is info plus a bold title, Read is neutral or no badge); the Updates link's <code>aria-label</code> "Notifications, 2 unread" did not contain its visible label, and the count badge carried its own <code>aria-label</code> (system: no <code>aria-label</code>; the visible text, then hidden ", 2 unread" after the badge); "Completed" used success although nothing is pending (system: neutral); the filter-summary badge on no-results states is now one removable input chip per filter; the "Long names and missing photos" badge on edge states was a mock annotation and is gone.</p>
 </section>

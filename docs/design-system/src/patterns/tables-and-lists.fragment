@@ -26,7 +26,7 @@
       <article class="card story-card"><div class="story-card__art" aria-hidden="true">{{icon:sparkle|icon--fill}}</div><div class="stack"><p class="eyebrow">Next week</p><h2 class="card__title">Aisha Mensah</h2><p class="text-muted">4.8 ★ · 64 reviews · North York · from $195</p><a href="../../mocks/pages/braider-profile/default.html">View Aisha’s profile <span aria-hidden="true">→</span></a></div></article>
       <article class="card story-card"><div class="story-card__art" aria-hidden="true">{{icon:sparkle|icon--fill}}</div><div class="stack"><p class="eyebrow">Available Sun 25 Oct</p><h2 class="card__title">Jules Baptiste</h2><p class="text-muted">4.9 ★ · 41 reviews · Scarborough · from $170</p><a href="../../mocks/pages/braider-profile/default.html">View Jules’s profile <span aria-hidden="true">→</span></a></div></article>
     </div>
-    <nav class="pagination" aria-label="Results pages"><span class="pagination__summary">Showing 1–3 of 12</span><a href="#structure" aria-disabled="true">Previous</a><a href="#structure" aria-current="page">1</a><a href="#structure">2</a><a href="#structure">3</a><a href="#structure">Next</a></nav>
+    <nav class="pagination" aria-label="Results pages"><span class="pagination__summary">Showing 1–3 of 12</span><a role="link" aria-disabled="true">Previous</a><a href="#structure" aria-current="page">1</a><a href="#structure">2</a><a href="#structure">3</a><a href="#structure">Next</a></nav>
   </div></div>
 </section>
 
@@ -34,7 +34,7 @@
   <h3>Row list and table</h3>
   {{example:[stack]Row cards for Maya’s appointments; a table for comparing her visit history.}}
 <div class="card appointment-row"><div class="stack stack--sm"><span class="badge badge--warning">Awaiting reply</span><h2 class="card__title">Nia Okafor · knotless braids</h2><p class="text-muted">Sat 24 Oct · 10:00 am · estimate $180–$240</p></div><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div>
-<div class="table-wrap"><table class="table"><caption>Past appointments</caption><thead><tr><th scope="col" aria-sort="descending"><button type="button">Date</button></th><th scope="col">Braider</th><th scope="col">Style</th><th scope="col" class="num">Paid</th></tr></thead><tbody><tr><td>Sat 3 Oct</td><td>Nia Okafor</td><td>Medium knotless braids</td><td class="num">$210</td></tr><tr data-state="hover"><td>Sat 15 Aug</td><td>Nia Okafor</td><td>Passion twists</td><td class="num">$185</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="table"><caption>Past appointments</caption><thead><tr><th scope="col" aria-sort="descending"><button type="button">Date</button></th><th scope="col">Braider</th><th scope="col">Style</th><th scope="col" class="num">Paid</th></tr></thead><tbody><tr><th scope="row">Sat 3 Oct</th><td>Nia Okafor</td><td>Medium knotless braids</td><td class="num">$210</td></tr><tr data-state="hover"><th scope="row">Sat 15 Aug</th><td>Nia Okafor</td><td>Passion twists</td><td class="num">$185</td></tr></tbody></table></div>
   {{/example}}
   <ul>
     <li><b>Loading</b>: skeletons in the collection’s own shape (card grid or rows); the filter row stays usable.</li>
@@ -48,6 +48,7 @@
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
   <ul>
     <li>Card grids: 1 column under 768px, 2 to 1023px, 3 from 1024px (<code>.feature-grid</code>).</li>
+    <li>Lists stay one column; a trailing badge moves to its own line rather than squeezing a title below half the row.</li>
     <li>Row cards wrap the action under the text on phones.</li>
     <li>Tables scroll horizontally inside <code>.table-wrap</code>; tables with four or fewer columns may switch to row cards under 768px when the page says so.</li>
     <li>The pagination summary takes its own line under 640px.</li>
@@ -58,7 +59,7 @@
   <ul>
     <li>Cards in a collection are <code>&lt;article&gt;</code> with a heading; each has one real link whose text names the item ("View Nia’s profile").</li>
     <li>Filter chips are toggle buttons with <code>aria-pressed</code>, grouped and labelled; changing a filter announces the new count in a status region ("12 braiders").</li>
-    <li>Tables have a <code>&lt;caption&gt;</code>, <code>scope</code> on headers, and <code>aria-sort</code> on the sorted column; the sort control is a button.</li>
+    <li>Tables have a <code>&lt;caption&gt;</code>, <code>scope</code> on column headers, a row header (<code>&lt;th scope="row"&gt;</code>) for the identifying cell, and <code>aria-sort</code> on the sorted column only; the sort control is a button. A table wider than its wrapper scrolls inside it, and the wrapper becomes a focusable region named by the caption.</li>
     <li>Pagination is a labelled <code>nav</code>; the current page has <code>aria-current="page"</code>.</li>
     <li>Status is badge text plus colour: "Awaiting reply", "Completed", "Unread".</li>
   </ul>

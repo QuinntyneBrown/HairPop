@@ -29,17 +29,19 @@
   <div class="ds-anatomy">
     <figure class="ds-anatomy__figure">
       <div class="progress-field" style="width: 100%; max-width: 24rem;">
-        <div class="progress-field__label"><span id="anat-progress-label">Uploading inspiration photos</span><output>2 of 3</output></div>
+        <div class="progress-field__label"><span id="anat-progress-label">Uploading inspiration photos</span><output>2 of 3</output><button class="btn btn--sm" type="button">Cancel upload</button></div>
         <div class="progress" role="progressbar" aria-labelledby="anat-progress-label" aria-valuemin="0" aria-valuemax="3" aria-valuenow="2" aria-valuetext="2 of 3 photos"><div class="progress__bar" style="--value: 66%;"></div></div>
       </div>
       <span class="ds-callout" style="left: 12%; top: 26%;" aria-hidden="true">1</span>
-      <span class="ds-callout" style="left: 82%; top: 26%;" aria-hidden="true">2</span>
-      <span class="ds-callout" style="left: 70%; top: 66%;" aria-hidden="true">3</span>
-      <span class="ds-callout" style="left: 34%; top: 66%;" aria-hidden="true">4</span>
+      <span class="ds-callout" style="left: 52%; top: 26%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 84%; top: 26%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 70%; top: 70%;" aria-hidden="true">4</span>
+      <span class="ds-callout" style="left: 34%; top: 70%;" aria-hidden="true">5</span>
     </figure>
     <ol class="ds-anatomy__list">
       <li><div><b>Label</b><small>Says what is happening, in the present tense; it names the progress bar.</small></div></li>
       <li><div><b>Value (optional)</b><small>An <code>&lt;output&gt;</code> with a count or percentage, tabular numbers.</small></div></li>
+      <li><div><b>Action (optional)</b><small>One small button at the end of the label row: "Cancel upload" while running, "Retry upload" after a failure.</small></div></li>
       <li><div><b>Track</b><small>8px tall, full radius, <code>--color-bg-subtle-hover</code>.</small></div></li>
       <li><div><b>Fill</b><small>Width from <code>--value</code>; <code>--progress-fill</code> (accent, success or danger).</small></div></li>
     </ol>
@@ -61,7 +63,7 @@
   <div class="progress progress--success" role="progressbar" aria-labelledby="pb-v3" aria-valuemin="0" aria-valuemax="3" aria-valuenow="3" aria-valuetext="3 of 3 photos"><div class="progress__bar" style="--value: 100%;"></div></div>
 </div>
 <div class="progress-field">
-  <div class="progress-field__label"><span id="pb-v4">Upload stopped: connection lost</span><output>1 of 3</output></div>
+  <div class="progress-field__label"><span id="pb-v4">Upload stopped: connection lost</span><output>1 of 3</output><button class="btn btn--sm" type="button">Retry upload</button></div>
   <div class="progress progress--danger" role="progressbar" aria-labelledby="pb-v4" aria-valuemin="0" aria-valuemax="3" aria-valuenow="1" aria-valuetext="1 of 3 photos, stopped"><div class="progress__bar" style="--value: 33%;"></div></div>
 </div></div><div class="ds-example__caption"><span>Determinate, indeterminate, success and danger. The fill colour is never the only signal: the label changes with it.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;progress-field&quot;&gt;
   &lt;div class=&quot;progress-field__label&quot;&gt;&lt;span id=&quot;pb-v1&quot;&gt;Uploading inspiration photos&lt;/span&gt;&lt;output&gt;2 of 3&lt;/output&gt;&lt;/div&gt;
@@ -76,7 +78,7 @@
   &lt;div class=&quot;progress progress--success&quot; role=&quot;progressbar&quot; aria-labelledby=&quot;pb-v3&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;3&quot; aria-valuenow=&quot;3&quot; aria-valuetext=&quot;3 of 3 photos&quot;&gt;&lt;div class=&quot;progress__bar&quot; style=&quot;--value: 100%;&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;progress-field&quot;&gt;
-  &lt;div class=&quot;progress-field__label&quot;&gt;&lt;span id=&quot;pb-v4&quot;&gt;Upload stopped: connection lost&lt;/span&gt;&lt;output&gt;1 of 3&lt;/output&gt;&lt;/div&gt;
+  &lt;div class=&quot;progress-field__label&quot;&gt;&lt;span id=&quot;pb-v4&quot;&gt;Upload stopped: connection lost&lt;/span&gt;&lt;output&gt;1 of 3&lt;/output&gt;&lt;button class=&quot;btn btn--sm&quot; type=&quot;button&quot;&gt;Retry upload&lt;/button&gt;&lt;/div&gt;
   &lt;div class=&quot;progress progress--danger&quot; role=&quot;progressbar&quot; aria-labelledby=&quot;pb-v4&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;3&quot; aria-valuenow=&quot;1&quot; aria-valuetext=&quot;1 of 3 photos, stopped&quot;&gt;&lt;div class=&quot;progress__bar&quot; style=&quot;--value: 33%;&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre></details></div>
   <h3>Bar only</h3>
@@ -111,15 +113,14 @@
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
     <li>The bar is always 100% of its container; it never sets its own width. Place it in a <code>.progress-field</code> inside the form or dialog it reports on.</li>
-    <li>The label and value share one row and wrap onto two lines at 360px rather than truncating; keep the label short so it rarely wraps.</li>
+    <li>The label, value and action share one row; when they do not fit, the label keeps the first line and the value and action wrap onto the next, never truncating or squeezing the count. Keep the label short so it rarely wraps.</li>
     <li>In a bottom-sheet dialog on phones, the progress field sits above the sticky footer so it is never covered.</li>
   </ul>
 </section>
 
 <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
   <p>The fill reads one component token, <code>--progress-fill</code>, which <code>.progress--success</code> and <code>.progress--danger</code> point at <code>--color-success-solid</code> and <code>--color-danger-solid</code>. The track is <code>--color-bg-subtle-hover</code>. In the dark theme the accent lightens to plum 300 and the track to grey 700, so the fill stays clearly brighter than the track.</p>
-  <pre><code>/* A quieter bar inside a toast */
-.toast .progress { --progress-fill: var(--color-fg-inverse); }</code></pre>
+  <p>Inside a toast the fill reads <code>--color-fg-inverse</code> (<code>.toast .progress</code> in <code>components.css</code>), so it stays quiet on the inverse surface.</p>
 </section>
 
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
@@ -142,10 +143,12 @@
     <div class="ds-pair"><span>Value on surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface" data-min="4.5"></span></div>
   </div>
   <p>The track itself is decorative; the fill, label and value carry the information.</p>
+  <h3>Forced colours</h3>
+  <p>The track gets a <code>CanvasText</code> hairline outline and the fill opts out of adjustment with a <code>Highlight</code> background, so the reached value stays visible.</p>
   <h3>Motion</h3>
   <p>Determinate fills animate width over <code>--duration-deliberate</code> (500ms); reduced motion makes the change instant. The indeterminate sweep loops on <code>--duration-loop-shimmer</code> and pauses under <code>prefers-reduced-motion</code> through <code>--motion-loop-state</code>, leaving a still 40% segment; the label still says the task is running.</p>
   <h3>Touch</h3>
-  <p>Not a target. Any Cancel or Retry button next to it follows the button sizes (40px or more).</p>
+  <p>Not a target. The Cancel or Retry action is a small button (32px tall), above the 24px minimum target.</p>
 </section>
 
 <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
@@ -202,7 +205,7 @@
     <tr><td><code>style="--value: 66%"</code></td><td>Fill amount; keep in step with <code>aria-valuenow</code>.</td></tr>
     <tr><td><code>.progress--indeterminate</code></td><td>Looping sweep; omit <code>aria-valuenow</code>.</td></tr>
     <tr><td><code>.progress--success</code> <code>.progress--danger</code></td><td>Outcome fill colour.</td></tr>
-    <tr><td><code>.progress-field</code>, <code>.progress-field__label</code></td><td>Label row (label and <code>&lt;output&gt;</code>) above the bar.</td></tr>
+    <tr><td><code>.progress-field</code>, <code>.progress-field__label</code></td><td>Label row (label, <code>&lt;output&gt;</code> and an optional small button) above the bar; wraps when it does not fit.</td></tr>
     <tr><td><code>aria-valuemin/max/now</code>, <code>aria-valuetext</code></td><td>Determinate value for assistive technology.</td></tr>
   </tbody></table>
 </section>

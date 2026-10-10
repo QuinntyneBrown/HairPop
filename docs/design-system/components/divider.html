@@ -17,7 +17,7 @@
 <main id="main" class="ds-main">
 <header class="ds-header"><p class="ds-kicker">Component · Containers and overlays</p><h1>Divider</h1><p class="ds-lead">A divider is a hairline that separates groups when space alone is not enough: a card footer, a menu group, the line above the site footer.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill"><code>&lt;hr&gt;</code> / <code>role="separator"</code></span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
-  <p>Reach for spacing first: the 4px scale already separates most groups. Use a divider when two adjacent groups would otherwise read as one, such as a card's footer actions, a menu's destructive group, or a long settings form split into topics. Do not add a rule under every list item inside a bordered card; one edge is enough.</p>
+  <p>Reach for spacing first: the 4px scale already separates most groups. Use a divider when two adjacent groups would otherwise read as one, such as a card's footer actions, a menu's destructive group, or a long settings form split into topics. Do not add a divider element under every list item; the <a href="list.html">list</a> draws its own row rules.</p>
   <ul>
     <li><b>Horizontal</b>: <code>&lt;hr&gt;</code> or <code>.divider</code> between blocks; 24px above and below.</li>
     <li><b>Vertical</b>: separates inline groups in a toolbar or footer row.</li>
@@ -44,13 +44,13 @@
   <p><strong>Nia received your request</strong><br><span class="text-muted">Today at 9:42 am</span></p>
   <div class="divider divider--label"><span>Earlier</span></div>
   <p><strong>How to prepare for knotless braids</strong><br><span class="text-muted">Yesterday</span></p>
-  <hr>
+  <hr class="divider">
   <p class="text-muted">Notifications older than 30 days are archived.</p>
-</div></div><div class="ds-example__caption"><span>Horizontal and labelled dividers inside a card.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;card&quot;&gt;
+</div></div><div class="ds-example__caption"><span>Horizontal and labelled dividers inside a card keep 24px above and below; the card's 16px block flow skips them.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;card&quot;&gt;
   &lt;p&gt;&lt;strong&gt;Nia received your request&lt;/strong&gt;&lt;br&gt;&lt;span class=&quot;text-muted&quot;&gt;Today at 9:42 am&lt;/span&gt;&lt;/p&gt;
   &lt;div class=&quot;divider divider--label&quot;&gt;&lt;span&gt;Earlier&lt;/span&gt;&lt;/div&gt;
   &lt;p&gt;&lt;strong&gt;How to prepare for knotless braids&lt;/strong&gt;&lt;br&gt;&lt;span class=&quot;text-muted&quot;&gt;Yesterday&lt;/span&gt;&lt;/p&gt;
-  &lt;hr&gt;
+  &lt;hr class=&quot;divider&quot;&gt;
   &lt;p class=&quot;text-muted&quot;&gt;Notifications older than 30 days are archived.&lt;/p&gt;
 &lt;/div&gt;</code></pre></details></div>
   <div class="ds-example"><div class="ds-example__canvas"><div class="cluster"><span class="text-muted">HairPop · Made for confident hair decisions</span><span class="divider divider--vertical" role="separator" aria-orientation="vertical"></span><a href="../../mocks/pages/terms/default.html">Terms</a><a href="../../mocks/pages/privacy/default.html">Privacy</a></div></div><div class="ds-example__caption"><span>A vertical divider separates the tagline from the legal links in a footer row.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;cluster&quot;&gt;&lt;span class=&quot;text-muted&quot;&gt;HairPop · Made for confident hair decisions&lt;/span&gt;&lt;span class=&quot;divider divider--vertical&quot; role=&quot;separator&quot; aria-orientation=&quot;vertical&quot;&gt;&lt;/span&gt;&lt;a href=&quot;../../mocks/pages/terms/default.html&quot;&gt;Terms&lt;/a&gt;&lt;a href=&quot;../../mocks/pages/privacy/default.html&quot;&gt;Privacy&lt;/a&gt;&lt;/div&gt;</code></pre></details></div>
@@ -136,11 +136,11 @@
 </section>
 
 <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
-  <pre><code>&lt;hr&gt;
+  <pre><code>&lt;hr class="divider"&gt;
 &lt;div class="divider divider--label"&gt;&lt;span&gt;Earlier&lt;/span&gt;&lt;/div&gt;
 &lt;span class="divider divider--vertical" role="separator" aria-orientation="vertical"&gt;&lt;/span&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
-    <tr><td><code>hr</code> / <code>.divider</code></td><td>Horizontal hairline with <code>--space-6</code> above and below.</td></tr>
+    <tr><td><code>hr</code> / <code>.divider</code></td><td>Horizontal hairline with <code>--space-6</code> above and below, inside a card too. In a flex or grid container with a gap the gap adds to the margin, so put horizontal dividers in block flow.</td></tr>
     <tr><td><code>.divider--vertical</code></td><td>Vertical hairline in a flex row.</td></tr>
     <tr><td><code>.divider--label</code></td><td>Centred label between two rules.</td></tr>
     <tr><td><code>role="separator"</code> <code>aria-orientation="vertical"</code></td><td>Semantics for a non-<code>hr</code> separator.</td></tr>
@@ -148,12 +148,13 @@
 </section>
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
-  <p>The mocks use hairlines as borders rather than elements:</p>
+  <p>Labelled dividers in the mocks; every other hairline there is a border of another component:</p>
   <ul>
-    <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (topbar bottom edge and site-footer top edge)</li>
-    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> (card edges separate the summary from the preparation list; no in-card rules yet)</li>
+    <li><a href="../../mocks/pages/notification-center/default.html">pages/notification-center/default</a> ("Earlier" between today's update and older ones, in the flush notification card)</li>
+    <li><a href="../../mocks/pages/sign-in/default.html">pages/sign-in/default</a> ("or" between the sign-in form and "Create account")</li>
+    <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (topbar bottom edge and site-footer top edge as borders)</li>
   </ul>
-  <p>Drift fixed during extraction: the footer separated Terms and Privacy with a typed " · " (now a cluster gap); <code>hr</code> and <code>.divider</code> had no labelled or vertical form.</p>
+  <p>Drift fixed during extraction: the footer separated Terms and Privacy with a typed " · " (now a cluster gap); <code>hr</code> and <code>.divider</code> had no labelled or vertical form; the card's block flow cut the space above a divider to 16px (cards now skip dividers).</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

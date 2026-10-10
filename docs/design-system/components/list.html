@@ -30,7 +30,7 @@
 <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
   <div class="ds-anatomy">
     <figure class="ds-anatomy__figure">
-      <ul class="list card card--flush" style="width: 100%;"><li><a class="list__item list__item--interactive" href="../../mocks/pages/appointment-detail/default.html"><span class="avatar" aria-hidden="true">NO</span><div class="list__body"><div class="list__title">Nia received your request</div><div class="list__meta">Today at 9:42 am · HP-1048</div></div><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a></li></ul>
+      <div class="card card--flush" style="width: 100%;"><ul class="list"><li><a class="list__item list__item--interactive" href="../../mocks/pages/appointment-detail/default.html"><span class="avatar" aria-hidden="true">NO</span><div class="list__body"><div class="list__title">Nia received your request</div><div class="list__meta">Today at 9:42 am · HP-1048</div></div><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a></li></ul></div>
       <span class="ds-callout" style="left: 6%; top: 30%;" aria-hidden="true">1</span>
       <span class="ds-callout" style="left: 30%; top: 30%;" aria-hidden="true">2</span>
       <span class="ds-callout" style="left: 30%; top: 70%;" aria-hidden="true">3</span>
@@ -46,62 +46,80 @@
 </section>
 
 <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
-  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><ul class="list card card--flush">
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card card--flush"><ul class="list">
   <li class="list__item">Medium knotless braids · from $180</li>
   <li class="list__item">Passion twists · from $160</li>
   <li class="list__item">Cornrows · from $90</li>
-</ul>
-<ul class="list card card--flush">
+</ul></div>
+<div class="card card--flush"><ul class="list">
   <li class="list__item"><span class="avatar" aria-hidden="true">NO</span><div class="list__body"><div class="list__title">Nia Okafor</div><div class="list__meta">Toronto West · 4.9 ★ from 86 reviews</div></div></li>
   <li class="list__item"><span class="avatar" aria-hidden="true">AM</span><div class="list__body"><div class="list__title">Aisha Mensah</div><div class="list__meta">North York · 4.8 ★ from 64 reviews</div></div></li>
-</ul>
-<ul class="list card card--flush" aria-label="Notifications">
-  <li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/appointment-detail/default.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Nia received your request</div><div class="list__meta">Today at 9:42 am · She will confirm the time and final price.</div></div><span class="badge badge--warning">Unread</span></a></li>
+</ul></div>
+<div class="card card--flush"><ul class="list" aria-label="Notifications">
+  <li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/appointment-detail/default.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Nia received your request</div><div class="list__meta">Today at 9:42 am · She will confirm the time and final price.</div></div></a></li>
   <li><a class="list__item list__item--interactive" href="../../mocks/pages/care-and-review/default.html"><div class="list__body"><div class="list__title">How to prepare for knotless braids</div><div class="list__meta">Yesterday · Read Nia’s preparation checklist.</div></div><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a></li>
-</ul></div><div class="ds-example__caption"><span>Simple, two-line with avatar, and an interactive notifications list with an unread row.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;ul class=&quot;list card card--flush&quot;&gt;
+</ul></div></div><div class="ds-example__caption"><span>Simple, two-line with avatar, and an interactive notifications list with an unread row.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;card card--flush&quot;&gt;&lt;ul class=&quot;list&quot;&gt;
   &lt;li class=&quot;list__item&quot;&gt;Medium knotless braids · from $180&lt;/li&gt;
   &lt;li class=&quot;list__item&quot;&gt;Passion twists · from $160&lt;/li&gt;
   &lt;li class=&quot;list__item&quot;&gt;Cornrows · from $90&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul class=&quot;list card card--flush&quot;&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;card card--flush&quot;&gt;&lt;ul class=&quot;list&quot;&gt;
   &lt;li class=&quot;list__item&quot;&gt;&lt;span class=&quot;avatar&quot; aria-hidden=&quot;true&quot;&gt;NO&lt;/span&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;div class=&quot;list__title&quot;&gt;Nia Okafor&lt;/div&gt;&lt;div class=&quot;list__meta&quot;&gt;Toronto West · 4.9 ★ from 86 reviews&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;
   &lt;li class=&quot;list__item&quot;&gt;&lt;span class=&quot;avatar&quot; aria-hidden=&quot;true&quot;&gt;AM&lt;/span&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;div class=&quot;list__title&quot;&gt;Aisha Mensah&lt;/div&gt;&lt;div class=&quot;list__meta&quot;&gt;North York · 4.8 ★ from 64 reviews&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul class=&quot;list card card--flush&quot; aria-label=&quot;Notifications&quot;&gt;
-  &lt;li&gt;&lt;a class=&quot;list__item list__item--interactive list__item--unread&quot; href=&quot;../../mocks/pages/appointment-detail/default.html&quot;&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;div class=&quot;list__title&quot;&gt;&lt;span class=&quot;visually-hidden&quot;&gt;Unread: &lt;/span&gt;Nia received your request&lt;/div&gt;&lt;div class=&quot;list__meta&quot;&gt;Today at 9:42 am · She will confirm the time and final price.&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;badge badge--warning&quot;&gt;Unread&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;card card--flush&quot;&gt;&lt;ul class=&quot;list&quot; aria-label=&quot;Notifications&quot;&gt;
+  &lt;li&gt;&lt;a class=&quot;list__item list__item--interactive list__item--unread&quot; href=&quot;../../mocks/pages/appointment-detail/default.html&quot;&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;div class=&quot;list__title&quot;&gt;&lt;span class=&quot;visually-hidden&quot;&gt;Unread: &lt;/span&gt;Nia received your request&lt;/div&gt;&lt;div class=&quot;list__meta&quot;&gt;Today at 9:42 am · She will confirm the time and final price.&lt;/div&gt;&lt;/div&gt;&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a class=&quot;list__item list__item--interactive&quot; href=&quot;../../mocks/pages/care-and-review/default.html&quot;&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;div class=&quot;list__title&quot;&gt;How to prepare for knotless braids&lt;/div&gt;&lt;div class=&quot;list__meta&quot;&gt;Yesterday · Read Nia’s preparation checklist.&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M9 6l6 6-6 6&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</code></pre></details></div>
+&lt;/ul&gt;&lt;/div&gt;</code></pre></details></div>
+  <h3>Current row, trailing badge and groups</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card card--flush"><ul class="list" aria-label="Help topics">
+  <li><a class="list__item list__item--interactive" href="../../mocks/pages/help/default.html" aria-current="true"><div class="list__body"><div class="list__title">How requests work</div></div></a></li>
+  <li><a class="list__item list__item--interactive" href="../../mocks/pages/appointment-detail/default.html"><div class="list__body"><div class="list__title">Amara Nkiruka Adeyemi-Williams accepted your change request</div><div class="list__meta truncate">Sat 24 Oct · 10:00 am · with Nia Okafor · estimate $180–$240</div></div><span class="badge badge--warning">Awaiting reply</span></a></li>
+</ul></div>
+<div class="card card--flush"><ul class="list" aria-label="Today">
+  <li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/appointment-detail/default.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li>
+</ul><div class="divider divider--label"><span>Earlier</span></div><ul class="list" aria-label="Earlier">
+  <li><a class="list__item list__item--interactive" href="../../mocks/pages/care-and-review/default.html"><div class="list__body"><div class="list__title">How to prepare for knotless braids</div><div class="list__meta">Yesterday</div></div><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a></li>
+</ul></div></div><div class="ds-example__caption"><span>A current help article; a trailing status badge that wraps to its own line when the title needs the room; two notification groups split by a labelled divider.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;card card--flush&quot;&gt;&lt;ul class=&quot;list&quot; aria-label=&quot;Help topics&quot;&gt;
+  &lt;li&gt;&lt;a class=&quot;list__item list__item--interactive&quot; href=&quot;../../mocks/pages/help/default.html&quot; aria-current=&quot;true&quot;&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;div class=&quot;list__title&quot;&gt;How requests work&lt;/div&gt;&lt;/div&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class=&quot;list__item list__item--interactive&quot; href=&quot;../../mocks/pages/appointment-detail/default.html&quot;&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;div class=&quot;list__title&quot;&gt;Amara Nkiruka Adeyemi-Williams accepted your change request&lt;/div&gt;&lt;div class=&quot;list__meta truncate&quot;&gt;Sat 24 Oct · 10:00 am · with Nia Okafor · estimate $180–$240&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;badge badge--warning&quot;&gt;Awaiting reply&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;card card--flush&quot;&gt;&lt;ul class=&quot;list&quot; aria-label=&quot;Today&quot;&gt;
+  &lt;li&gt;&lt;a class=&quot;list__item list__item--interactive list__item--unread&quot; href=&quot;../../mocks/pages/appointment-detail/default.html&quot;&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;div class=&quot;list__title&quot;&gt;&lt;span class=&quot;visually-hidden&quot;&gt;Unread: &lt;/span&gt;Nia received your request&lt;/div&gt;&lt;div class=&quot;list__meta&quot;&gt;Today at 9:42 am&lt;/div&gt;&lt;/div&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;div class=&quot;divider divider--label&quot;&gt;&lt;span&gt;Earlier&lt;/span&gt;&lt;/div&gt;&lt;ul class=&quot;list&quot; aria-label=&quot;Earlier&quot;&gt;
+  &lt;li&gt;&lt;a class=&quot;list__item list__item--interactive&quot; href=&quot;../../mocks/pages/care-and-review/default.html&quot;&gt;&lt;div class=&quot;list__body&quot;&gt;&lt;div class=&quot;list__title&quot;&gt;How to prepare for knotless braids&lt;/div&gt;&lt;div class=&quot;list__meta&quot;&gt;Yesterday&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M9 6l6 6-6 6&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</code></pre></details></div>
 </section>
 
 <section class="ds-section" id="sizes" data-na="One row density; rows grow with a second line. Use a dense table for compact data."><h2><a href="#sizes">Sizes</a></h2><p class="ds-na">One row density; rows grow with a second line. Use a dense table for compact data.</p></section>
 
 <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
-  <p>Only interactive rows have states. Hover tints the row; focus draws the shared ring inside the row; the current item uses <code>aria-current="true"</code> and the accent tint; unread rows add a dot and a hidden "Unread:" prefix.</p>
+  <p>Only interactive rows have states. Hover tints the row; focus draws the shared ring inside the row (offset inwards by the ring width plus its offset, so a flush card never clips it); the current item uses <code>aria-current="true"</code> and the accent tint; unread rows add a dot and a hidden "Unread:" prefix.</p>
   <div class="ds-matrix"><table>
     <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Current</th><th scope="col">Unread</th></tr></thead>
     <tbody>
       <tr><th scope="row">Interactive</th>
-        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive" href="../../mocks/pages/help/default.html"><div class="list__title">How requests work</div></a></li></ul></td>
-        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive" data-state="hover" href="../../mocks/pages/help/default.html"><div class="list__title">How requests work</div></a></li></ul></td>
-        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive" data-state="focus" href="../../mocks/pages/help/default.html"><div class="list__title">How requests work</div></a></li></ul></td>
-        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive" aria-current="true" href="../../mocks/pages/help/default.html"><div class="list__title">How requests work</div></a></li></ul></td>
-        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/notification-center/unread.html"><div class="list__title">Time confirmed</div><span class="badge badge--warning">Unread</span></a></li></ul></td></tr>
+        <td><div class="card card--flush"><ul class="list"><li><a class="list__item list__item--interactive" href="../../mocks/pages/help/default.html"><div class="list__body"><div class="list__title">How requests work</div></div></a></li></ul></div></td>
+        <td><div class="card card--flush"><ul class="list"><li><a class="list__item list__item--interactive" data-state="hover" href="../../mocks/pages/help/default.html"><div class="list__body"><div class="list__title">How requests work</div></div></a></li></ul></div></td>
+        <td><div class="card card--flush"><ul class="list"><li><a class="list__item list__item--interactive" data-state="focus" href="../../mocks/pages/help/default.html"><div class="list__body"><div class="list__title">How requests work</div></div></a></li></ul></div></td>
+        <td><div class="card card--flush"><ul class="list"><li><a class="list__item list__item--interactive" aria-current="true" href="../../mocks/pages/help/default.html"><div class="list__body"><div class="list__title">How requests work</div></div></a></li></ul></div></td>
+        <td><div class="card card--flush"><ul class="list"><li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/notification-center/unread.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Time confirmed</div></div></a></li></ul></div></td></tr>
     </tbody>
   </table></div>
   <h3>Both themes</h3>
-  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><ul class="list card card--flush"><li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/notification-center/unread.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li><li><a class="list__item list__item--interactive" data-state="hover" href="../../mocks/pages/care-and-review/default.html"><div class="list__body"><div class="list__title">How to prepare</div><div class="list__meta">Yesterday</div></div></a></li></ul></div></div><div data-theme="dark"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><ul class="list card card--flush"><li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/notification-center/unread.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li><li><a class="list__item list__item--interactive" data-state="hover" href="../../mocks/pages/care-and-review/default.html"><div class="list__body"><div class="list__title">How to prepare</div><div class="list__meta">Yesterday</div></div></a></li></ul></div></div></div>
+  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="card card--flush"><ul class="list"><li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/notification-center/unread.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li><li><a class="list__item list__item--interactive" data-state="hover" href="../../mocks/pages/care-and-review/default.html"><div class="list__body"><div class="list__title">How to prepare</div><div class="list__meta">Yesterday</div></div></a></li></ul></div></div></div><div data-theme="dark"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="card card--flush"><ul class="list"><li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/notification-center/unread.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li><li><a class="list__item list__item--interactive" data-state="hover" href="../../mocks/pages/care-and-review/default.html"><div class="list__body"><div class="list__title">How to prepare</div><div class="list__meta">Yesterday</div></div></a></li></ul></div></div></div></div>
 </section>
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
     <li>Lists are one column at every width; on wide screens cap them with the detail grid's main column or <code>--layout-form-max</code> rather than stretching rows to 1280px.</li>
     <li>Titles wrap; meta lines may use <code>.truncate</code> on phones when the full text is available on the next screen.</li>
-    <li>Trailing badges stay on the title row and never push the title below 50% of the row.</li>
+    <li>The body keeps at least half the row (<code>min-width: 50%</code>). When a trailing badge would squeeze the title below that, the row wraps and the badge moves to its own line, still at the end.</li>
   </ul>
 </section>
 
 <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
-  <p>Rows read <code>--color-border-default</code> (dividers), <code>--color-bg-subtle</code> (hover), <code>--color-accent-subtle</code> (current) and <code>--color-accent</code> (unread dot). Place the list in a <code>.card.card--flush</code> for the surface and edge.</p>
+  <p>Rows read <code>--color-border-default</code> (dividers), <code>--color-bg-subtle</code> (hover), <code>--color-accent-subtle</code> (current) and <code>--color-accent</code> (unread dot). For the surface and edge, nest the list in a flush card: <code>&lt;div class="card card--flush"&gt;&lt;ul class="list"&gt;</code>. In forced colours the unread dot is drawn in <code>CanvasText</code> and the current row gets a <code>Highlight</code> inset outline, because the system removes both backgrounds.</p>
 </section>
 
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
@@ -113,7 +131,7 @@
     <tr><td><kbd>Enter</kbd></td><td>Opens the focused row.</td></tr>
   </tbody></table>
   <h3>Focus</h3>
-  <p>The shared ring on the row link. Each row is one tab stop; do not nest a second link inside an interactive row.</p>
+  <p>The shared ring on the row link, drawn inside the row so a flush card's rounded, clipped edge never cuts it. Each row is one tab stop; do not nest a second link inside an interactive row.</p>
   <h3>Labelling</h3>
   <p>Give a list a name when several sit on a page (<code>aria-label="Notifications"</code>). Unread state is in text ("Unread:" visually hidden, or a visible badge), not only the dot. Leading avatars repeat the title's name and are <code>aria-hidden</code>.</p>
   <h3>Contrast</h3>
@@ -140,9 +158,9 @@
 
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
-    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><ul class="list card card--flush"><li><a class="list__item list__item--interactive" href="../../mocks/pages/appointment-detail/default.html"><div class="list__body"><div class="list__title">Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li></ul></div><figcaption>Make the whole row one link to the update.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card card--flush"><ul class="list"><li><a class="list__item list__item--interactive" href="../../mocks/pages/appointment-detail/default.html"><div class="list__body"><div class="list__title">Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li></ul></div></div><figcaption>Make the whole row one link to the update.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card"><span class="badge badge--warning">Unread</span><p><b>Nia received your request</b></p><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div></div><figcaption>Give every notification its own card and primary button, as the notification-center mock does; several primaries compete on one page.</figcaption></figure>
-    <figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Unread</span></div><figcaption>Say "Unread" in text alongside the dot.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--info">Unread</span></div><figcaption>Say "Unread" in text alongside the dot: a visually hidden "Unread:" prefix, or one info badge, never both.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge badge--info">Read</span></div><figcaption>Badge every row "Read"; mark the exception (unread), not the norm.</figcaption></figure>
   </div>
 </section>
@@ -166,17 +184,19 @@
 </section>
 
 <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
-  <pre><code>&lt;ul class="list card card--flush" aria-label="Notifications"&gt;
+  <pre><code>&lt;div class="card card--flush"&gt;
+&lt;ul class="list" aria-label="Notifications"&gt;
   &lt;li&gt;&lt;a class="list__item list__item--interactive list__item--unread" href="/appointments/hp-1048"&gt;
     &lt;div class="list__body"&gt;
       &lt;div class="list__title"&gt;&lt;span class="visually-hidden"&gt;Unread: &lt;/span&gt;Nia received your request&lt;/div&gt;
       &lt;div class="list__meta"&gt;Today at 9:42 am&lt;/div&gt;
     &lt;/div&gt;
   &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
+&lt;/ul&gt;
+&lt;/div&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.list</code></td><td>Unstyled vertical list.</td></tr>
-    <tr><td><code>.list__item</code></td><td>Row with padding and a bottom divider.</td></tr>
+    <tr><td><code>.list__item</code></td><td>Wrapping row with padding. The list draws a hairline between rows (from its <code>&lt;li&gt;</code> children) and none after the last.</td></tr>
     <tr><td><code>.list__item--interactive</code></td><td>Link row: 44px minimum, hover tint.</td></tr>
     <tr><td><code>.list__item--unread</code></td><td>Accent dot before the title.</td></tr>
     <tr><td><code>.list__body</code> <code>.list__title</code> <code>.list__meta</code></td><td>Text parts.</td></tr>
@@ -192,7 +212,7 @@
     <li><a href="../../mocks/pages/notification-center/unread.html">pages/notification-center/unread</a> (unread badge on every unread card)</li>
     <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> ("Prepare for your visit" ordered list in prose)</li>
   </ul>
-  <p>Drift recorded: notifications were cards with one primary button each and a "Read" badge on read items (system recommends an interactive list with an unread marker only on unread rows); the ordered list in the preparation card had no inline padding and its numbers hung outside the card padding.</p>
+  <p>Drift recorded: notifications were cards with one primary button each and a "Read" badge on read items (system recommends an interactive list with an unread marker only on unread rows); the ordered list in the preparation card had no inline padding and its numbers hung outside the card padding. Fixed in the stylesheet: link rows lost the rule between rows (each <code>&lt;a&gt;</code> was the last child of its <code>&lt;li&gt;</code>); the focus ring was clipped by the flush card; a trailing badge squeezed long titles; the list and the card shared one element, which the components cannot (now nested).</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

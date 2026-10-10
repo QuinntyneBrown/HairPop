@@ -78,7 +78,7 @@
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
     <figure class="ds-do"><div class="ds-example__canvas"><span class="dialog__icon dialog__icon--danger" aria-hidden="true">{{icon:alert-circle}}</span><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button">Cancel request</button></div><figcaption>The danger icon and button carry the warning; the safe action gets initial focus.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="alert alert--warning"><div><strong>Check before continuing.</strong> This action cannot be undone here.</div></div><button class="btn btn--danger" type="button">Sign out</button></div><figcaption>A warning alert stacked on a danger dialog repeats the warning twice (the mocks’ confirm states).</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="alert alert--warning"><div><strong>Check before continuing.</strong> This action cannot be undone here.</div></div><button class="btn btn--danger" type="button">Sign out</button></div><figcaption>A warning alert stacked on a danger dialog repeats the warning twice (the first mocks’ confirm states).</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><button class="btn" type="button">Keep browsing</button><button class="btn btn--primary" type="button">Show braiders</button></div><figcaption>Both footer actions are buttons; the dialog closes in place.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><a class="btn" href="../../mocks/pages/matching-braiders/default.html">Keep browsing</a></div><figcaption>A footer link with <code>autofocus</code> that navigates away; dismissing a dialog should close it and restore focus.</figcaption></figure>
   </div>
@@ -88,7 +88,6 @@
   <ul>
     {{mock:dialogs/change-appointment/default|form dialog}}
     {{mock:dialogs/cancel-appointment/default|destructive confirmation}}
-    {{mock:dialogs/cancel-appointment/confirm|warning stacked on danger}}
     {{mock:dialogs/cancel-appointment/failed|failure in the body}}
     {{mock:dialogs/sign-out/busy|busy confirm}}
     {{mock:dialogs/request-review/default|review dialog}}

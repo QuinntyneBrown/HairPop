@@ -14,7 +14,7 @@
 
 An icon is a small line drawing that supports a label: the calendar in "Request with Nia", the close mark in a dialog header, the search glass in an empty no-results state, the star in "4.9 from 86 reviews". HairPop draws every icon from one set of inline SVGs on a 24-unit grid with a 2-unit round stroke in `currentColor`, so an icon always takes the colour of the text or control around it, in both themes. The component turns a name into that SVG and nothing else.
 
-The mocks drew icons with text glyphs (✦, ×, ⌕, !, ✓, →, ★). The iconography foundation replaces every glyph with an SVG icon; this component is how the product does it.
+The mocks drew icons with text glyphs (✦, ×, ⌕, !, ✓, →, ★). The iconography foundation replaces every glyph with an inline SVG icon, written as `<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="…"/></svg>` with the path copied from the design system's `ICONS` table; this component is how the product renders exactly that markup. There is no sprite sheet and no `<use href>`, so mocks, design-system pages and the product share one markup.
 
 Use something else when:
 
@@ -38,7 +38,7 @@ Every place the product draws an icon, from the mocks' glyphs (mapped by the fou
 |---|---|---|---|---|
 | Top bar brand on every page (mock ✦) | `sparkle`, md, decorative | before the text "HairPop" | default, dark | surface (top bar) |
 | Style card art panels, `tables-and-lists` pattern | `sparkle`, `fill`, decorative, sized by the panel | none | default, dark | accent-subtle panel |
-| Empty states "Nothing here yet" on `pages/style-detail/empty`, `pages/braider-profile/empty` (mock ✦) | `sparkle`, lg, inside `.empty__icon` | none | default, dark | canvas |
+| Empty style gallery "No styles to explore yet" on `pages/style-gallery/empty` (mock ✦ with "Nothing here yet") | `sparkle`, lg, inside `.empty__icon` | none | default, dark | canvas |
 | Dialog header close in every dialog (`dialogs/*`, mock ×) | `close`, md, inside a ghost icon-only button named "Close dialog" | none | button hover and focus | raised (dialog) |
 | Toast dismiss (`notifications/*`, mock ×), alert dismiss, chip remove | `close`, sm, inside `.close` / `.remove` named "Dismiss notification", "Dismiss: Prices are estimates", "Remove Knotless" | none | control hover and focus | inverse (toast), tinted (alert), surface (chip) |
 | No-results on `pages/matching-braiders/no-results`, `pages/style-gallery/no-results`, `pages/my-appointments/no-results` (mock ⌕); not-found page | `search`, lg, inside `.empty__icon` | none | default, dark | canvas |
@@ -144,9 +144,9 @@ The set: 38 names. Names are kebab-case nouns or verbs and never describe shape 
 | `help` | Help | Help navigation |
 | `home` | Home | Home navigation |
 
-Paths are the `ICONS` table of the design system's `build.py`, copied verbatim into the registry, plus `arrow-up` (`M12 19V5M6 11l6-6 6 6`) and `arrow-down` (`M12 5v14M6 13l6 6 6-6`) (D-6).
+Paths are the `ICONS` table of the design system's `build.py`, copied verbatim into the registry: 38 entries, including `arrow-up` (`M12 19V5M6 11l6-6 6 6`) and `arrow-down` (`M12 5v14M6 13l6 6 6-6`) (D-6).
 
-Glyph mapping (the mocks' glyph → the icon the product renders): ✦ → `sparkle`; × → `close`; ⌕ → `search`; "!" → `alert-circle`; ✓ → `check` inside the `.empty__icon` circle and `check-circle` everywhere else (D-7); → → `arrow-right`; ★ → `star` (filled, labelled); ⚠ → `warning`.
+Glyph mapping (the mocks' glyph → the icon the product renders): ✦ → `sparkle`; × → `close`; ⌕ → `search`; "!" → `alert-circle`; ✓ → `check` inside the `.empty__icon` circle and `check-circle` everywhere else (D-7); → → `arrow-right`; ★ → `star` (filled, labelled); ⚠ → `warning`; ↑ and ↓ → `arrow-up` and `arrow-down` (D-6). The iconography foundation's mapping table lists the same rows. The mock navigation bar's ⌂, ☾ and × are review chrome, not product UI, and are not mapped.
 
 | Size | Modifier | Box | Use |
 |---|---|---|---|
@@ -377,7 +377,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - Host bindings: static `class: 'icon'` and `viewBox: '0 0 24 24'`; `[class.icon--sm]`, `[class.icon--lg]`, `[class.icon--fill]` from the inputs; `[attr.aria-hidden]` `'true'` or `null`; `[attr.role]` `'img'` or `null`; `[attr.aria-label]` the label or `null`.
 - Styles: none in the component (D-2). The `.icon`, `.icon--sm`, `.icon--lg` and `.icon--fill` rules stay in the shared foundation stylesheet with the other foundations and utilities.
 - Development check (D-5): when `ICONS[name()]` is undefined and `isDevMode()`, `console.error` once per name with `hp-icon` and the name.
-- Registry: copy the 36 paths from `docs/design-system/build.py` verbatim and add `arrow-up` and `arrow-down` (D-6); the design-system `ICONS` table and the iconography sheet gain the same two entries in the same slice.
+- Registry: copy the 38 paths of the `ICONS` table in `docs/design-system/build.py` verbatim, `arrow-up` and `arrow-down` included (D-6); the iconography sheet shows all 38.
 - No CDK primitive. Composes nothing. Used by button, link, alert, toast, dialog, empty state, error page, menu, sidebar navigation, top bar, text field, avatar and stat.
 - Perf-test scenario `frontend/projects/perf-test/src/scenarios/Icon.ts`, exported from `src/scenarios/index.ts`, with iterations added to `e2e/perf-test/config/scenario-iterations.mjs`.
 
@@ -385,9 +385,9 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 
 - **D-1** *Is the host a wrapper element (`<hp-icon>`) or the `<svg>` itself?* The `<svg>`, through the attribute selector `svg[hp-icon]`. The button CRD's slot contract projects an `svg.icon`, and the design system places icons with child combinators (`.alert > .icon`, `.toast > .icon`) and descendant rules (`.btn .icon`, `.search .icon`); a wrapper would break all of them and add a layout box. The rendered DOM is identical to the design system's markup.
 - **D-2** *Does the component carry its own encapsulated styles?* No. The iconography page is a foundation, and AGENTS.md keeps foundations global. Global `.icon` rules keep their plain specificity, so every parent's sizing rule (`.btn .icon` at 1.25 em) wins as the design system intends; scoped host styles would compete with those rules.
-- **D-3** *How is a meaningful standalone icon named?* With the `label` input, which renders `role="img"` and `aria-label`. The foundation describes visually hidden text after the icon; the label is equivalent for assistive technology, keeps the words with the icon, and is one element instead of two. The rating star is the product's only case today.
+- **D-3** *How is a meaningful standalone icon named?* With the `label` input, which renders `role="img"` and `aria-label`. The label is equivalent to visually hidden text for assistive technology, keeps the words with the icon, and is one element instead of two; the iconography foundation's accessibility rules state the same pattern. The rating star is the product's only case today.
 - **D-4** *Are icon sizes tokens?* No. The design system defines them as rem values on `.icon`, `.icon--sm` and `.icon--lg` and has no icon size tokens; the CRD does not invent any. Rem keeps them in step with text size.
 - **D-5** *What happens with an unknown name?* The type system rejects it at compile time; at run time (untyped data) the icon renders an empty box of the right size, so the layout holds, and development builds log a console error naming `hp-icon` and the name. A broken glyph or a thrown error would be worse for the customer than a blank 20 px box.
-- **D-6** *The stat delta uses the text arrows ↑ and ↓, which the foundation says to replace with icons, but the set has no up or down arrow. What renders?* Two new icons, `arrow-up` and `arrow-down`, drawn like `arrow-right` on the same grid. The foundation forbids rotating an icon to make a new meaning (chevrons excepted) and forbids mixing glyphs with the set, so the only consistent option is to add them; the design system's `ICONS` table and sheet catch up in the implementing slice.
-- **D-7** *The foundation maps ✓ to `check-circle`, but the empty-state page draws `check` inside its circle. Which is right?* Both, by context: inside the `.empty__icon` circle the circle is already drawn, so the mark is `check`; everywhere else a success status is `check-circle`. This keeps one meaning (success) and avoids a circle inside a circle.
+- **D-6** *The stat delta uses the text arrows ↑ and ↓, which the foundation says to replace with icons, but the set has no up or down arrow. What renders?* Two new icons, `arrow-up` and `arrow-down`, drawn like `arrow-right` on the same grid. The foundation forbids rotating an icon to make a new meaning (chevrons excepted) and forbids mixing glyphs with the set, so the only consistent option is to add them; the design system's `ICONS` table and icon sheet carry both.
+- **D-7** *The empty-state page draws `check` inside its circle, while success alerts and toasts use `check-circle`. Which does ✓ map to?* Both, by context: inside the `.empty__icon` circle the circle is already drawn, so the mark is `check`; everywhere else a success status is `check-circle`. This keeps one meaning (success) and avoids a circle inside a circle; the foundation's mapping table has one row for each.
 - **D-8** *Is the icon set direction-aware for right-to-left text?* No. No L2 requirement covers translation and the copy is English only; the consumer picks the direction icon it means. Adding mirroring later changes no input.

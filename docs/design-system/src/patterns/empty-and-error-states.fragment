@@ -19,7 +19,7 @@
 <section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
   <p>The empty state replaces the list, inside the page shell and under the page header, so navigation and context stay.</p>
   <div class="ds-frame"><div class="ds-frame__body">
-    <div class="page-header"><div><p class="eyebrow">Your HairPop</p><p style="font: var(--text-h1); letter-spacing: var(--letter-spacing-tight);">My appointments</p><p class="subtitle">Requests and visits appear here.</p></div></div>
+    <div class="page-header"><div><p class="eyebrow">Appointments</p><p style="font: var(--text-h1); letter-spacing: var(--letter-spacing-tight);">My appointments</p><p class="subtitle">Requests and visits appear here.</p></div></div>
     <section class="empty"><div class="empty__icon" aria-hidden="true">{{icon:calendar}}</div><h2 class="empty__title">No appointments yet</h2><p class="empty__text">When you request a visit, you’ll find its status and details here.</p><div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></div></section>
   </div></div>
 </section>
@@ -38,7 +38,7 @@
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
   <ul>
     <li>Centred at every width; text is capped at 36ch so lines stay short on desktop.</li>
-    <li>Actions wrap and centre on phones; the primary comes first.</li>
+    <li>Actions wrap and centre on phones; the primary comes first. Error pages add <code>.empty--stack-actions</code>, which stacks the actions at full width below 640px.</li>
     <li>Use <code>.empty--compact</code> inside cards and dialogs, full padding when the state replaces a page’s main content.</li>
   </ul>
 </section>
@@ -46,7 +46,7 @@
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
   <ul>
     <li>The icon is decorative (<code>aria-hidden</code>); the title is a real heading at the next level under the page’s h1.</li>
-    <li>When an empty or error state replaces content after a user action (applying filters, retrying), announce it through the page’s status region ("No braiders match these filters").</li>
+    <li>When an empty or error state replaces content after a user action (applying filters, retrying), announce it once through the empty state’s own visually hidden <code>role="status"</code> span, written after the state renders ("No braiders match these filters"); use <code>role="alert"</code> only when a retry the person started fails again.</li>
     <li>"Try again" is a button when it retries in place, a link when it reloads the page.</li>
     <li>Error pages keep the skip link, top bar and footer so keyboard users can leave.</li>
   </ul>

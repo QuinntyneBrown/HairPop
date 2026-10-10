@@ -7,7 +7,7 @@
 | Status | planned |
 | Traces to | L2-041, L2-042 |
 | Design system | [`tooltip.html`](../../design-system/components/tooltip.html) |
-| Source mocks | [`dialogs/filter-braiders/default`](../../mocks/dialogs/filter-braiders/default.html), [`dialogs/change-appointment/default`](../../mocks/dialogs/change-appointment/default.html), [`dialogs/report-review/default`](../../mocks/dialogs/report-review/default.html), [`dialogs/request-review/default`](../../mocks/dialogs/request-review/default.html), [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html) |
+| Source mocks | [`dialogs/filter-braiders/default`](../../mocks/dialogs/filter-braiders/default.html), [`dialogs/change-appointment/default`](../../mocks/dialogs/change-appointment/default.html), [`dialogs/report-review/default`](../../mocks/dialogs/report-review/default.html), [`dialogs/request-review/default`](../../mocks/dialogs/request-review/default.html), [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html) |
 | Rendering | [`tooltip.html`](tooltip.html) |
 
 ## Purpose and scope
@@ -30,7 +30,7 @@ Out of scope:
 
 ## Usage
 
-No mock renders a tooltip yet; the design system defines it for the icon-only controls the mocks already use. One row per configuration:
+The form and confirmation dialog mocks wrap their close control in `.has-tooltip` with a hidden `.tooltip.tooltip--below` reading "Close dialog", which the stylesheet reveals on hover and focus (the static stand-in for the overlay, D-1; below, because the panel clips a bubble above its top edge). The other rows come from the design system, for icon-only controls later screens use. One row per configuration:
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
@@ -183,7 +183,7 @@ Forced colours: the bubble gets a `--border-width-hairline` `CanvasText` border 
 ## Responsive behaviour
 
 - The bubble is placed by the CDK flexible connected position strategy: above and centred, else below, shifted to keep `--space-2` from every viewport edge. At 320 px a tooltip on a trigger at the screen edge shifts inward and is never clipped.
-- In a dialog the bubble is outside the panel's scroll container. Measured: with today's in-place `.has-tooltip` CSS, the close-control tooltip of the filter braiders dialog extends 12 px above the panel and is clipped by its `overflow: auto` (D-1).
+- In a dialog the bubble is outside the panel's scroll container. Measured: with the in-place documentation `.has-tooltip` CSS and the bubble above, the close-control tooltip of the filter braiders dialog extends 12 px above the panel and is clipped by its `overflow: auto` (D-1).
 - Text never wraps. The longest product text, "Search styles" with "/", measures 119 px at default text and 237 px at 200 % text (measured in Chromium), so it fits a 320 px viewport with the `--space-2` margins.
 - Touch devices (`hover: none`) never show tooltips; icon-only controls keep their `aria-label`, and the trigger keeps its own 40 × 40 px target.
 - At 320 px nothing scrolls horizontally or clips; at 200 % zoom everything stays available.
@@ -284,15 +284,15 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - Overlay: on first show, create one `OverlayRef` with `overlay.position().flexibleConnectedTo(trigger).withPositions([above, below]).withViewportMargin(8).withPush(true)`, `scrollStrategy: overlay.scrollStrategies.reposition()`, no backdrop; set `overlayRef.hostElement.style.zIndex = 'var(--z-tooltip)'`. Attach a `TemplatePortal` of the bubble on show and detach on hide; reuse the overlay; dispose it on destroy. Listen to `positionChanges` to toggle `.tooltip--below`.
 - Show and hide: `pointerenter` (when `matchMedia('(hover: hover)')` and `event.pointerType !== 'touch'`) starts a 300 ms timer; `FocusMonitor.monitor(trigger)` shows at once for origin `keyboard`; `pointerleave` on host and bubble start a `--duration-fast` hide grace; `blur`, the trigger's `click` and the overlay's `keydownEvents` Escape (with `preventDefault` and `stopPropagation`) hide at once.
 - `aria-describedby`: append the id on show, remove only that id on hide.
-- Port the `.tooltip` rules into the component's styles with `ViewEncapsulation.None` (the bubble renders outside the host), overriding `position: relative`, `pointer-events: auto` and adding `.tooltip--below::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--color-bg-inverse); }`. `components.css` gains `.tooltip--below` and the forced-colours border in the same slice (D-3, D-8).
+- Port the `.tooltip` rules into the component's styles with `ViewEncapsulation.None` (the bubble renders outside the host), overriding `position: relative`, `pointer-events: auto` and adding `.tooltip--below::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--color-bg-inverse); }`. `components.css` defines `.tooltip--below`, the `--tooltip-arrow-x` arrow position and the forced-colours border (D-2, D-3, D-8); the port keeps them.
 - Composes nothing; the trigger is projected.
 - Perf-test scenario `frontend/projects/perf-test/src/scenarios/Tooltip.ts`, exported from `src/scenarios/index.ts`, with iterations in `e2e/perf-test/config/scenario-iterations.mjs`.
 
 ## Decisions
 
 - **D-1** *Is the bubble rendered in place inside `.has-tooltip` (the design-system CSS reveal) or in an overlay?* In a CDK overlay. Measured in Chromium: the in-place bubble of the dialog close control sits 12 px above the panel's top edge and the panel's `overflow: auto` clips it; at the viewport edge it would clip too. The design system's own responsive rule says the product flips and shifts tooltips with the CDK Overlay so they never clip, and the brief requires overlays to use the CDK.
-- **D-2** *Which positions?* Above-centre first, below-centre second, with push so the bubble shifts along the edge; when pushed, the arrow is moved (an inline `left` on `.tooltip::after` through a style variable the component sets on each position change) so it still points at the trigger's centre. These are the design system's placement (above, centred) plus its flip rule; left and right placements are not used, because the arrow is only drawn vertically.
-- **D-3** *What does the arrow do when the bubble flips below?* It points up, via the new modifier `.tooltip--below`. The design system draws only the downward arrow; an arrow pointing away from the trigger would mislead, and hiding it would make the two placements look different.
+- **D-2** *Which positions?* Above-centre first, below-centre second, with push so the bubble shifts along the edge; when pushed, the arrow is moved (`.tooltip::after` reads `left: var(--tooltip-arrow-x, 50%)`, a component-scoped property the component sets on the bubble on each position change) so it still points at the trigger's centre. These are the design system's placement (above, centred) plus its flip rule; left and right placements are not used, because the arrow is only drawn vertically.
+- **D-3** *What does the arrow do when the bubble flips below?* It points up, via the modifier `.tooltip--below` (in `components.css` and on the design-system tooltip page). The first extracted design system drew only the downward arrow; an arrow pointing away from the trigger would mislead, and hiding it would make the two placements look different.
 - **D-4** *What is the hover delay, given no duration token is 300 ms?* 300 ms, the design system's stated value, as a component constant. It is a behavioural delay, not a transition, like the toast's 8-second timer; the fade itself uses `--duration-fast`.
 - **D-5** *The design system's text tooltips repeat the `aria-label`; does the trigger still get `aria-describedby`?* Yes, while the bubble shows, as the design system's accessibility section and anatomy require. When the text equals the name, a screen reader may read the same words twice; that is the design system's accepted cost of one rule for every tooltip, and a hint that differs from the name (a shortcut) is only reachable this way.
 - **D-6** *How is an icon-only trigger without a name caught?* A development-mode `console.error` naming `hp-tooltip`, the same check as button D-9: the tooltip must never become the only name.

@@ -60,7 +60,7 @@
     <tbody>
       <tr><th scope="row">Filter</th><td><button type="button" class="chip" aria-pressed="false">Braids</button></td><td><button type="button" class="chip" aria-pressed="false" data-state="hover">Braids</button></td><td><button type="button" class="chip" aria-pressed="false" data-state="focus">Braids</button></td><td><button type="button" class="chip" aria-pressed="false" data-state="active">Braids</button></td><td><button type="button" class="chip" aria-pressed="true">Braids</button></td><td><button type="button" class="chip" aria-pressed="true" data-state="hover">Braids</button></td><td><button type="button" class="chip" aria-pressed="false" disabled>Braids</button></td></tr>
       <tr><th scope="row">Filter, md</th><td><button type="button" class="chip chip--md" aria-pressed="false">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="false" data-state="hover">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="false" data-state="focus">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="false" data-state="active">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="true">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="true" data-state="hover">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="false" disabled>Twists</button></td></tr>
-      <tr><th scope="row">Input</th><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200">{{icon:close|icon--sm}}</button></span></td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (hover)" style="background: var(--color-bg-subtle-hover);">{{icon:close|icon--sm}}</button></span></td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (focus)" data-state="focus">{{icon:close|icon--sm}}</button></span></td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (active)" style="background: var(--color-bg-subtle-hover);">{{icon:close|icon--sm}}</button></span></td><td>—</td><td>—</td><td><span class="chip chip--static" data-state="disabled">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (disabled)" disabled>{{icon:close|icon--sm}}</button></span></td></tr>
+      <tr><th scope="row">Input</th><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200">{{icon:close|icon--sm}}</button></span></td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (hover)" style="background: var(--color-bg-subtle-hover);">{{icon:close|icon--sm}}</button></span></td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (focus)" data-state="focus">{{icon:close|icon--sm}}</button></span></td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (active)" style="background: var(--color-bg-subtle-hover);">{{icon:close|icon--sm}}</button></span></td><td>—</td><td>—</td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (disabled)" disabled>{{icon:close|icon--sm}}</button></span></td></tr>
       <tr><th scope="row">Static</th><td><span class="chip chip--static">Knotless</span></td><td colspan="6">No interactive states.</td></tr>
     </tbody>
   </table></div>
@@ -75,7 +75,7 @@
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
-    <li>Chip rows wrap (<code>.chip-row</code>, <code>flex-wrap: wrap</code>, 8px gap); they never scroll sideways and never shrink a label.</li>
+    <li>Chip rows wrap (<code>.chip-row</code>, <code>flex-wrap: wrap</code>, 8px gap); they never scroll sideways and never truncate a label. A wrapping row moves a chip to the next line before it shrinks it, so a label stays on one line whenever its chip fits the row; only a chip wider than the whole row (text at 200% on a phone) wraps its label inside the pill (<code>max-width: 100%</code>, <code>white-space: normal</code>) and grows in height.</li>
     <li>At 360px the style-type row ("All styles", "Braids", "Twists", "Locs") fits on one line; a longer set wraps to two.</li>
     <li>The small chip is 32px tall; with 8px between neighbours it meets the 24px target rule. Prefer <code>.chip--md</code> when a row is the main control on a phone screen.</li>
   </ul>
@@ -169,7 +169,7 @@
     <tr><td><code>.chip .remove</code></td><td>Remove button inside an input chip; needs <code>aria-label</code>.</td></tr>
     <tr><td><code>.chip-row</code></td><td>Wrapping row with 8px gap; add <code>role="group"</code> and a label.</td></tr>
     <tr><td><code>aria-pressed="true|false"</code></td><td>Toggle state; <code>"true"</code> shows the selected look.</td></tr>
-    <tr><td><code>disabled</code></td><td>Disabled, 50% opacity.</td></tr>
+    <tr><td><code>disabled</code></td><td>Disabled, 50% opacity. On an input chip, <code>disabled</code> goes on the remove button and <code>.chip:has(.remove:disabled)</code> dims the chip.</td></tr>
     <tr><td><code>data-state="hover|focus|active|selected|disabled"</code></td><td>Documentation and mocks only.</td></tr>
   </tbody></table>
 </section>
@@ -178,8 +178,8 @@
   <p>Extracted from these mocks:</p>
   <ul>
     {{mock:pages/style-gallery/default|style-type filter chips}}
-    {{mock:pages/style-gallery/no-results|filter summary that should be input chips}}
-    {{mock:pages/matching-braiders/no-results|filter summary badge}}
+    {{mock:pages/style-gallery/no-results|applied filters as input chips}}
+    {{mock:pages/matching-braiders/no-results|applied price and distance filters as input chips}}
   </ul>
   <p>Drift fixed during extraction: only the pressed chip carried <code>aria-pressed</code> and the row had no group label (system: every chip states <code>aria-pressed</code>, the row is a labelled group, one pressed at a time for single-choice sets); applied filters were shown as one badge (system: removable input chips); the remove button was 20px (now 24px to meet the target minimum).</p>
 </section>

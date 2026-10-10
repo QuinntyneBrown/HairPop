@@ -1,6 +1,6 @@
-<!--meta {"lead": "A menu offers a short list of actions from one trigger, such as an account menu behind Maya's name. Use it when actions are related and rarely needed.", "description": "Menu button with icons, shortcuts, sections, checkable and danger items; APG Menu Button keyboard model.", "pills": ["APG Menu Button", "Status: core set"], "variants": "with icons, with shortcuts, with sections, danger item, checkable items", "states": "closed, open, item hover, item focus, item disabled, item checked", "sources": []} -->
+<!--meta {"lead": "A menu offers a short list of actions from one trigger, such as an account menu behind Maya's name. Use it when actions are related and rarely needed.", "description": "Menu button with icons, shortcuts, sections, checkable and danger items; APG Menu Button keyboard model.", "pills": ["APG Menu Button", "Status: core set"], "variants": "with icons, with shortcuts, with sections, danger item, checkable items", "states": "closed, open, item hover, item focus, item disabled, item checked", "sources": ["pages/matching-braiders/default"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
-  <p>Use a menu when one trigger offers three to seven related actions that do not deserve their own buttons: an account menu (Account settings, Notifications, Sign out) or an appointment's overflow actions (Request a change, Message Nia, Cancel request). It is part of the core set; no mock uses it yet, and the mocks' top bar shows "Maya" as a plain link.</p>
+  <p>Use a menu when one trigger offers three to seven related actions that do not deserve their own buttons: an account menu (Account settings, Notifications, Sign out) or an appointment's overflow actions (Request a change, Message Nia, Cancel request). It is part of the core set: the matching braiders mock shows the closed sort trigger ("Sort: Best match"), and the mocks' top bar still shows "Maya" as a plain link.</p>
   <ul>
     <li>Do not use a menu for navigation between pages that people visit often; use the <a href="top-bar.html">top bar</a> links.</li>
     <li>Do not use a menu to pick a value in a form; use a <a href="select.html">select</a> or <a href="radio-group.html">radio group</a>.</li>
@@ -14,7 +14,7 @@
       <div class="stack stack--sm" style="align-items: flex-start;">
         <button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="true" aria-controls="menu-anatomy">Maya {{icon:chevron-down|icon--sm}}</button>
         <ul class="menu menu--static" id="menu-anatomy" role="menu" aria-label="Account">
-          <li role="none" class="menu__group">Account</li>
+          <li role="none" class="menu__group" aria-hidden="true">Account</li>
           <li role="none"><a class="menu__item" role="menuitem" href="../../mocks/pages/account-settings/default.html">{{icon:user|icon--sm}}Account settings</a></li>
           <li role="none"><a class="menu__item" role="menuitem" href="../../mocks/pages/notification-center/default.html">{{icon:bell|icon--sm}}Notifications</a></li>
           <li role="separator" class="menu__divider"></li>
@@ -29,8 +29,8 @@
     <ol class="ds-anatomy__list">
       <li><div><b>Trigger</b><small>A button with <code>aria-haspopup="menu"</code> and <code>aria-expanded</code>; chevron icon.</small></div></li>
       <li><div><b>Section label (optional)</b><small>Overline style; groups items.</small></div></li>
-      <li><div><b>Item</b><small>32px tall, 12px padding, optional 16px icon and shortcut.</small></div></li>
-      <li><div><b>Panel</b><small>Raised surface, <code>--radius-md</code>, <code>--shadow-3</code>, 4px inner padding, 12rem minimum width.</small></div></li>
+      <li><div><b>Item</b><small>At least 32px tall, 12px side padding, optional 16px icon and shortcut; long labels wrap.</small></div></li>
+      <li><div><b>Panel</b><small>Raised surface, <code>--radius-md</code>, <code>--shadow-3</code>, 4px inner padding; width from <code>min(12rem, 100vw - 32px)</code> to <code>min(20rem, 100vw - 32px)</code>.</small></div></li>
     </ol>
   </div>
 </section>
@@ -48,7 +48,7 @@
   <li role="none"><button class="menu__item" role="menuitem" type="button">Toggle theme <kbd>T</kbd></button></li>
 </ul>
 <ul class="menu menu--static" role="menu" aria-label="Sort braiders">
-  <li role="none" class="menu__group">Sort by</li>
+  <li role="none" class="menu__group" aria-hidden="true">Sort by</li>
   <li role="none"><button class="menu__item" role="menuitemradio" aria-checked="true" type="button">Best match</button></li>
   <li role="none"><button class="menu__item" role="menuitemradio" aria-checked="false" type="button">Lowest price</button></li>
   <li role="none"><button class="menu__item" role="menuitemradio" aria-checked="false" type="button">Highest rated</button></li>
@@ -78,10 +78,10 @@
         <td><button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="false" data-state="hover">Maya {{icon:chevron-down|icon--sm}}</button></td>
         <td><button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="false" data-state="focus">Maya {{icon:chevron-down|icon--sm}}</button></td>
         <td><button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="false" disabled>Maya {{icon:chevron-down|icon--sm}}</button></td>
-        <td><button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="true" data-state="active">Maya {{icon:chevron-down|icon--sm}}</button></td></tr>
+        <td><button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="true">Maya {{icon:chevron-down|icon--sm}}</button></td></tr>
     </tbody>
   </table></div>
-  <p>In the last column the trigger shows the open state (<code>aria-expanded="true"</code>, pressed background); keyboard focus moves to the first item when the menu opens.</p>
+  <p>Hover and focus highlight an item with <code>--color-bg-subtle-hover</code>, which stays visible against the raised panel in both themes; keyboard focus adds the shared ring drawn inset (<code>outline-offset: calc(-1 * var(--focus-ring-width))</code>). A highlighted or focused danger item keeps its danger colours. In the last column the trigger shows the open state: <code>aria-expanded="true"</code> holds the button's active fill (<a href="button.html">button</a>); keyboard focus moves to the first item when the menu opens.</p>
   <h3>Both themes</h3>
   {{themes}}<ul class="menu menu--static" role="menu" aria-label="Account menu preview"><li role="none"><button class="menu__item" role="menuitem" type="button">{{icon:user|icon--sm}}Account settings</button></li><li role="none"><button class="menu__item" role="menuitem" type="button" data-state="hover">{{icon:bell|icon--sm}}Notifications</button></li><li role="separator" class="menu__divider"></li><li role="none"><button class="menu__item menu__item--danger" role="menuitem" type="button">{{icon:log-out|icon--sm}}Sign out</button></li></ul>{{/themes}}
 </section>
@@ -89,13 +89,13 @@
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
     <li>The panel opens below the trigger, aligned to its start edge, and flips above or to the end edge when it would leave the viewport (CDK Overlay flexible positioning).</li>
-    <li>Below 640px a menu with more than five items opens as a bottom sheet (the <a href="dialog.html">dialog</a> sheet layout) so items become full-width 44px targets.</li>
-    <li>Item labels do not wrap; the panel grows to the longest label up to <code>min(20rem, 100vw - 32px)</code> and truncates beyond that.</li>
+    <li>Below 640px a menu with more than five items opens as a bottom sheet (<code>.menu--sheet</code>: fixed to the bottom edge, full width, <code>--radius-xl</code> top corners, safe-area padding) so items become full-width 44px targets.</li>
+    <li>The panel is at least <code>min(12rem, 100vw - 32px)</code> and at most <code>min(20rem, 100vw - 32px)</code> wide, so it never makes a 320px page scroll. Labels never truncate: beyond the maximum they wrap inside the item, which grows in height.</li>
   </ul>
 </section>
 
 <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
-  <p>The panel uses <code>--color-bg-surface-raised</code>, <code>--color-border-default</code> and <code>--shadow-3</code>; items use <code>--color-bg-subtle</code> on hover and focus. In dark the raised surface is grey 800, lighter than the page, so the panel reads as elevated without relying on the shadow. Danger items read <code>--color-danger-fg</code> on <code>--color-danger-bg</code> when highlighted.</p>
+  <p>The panel uses <code>--color-bg-surface-raised</code>, <code>--color-border-default</code> and <code>--shadow-3</code>; items use <code>--color-bg-subtle-hover</code> on hover and focus (<code>--color-bg-subtle</code> matches the dark panel exactly, so it would be invisible). In dark the raised surface is grey 800, lighter than the page, so the panel reads as elevated without relying on the shadow. Danger items read <code>--color-danger-fg</code> on <code>--color-danger-bg</code> when highlighted.</p>
 </section>
 
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
@@ -113,13 +113,15 @@
     <tr><td><kbd>Tab</kbd></td><td>Closes the menu and moves on in page order.</td></tr>
   </tbody></table>
   <h3>Focus</h3>
-  <p>Focus moves into the menu on open (roving focus; the item background shows focus instead of a ring) and returns to the trigger on close. Clicking outside closes it without moving focus.</p>
+  <p>Focus moves into the menu on open (roving focus; the focused item shows the highlight and an inset ring, at least 3:1 against the panel) and returns to the trigger on close. Clicking outside closes it without moving focus.</p>
   <h3>Labelling</h3>
   <p>The menu is labelled by its trigger (<code>aria-labelledby</code>) or an <code>aria-label</code> that names the object: "Appointment HP-1048 actions". An icon-only trigger needs <code>aria-label</code> ("More actions for HP-1048"). Shortcut hints are visible text only.</p>
   <h3>Contrast</h3>
   <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
     {{pair:Item on panel|--color-fg-default|--color-bg-surface-raised|4.5}}
-    {{pair:Highlighted item|--color-fg-default|--color-bg-subtle|4.5}}
+    {{pair:Highlighted item|--color-fg-default|--color-bg-subtle-hover|4.5}}
+    {{pair:Focus ring on panel|--color-focus-ring|--color-bg-surface-raised|3}}
+    {{pair:Focus ring on highlight|--color-focus-ring|--color-bg-subtle-hover|3}}
     {{pair:Danger item highlighted|--color-danger-fg|--color-danger-bg|4.5}}
     {{pair:Section label on panel|--color-fg-subtle|--color-bg-surface-raised|4.5}}
   </div>
@@ -154,7 +156,8 @@
       {{tok:Panel background|--color-bg-surface-raised}}
       {{tok:Panel border|--color-border-default}}
       {{tok:Item text|--color-fg-default}}
-      {{tok:Item highlight|--color-bg-subtle}}
+      {{tok:Item highlight|--color-bg-subtle-hover}}
+      {{tok:Focused item ring (inset)|--color-focus-ring}}
       {{tok:Danger item text / highlight|--color-danger-fg|--color-danger-bg}}
       {{tok:Checked mark|--color-fg-accent}}
       {{tok:Disabled item|--color-fg-disabled}}
@@ -181,6 +184,7 @@
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.menu-anchor</code></td><td>Positioning context for the panel.</td></tr>
     <tr><td><code>.menu</code></td><td>Floating panel at <code>--z-dropdown</code>; <code>.menu--static</code> renders it in flow (docs).</td></tr>
+    <tr><td><code>.menu--sheet</code></td><td>Bottom sheet below 640px for menus with more than five items; 44px items.</td></tr>
     <tr><td><code>.menu__item</code></td><td>Item row; <code>.menu__item--danger</code> for destructive items.</td></tr>
     <tr><td><code>.menu__group</code> / <code>.menu__divider</code></td><td>Section label / separator.</td></tr>
     <tr><td><code>aria-checked="true"</code></td><td>On <code>menuitemradio</code> / <code>menuitemcheckbox</code>: shows the check mark.</td></tr>
@@ -190,10 +194,9 @@
 </section>
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
-  <p>Core-set component: no mock uses a menu yet. Its look comes from the mocks' kit (<code>.menu</code> in <code>docs/mocks/assets/ui.css</code>) and its likely first uses are on these screens:</p>
+  <p>Core-set component. Its look comes from the mocks' kit (<code>.menu</code>, now in <code>components.css</code>); the mocks show its trigger:</p>
   <ul>
-    {{mock:pages/style-gallery/default|top bar account link "Maya", a candidate for an account menu}}
-    {{mock:dialogs/sign-out/default|the confirmation an account-menu "Sign out" opens}}
+    {{mock:pages/matching-braiders/default|closed sort trigger "Sort: Best match" beside the search}}
   </ul>
-  <p>Drift fixed during extraction: the kit's menu had no section label or checked-item style (added <code>.menu__group</code> and <code>aria-checked</code> styling); danger items had no highlighted colour (now <code>--color-danger-bg</code>).</p>
+  <p>Drift fixed during extraction: the kit's menu had no section label or checked-item style (added <code>.menu__group</code> and <code>aria-checked</code> styling); danger items had no highlighted colour (now <code>--color-danger-bg</code>); the item highlight was <code>--color-bg-subtle</code>, identical to the dark panel (now <code>--color-bg-subtle-hover</code> plus an inset focus ring, menu CRD D-3); the panel had a fixed 12rem minimum and labels could not wrap, which overflowed a 360px page at 200% text (now capped by the viewport and wrapping, menu CRD D-5).</p>
 </section>

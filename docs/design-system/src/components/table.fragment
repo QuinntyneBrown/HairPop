@@ -13,7 +13,7 @@
 <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
   <div class="ds-anatomy">
     <figure class="ds-anatomy__figure">
-      <div class="table-wrap" style="width: 100%;"><table class="table"><caption>Appointments</caption><thead><tr><th scope="col">Request</th><th scope="col">Date</th><th scope="col" class="num">Estimate</th></tr></thead><tbody><tr><td>HP-1048</td><td>Sat 24 Oct</td><td class="num">$180–$240</td></tr></tbody></table></div>
+      <div class="table-wrap" style="width: 100%;"><table class="table"><caption>Appointments</caption><thead><tr><th scope="col">Request</th><th scope="col">Date</th><th scope="col" class="num">Estimate</th></tr></thead><tbody><tr><th scope="row">HP-1048</th><td>Sat 24 Oct</td><td class="num">$180–$240</td></tr></tbody></table></div>
       <span class="ds-callout" style="left: 10%; top: 24%;" aria-hidden="true">1</span>
       <span class="ds-callout" style="left: 10%; top: 48%;" aria-hidden="true">2</span>
       <span class="ds-callout" style="left: 40%; top: 72%;" aria-hidden="true">3</span>
@@ -22,7 +22,7 @@
     <ol class="ds-anatomy__list">
       <li><div><b>Caption</b><small>Names the table; label type; can be visually hidden when a heading sits above.</small></div></li>
       <li><div><b>Header row</b><small><code>&lt;th scope="col"&gt;</code>, label type in <code>--color-fg-muted</code> on <code>--color-bg-surface-sunken</code>; sticky.</small></div></li>
-      <li><div><b>Cell</b><small><code>--space-3</code> × <code>--space-4</code> padding, body-sm type, hairline row divider.</small></div></li>
+      <li><div><b>Row header and cells</b><small>The identifying cell is <code>&lt;th scope="row"&gt;</code> in label type on the row's own background; cells have <code>--space-3</code> × <code>--space-4</code> padding, body-sm type, one line each, and a hairline row divider.</small></div></li>
       <li><div><b>Numeric cell</b><small><code>.num</code>: right-aligned, tabular figures.</small></div></li>
     </ol>
   </div>
@@ -30,14 +30,14 @@
 
 <section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
   <h3>Default with sort and row actions</h3>
-  {{example:[stack]Date is sorted descending; row actions show on hover and focus.}}
+  {{example:[stack]Date is sorted descending; Estimate is sortable but unsorted (no <code>aria-sort</code>, no arrow); row actions show on hover and focus. On a phone the table scrolls inside its wrapper, which is then a named, focusable region.}}
 <div class="table-wrap">
   <table class="table">
     <caption>Your appointments</caption>
-    <thead><tr><th scope="col">Request</th><th scope="col">Braider</th><th scope="col" aria-sort="descending"><button type="button">Date</button></th><th scope="col">Status</th><th scope="col" class="num">Estimate</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+    <thead><tr><th scope="col">Request</th><th scope="col">Service</th><th scope="col">Braider</th><th scope="col" aria-sort="descending"><button type="button">Date</button></th><th scope="col">Status</th><th scope="col" class="num"><button type="button">Estimate</button></th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
     <tbody>
-      <tr><th scope="row">HP-1048</th><td>Nia Okafor</td><td>Sat 24 Oct · 10:00 am</td><td><span class="badge badge--warning">Awaiting reply</span></td><td class="num">$180–$240</td><td><div class="row-actions"><a class="btn btn--ghost btn--sm" href="../../mocks/pages/appointment-detail/default.html">View HP-1048</a></div></td></tr>
-      <tr><th scope="row">HP-0992</th><td>Nia Okafor</td><td>Sat 3 Oct · 9:30 am</td><td><span class="badge badge--success">Completed</span></td><td class="num">$210</td><td><div class="row-actions"><a class="btn btn--ghost btn--sm" href="../../mocks/pages/care-and-review/default.html">Review HP-0992</a></div></td></tr>
+      <tr><th scope="row">HP-1048</th><td>Medium knotless braids</td><td>Nia Okafor</td><td>Sat 24 Oct · 10:00 am</td><td><span class="badge badge--warning">Awaiting reply</span></td><td class="num">$180–$240</td><td><div class="row-actions"><a class="btn btn--ghost btn--sm" href="../../mocks/pages/appointment-detail/default.html">View HP-1048</a></div></td></tr>
+      <tr><th scope="row">HP-0992</th><td>Medium knotless braids</td><td>Nia Okafor</td><td>Sat 3 Oct · 9:30 am</td><td><span class="badge">Completed</span></td><td class="num">$210</td><td><div class="row-actions"><a class="btn btn--ghost btn--sm" href="../../mocks/pages/care-and-review/default.html">Review HP-0992</a></div></td></tr>
     </tbody>
   </table>
 </div>
@@ -50,9 +50,9 @@
     <caption class="visually-hidden">Past appointments</caption>
     <thead><tr><th scope="col"><label class="choice"><input type="checkbox"><span class="visually-hidden">Select all appointments</span></label></th><th scope="col">Request</th><th scope="col">Braider</th><th scope="col" class="num">Paid</th></tr></thead>
     <tbody>
-      <tr aria-selected="true"><td><label class="choice"><input type="checkbox" checked><span class="visually-hidden">Select HP-0992</span></label></td><td>HP-0992</td><td>Nia Okafor</td><td class="num">$210</td></tr>
-      <tr><td><label class="choice"><input type="checkbox"><span class="visually-hidden">Select HP-0911</span></label></td><td>HP-0911</td><td>Aisha Mensah</td><td class="num">$195</td></tr>
-      <tr><td><label class="choice"><input type="checkbox"><span class="visually-hidden">Select HP-0874</span></label></td><td>HP-0874</td><td>Jules Baptiste</td><td class="num">$170</td></tr>
+      <tr aria-selected="true"><td><label class="choice"><input type="checkbox" checked><span class="visually-hidden">Select HP-0992</span></label></td><th scope="row">HP-0992</th><td>Nia Okafor</td><td class="num">$210</td></tr>
+      <tr><td><label class="choice"><input type="checkbox"><span class="visually-hidden">Select HP-0911</span></label></td><th scope="row">HP-0911</th><td>Aisha Mensah</td><td class="num">$195</td></tr>
+      <tr><td><label class="choice"><input type="checkbox"><span class="visually-hidden">Select HP-0874</span></label></td><th scope="row">HP-0874</th><td>Jules Baptiste</td><td class="num">$170</td></tr>
     </tbody>
   </table>
 </div>
@@ -61,22 +61,22 @@
 
 <section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
   {{example:[stack]Medium (default) 12 × 16px cells; small (<code>.table--dense</code>) 8 × 12px cells.}}
-<div class="table-wrap"><table class="table"><caption class="visually-hidden">Medium table</caption><thead><tr><th scope="col">Medium</th><th scope="col" class="num">Estimate</th></tr></thead><tbody><tr><td>HP-1048</td><td class="num">$180–$240</td></tr></tbody></table></div>
-<div class="table-wrap"><table class="table table--dense"><caption class="visually-hidden">Small table</caption><thead><tr><th scope="col">Small</th><th scope="col" class="num">Estimate</th></tr></thead><tbody><tr><td>HP-1048</td><td class="num">$180–$240</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="table"><caption class="visually-hidden">Medium table</caption><thead><tr><th scope="col">Medium</th><th scope="col" class="num">Estimate</th></tr></thead><tbody><tr><th scope="row">HP-1048</th><td class="num">$180–$240</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="table table--dense"><caption class="visually-hidden">Small table</caption><thead><tr><th scope="col">Small</th><th scope="col" class="num">Estimate</th></tr></thead><tbody><tr><th scope="row">HP-1048</th><td class="num">$180–$240</td></tr></tbody></table></div>
   {{/example}}
 </section>
 
 <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
-  <p>Rows highlight on hover and while a control inside has focus; selected rows use the accent tint; sorted columns show an arrow and <code>aria-sort</code>. The table as a whole can be loading, empty or in error.</p>
+  <p>Rows highlight on hover and while a control inside has focus; the row header takes the same tint as its row; selected rows use the accent tint; sorted columns show an arrow and <code>aria-sort</code>. The table as a whole can be loading, empty or in error.</p>
   <div class="table-wrap">
     <table class="table">
       <caption>Row states</caption>
       <thead><tr><th scope="col">State</th><th scope="col">Request</th><th scope="col">Braider</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
       <tbody>
-        <tr><td>Default</td><td>HP-1048</td><td>Nia Okafor</td><td><div class="row-actions"><button class="btn btn--ghost btn--sm" type="button">View</button></div></td></tr>
-        <tr data-state="hover"><td>Hover</td><td>HP-0992</td><td>Nia Okafor</td><td><div class="row-actions"><button class="btn btn--ghost btn--sm" type="button">View</button></div></td></tr>
-        <tr data-state="hover"><td>Focus within</td><td>HP-0911</td><td>Aisha Mensah</td><td><div class="row-actions"><button class="btn btn--ghost btn--sm" type="button" data-state="focus">View</button></div></td></tr>
-        <tr data-state="selected"><td>Selected</td><td>HP-0874</td><td>Jules Baptiste</td><td><div class="row-actions"><button class="btn btn--ghost btn--sm" type="button">View</button></div></td></tr>
+        <tr><td>Default</td><th scope="row">HP-1048</th><td>Nia Okafor</td><td><div class="row-actions"><button class="btn btn--ghost btn--sm" type="button">View</button></div></td></tr>
+        <tr data-state="hover"><td>Hover</td><th scope="row">HP-0992</th><td>Nia Okafor</td><td><div class="row-actions"><button class="btn btn--ghost btn--sm" type="button">View</button></div></td></tr>
+        <tr data-state="hover"><td>Focus within</td><th scope="row">HP-0911</th><td>Aisha Mensah</td><td><div class="row-actions"><button class="btn btn--ghost btn--sm" type="button" data-state="focus">View</button></div></td></tr>
+        <tr data-state="selected"><td>Selected</td><th scope="row">HP-0874</th><td>Jules Baptiste</td><td><div class="row-actions"><button class="btn btn--ghost btn--sm" type="button">View</button></div></td></tr>
       </tbody>
     </table>
   </div>
@@ -87,7 +87,7 @@
 <div class="table-wrap"><table class="table"><caption>Appointments failed to load</caption><thead><tr><th scope="col">Request</th><th scope="col">Braider</th><th scope="col" class="num">Estimate</th></tr></thead><tbody><tr><td colspan="3"><div class="empty empty--compact empty--error"><p class="empty__title">We couldn’t load your appointments</p><p class="empty__text">Check your connection and try again.</p><div class="empty__actions"><button class="btn btn--primary" type="button">Try again</button></div></div></td></tr></tbody></table></div>
   {{/example}}
   <h3>Both themes</h3>
-  {{themes:stack}}<div class="table-wrap"><table class="table"><caption class="visually-hidden">Theme sample</caption><thead><tr><th scope="col">Request</th><th scope="col">Status</th><th scope="col" class="num">Estimate</th></tr></thead><tbody><tr><td>HP-1048</td><td><span class="badge badge--warning">Awaiting reply</span></td><td class="num">$180–$240</td></tr><tr data-state="hover"><td>HP-0992</td><td><span class="badge badge--success">Completed</span></td><td class="num">$210</td></tr><tr data-state="selected"><td>HP-0911</td><td><span class="badge badge--info">Read</span></td><td class="num">$195</td></tr></tbody></table></div>{{/themes}}
+  {{themes:stack}}<div class="table-wrap"><table class="table"><caption class="visually-hidden">Theme sample</caption><thead><tr><th scope="col">Request</th><th scope="col">Status</th><th scope="col" class="num">Estimate</th></tr></thead><tbody><tr><th scope="row">HP-1048</th><td><span class="badge badge--warning">Awaiting reply</span></td><td class="num">$180–$240</td></tr><tr data-state="hover"><th scope="row">HP-0992</th><td><span class="badge">Completed</span></td><td class="num">$210</td></tr><tr data-state="selected"><th scope="row">HP-0911</th><td><span class="badge">Completed</span></td><td class="num">$195</td></tr></tbody></table></div>{{/themes}}
 </section>
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
@@ -95,7 +95,9 @@
     <li>The table scrolls horizontally inside <code>.table-wrap</code>; the page never scrolls sideways. Keep the identifying column first so it is visible before scrolling.</li>
     <li>Below 768px, a table with four columns or fewer may switch to row cards (<code>.card.appointment-row</code>) when the screen says so; My appointments uses cards at every width today.</li>
     <li>Row actions are always visible under <code>(hover: none)</code>.</li>
-    <li>The header is sticky inside the wrapper so column names stay visible in long lists.</li>
+    <li>Cell values stay on one line (<code>white-space: nowrap</code>), so a column is as wide as its longest value and a wide table scrolls inside the wrapper instead of breaking "Sat 24 Oct · 10:00 am" over several lines. A full-width empty or error row wraps.</li>
+    <li>While the table overflows, the wrapper is a focusable region named by the caption (<code>role="region"</code>, <code>aria-labelledby</code>, <code>tabindex="0"</code>) so keyboard users can scroll it; when it fits, it carries none of these.</li>
+    <li>The column header row is sticky only inside the wrapper's own scroll area. The wrapper scrolls horizontally only, so on the page the header scrolls away with the table: paginate long histories rather than nesting a vertical scroll area.</li>
   </ul>
 </section>
 
@@ -110,10 +112,10 @@
   <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
     <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through sort buttons, checkboxes and row actions in order; focus within a row reveals its actions.</td></tr>
     <tr><td><kbd>Enter</kbd> / <kbd>Space</kbd></td><td>Sorts by the focused column; toggles a checkbox; activates a row action.</td></tr>
-    <tr><td><kbd>Shift</kbd>+scroll / arrow keys in the wrapper</td><td>Scrolls a wide table horizontally (the wrapper is scrollable).</td></tr>
+    <tr><td><kbd>←</kbd> / <kbd>→</kbd> with the wrapper focused</td><td>Scrolls a wide table horizontally; the overflowing wrapper is a tab stop.</td></tr>
   </tbody></table>
   <h3>Focus</h3>
-  <p>The shared ring on sort buttons and row controls. A row with focus inside gets the hover tint so the row being acted on is visible.</p>
+  <p>The shared ring on the overflowing wrapper, sort buttons and row controls. Sort buttons look like header text but keep a 24px (<code>--target-min</code>) target. A row with focus inside gets the hover tint so the row being acted on is visible. In forced colours a selected row gets a <code>Highlight</code> inset outline, because the system removes its tint.</p>
   <h3>Labelling</h3>
   <p>The caption names the table. Row actions name their record ("View HP-1048"), and row checkboxes name theirs ("Select HP-0992"). An empty header over actions has visually hidden text "Actions". Loading tables set <code>aria-busy="true"</code> on the wrapper; skeletons are <code>aria-hidden</code>.</p>
   <h3>Contrast</h3>
@@ -185,7 +187,9 @@
     <tr><td><code>.table-wrap</code></td><td>Bordered, rounded, horizontally scrolling container.</td></tr>
     <tr><td><code>.table</code> <code>.table--dense</code></td><td>Base table; compact padding.</td></tr>
     <tr><td><code>.num</code></td><td>Right-aligned tabular figures.</td></tr>
-    <tr><td><code>aria-sort="ascending|descending"</code> + <code>&lt;button&gt;</code></td><td>Sortable header with arrow.</td></tr>
+    <tr><td><code>&lt;button&gt;</code> in a <code>thead th</code></td><td>Sortable header: header text look, 24px target, shared focus ring.</td></tr>
+    <tr><td><code>aria-sort="ascending|descending"</code></td><td>On the sorted column only; adds the decorative arrow.</td></tr>
+    <tr><td><code>&lt;th scope="row"&gt;</code></td><td>Row header: label type, row's own background.</td></tr>
     <tr><td><code>aria-selected="true"</code> on <code>tr</code></td><td>Selected row tint.</td></tr>
     <tr><td><code>.row-actions</code></td><td>Actions revealed on hover and focus, always shown on touch.</td></tr>
     <tr><td><code>data-state="hover|selected"</code> on <code>tr</code></td><td>Documentation only: forces a row state.</td></tr>
@@ -198,5 +202,5 @@
     {{mock:pages/my-appointments/default|two appointments as row cards}}
     {{mock:pages/my-appointments/long|paged list of 126 results, where a dense table would help}}
   </ul>
-  <p>Drift fixed during extraction: none in the mocks; the kit's sort arrows were typed glyphs that screen readers announced (now hidden with empty alt text in <code>content</code>), and row actions had no record names.</p>
+  <p>Drift fixed during extraction: none in the mocks; the kit's sort arrows were typed glyphs that screen readers announced (now hidden with empty alt text in <code>content</code>), and row actions had no record names. Fixed in the stylesheet: row headers were painted like column headers (sunken, muted, sticky), so hover and selection stopped at the first cell; the last row's row header kept its rule; unsorted sort buttons kept the browser's button style and sorted ones were 23px tall; values wrapped over several lines on phones.</p>
 </section>

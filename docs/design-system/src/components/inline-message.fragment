@@ -1,4 +1,4 @@
-<!--meta {"lead": "Inline messages sit right next to what they describe: a hint under a field, the error that says how to fix it, a quiet Saved beside a form.", "description": "Field hint, field error, character counter and inline status (neutral, success, warning, danger), in both themes.", "pills": ["Linked with <code>aria-describedby</code>", "Status: stable"], "variants": "field hint, field error, counter, inline status (neutral, success, warning, danger), live dot", "states": "hint, invalid, over limit, saving, saved, failed", "sources": ["pages/booking-request/invalid", "pages/account-settings/invalid", "pages/reset-password/invalid", "dialogs/filter-braiders/invalid"]} -->
+<!--meta {"lead": "Inline messages sit right next to what they describe: a hint under a field, the error that says how to fix it, a quiet Saved beside a form.", "description": "Field hint, field error, character counter and inline status (neutral, success, warning, danger), in both themes.", "pills": ["Linked with <code>aria-describedby</code>", "Status: stable"], "variants": "field hint, field error, counter, inline status (neutral, success, warning, danger), live dot", "states": "hint, invalid, over limit, saving, saved, failed", "sources": ["pages/booking-request/invalid", "pages/account-settings/invalid", "pages/reset-password/invalid", "dialogs/filter-braiders/invalid", "pages/booking-request/submitting", "pages/account-settings/submitting"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use an inline message for feedback that belongs to one control or one small area, placed where the eye already is. Use an <a href="alert.html">alert</a> for a condition that affects a region or the page (and the error summary that lists every invalid field), and a <a href="toast.html">toast</a> for feedback about an action that has finished elsewhere.</p>
   <ul>
@@ -29,7 +29,7 @@
   {{example:[stack]Hint before input, error after validation, counter on a textarea.}}
 <div class="field"><label class="field__label" for="var-password">New password</label><input class="input" id="var-password" type="password" autocomplete="new-password" aria-describedby="var-password-help"><span class="field__help" id="var-password-help">Use at least 12 characters.</span></div>
 <div class="field"><label class="field__label" for="var-time">Preferred time</label><input class="input" id="var-time" type="text" value="Sat 24 Oct, 7:00 am" aria-invalid="true" aria-describedby="var-time-error"><span class="field__error" id="var-time-error">Choose an offered time. Nia starts at 9:00 am on Saturdays.</span></div>
-<div class="field"><label class="field__label" for="var-review">Your review</label><textarea class="textarea" id="var-review" aria-describedby="var-review-count">Nia explained each step and the braids feel comfortable.</textarea><span class="field__counter" id="var-review-count">55 of 500 characters</span></div>
+<div class="field"><label class="field__label" for="var-review">Your review</label><textarea class="textarea" id="var-review" aria-describedby="var-review-count">Nia explained each step and the braids feel comfortable.</textarea><span class="field__counter" id="var-review-count">56 of 500 characters</span></div>
   {{/example}}
   {{example:Inline status beside an action; the live dot pulses only while work is in progress.}}
 <span class="inline-status" role="status"><span class="dot dot--pulse" aria-hidden="true"></span>Saving…</span>
@@ -54,7 +54,7 @@
   <h3>Both themes</h3>
   {{themes:stack}}<span class="field__help">Use at least 12 characters.</span><span class="field__error">Enter an email address like name@example.com.</span><span class="inline-status inline-status--success">{{icon:check|icon--sm}}Saved just now</span><span class="inline-status inline-status--warning">{{icon:warning|icon--sm}}Saved on this device only</span><span class="inline-status inline-status--danger">{{icon:alert-circle|icon--sm}}Not saved</span>{{/themes}}
   <ul>
-    <li><b>Timing</b>: validate on blur, then re-validate on every input so the error disappears as soon as the value is fixed.</li>
+    <li><b>Timing</b>: an error first shows after a submit attempt, or once the control has been changed and left; it then re-validates on every input so it disappears as soon as the value is fixed (the form field owns this timing).</li>
     <li><b>Hint plus error</b>: keep the hint; put the error first in <code>aria-describedby</code> so it is read first.</li>
     <li><b>Over limit</b>: <code>data-over="true"</code> turns the counter danger and the textarea invalid; never truncate what was typed.</li>
   </ul>
@@ -65,6 +65,7 @@
     <li>Messages wrap under their control at any width; they never sit beside it, so they cannot overflow at 360px.</li>
     <li>In two-column form rows (768px and up), each field keeps its own message; rows align to the top so a long error does not push its neighbour.</li>
     <li>Inline status wraps below the form's actions on phones.</li>
+    <li>A word longer than the line, such as "name@example.com" at 200% text on a 360px screen, breaks (<code>overflow-wrap: anywhere</code>) instead of overflowing the field.</li>
   </ul>
 </section>
 
@@ -95,7 +96,7 @@
     {{pair:Warning status on card|--color-warning-fg|--color-bg-surface|4.5}}
   </div>
   <h3>Motion</h3>
-  <p>Messages appear without animation. The live dot pulses over <code>--duration-loop-pulse</code> and pauses under reduced motion (<code>--motion-loop-state</code>).</p>
+  <p>Messages appear without animation. The live dot pulses over <code>--duration-loop-pulse</code> only while work is in progress, and pauses at full opacity under reduced motion (<code>--motion-loop-state</code>). Use the dot, not a spinner, beside a busy button: the button already shows the spinner.</p>
   <h3>Touch</h3>
   <p>Not a target. Keep errors directly under the field so they are visible above the on-screen keyboard.</p>
 </section>
@@ -105,7 +106,7 @@
     <li>Errors are one sentence: what to do, with an example when the format is unclear: "Enter an email address like name@example.com."</li>
     <li>Never blame ("You entered an invalid value") and never be vague ("Enter a valid value to continue").</li>
     <li>Hints explain constraints before they bite: "Use at least 12 characters."</li>
-    <li>Status is two or three words, past tense for done: "Saved just now", "Not saved".</li>
+    <li>Status is a few words (five at most), past tense for done: "Saved just now", "Not saved", "Saved on this device only"; an ellipsis for work in progress: "Saving…".</li>
   </ul>
 </section>
 
@@ -159,6 +160,8 @@
     {{mock:pages/account-settings/invalid|email format error}}
     {{mock:pages/reset-password/invalid|password length error}}
     {{mock:dialogs/filter-braiders/invalid|error inside a dialog}}
+    {{mock:pages/booking-request/submitting|"Sending your request to Nia…" status beside the busy button}}
+    {{mock:pages/account-settings/submitting|"Saving…" status beside the busy button}}
   </ul>
   <p>Drift fixed during extraction: the error <code>&lt;span&gt;</code> was nested inside the <code>&lt;label class="field"&gt;</code>, making it part of the field's accessible name (system: <code>div.field</code> with <code>label for</code> and the error outside); the "⚠" glyph was read aloud (now empty alternative text); the fallback error "Enter a valid value to continue." was vague; no field had a hint, so rules such as the 12-character password appeared only as errors; the hint, counter and inline-status variants were added from the core set.</p>
 </section>

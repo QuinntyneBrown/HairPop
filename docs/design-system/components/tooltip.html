@@ -21,6 +21,7 @@
   <ul>
     <li><b>Text</b>: two to five words, no full stop.</li>
     <li><b>With shortcut</b>: the label followed by a <code>&lt;kbd&gt;</code> shortcut, for desktop power features.</li>
+    <li><b>Below</b> (<code>.tooltip--below</code>): when there is no room above the trigger (a dialog's close button near the top of the panel or viewport) the bubble opens below and its arrow points up.</li>
   </ul>
 </section>
 
@@ -46,9 +47,15 @@
   <div class="ds-example"><div class="ds-example__canvas"><div class="cluster" style="gap: var(--space-12); padding-top: var(--space-10);">
   <span class="has-tooltip" data-state="open"><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button><span class="tooltip" role="tooltip" id="var-tip-1">Close dialog</span></span>
   <span class="has-tooltip" data-state="open"><button class="btn btn--icon" type="button" aria-label="Search styles" aria-describedby="var-tip-2"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4"/></svg></button><span class="tooltip" role="tooltip" id="var-tip-2">Search styles<kbd>/</kbd></span></span>
+</div>
+<div class="cluster" style="padding-bottom: var(--space-10);">
+  <span class="has-tooltip" data-state="open"><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog" aria-describedby="var-tip-3"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button><span class="tooltip tooltip--below" role="tooltip" id="var-tip-3">Close dialog</span></span>
 </div></div><div class="ds-example__caption"><span>Shown here with <code>data-state="open"</code>; in the product they appear on hover and focus.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;cluster&quot; style=&quot;gap: var(--space-12); padding-top: var(--space-10);&quot;&gt;
   &lt;span class=&quot;has-tooltip&quot; data-state=&quot;open&quot;&gt;&lt;button class=&quot;btn btn--ghost btn--icon&quot; type=&quot;button&quot; aria-label=&quot;Close dialog&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;span class=&quot;tooltip&quot; role=&quot;tooltip&quot; id=&quot;var-tip-1&quot;&gt;Close dialog&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;has-tooltip&quot; data-state=&quot;open&quot;&gt;&lt;button class=&quot;btn btn--icon&quot; type=&quot;button&quot; aria-label=&quot;Search styles&quot; aria-describedby=&quot;var-tip-2&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;span class=&quot;tooltip&quot; role=&quot;tooltip&quot; id=&quot;var-tip-2&quot;&gt;Search styles&lt;kbd&gt;/&lt;/kbd&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class=&quot;cluster&quot; style=&quot;padding-bottom: var(--space-10);&quot;&gt;
+  &lt;span class=&quot;has-tooltip&quot; data-state=&quot;open&quot;&gt;&lt;button class=&quot;btn btn--ghost btn--icon&quot; type=&quot;button&quot; aria-label=&quot;Close dialog&quot; aria-describedby=&quot;var-tip-3&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;span class=&quot;tooltip tooltip--below&quot; role=&quot;tooltip&quot; id=&quot;var-tip-3&quot;&gt;Close dialog&lt;/span&gt;&lt;/span&gt;
 &lt;/div&gt;</code></pre></details></div>
 </section>
 
@@ -74,7 +81,8 @@
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
-    <li>Tooltips sit above the trigger, centred. Near a viewport edge the product flips or shifts them with the CDK Overlay so they never clip.</li>
+    <li>Tooltips sit above the trigger, centred. Near a viewport edge the product flips them below (<code>.tooltip--below</code>, arrow pointing up) or shifts them along the edge with the CDK Overlay so they never clip; when shifted, the arrow follows the trigger through <code>--tooltip-arrow-x</code>.</li>
+    <li>In the product the bubble renders in the CDK overlay, outside any scrolling panel, and takes pointer events so it can be hovered (WCAG 1.4.13). The in-place <code>.has-tooltip</code> reveal on this page and in the mocks is a static stand-in; inside a dialog panel the mocks open it below so the panel does not clip it.</li>
     <li>On touch devices (<code>hover: none</code>) tooltips are never the only label: icon-only buttons keep an <code>aria-label</code>, and important hints are shown inline.</li>
     <li>Text never wraps; a hint that needs a second line belongs on the page.</li>
   </ul>
@@ -99,7 +107,9 @@
   <h3>Contrast</h3>
   <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
     <div class="ds-pair"><span>Tooltip text</span><span class="ds-pair__ratio" data-contrast="--color-fg-inverse|--color-bg-inverse" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Bubble edge on page</span><span class="ds-pair__ratio" data-contrast="--color-bg-inverse|--color-bg-canvas" data-min="3"></span></div>
   </div>
+  <p>Forced colours replace the inverse background, so the bubble gets a 1px <code>CanvasText</code> border.</p>
   <h3>Motion</h3>
   <p>Fades in over <code>--duration-fast</code> after a 300ms hover delay and hides immediately; reduced motion removes the fade. Focus shows it without delay.</p>
   <h3>Touch</h3>
@@ -150,15 +160,18 @@
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.has-tooltip</code></td><td>Positioning context; shows the tooltip on hover and <code>:focus-within</code>.</td></tr>
     <tr><td><code>.tooltip</code> + <code>role="tooltip"</code></td><td>The bubble and arrow.</td></tr>
+    <tr><td><code>.tooltip--below</code></td><td>Bubble below the trigger, arrow pointing up.</td></tr>
+    <tr><td><code>--tooltip-arrow-x</code></td><td>Arrow position along the bubble (default 50%); set by the product when the bubble is shifted along an edge.</td></tr>
     <tr><td><code>aria-describedby</code></td><td>Links the trigger to the tooltip.</td></tr>
     <tr><td><code>data-state="open|hover"</code> on <code>.has-tooltip</code></td><td>Documentation only: shows the tooltip statically.</td></tr>
   </tbody></table>
 </section>
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
-  <p>Core-set component: no mock shows a tooltip yet. It is needed by the icon-only controls the mocks already use:</p>
+  <p>Core-set component. The dialog mocks name their icon-only close button with it:</p>
   <ul>
-    <li><a href="../../mocks/dialogs/filter-braiders/default.html">dialogs/filter-braiders/default</a> (icon-only close button)</li>
+    <li><a href="../../mocks/dialogs/filter-braiders/default.html">dialogs/filter-braiders/default</a> ("Close dialog" on the close button, opening below)</li>
+    <li><a href="../../mocks/dialogs/change-appointment/default.html">dialogs/change-appointment/default</a> ("Close dialog" on the close button, opening below)</li>
     <li><a href="../../mocks/pages/booking-request/default.html">pages/booking-request/default</a> (price rule shown as text, not a tooltip)</li>
   </ul>
   <p>Drift fixed during extraction: the tooltip arrow was a raw 5px border (now <code>--space-1</code>) and its offset a raw 8px (now <code>--space-2</code>); dialog close buttons relied on a "×" glyph with no tooltip.</p>

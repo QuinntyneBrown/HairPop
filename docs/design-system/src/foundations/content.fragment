@@ -101,7 +101,7 @@
     <tbody>
       <tr><td>Skip link</td><td>Skip to content</td></tr>
       <tr><td>Primary navigation</td><td>Styles · Braiders · Appointments · Help</td></tr>
-      <tr><td>Notifications link</td><td>Updates (with count: "Updates, 2 unread")</td></tr>
+      <tr><td>Notifications link</td><td>Updates (with count, named "Updates 2, 2 unread")</td></tr>
       <tr><td>Footer</td><td>HairPop · Made for confident hair decisions · Terms · Privacy</td></tr>
       <tr><td>Status badges</td><td>Awaiting reply · Confirmed · Completed · Unread · Read</td></tr>
       <tr><td>Dialog close</td><td>Close dialog</td></tr>

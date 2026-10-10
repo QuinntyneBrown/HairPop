@@ -7,7 +7,7 @@
 | Status | planned |
 | Traces to | L2-005, L2-015, L2-021, L2-041, L2-042 |
 | Design system | [`select.html`](../../design-system/components/select.html) |
-| Source mocks | [`dialogs/filter-braiders/default`](../../mocks/dialogs/filter-braiders/default.html), [`dialogs/filter-braiders/invalid`](../../mocks/dialogs/filter-braiders/invalid.html), [`dialogs/change-appointment/default`](../../mocks/dialogs/change-appointment/default.html), [`dialogs/change-appointment/invalid`](../../mocks/dialogs/change-appointment/invalid.html), [`dialogs/request-review/default`](../../mocks/dialogs/request-review/default.html), [`dialogs/request-review/invalid`](../../mocks/dialogs/request-review/invalid.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html) |
+| Source mocks | [`dialogs/filter-braiders/default`](../../mocks/dialogs/filter-braiders/default.html), [`dialogs/filter-braiders/invalid`](../../mocks/dialogs/filter-braiders/invalid.html), [`dialogs/change-appointment/default`](../../mocks/dialogs/change-appointment/default.html), [`dialogs/change-appointment/invalid`](../../mocks/dialogs/change-appointment/invalid.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html) |
 | Rendering | [`select.html`](select.html) |
 
 ## Purpose and scope
@@ -29,15 +29,14 @@ Out of scope:
 
 ## Usage
 
-No mock uses a select: the distance, preferred-time, new-time and service questions are free-text inputs, which the design system records as drift and replaces with selects of supported values.
+Every `select.select` in `docs/mocks/`, plus the configurations the design system adds. Distance, offered times and the service are always chosen from supported values, never typed.
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
 | `dialogs/filter-braiders` | md, required, in a field | "Distance from Toronto": "Within 5 km", "Within 10 km", "Within 25 km" | default, busy (editable), failed (value kept) | raised (dialog) |
 | `dialogs/change-appointment` | md, required, placeholder option, options grouped by day | "New preferred time": "Choose a time"; "Sat 24 Oct": "Sat 24 Oct, 1:00 pm"; "Sun 25 Oct": "Sun 25 Oct, 11:00 am", "Sun 25 Oct, 2:00 pm" | default, invalid "Choose one of the times Nia has offered.", busy, failed | raised |
-| `dialogs/request-review` | md, required, Nia's offered times | "Preferred time": "Sat 24 Oct, 10:00 am", "Sun 25 Oct, 11:00 am" | default, invalid "Choose an offered time." | raised |
 | `pages/booking-request` | md, preselected from Nia's profile (D-9) | "Service": "Medium knotless braids" and Nia's other published services | default, invalid when the service is no longer offered | surface (form panel) |
-| Design system *Variants* | md and sm, paired with the distance select in a `.form-row` from 768 px | "Sort braiders by": "Best match", "Lowest price", "Highest rated", "Nearest" | default | surface |
+| Design system *Variants* | md, paired with the distance select in a `.form-row` from 768 px | "Sort braiders by": "Best match", "Lowest price", "Highest rated", "Nearest" | default | surface |
 | Design system *Sizes* | sm, md, lg | — | all | surface |
 
 Every row is buildable with the API below: a native select with `fieldSize`, projected `<option>` and `<optgroup>` elements, inside a form field.
@@ -338,7 +337,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - Folder `frontend/projects/components/src/lib/select/`; file `select.ts` exporting the standalone component `Select` with `selector: 'select[hp-select]'`, `template: '<ng-content />'`, `changeDetection: OnPush`. Export from `public-api.ts`.
 - Host bindings: `class.select`; `class.select--sm`, `class.select--lg`; `attr.id`; `attr.aria-describedby`; `attr.aria-invalid`.
 - Injections and registration as the text field. `NgSelectOption` on projected options finds the `SelectControlValueAccessor` on the select element, because the options are declared in the consumer's template inside it.
-- Styles: port `.select` and the shared `.input, .select, .textarea` rules from `docs/design-system/assets/components.css` as `:host(...)` rules and add `line-height: var(--line-height-snug)` (D-4), in `components.css` too in the same slice.
+- Styles: port `.select`, the shared `.input, .select, .textarea` rules and `.input, .select { line-height: var(--line-height-snug); }` (D-4) from `docs/design-system/assets/components.css` as `:host(...)` rules.
 - No CDK primitive.
 - Perf-test scenario `frontend/projects/perf-test/src/scenarios/Select.ts`, exported from `src/scenarios/index.ts`, with iterations in `e2e/perf-test/config/scenario-iterations.mjs`.
 
@@ -347,11 +346,11 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - **D-1** *Wrapper or native host?* A component on the native `<select>` with a template of one `<ng-content>`, so the platform picker, type-ahead, form submission and accessibility stay native and the options stay the element's children.
 - **D-2** *How do values and the placeholder work with Angular forms?* `SelectControlValueAccessor` on the same element and `[ngValue]` on options, so the form model holds typed values (the number 25, a slot id). The design system's `value="" disabled selected` placeholder shows a blank select when a reactive control's value is `null`, because no option matches; `[ngValue]="null" disabled` matches it, shows "Choose a time" and can never be chosen.
 - **D-3** *`size` or another name?* `fieldSize`, as the text field: the native `size` attribute turns a select into an open list box.
-- **D-4** *Height?* Exactly the control height, with `--line-height-snug`; measured, the design-system stylesheet draws 44 px for a 40 px select (text field D-4).
+- **D-4** *Height?* Exactly the control height, with `--line-height-snug`, which `components.css` sets on `.select`; measured, the body line height would draw 44 px for a 40 px select (text field D-4).
 - **D-5** *Read-only?* Not offered: a native select has no read-only state, and disabling it hides the value from some screen readers' form mode. A value Maya cannot change is shown as text (description list) or a read-only text field.
-- **D-6** *Do grouped options repeat the day?* Yes. The closed select shows only the chosen option's text, so the design system's grouped "11:00 am" would read as a time without a day once chosen; "Sun 25 Oct, 11:00 am" stands on its own, matching the design system's own do-example options.
+- **D-6** *Do grouped options repeat the day?* Yes. The closed select shows only the chosen option's text, so a grouped "11:00 am" would read as a time without a day once chosen; "Sun 25 Oct, 11:00 am" stands on its own, as the design system's variants and do-example draw it.
 - **D-7** *The closed select cuts long values with 200 % text on a phone. Is that acceptable?* Yes, as the platform's behaviour: measured at 360 px with 200 % text only about 190 px remain beside the chevron, so even "Within 25 km" (198 px) is cut, while the opened picker shows every option whole and assistive technology reads the full value. The design system accepts platform truncation and asks for options under 30 characters; L2-042 asks that content stay readable at 200 % text. The CRD keeps the native select, the most consistent option with both, because the value stays readable and operable through the picker (needs product confirmation).
 - **D-8** *Native or custom listbox?* Native everywhere. No product list needs search, rich option content or multi-line options, the conditions under which the design system allows a custom APG listbox.
-- **D-9** *The booking request mock types the service as free text. What does the product render?* A select of Nia's currently published services, preselected from her profile. L2-015 requires a service currently offered by the selected braider, and the design system's rule is that an answer from a known set is never free text.
+- **D-9** *What does the booking request's "Service" question render?* A select of Nia's currently published services, preselected from her profile. L2-015 requires a service currently offered by the selected braider, and the design system's rule is that an answer from a known set is never free text.
 - **D-10** *`multiple` or a list-box `size`?* Not supported. No screen needs a multi-select; several choices use a checkbox group, which shows every option.
 - **D-11** *Does changing the value act at once?* Never. Filters apply on "Show braiders" and a change request is sent on "Send change request" (WCAG 3.2.2, design system *Accessibility*).

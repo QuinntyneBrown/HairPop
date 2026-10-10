@@ -52,10 +52,9 @@
 
 <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
   <h3>Loading with a known layout</h3>
-  {{example:[start]Skeletons mirror the real card: photo at 3:2, eyebrow, title, one line of text. The container sets <code>aria-busy="true"</code>.}}
-<section class="feature-grid" aria-busy="true" aria-label="Loading styles" style="flex: 1 1 100%;">
-  <div class="card stack"><span class="skeleton skeleton--rect skeleton--hero"></span><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div>
-  <div class="card stack"><span class="skeleton skeleton--rect skeleton--hero"></span><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div>
+  {{example:[start]Skeletons mirror the real card: photo at 3:2, eyebrow, title, two lines of summary and the link. The region keeps its name ("Styles"), sets <code>aria-busy="true"</code> and holds one status message ("Loading styles").}}
+<section class="feature-grid" aria-busy="true" aria-label="Styles" style="flex: 1 1 100%;">
+  <div class="skeleton-group"><span class="visually-hidden" role="status">Loading styles</span><div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div class="stack"><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><div><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div><span class="skeleton skeleton--text" style="width: 40%;"></span></div></div><div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div class="stack"><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><div><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div><span class="skeleton skeleton--text" style="width: 40%;"></span></div></div></div>
 </section>
   {{/example}}
   <h3>Action in progress, refresh and progress</h3>
@@ -81,7 +80,7 @@
   <ul>
     <li>One polite <code>role="status"</code> region per page holds toasts; errors that need attention use <code>role="alert"</code> in a separate region, never nested inside the status region.</li>
     <li>Status is colour + icon + text: every alert, banner and toast has an icon and a bold lead.</li>
-    <li>Skeleton containers set <code>aria-busy="true"</code> and an <code>aria-label</code> ("Loading styles"); the shapes themselves carry no content.</li>
+    <li>Skeleton regions keep their own name ("Styles"), set <code>aria-busy="true"</code>, and hold one visually hidden <code>role="status"</code> message that names what is loading ("Loading styles"); the shapes themselves are <code>aria-hidden</code> and carry no content.</li>
     <li>Toasts stay at least 8 seconds, pause on hover and focus, and danger toasts never auto-dismiss (2.2.1).</li>
     <li>Under reduced motion, shimmer and pulse pause; spinners keep turning because they are the only sign of progress.</li>
   </ul>
