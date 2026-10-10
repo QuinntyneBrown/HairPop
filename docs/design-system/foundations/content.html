@@ -53,7 +53,7 @@
       <tr><td>Send request</td><td>Submit, Book now</td><td>Booking request form and review dialog</td></tr>
       <tr><td>Request with Nia</td><td>Book</td><td>Braider profile</td></tr>
       <tr><td>Request a change</td><td>Edit, Reschedule</td><td>Appointment detail</td></tr>
-      <tr><td>Cancel request / Keep browsing</td><td>Yes / No, OK / Cancel</td><td>Cancel appointment dialog</td></tr>
+      <tr><td>Cancel request / Keep request</td><td>Yes / No, OK / Cancel</td><td>Cancel appointment dialog</td></tr>
       <tr><td>Find braiders, See braiders for this style</td><td>Search, Go</td><td>Style gallery and style detail</td></tr>
       <tr><td>Explore Knotless braids</td><td>Learn more, Click here</td><td>Style cards (the link names its destination)</td></tr>
       <tr><td>Post review</td><td>Submit</td><td>Care and review</td></tr>
@@ -87,8 +87,8 @@
 <section class="ds-section" id="errors"><h2><a href="#errors">Error messages</a></h2>
   <p><b>Formula:</b> what happened + what is safe + what to do next. Never blame the person, never show a code without words.</p>
   <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><p class="field__error">Enter an email address like name@example.com.</p>
-<div class="alert alert--danger" role="alert"><div><strong>We couldn’t save this change.</strong> Your details remain here. Please try again.</div></div></div><div class="ds-example__caption"><span>An inline error, a page error and an action toast written with the formula.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;p class=&quot;field__error&quot;&gt;Enter an email address like name@example.com.&lt;/p&gt;
-&lt;div class=&quot;alert alert--danger&quot; role=&quot;alert&quot;&gt;&lt;div&gt;&lt;strong&gt;We couldn’t save this change.&lt;/strong&gt; Your details remain here. Please try again.&lt;/div&gt;&lt;/div&gt;</code></pre></details></div>
+<div class="alert alert--danger" role="alert"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg><div><p class="alert__title">We couldn’t save this change</p><p>Your details remain here. Please try again.</p></div></div></div><div class="ds-example__caption"><span>An inline error, a page error and an action toast written with the formula.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;p class=&quot;field__error&quot;&gt;Enter an email address like name@example.com.&lt;/p&gt;
+&lt;div class=&quot;alert alert--danger&quot; role=&quot;alert&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01&quot;/&gt;&lt;/svg&gt;&lt;div&gt;&lt;p class=&quot;alert__title&quot;&gt;We couldn’t save this change&lt;/p&gt;&lt;p&gt;Your details remain here. Please try again.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</code></pre></details></div>
   <ul>
     <li><b>Field errors</b> name the fix, not the rule that failed: "Choose a rating from 1 to 5", not "Invalid input".</li>
     <li><b>Page errors</b> reassure first: "We couldn't load braiders. Check your connection and try again. Your details are safe."</li>
@@ -121,8 +121,8 @@
       <tr><td>Footer</td><td>HairPop · Made for confident hair decisions · Terms · Privacy</td></tr>
       <tr><td>Status badges</td><td>Awaiting reply · Confirmed · Completed · Unread · Read</td></tr>
       <tr><td>Dialog close</td><td>Close dialog</td></tr>
-      <tr><td>Toast dismiss</td><td>Dismiss notification</td></tr>
-      <tr><td>Toast actions</td><td>Undo · View update</td></tr>
+      <tr><td>Toast dismiss</td><td>Dismiss: Time confirmed</td></tr>
+      <tr><td>Toast actions</td><td>Name the result: View appointment · Retry · Choose · Undo (only when reversible)</td></tr>
       <tr><td>Error summary</td><td>Check the highlighted field · Correct the information below and try again.</td></tr>
       <tr><td>Offline banner</td><td>You’re offline. Saved details are shown. Actions need a connection.</td></tr>
       <tr><td>Partial load</td><td>Some details are unavailable. Reviews could not load. Retry reviews.</td></tr>

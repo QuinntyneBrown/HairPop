@@ -28,12 +28,11 @@ Out of scope:
 
 ## Usage
 
-All 181 mocks end with the same footer. The inventory script finds one configuration:
+All 181 mocks end with the same product footer:
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| Every page, dialog and notification mock (181) | mock: brand line in a `<span>` and two links in a `<span>` separated by "·" (drift, D-4) | "HairPop · Made for confident hair decisions"; "Terms", "Privacy" | link default, hover, focus | canvas |
-| Every product screen (design system *Variants*, "with help and cookie links", recommended once the cookie banner ships; the banner exists in `notifications/cookie-consent/*`) | brand line + four links in a list (D-2) | "Help", "Cookie preferences" (opens `dialogs/cookie-preferences`), "Terms", "Privacy" | default, hover, focus, active | canvas |
+| Every page, dialog and notification mock (181), and every product screen (design system *Variants*, product footer; the cookie banner it pairs with is `notifications/cookie-consent/*`) | brand line in a `<p>` + four links in a `ul.site-footer__links` (D-2, D-4) | "Help", "Cookie preferences" (opens `dialogs/cookie-preferences`), "Terms", "Privacy" | default, hover, focus, active | canvas |
 | `pages/booking-request/*`, `pages/sign-up/*`, `pages/account-settings/*` | same footer; the flows link to Terms and Privacy from here as well as in their own copy | as above | — | canvas |
 | `pages/terms/*`, `pages/privacy/*`, `pages/help/*` | same footer on the destinations themselves | as above | link to the current page stays a plain link | canvas |
 | Error pages (`not-found`, `forbidden`, `server-error`, `offline`) | same footer; the shell is kept (layout foundation) | as above | — | canvas |
@@ -86,7 +85,7 @@ interface FooterLink {
 
 | Variant | Modifier | Use for |
 |---|---|---|
-| Simple | two links | Today's mocks: Terms, Privacy. Kept only until the cookie banner ships (D-2). |
+| Simple | two links | Terms and Privacy only, for a context without help or cookie choices (design system *Variants*). HairPop's shell uses the product footer (D-2). |
 | With help and cookie links | four links | The product footer: Help, Cookie preferences, Terms, Privacy. |
 
 One size. Padding follows `--layout-margin` per breakpoint (16 → 32 → 48 px), so the footer lines up with the page content and the top bar.
@@ -274,7 +273,7 @@ Render cost is measured by the `Footer` perf-test scenario and gated by `--fail-
 - Folder `frontend/projects/components/src/lib/footer/`; file `footer.ts` exporting the standalone component `Footer` with `selector: 'footer[hp-footer]'`, `changeDetection: OnPush`, scoped `styles` porting `.site-footer`, `.site-footer a` and `.site-footer__links` from `components.css` (`:host` for `.site-footer`). Export it and `FooterLink` from `public-api.ts`.
 - Host binding: `class.site-footer` always. The `.footer` alias in `components.css` is not rendered by the component.
 - Template: `<p>{{ brandLine() }}</p><ul class="site-footer__links">@for (item of links(); track item.id) { <li><a hp-link variant="inherit" [routerLink]="item.link" [attr.aria-haspopup]="item.opensDialog ? 'dialog' : null" (click)="activate($event, item)">{{ item.label }}</a></li> }</ul>`.
-- Hover colour: the footer sets the Link component's inherit-variant hover hook to `--color-fg-default` on its links (link CRD D-3) and leaves the weight hook unset, so links stay regular weight (D-5).
+- Hover colour: `components.css` sets the Link component's inherit-variant hover hook on the footer (`.site-footer { --link-inherit-hover-fg: var(--color-fg-default); }`, link CRD D-3) and leaves the weight hook unset, so links stay regular weight (D-5); the component ports that rule onto `:host`.
 - `activate`: when `opensDialog` and the click has no modifier keys and is the primary button, call `preventDefault()` (RouterLink then does not navigate) and emit `dialogRequested`.
 - Development check (D-8): more than six links logs `console.error` naming `hp-footer`; skipped in production.
 - Perf-test scenario `frontend/projects/perf-test/src/scenarios/Footer.ts`, exported from `src/scenarios/index.ts`, with iterations in `e2e/perf-test/config/scenario-iterations.mjs`.
@@ -282,11 +281,11 @@ Render cost is measured by the `Footer` perf-test scenario and gated by `--fail-
 ## Decisions
 
 - **D-1** *Wrapper element or the native `<footer>`?* The native element, through the attribute selector `footer[hp-footer]`, with `.site-footer` on the host. The `contentinfo` landmark comes from the native element, and `.product-shell`'s column layout (with `.product-main { flex: 1 }` pushing the footer to the bottom of short pages) expects the footer as its direct child, as in the mocks.
-- **D-2** *The mocks show Terms and Privacy only; the design system recommends adding Help and Cookie preferences "once the cookie banner ships". Which does the product render?* All four: Help, Cookie preferences, Terms, Privacy. The cookie banner exists in the mocks (`notifications/cookie-consent/*`), and L2-034 requires that a saved choice "can be revised in Cookie preferences" after the banner is dismissed; the footer is the design system's route back. Help in the footer is the design system's own variant and does not repeat the top bar's journey links.
+- **D-2** *The first mocks showed Terms and Privacy only, and the design system recommended adding Help and Cookie preferences "once the cookie banner ships". Which does the product render?* All four: Help, Cookie preferences, Terms, Privacy, which the design system and the mocks now show. The cookie banner exists in the mocks (`notifications/cookie-consent/*`), and L2-034 requires that a saved choice "can be revised in Cookie preferences" after the banner is dismissed; the footer is the design system's route back. Help in the footer is the design system's own variant and does not repeat the top bar's journey links.
 - **D-3** *Cookie preferences opens a dialog. Is it a button (Button D-10's rule) or a link?* A link, as the design system's footer page specifies ("a link that opens a dialog is the only exception"), so it keeps the footer link look and its place in the list. It is honest about its behaviour (`aria-haspopup="dialog"`), opens the dialog on activation through `dialogRequested`, and still has a real `href` to the Privacy page as a fallback before scripts load and for modified clicks.
-- **D-4** *The mocks put the brand line in a `<span>` and separate the links with "·" glyphs inside one `<span>`.* The design system's markup applies: a `<p>` and a `<ul>` list, with spacing from the list gap. The dot is read aloud and crowds the targets (design system *Do and don't*); this is recorded on the design-system page as drift fixed during extraction.
+- **D-4** *The first mocks put the brand line in a `<span>` and separated the links with "·" glyphs inside one `<span>`.* The design system's markup applies: a `<p>` and a `<ul>` list, with spacing from the list gap. The dot is read aloud and crowds the targets (design system *Do and don't*); the design-system page records it as drift fixed during extraction, and the mocks now render the list.
 - **D-5** *The Link component's `inherit` variant becomes semibold inside alerts and toasts. What weight do footer links use?* Regular, from `--text-body-sm`: the footer's states table and anatomy show plain muted links. The footer relies on `inherit` taking both colour and weight from its container here.
 - **D-6** *Do visited links change colour?* No; the set is small and stable (design system *States*).
 - **D-7** *Does the link to the current page get `aria-current`?* No. The footer is not a navigation landmark and the design system specifies no current state; the page's `<h1>` names the page.
 - **D-8** *How is "never more than six links" enforced?* A development-mode `console.error` naming the component; it still renders every link. No L2 requirement covers the limit; it is a design-system content rule.
-- **D-9** *The design system says the footer wraps "below about 560px". Is that a breakpoint?* No: wrapping comes from `flex-wrap` and depends on the number and length of links (measured: four links wrap below the brand line at 560 px; two links fit beside it). The CRD specifies the behaviour, not a pixel value.
+- **D-9** *The design system first said the footer wraps "below about 560px". Is that a breakpoint?* No: wrapping comes from `flex-wrap` and depends on the number and length of links (measured: four links wrap below the brand line at 560 px; two links fit beside it). The CRD specifies the behaviour, not a pixel value.

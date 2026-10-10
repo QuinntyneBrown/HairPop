@@ -1,4 +1,4 @@
-<!--meta {"lead": "A description list shows the facts of one record as label and value pairs: an appointment's service, time, estimate and location. Facts scan faster as pairs than as sentences.", "description": "Horizontal (label beside value) and stacked description lists, responsive from 640px, in both themes.", "pills": ["Native <code>&lt;dl&gt;</code>", "Status: stable"], "variants": "horizontal, stacked", "states": "default, value missing, value pending", "sources": []} -->
+<!--meta {"lead": "A description list shows the facts of one record as label and value pairs: an appointment's service, time, estimate and location. Facts scan faster as pairs than as sentences.", "description": "Horizontal (label beside value) and stacked description lists, responsive from 640px, in both themes.", "pills": ["Native <code>&lt;dl&gt;</code>", "Status: stable"], "variants": "horizontal, stacked", "states": "default, value missing, value pending", "sources": ["pages/appointment-detail/default", "pages/appointment-detail/success", "dialogs/request-review/default", "pages/braider-profile/default", "pages/braider-profile/partial"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use a description list for the fields of a single record that people read rather than edit: the appointment detail, the review step of a booking, the account summary. Use a <a href="table.html">table</a> to compare several records, and a <a href="form-field.html">form</a> when the values are editable.</p>
   <ul>
@@ -146,11 +146,12 @@
 </section>
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
-  <p>Core-set component: the mocks state these facts as prose. It is recommended for:</p>
   <ul>
-    {{mock:pages/appointment-detail/default|time, estimate and location as sentences}}
-    {{mock:pages/appointment-detail/success|confirmed estimate and studio address as sentences}}
-    {{mock:dialogs/request-review/default|review step that should list the request's details}}
+    {{mock:pages/appointment-detail/default|pending request: estimate, final price and location pending}}
+    {{mock:pages/appointment-detail/success|confirmed estimate and studio address}}
+    {{mock:dialogs/request-review/default|the request's details before sending}}
+    {{mock:pages/braider-profile/default|stacked list in the "Before you book" aside}}
+    {{mock:pages/braider-profile/partial|a missing value with "Retry reviews"}}
   </ul>
-  <p>Drift recorded: appointment facts were written as prose ("Sat 24 Oct · 10:00 am with Nia Okafor", "Estimated price: …") rather than label and value pairs; the kit's <code>.dl</code> kept two columns at 360px, squeezing values (now stacked below 640px).</p>
+  <p>Drift fixed: appointment facts were written as prose ("Sat 24 Oct · 10:00 am with Nia Okafor", "Estimated price: …") rather than label and value pairs; the kit's <code>.dl</code> kept two columns at 360px, squeezing values (now stacked below 640px).</p>
 </section>

@@ -1,4 +1,4 @@
-<!--meta {"lead": "The page header opens every screen: a short eyebrow, the page's one <code>&lt;h1&gt;</code>, a subtitle with the facts that matter, and optional page actions.", "description": "Eyebrow, display h1, subtitle and actions; actions drop below the title and the primary goes full width on phones.", "pills": ["Holds the page <code>&lt;h1&gt;</code>", "Status: stable"], "variants": "title only, with eyebrow and subtitle, with actions", "states": "static; actions follow button states", "sources": ["pages/style-gallery/default", "pages/appointment-detail/default", "pages/my-appointments/default", "pages/sign-in/default"]} -->
+<!--meta {"lead": "The page header opens every screen: a short eyebrow, the page's one <code>&lt;h1&gt;</code>, a subtitle with the facts that matter, and optional page actions.", "description": "Eyebrow, display h1, subtitle and actions; actions drop below the title and the primary goes full width on phones.", "pills": ["Holds the page <code>&lt;h1&gt;</code>", "Status: stable"], "variants": "title only, with eyebrow and subtitle, with actions", "states": "static; actions follow button states", "sources": ["pages/style-gallery/default", "pages/appointment-detail/default", "pages/my-appointments/default", "pages/sign-in/default", "pages/not-found/default"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Every product page uses one page header as the first thing in <code>&lt;main&gt;</code> (after an optional <a href="breadcrumb.html">breadcrumb</a>). It holds the page's only <code>&lt;h1&gt;</code> in the light display face, which carries HairPop's voice: "Find a style that feels like you", "Your appointment with Nia".</p>
   <ul>
@@ -56,8 +56,10 @@
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
-    <li><b>Below 768px</b>: actions move below the subtitle and take the full width; the primary action is full width and comes first, secondary actions follow.</li>
-    <li><b>From 768px</b>: actions sit at the end of the row, aligned to the bottom of the title block.</li>
+    <li><b>Below 768px</b>: actions move below the subtitle and take the full width; secondary actions come first and the primary, placed last in the markup, is full width on its own row. The visual order, the DOM order and the focus order stay the same at every width.</li>
+    <li><b>From 768px</b>: actions keep their natural width and sit at the end of the row, aligned to the bottom of the title block, when the title leaves room; a title that fills the row pushes them onto the next line, left-aligned.</li>
+    <li>With no actions the empty <code>.page-header__actions</code> takes no space (<code>:empty</code> is hidden).</li>
+    <li>At 200% text a long title word breaks across lines (<code>overflow-wrap: anywhere</code>, <code>hyphens: auto</code>) rather than widening the page.</li>
     <li>The title is fluid (40px at 360px, 68px from about 1280px) and wraps with <code>text-wrap: balance</code>; keep it under about 40 characters so it fits in two lines on phones.</li>
     <li>24px (<code>--space-6</code>) separates the header from the page content at every width.</li>
   </ul>
@@ -76,7 +78,7 @@
     <tr><td><kbd>Enter</kbd></td><td>Activates an action.</td></tr>
   </tbody></table>
   <h3>Focus</h3>
-  <p>The skip link targets <code>&lt;main id="main"&gt;</code>, which starts with this header. After a client-side route change, move focus to the <code>&lt;h1&gt;</code> (with <code>tabindex="-1"</code>) so screen-reader users hear the new page.</p>
+  <p>The skip link targets <code>&lt;main id="main"&gt;</code>, which starts with this header. After a client-side route change, move focus to the <code>&lt;h1&gt;</code> (with <code>tabindex="-1"</code>) so screen-reader users hear the new page; the heading shows no ring because it is not a control. On a full page load focus is not moved and starts at the skip link.</p>
   <h3>Labelling</h3>
   <p>The title names the page specifically ("Your appointment with Nia", not "Details"). Uppercase eyebrows are styled with CSS (<code>text-transform</code>), so screen readers read "Discover", not letter by letter.</p>
   <h3>Contrast</h3>
@@ -95,7 +97,7 @@
   <ul>
     <li>Titles are warm and specific, in sentence case, without a full stop: "Find a style that feels like you", "Care for your knotless braids".</li>
     <li>Subtitles hold facts separated by middle dots and end with a full stop: "Sat 24 Oct at 10:00 am · awaiting Nia’s reply."</li>
-    <li>Eyebrows are one or two words: "Discover" for browsing, the area name for account screens, none for auth, legal and error pages.</li>
+    <li>Eyebrows are one or two words: "Discover" for browsing, the area name for account screens ("Appointments", "Account"), none for auth, legal, help and error pages.</li>
     <li>Never call a pending request "confirmed" in the title or subtitle.</li>
   </ul>
 </section>
@@ -103,9 +105,9 @@
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
     <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><p class="eyebrow">Appointments</p><p style="font: var(--text-h3);">Your appointment with Nia</p></div><figcaption>An eyebrow that names the area the page belongs to.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><p class="eyebrow">Your HairPop</p><p style="font: var(--text-h3);">Reset your password</p></div><figcaption>The same "Your HairPop" eyebrow on every non-browsing screen, including sign in and errors, as the mocks do; it stops carrying information.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><p class="eyebrow">Your HairPop</p><p style="font: var(--text-h3);">Reset your password</p></div><figcaption>The same "Your HairPop" eyebrow on every non-browsing screen, including sign in and errors, as the first mocks did; it stops carrying information.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><p class="text-muted">Request HP-1048 · Sat 24 Oct at 10:00 am · awaiting Nia’s reply.</p></div><figcaption>Put the facts the customer checks first in the subtitle.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><p style="font: var(--text-h3);">Details</p></div><figcaption>Use a generic heading like "Details", as the mocks' form panels do; it says nothing in a headings list.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><p style="font: var(--text-h3);">Details</p></div><figcaption>Use a generic heading like "Details", as the first mocks' form panels did; it says nothing in a headings list.</figcaption></figure>
   </div>
 </section>
 
@@ -132,7 +134,7 @@
   <pre><code>&lt;div class="page-header"&gt;
   &lt;div&gt;
     &lt;p class="eyebrow"&gt;Appointments&lt;/p&gt;
-    &lt;h1&gt;Your appointment with Nia&lt;/h1&gt;
+    &lt;h1 tabindex="-1"&gt;Your appointment with Nia&lt;/h1&gt;
     &lt;p class="subtitle"&gt;Request HP-1048 · Sat 24 Oct at 10:00 am · awaiting Nia’s reply.&lt;/p&gt;
   &lt;/div&gt;
   &lt;div class="page-header__actions"&gt;
@@ -144,7 +146,8 @@
     <tr><td><code>.page-header</code></td><td>Wrapping row: title block and actions, 24px above the content.</td></tr>
     <tr><td><code>.eyebrow</code></td><td>Accent overline above the title.</td></tr>
     <tr><td><code>.subtitle</code></td><td>Muted line under the title.</td></tr>
-    <tr><td><code>.page-header__actions</code></td><td>Full width on phones with the primary full width; inline from 768px.</td></tr>
+    <tr><td><code>.page-header__actions</code></td><td>Full width on phones with the primary full width; inline from 768px; hidden when empty.</td></tr>
+    <tr><td><code>h1</code> inside <code>.page-header</code></td><td>Breaks long words at enlarged text; no focus ring when focused after navigation.</td></tr>
   </tbody></table>
 </section>
 
@@ -152,8 +155,9 @@
   <ul>
     {{mock:pages/style-gallery/default|"Discover" eyebrow}}
     {{mock:pages/appointment-detail/default|facts in the subtitle}}
-    {{mock:pages/my-appointments/default|"Your HairPop" eyebrow}}
-    {{mock:pages/sign-in/default|"Your HairPop" on an auth screen}}
+    {{mock:pages/my-appointments/default|"Appointments" eyebrow and a page action}}
+    {{mock:pages/sign-in/default|auth screen: no eyebrow}}
+    {{mock:pages/not-found/default|error page: no eyebrow}}
   </ul>
-  <p>Drift fixed during extraction: every non-browsing screen, including sign in, legal and error pages, uses the eyebrow "Your HairPop" (system: the area name, or no eyebrow); form panels repeat a generic "Details" heading under a specific page title (system: name the section, such as "Your details"); the header had no slot for page actions (added <code>.page-header__actions</code>).</p>
+  <p>Drift fixed during extraction: every non-browsing screen, including sign in, legal and error pages, uses the eyebrow "Your HairPop" (system: the area name, or no eyebrow); form panels repeat a generic "Details" heading under a specific page title (system: name the section, such as "Your details"); the header had no slot for page actions (added <code>.page-header__actions</code>). The mocks now follow the eyebrow rule and show "Book a style" on My appointments. Added since: an empty actions container takes no space, long title words break at 200% text, and the focused title shows no ring.</p>
 </section>

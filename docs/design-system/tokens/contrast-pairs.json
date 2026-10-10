@@ -110,6 +110,12 @@
       "note": "hovered links"
     },
     {
+      "fg": "--color-fg-link-hover",
+      "bg": "--color-bg-surface-raised",
+      "min": 4.5,
+      "note": "hovered skip link on its raised surface"
+    },
+    {
       "fg": "--color-fg-accent",
       "bg": "--color-bg-surface",
       "min": 4.5,

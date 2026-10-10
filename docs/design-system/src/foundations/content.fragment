@@ -36,7 +36,7 @@
       <tr><td>Send request</td><td>Submit, Book now</td><td>Booking request form and review dialog</td></tr>
       <tr><td>Request with Nia</td><td>Book</td><td>Braider profile</td></tr>
       <tr><td>Request a change</td><td>Edit, Reschedule</td><td>Appointment detail</td></tr>
-      <tr><td>Cancel request / Keep browsing</td><td>Yes / No, OK / Cancel</td><td>Cancel appointment dialog</td></tr>
+      <tr><td>Cancel request / Keep request</td><td>Yes / No, OK / Cancel</td><td>Cancel appointment dialog</td></tr>
       <tr><td>Find braiders, See braiders for this style</td><td>Search, Go</td><td>Style gallery and style detail</td></tr>
       <tr><td>Explore Knotless braids</td><td>Learn more, Click here</td><td>Style cards (the link names its destination)</td></tr>
       <tr><td>Post review</td><td>Submit</td><td>Care and review</td></tr>
@@ -71,7 +71,7 @@
   <p><b>Formula:</b> what happened + what is safe + what to do next. Never blame the person, never show a code without words.</p>
   {{example:[stack] An inline error, a page error and an action toast written with the formula.}}
 <p class="field__error">Enter an email address like name@example.com.</p>
-<div class="alert alert--danger" role="alert"><div><strong>We couldn’t save this change.</strong> Your details remain here. Please try again.</div></div>
+<div class="alert alert--danger" role="alert">{{icon:alert-circle}}<div><p class="alert__title">We couldn’t save this change</p><p>Your details remain here. Please try again.</p></div></div>
   {{/example}}
   <ul>
     <li><b>Field errors</b> name the fix, not the rule that failed: "Choose a rating from 1 to 5", not "Invalid input".</li>
@@ -105,8 +105,8 @@
       <tr><td>Footer</td><td>HairPop · Made for confident hair decisions · Terms · Privacy</td></tr>
       <tr><td>Status badges</td><td>Awaiting reply · Confirmed · Completed · Unread · Read</td></tr>
       <tr><td>Dialog close</td><td>Close dialog</td></tr>
-      <tr><td>Toast dismiss</td><td>Dismiss notification</td></tr>
-      <tr><td>Toast actions</td><td>Undo · View update</td></tr>
+      <tr><td>Toast dismiss</td><td>Dismiss: Time confirmed</td></tr>
+      <tr><td>Toast actions</td><td>Name the result: View appointment · Retry · Choose · Undo (only when reversible)</td></tr>
       <tr><td>Error summary</td><td>Check the highlighted field · Correct the information below and try again.</td></tr>
       <tr><td>Offline banner</td><td>You’re offline. Saved details are shown. Actions need a connection.</td></tr>
       <tr><td>Partial load</td><td>Some details are unavailable. Reviews could not load. Retry reviews.</td></tr>

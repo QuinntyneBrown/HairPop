@@ -43,7 +43,7 @@
           <p class="inline-status inline-status--success">{{icon:check|icon--sm}}Reminder saved</p>
         </section>
         <div class="toast-region toast-region--inline" role="status" aria-live="polite">
-          <div class="toast toast--success">{{icon:check-circle}}<div class="toast__body"><strong class="toast__title">Time confirmed</strong><span class="toast__text">Nia confirmed Sat 24 Oct at 10:00 am.</span><button class="toast__action" type="button">View appointment</button></div><button class="close" type="button" aria-label="Dismiss notification">{{icon:close|icon--sm}}</button></div>
+          <div class="toast toast--success">{{icon:check-circle}}<div class="toast__body"><strong class="toast__title">Time confirmed</strong><span class="toast__text">Nia confirmed Sat 24 Oct at 10:00 am.</span><button class="toast__action" type="button">View appointment</button></div><button class="close" type="button" aria-label="Dismiss: Time confirmed">{{icon:close|icon--sm}}</button></div>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
   {{/example}}
   <h3>Undo instead of confirm</h3>
   <p>When an action is reversible (removing a saved braider, clearing filters), do it at once and offer <b>Undo</b> in the toast. Only offer Undo when it really reverses the action; a review that has been posted, or a time Nia confirmed, has nothing to undo.</p>
-  {{themes:stack}}<div class="toast toast--info">{{icon:info}}<div class="toast__body"><strong class="toast__title">Filters cleared</strong><span class="toast__text">Showing all 12 braiders near Toronto.</span><button class="toast__action" type="button">Undo</button></div><button class="close" type="button" aria-label="Dismiss notification">{{icon:close|icon--sm}}</button></div>{{/themes}}
+  {{themes:stack}}<div class="toast toast--info">{{icon:info}}<div class="toast__body"><strong class="toast__title">Filters cleared</strong><span class="toast__text">Showing all 12 braiders near Toronto.</span><button class="toast__action" type="button">Undo</button></div><button class="close" type="button" aria-label="Dismiss: Filters cleared">{{icon:close|icon--sm}}</button></div>{{/themes}}
 </section>
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>

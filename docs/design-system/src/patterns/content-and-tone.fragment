@@ -88,7 +88,7 @@
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
   <ul>
     <li>Link and button text make sense alone: "View Nia’s profile", "Cancel request" (2.4.4).</li>
-    <li>Icon-only controls get a verb-and-object label: "Close dialog", "Dismiss notification".</li>
+    <li>Icon-only controls get a verb-and-object label: "Close dialog", "Dismiss: Time confirmed" (a toast's dismiss names its title).</li>
     <li>A visible label is part of the accessible name (2.5.3): the link that reads "Updates 2" is named "Updates 2, 2 unread".</li>
     <li>Status words appear as text, not colour alone: "Awaiting reply" on the badge.</li>
     <li>Plain language: short sentences, common words, no idioms that do not translate.</li>

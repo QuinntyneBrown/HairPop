@@ -17,7 +17,7 @@
 <main id="main" class="ds-main">
 <header class="ds-header"><p class="ds-kicker">Component · Navigation</p><h1>Skip link</h1><p class="ds-lead">The skip link is the first thing a keyboard user reaches on every HairPop page. It jumps past the top bar straight to the content.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Native <code>&lt;a href="#main"&gt;</code></span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
-  <p>Every page starts with <code>&lt;a class="skip-link" href="#main"&gt;Skip to content&lt;/a&gt;</code> as the first element in <code>&lt;body&gt;</code>. It stays off-screen until it receives keyboard focus, then slides into the top-left corner above the top bar. Activating it moves focus to <code>&lt;main id="main"&gt;</code>, skipping the brand, four nav links, Updates and the account link (seven tab stops on every page).</p>
+  <p>Every page starts with <code>&lt;a class="skip-link" href="#main"&gt;Skip to content&lt;/a&gt;</code> as its first focusable element (the first node of the application root). It stays off-screen until it receives keyboard focus, then slides into the top-left corner above the top bar. Activating it moves focus to <code>&lt;main id="main"&gt;</code>, skipping the brand, four nav links, Updates and the account link (seven tab stops on every page).</p>
   <ul>
     <li>One skip link per page, always to the main content. Add a second ("Skip to results") only for very long filter areas.</li>
     <li>It is not a replacement for landmarks and headings; pages still need them.</li>
@@ -76,7 +76,7 @@
 
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
   <h3>Role and pattern</h3>
-  <p>A native same-page link (WCAG 2.4.1 Bypass Blocks). The target is <code>&lt;main id="main"&gt;</code>; browsers move focus there when it is followed. For client-side routing, set <code>tabindex="-1"</code> on <code>main</code> and focus it in script.</p>
+  <p>A native same-page link (WCAG 2.4.1 Bypass Blocks). The target is <code>&lt;main id="main"&gt;</code>. In the app the link is handled in script, because a <code>&lt;base href="/"&gt;</code> would resolve <code>#main</code> to the site root: activation cancels the navigation (no hash, no history entry), gives the target <code>tabindex="-1"</code> if it has none, focuses it, and removes that attribute again when focus leaves. <code>main</code> shows no ring when focused (<code>main:focus { outline: none; }</code>); the next Tab lands on a control that does.</p>
   <h3>Keyboard</h3>
   <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
     <tr><td><kbd>Tab</kbd> (first press)</td><td>Focuses and reveals the skip link.</td></tr>
@@ -90,13 +90,14 @@
   <h3>Contrast</h3>
   <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
     <div class="ds-pair"><span>Label on raised surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface-raised" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Hovered label on raised surface</span><span class="ds-pair__ratio" data-contrast="--color-fg-link-hover|--color-bg-surface-raised" data-min="4.5"></span></div>
     <div class="ds-pair"><span>Focus ring on raised surface</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-surface-raised" data-min="3"></span></div>
     <div class="ds-pair"><span>Focus ring on top bar</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-surface" data-min="3"></span></div>
   </div>
   <h3>Motion</h3>
   <p>It slides down over <code>--duration-fast</code>; under reduced motion it appears instantly.</p>
   <h3>Touch</h3>
-  <p>When visible it is at least 40px tall and wide enough for its label, well above the 24px minimum.</p>
+  <p>When visible it is 39px tall (the label line plus <code>--space-2</code> above and below) and as wide as its label, 134px for "Skip to content", well above the 24px minimum.</p>
 </section>
 
 <section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
@@ -109,7 +110,7 @@
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
     <figure class="ds-do"><div class="ds-example__canvas"><a class="skip-link skip-link--demo" href="#main" data-state="focus">Skip to content</a></div><figcaption>Point it at <code>&lt;main id="main"&gt;</code> on every page, including dialogs' underlying pages.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><p class="text-muted">Dialog mocks keep the skip link active while the page behind is <code>inert</code>.</p></div><figcaption>Leave the skip link focusable while a modal dialog is open, as the dialog mocks do; it targets content that is inert. Make it inert with the page behind the dialog.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><p class="text-muted">The skip link stays active while the page behind the dialog is <code>inert</code>.</p></div><figcaption>Leave the skip link focusable while a modal dialog is open, as the first dialog mocks did; it targets content that is inert. Make it inert with the page behind the dialog.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><p>Product pages reveal it only on <code>:focus-visible</code>.</p></div><figcaption>Keep it off-screen with positioning, so it stays in the accessibility tree.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><p class="text-muted"><code>display: none</code> until hover</p></div><figcaption>Hide it with <code>display: none</code> or <code>visibility: hidden</code>; it can then never receive focus.</figcaption></figure>
   </div>
@@ -135,15 +136,19 @@
 
 <section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
   <pre><code>&lt;body&gt;
-  &lt;a class="skip-link" href="#main"&gt;Skip to content&lt;/a&gt;
-  &lt;div class="product-shell"&gt;
-    &lt;header class="topbar"&gt;…&lt;/header&gt;
-    &lt;main id="main" class="container product-main" tabindex="-1"&gt;…&lt;/main&gt;
+  &lt;div&gt;&lt;!-- the application root; inert while a modal dialog is open --&gt;
+    &lt;a class="skip-link" href="#main"&gt;Skip to content&lt;/a&gt;
+    &lt;div class="product-shell"&gt;
+      &lt;header class="topbar"&gt;…&lt;/header&gt;
+      &lt;main id="main" class="container product-main"&gt;…&lt;/main&gt;
+      &lt;footer class="site-footer"&gt;…&lt;/footer&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/body&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.skip-link</code></td><td>Off-screen until <code>:focus-visible</code>, then shown top-left above everything.</td></tr>
-    <tr><td><code>href="#main"</code></td><td>Target; <code>&lt;main&gt;</code> must carry <code>id="main"</code>.</td></tr>
+    <tr><td><code>href="#main"</code></td><td>Target; <code>&lt;main&gt;</code> must carry <code>id="main"</code>. It gets <code>tabindex="-1"</code> only while focused from the skip link.</td></tr>
+    <tr><td><code>main:focus</code></td><td>No outline on the focused landmark (app-shell rule).</td></tr>
     <tr><td><code>.skip-link--demo</code></td><td>Documentation only: keeps it in flow.</td></tr>
     <tr><td><code>data-state="focus|hover|active"</code></td><td>Documentation only: forces a state.</td></tr>
   </tbody></table>
@@ -153,9 +158,10 @@
   <ul>
     <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (first element on every page)</li>
     <li><a href="../../mocks/pages/sign-in/default.html">pages/sign-in/default</a> (auth pages)</li>
-    <li><a href="../../mocks/dialogs/cancel-appointment/default.html">dialogs/cancel-appointment/default</a> (stays focusable behind an open dialog)</li>
+    <li><a href="../../mocks/pages/not-found/default.html">pages/not-found/default</a> (error pages keep it)</li>
+    <li><a href="../../mocks/dialogs/cancel-appointment/default.html">dialogs/cancel-appointment/default</a> (inert with the page behind an open dialog)</li>
   </ul>
-  <p>Drift fixed during extraction: in dialog mocks the skip link stays outside the <code>inert</code> page and remains focusable while the modal is open (system makes it inert with the page); the hidden offset reused <code>--space-24</code> as a magic offset (kept, documented as the hidden position).</p>
+  <p>Drift fixed during extraction: in dialog mocks the skip link stayed outside the <code>inert</code> page and remained focusable while the modal was open (system makes it inert with the page; the dialog mocks now do); the hidden offset reused <code>--space-24</code> as a magic offset (kept, documented as the hidden position).</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

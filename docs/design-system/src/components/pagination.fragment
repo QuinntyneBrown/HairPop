@@ -89,7 +89,7 @@
   <h3>Focus</h3>
   <p>The shared ring. After a new page loads, move focus to the results heading (or the list) and announce the new range ("Showing 4–6 of 126") so keyboard users do not restart at the top bar.</p>
   <h3>Labelling</h3>
-  <p>Label the nav for what it pages ("Results pages", "Braiders pages"); a page with two paginations uses two labels. Number links read as "2"; add hidden text ("Page 2") if the context is unclear. Icon-only previous/next carry hidden text ("Next reviews").</p>
+  <p>Label the nav for what it pages ("Results pages", "Braiders pages"); a page with two paginations uses two labels. Number links read as "2"; when the context is unclear, name them "Page 2" with an <code>aria-label</code> that still contains the visible number (2.5.3). Icon-only previous/next carry hidden text ("Next reviews").</p>
   <h3>Contrast</h3>
   <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
     {{pair:Page link on page|--color-fg-muted|--color-bg-canvas|4.5}}

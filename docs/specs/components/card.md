@@ -37,9 +37,9 @@ Every use of `.card` in `docs/mocks/`, grouped by configuration (inventory: `usa
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| `pages/style-gallery/default`, `long`, `offline`, `edge` (feature grid) | `article`, `layout="story"` | photo `.story-card__photo` (Knotless braids, alt "Medium knotless braids shown from the back and side") or art `.story-card__art` holding the `sparkle` icon (`icon--fill`) (Passion twists, Cornrows); `.eyebrow` "Most explored" / "Protective style" / "Classic"; `h2.card__title`; `.text-muted` "Gentle at the root · 4–7 hours · typically $160–$300"; link "Explore Knotless braids →" | default, link hover and focus | canvas, in `.feature-grid` |
-| `pages/matching-braiders/default`, `long`, `offline`, `edge` (feature grid) | `article`, `layout="story"` | photo of Nia (alt "Portrait of Nia Okafor", D-7) or art panel (Aisha Mensah, Jules Baptiste); eyebrow "Available Sat 24 Oct" / "Next week" / "Available Sun 25 Oct"; summary "4.9 ★ · 86 reviews · Toronto West · knotless braids from $180"; link "View Nia’s profile →" / "View Aisha’s profile →" / "View Jules’s profile →" (D-7) | default, link hover and focus | canvas, in `.feature-grid` |
-| `pages/help/default` (feature grid) | `article`, `layout="story"` | art panel; eyebrow "Appointments" / "Pricing" / "Support"; titles "How requests work", "Prices and estimates", "Need a hand?"; one link each, named by its target: "See how requests work →", "See what changes a quote →", "Contact support →" | default | canvas |
+| `pages/style-gallery/default`, `long`, `offline`, `edge` (feature grid) | `article`, `layout="story"` | photo `.story-card__photo` (Knotless braids, alt "Medium knotless braids shown from the back and side") or art `.story-card__art` holding the `sparkle` icon (`icon--fill`) (Passion twists, Cornrows); `.eyebrow` "Most explored" / "Protective style" / "Classic"; `h2.card__title`; `.text-muted` "Gentle at the root · 4–7 hours · typically $160–$300"; standalone link (`a.link.link--standalone` with the `arrow-right` icon in `.link__arrow`, [link.md](link.md)) "Explore Knotless braids" | default, link hover and focus | canvas, in `.feature-grid` |
+| `pages/matching-braiders/default`, `long`, `offline`, `edge` (feature grid) | `article`, `layout="story"` | photo of Nia (alt "Portrait of Nia Okafor", D-7) or art panel (Aisha Mensah, Jules Baptiste); eyebrow "Available Sat 24 Oct" / "Next week" / "Available Sun 25 Oct"; summary "4.9 ★ · 86 reviews · Toronto West · knotless braids from $180"; standalone link "View Nia’s profile" / "View Aisha’s profile" / "View Jules’s profile" (D-7) | default, link hover and focus | canvas, in `.feature-grid` |
+| `pages/help/default` (feature grid) | `article`, `layout="story"` | art panel; eyebrow "Appointments" / "Pricing" / "Support"; titles "How requests work", "Prices and estimates", "Need a hand?"; one link each, named by its target: "See how requests work", "See what changes a quote", "Contact support" (standalone links) | default | canvas |
 | `pages/style-detail/default`, `partial`, `edge`, `offline` main column | `section`, block, named by its heading (`aria-labelledby`, D-9) | `.hero-photo` (alt "Long medium knotless braids with neat, visible parting"), h2 "What to expect", body, fact tiles, `.text-muted` quote factors | default | canvas, `.detail-grid` main |
 | `pages/style-detail/*` aside | `aside`, block | h2 "Make it yours", body, primary button "See braiders for this style" | default | canvas, `.detail-grid` aside |
 | `pages/braider-profile/default`, `partial`, `edge` | `div` (in `section.stack`), block | `.profile-head` (avatar "NO", h2 "Nia Okafor", "Toronto West · 4.9 ★ from 86 reviews"), bio, fact tiles, primary button "Request with Nia" | default | canvas, `.detail-grid` main |
@@ -68,7 +68,7 @@ Every row is buildable with the API below: one native host element, `layout` × 
 3. **Eyebrow (optional)** — `.eyebrow` (global type utility): overline in `--color-fg-accent`, why this card is here ("Most explored", "Available Sat 24 Oct").
 4. **Title** — a real heading. `.card__title` gives the h4 role (`--text-h4`) in grids and rows; any other `h2`/`h3` inside a card gets the h3 role (`--text-h3`), never the 36 px page h2. Every heading in a card breaks a word that is longer than its line (`overflow-wrap: anywhere`), so a long name never runs past the card (D-16).
 5. **Summary** — `.text-muted` (global type utility): one line of facts separated by " · ".
-6. **Action (optional)** — one link or button that names its target. In an interactive card it is the title's `.card__link`, stretched over the card.
+6. **Action (optional)** — one link or button that names its target; in a story card a standalone link ([link.md](link.md)) whose `arrow-right` icon is decorative. In an interactive card it is the title's `.card__link`, stretched over the card.
 7. **Header (optional)** — `.card__header`: the title row with a trailing badge or action; wraps when both do not fit (D-3).
 8. **Footer (optional)** — `.card__footer`: actions after a `--border-width-hairline` top rule, `--space-4` above, `--space-3` between, aligned to the end, wrapping.
 9. **Profile head (optional)** — `.profile-head`: avatar beside the name and summary, wrapping; the text block may shrink below its longest word (`min-width: 0`) so the heading wraps beside the avatar (D-16).
@@ -156,7 +156,7 @@ Rendered DOM. Classes and attributes are the e2e contract; the host element carr
     <p class="eyebrow">Most explored</p>
     <h2 class="card__title">Knotless braids</h2>
     <p class="text-muted">Gentle at the root · 4–7 hours · typically $160–$300</p>
-    <a href="/styles/knotless-braids">Explore Knotless braids <span aria-hidden="true">→</span></a>
+    <a class="link link--standalone" href="/styles/knotless-braids">Explore Knotless braids<span class="link__arrow" aria-hidden="true"><svg class="icon icon--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   </div>
 </article>
 ```
@@ -169,7 +169,7 @@ Rendered DOM. Classes and attributes are the e2e contract; the host element carr
     <p class="eyebrow">Next week</p>
     <h2 class="card__title">Aisha Mensah</h2>
     <p class="text-muted">4.8 ★ · 64 reviews · North York · knotless braids from $195</p>
-    <a href="/braiders/aisha-mensah">View Aisha’s profile <span aria-hidden="true">→</span></a>
+    <a class="link link--standalone" href="/braiders/aisha-mensah">View Aisha’s profile<span class="link__arrow" aria-hidden="true"><svg class="icon icon--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   </div>
 </article>
 ```
@@ -267,7 +267,7 @@ Consumer templates (the badge, avatar and button are their own components; see t
     @if (style.eyebrow) { <p class="eyebrow">{{ style.eyebrow }}</p> }
     <h2 class="card__title">{{ style.name }}</h2>
     <p class="text-muted">{{ style.summary }}</p>
-    <a [routerLink]="['/styles', style.slug]">Explore {{ style.name }} <span aria-hidden="true">→</span></a>
+    <a hp-link variant="standalone" [routerLink]="['/styles', style.slug]">Explore {{ style.name }}</a>
   </div>
 </article>
 

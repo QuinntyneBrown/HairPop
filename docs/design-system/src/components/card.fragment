@@ -19,7 +19,7 @@
           <p class="eyebrow">Most explored</p>
           <h3 class="card__title">Knotless braids</h3>
           <p class="text-muted">Gentle at the root · 4–7 hours · typically $160–$300</p>
-          <a href="../../mocks/pages/style-detail/default.html">Explore Knotless braids <span aria-hidden="true">→</span></a>
+          <a class="link link--standalone" href="../../mocks/pages/style-detail/default.html">Explore Knotless braids<span class="link__arrow" aria-hidden="true">{{icon:arrow-right|icon--sm}}</span></a>
         </div>
       </article>
       <span class="ds-callout" style="left: 21%; top: 22%;" aria-hidden="true">1</span>
@@ -64,7 +64,7 @@
     <p class="eyebrow">Available Sat 24 Oct</p>
     <h3 class="card__title">Nia Okafor</h3>
     <p class="text-muted">4.9 ★ · 86 reviews · Toronto West · knotless braids from $180</p>
-    <a href="../../mocks/pages/braider-profile/default.html">View Nia’s profile <span aria-hidden="true">→</span></a>
+    <a class="link link--standalone" href="../../mocks/pages/braider-profile/default.html">View Nia’s profile<span class="link__arrow" aria-hidden="true">{{icon:arrow-right|icon--sm}}</span></a>
   </div>
 </article>
 <article class="card story-card">
@@ -73,7 +73,7 @@
     <p class="eyebrow">Protective style</p>
     <h3 class="card__title">Passion twists</h3>
     <p class="text-muted">Soft, textured finish · 3–6 hours · typically $140–$260</p>
-    <a href="../../mocks/pages/style-detail/default.html">Explore Passion twists <span aria-hidden="true">→</span></a>
+    <a class="link link--standalone" href="../../mocks/pages/style-detail/default.html">Explore Passion twists<span class="link__arrow" aria-hidden="true">{{icon:arrow-right|icon--sm}}</span></a>
   </div>
 </article>
   {{/example}}

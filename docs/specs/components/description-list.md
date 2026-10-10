@@ -12,7 +12,7 @@
 
 ## Purpose and scope
 
-A description list shows the facts of one record as label and value pairs, so Maya can scan her appointment's service, time, estimate and location instead of reading them out of sentences. It has two layouts: horizontal (labels in a narrow column beside the values from 640 px, stacked on phones) for detail cards and dialogs, and stacked (label above value at every width) for asides and narrow cards. Values can be present, pending (not known yet, said in words) or missing (could not load, with a retry nearby). It is a core-set component: the mocks still state these facts as prose, which the design system records as drift (D-1).
+A description list shows the facts of one record as label and value pairs, so Maya can scan her appointment's service, time, estimate and location instead of reading them out of sentences. It has two layouts: horizontal (labels in a narrow column beside the values from 640 px, stacked on phones) for detail cards and dialogs, and stacked (label above value at every width) for asides and narrow cards. Values can be present, pending (not known yet, said in words) or missing (could not load, with a retry nearby). The mocks render it on the appointment detail, in the review-request dialog and in the braider profile's "Before you book" aside (D-1).
 
 Use something else when:
 
@@ -30,14 +30,14 @@ Out of scope:
 
 ## Usage
 
-There is no `<dl>` or `.dl` in `docs/mocks/` (inventory: `usage_inventory.py docs/mocks dl` finds none). The rows below are the screens the design system names for it, with the facts the mocks write as prose.
+Every `.dl` in `docs/mocks/` (inventory: `usage_inventory.py docs/mocks dl`), plus the states the design system defines.
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| `pages/appointment-detail/default`, `partial`, `offline` (pending request HP-1048) | horizontal, in the main `section` card under the heading "Medium knotless braids" | Status: badge "Awaiting reply"; Service: "Medium knotless braids"; Braider: link "Nia Okafor"; Preferred time: "Sat 24 Oct · 10:00 am · about 5 hours"; Estimate: "$180–$240"; Final price: "Nia confirms after accepting" (pending); Location: "Shared after Nia accepts" (pending). Mock: "Estimated price: $180–$240. Nia will confirm the final price." and "Location shared after Nia accepts." as paragraphs (drift, D-1) | present, pending | surface (card) |
+| `pages/appointment-detail/default`, `partial`, `offline` (pending request HP-1048) | horizontal, in the main `section` card under the heading "Medium knotless braids" | Status: badge "Awaiting reply"; Service: "Medium knotless braids"; Braider: link "Nia Okafor"; Preferred time: "Sat 24 Oct · 10:00 am · about 5 hours"; Estimate: "$180–$240"; Final price: "Nia confirms after accepting" (pending); Location: "Shared after Nia accepts" (pending) | present, pending | surface (card) |
 | `pages/appointment-detail/success` (confirmed) | horizontal, same card | Status: badge "Confirmed"; Time: "Sat 24 Oct · 10:00 am"; Confirmed estimate: "$210"; Studio address: "1246 Bloor Street West, Toronto" | present | surface |
-| `dialogs/request-review/default`, `busy`, `invalid`, `failed` | horizontal in the dialog body | Service: "Medium knotless braids"; Braider: "Nia Okafor"; Preferred time: "Sat 24 Oct · 10:00 am · not confirmed until Nia accepts"; Estimate: "$180–$240 · about 5 hours · Nia confirms the final price"; Location: "Toronto West · address shared after Nia accepts"; Your email: "maya.chen@example.com"; Hair details: "Shoulder length; bringing my own extensions". Mock: one read-only text field (drift, D-1) | present, pending | raised (dialog panel) |
-| `pages/braider-profile/*` aside "Before you book" | stacked | Service area: "Toronto West"; Address: "Shared after confirmation" (pending); Typical duration: "5 hours"; Knotless braids: "From $180". Mock: two paragraphs (drift, D-1) | present, pending | surface (aside card) |
+| `dialogs/request-review/default`, `busy`, `invalid`, `failed` | horizontal in the dialog body | Service: "Medium knotless braids"; Braider: "Nia Okafor"; Preferred time: "Sat 24 Oct · 10:00 am · not confirmed until Nia accepts"; Estimate: "$180–$240 · about 5 hours · Nia confirms the final price"; Location: "Toronto West · address shared after Nia accepts"; Your email: "maya.chen@example.com"; Hair details: "Shoulder length; bringing my own extensions" | present, pending | raised (dialog panel) |
+| `pages/braider-profile/*` aside "Before you book" | stacked | Service area: "Toronto West"; Address: "Shared after confirmation" (pending); Typical duration: "5 hours"; Knotless braids: "From $180" | present, pending | surface (aside card) |
 | `pages/braider-profile/partial` | stacked, a "Reviews" pair whose value is missing | Reviews: inline danger status "Couldn’t load" · link "Retry reviews" | missing | surface |
 | `pages/style-detail/*` when an optional fact is unavailable | horizontal or stacked | the pair is left out entirely (no blank value, no lone dash) | omitted | surface |
 | Design system *States* | both layouts | Estimate "$180–$240"; Final price "Nia confirms after accepting"; Reviews "Couldn’t load · Retry reviews" | present, pending, missing | surface |
@@ -304,7 +304,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 
 ## Decisions
 
-- **D-1** *The mocks write appointment facts as sentences and the review dialog as a read-only field. Which does the product render?* The description list. The design system records the prose as drift ("time, price and place are hard to scan") and names appointment detail, its confirmed state and the review dialog as the places for it; the braider profile's "Before you book" aside uses the stacked layout. The facts and their copy come from the mocks ("Shared after Nia accepts", "$180–$240", "1246 Bloor Street West, Toronto").
+- **D-1** *Are an appointment's facts written as sentences, and the review dialog as a text field, as the first mocks did?* No: the product renders a description list. Facts written as prose are hard to scan for time, price and place (the design system's do and don't), and the design system names the appointment detail, its confirmed state and the review dialog as the places for it; the braider profile's "Before you book" aside uses the stacked layout. The facts and their copy come from the mocks ("Shared after Nia accepts", "$180–$240", "1246 Bloor Street West, Toronto").
 - **D-2** *Is the host the native `<dl>` or a wrapper?* The native `<dl>`, through an attribute selector, because the grid and the screen-reader pairing need `<dt>` and `<dd>` as the `<dl>`'s direct children.
 - **D-3** *When is the stacked layout used?* In asides and any container narrower than a detail grid's main column. Measured at 768 px: the aside is 256 px wide, and a horizontal list in it gave "Typical duration" a 109 px column and the values 73 px.
 - **D-4** *May pairs be wrapped in `<div>` groups, which HTML allows?* No. A group `<div>` becomes one grid item and breaks the two-column layout, as the design system warns; Angular's `@for` and `@if` blocks add no elements, so consumers never need a wrapper.
