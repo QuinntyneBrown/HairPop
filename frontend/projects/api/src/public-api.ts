@@ -6,3 +6,5 @@
 export * from './lib/common';
 export * from './lib/api-error';
 export * from './lib/http';
+export * from './lib/format';
+export * from './lib/styles';

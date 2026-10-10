@@ -1,6 +1,8 @@
+import { fileURLToPath } from 'node:url';
+
 import { test as base, BrowserContext, Page, Request, Route } from '@playwright/test';
 
-import { BRAIDER_URL, CUSTOMER_URL, STUB_API_PORT } from './urls';
+import { BRAIDER_URL, CUSTOMER_URL, MEDIA_ORIGIN, STUB_API_PORT } from './urls';
 import { DEFAULT_RULES, match, unmatchedBody } from '../stub-api/rules.mjs';
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -110,6 +112,12 @@ async function install(context: BrowserContext, page: Page, api: Api): Promise<v
     [CUSTOMER_URL, BRAIDER_URL].map((url) => ({ name: 'hp-e2e', value: api.id, url })),
   );
   await page.route(/\/(api|sanctum)\//, (route, request) => api.handle(route, request));
+  // Fixture media URLs resolve to the mock photos (docs/mocks/assets/photos).
+  await page.route(`${MEDIA_ORIGIN}/**`, (route, request) => {
+    const name = new URL(request.url()).pathname.split('/').pop() ?? '';
+    const file = new URL(`../../docs/mocks/assets/photos/${name}`, import.meta.url);
+    return route.fulfill({ path: fileURLToPath(file) });
+  });
   await page.clock.setSystemTime(TODAY);
   await api.sync();
 }
@@ -117,11 +125,22 @@ async function install(context: BrowserContext, page: Page, api: Api): Promise<v
 export const test = base.extend<{ api: Api }>({
   api: async ({ context, page }, use, testInfo) => {
     const api = new Api(`${testInfo.workerIndex}-${testInfo.testId}-${testInfo.retry}`);
+    const consoleErrors: string[] = [];
+    page.on('console', (message) => {
+      // Error statuses a test asks for are logged by the browser; anything else is a defect.
+      if (message.type() === 'error' && !message.text().startsWith('Failed to load resource')) {
+        consoleErrors.push(message.text());
+      }
+    });
+    page.on('pageerror', (error) => consoleErrors.push(error.message));
     await install(context, page, api);
     await use(api);
     await api.dispose();
     if (api.missing.length) {
       throw new Error(`Requests without an e2e rule:\n${api.missing.join('\n')}`);
+    }
+    if (consoleErrors.length) {
+      throw new Error(`Console errors:\n${consoleErrors.join('\n')}`);
     }
   },
 });

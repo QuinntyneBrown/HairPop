@@ -4,3 +4,5 @@ export const CUSTOMER_PORT = 4410;
 export const BRAIDER_PORT = 4420;
 export const CUSTOMER_URL = `http://localhost:${CUSTOMER_PORT}`;
 export const BRAIDER_URL = `http://localhost:${BRAIDER_PORT}`;
+/** Origin of fixture photos; the api fixture serves them from docs/mocks/assets/photos. */
+export const MEDIA_ORIGIN = 'https://media.hairpop.example';
