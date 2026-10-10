@@ -19,6 +19,8 @@
 .crd-frame iframe { display: block; border: 0; max-width: 100%; }
 .ds-themes > .crd-wrapfix { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; align-content: flex-start; }
 .ds-themes > .crd-wrapfix::before { flex-basis: 100%; }
+/* Specimen only, not product CSS: button D-13 */
+.btn[aria-expanded="true"] { background: var(--btn-bg-active); }
 </style>
 </head>
 <body id="top">
@@ -56,6 +58,8 @@
     <span class="crd-ac">AC-12, AC-13, AC-14, AC-17, AC-18</span>
     <h3>Toggle</h3>
     <div class="ds-example"><div class="ds-example__canvas"><button class="btn" type="button" aria-pressed="false">Save braider</button><button class="btn" type="button" aria-pressed="true">Saved</button></div><div class="ds-example__caption"><span>Toggle off and on: <code>aria-pressed</code> uses the selected look shared with chips and the current nav link. Activation flips it. <span class="crd-ac">AC-18</span></span></div></div>
+    <h3>Expanded (menu trigger)</h3>
+    <div class="ds-example"><div class="ds-example__canvas"><button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="false">More actions</button><button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="true">More actions</button><button class="btn" type="button" aria-haspopup="menu" aria-expanded="true">Sort: Best match</button></div><div class="ds-example__caption"><span>Menu trigger closed, then open. Open triggers hold the variant's active fill (required, D-13; drawn by a specimen-only rule, since <code>components.css</code> has no <code>.btn[aria-expanded="true"]</code> rule yet). <span class="crd-ac">AC-31</span></span></div></div>
     <h3>Busy</h3>
     <div class="ds-example"><div class="ds-example__canvas"><button class="btn btn--primary" type="submit" aria-busy="true">Send request</button><button class="btn btn--danger" type="button" aria-busy="true">Cancel request</button><button class="btn btn--primary" type="button" aria-busy="true">Show braiders</button></div><div class="ds-example__caption"><span>Busy keeps the label (painted transparent, so the name is unchanged), the size and the focus. Mocks that show a disabled “Working…” button are drift (D-7). The spinner keeps turning under reduced motion. <span class="crd-ac">AC-14, AC-15, AC-16, AC-23, AC-30</span></span></div></div>
     <h3>Disabled</h3>

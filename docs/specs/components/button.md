@@ -129,6 +129,7 @@ Width comes from the label and padding; `block` makes it the container's width. 
 | Busy | `aria-busy="true"` | Label painted transparent, spinner centred, colours and size kept, `pointer-events: none` | Name unchanged, role unchanged, busy state exposed; focus stays; no activation reaches consumers; progress copy comes from the form's live region |
 | Pressed (toggle on) | `aria-pressed="true"` | Fill `--color-accent-subtle`, label `--color-fg-accent`, border `--color-accent`; hover fill `--color-accent-subtle-hover` (the selected look shared with chips and the current nav link) | Toggle button, pressed |
 | Pressed (toggle off) | `aria-pressed="false"` | Variant's default look | Toggle button, not pressed |
+| Expanded (menu trigger open) | `aria-expanded="true"`, set by the menu trigger directive | Fill `--btn-bg-active`, the variant's active colour, held while the menu is open; no transform (D-13) | Expanded state exposed by the trigger's own attribute |
 | Link host | `<a href>` | Identical look; `a.btn:hover` keeps the label colour and no underline (link variant keeps its underline) | Role link; Enter follows, Space does not; middle click opens a new tab |
 | Forced colours | `(forced-colors: active)` | Border `CanvasText` on every variant; primary `Highlight` fill with `HighlightText` label; focus ring `Highlight` | — |
 | Reduced motion | `(prefers-reduced-motion: reduce)` | Transitions instant (`--duration-fast` is zeroed by the tokens); the spinner keeps turning | — |
@@ -185,6 +186,7 @@ Rendered DOM. Classes and attributes are the e2e contract; the element and its a
 <button class="btn btn--primary" type="submit" disabled>Post review</button>
 <button class="btn" type="button" aria-pressed="true">Saved</button>
 <button class="btn" type="button" aria-pressed="false">Save braider</button>
+<button class="btn btn--ghost" type="button" aria-haspopup="menu" aria-expanded="true">More actions</button>
 ```
 
 ```html
@@ -300,7 +302,7 @@ Forced colours: the stylesheet gives every `.btn` a `CanvasText` border, paints 
 
 ## Responsive behaviour
 
-- The component has no breakpoint rules of its own. Its containers do: below `--layout-breakpoint-md` (768 px) `.form-actions` and `.page-header__actions` make the primary button full width and first in reading order; `.dialog__footer` stretches every button to share the row and uses `wrap-reverse` so the primary lands first on phones and last from 640 px.
+- The component has no breakpoint rules of its own. Its containers do: below `--layout-breakpoint-md` (768 px) `.form-actions` makes the primary button full width and visually first (`order: -1`, form-layout CRD), and `.page-header__actions` makes it full width but keeps it last, in DOM order (page-header D-4); `.dialog__footer` stretches every button to share the row and uses `wrap-reverse` so the primary lands on top on phones and last from 640 px (dialog CRD).
 - A `block` button is always its container's width, at every breakpoint.
 - Labels are written not to wrap at 360 px (three or four words); the longest, "See braiders for this style", fits a medium button inside the style detail card at 320 px. When the container is narrower than the label, as when text is enlarged to 200 %, the label wraps onto further lines, the button grows in height, and nothing overflows or truncates (D-5).
 - Targets: md (40 px) and lg (48 px) exceed `--target-min` (24 px) and sm (32 px) exceeds it too; sm appears only where neighbours are at least 8 px apart. A screen's primary action on a phone uses `size="lg"` so it reaches `--target-comfortable` (44 px) (D-6).
@@ -418,6 +420,10 @@ Fill, border, transform and shadow animate over `--duration-fast`; the active st
 
 - **AC-30** Given `prefers-reduced-motion: reduce`, when a button is hovered, then the colour change is instant, and when it is busy, then the spinner keeps turning. (L2-041)
 
+### Menu trigger
+
+- **AC-31** Given a ghost button "More actions" that triggers the menu for HP-1048, when the menu opens and the trigger gets `aria-expanded="true"`, then the button keeps its variant's active fill (`--btn-bg-active`) without the 1 px press offset for as long as the menu is open, and returns to its default look when the menu closes. (L2-041)
+
 ### Performance
 
 Render cost is measured by the perf-test scenario named under *Performance* and gated by `--fail-on-regression`; no L2 requirement covers it, so it has no criterion here.
@@ -448,3 +454,4 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - **D-10** *The mocks use `<a class="btn">` for "Filters", "Request a change", "Cancel request" (opening dialogs) and "Try again" (re-running a request). Which element does the product render?* A `<button>`: the design system's rule is that a control that changes something, opens a dialog or starts a process is a button, and a link only goes somewhere. "View request", "Explore styles", "See braiders for this style", "Request with Nia", "Sign in" and "View appointment" stay links. The static mocks used links only to let the gallery navigate between screens.
 - **D-11** *Does `busy` apply to an `<a>` host?* Yes, with the same guard, which also cancels navigation while busy. One implementation serves both hosts; it is rare on links and never required by a mock.
 - **D-12** *Is there an `icon` input?* No. Icons are projected `<svg class="icon" aria-hidden="true">` content before or after the text, as the design-system anatomy shows, so the icon set can change without touching the button API and an icon-only button is just a button whose only content is an icon.
+- **D-13** *How does an open menu trigger look?* It holds the variant's active fill through `.btn[aria-expanded="true"]` reading `--btn-bg-active`, without the active transform. The menu CRD (D-4) needs the open trigger to look engaged, and the rule belongs in the button's styles so the button owns every look it can take. `aria-expanded` and `aria-haspopup` stay consumer attributes set by the menu trigger; the button never reads or writes them.

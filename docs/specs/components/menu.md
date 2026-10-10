@@ -25,7 +25,7 @@ Out of scope:
 
 - What an item does. Items raise `triggered`, or navigate when they are links; "Sign out" and "Cancel request" open their confirmation [dialogs](dialog.md), which own the confirmation.
 - The trigger's look and name. The trigger is a [button](button.md) (`button[hp-button]`); the menu only adds `aria-haspopup`, `aria-expanded`, `aria-controls` and the open look.
-- The account link in the top bar. The top-bar component decides whether "Maya" is a link or a menu trigger; this CRD specifies the menu it opens.
+- The account link in the top bar. `top-bar.md` keeps "Maya" as a plain link to account settings, as the mocks do, so the account menu below has no consumer until the top-bar CRD adopts it; this CRD specifies the menu so that change needs no API change here.
 - Submenus. The design system defines none; nested `hpMenuTriggerFor` inside a menu is not supported (D-9).
 
 ## Usage

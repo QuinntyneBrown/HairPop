@@ -80,14 +80,14 @@ interface SidebarNavItem {
   readonly id: string;               // "appointments"
   readonly label: string;            // "Appointments"
   readonly link: Commands;           // '/appointments'
-  readonly icon?: string;            // SVG path data on the 24-unit grid, from the icon set
+  readonly icon?: IconName;          // a name from the icon CRD's registry
   readonly count?: number;           // 0 or absent: no badge; above 99: "99+"
   readonly countText?: string;       // visually hidden, read after the count: ", 2 unread"
 }
 ```
 
 - Inputs are signal inputs and models; object inputs are treated as immutable.
-- Links render through `RouterLink`. Icons render as `<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path [attr.d]="icon"/></svg>`.
+- Links render through `RouterLink`. Icons render through the icon component as `<svg hp-icon [name]="item.icon"></svg>`, whose DOM is the same single `<svg class="icon" aria-hidden="true" viewBox="0 0 24 24">` shown under *Markup*.
 - In development mode, `groups` in which some items have an `icon` and others do not log a `console.error` naming `hp-sidebar-navigation` (D-8).
 - Every user-facing string is an input; the component renders no copy of its own.
 
@@ -208,12 +208,12 @@ Consumer template:
 ```ts
 readonly accountGroups = computed<readonly SidebarNavGroup[]>(() => [
   { label: 'Your HairPop', items: [
-    { id: 'appointments', label: 'Appointments', link: '/appointments', icon: ICONS.calendar },
-    { id: 'updates', label: 'Updates', link: '/notifications', icon: ICONS.bell, count: this.unread(), countText: `, ${this.unread()} unread` },
+    { id: 'appointments', label: 'Appointments', link: '/appointments', icon: 'calendar' },
+    { id: 'updates', label: 'Updates', link: '/notifications', icon: 'bell', count: this.unread(), countText: `, ${this.unread()} unread` },
   ] },
   { label: 'Account', items: [
-    { id: 'settings', label: 'Account settings', link: '/settings', icon: ICONS.user },
-    { id: 'help', label: 'Help', link: '/help', icon: ICONS.help },
+    { id: 'settings', label: 'Account settings', link: '/settings', icon: 'user' },
+    { id: 'help', label: 'Help', link: '/help', icon: 'help' },
   ] },
 ]);
 ```

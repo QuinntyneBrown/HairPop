@@ -26,7 +26,7 @@ Out of scope:
 - When errors appear and what they say. The form field decides (its D-3: after submit, or once the control is dirty and touched) and the component reads the result through `HP_FORM_FIELD`; outside a field the consumer uses `invalid` and `describedBy`.
 - Tri-state logic between a "Select all" parent and its rows. The table or page computes the parent's `checked` and `indeterminate`; the component renders and reports them.
 - Saving. The dialog or form saves on its own button ("Save preferences") and keeps the duplicate-submission guard; the checkbox never saves anything.
-- The error summary ("Check the highlighted field") and the save-failure alert ("We couldn’t save this change."). The dialog renders them.
+- The error summary and the save-failure alert ("We couldn’t save this change."). The form layout inside the dialog renders the summary with its own copy ("Check 1 field before saving"; form-layout D-16), and the dialog renders the failure alert. The mocks' "Check the highlighted field" is drift.
 
 ## Usage
 
