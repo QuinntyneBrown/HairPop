@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-empty-state` |
 | Library path | `frontend/projects/components/src/lib/empty-state/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-001, L2-002, L2-004, L2-005, L2-007, L2-012, L2-014, L2-017, L2-018, L2-025, L2-030, L2-032, L2-033, L2-035, L2-036, L2-041, L2-042 |
 | Design system | [`empty-state.html`](../../design-system/components/empty-state.html) |
 | Source mocks | [`pages/my-appointments/empty`](../../mocks/pages/my-appointments/empty.html), [`pages/notification-center/empty`](../../mocks/pages/notification-center/empty.html), [`pages/style-gallery/empty`](../../mocks/pages/style-gallery/empty.html), [`pages/matching-braiders/empty`](../../mocks/pages/matching-braiders/empty.html), [`pages/braider-profile/empty`](../../mocks/pages/braider-profile/empty.html), [`pages/style-gallery/no-results`](../../mocks/pages/style-gallery/no-results.html), [`pages/matching-braiders/no-results`](../../mocks/pages/matching-braiders/no-results.html), [`pages/my-appointments/no-results`](../../mocks/pages/my-appointments/no-results.html), [`pages/style-gallery/error`](../../mocks/pages/style-gallery/error.html), [`pages/help/error`](../../mocks/pages/help/error.html), [`pages/terms/error`](../../mocks/pages/terms/error.html), [`pages/booking-request/success`](../../mocks/pages/booking-request/success.html), [`pages/care-and-review/success`](../../mocks/pages/care-and-review/success.html), [`pages/account-settings/success`](../../mocks/pages/account-settings/success.html), [`pages/forgot-password/success`](../../mocks/pages/forgot-password/success.html) |

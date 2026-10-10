@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-page-header` |
 | Library path | `frontend/projects/components/src/lib/page-header/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-018, L2-019, L2-035, L2-037, L2-041, L2-042 |
 | Design system | [`page-header.html`](../../design-system/components/page-header.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/my-appointments/loading`](../../mocks/pages/my-appointments/loading.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/care-and-review/default`](../../mocks/pages/care-and-review/default.html), [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html), [`pages/not-found/default`](../../mocks/pages/not-found/default.html), [`pages/terms/default`](../../mocks/pages/terms/default.html), [`pages/notification-center/default`](../../mocks/pages/notification-center/default.html) |

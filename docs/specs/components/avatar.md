@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `span[hp-avatar]`, `hp-avatar-group` |
 | Library path | `frontend/projects/components/src/lib/avatar/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-004, L2-007, L2-041, L2-042 |
 | Design system | [`avatar.html`](../../design-system/components/avatar.html) |
 | Source mocks | [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/braider-profile/edge`](../../mocks/pages/braider-profile/edge.html), [`pages/braider-profile/partial`](../../mocks/pages/braider-profile/partial.html), [`pages/braider-profile/offline`](../../mocks/pages/braider-profile/offline.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`dialogs/report-review/default`](../../mocks/dialogs/report-review/default.html) |

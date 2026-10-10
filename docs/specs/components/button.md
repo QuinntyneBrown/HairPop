@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `button[hp-button]`, `a[hp-button]` |
 | Library path | `frontend/projects/components/src/lib/button/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-005, L2-007, L2-011, L2-022, L2-036, L2-041, L2-042 |
 | Design system | [`button.html`](../../design-system/components/button.html) |
 | Source mocks | [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html), [`pages/booking-request/submitting`](../../mocks/pages/booking-request/submitting.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/style-detail/default`](../../mocks/pages/style-detail/default.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`pages/style-gallery/error`](../../mocks/pages/style-gallery/error.html), [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html), [`dialogs/cancel-appointment/default`](../../mocks/dialogs/cancel-appointment/default.html), [`dialogs/cancel-appointment/busy`](../../mocks/dialogs/cancel-appointment/busy.html), [`dialogs/filter-braiders/default`](../../mocks/dialogs/filter-braiders/default.html), [`dialogs/sign-out/default`](../../mocks/dialogs/sign-out/default.html) |

@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `div[hp-progress]`, `hp-progress-field` |
 | Library path | `frontend/projects/components/src/lib/progress-bar/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-036, L2-041, L2-042, L2-045 |
 | Design system | [`progress-bar.html`](../../design-system/components/progress-bar.html) |
 | Source mocks | None use a progress bar yet. Closest: [`pages/booking-request/submitting`](../../mocks/pages/booking-request/submitting.html) and [`dialogs/cookie-preferences/busy`](../../mocks/dialogs/cookie-preferences/busy.html), short submits that use Button's busy state instead |

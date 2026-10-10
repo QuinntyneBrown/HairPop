@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `span[hp-badge]` |
 | Library path | `frontend/projects/components/src/lib/badge/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-017, L2-018, L2-019, L2-020, L2-022, L2-030, L2-041, L2-042 |
 | Design system | [`badge.html`](../../design-system/components/badge.html) |
 | Source mocks | [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/appointment-detail/success`](../../mocks/pages/appointment-detail/success.html), [`pages/notification-center/unread`](../../mocks/pages/notification-center/unread.html), [`pages/notification-center/read`](../../mocks/pages/notification-center/read.html), [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/matching-braiders/no-results`](../../mocks/pages/matching-braiders/no-results.html), [`dialogs/cancel-appointment/default`](../../mocks/dialogs/cancel-appointment/default.html), [`notifications/booking-update/info`](../../mocks/notifications/booking-update/info.html) |

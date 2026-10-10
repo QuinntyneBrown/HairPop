@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `ul[hp-list]`, `ol[hp-list]`, `li[hp-list-item]`, `a[hp-list-item]` |
 | Library path | `frontend/projects/components/src/lib/list/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-029, L2-030, L2-035, L2-041, L2-042 |
 | Design system | [`list.html`](../../design-system/components/list.html) |
 | Source mocks | [`pages/notification-center/default`](../../mocks/pages/notification-center/default.html), [`pages/notification-center/unread`](../../mocks/pages/notification-center/unread.html), [`pages/notification-center/read`](../../mocks/pages/notification-center/read.html), [`pages/notification-center/loading`](../../mocks/pages/notification-center/loading.html), [`pages/notification-center/empty`](../../mocks/pages/notification-center/empty.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html) |

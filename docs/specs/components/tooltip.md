@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-tooltip` |
 | Library path | `frontend/projects/components/src/lib/tooltip/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-041, L2-042 |
 | Design system | [`tooltip.html`](../../design-system/components/tooltip.html) |
 | Source mocks | [`dialogs/filter-braiders/default`](../../mocks/dialogs/filter-braiders/default.html), [`dialogs/change-appointment/default`](../../mocks/dialogs/change-appointment/default.html), [`dialogs/report-review/default`](../../mocks/dialogs/report-review/default.html), [`dialogs/request-review/default`](../../mocks/dialogs/request-review/default.html), [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html) |

@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-radio-group`, `label[hp-radio]` |
 | Library path | `frontend/projects/components/src/lib/radio-group/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-015, L2-025, L2-036, L2-041, L2-042 |
 | Design system | [`radio-group.html`](../../design-system/components/radio-group.html) |
 | Source mocks | [`pages/care-and-review/default`](../../mocks/pages/care-and-review/default.html), [`pages/care-and-review/invalid`](../../mocks/pages/care-and-review/invalid.html), [`pages/care-and-review/submitting`](../../mocks/pages/care-and-review/submitting.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html), [`pages/booking-request/invalid`](../../mocks/pages/booking-request/invalid.html), [`pages/booking-request/submitting`](../../mocks/pages/booking-request/submitting.html) |

@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-breadcrumb` |
 | Library path | `frontend/projects/components/src/lib/breadcrumb/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-041, L2-042 |
 | Design system | [`breadcrumb.html`](../../design-system/components/breadcrumb.html) |
 | Source mocks | [`pages/style-detail/default`](../../mocks/pages/style-detail/default.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html) |

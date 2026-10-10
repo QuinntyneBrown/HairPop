@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-error-page` |
 | Library path | `frontend/projects/components/src/lib/error-page/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-003, L2-007, L2-019, L2-029, L2-036, L2-037, L2-041, L2-042, L2-044, L2-045 |
 | Design system | [`error-page.html`](../../design-system/components/error-page.html) |
 | Source mocks | [`pages/not-found/default`](../../mocks/pages/not-found/default.html), [`pages/forbidden/default`](../../mocks/pages/forbidden/default.html), [`pages/server-error/default`](../../mocks/pages/server-error/default.html), [`pages/offline/default`](../../mocks/pages/offline/default.html), [`pages/not-found/loading`](../../mocks/pages/not-found/loading.html), [`pages/not-found/error`](../../mocks/pages/not-found/error.html), [`pages/forbidden/loading`](../../mocks/pages/forbidden/loading.html), [`pages/forbidden/error`](../../mocks/pages/forbidden/error.html), [`pages/server-error/loading`](../../mocks/pages/server-error/loading.html), [`pages/server-error/error`](../../mocks/pages/server-error/error.html), [`pages/offline/loading`](../../mocks/pages/offline/loading.html), [`pages/offline/error`](../../mocks/pages/offline/error.html) |

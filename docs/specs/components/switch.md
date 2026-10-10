@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `label[hp-switch]` |
 | Library path | `frontend/projects/components/src/lib/switch/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-031, L2-041, L2-042 |
 | Design system | [`switch.html`](../../design-system/components/switch.html) |
 | Source mocks | [`pages/account-settings/default`](../../mocks/pages/account-settings/default.html) (future notification preferences), [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html) (correctly a checkbox, not a switch) |

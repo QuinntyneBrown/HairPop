@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `a[hp-skip-link]` |
 | Library path | `frontend/projects/components/src/lib/skip-link/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-041, L2-042 |
 | Design system | [`skip-link.html`](../../design-system/components/skip-link.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html), [`pages/not-found/default`](../../mocks/pages/not-found/default.html), [`dialogs/cancel-appointment/default`](../../mocks/dialogs/cancel-appointment/default.html), [`notifications/booking-update/info`](../../mocks/notifications/booking-update/info.html) |

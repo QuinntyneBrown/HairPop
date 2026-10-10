@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-pagination` |
 | Library path | `frontend/projects/components/src/lib/pagination/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-002, L2-005, L2-035, L2-041, L2-042 |
 | Design system | [`pagination.html`](../../design-system/components/pagination.html) |
 | Source mocks | [`pages/style-gallery/long`](../../mocks/pages/style-gallery/long.html), [`pages/matching-braiders/long`](../../mocks/pages/matching-braiders/long.html), [`pages/my-appointments/long`](../../mocks/pages/my-appointments/long.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html) |

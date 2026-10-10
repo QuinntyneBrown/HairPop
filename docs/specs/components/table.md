@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-table`, `th[hp-table-sort]` |
 | Library path | `frontend/projects/components/src/lib/table/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-018, L2-035, L2-041, L2-042 |
 | Design system | [`table.html`](../../design-system/components/table.html) |
 | Source mocks | [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/my-appointments/long`](../../mocks/pages/my-appointments/long.html), [`pages/my-appointments/loading`](../../mocks/pages/my-appointments/loading.html), [`pages/my-appointments/empty`](../../mocks/pages/my-appointments/empty.html), [`pages/my-appointments/error`](../../mocks/pages/my-appointments/error.html) |
