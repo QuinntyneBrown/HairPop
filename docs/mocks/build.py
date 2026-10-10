@@ -178,10 +178,14 @@ def page_header(screen: str, state: str) -> str:
     return f'<div class="page-header"><div><p class="eyebrow">{esc(p[3])}</p><h1>{esc(p[4])}</h1><p class="subtitle">{esc(p[5])}</p></div>{actions}</div>'
 
 
+ERROR_PAGES = {"not-found", "forbidden", "server-error", "offline"}
+
+
 def shell(screen: str, state: str, *, inert: bool = False, banner: str = "") -> str:
+    header = "" if screen in ERROR_PAGES and state == "default" else page_header(screen, state)
     return f'''<div{attribute("inert", "", inert)}{attribute("aria-hidden", "true", inert)} class="product-shell">
 {banner}{topbar(screen)}
-<main id="main" class="container product-main">{page_header(screen, state)}{content(screen, state)}</main>{footer(screen)}</div>'''
+<main id="main" class="container product-main">{header}{content(screen, state)}</main>{footer(screen)}</div>'''
 
 
 # ---------------------------------------------------------------------------
@@ -302,10 +306,10 @@ def pagination(state: str, total: str = "126", noun: str = "styles") -> str:
     return f'<nav class="pagination" aria-label="Results pages"><p class="pagination__summary">Showing 1–12 of {total} {noun}</p><a class="btn btn--ghost btn--sm" href="default.html" aria-disabled="true">{icon("chevron-left", "icon--sm")}Previous</a><a class="btn btn--ghost btn--sm" href="long.html" aria-current="page">1</a><a class="btn btn--ghost btn--sm" href="long.html">2</a><a class="btn btn--ghost btn--sm" href="long.html">3</a><a class="btn btn--ghost btn--sm" href="long.html">Next{icon("chevron-right", "icon--sm")}</a></nav>'
 
 
-def empty(title, text, actions, icon_name="sparkle", tone="", reference="") -> str:
+def empty(title, text, actions, icon_name="sparkle", tone="", reference="", level=2) -> str:
     tone_class = f" empty--{tone}" if tone else ""
-    ref = f'<p class="empty__reference">Reference {esc(reference)}</p>' if reference else ""
-    return f'<section class="empty{tone_class}" aria-labelledby="empty-title"><div class="empty__icon" aria-hidden="true">{icon(icon_name, "icon--lg")}</div><h2 class="empty__title" id="empty-title">{esc(title)}</h2><p class="empty__text">{esc(text)}</p>{ref}<div class="empty__actions">{actions}</div></section>'
+    ref = f'<p class="empty__reference">{esc(reference)}</p>' if reference else ""
+    return f'<section class="empty{tone_class}" aria-labelledby="empty-title"><div class="empty__icon" aria-hidden="true">{icon(icon_name, "icon--lg")}</div><h{level} class="empty__title" id="empty-title">{esc(title)}</h{level}><p class="empty__text">{esc(text)}</p>{ref}<div class="empty__actions">{actions}</div></section>'
 
 
 # ---------------------------------------------------------------------------
@@ -471,14 +475,13 @@ def page_body(screen: str, state: str) -> str:
             body = "<h2>Your information</h2><p>We use your name, email and phone to manage requests and let your braider reach you. Hair details are shared only with the braider you request.</p><h2>Cookies and storage</h2><p>Essential storage keeps you signed in. Optional usage data is stored only if you allow it, and you can change that choice in Cookie preferences.</p><h2>Your choices</h2><p>Update your contact details in Account settings. Contact support@hairpop.example for help with your information.</p>"
         return f'<article class="card legal-copy"><p class="text-muted">Effective 1 Oct 2026</p>{body}</article>'
     if screen == "not-found":
-        return empty("Page not found", "Check the address, or start again from the style gallery.", anchor("Explore styles", "style-gallery", True), "search")
+        return empty("We couldn’t find that page", "The link may be old, or the address may have changed.", anchor("Explore styles", "style-gallery", True), "search", level=1)
     if screen == "forbidden":
-        return empty("Access unavailable", "This page belongs to another account, or it isn’t available any more.", anchor("Sign in", "sign-in", True) + anchor("My appointments", "my-appointments"), "lock")
+        return empty("You can’t open this page", "Sign in with the account you use for your appointments.", anchor("Sign in", "sign-in", True), "lock", "warning", level=1)
     if screen == "server-error":
-        return empty("Something went wrong on our side", "Nothing was resent. Try again in a moment, or check My appointments to see what was saved.", f'<a class="btn btn--primary" href="default.html">{icon("refresh")}Try again</a>{anchor("My appointments", "my-appointments")}', "alert-circle", "error", "ERR-7F3K2")
+        return empty("HairPop needs a moment", "We couldn’t load this page. Your booking request has not been resent.", f'<button class="btn btn--primary" type="button">{icon("refresh")}Try again</button><a class="btn" href="mailto:support@hairpop.example">Contact support</a>', "alert-circle", "error", "Reference: HP-ERR-7F3K2Q · Sat 10 Oct, 9:42 am", level=1)
     if screen == "offline":
-        saved = '<section class="card stack" aria-labelledby="saved"><h2 id="saved">Saved in this browser</h2><div class="appointment-row"><div class="stack stack--sm"><span class="badge badge--warning">Awaiting reply</span><p><strong>Nia Okafor · medium knotless braids</strong></p><p class="text-muted">Sat 24 Oct · 10:00 am · last updated today at 9:42 am</p></div><a class="btn" href="' + href("appointment-detail", state="offline") + '">View saved details</a></div></section>'
-        return empty("No connection", "New requests, changes and reviews need a connection. Your saved appointment is below.", f'<a class="btn btn--primary" href="default.html">{icon("refresh")}Try again</a>', "wifi-off", "warning") + saved
+        return empty("You’re offline", "Saved appointment details remain available. Requests need a connection.", f'<button class="btn btn--primary" type="button">{icon("refresh")}Try again</button>{anchor("View saved appointments", "my-appointments")}', "wifi-off", "warning", level=1)
     if screen == "braider-requests":
         def req(ref, who, what, when, est, detail, kind="request"):
             badge = '<span class="badge badge--info">Change requested</span>' if kind == "change" else '<span class="badge badge--warning">Awaiting your reply</span>'
