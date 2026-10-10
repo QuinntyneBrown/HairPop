@@ -66,6 +66,12 @@
       <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#4c2269" flood-opacity="0.28"/>
     </filter>
     <clipPath id="glossClip"><rect x="0" y="0" width="640" height="300"/></clipPath>
+
+    <linearGradient id="handSkin" gradientUnits="userSpaceOnUse" x1="-10" y1="-40" x2="6" y2="70">
+      <stop offset="0" stop-color="#a35d37"/>
+      <stop offset="0.45" stop-color="#7c4225"/>
+      <stop offset="1" stop-color="#5f2f15"/>
+    </linearGradient>
     <clipPath id="scalp"><path d="M 98 126 C 92 40, 208 40, 202 126 C 198 102, 178 92, 150 92 C 122 92, 102 102, 98 126 Z"/></clipPath>
   </defs>
 
@@ -73,17 +79,39 @@
   <path d="M 100 110 C 90 150, 88 190, 94 236" fill="none" stroke="#1a0d09" stroke-width="9" stroke-linecap="round"/><path d="M 100 110 C 90 150, 88 190, 94 236" fill="none" stroke="#5e3524" stroke-width="6.3" stroke-linecap="round"/><path d="M 100 110 C 90 150, 88 190, 94 236" fill="none" stroke="#8d5a3c" stroke-width="2.9" stroke-linecap="round" stroke-dasharray="5.0 4.5" opacity="0.85"/><path d="M 106 98 C 96 140, 98 190, 104 240" fill="none" stroke="#1a0d09" stroke-width="9" stroke-linecap="round"/><path d="M 106 98 C 96 140, 98 190, 104 240" fill="none" stroke="#5e3524" stroke-width="6.3" stroke-linecap="round"/><path d="M 106 98 C 96 140, 98 190, 104 240" fill="none" stroke="#8d5a3c" stroke-width="2.9" stroke-linecap="round" stroke-dasharray="5.0 4.5" opacity="0.85"/><path d="M 200 110 C 210 150, 212 190, 206 236" fill="none" stroke="#1a0d09" stroke-width="9" stroke-linecap="round"/><path d="M 200 110 C 210 150, 212 190, 206 236" fill="none" stroke="#5e3524" stroke-width="6.3" stroke-linecap="round"/><path d="M 200 110 C 210 150, 212 190, 206 236" fill="none" stroke="#8d5a3c" stroke-width="2.9" stroke-linecap="round" stroke-dasharray="5.0 4.5" opacity="0.85"/><path d="M 194 98 C 204 140, 202 190, 196 240" fill="none" stroke="#1a0d09" stroke-width="9" stroke-linecap="round"/><path d="M 194 98 C 204 140, 202 190, 196 240" fill="none" stroke="#5e3524" stroke-width="6.3" stroke-linecap="round"/><path d="M 194 98 C 204 140, 202 190, 196 240" fill="none" stroke="#8d5a3c" stroke-width="2.9" stroke-linecap="round" stroke-dasharray="5.0 4.5" opacity="0.85"/>
   
   <!-- neck -->
-  <path d="M 140 194 L 140 238 Q 150 248 160 238 L 160 194 Z" fill="url(#neck)"/>
+  <path d="M 140 194 L 140 226 Q 150 236 160 226 L 160 194 Z" fill="url(#neck)"/>
+  <g transform="translate(0 -12)">
   <!-- top / shoulders (lower part hides behind the wordmark) -->
-  <path d="M 150 236 C 126 232, 106 242, 98 262 L 94 300 L 206 300 L 202 262 C 194 242, 174 232, 150 236 Z" fill="url(#shirt)"/>
-  <path d="M 150 236 C 126 232, 106 242, 98 262 L 94 300 L 206 300 L 202 262 C 194 242, 174 232, 150 236 Z" fill="url(#shirtShade)"/>
+  <path d="M 150 236 C 126 232, 106 242, 98 262 L 94 312 L 206 312 L 202 262 C 194 242, 174 232, 150 236 Z" fill="url(#shirt)"/>
+  <path d="M 150 236 C 126 232, 106 242, 98 262 L 94 312 L 206 312 L 202 262 C 194 242, 174 232, 150 236 Z" fill="url(#shirtShade)"/>
   <!-- collar -->
   <path d="M 128 236 C 136 248, 144 256, 150 259 C 156 256, 164 248, 172 236 C 164 234, 156 236, 150 240 C 144 236, 136 234, 128 236 Z" fill="#c27a12"/>
   <path d="M 131 237 C 138 247, 145 253, 150 256 C 155 253, 162 247, 169 237 C 162 235, 156 237, 150 241 C 144 237, 138 235, 131 237 Z" fill="url(#skin)"/>
-  <!-- waving arm + hand (right side) -->
-  <path d="M 192 258 C 206 244, 218 232, 232 222" fill="none" stroke="url(#shirtArm)" stroke-width="22" stroke-linecap="round"/>
-  <path d="M 222 230 C 232 220, 240 212, 248 204" fill="none" stroke="#7c4225" stroke-width="15" stroke-linecap="round"/>
-  <g id="hand" transform="translate(254 176) scale(0.8) translate(-268 -188)" stroke="#4f260f" stroke-width="2.4"><rect x="255.4" y="128.0" width="13" height="48" rx="6.5" fill="url(#skinHand)" transform="rotate(-26 261.86 176)"/><rect x="258.8" y="122.0" width="14" height="54" rx="7.0" fill="url(#skinHand)" transform="rotate(-9 265.81 176)"/><rect x="262.9" y="124.0" width="14" height="52" rx="7.0" fill="url(#skinHand)" transform="rotate(8 269.95 176)"/><rect x="267.7" y="132.0" width="12" height="44" rx="6.0" fill="url(#skinHand)" transform="rotate(24 273.69 176)"/><rect x="245.0" y="162.0" width="14" height="30" rx="7.0" fill="url(#skinHand)" transform="rotate(-70 252 192)"/><ellipse cx="268" cy="188" rx="22" ry="25" fill="url(#skinHand)"/><ellipse cx="264" cy="176" rx="8" ry="4" fill="#fff" stroke="none" opacity="0.12"/><path d="M 258 194 q 12 8 22 0" fill="none" stroke-width="1.8" stroke-linecap="round" opacity="0.55"/></g>
+  
+  <!-- waving arm + hand (right side): one silhouette with one outline -->
+  <g id="hand" transform="translate(258 168) rotate(14)">
+    <path d="M -2 14 C -6 34, -11 52, -15 70" fill="none" stroke="#3d1d0c" stroke-width="16.4" stroke-linecap="round"/><path d="M -14 -8 C -14 -14, 14 -14, 15 -7 C 17 4, 14 14, 6 18 C 0 20, -8 19, -12 14 C -15 9, -15 0, -14 -8 Z" fill="#3d1d0c" stroke="#3d1d0c" stroke-width="3.4" stroke-linejoin="round"/><path d="M -12 6 C -18 2, -22 -4, -25 -11" fill="none" stroke="#3d1d0c" stroke-width="12.4" stroke-linecap="round"/><path d="M -9 -6 L -19 -31" fill="none" stroke="#3d1d0c" stroke-width="11.6" stroke-linecap="round"/><path d="M -2.5 -8 L -4.5 -37" fill="none" stroke="#3d1d0c" stroke-width="12.0" stroke-linecap="round"/><path d="M 4.5 -7 L 10 -34" fill="none" stroke="#3d1d0c" stroke-width="11.6" stroke-linecap="round"/><path d="M 10.5 -3 L 20 -22" fill="none" stroke="#3d1d0c" stroke-width="10.6" stroke-linecap="round"/>
+    <path d="M -2 14 C -6 34, -11 52, -15 70" fill="none" stroke="url(#handSkin)" stroke-width="13.0" stroke-linecap="round"/><path d="M -14 -8 C -14 -14, 14 -14, 15 -7 C 17 4, 14 14, 6 18 C 0 20, -8 19, -12 14 C -15 9, -15 0, -14 -8 Z" fill="url(#handSkin)" stroke="none" stroke-width="0" stroke-linejoin="round"/><path d="M -12 6 C -18 2, -22 -4, -25 -11" fill="none" stroke="url(#handSkin)" stroke-width="9.0" stroke-linecap="round"/><path d="M -9 -6 L -19 -31" fill="none" stroke="url(#handSkin)" stroke-width="8.2" stroke-linecap="round"/><path d="M -2.5 -8 L -4.5 -37" fill="none" stroke="url(#handSkin)" stroke-width="8.6" stroke-linecap="round"/><path d="M 4.5 -7 L 10 -34" fill="none" stroke="url(#handSkin)" stroke-width="8.2" stroke-linecap="round"/><path d="M 10.5 -3 L 20 -22" fill="none" stroke="url(#handSkin)" stroke-width="7.2" stroke-linecap="round"/>
+    <!-- palm crease and thumb pad -->
+    <path d="M -7 4 C -3 9, 4 10, 9 6" fill="none" stroke="#3d1d0c" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+    <path d="M -11 -2 C -9 6, -6 11, -2 13" fill="none" stroke="#3d1d0c" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+    <!-- highlights -->
+    <ellipse cx="-4.5" cy="-30" rx="2" ry="3.4" fill="#fff" opacity="0.16"/>
+    <ellipse cx="-16.5" cy="-25" rx="1.8" ry="3" fill="#fff" opacity="0.14" transform="rotate(-20 -16.5 -25)"/>
+    <ellipse cx="2" cy="-4" rx="6" ry="3" fill="#fff" opacity="0.10"/>
+    <!-- coral bangle at the wrist -->
+    <path d="M -11 29 C -8 33, 2 34, 5 29" fill="none" stroke="#c4566e" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M -11 29 C -8 33, 2 34, 5 29" fill="none" stroke="#f98ba2" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M -7.5 30.6 C -4.5 32, -0.5 32, 1.5 31" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+  </g>
+  <!-- wave motion marks -->
+  <g fill="none" stroke="#f7c15c" stroke-width="3" stroke-linecap="round">
+    <path d="M 290 136 C 296 144, 298 154, 296 164"/>
+    <path d="M 300 128 C 308 140, 310 156, 306 170" opacity="0.7"/>
+  </g>
+  <!-- sleeve over the end of the forearm -->
+  <path d="M 192 260 C 204 248, 214 240, 226 232" fill="none" stroke="url(#shirtArm)" stroke-width="22" stroke-linecap="round"/>
+  </g>
   
   <!-- ears -->
   <ellipse cx="101" cy="140" rx="8" ry="11" fill="url(#skin)"/>
