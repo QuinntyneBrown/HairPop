@@ -1,0 +1,158 @@
+/* ==========================================================================
+   HairPop layout.css — global layout primitives (container.md).
+
+   Loaded after tokens.css and foundation.css, before any page styles.
+   Ported from docs/design-system/assets/components.css (Layout primitives).
+   The responsive tokens --layout-columns, --layout-gutter and --layout-margin
+   change at 768 and 1024 px in tokens.css. Media queries are min-width only
+   and in rem (48rem = --layout-breakpoint-md, 64rem = --layout-breakpoint-lg)
+   because media queries cannot read custom properties. No colour, elevation,
+   layer or motion. Visual order always equals DOM order (D-5).
+   ========================================================================== */
+
+/* ---------- Container ---------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--layout-container-max);
+  margin-inline: auto;
+  padding-inline: var(--layout-margin);
+}
+
+.container--narrow {
+  max-width: var(--layout-form-max);
+}
+
+/* ---------- Stack -------------------------------------------------------- */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.stack--sm {
+  gap: var(--space-2);
+}
+
+.stack--lg {
+  gap: var(--space-8);
+}
+
+/* ---------- Cluster ------------------------------------------------------ */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.cluster--between {
+  justify-content: space-between;
+}
+
+.cluster--end {
+  justify-content: flex-end;
+}
+
+/* ---------- Grid --------------------------------------------------------- */
+.grid {
+  display: grid;
+  gap: var(--layout-gutter);
+  grid-template-columns: repeat(var(--layout-columns), minmax(0, 1fr));
+}
+
+.grid--auto {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--layout-card-min)), 1fr));
+}
+
+.span-full {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Content grids: 1 -> 2 -> 3 columns; detail = main + aside ---- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (min-width: 48rem) {
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detail-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(var(--layout-sidebar-width), 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .feature-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- App shell: top bar, main, footer ---------------------------- */
+.product-shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-main {
+  flex: 1;
+  padding-block: var(--space-6) var(--space-12);
+}
+
+.product-main > * + * {
+  margin-top: var(--space-6);
+}
+
+/* D-3: a routed page's host is a block with no margin of its own, and its
+   top-level blocks get the same rhythm as main's direct children. */
+.product-main > router-outlet + * {
+  display: block;
+  margin-top: 0;
+}
+
+.product-main > router-outlet + * > * + * {
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 48rem) {
+  .product-main {
+    padding-block: var(--space-8) var(--space-12);
+  }
+}
+
+/* skip-link.md D-4: the skip link's target is a landmark, not a control. */
+main:focus {
+  outline: none;
+}
+
+/* ---------- Section ------------------------------------------------------ */
+.section {
+  margin-block: var(--space-8);
+}
+
+/* ---------- Form panel (form-layout.md D-3) ------------------------------ */
+.form-panel {
+  max-width: var(--layout-form-max);
+  margin-inline: auto;
+  width: 100%;
+}
+
+.form-panel > h2 {
+  font: var(--text-h3);
+  margin-bottom: var(--space-4);
+}
+
+.form-panel .stack {
+  gap: var(--space-4);
+}
