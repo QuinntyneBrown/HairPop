@@ -463,6 +463,9 @@ export class TopBar {
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       hasBackdrop: false,
+      // In the overlay container, not the top layer, so `--z-dropdown` keeps the panel under
+      // dialogs and toasts (Design: Elevation and layer).
+      usePopover: false,
     });
     overlayRef.hostElement.style.zIndex = 'var(--z-dropdown)';
     this.overlaySubscriptions.add(

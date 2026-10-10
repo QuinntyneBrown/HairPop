@@ -48,21 +48,9 @@ const TRIGGER_SELECTOR =
     '(pointerleave)': 'scheduleHide()',
     '(click)': 'hide()',
   },
-  template: `<ng-content /><ng-template #bubble
-      ><span
-        class="tooltip"
-        role="tooltip"
-        [id]="id"
-        [class.tooltip--below]="below()"
-        [style.--tooltip-arrow-x]="arrowX()"
-        (pointerenter)="cancelHide()"
-        (pointerleave)="scheduleHide()"
-        >{{ text() }}
-        @if (shortcut()) {
-          <kbd>{{ shortcut() }}</kbd>
-        }
-      </span></ng-template
-    >`,
+  // Kept compact: whitespace after the text would become part of the bubble's text.
+  // prettier-ignore
+  template: `<ng-content /><ng-template #bubble><span class="tooltip" role="tooltip" [id]="id" [class.tooltip--below]="below()" [style.--tooltip-arrow-x]="arrowX()" (pointerenter)="cancelHide()" (pointerleave)="scheduleHide()">{{ text() }}@if (shortcut()) {<kbd>{{ shortcut() }}</kbd>}</span></ng-template>`,
   styles: `
     .has-tooltip {
       position: relative;
@@ -280,6 +268,9 @@ export class Tooltip {
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       hasBackdrop: false,
+      // In the overlay container, not the top layer, so `--z-tooltip` orders it above
+      // dialogs and toasts (Design: Layer).
+      usePopover: false,
     });
     overlayRef.hostElement.style.zIndex = 'var(--z-tooltip)';
     this.overlaySubscriptions.add(

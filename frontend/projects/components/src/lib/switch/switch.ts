@@ -117,8 +117,9 @@ let nextSwitchId = 0;
         translate: calc(var(--switch-width) - var(--switch-thumb) - 2 * var(--space-0-5)) 0;
       }
 
-      :host(:hover) input:not(:checked):not(:disabled) {
-        background: var(--color-fg-muted);
+      /* Hover (off) re-points the track token; the on track keeps --switch-track-on. */
+      :host(:hover:not(:has(input:disabled))) {
+        --switch-track: var(--color-fg-muted);
       }
 
       :host input:disabled {
@@ -151,8 +152,7 @@ let nextSwitchId = 0;
       }
 
       @media (forced-colors: active) {
-        :host input,
-        :host(:hover) input:not(:checked):not(:disabled) {
+        :host input {
           forced-color-adjust: none;
           box-shadow: inset 0 0 0 var(--border-width-hairline) CanvasText;
           background: Canvas;
