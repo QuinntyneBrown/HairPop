@@ -1,4 +1,4 @@
-<!--meta {"lead": "The page header opens every screen: a short eyebrow, the page's one <code>&lt;h1&gt;</code>, a subtitle with the facts that matter, and optional page actions.", "description": "Eyebrow, display h1, subtitle and actions; actions drop below the title and the primary goes full width on phones.", "pills": ["Holds the page <code>&lt;h1&gt;</code>", "Status: stable"], "variants": "title only, with eyebrow and subtitle, with actions", "states": "static; actions follow button states", "sources": ["pages/style-gallery/default", "pages/appointment-detail/default", "pages/my-appointments/default", "pages/sign-in/default", "pages/not-found/default"]} -->
+<!--meta {"lead": "The page header opens every screen: a short eyebrow, the page's one <code>&lt;h1&gt;</code>, a subtitle with the facts that matter, and optional page actions.", "description": "Eyebrow, display h1, subtitle and actions; actions drop below the title and the primary goes full width on phones.", "pills": ["Holds the page <code>&lt;h1&gt;</code>", "Status: stable"], "variants": "title only, with eyebrow and subtitle, with actions", "states": "static; actions follow button states", "sources": ["pages/style-gallery/default", "pages/appointment-detail/default", "pages/my-appointments/default", "pages/sign-in/default", "pages/help/default"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Every product page uses one page header as the first thing in <code>&lt;main&gt;</code> (after an optional <a href="breadcrumb.html">breadcrumb</a>). It holds the page's only <code>&lt;h1&gt;</code> in the light display face, which carries HairPop's voice: "Find a style that feels like you", "Your appointment with Nia".</p>
   <ul>
@@ -97,7 +97,7 @@
   <ul>
     <li>Titles are warm and specific, in sentence case, without a full stop: "Find a style that feels like you", "Care for your knotless braids".</li>
     <li>Subtitles hold facts separated by middle dots and end with a full stop: "Sat 24 Oct at 10:00 am · awaiting Nia’s reply."</li>
-    <li>Eyebrows are one or two words: "Discover" for browsing, the area name for account screens ("Appointments", "Account"), none for auth, legal, help and error pages.</li>
+    <li>Eyebrows are one or two words: "Discover" for browsing, the area name for account screens ("Appointments", "Account"), none for auth, legal and help pages. Error pages have no page header: their empty-state title is the <code>&lt;h1&gt;</code>.</li>
     <li>Never call a pending request "confirmed" in the title or subtitle.</li>
   </ul>
 </section>
@@ -107,7 +107,7 @@
     <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><p class="eyebrow">Appointments</p><p style="font: var(--text-h3);">Your appointment with Nia</p></div><figcaption>An eyebrow that names the area the page belongs to.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><p class="eyebrow">Your HairPop</p><p style="font: var(--text-h3);">Reset your password</p></div><figcaption>The same "Your HairPop" eyebrow on every non-browsing screen, including sign in and errors, as the first mocks did; it stops carrying information.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><p class="text-muted">Request HP-1048 · Sat 24 Oct at 10:00 am · awaiting Nia’s reply.</p></div><figcaption>Put the facts the customer checks first in the subtitle.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><p style="font: var(--text-h3);">Details</p></div><figcaption>Use a generic heading like "Details", as the first mocks' form panels did; it says nothing in a headings list.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><p style="font: var(--text-h3);">Details</p></div><figcaption>Use a generic heading like "Details", as the auth mocks' form panels still do; it says nothing in a headings list.</figcaption></figure>
   </div>
 </section>
 
@@ -157,7 +157,7 @@
     {{mock:pages/appointment-detail/default|facts in the subtitle}}
     {{mock:pages/my-appointments/default|"Appointments" eyebrow and a page action}}
     {{mock:pages/sign-in/default|auth screen: no eyebrow}}
-    {{mock:pages/not-found/default|error page: no eyebrow}}
+    {{mock:pages/help/default|help page: no eyebrow}}
   </ul>
-  <p>Drift fixed during extraction: every non-browsing screen, including sign in, legal and error pages, uses the eyebrow "Your HairPop" (system: the area name, or no eyebrow); form panels repeat a generic "Details" heading under a specific page title (system: name the section, such as "Your details"); the header had no slot for page actions (added <code>.page-header__actions</code>). The mocks now follow the eyebrow rule and show "Book a style" on My appointments. Added since: an empty actions container takes no space, long title words break at 200% text, and the focused title shows no ring.</p>
+  <p>Drift fixed during extraction: every non-browsing screen, including sign in, legal and error pages, uses the eyebrow "Your HairPop" (system: the area name, or no eyebrow); form panels repeat a generic "Details" heading under a specific page title (system: name the section, such as "Your details"); the header had no slot for page actions (added <code>.page-header__actions</code>). The mocks now follow the eyebrow rule, show "Book a style" on My appointments and drop the page header from the four error pages; the auth screens' form panels still use the generic "Details" heading. Added since: an empty actions container takes no space, long title words break at 200% text, and the focused title shows no ring.</p>
 </section>

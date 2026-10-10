@@ -33,7 +33,7 @@ The design system adds a breadcrumb to each detail page (D-7), and the detail mo
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| `pages/style-detail` (all states that render the style: default, edge, offline, partial) | `trail` [Styles], `current` style name | "Styles" › "Knotless braids" | default, hover, focus, current; collapsed below 768 px to "‹ Styles" | canvas, above the page header |
+| `pages/style-detail` (default, empty, edge, offline, partial) | `trail` [Styles], `current` style name | "Styles" › "Knotless braids" | default, hover, focus, current; collapsed below 768 px to "‹ Styles" | canvas, above the page header |
 | `pages/braider-profile` (default, empty, edge, offline, partial) | `trail` [Braiders], `current` braider name | "Braiders" › "Nia Okafor" | default, hover, focus, current; collapsed "‹ Braiders" | canvas |
 | `pages/appointment-detail` (default, empty, offline, partial, success) | `trail` [Appointments], `current` request reference | "Appointments" › "HP-1048" | default, hover, focus, current; collapsed "‹ Appointments" | canvas |
 | `pages/matching-braiders` for a selected style (default, empty, no-results, long, edge, offline; design-system *Anatomy*) | `trail` [Styles, Knotless braids], `current` "Braiders" | "Styles" › "Knotless braids" › "Braiders" | default, hover, focus, current; collapsed "‹ Knotless braids" | canvas |

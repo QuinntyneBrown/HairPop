@@ -43,7 +43,7 @@ No mock uses a progress bar; it is part of the design system's core set so the f
 | A photo thumbnail row, design system *Bar only* | `div[hp-progress]` alone, determinate, `max` 100 | `aria-label="Uploading braids-front.jpg"` | in progress (40) | surface |
 | A long task of unknown length, design system *Variants* | `hp-progress-field`, indeterminate | label "Importing your past appointments" | running, complete ("Appointments imported", full success bar), failed ("Import stopped", full danger bar) | surface |
 | Inside a toast, design system *Theming* | `div[hp-progress]`, determinate, inverse surface | `aria-label` naming the task | in progress | inverse (toast) |
-| Not a use: `pages/*/submitting`, `dialogs/*/busy` | — | — | Button's `busy` state, never a bar stacked on a disabled "Working…" button (design system *Do and don't*) | — |
+| Not a use: `pages/*/submitting`, `dialogs/*/busy` | — | — | Button's `busy` state, never a bar stacked on a disabled "Working…" button as the first mocks drew it (design system *Do and don't*) | — |
 
 Every row is buildable with the API below: a bar with `value`, `max`, `status` and `valueText`, named natively, or a field that adds the label, count and one action.
 

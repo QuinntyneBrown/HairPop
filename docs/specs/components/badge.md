@@ -7,7 +7,7 @@
 | Status | planned |
 | Traces to | L2-017, L2-018, L2-019, L2-020, L2-022, L2-030, L2-041, L2-042 |
 | Design system | [`badge.html`](../../design-system/components/badge.html) |
-| Source mocks | [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/appointment-detail/success`](../../mocks/pages/appointment-detail/success.html), [`pages/notification-center/unread`](../../mocks/pages/notification-center/unread.html), [`pages/notification-center/read`](../../mocks/pages/notification-center/read.html), [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`dialogs/cancel-appointment/default`](../../mocks/dialogs/cancel-appointment/default.html), [`notifications/booking-update/info`](../../mocks/notifications/booking-update/info.html) |
+| Source mocks | [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/appointment-detail/success`](../../mocks/pages/appointment-detail/success.html), [`pages/my-appointments/edge`](../../mocks/pages/my-appointments/edge.html), [`pages/notification-center/read`](../../mocks/pages/notification-center/read.html), [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`dialogs/cancel-appointment/default`](../../mocks/dialogs/cancel-appointment/default.html), [`notifications/booking-update/info`](../../mocks/notifications/booking-update/info.html) |
 | Rendering | [`badge.html`](badge.html) |
 
 ## Purpose and scope
@@ -25,7 +25,7 @@ Out of scope:
 - Which status an appointment is in, and which tone each status uses. The appointment record decides the status and the appointments feature maps it to a label and tone using the table under *Content* (D-9); the badge renders what it is given.
 - Bold titles for unread notifications and "Unread" visually hidden prefixes in lists. The notification list and card own those.
 - The link around a count ("Updates"), its 44 px target and its name. The top bar and sidebar navigation own them; the count badge supplies only its number, and the link writes the hidden count words after it (D-5).
-- Placement: `.card__header`, `.appointment-row`, `.stack`, `.tab`, `.nav-link`, `.account-link` and `.sidebar .nav-link` position the badge; it is their child (D-1).
+- Placement: `.card__header`, `.appointment-row`, `.stack`, description-list values (`dd`), `.tab`, `.nav-link`, `.account-link` and `.sidebar .nav-link` position the badge; it is their child (D-1).
 
 ## Usage
 
@@ -34,12 +34,12 @@ Every use of `.badge` in `docs/mocks/`, plus the configurations the design-syste
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
 | Appointment rows on `pages/my-appointments/default`, `long`, `edge`, `offline` | `tone="warning"` above the title of HP-1048; neutral for HP-0992 (D-3) | "Awaiting reply"; "Completed" | default | surface (card) |
-| Appointment card on `pages/appointment-detail/default`, `offline`, `partial`, and behind `dialogs/cancel-appointment/*`, `dialogs/change-appointment/*`, `notifications/booking-update/*` | `tone="warning"` first child of `.card.stack` | "Awaiting reply" | default; hugs its label at the start of the `.stack` (`width: fit-content`, D-11) | surface (card) |
-| Accepted request on `pages/appointment-detail/success` | `tone="success"` | "Confirmed" | default | surface (card) |
-| Cancelled request (design-system lifecycle, appointments table HP-0921) | `tone="danger"` | "Cancelled" | default | surface (card, table) |
+| Appointment card on `pages/appointment-detail/default`, `offline`, `partial`, and behind `dialogs/cancel-appointment/*`, `dialogs/change-appointment/*`, `notifications/booking-update/*` | `tone="warning"` in the description list's "Status" value (`dd`) | "Awaiting reply" | default; hugs its label (`width: fit-content`, D-11) | surface (card) |
+| Accepted request on `pages/appointment-detail/success` | `tone="success"` in the "Status" value | "Confirmed" | default | surface (card) |
+| Cancelled request: Amara's row on `pages/my-appointments/edge`; design-system lifecycle, appointments table HP-0921 | `tone="danger"` above the row title | "Cancelled" | default | surface (card, table) |
 | Declined request (L2-020; no mock yet) | `tone="danger"` (D-4) | "Declined" | default | surface (card) |
-| Notification cards on `pages/notification-center/default`, `unread`, `offline`, list rows; `pages/notification-center/read` shows the read items without a badge | `tone="info"` on unread items only (D-3) | "Unread" | default; absent once read | surface (card, list) |
-| "Updates" in the top bar on every page (`pages/*`, `dialogs/*`, `notifications/*`) | count form, `[count]="2"`, followed by the top bar's visually hidden ", 2 unread"; no `aria-label` on the badge or the link (D-5) | number | 2; hidden at 0; "99+" above 99 | surface (top bar) |
+| Notification rows on `pages/notification-center/default`, `unread`, `read`, `offline` | not used: unread rows carry the list's unread marker and a visually hidden "Unread: " prefix, read rows carry nothing (list D-1, D-5; D-3) | — | — | — |
+| "Updates" in the top bar on every signed-in page (`pages/*`, `dialogs/*`, `notifications/*`; the auth pages show "Sign in" instead), except `pages/notification-center/read` and `empty`, where nothing is unread and no count shows | count form, `[count]="2"`, followed by the top bar's visually hidden ", 2 unread"; no `aria-label` on the badge or the link (D-5) | number | 2; hidden at 0; "99+" above 99 | surface (top bar) |
 | "Updates" in the sidebar navigation | count form, `[count]="2"`, followed by the sidebar's visually hidden ", 2 unread" | number | 2, hidden at 0 | surface |
 | Tab counts ("Upcoming 1", "Reviews 86") and navigation counts ("Past 3") | `tone="info"` or neutral with a number as the content | "1", "86", "3" | inside a selected, hovered, focused or disabled tab or link | surface |
 | Card header "Request HP-1048", description list "Status", appointments table status column (design system) | `tone="warning"` / `"success"` / `"danger"` | lifecycle labels | inside a hovered or selected row | surface |
@@ -88,7 +88,7 @@ None. A badge is never interactive.
 | Variant | Modifier | Use for |
 |---|---|---|
 | Neutral | — (base `.badge`) | Finished or informational states: "Completed"; plain counts in tabs and navigation ("Reviews 86", "Past 3") |
-| Info | `.badge--info` | Something new to read: "Unread", "Upcoming 1" |
+| Info | `.badge--info` | Something new to read: "Upcoming 1"; "Unread" where a list chooses a visible unread marker (list D-5) |
 | Success | `.badge--success` | A good, settled state: "Confirmed" |
 | Warning | `.badge--warning` | Waiting on someone, or needs the customer's action: "Awaiting reply" |
 | Danger | `.badge--danger` | Ended without the visit: "Cancelled", "Declined" |
@@ -130,7 +130,7 @@ Rendered DOM. Classes and attributes are the e2e contract; the `<span>` is the h
 ```
 
 ```html
-<!-- rendered: notifications -->
+<!-- rendered: a visible unread marker, where a list uses one instead of hidden text (list D-5); the notification center does not -->
 <span class="badge badge--info">Unread</span>
 ```
 
@@ -271,7 +271,7 @@ None. Counts do not bounce or pulse when they change.
 | Cancelled by either side | "Cancelled" | danger |
 | Braider declined | "Declined" | danger (D-4) |
 
-- Notifications: unread items show info "Unread"; read items show no badge (D-3).
+- Notifications: the notification center shows no badge on its rows; unread rows carry the list's unread marker and a hidden "Unread: " prefix (list D-1, D-5). A list that shows a visible unread marker uses info "Unread", never warning (D-3).
 - Never "Booked" or "Confirmed" before Nia accepts; the pending request is "Awaiting reply" (design system *Content*).
 - Counts above 99 show "99+"; the consumer's hidden text after the badge keeps the full number (", 120 unread").
 - Translatable content: the projected words. Data values: the count. The hidden count text beside a count badge is the consumer's translatable copy. The component itself renders no words, so there is nothing to translate inside it.
@@ -293,7 +293,7 @@ None. Counts do not bounce or pulse when they change.
 
 - **AC-1** Given the appointment detail for HP-1048 while it awaits Nia's reply, when the card renders `<span hp-badge tone="warning">Awaiting reply</span>`, then the DOM holds the native `<span class="badge badge--warning">Awaiting reply</span>` with no wrapper, it shows an 8 px dot before the uppercased label, and it is 24 px tall. (L2-019)
 - **AC-2** Given a badge with no `tone`, `solid` or `count`, when it renders "Completed", then its class list is exactly `badge`, its fill resolves to `--color-bg-subtle` and its label to `--color-fg-muted`. (L2-018)
-- **AC-3** Given the "Awaiting reply" badge as the first child of the appointment card's `.stack`, when the card renders at 1280 px, then the badge is as wide as its label plus padding, not as wide as the card. (L2-019)
+- **AC-3** Given the "Awaiting reply" badge as a direct child of a `.stack` column, or in the appointment card's "Status" value, when the card renders at 1280 px, then the badge is as wide as its label plus padding, not as wide as the card. (L2-019)
 
 ### Lifecycle
 
@@ -305,7 +305,7 @@ None. Counts do not bounce or pulse when they change.
 
 ### Notifications and counts
 
-- **AC-9** Given an unread notification "Nia received your request" and a read notification "How to prepare for knotless braids", when the notification center renders, then the unread card shows an info badge "Unread" and the read card shows no badge. (L2-030)
+- **AC-9** Given the notification center with the unread rows "Nia received your request" and "How to prepare for knotless braids", when it renders and again after both are read, then no row holds a badge (the list marks unread rows, list D-5), and once both are read the top bar's "Updates" link shows no count badge. (L2-030)
 - **AC-10** Given two unread notifications, when the top bar renders `<span hp-badge [count]="2">` inside "Updates" followed by the hidden ", 2 unread", then the badge DOM is exactly `<span class="badge badge--count">2</span>`, neither the badge nor the link has an `aria-label`, and the link's accessible name is "Updates 2, 2 unread". (L2-030)
 - **AC-11** Given the "Updates" count at 2, when Maya marks one notification read, then the count shows 1 exactly once, and when she marks the last one read, then the badge has the `hidden` attribute, takes no space and is not in the accessibility tree. (L2-030)
 - **AC-12** Given 120 unread notifications, when the count badge renders inside "Updates" with the hidden ", 120 unread" after it, then the badge shows "99+" on one line and the link is read as "Updates 99+, 120 unread". (L2-030)
@@ -354,7 +354,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 
 - **D-1** *Is the host a wrapper element (`<hp-badge>`) or the `<span>`?* The `<span>`, through `span[hp-badge]`. Other components and pages render badges with the `.badge badge--<tone>` classes and the design system positions them as direct children (`.stack > *`, `.tab .badge`, `.sidebar .nav-link .badge { margin-left: auto }`); the e2e page objects locate `.badge`. A wrapper would add a box and break `align-self` inside a column.
 - **D-2** *May a label wrap?* Yes, as a safety net; copy is still written to fit one line at 360 px. The design system first said the badge never wraps (`white-space: nowrap`). Measured in Chromium on `pages/my-appointments/default` and `pages/appointment-detail/default` at 360 px with text enlarged to 200 %, the "Awaiting reply" badge is 290 px wide, overruns the card's content box by 91 px, and the page scrolls horizontally, which breaks L2-042 (text zoom to 200 % stays readable and operable). The label therefore wraps inside the pill and the pill grows in height; the count form keeps `nowrap` because a number never needs to wrap. The same choice as the button's D-5; `components.css` and the badge page now state it.
-- **D-3** *The first mocks badged "Completed" in success, "Unread" in warning and "Read" in info. Which wins?* The design system, which records all three as drift, and the mocks now follow it: "Completed" is neutral (nothing is pending), "Unread" is info, and read notifications drop the badge. L2-030 asks that read and unread are each identified; the "Unread" badge plus the list's bold title identify the unread items, and its absence identifies the read ones.
+- **D-3** *The first mocks badged "Completed" in success, "Unread" in warning and "Read" in info. Which wins?* The design system, which records all three as drift, and the mocks now follow it: "Completed" is neutral (nothing is pending), and the notification center drops both badges: unread rows carry the list's unread marker and a visually hidden "Unread: " prefix, read rows carry nothing (list D-1, D-5). L2-030 asks that read and unread are each identified; the marker and the hidden prefix identify the unread items, and their absence identifies the read ones. Where a list does show a visible marker, "Unread" is info, never warning.
 - **D-4** *L2-020 requires a declined status, but no mock or design-system page shows one. What does it look like?* A danger badge reading "Declined". Like "Cancelled" it ends the request without a visit, and the slot is no longer confirmed; danger is the tone the design system uses for that outcome.
 - **D-5** *Where do the words that give a count its meaning go? The mocks put `aria-label="2 unread"` on the badge and "Notifications, 2 unread" on the link; the badge page puts a hidden " unread" inside the badge ("Updates 2 unread"); the top-bar, sidebar and tabs pages put a hidden ", 2 unread" after the badge ("Updates 2, 2 unread").* After the badge, written by the consumer, and the badge renders the number only. Every consumer of the count form (top bar D-6, sidebar navigation, tabs D-11) already follows its own design-system page in this form, and it carries information the in-badge form cannot: when the badge is capped at "99+" the hidden text still gives the full number (", 120 unread"). Both forms keep the visible "Updates" first in the name (WCAG 2.5.3) and neither uses `aria-label`. The badge page shows this form.
 - **D-6** *What does `solid` do with a tone?* Solid ignores the tone: the design system defines one solid look (`--color-info-solid` with `--color-fg-on-accent`), and `.badge--solid` overrides the tone tokens anyway. Rendering only `badge badge--solid` keeps the class list honest.
@@ -362,4 +362,4 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - **D-8** *Were the "Long names and missing photos" and "Knotless · Toronto · under $150" badges in the first mocks product usages?* No. The first was a mock annotation that labelled each `edge` state; the second was a filter summary that the design system replaces with one removable input chip per filter. Neither shapes the badge API, and the mocks no longer render either.
 - **D-9** *Does the badge know appointment statuses (an input like `status="pending"`)?* No. It stays a generic status label with a tone; the appointments feature maps its status to the label and tone in the *Content* table. Keeping the domain out of the shared library lets notifications, tabs and tables reuse it unchanged.
 - **D-10** *What happens to the dot in forced colours?* It is drawn in `CanvasText` with `forced-color-adjust: none`. Forced colours replace backgrounds, which would erase the `currentColor` dot and remove the badge's only non-text cue; the words remain the primary signal either way.
-- **D-11** *The design system first fixed the stretched badge with `align-self: flex-start`. Is that kept?* No; `components.css` now drops it. Measured in Chromium, `align-self: flex-start` also pins the badge to the top of every row parent: inside a `.nav-link` ("HP-1048 Awaiting reply") and a `.tab` ("Upcoming 1") its centre sits 10 px above the link's centre. `width: fit-content`, which the design system already sets, is enough to stop a column parent from stretching it (a stretched item needs an automatic width), so the badge drops `align-self` and takes its parent's alignment: measured, it is centred in links and tabs and still 153 px wide at the start of the appointment card's `.stack`. The tabs CRD's `.tab .badge { align-self: center }` (its D-11) agrees with this and becomes redundant, not conflicting.
+- **D-11** *The design system first fixed the stretched badge with `align-self: flex-start`. Is that kept?* No; `components.css` now drops it. Measured in Chromium, `align-self: flex-start` also pins the badge to the top of every row parent: inside a `.nav-link` ("HP-1048 Awaiting reply") and a `.tab` ("Upcoming 1") its centre sits 10 px above the link's centre. `width: fit-content`, which the design system already sets, is enough to stop a column parent from stretching it (a stretched item needs an automatic width), so the badge drops `align-self` and takes its parent's alignment: measured, it is centred in links and tabs and still hugs its label (153 px for "Awaiting reply") at the start of a `.stack` column. The tabs CRD's `.tab .badge { align-self: center }` (its D-11) agrees with this and becomes redundant, not conflicting.

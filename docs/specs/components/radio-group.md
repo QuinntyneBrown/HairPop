@@ -36,7 +36,7 @@ The care-and-review mocks ask for the rating with a horizontal radio group and t
 |---|---|---|---|---|
 | `pages/care-and-review/default` | `orientation="horizontal"`, five options, inside the form field group "Rating, 1 to 5" | "1", "2", "3", "4", "5 (excellent)" | unchecked, checked "5", hover, focus | surface (form panel) |
 | `pages/care-and-review/invalid` | as above, `invalid` | as above; error "Choose a rating from 1 to 5." from the form field | invalid (every radio), then checked once Maya chooses | surface |
-| `pages/care-and-review/submitting`, `offline`, failed retry | as above | as above | checked, enabled, value kept (D-11) | surface |
+| `pages/care-and-review/submitting`, `offline` (and a failed retry, which has no mock) | as above | as above | checked, enabled, value kept (D-11) | surface |
 | `pages/booking-request/default` | `cards`, vertical, inside the form field group "Preferred time" | "Sat 24 Oct · 10:00 am" with description "About 5 hours · estimate $180–$240"; "Sun 25 Oct · 11:00 am" with the same description | checked (the time Maya first asked for), unchecked, hover, focus | surface (form panel) |
 | `pages/booking-request/invalid` | `cards`, `invalid` | as above; error "Choose a time Nia offers. Her first slot on Sat 24 Oct is 10:00 am." from the form field | invalid | surface |
 | `pages/booking-request/submitting`, `offline` | `cards` | as above | checked, enabled, value kept | surface |
@@ -135,11 +135,11 @@ Rendered DOM. Classes, attributes and element order are the e2e contract; genera
 <fieldset class="field">
   <legend>Rating, 1 to 5</legend>
   <hp-radio-group class="choice-group choice-group--inline">
-    <label class="choice"><input type="radio" id="hp-radio-1" name="rating" value="1" aria-labelledby="hp-radio-1-label"><span id="hp-radio-1-label">1</span></label>
-    <label class="choice"><input type="radio" id="hp-radio-2" name="rating" value="2" aria-labelledby="hp-radio-2-label"><span id="hp-radio-2-label">2</span></label>
-    <label class="choice"><input type="radio" id="hp-radio-3" name="rating" value="3" aria-labelledby="hp-radio-3-label"><span id="hp-radio-3-label">3</span></label>
-    <label class="choice"><input type="radio" id="hp-radio-4" name="rating" value="4" aria-labelledby="hp-radio-4-label"><span id="hp-radio-4-label">4</span></label>
-    <label class="choice"><input type="radio" id="hp-radio-5" name="rating" value="5" aria-labelledby="hp-radio-5-label"><span id="hp-radio-5-label">5 (excellent)</span></label>
+    <label class="choice"><input type="radio" id="hp-radio-1" name="rating" value="1" required aria-labelledby="hp-radio-1-label"><span id="hp-radio-1-label">1</span></label>
+    <label class="choice"><input type="radio" id="hp-radio-2" name="rating" value="2" required aria-labelledby="hp-radio-2-label"><span id="hp-radio-2-label">2</span></label>
+    <label class="choice"><input type="radio" id="hp-radio-3" name="rating" value="3" required aria-labelledby="hp-radio-3-label"><span id="hp-radio-3-label">3</span></label>
+    <label class="choice"><input type="radio" id="hp-radio-4" name="rating" value="4" required aria-labelledby="hp-radio-4-label"><span id="hp-radio-4-label">4</span></label>
+    <label class="choice"><input type="radio" id="hp-radio-5" name="rating" value="5" required aria-labelledby="hp-radio-5-label"><span id="hp-radio-5-label">5 (excellent)</span></label>
   </hp-radio-group>
   <!-- the form field renders the hint and error here; when the error shows it adds aria-describedby to the fieldset -->
 </fieldset>
@@ -147,7 +147,7 @@ Rendered DOM. Classes, attributes and element order are the e2e contract; genera
 
 ```html
 <!-- rendered: invalid rating option (every option carries it) -->
-<label class="choice"><input type="radio" id="hp-radio-1" name="rating" value="1" aria-invalid="true" aria-labelledby="hp-radio-1-label"><span id="hp-radio-1-label">1</span></label>
+<label class="choice"><input type="radio" id="hp-radio-1" name="rating" value="1" required aria-invalid="true" aria-labelledby="hp-radio-1-label"><span id="hp-radio-1-label">1</span></label>
 ```
 
 ```html
@@ -156,14 +156,14 @@ Rendered DOM. Classes, attributes and element order are the e2e contract; genera
   <legend>Preferred time</legend>
   <hp-radio-group class="choice-group">
     <label class="choice choice--card">
-      <input type="radio" id="hp-radio-8" name="time" value="slot-2026-10-24-1000" aria-labelledby="hp-radio-8-label" aria-describedby="hp-radio-8-description">
+      <input type="radio" id="hp-radio-8" name="time" value="slot-2026-10-24-1000" required aria-labelledby="hp-radio-8-label" aria-describedby="hp-radio-8-description">
       <span class="choice__text">
         <span id="hp-radio-8-label">Sat 24 Oct · 10:00 am</span>
         <small id="hp-radio-8-description">About 5 hours · estimate $180–$240</small>
       </span>
     </label>
     <label class="choice choice--card">
-      <input type="radio" id="hp-radio-9" name="time" value="slot-2026-10-25-1100" aria-labelledby="hp-radio-9-label" aria-describedby="hp-radio-9-description">
+      <input type="radio" id="hp-radio-9" name="time" value="slot-2026-10-25-1100" required aria-labelledby="hp-radio-9-label" aria-describedby="hp-radio-9-description">
       <span class="choice__text">
         <span id="hp-radio-9-label">Sun 25 Oct · 11:00 am</span>
         <small id="hp-radio-9-description">About 5 hours · estimate $180–$240</small>
@@ -180,7 +180,7 @@ Consumer templates:
 ```html
 <!-- consumer: care and review rating; the field supplies legend, error and invalid state -->
 <fieldset hp-form-field label="Rating, 1 to 5" [errorMessages]="{ required: 'Choose a rating from 1 to 5.' }">
-  <hp-radio-group formControlName="rating" orientation="horizontal" required>
+  <hp-radio-group formControlName="rating" name="rating" orientation="horizontal" required>
     <label hp-radio value="1">1</label>
     <label hp-radio value="2">2</label>
     <label hp-radio value="3">3</label>
@@ -191,7 +191,7 @@ Consumer templates:
 
 <!-- consumer: booking request offered times -->
 <fieldset hp-form-field label="Preferred time" [errorMessages]="{ required: 'Choose a time Nia offers. Her first slot on Sat 24 Oct is 10:00 am.' }">
-  <hp-radio-group formControlName="slot" cards required>
+  <hp-radio-group formControlName="slot" name="time" cards required>
     @for (slot of offeredSlots(); track slot.id) {
       <label hp-radio [value]="slot.id" [description]="slot.estimateText" [disabled]="slot.withdrawn">{{ slot.startText }}</label>
     }

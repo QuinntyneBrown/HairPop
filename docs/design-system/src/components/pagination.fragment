@@ -167,5 +167,5 @@
     {{mock:pages/my-appointments/long|appointment history, page 1 of 3}}
     {{mock:pages/braider-profile/default|simple: Nia's reviews}}
   </ul>
-  <p>Drift fixed during extraction: the mocks use an ad-hoc <code>.pagination-row</code> instead of the kit's <code>.pagination</code> (now one component, with the old class kept as an alias); Previous and "1" both link to the current page and Previous is live on page 1 (system disables it with <code>aria-disabled</code>); the summary had no styling of its own (now <code>.pagination__summary</code>). The mocks now render <code>.pagination</code>. Added since: the ellipsis box, the simple modifier, the two page windows, tabular figures and the forced-colours outline on the current page.</p>
+  <p>Drift fixed during extraction: the first mocks used an ad-hoc <code>.pagination-row</code> instead of the kit's <code>.pagination</code> (now one component, with the old class kept as an alias); Previous and "1" both linked to the current page and Previous was live on page 1 (system disables it with <code>aria-disabled</code>); the summary had no styling of its own (now <code>.pagination__summary</code>). The mocks now render <code>.pagination</code>. Added since: the ellipsis box, the simple modifier, the two page windows, tabular figures and the forced-colours outline on the current page.</p>
 </section>

@@ -32,15 +32,15 @@ Out of scope:
 
 ## Usage
 
-Every mock (181 screens: 22 pages, 7 dialogs, 4 notification sets) starts with the same `header.topbar`. The inventory script groups them by which link carries `aria-current="page"`:
+Every mock (170 screens: 22 pages, 7 dialogs, 4 notification sets) starts with the skip link and then the same `header.topbar`. The inventory script groups them by which link carries `aria-current="page"`:
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| `pages/style-gallery/*` (8 states), `dialogs/cookie-preferences/*`, `notifications/cookie-consent/*` (19 screens) | signed in, `current: 'styles'` | brand "HairPop"; links Styles, Braiders, Appointments, Help; "Updates" with count 2; account "Maya" | Styles current; link hover, focus | surface (`--topbar-bg`) over canvas |
+| `pages/style-gallery/*` (8 states), `dialogs/cookie-preferences/*`, `notifications/cookie-consent/*` (18 screens) | signed in, `current: 'styles'` | brand "HairPop"; links Styles, Braiders, Appointments, Help; "Updates" with count 2; account "Maya" | Styles current; link hover, focus | surface (`--topbar-bg`) over canvas |
 | `pages/matching-braiders/*` (8), `dialogs/filter-braiders/*` (4) | signed in, `current: 'braiders'` (route `/styles/knotless-braids/braiders`) | as above | Braiders current | surface |
 | `pages/my-appointments/*` (8) | signed in, `current: 'appointments'` | as above | Appointments current | surface |
 | `pages/help/*` (4) | signed in, `current: 'help'` | as above | Help current | surface |
-| Every other screen (109): style detail, braider profile, booking request, appointment detail, care and review, notification center, account settings, legal, error pages, and the dialogs and notifications shown over them | signed in, `current: null` | as above | no current link | surface |
+| Every other screen (99): style detail, braider profile, booking request, appointment detail, care and review, notification center, account settings, legal, error pages, and the dialogs and notifications shown over them | signed in, `current: null` | as above | no current link | surface |
 | `pages/notification-center/unread` → `read`, and `empty` | `updates.unreadCount` 2 on `unread`, 0 on `read` once Maya has read both updates and on `empty` | "Updates" + count; hidden ", 2 unread"; plain "Updates" at 0 | count 2, 0 (badge and hidden text removed) | surface |
 | `pages/sign-in/*`, `sign-up/*`, `forgot-password/*`, `reset-password/*`, `verify-email/*`, and any page a visitor opens signed out | signed out: `updates: null`, account "Sign in" → `/sign-in` (D-7) | brand, four links, "Sign in" | no Updates link; no current link | surface |
 | Design system *Content*: more than 99 unread | `unreadCount: 120` | badge "99+", hidden ", 120 unread" | count capped | surface |

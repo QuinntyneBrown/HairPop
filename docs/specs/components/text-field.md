@@ -37,11 +37,10 @@ Every `input.input` in `docs/mocks/`, plus the configurations the design system 
 | `pages/sign-up` | `type="text"` `autocomplete="name"`; email; `type="password"` `autocomplete="new-password"` + "Show" | "Name" `Maya Chen`, "Email", "Password" | default, invalid (email, password) | surface |
 | `pages/forgot-password` | email | "Email" | default, invalid | surface |
 | `pages/reset-password` | two `type="password"` `autocomplete="new-password"`, each with "Show" | "New password", "Confirm password" | default, invalid | surface |
-| `pages/account-settings` | name, email, `type="tel"` `autocomplete="tel"` | "Name" `Maya Chen`, "Email" `maya.chen@example.com`, "Phone (optional)" `416-555-0148` with hint "Braiders text this number." | default, invalid email, offline, failed, submitting | surface |
+| `pages/account-settings` | name, email, `type="tel"` `autocomplete="tel"` | "Name" `Maya Chen`, "Email" `maya.chen@example.com`, "Phone (optional)" `416-555-0148` with hint "Braiders text this number." | default, invalid email, submitting, success, failed, offline | surface |
 | `pages/booking-request` | email `autocomplete="email"`, tel, in a `.form-row` from 768 px | "Your email", "Phone (optional)" | default, invalid | surface |
 | `dialogs/filter-braiders` | `type="number"` `inputmode="numeric"` `min="0"` `step="10"` with a hidden `$` prefix addon | "Maximum price" `150` | default, invalid, busy, failed | raised (dialog) |
 | `pages/style-gallery`, `pages/matching-braiders`, `pages/my-appointments` filter rows | search box (`grow`) holding `type="search"` with `aria-label`, inside an inline form | "Search style gallery", "Search matching braiders", "Search my appointments", value "knotless braids" | default, focus | canvas |
-| Top bar (top-bar CRD) | search box without `grow` | "Search styles" | default | top bar |
 | Design system *States* | `readonly` | "Request number" `HP-1048` | read-only | surface |
 | Design system *Sizes* | `fieldSize="sm"` in a dense filter row; `fieldSize="lg"` for a hero search | "Toronto"; "knotless braids" | all | surface |
 | Design system *Variants* | number with a `km` suffix addon | "Distance from Toronto" `10` | default | surface |
@@ -107,7 +106,7 @@ Inside a form field the input injects `HP_FORM_FIELD` and follows the single-con
 | Password | `type="password"` + `autocomplete="current-password"` or `"new-password"`, text-only "Show" suffix button (D-13) | "Password", "New password", "Confirm password". |
 | Phone | `type="tel"` + `autocomplete="tel"` | "Phone". |
 | Number | `type="number"` + `inputmode="numeric"`, `min`, `step`; unit addon from the field | "Maximum price" with `$`. |
-| Search | `type="search"` + `aria-label` in a search box | Filter rows and the top bar. |
+| Search | `type="search"` + `aria-label` in a search box | Filter rows. |
 | Read-only | `readonly` | A value shown for reference that can be copied: "HP-1048". |
 
 | Size | Modifier | Height | Padding | Type |
@@ -142,9 +141,9 @@ Surface contexts: the field reads `--field-*` component tokens over semantic tok
 Rendered DOM. Classes and attributes are the e2e contract.
 
 ```html
-<!-- rendered: email inside a form field (account settings) -->
-<input class="input" id="hp-field-2-control" name="email" type="email" autocomplete="email" required
-       aria-describedby="hp-field-2-hint">
+<!-- rendered: phone with a hint inside a form field (account settings) -->
+<input class="input" id="hp-field-3-control" name="phone" type="tel" autocomplete="tel"
+       aria-describedby="hp-field-3-help">
 ```
 
 ```html
@@ -400,5 +399,5 @@ Render cost is measured by the perf-test scenarios named under *Performance* and
 - **D-9** *Native `maxlength`?* Never; see form field D-8. A typed or pasted value is never cut off.
 - **D-10** *Who prevents small fields on phones?* The page, by choosing the size; the component does not resize by viewport. The design system reserves `sm` for dense rows and requires 16 px text when typing on phones.
 - **D-11** *Does Enter in a search box need a script?* No. The search box sits in an inline form layout (`<form role="search">`), so Enter submits natively and the form layout emits `submitted`; Esc clearing is the platform's `type="search"` behaviour.
-- **D-12** *Does the top bar's search use this?* Yes, the search box without `grow` (`.search` only), as `components.css` styles `.topbar .search`; the top bar CRD places it.
+- **D-12** *Does the top bar take a search box?* No. The top bar CRD's D-11 keeps search out of the bar and `components.css` has no `.topbar .search` rule; the search box lives in the filter rows of the style gallery, matching braiders and My appointments, with `grow`. The search box without `grow` (`.search` only) stays available for a narrower container.
 - **D-13** *Does the "Show" toggle carry an eye icon?* No, the label "Show" alone, as the design system's password example now draws it. Measured with `--line-height-snug` fields: with the icon the password input keeps 183 px at 320 px but only 88 px at 360 px and 50 px at 320 px with 200 % text, which leaves almost no room for the value; without it the input keeps 211, 144 and 104 px. L2-042 requires the form to stay operable at 200 % text, and the word already names the action.

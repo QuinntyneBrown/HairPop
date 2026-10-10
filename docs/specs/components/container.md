@@ -39,14 +39,14 @@ Inventory: `usage_inventory.py docs/mocks container`, `… stack`, `… cluster`
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| Every page, dialog and notification mock (181 files) | `.product-shell` holding `header.topbar`, `main#main.container.product-main`, `footer.site-footer`; the skip link "Skip to content" before it | top bar (sparkle icon and "HairPop") with Styles, Braiders, Appointments, Help, "Updates" and "Maya"; footer "HairPop · Made for confident hair decisions", Terms, Privacy | default; `inert` + `aria-hidden` while a dialog is open (dialog CRD) | canvas |
-| `pages/style-gallery/*`, `pages/matching-braiders/*`, `pages/help/default` | `.feature-grid` of story cards (in `section.stack` on the gallery) | three cards: Knotless braids, Passion twists, Cornrows; Nia Okafor, Aisha Mensah, Jules Baptiste; three help topics | 1 → 2 → 3 columns | canvas |
+| Every page, dialog and notification mock (170 files) | `.product-shell` holding `header.topbar`, on the read screens' `offline` state the offline banner (alert CRD D-3), `main#main.container.product-main`, `footer.site-footer`; the skip link "Skip to content" before it | top bar (sparkle icon and "HairPop") with Styles, Braiders, Appointments, Help, the menu button, "Updates" and "Maya" ("Sign in" instead of "Updates" and "Maya" on the auth pages); footer "HairPop · Made for confident hair decisions", Help, Cookie preferences, Terms, Privacy | default; `inert` + `aria-hidden` while a dialog is open (dialog CRD) | canvas |
+| `pages/style-gallery/*`, `pages/matching-braiders/*`, `pages/help/default`, `offline` | `.feature-grid` of story cards (in `section.stack` on the gallery) | three cards: Knotless braids, Passion twists, Cornrows; Nia Okafor, Aisha Mensah, Jules Baptiste (a fourth, long-named card in each `edge` state); three help topics | 1 → 2 → 3 columns | canvas |
 | `pages/*/loading` (every page with a loading state) | the screen's own layout with skeletons (card CRD D-10): `.feature-grid` of story cards on the style gallery, matching braiders and help; `.stack` of row cards on My appointments; `.detail-grid` on style detail, braider profile and appointment detail; the region `aria-busy="true"` and named for what loads ("Loading styles", "Loading braiders for knotless braids", "Loading your appointments", D-7; skeleton CRD) | skeletons | loading | canvas |
 | `pages/style-detail/*` | `.detail-grid`: `section.card` main, `aside.card` | "What to expect"; "Make it yours" | stacked below 768 px | canvas |
-| `pages/braider-profile/*` | `.detail-grid` whose main column is a `section.stack` of two cards | profile card and "Customer reviews"; aside "Before you book" | stacked below 768 px | canvas |
+| `pages/braider-profile/*` | `.detail-grid` whose main column is a `section.stack` of cards; in `edge` a card for Amara sits above the grid | profile card and "Customer reviews" (plus "Portfolio" in `empty`; the profile card alone in `partial`); aside "Before you book" | stacked below 768 px | canvas |
 | `pages/appointment-detail/*`, and the dialogs opened from it | `.detail-grid`: `section.card.stack` main with a `.cluster` of actions, `aside.card` | "Medium knotless braids" with "Request a change" and "Cancel request"; "Prepare for your visit" | stacked below 768 px | canvas |
-| `pages/my-appointments/*` | `section.stack` of row cards | HP-1048, HP-0992 rows | default | canvas |
-| Every form page and form dialog | `form.stack` (fields 16 px apart) inside `.form-panel`; `.dialog__body.stack` | "Your details", "Details" | default, invalid, submitting | surface |
+| `pages/my-appointments/*` | `section.stack` of row cards, with the pagination last in `long` | HP-1048, HP-0992 rows (plus Amara's cancelled row in `edge`) | default | canvas |
+| Every form page and form dialog | `form.stack` (fields 16 px apart) inside `.form-panel`; `.dialog__body.stack` | "Your details", "Your review", "Contact details", "Details" | default, invalid, submitting | surface |
 | Inside story cards | `div.stack` holding eyebrow, title, summary, link | "Most explored", "Knotless braids" | default | surface |
 | Design system *Stack and cluster* | `.stack`, `.stack--sm`, `.stack--lg`; `.cluster`, `.cluster--between` (pagination summary "Showing 1–3 of 126" with "Next", the table's bulk bar "1 selected"), `.cluster--end` | chips "All styles", "Braids", "Twists", "Locs" | wraps | any |
 | Design system *Auto grid and spans* | `.grid.grid--auto` of cards at least 288 px wide; `.grid` with a `.span-full` child | Nia Okafor, Aisha Mensah, Jules Baptiste; "Full-width notice" | 4 / 8 / 12 columns | canvas |
@@ -62,16 +62,17 @@ Every row is buildable with `hp-app-shell` (top bar, main, footer, optional narr
 2. **Top bar slot** — `[slot=topbar]`: the top bar component, first in the shell.
 3. **Main** — `<main id="main" class="container product-main">`, rendered by the shell: the page's only main landmark and the skip link's target; grows to fill the shell (`flex: 1`); padding `--space-6` above (`--space-8` from 768 px) and `--space-12` below; `--space-6` between its top-level blocks.
 4. **Footer slot** — `[slot=footer]`: the footer component, last in the shell.
+5. **Banner slot** — `[slot=banner]`: an app-wide banner (the offline alert, alert CRD D-3) between the top bar and main, full width; empty on most pages (D-8).
 
 ### Layout classes (`layout.css`)
 
-5. **Container** — `.container`: `width: 100%`, `max-width: var(--layout-container-max)` (1280 px), centred, `padding-inline: var(--layout-margin)` (16 → 32 → 48 px). `.container--narrow`: `max-width: var(--layout-form-max)` (608 px).
-6. **Stack** — `.stack`: flex column, gap `--space-4` (16 px); `.stack--sm` `--space-2` (8 px); `.stack--lg` `--space-8` (32 px).
-7. **Cluster** — `.cluster`: wrapping flex row, gap `--space-3` (12 px), items centred; `.cluster--between` and `.cluster--end` align the row.
-8. **Grid** — `.grid`: `--layout-columns` equal tracks (`minmax(0, 1fr)`) with `--layout-gutter` gaps; `.grid--auto` fills with tracks at least `--layout-card-min` (288 px, never wider than the container); `.span-full` spans every column.
-9. **Feature grid** — `.feature-grid`: one column, two from 768 px, three from 1024 px, gap `--space-4`.
-10. **Detail grid** — `.detail-grid`: one column; from 768 px a `2fr` main track and an aside track of at least `--layout-sidebar-width` (256 px); gap `--space-4`; items aligned to the start.
-11. **Section** — `.section`: `--space-8` block margin for a page section.
+6. **Container** — `.container`: `width: 100%`, `max-width: var(--layout-container-max)` (1280 px), centred, `padding-inline: var(--layout-margin)` (16 → 32 → 48 px). `.container--narrow`: `max-width: var(--layout-form-max)` (608 px).
+7. **Stack** — `.stack`: flex column, gap `--space-4` (16 px); `.stack--sm` `--space-2` (8 px); `.stack--lg` `--space-8` (32 px).
+8. **Cluster** — `.cluster`: wrapping flex row, gap `--space-3` (12 px), items centred; `.cluster--between` and `.cluster--end` align the row.
+9. **Grid** — `.grid`: `--layout-columns` equal tracks (`minmax(0, 1fr)`) with `--layout-gutter` gaps; `.grid--auto` fills with tracks at least `--layout-card-min` (288 px, never wider than the container); `.span-full` spans every column.
+10. **Feature grid** — `.feature-grid`: one column, two from 768 px, three from 1024 px, gap `--space-4`.
+11. **Detail grid** — `.detail-grid`: one column; from 768 px a `2fr` main track and an aside track of at least `--layout-sidebar-width` (256 px); gap `--space-4`; items aligned to the start.
+12. **Section** — `.section`: `--space-8` block margin for a page section.
 
 Host: `hp-app-shell` is an element (a composite that renders the main landmark); its host carries `.product-shell`. The layout classes are not components and have no host.
 
@@ -98,6 +99,7 @@ Host: `hp-app-shell` is an element (a composite that renders the main landmark);
 |---|---|---|
 | `[slot=topbar]` | The top bar (`<header class="topbar">` from the top-bar component) | Declared once, before the main element. |
 | default | The page: a `<router-outlet>` in the application, or static content | Declared once, inside the main element. Top-level blocks of the routed page are spaced `--space-6` apart (D-3). |
+| `[slot=banner]` | An app-wide banner: `hp-alert banner` ("You’re offline" on the read screens' offline state) | Declared once, between the top bar and the main element (D-8). |
 | `[slot=footer]` | The footer (`<footer class="site-footer">` from the footer component) | Declared once, after the main element. |
 
 ### Global layout classes
@@ -314,10 +316,10 @@ None.
 
 ### App shell
 
-- **AC-1** Given the application root with `<hp-app-shell>` holding the top bar, a `<router-outlet>` and the footer, when the style gallery route renders, then the shell's children are, in order, `header.topbar`, `main#main.container.product-main` and `footer.site-footer`, and the page has exactly one main landmark, one banner and one contentinfo. (L2-041)
+- **AC-1** Given the application root with `<hp-app-shell>` holding the top bar, a `<router-outlet>` and the footer, when the style gallery route renders, then the shell's children are, in order, `header.topbar`, `main#main.container.product-main` and `footer.site-footer`, and the page has exactly one main landmark, one banner and one contentinfo; given the same route offline, the offline alert projected into `[slot=banner]` sits between `header.topbar` and `main#main`. (L2-041)
 - **AC-2** Given the style detail page, when Maya activates "Skip to content" and presses Tab, then focus lands on the first focusable element inside `main#main`, past the top bar's links. (L2-041)
 - **AC-3** Given the not-found page, whose content is shorter than a 900 px tall window, when it renders, then the footer's bottom edge is at the bottom of the window. (L2-042)
-- **AC-4** Given the style detail route, when it renders at 360 px, then the page header, the partial-data alert (in `partial`) and the detail grid are 24 px apart, main has 24 px of padding above the page header, and at 768 px that padding is 32 px. (L2-042)
+- **AC-4** Given the style detail route, when it renders at 360 px, then the page header, the partial-data alert (in `partial`) and the detail grid are 24 px apart, main has 24 px of padding above the breadcrumb that opens it, and at 768 px that padding is 32 px. (L2-042)
 - **AC-5** Given the sign-in route with `narrow` set, when it renders at 1280 px, then main has `container--narrow`, its content is at most 608 px wide and centred. (L2-042)
 - **AC-6** Given any page at 1440 px, when it renders, then main's content box is 1280 px wide minus the 48 px margins and centred, and at 360 px the margins are 16 px. (L2-042)
 - **AC-7** Given a page with the sticky top bar, when Maya tabs to a link that is scrolled under the top bar, then the page scrolls so the focused link is fully visible below the top bar. (L2-041)
@@ -348,7 +350,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 ## Implementation notes
 
 - Folder `frontend/projects/components/src/lib/container/` holding:
-  - `app-shell.ts` exporting the standalone component `AppShell` with `selector: 'hp-app-shell'`, `host: { class: 'product-shell' }`, `changeDetection: OnPush`, and the template `<ng-content select="[slot=topbar]" /><main id="main" class="container product-main" [class.container--narrow]="narrow()"><ng-content /></main><ng-content select="[slot=footer]" />`. It has no styles of its own: its classes are styled by `layout.css`. Export it from `public-api.ts`.
+  - `app-shell.ts` exporting the standalone component `AppShell` with `selector: 'hp-app-shell'`, `host: { class: 'product-shell' }`, `changeDetection: OnPush`, and the template `<ng-content select="[slot=topbar]" /><ng-content select="[slot=banner]" /><main id="main" class="container product-main" [class.container--narrow]="narrow()"><ng-content /></main><ng-content select="[slot=footer]" />`. It has no styles of its own: its classes are styled by `layout.css`. Export it from `public-api.ts`.
   - `layout.css` with the rules for `.product-shell`, `.product-main`, `.container`, `.container--narrow`, `.section`, `.stack*`, `.cluster*`, `.grid`, `.grid--auto`, `.span-full`, `.feature-grid` and `.detail-grid`, ported from `docs/design-system/assets/components.css` (Layout primitives), plus the routed-page rhythm rule (D-3): `.product-main > router-outlet + * { display: block; margin-top: 0 }` and `.product-main > router-outlet + * > * + * { margin-top: var(--space-6) }`.
 - Distribution: `layout.css` is listed in the library's `ng-package.json` `assets` and in each application's `angular.json` `styles`, after the tokens and foundation stylesheets and before any page styles. It is the only global stylesheet this CRD adds (D-1).
 - No CDK primitive. The shell composes nothing; the top bar and footer are projected.
@@ -363,3 +365,4 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - **D-5** *May a page reorder content visually, for example put the aside first on phones?* No. Visual order equals DOM order at every width so keyboard and screen-reader order match what is seen (L2-041); a page that needs the aside first puts it first in the DOM.
 - **D-6** *Is `.container--narrow` used today?* No mock uses it: the form pages cap their card with the form-layout component's `.form-panel` (also `--layout-form-max`) and keep the page header at full width. The narrow container is kept for auth and form-only pages whose whole content should be narrow, and is reached only through the shell's `narrow` input. The design system collapsed the mocks' 38 rem and 42 rem caps into the one token.
 - **D-7** *Is a loading grid labelled "Loading content", as the first loading mocks did?* No. The page labels a loading region with what it loads ("Loading styles", "Loading your appointments"), as L2-035 requires a loading state to identify the region; the feature grid itself adds no label.
+- **D-8** *Where does the offline banner go? The read screens' offline mocks place it between the top bar and `<main>`, outside both.* In the shell's `[slot=banner]`, declared once between the top bar and main. The banner reports an app-wide condition (alert CRD D-3), so it belongs to neither the top bar's landmark nor the page's main; a slot keeps it a full-width sibling, as the mocks draw it, without the page reaching outside its main.

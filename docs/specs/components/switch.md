@@ -32,7 +32,7 @@ The switch is in the design system's core set. Account settings shows it in a "N
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| `pages/account-settings/default` "Notifications" card | `layout="row"` (`.switch--end`), with description | "Appointment reminders", description "A text the day before Sat 24 Oct at 10:00 am." (on); "Email updates", description "News about your requests and appointments, sent to maya.chen@example.com." (off) | off, on, hover, focus, reverted after a failed save | surface (card) |
+| `pages/account-settings/default` "Notifications" card, after the contact-details form in every form state (`default`, `invalid`, `submitting`, `success`, `failed`, `offline`), introduced by "These settings save as soon as you change them." | `layout="row"` (`.switch--end`), with description | "Appointment reminders", description "A text the day before Sat 24 Oct at 10:00 am." (on); "Email updates", description "News about your requests and appointments, sent to maya.chen@example.com." (off) | off, on, hover, focus, reverted after a failed save | surface (card) |
 | Account settings, inline (design system *Variants*) | `layout="inline"` | "Email me when Nia replies" | on, off, hover, focus | surface |
 | Short settings in states matrix (design system *States*) | inline | "Reminders", "Email updates" | off, on, hover, focus, disabled off, disabled on | surface |
 | Cookie preferences dialog (`dialogs/cookie-preferences/default`) | not a switch: the dialog saves on "Save preferences", so it keeps the checkbox (design system *Do and don't*) | — | — | — |

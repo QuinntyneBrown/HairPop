@@ -86,7 +86,7 @@
   <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><span class="badge">Completed</span><span class="badge badge--info">Unread</span><span class="badge badge--success">Confirmed</span><span class="badge badge--warning">Awaiting reply</span><span class="badge badge--danger">Cancelled</span><span class="badge badge--solid">New</span><span class="badge badge--count">2</span></div></div><div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><span class="badge">Completed</span><span class="badge badge--info">Unread</span><span class="badge badge--success">Confirmed</span><span class="badge badge--warning">Awaiting reply</span><span class="badge badge--danger">Cancelled</span><span class="badge badge--solid">New</span><span class="badge badge--count">2</span></div></div></div>
   <ul>
     <li><b>Changing status</b> (Awaiting reply → Confirmed) is announced by the toast or live region that reports the change, not by the badge.</li>
-    <li><b>Unread</b> notifications use an info badge plus a bold title; <b>read</b> ones drop the badge. Warning is reserved for something that needs action.</li>
+    <li><b>Unread</b> is information: where a list shows a visible marker, it is an info badge, never warning, which is reserved for something that needs action. The notification center uses no badge on its rows: unread rows carry the list's unread marker and a visually hidden "Unread: " prefix, and read rows carry nothing.</li>
   </ul>
 </section>
 
@@ -193,12 +193,12 @@
   <p>Extracted from these mocks:</p>
   <ul>
     <li><a href="../../mocks/pages/my-appointments/default.html">pages/my-appointments/default</a> (Awaiting reply and Completed on appointment rows)</li>
-    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> (warning badge inside a .stack card)</li>
+    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> (warning badge in the Status value of a description list)</li>
     <li><a href="../../mocks/pages/appointment-detail/success.html">pages/appointment-detail/success</a> (Confirmed)</li>
-    <li><a href="../../mocks/pages/notification-center/unread.html">pages/notification-center/unread</a> (Unread and Read badges)</li>
+    <li><a href="../../mocks/pages/my-appointments/edge.html">pages/my-appointments/edge</a> (Cancelled in danger on an appointment row)</li>
     <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (count badge on Updates)</li>
   </ul>
-  <p>Drift fixed during extraction: badges stretched to full width inside <code>.stack</code> (now <code>width: fit-content</code>); the dot was 6px and the pill 22px, both off the 4px grid (now 8px and 24px); Unread used warning and Read used info (system: Unread is info plus a bold title, Read is neutral or no badge); the Updates link's <code>aria-label</code> "Notifications, 2 unread" did not contain its visible label, and the count badge carried its own <code>aria-label</code> (system: no <code>aria-label</code>; the visible text, then hidden ", 2 unread" after the badge); "Completed" used success although nothing is pending (system: neutral); the filter-summary badge on no-results states is now one removable input chip per filter; the "Long names and missing photos" badge on edge states was a mock annotation and is gone.</p>
+  <p>Drift fixed during extraction: badges stretched to full width inside <code>.stack</code> (now <code>width: fit-content</code>); the dot was 6px and the pill 22px, both off the 4px grid (now 8px and 24px); Unread used warning and Read used info (system: the notification center drops both and marks unread rows through the list; a visible Unread marker elsewhere is info); the Updates link's <code>aria-label</code> "Notifications, 2 unread" did not contain its visible label, and the count badge carried its own <code>aria-label</code> (system: no <code>aria-label</code>; the visible text, then hidden ", 2 unread" after the badge); "Completed" used success although nothing is pending (system: neutral); the filter-summary badge on no-results states is now one removable input chip per filter; the "Long names and missing photos" badge on edge states was a mock annotation and is gone.</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

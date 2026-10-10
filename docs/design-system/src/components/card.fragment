@@ -63,7 +63,7 @@
   <div class="stack">
     <p class="eyebrow">Available Sat 24 Oct</p>
     <h3 class="card__title">Nia Okafor</h3>
-    <p class="text-muted">4.9 ★ · 86 reviews · Toronto West · knotless braids from $180</p>
+    <p class="text-muted">4.9 ★ from 86 reviews · Toronto West · knotless braids from $180</p>
     <a class="link link--standalone" href="../../mocks/pages/braider-profile/default.html">View Nia’s profile<span class="link__arrow" aria-hidden="true">{{icon:arrow-right|icon--sm}}</span></a>
   </div>
 </article>

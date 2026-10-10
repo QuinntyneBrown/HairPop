@@ -61,7 +61,7 @@
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
   <ul>
     <li>Tooltips sit above the trigger, centred. Near a viewport edge the product flips them below (<code>.tooltip--below</code>, arrow pointing up) or shifts them along the edge with the CDK Overlay so they never clip; when shifted, the arrow follows the trigger through <code>--tooltip-arrow-x</code>.</li>
-    <li>In the product the bubble renders in the CDK overlay, outside any scrolling panel, and takes pointer events so it can be hovered (WCAG 1.4.13). The in-place <code>.has-tooltip</code> reveal on this page and in the mocks is a static stand-in; inside a dialog panel the mocks open it below so the panel does not clip it.</li>
+    <li>In the product the bubble renders in the CDK overlay, outside any scrolling panel, and takes pointer events so it can be hovered (WCAG 1.4.13). The in-place <code>.has-tooltip</code> reveal on this page and in the mocks is a static stand-in; inside a dialog panel the mocks open it below so the panel does not clip it, pushed to the panel's end edge with the arrow on the close button's centre.</li>
     <li>On touch devices (<code>hover: none</code>) tooltips are never the only label: icon-only buttons keep an <code>aria-label</code>, and important hints are shown inline.</li>
     <li>Text never wraps; a hint that needs a second line belongs on the page.</li>
   </ul>
@@ -149,7 +149,7 @@
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
   <p>Core-set component. The dialog mocks name their icon-only close button with it:</p>
   <ul>
-    {{mock:dialogs/filter-braiders/default|"Close dialog" on the close button, opening below}}
+    {{mock:dialogs/filter-braiders/default|"Close dialog" on the close button, opening below, pushed to the end edge}}
     {{mock:dialogs/change-appointment/default|"Close dialog" on the close button, opening below}}
     {{mock:pages/booking-request/default|price rule shown as text, not a tooltip}}
   </ul>

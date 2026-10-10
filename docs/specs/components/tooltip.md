@@ -30,7 +30,7 @@ Out of scope:
 
 ## Usage
 
-The form and confirmation dialog mocks wrap their close control in `.has-tooltip` with a hidden `.tooltip.tooltip--below` reading "Close dialog", which the stylesheet reveals on hover and focus (the static stand-in for the overlay, D-1; below, because the panel clips a bubble above its top edge). The other rows come from the design system, for icon-only controls later screens use. One row per configuration:
+The form and confirmation dialog mocks wrap their close control in `.has-tooltip` with a hidden `.tooltip.tooltip--below` reading "Close dialog", which the stylesheet reveals on hover and focus (the static stand-in for the overlay, D-1; below, because the panel clips a bubble above its top edge). The mock bubble is pushed to the panel's end edge by an inline style (`left: auto; right: 0; translate: none`) with `--tooltip-arrow-x` set so the arrow points at the button's centre, the pushed position of D-2, and the button's `aria-describedby="dlg-close-tip"` is always present because the static bubble always is. The destructive confirmations (`cancel-appointment`, `sign-out`) have no close control. The other rows come from the design system, for icon-only controls later screens use. One row per configuration:
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|

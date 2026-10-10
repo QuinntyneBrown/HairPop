@@ -431,14 +431,14 @@ def options(values, selected=None):
     return ''.join(f'<option{attribute("selected", "", v == selected)}>{esc(v)}</option>' for v in values)
 
 
-def radio_group(name, legend, choices, *, checked=None, error=None, inline=False, cards=False):
+def radio_group(name, legend, choices, *, checked=None, error=None, inline=False, cards=False, required=True):
     items = ''
     for i, choice in enumerate(choices, 1):
         rid = f"{name}-{i}"
         label, value, description = choice
         desc_html = f'<small id="{rid}-description">{esc(description)}</small>' if description else ''
         text = f'<span class="choice__text"><span id="{rid}-label">{esc(label)}</span>{desc_html}</span>' if description else f'<span id="{rid}-label">{esc(label)}</span>'
-        items += (f'<label class="choice{" choice--card" if cards else ""}"><input type="radio" id="{rid}" name="{name}" value="{esc(value)}"{attribute("checked", "", checked == i)}'
+        items += (f'<label class="choice{" choice--card" if cards else ""}"><input type="radio" id="{rid}" name="{name}" value="{esc(value)}"{attribute("checked", "", checked == i)}{attribute("required", "", required)}'
                   f'{attribute("aria-invalid", "true", bool(error))} aria-labelledby="{rid}-label"{attribute("aria-describedby", f"{rid}-description", bool(description))}>{text}</label>')
     group = f'<div class="choice-group{" choice-group--inline" if inline else ""}">{items}</div>'
     return f'<fieldset class="field"{described(f"{name}-error" if error else None)}><legend>{esc(legend)}</legend>{group}{messages(name, None, error)}</fieldset>'
@@ -763,7 +763,7 @@ def notification_content(item, state):
     polite = ''.join(one_toast(k) for k in kinds if k != "danger")
     assertive = ''.join(one_toast(k) for k in kinds if k == "danger")
     return (f'<div class="toast-region" role="status" aria-live="polite">{polite}</div><div class="toast-region toast-region--top" role="alert" aria-live="assertive">{assertive}</div>'
-            '<p class="mock-note" style="bottom: var(--space-12); right: var(--space-4);">Info and success messages dismiss after 8 seconds and pause on hover or focus. Warnings and errors persist until dismissed.</p>')
+            '<p class="mock-note" style="bottom: var(--space-12); right: var(--space-4);">Info and success messages dismiss after 8 seconds, or 10 seconds when they offer an action, and pause on hover or focus. Warnings, errors and persistent messages stay until dismissed.</p>')
 
 
 # ---------------------------------------------------------------- documents

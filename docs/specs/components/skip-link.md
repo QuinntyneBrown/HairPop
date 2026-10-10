@@ -28,11 +28,11 @@ Out of scope:
 
 ## Usage
 
-The skip link appears on all 181 mocks (every page, every dialog's underlying page, every notification's underlying page) with the same configuration. Grouped:
+The skip link appears on all 170 mocks (every page, every dialog's underlying page, every notification's underlying page) with the same configuration. Grouped:
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| Every product page (`pages/style-gallery`, `matching-braiders`, `braider-profile`, `booking-request`, `my-appointments`, `appointment-detail`, `care-and-review`, `notification-center`, `account-settings`, `help`, `terms`, `privacy`) in every state | `target` `main` (default), first focusable element | "Skip to content" | hidden, focused, hover, active | raised surface over the top bar |
+| Every product page (`pages/style-gallery`, `style-detail`, `matching-braiders`, `braider-profile`, `booking-request`, `my-appointments`, `appointment-detail`, `care-and-review`, `notification-center`, `account-settings`, `help`, `terms`, `privacy`) in every state | `target` `main` (default), first focusable element | "Skip to content" | hidden, focused, hover, active | raised surface over the top bar |
 | Auth pages (`pages/sign-in`, `sign-up`, `forgot-password`, `reset-password`, `verify-email`) | same | "Skip to content" | hidden, focused | raised surface over the top bar |
 | Error destinations (`pages/not-found`, `forbidden`, `server-error`, `offline`) | same | "Skip to content" | hidden, focused | raised surface over the top bar |
 | Every dialog mock (`dialogs/*`) | same, inside the inert application root behind the dialog | "Skip to content" | not focusable while the dialog is open (D-5) | — |

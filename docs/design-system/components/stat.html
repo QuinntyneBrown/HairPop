@@ -166,7 +166,7 @@
 &lt;/div&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
     <tr><td><code>.fact-grid</code></td><td>Auto-fit grid of tiles, 8rem minimum, 16px gap, 24px block margin.</td></tr>
-    <tr><td><code>.fact</code>, <code>.fact__value</code>, <code>.fact__label</code></td><td>Tile, value, label. The mocks' unclassed <code>.fact-grid &gt; div &gt; strong/span</code> markup is matched inside <code>:where()</code>, at zero specificity, so it never outranks the part classes.</td></tr>
+    <tr><td><code>.fact</code>, <code>.fact__value</code>, <code>.fact__label</code></td><td>Tile, value, label. The first mocks' unclassed <code>.fact-grid &gt; div &gt; strong/span</code> markup is still matched inside <code>:where()</code>, at zero specificity, so it never outranks the part classes.</td></tr>
     <tr><td><code>.stat</code>, <code>.stat__label</code>, <code>.stat__value</code></td><td>Large stat.</td></tr>
     <tr><td><code>.stat__delta--up</code> <code>.stat__delta--down</code></td><td>Delta colour; add the <code>arrow-up</code> or <code>arrow-down</code> icon (<code>.icon--sm</code>) and words.</td></tr>
     <tr><td><code>hidden</code> on <code>.fact</code></td><td>Omits a fact that is not published.</td></tr>
@@ -179,7 +179,7 @@
   <ul>
     <li><a href="../../mocks/pages/style-detail/default.html">pages/style-detail/default</a> (typical time, price and wear)</li>
     <li><a href="../../mocks/pages/braider-profile/default.html">pages/braider-profile/default</a> (starting price and duration)</li>
-    <li><a href="../../mocks/pages/style-detail/loading.html">pages/style-detail/loading</a> (skeleton cards)</li>
+    <li><a href="../../mocks/pages/style-detail/loading.html">pages/style-detail/loading</a> (skeleton cards with three rect fact tiles)</li>
   </ul>
   <p>Drift fixed during extraction: values used <code>&lt;strong&gt;</code> for visual weight (system: <code>.fact__value</code>, no emphasis semantics); tiles had no class of their own (system adds <code>.fact</code> and keeps the old selectors working); a missing fact had no defined behaviour (system: the tile is omitted); the parity selectors outranked <code>.fact__value</code> and painted values as labels (now zero specificity); the loading tile was 10px taller than the loaded one (now bars inside the line boxes); tiles overflowed the card at 200% text (now <code>min(8rem, 100%)</code>); the stat with delta was added from the core set.</p>
 </section>

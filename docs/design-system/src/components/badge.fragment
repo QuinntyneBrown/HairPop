@@ -1,4 +1,4 @@
-<!--meta {"lead": "A badge labels status in a word or two, such as Awaiting reply or Confirmed, so people can scan a list of requests without opening each one.", "description": "Neutral, info, success, warning, danger, solid and count badges, in both themes.", "pills": ["Dot + text, never colour alone", "Status: stable"], "variants": "neutral, info, success, warning, danger; solid; count", "states": "static (not interactive); lifecycle: awaiting reply, confirmed, completed, cancelled", "sources": ["pages/my-appointments/default", "pages/appointment-detail/default", "pages/appointment-detail/success", "pages/notification-center/unread", "pages/style-gallery/default"]} -->
+<!--meta {"lead": "A badge labels status in a word or two, such as Awaiting reply or Confirmed, so people can scan a list of requests without opening each one.", "description": "Neutral, info, success, warning, danger, solid and count badges, in both themes.", "pills": ["Dot + text, never colour alone", "Status: stable"], "variants": "neutral, info, success, warning, danger; solid; count", "states": "static (not interactive); lifecycle: awaiting reply, confirmed, completed, cancelled", "sources": ["pages/my-appointments/default", "pages/appointment-detail/default", "pages/appointment-detail/success", "pages/my-appointments/edge", "pages/style-gallery/default"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use a badge for a short, read-only status attached to something: an appointment's state, the unread count on "Updates", a "New" marker. It is not a button and not a filter. Use a <a href="chip.html">chip</a> for anything people can select or remove, and an <a href="alert.html">alert</a> when the status needs a sentence of explanation.</p>
   <ul>
@@ -67,7 +67,7 @@
   {{themes}}<span class="badge">Completed</span><span class="badge badge--info">Unread</span><span class="badge badge--success">Confirmed</span><span class="badge badge--warning">Awaiting reply</span><span class="badge badge--danger">Cancelled</span><span class="badge badge--solid">New</span><span class="badge badge--count">2</span>{{/themes}}
   <ul>
     <li><b>Changing status</b> (Awaiting reply → Confirmed) is announced by the toast or live region that reports the change, not by the badge.</li>
-    <li><b>Unread</b> notifications use an info badge plus a bold title; <b>read</b> ones drop the badge. Warning is reserved for something that needs action.</li>
+    <li><b>Unread</b> is information: where a list shows a visible marker, it is an info badge, never warning, which is reserved for something that needs action. The notification center uses no badge on its rows: unread rows carry the list's unread marker and a visually hidden "Unread: " prefix, and read rows carry nothing.</li>
   </ul>
 </section>
 
@@ -174,10 +174,10 @@
   <p>Extracted from these mocks:</p>
   <ul>
     {{mock:pages/my-appointments/default|Awaiting reply and Completed on appointment rows}}
-    {{mock:pages/appointment-detail/default|warning badge inside a .stack card}}
+    {{mock:pages/appointment-detail/default|warning badge in the Status value of a description list}}
     {{mock:pages/appointment-detail/success|Confirmed}}
-    {{mock:pages/notification-center/unread|Unread and Read badges}}
+    {{mock:pages/my-appointments/edge|Cancelled in danger on an appointment row}}
     {{mock:pages/style-gallery/default|count badge on Updates}}
   </ul>
-  <p>Drift fixed during extraction: badges stretched to full width inside <code>.stack</code> (now <code>width: fit-content</code>); the dot was 6px and the pill 22px, both off the 4px grid (now 8px and 24px); Unread used warning and Read used info (system: Unread is info plus a bold title, Read is neutral or no badge); the Updates link's <code>aria-label</code> "Notifications, 2 unread" did not contain its visible label, and the count badge carried its own <code>aria-label</code> (system: no <code>aria-label</code>; the visible text, then hidden ", 2 unread" after the badge); "Completed" used success although nothing is pending (system: neutral); the filter-summary badge on no-results states is now one removable input chip per filter; the "Long names and missing photos" badge on edge states was a mock annotation and is gone.</p>
+  <p>Drift fixed during extraction: badges stretched to full width inside <code>.stack</code> (now <code>width: fit-content</code>); the dot was 6px and the pill 22px, both off the 4px grid (now 8px and 24px); Unread used warning and Read used info (system: the notification center drops both and marks unread rows through the list; a visible Unread marker elsewhere is info); the Updates link's <code>aria-label</code> "Notifications, 2 unread" did not contain its visible label, and the count badge carried its own <code>aria-label</code> (system: no <code>aria-label</code>; the visible text, then hidden ", 2 unread" after the badge); "Completed" used success although nothing is pending (system: neutral); the filter-summary badge on no-results states is now one removable input chip per filter; the "Long names and missing photos" badge on edge states was a mock annotation and is gone.</p>
 </section>

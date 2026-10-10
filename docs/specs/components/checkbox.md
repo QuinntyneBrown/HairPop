@@ -26,7 +26,7 @@ Out of scope:
 - When errors appear and what they say. The form field decides (its D-3: after submit, or once the control is dirty and touched) and the component reads the result through `HP_FORM_FIELD`; outside a field the consumer uses `invalid` and `describedBy`.
 - Tri-state logic between a "Select all" parent and its rows. The table or page computes the parent's `checked` and `indeterminate`; the component renders and reports them.
 - Saving. The dialog or form saves on its own button ("Save preferences") and keeps the duplicate-submission guard; the checkbox never saves anything.
-- The error summary and the save-failure alert ("We couldn’t save this change."). The form layout inside the dialog renders the summary with its own copy ("Check 1 field before saving"; form-layout D-16), and the dialog renders the failure alert.
+- The error summary and the save-failure alert ("We couldn’t save this change."). The form layout renders a summary with its own copy where a form can be invalid (form-layout D-16), and the dialog renders the failure alert in `dialogs/cookie-preferences/failed`. The cookie checkbox is optional, so that dialog has no invalid state.
 
 ## Usage
 
@@ -34,7 +34,7 @@ Every use of `.choice` with a checkbox in `docs/mocks/`, plus the configurations
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| `dialogs/cookie-preferences/default` | single, with description (D-4) | "Remember my optional usage choices"; description "Helps us improve search. You can change this any time." | checked, unchecked, hover, focus | raised (dialog panel) |
+| `dialogs/cookie-preferences/default` | single, with description (D-4), wrapped in a plain `div.field`, label and description linked by `aria-labelledby` and `aria-describedby` | "Remember my optional usage choices"; description "Helps us improve search. You can change this any time." | checked (as rendered); unchecked, hover, focus | raised (dialog panel) |
 | `dialogs/cookie-preferences/busy` | single, with description | as above | checked and still enabled while "Save preferences" is busy (D-7) | raised |
 | `dialogs/cookie-preferences/failed` | single, with description, under the dialog's "We couldn’t save this change." alert | as above | keeps the value Maya chose | raised |
 | Booking request policy confirmation (design system *Variants* and *States*; no mock yet) | single, `required`, no description, inside a form field with an error | "I’ve read Nia’s cancellation policy"; error "Confirm you’ve read the policy to send your request." | unchecked, checked, invalid, focus | surface (form panel) |
@@ -386,7 +386,7 @@ Fill and edge transition over `--duration-fast`. Under `prefers-reduced-motion: 
 
 ### Screen readers
 
-- **AC-18** Given the cookie checkbox with its description inside `div[hp-form-field] choice` while the field shows an error, when a screen reader reads it, then the name is only the label text and the description is the description text followed by the field's error text, in that order. (L2-041)
+- **AC-18** Given the checkbox "Email me when Nia replies" with its description inside `div[hp-form-field] choice` while the field shows an error, when a screen reader reads it, then the name is only the label text and the description is the description text followed by the field's error text, in that order. (L2-041)
 - **AC-19** Given `<label hp-checkbox hideLabel>Select HP-0992</label>` in a table cell, when it renders, then the label `<span>` has `.visually-hidden`, nothing but the box is visible, the accessible name is "Select HP-0992" and the row is at least 24 × 24 px. (L2-041)
 
 ### Theming

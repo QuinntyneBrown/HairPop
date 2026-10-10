@@ -5,9 +5,9 @@
 | Selector | `hp-page-header` |
 | Library path | `frontend/projects/components/src/lib/page-header/` |
 | Status | planned |
-| Traces to | L2-018, L2-019, L2-035, L2-037, L2-041, L2-042 |
+| Traces to | L2-018, L2-019, L2-032, L2-035, L2-041, L2-042 |
 | Design system | [`page-header.html`](../../design-system/components/page-header.html) |
-| Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/my-appointments/loading`](../../mocks/pages/my-appointments/loading.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/care-and-review/default`](../../mocks/pages/care-and-review/default.html), [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html), [`pages/not-found/default`](../../mocks/pages/not-found/default.html), [`pages/terms/default`](../../mocks/pages/terms/default.html), [`pages/notification-center/default`](../../mocks/pages/notification-center/default.html) |
+| Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/my-appointments/loading`](../../mocks/pages/my-appointments/loading.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/care-and-review/default`](../../mocks/pages/care-and-review/default.html), [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html), [`pages/help/default`](../../mocks/pages/help/default.html), [`pages/terms/default`](../../mocks/pages/terms/default.html), [`pages/notification-center/default`](../../mocks/pages/notification-center/default.html) |
 | Rendering | [`page-header.html`](page-header.html) |
 
 ## Purpose and scope
@@ -29,7 +29,7 @@ Out of scope:
 
 ## Usage
 
-Every mock (181 screens) has one page header, with its `<h1 tabindex="-1">` and the eyebrow rule of D-3; My appointments also shows a page action. The inventory groups them by title:
+Every mock except the four error pages (166 of 170 screens) has one page header, with its `<h1 tabindex="-1">` and the eyebrow rule of D-3; My appointments also shows a page action. The error pages have no page header (D-11). The inventory groups them by title:
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
@@ -41,11 +41,11 @@ Every mock (181 screens) has one page header, with its `<h1 tabindex="-1">` and 
 | `pages/appointment-detail/*` (7) | eyebrow, title, subtitle | "Appointments" · "Your appointment with Nia" · "Request HP-1048 · Sat 24 Oct at 10:00 am · awaiting Nia’s reply." ("Request a change" stays in the appointment card) | default, loading, partial | canvas |
 | `pages/my-appointments/*` (8) | eyebrow, title, subtitle; actions on default, long, edge and offline (empty and no-results already carry their own primary action) | "Appointments" · "My appointments" · "1 request awaiting a reply · 1 completed appointment."; primary "Book a style" | default, loading, empty, no-results | canvas |
 | `pages/care-and-review/*` (8) | eyebrow, title, subtitle | "Appointments" · "Care for your knotless braids" · "Your visit with Nia was on Sat 3 Oct · share how it went." | default, loading, submitting | canvas |
-| `pages/notification-center/*` (7), `pages/account-settings/*` (7) | eyebrow, title, subtitle | "Account" · "Notifications" · "2 unread updates about your appointments."; "Account" · "Account settings" · "Keep your contact details current so braiders can reach you." | default, loading | canvas |
+| `pages/notification-center/*` (7), `pages/account-settings/*` (8) | eyebrow, title, subtitle | "Account" · "Notifications" · "2 unread updates about your appointments."; "Account" · "Account settings" · "Keep your contact details current so braiders can reach you." | default, loading | canvas |
 | `pages/sign-in`, `sign-up`, `forgot-password`, `reset-password`, `verify-email` (29) | no eyebrow (D-3) | "Welcome back", "Join HairPop", "Reset your password", "Choose a new password", "Check your email" + subtitles, e.g. "We sent a verification link to maya.chen@example.com." | default, submitting | canvas |
 | `pages/help/*` (4), `pages/terms/*`, `pages/privacy/*` (6) | no eyebrow | "How can we help?"; "Terms of use"; "Privacy at HairPop" + subtitles | default, loading | canvas |
-| `pages/not-found`, `forbidden`, `server-error`, `offline` (12) | no eyebrow | "We couldn’t find that page", "You can’t open this page", "HairPop needs a moment", "You’re offline" + subtitles | default | canvas |
-| Every dialog and notification mock (60) | the header of the page behind | as for that page | — | canvas under the backdrop |
+| `pages/not-found`, `forbidden`, `server-error`, `offline` (4, `default` only) | no page header: the error page's `h1.empty__title tabindex="-1"` is the page heading (D-11) | — | — | — |
+| Every dialog and notification mock (51) | the header of the page behind | as for that page | — | canvas under the backdrop |
 | Design system *Variants*, with actions | eyebrow, title, subtitle, actions | "Appointments" · "Your appointment with Nia" · secondary "Request a change" + primary "Message Nia" | button states | canvas |
 
 Every row is buildable with `eyebrow`, `heading`, `subtitle` and the `actions` slot.
@@ -68,7 +68,7 @@ Host: `hp-page-header` is an element that carries `.page-header` itself (D-1); i
 | Input | Type | Default | Required | Rule |
 |---|---|---|---|---|
 | `heading` | `string` | — | yes | The `<h1>` text. Specific, sentence case, no full stop: "Your appointment with Nia". |
-| `eyebrow` | `string \| null` | `null` | no | The area name ("Discover", "Appointments", "Account"). `null` renders no eyebrow element (auth, legal, help and error pages, D-3). |
+| `eyebrow` | `string \| null` | `null` | no | The area name ("Discover", "Appointments", "Account"). `null` renders no eyebrow element (auth, legal and help pages, D-3). |
 | `subtitle` | `string \| null` | `null` | no | Facts separated by middle dots, ending with a full stop. `null` renders no subtitle element. |
 | `focusOnNavigation` | `boolean` (`booleanAttribute`) | `true` | no | When true, the component moves focus to its `<h1>` if it was created by a client-side navigation (D-6). Set false for a header created without a route change (for example, one swapped in by a page state). |
 
@@ -92,7 +92,7 @@ Host: `hp-page-header` is an element that carries `.page-header` itself (D-1); i
 | Variant | Modifier | Use for |
 |---|---|---|
 | Eyebrow, title, subtitle | — | The common form: every browsing and account screen. |
-| Title and subtitle | `eyebrow: null` | Auth, legal, help and error pages. |
+| Title and subtitle | `eyebrow: null` | Auth, legal and help pages. |
 | Title only | `eyebrow` and `subtitle` null | A legal page where nothing else adds information ("Terms of use"). |
 | With actions | `[slot=actions]` content | A page-level action: "Book a style" on My appointments. |
 
@@ -142,11 +142,11 @@ Rendered DOM. Classes and elements are the e2e contract.
 ```
 
 ```html
-<!-- rendered: error page, no eyebrow -->
+<!-- rendered: help page, no eyebrow -->
 <hp-page-header class="page-header">
   <div>
-    <h1 tabindex="-1">We couldn’t find that page</h1>
-    <p class="subtitle">The link may be old, or the address may have changed.</p>
+    <h1 tabindex="-1">How can we help?</h1>
+    <p class="subtitle">Find answers about requests, pricing, changes and reviews.</p>
   </div>
   <div class="page-header__actions"></div>
 </hp-page-header>
@@ -242,7 +242,7 @@ None.
 
 - Titles are warm and specific, in sentence case, without a full stop: "Find a style that feels like you", "Care for your knotless braids".
 - Subtitles hold facts separated by middle dots and end with a full stop: "Request HP-1048 · Sat 24 Oct at 10:00 am · awaiting Nia’s reply."
-- Eyebrows are one or two words: "Discover" for browsing, the area name for account screens ("Appointments", "Account"), none for auth, legal, help and error pages (D-3).
+- Eyebrows are one or two words: "Discover" for browsing, the area name for account screens ("Appointments", "Account"), none for auth, legal and help pages (D-3).
 - Dates and times use the appointment's local time zone, as "Sat 24 Oct at 10:00 am"; prices as "$180–$240" with estimate language.
 - Translatable inputs: `heading`, `eyebrow`, `subtitle`, projected action labels. Data values inside them: braider names ("Nia"), references ("HP-1048"), dates, counts, the customer's email.
 - Long titles wrap over several lines; nothing truncates.
@@ -263,7 +263,7 @@ None.
 - **AC-1** Given Maya's My appointments page, when the header renders, then the host has the class `page-header` and holds `p.eyebrow` "Appointments", one `<h1>` "My appointments" and `p.subtitle` "1 request awaiting a reply · 1 completed appointment.", and the page contains no other `<h1>`. (L2-018)
 - **AC-2** Given request HP-1048 is pending, when the appointment detail header renders, then the title is "Your appointment with Nia" and the subtitle reads exactly "Request HP-1048 · Sat 24 Oct at 10:00 am · awaiting Nia’s reply.", with no "confirmed" anywhere in the header. (L2-019)
 - **AC-3** Given the headings list of the appointment detail page, when a screen reader lists headings, then the level-one heading is "Your appointment with Nia" without "Appointments", and the eyebrow's text node is "Appointments" in sentence case, displayed uppercase by CSS. (L2-041)
-- **AC-4** Given an unknown route, when the not-found page's header renders with `eyebrow: null`, then no `p.eyebrow` element exists, the `<h1>` reads "We couldn’t find that page" and the subtitle "The link may be old, or the address may have changed." (L2-037)
+- **AC-4** Given the help page, when its header renders with `eyebrow: null`, then no `p.eyebrow` element exists, the `<h1>` reads "How can we help?" and the subtitle "Find answers about requests, pricing, changes and reviews." (L2-032)
 - **AC-5** Given My appointments is loading, when the page renders its loading state, then the header shows "My appointments" and its subtitle as real text with no skeleton in the header, identifying the page being loaded. (L2-035)
 
 ### Actions
@@ -306,7 +306,7 @@ Render cost is measured by the `PageHeader` perf-test scenario and gated by `--f
 
 - **D-1** *Wrapper element, native `<div>` host, or element with the class on the host?* The element `hp-page-header` carrying `.page-header` itself. It is a composite (title block and actions), and no rule depends on the element type: `.page-header` and `.product-main > * + *` match any element. With the class on the host there is no extra wrapper, so the DOM matches the mocks except for the element name.
 - **D-2** *Title, eyebrow and subtitle as inputs or projected content?* Inputs: every mock's values are plain strings, inputs guarantee the eyebrow is a paragraph outside the `<h1>` and the heading is exactly one `<h1>`, and only actions need projection.
-- **D-3** *The first mocks used the eyebrow "Your HairPop" on every non-browsing screen, including sign in, legal and error pages. Which eyebrow does each page get?* The design system's rule: the area name ("Appointments" for booking, appointment detail, My appointments and care; "Account" for notifications and account settings) or no eyebrow (auth, legal, help and error pages). The design-system page records the old eyebrow as drift fixed during extraction, and the mocks now follow the rule.
+- **D-3** *The first mocks used the eyebrow "Your HairPop" on every non-browsing screen, including sign in, legal and error pages. Which eyebrow does each page get?* The design system's rule: the area name ("Appointments" for booking, appointment detail, My appointments and care; "Account" for notifications and account settings) or no eyebrow (auth, legal and help pages; error pages have no page header, D-11). The design-system page records the old eyebrow as drift fixed during extraction, and the mocks now follow the rule.
 - **D-4** *The design system first said that below 768 px "the primary action is full width and comes first", but `components.css` does not reorder it, and reordering visually would make the focus order differ from the visual order.* DOM order, visual order and focus order stay identical at every width: consumers put the primary last, and on phones it is full width on its own row after the secondary actions (needs product confirmation). L2-041 requires focus order to follow the content order; `.form-actions` uses `order: -1` for the same purpose, but a page header has no submit semantics that would justify the mismatch. Measured at 360 px, this is how `components.css` renders it, and the design-system page now says so.
 - **D-5** *At 200 % text, long title words overflowed (measured at 360 px: "My appointments" 513 px, "Notifications" 467 px, "Your appointment with Nia" 474 px wide pages).* The title breaks words that cannot fit (`overflow-wrap: anywhere` with `hyphens: auto` in `components.css`), so L2-042's 200 % text criterion holds; at default text no title breaks a word at 320 px.
 - **D-6** *How does the header move focus to the `<h1>` after a client-side route change, and is a ring shown?* The component focuses its heading after first render when the router had already completed a navigation before the component was created, which is true for client-side navigations and false on the first load (so the first load starts at the skip link, as the top bar page says). No ring is drawn: the heading is not operable and the ring would sit around the page's largest text after every navigation. `focusOnNavigation` lets a page opt out, and `focusHeading()` lets it announce a content swap.
@@ -314,3 +314,4 @@ Render cost is measured by the `PageHeader` perf-test scenario and gated by `--f
 - **D-8** *Is the heading level configurable?* No. The header always renders the page's only `<h1>`; sections inside the page use `<h2>`.
 - **D-9** *What does the header show while the page's data loads, for example a subtitle that needs the appointment's date?* The page passes the strings it already has; a subtitle that depends on unloaded data is passed once known (it is `null` until then), and the header never shows a skeleton or placeholder text. The mocks' loading states show the full header because the static copy is known; they omit the page actions, which depend on the loaded data.
 - **D-10** *The design system first said actions sit "at the end of the row" from 768 px. Measured at 768 px, the title block of "Your appointment with Nia" (32–621 px) leaves no room and the actions wrap below it. Is that a defect?* No: it is the row's `flex-wrap`, and it keeps both the title and the actions whole. From 768 px the rule that matters is that actions keep their natural width (the primary is no longer full width); they share the title's row only when it has room, as at 1280 px.
+- **D-11** *Do the error pages (not found, forbidden, server error, offline) use the page header?* No. Each is a single static response whose heading is the error page's own `h1.empty__title tabindex="-1"` with its message and actions (error-page and empty-state CRDs), so a page header above it would repeat the title. The mocks render those four pages without a breadcrumb or page header, in a `default` state only.

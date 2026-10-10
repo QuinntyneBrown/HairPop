@@ -31,8 +31,8 @@ Every `textarea.textarea` in `docs/mocks/`, plus the configurations the design s
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| `pages/care-and-review` | `autoGrow`, in a field with hint and counter (limit 500) | "Your review", "Nia explained each step and the braids feel comfortable.", hint "What should others know about your visit?", "56 of 500 characters" | default, invalid "Write a few words about your visit with Nia.", over limit, submitting (editable), offline, failed | surface (form panel) |
-| `pages/booking-request` | `autoGrow`, field marked optional, counter (limit 200) | "Hair details (optional)", "Shoulder length; bringing my own extensions" | default, over limit "Shorten this to 200 characters or fewer.", submitting, offline | surface |
+| `pages/care-and-review` | `autoGrow`, in a field with hint and counter (limit 500) | "Your review", "Nia explained each step and the braids feel comfortable.", hint "What should others know about your visit?", "56 of 500 characters" | default, invalid "Write a few words about your visit with Nia.", submitting (editable), offline; over limit and failed have no mock | surface (form panel) |
+| `pages/booking-request` | `autoGrow`, field marked optional, counter (limit 200) | "Hair details (optional)", "Shoulder length; bringing my own extensions" | default, submitting, offline; over limit "Shorten this to 200 characters or fewer." has no mock | surface |
 | `dialogs/report-review` | `autoGrow`, counter (limit 300) | "Reason", "Inaccurate service details" | default, invalid "Tell us what needs review.", busy, failed (value kept) | raised (dialog) |
 | `notifications/review-feedback` (screens behind the toasts) | as care and review | as above | default | surface |
 | Design system *Variants* | default (manually resizable), `rows="3"` | "Hair details" | default | surface |
@@ -113,13 +113,13 @@ Rendered DOM. Classes and attributes are the e2e contract.
 ```html
 <!-- rendered: care and review, auto-grow, with hint and counter from the form field -->
 <textarea class="textarea textarea--auto-grow" id="hp-field-2-control" name="review" required
-          aria-describedby="hp-field-2-hint hp-field-2-counter"></textarea>
+          aria-describedby="hp-field-2-help hp-field-2-counter"></textarea>
 ```
 
 ```html
 <!-- rendered: invalid, empty review -->
 <textarea class="textarea textarea--auto-grow" id="hp-field-2-control" name="review" required
-          aria-invalid="true" aria-describedby="hp-field-2-error hp-field-2-hint hp-field-2-counter"></textarea>
+          aria-invalid="true" aria-describedby="hp-field-2-error hp-field-2-help hp-field-2-counter"></textarea>
 ```
 
 ```html

@@ -232,7 +232,7 @@
   <p>Core-set component: no mock uses a table yet. The data it would hold appears as row cards in:</p>
   <ul>
     <li><a href="../../mocks/pages/my-appointments/default.html">pages/my-appointments/default</a> (two appointments as row cards)</li>
-    <li><a href="../../mocks/pages/my-appointments/long.html">pages/my-appointments/long</a> (paged list of 126 results, where a dense table would help)</li>
+    <li><a href="../../mocks/pages/my-appointments/long.html">pages/my-appointments/long</a> (paged appointment history ("Showing 1–2 of 6 appointments"), where a dense table would help once it grows)</li>
   </ul>
   <p>Drift fixed during extraction: none in the mocks; the kit's sort arrows were typed glyphs that screen readers announced (now hidden with empty alt text in <code>content</code>), and row actions had no record names. Fixed in the stylesheet: row headers were painted like column headers (sunken, muted, sticky), so hover and selection stopped at the first cell; the last row's row header kept its rule; unsorted sort buttons kept the browser's button style and sorted ones were 23px tall; values wrapped over several lines on phones.</p>
 </section>

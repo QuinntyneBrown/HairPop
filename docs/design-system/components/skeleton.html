@@ -178,9 +178,9 @@
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
     <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div></div></div><figcaption>Mirror the loaded card: 3:2 media, title, summary, in the real grid.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card" aria-hidden="true"><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div><div class="card" aria-hidden="true"><span class="skeleton skeleton--rect" style="min-height: 6rem;"></span><span class="skeleton skeleton--text"></span></div></div><figcaption>The mocks show the same three generic cards on every screen, so the page jumps when the real layout arrives.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card" aria-hidden="true"><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div><div class="card" aria-hidden="true"><span class="skeleton skeleton--rect" style="min-height: 6rem;"></span><span class="skeleton skeleton--text"></span></div></div><figcaption>The same three generic cards on every screen, as the first mocks drew them, so the page jumps when the real layout arrives.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><section aria-busy="true" aria-label="Styles"><span class="visually-hidden" role="status">Loading styles</span><span class="skeleton skeleton--text" aria-hidden="true"></span></section></div><figcaption>Mark the region <code>aria-busy</code> and give it one status message.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><section aria-label="Loading content"><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></section></div><figcaption>An <code>aria-label</code> alone (as in the mocks) is not announced as loading, and blocks without <code>aria-hidden</code> clutter the reading order.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><section aria-label="Loading content"><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></section></div><figcaption>An <code>aria-label</code> alone (as in the first mocks) is not announced as loading, and blocks without <code>aria-hidden</code> clutter the reading order.</figcaption></figure>
   </div>
 </section>
 
@@ -231,12 +231,15 @@
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
   <p>Extracted from these mocks:</p>
   <ul>
-    <li><a href="../../mocks/pages/style-gallery/loading.html">pages/style-gallery/loading</a> (generic three-card skeleton)</li>
-    <li><a href="../../mocks/pages/matching-braiders/loading.html">pages/matching-braiders/loading</a> (same generic skeleton)</li>
-    <li><a href="../../mocks/pages/braider-profile/loading.html">pages/braider-profile/loading</a> (same generic skeleton for a detail layout)</li>
-    <li><a href="../../mocks/pages/my-appointments/loading.html">pages/my-appointments/loading</a> (same generic skeleton for a list)</li>
+    <li><a href="../../mocks/pages/style-gallery/loading.html">pages/style-gallery/loading</a> (three story-card skeletons in the named, busy styles grid)</li>
+    <li><a href="../../mocks/pages/matching-braiders/loading.html">pages/matching-braiders/loading</a> (story-card skeletons under the real search, filters and sort)</li>
+    <li><a href="../../mocks/pages/braider-profile/loading.html">pages/braider-profile/loading</a> (detail layout: profile, reviews and aside cards)</li>
+    <li><a href="../../mocks/pages/my-appointments/loading.html">pages/my-appointments/loading</a> (appointment-row skeletons)</li>
+    <li><a href="../../mocks/pages/notification-center/loading.html">pages/notification-center/loading</a> (list-row skeletons in a flush card)</li>
+    <li><a href="../../mocks/pages/style-detail/loading.html">pages/style-detail/loading</a> (hero, fact tiles and aside card)</li>
+    <li><a href="../../mocks/pages/booking-request/loading.html">pages/booking-request/loading</a> (form panel: label lines and control-height fields)</li>
   </ul>
-  <p>Drift fixed during extraction: every loading mock shows the same three generic skeleton cards whatever the real layout (system: the skeleton mirrors the loaded layout); the hero block had a fixed <code>min-height</code> of three times <code>--space-12</code> (now a 3:2 aspect ratio matching the photo, no layout shift); the loading region had only <code>aria-label="Loading content"</code> (now <code>aria-busy</code> plus a named status message, blocks <code>aria-hidden</code>); text lines were 0.9em with 0.3em margins, off-scale (now 0.875em and 0.375em); the shimmer used a raw 1.4s duration and stopped through a global <code>!important</code> override (now <code>--duration-loop-shimmer</code>, paused through <code>--motion-loop-state</code>).</p>
+  <p>Drift fixed during extraction: every loading mock showed the same three generic skeleton cards whatever the real layout (system: the skeleton mirrors the loaded layout; the mocks now do); the hero block had a fixed <code>min-height</code> of three times <code>--space-12</code> (now a 3:2 aspect ratio matching the photo, no layout shift); the loading region had only <code>aria-label="Loading content"</code> (now <code>aria-busy</code> plus a named status message, blocks <code>aria-hidden</code>); text lines were 0.9em with 0.3em margins, off-scale (now 0.875em and 0.375em); the shimmer used a raw 1.4s duration and stopped through a global <code>!important</code> override (now <code>--duration-loop-shimmer</code>, paused through <code>--motion-loop-state</code>).</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>
