@@ -44,4 +44,11 @@ module.exports = defineConfig([
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
     rules: {},
   },
+  {
+    // Checkbox, radio and switch hosts are labels that wrap the native input their own template renders.
+    files: ['projects/components-examples/**/*.html'],
+    rules: {
+      '@angular-eslint/template/label-has-associated-control': 'off',
+    },
+  },
 ]);

@@ -1,0 +1,13 @@
+/* Storybook page background. Component foundations come from the library styles in angular.json. */
+body {
+  margin: 0;
+  background: var(--color-bg-canvas);
+  color: var(--color-fg-default);
+}
+
+/* The routed examples page stacks its stories. Global because the router creates the host. */
+.storybook__stories > :not(router-outlet) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}

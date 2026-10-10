@@ -34,6 +34,64 @@
           }
         }
       }
+    },
+    "storybook": {
+      "projectType": "application",
+      "root": "projects/storybook",
+      "sourceRoot": "projects/storybook/src",
+      "prefix": "hp",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/storybook/src/main.ts",
+            "index": "projects/storybook/src/index.html",
+            "tsConfig": "projects/storybook/tsconfig.app.json",
+            "styles": [
+              "projects/components/styles/tokens.css",
+              "projects/components/styles/fonts.css",
+              "projects/components/styles/foundation.css",
+              "projects/components/styles/layout.css",
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "projects/storybook/src/styles.css"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "storybook:build:production"
+            },
+            "development": {
+              "buildTarget": "storybook:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/storybook/**/*.ts",
+              "projects/storybook/**/*.html",
+              "projects/components-examples/**/*.ts"
+            ],
+            "eslintConfig": "projects/storybook/eslint.config.js"
+          }
+        }
+      }
     }
   }
 }

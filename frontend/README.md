@@ -1,10 +1,12 @@
 # Frontend
 
-Angular 21 workspace for HairPop's web applications. It currently holds one project:
+Angular 21 workspace for HairPop's web applications. It currently holds:
 
-| Project      | Path                  | Purpose                                                                                                                                   |
-| ------------ | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `components` | `projects/components` | `@hairpop/components`, the shared components library built to the CRDs in [`docs/specs/components/`](../docs/specs/components/README.md). |
+| Project               | Path                           | Purpose                                                                                                                                   |
+| --------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `components`          | `projects/components`          | `@hairpop/components`, the shared components library built to the CRDs in [`docs/specs/components/`](../docs/specs/components/README.md). |
+| `storybook`           | `projects/storybook`           | The component storybook: browse every component's stories in light and dark. See [its README](projects/storybook/README.md).              |
+| `components-examples` | `projects/components-examples` | One examples page per component, rendered by the storybook. A source folder, not a built project.                                         |
 
 ## Commands
 
@@ -12,7 +14,9 @@ Run from this folder:
 
 ```bash
 npm install            # also installs the husky pre-commit hook
+npm start              # ng serve storybook → http://localhost:4200
 npm run build          # ng build components → dist/components
+npm run build:storybook # ng build storybook → dist/storybook
 npm run lint           # angular-eslint
 npm run format:check   # Prettier
 npm run format         # Prettier, write

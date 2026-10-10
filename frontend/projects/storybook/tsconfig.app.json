@@ -1,0 +1,13 @@
+/* The storybook compiles the library and its examples from source, so edits reload live. */
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/storybook",
+    "types": [],
+    "paths": {
+      "@hairpop/components": ["../components/src/public-api.ts"],
+      "@hairpop/components-examples": ["../components-examples/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "../components-examples/src/**/*.ts"]
+}

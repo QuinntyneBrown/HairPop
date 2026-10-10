@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "start": "ng serve storybook",
     "build": "ng build components",
+    "build:storybook": "ng build storybook",
     "watch": "ng build components --watch --configuration development",
     "lint": "ng lint",
     "format": "prettier --write .",
