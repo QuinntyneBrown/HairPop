@@ -1,26 +1,155 @@
-<!--meta {"lead": "Pair facts and their labels in appointment detail.", "description": "Pair facts and their labels in appointment detail.", "variants": "horizontal, vertical", "states": "default, hover, focus, active, disabled", "sources": ["pages/appointment-detail/default"], "pills": ["Extracted"]} -->
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Pair facts and their labels in appointment detail. This component appears in <a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a>.</p><p>Use it for this job; choose a different component when the interaction or information hierarchy changes.</p></section>
+<!--meta {"lead": "A description list shows the facts of one record as label and value pairs: an appointment's service, time, estimate and location. Facts scan faster as pairs than as sentences.", "description": "Horizontal (label beside value) and stacked description lists, responsive from 640px, in both themes.", "pills": ["Native <code>&lt;dl&gt;</code>", "Status: stable"], "variants": "horizontal, stacked", "states": "default, value missing, value pending", "sources": []} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a description list for the fields of a single record that people read rather than edit: the appointment detail, the review step of a booking, the account summary. Use a <a href="table.html">table</a> to compare several records, and a <a href="form-field.html">form</a> when the values are editable.</p>
+  <ul>
+    <li><b>Horizontal</b> (<code>.dl</code>): labels in a narrow column beside values from 640px; stacked on phones.</li>
+    <li><b>Stacked</b> (<code>.dl--stacked</code>): label above value at every width, for asides and narrow cards.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2><div class="ds-anatomy"><figure class="ds-anatomy__figure"><dl class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl></figure><ol class="ds-anatomy__list"><li><div><b>Semantic element</b><small>Preserves the native role and browser interaction.</small></div></li><li><div><b>Visible content</b><small>Names the action, value, or status in plain language.</small></div></li><li><div><b>Component class</b><small>Reads shared roles from the token stylesheet.</small></div></li></ol></div></section>
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <dl class="dl" style="width: 100%;"><dt>Preferred time</dt><dd>Sat 24 Oct · 10:00 am</dd></dl>
+      <span class="ds-callout" style="left: 6%; top: 30%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 48%; top: 30%;" aria-hidden="true">2</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Term</b><small><code>&lt;dt&gt;</code>: label type in <code>--color-fg-muted</code>; sized to its longest label (<code>max-content</code>).</small></div></li>
+      <li><div><b>Value</b><small><code>&lt;dd&gt;</code>: body type in <code>--color-fg-default</code>; can hold a badge or a link.</small></div></li>
+    </ol>
+  </div>
+</section>
 
-<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2><p>Choose the variant by meaning and context. Keep status or action labels explicit.</p><ul><li><strong>Horizontal</strong> — use this form when the surrounding content calls for horizontal presentation.</li><li><strong>Vertical</strong> — use this form when the surrounding content calls for vertical presentation.</li></ul>{{example:Base specimen}}<dl class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl>{{/example}}</section>
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:[start]Horizontal in a detail card; stacked in an aside. Resize below 640px to see the horizontal list stack.}}
+<section class="card" style="flex: 2 1 20rem;" aria-labelledby="dl-ex-1">
+  <h3 id="dl-ex-1">Request HP-1048</h3>
+  <dl class="dl">
+    <dt>Status</dt><dd><span class="badge badge--warning">Awaiting reply</span></dd>
+    <dt>Service</dt><dd>Medium knotless braids</dd>
+    <dt>Braider</dt><dd><a href="../../mocks/pages/braider-profile/default.html">Nia Okafor</a></dd>
+    <dt>Preferred time</dt><dd>Sat 24 Oct · 10:00 am · about 5 hours</dd>
+    <dt>Estimate</dt><dd>$180–$240</dd>
+    <dt>Location</dt><dd>Shared after Nia accepts</dd>
+  </dl>
+</section>
+<aside class="card" style="flex: 1 1 12rem;" aria-labelledby="dl-ex-2">
+  <h3 id="dl-ex-2">Before you book</h3>
+  <dl class="dl dl--stacked">
+    <dt>Service area</dt><dd>Toronto West</dd>
+    <dt>Typical duration</dt><dd>5 hours</dd>
+    <dt>Knotless braids</dt><dd>From $180</dd>
+  </dl>
+</aside>
+  {{/example}}
+</section>
 
-<section class="ds-section" id="sizes" data-na="This component has one size; it adapts through content and layout tokens."><h2><a href="#sizes">Sizes</a></h2></section>
+<section class="ds-section" id="sizes" data-na="One size; type follows the body and label roles."><h2><a href="#sizes">Sizes</a></h2></section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>The table forces pointer and focus states with <code>data-state</code> for review. Production interactions use native attributes and pseudo-classes.</p><div class="ds-matrix"><table><thead><tr><th scope="col">Specimen</th><th scope="col">default</th><th scope="col">hover</th><th scope="col">focus</th><th scope="col">active</th><th scope="col">disabled</th></tr></thead><tbody><tr><th scope="row">Description list</th><td><dl class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl></td><td><dl data-state="hover" class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl></td><td><dl data-state="focus" class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl></td><td><dl data-state="active" class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl></td><td><dl data-state="disabled" class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl></td></tr></tbody></table></div>{{themes}}<dl class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl>{{/themes}}</section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Description lists are static. Values have three content states: present, pending (not known yet, said in words) and missing (couldn't load, with a retry nearby). Never leave a value blank or show a dash alone.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Present</th><th scope="col">Pending</th><th scope="col">Missing</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Horizontal</th>
+        <td><dl class="dl"><dt>Estimate</dt><dd>$180–$240</dd></dl></td>
+        <td><dl class="dl"><dt>Final price</dt><dd class="text-muted">Nia confirms after accepting</dd></dl></td>
+        <td><dl class="dl"><dt>Reviews</dt><dd><span class="inline-status inline-status--danger">Couldn’t load · <a href="../../mocks/pages/braider-profile/partial.html">Retry reviews</a></span></dd></dl></td></tr>
+      <tr><th scope="row">Stacked</th>
+        <td><dl class="dl dl--stacked"><dt>Estimate</dt><dd>$180–$240</dd></dl></td>
+        <td><dl class="dl dl--stacked"><dt>Final price</dt><dd class="text-muted">Nia confirms after accepting</dd></dl></td>
+        <td><dl class="dl dl--stacked"><dt>Reviews</dt><dd><span class="inline-status inline-status--danger">Couldn’t load</span></dd></dl></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  {{themes}}<dl class="dl"><dt>Service</dt><dd>Medium knotless braids</dd><dt>Preferred time</dt><dd>Sat 24 Oct · 10:00 am</dd><dt>Estimate</dt><dd>$180–$240</dd></dl>{{/themes}}
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>Keep the component within the 16px phone margin, allow text to wrap without clipping, and preserve a reachable 24px minimum target. At 768px and 1024px, let the containing grid set width rather than adding fixed dimensions.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Below <code>--layout-breakpoint-sm</code> (640px) <code>.dl</code> stacks: each term sits above its value with 8px after the value.</li>
+    <li>From 640px the term column is as wide as the longest label and the value takes the rest; rows are 8px apart with 24px between columns.</li>
+    <li>Long values wrap inside their column; keep terms to three words so the label column stays narrow.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2><p>The same markup appears in light and dark themes. Use the semantic roles in the token table; override a component token only for a local variation.</p>{{themes}}<dl class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl>{{/themes}}</section>
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Terms read <code>--color-fg-muted</code>, values <code>--color-fg-default</code>; spacing reads <code>--space-1/2/3/6</code>. No component tokens: override the semantic text colours if a surface needs it.</p>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><h3>Role and keyboard</h3><p>Tab and Shift+Tab follow DOM order; Enter or Space activates native controls, while links use Enter. Static content remains in reading order.</p><h3>Focus and labelling</h3><p>Keep the shared visible focus ring. The visible text supplies the accessible name; icon-only actions need an explicit label. Associate help and errors with the relevant control.</p><h3>Contrast, motion, and touch</h3><p>Text uses a 4.5:1 minimum, meaningful controls and focus boundaries use 3:1, and all actions keep a 24px minimum target with comfortable spacing. Reduced motion removes decorative transitions. Check the actual foreground and background pair in both themes on the <a href="../foundations/color.html">Color foundation</a>.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Native <code>&lt;dl&gt;</code>, <code>&lt;dt&gt;</code>, <code>&lt;dd&gt;</code>: screen readers announce the list and pair count. Do not wrap pairs in extra <code>&lt;div&gt;</code>s that break the grid, and do not fake pairs with paragraphs and bold text.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Reaches only links or buttons inside values; the list itself is not focusable.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Not focusable; links inside values use the shared ring.</p>
+  <h3>Labelling</h3>
+  <p>The card heading above names the record. Terms are the labels; do not repeat them in the value ("Estimate: $180–$240" under "Estimate").</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Term on card|--color-fg-muted|--color-bg-surface|4.5}}
+    {{pair:Value on card|--color-fg-default|--color-bg-surface|4.5}}
+    {{pair:Term in dialog|--color-fg-muted|--color-bg-surface-raised|4.5}}
+  </div>
+  <h3>Motion</h3>
+  <p>None.</p>
+  <h3>Touch</h3>
+  <p>Links inside values keep a 24px target.</p>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>Use sentence case. For description list, keep the wording concrete and close to the value or action it describes. Show “Awaiting reply” until the braider accepts; label a price estimate as an estimate.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Terms are short nouns in sentence case, no colon: "Preferred time", "Estimate".</li>
+    <li>Values use the product formats: "Sat 24 Oct · 10:00 am", "$180–$240", "about 5 hours".</li>
+    <li>Say why a value is not known yet ("Shared after Nia accepts") instead of leaving it blank.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><dl class="dl"><div><dt>Service</dt><dd>Medium knotless braids</dd></div><div><dt>Typical duration</dt><dd>About five hours</dd></div></dl></div><figcaption>Use the description list for its stated job: pair facts and their labels in appointment detail.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Unclear action</span></div><figcaption>Do not replace the semantic element with unlabelled text or a decorative shape.</figcaption></figure><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Pair colour with an explicit state label.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not make colour or a dot the only carrier of status.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><dl class="dl"><dt>Preferred time</dt><dd>Sat 24 Oct · 10:00 am</dd><dt>Estimate</dt><dd>$180–$240</dd><dt>Location</dt><dd>Shared after Nia accepts</dd></dl></div><figcaption>Lay appointment facts out as pairs.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><p><strong>Sat 24 Oct · 10:00 am</strong> with Nia Okafor</p><p>Estimated price: $180–$240. Nia will confirm the final price.</p><p>Location shared after Nia accepts.</p></div><figcaption>Bury the facts in sentences, as the appointment-detail mock does; time, price and place are hard to scan.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><dl class="dl"><dt>Final price</dt><dd class="text-muted">Nia confirms after accepting</dd></dl></div><figcaption>Explain a pending value.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><dl class="dl"><dt>Final price</dt><dd>—</dd></dl></div><figcaption>Show a lone dash; it is read as "dash" and says nothing.</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>{{tok:Color fg muted|--color-fg-muted}}{{tok:Space 2|--space-2}}{{tok:Space 4|--space-4}}</tbody></table></div></section>
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Term|--color-fg-muted}}
+      {{tok:Value|--color-fg-default}}
+      {{tok:Term font|--text-label}}
+      {{tok:Value font|--text-body}}
+      {{tok:Row gap / column gap|--space-2|--space-6}}
+      {{tok:Stack breakpoint|--layout-breakpoint-sm}}
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2><p>Copy the semantic markup and product class; replace the sample content with real data.</p><pre><code>&lt;dl class=&quot;dl&quot;&gt;&lt;div&gt;&lt;dt&gt;Service&lt;/dt&gt;&lt;dd&gt;Medium knotless braids&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;Typical duration&lt;/dt&gt;&lt;dd&gt;About five hours&lt;/dd&gt;&lt;/div&gt;&lt;/dl&gt;</code></pre><p>Forced <code>data-state</code> values are for documentation snapshots only.</p></section>
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;dl class="dl"&gt;
+  &lt;dt&gt;Service&lt;/dt&gt;&lt;dd&gt;Medium knotless braids&lt;/dd&gt;
+  &lt;dt&gt;Preferred time&lt;/dt&gt;&lt;dd&gt;Sat 24 Oct · 10:00 am&lt;/dd&gt;
+  &lt;dt&gt;Estimate&lt;/dt&gt;&lt;dd&gt;$180–$240&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.dl</code></td><td>Stacked below 640px; term and value columns from 640px.</td></tr>
+    <tr><td><code>.dl--stacked</code></td><td>Term above value at every width.</td></tr>
+  </tbody></table>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><ul>{{mock:pages/appointment-detail/default|visible specimen}}</ul><p>The examples use the corresponding selectors in <a href="../assets/components.css">components.css</a>.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Core-set component: the mocks state these facts as prose. It is recommended for:</p>
+  <ul>
+    {{mock:pages/appointment-detail/default|time, estimate and location as sentences}}
+    {{mock:pages/appointment-detail/success|confirmed estimate and studio address as sentences}}
+    {{mock:dialogs/request-review/default|review step that should list the request's details}}
+  </ul>
+  <p>Drift recorded: appointment facts were written as prose ("Sat 24 Oct · 10:00 am with Nia Okafor", "Estimated price: …") rather than label and value pairs; the kit's <code>.dl</code> kept two columns at 360px, squeezing values (now stacked below 640px).</p>
+</section>

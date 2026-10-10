@@ -1,26 +1,169 @@
-<!--meta {"lead": "Show a sequence of related items with optional actions.", "description": "Show a sequence of related items with optional actions.", "variants": "simple, two-line, icon, interactive, divided", "states": "default, hover, focus, active, disabled, selected", "sources": ["pages/my-appointments/default"], "pills": ["Extracted"]} -->
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Show a sequence of related items with optional actions. This component appears in <a href="../../mocks/pages/my-appointments/default.html">pages/my-appointments/default</a>.</p><p>Use it for this job; choose a different component when the interaction or information hierarchy changes.</p></section>
+<!--meta {"lead": "A list stacks short, similar items in one column: notifications, a braider's services, a help topic's articles. Each row is one line or two, with an optional avatar or icon.", "description": "Simple, two-line, avatar, interactive and unread list rows with dividers, in both themes.", "pills": ["<code>&lt;ul&gt;</code> / <code>&lt;ol&gt;</code>", "Status: stable"], "variants": "simple, two-line, with avatar or icon, interactive (link rows), unread, with dividers", "states": "default, hover, focus, current/selected, unread", "sources": []} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a list for a run of homogeneous items that people scan top to bottom and open one at a time. Use <a href="card.html">cards</a> when each item carries media or several actions, a <a href="table.html">table</a> when people compare fields across items, and a plain <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> in prose (the "Prepare for your visit" steps).</p>
+  <ul>
+    <li><b>Simple</b>: one line per row.</li>
+    <li><b>Two-line</b>: a title and a meta line in <code>--color-fg-muted</code>.</li>
+    <li><b>With avatar or icon</b>: a leading 40px avatar or 20px icon.</li>
+    <li><b>Interactive</b>: each row is a link (<code>&lt;a class="list__item list__item--interactive"&gt;</code>), 44px tall at minimum.</li>
+    <li><b>Unread</b>: an accent dot before the title plus the word "Unread" for screen readers.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2><div class="ds-anatomy"><figure class="ds-anatomy__figure"><ul class="list"><li><a href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul></figure><ol class="ds-anatomy__list"><li><div><b>Semantic element</b><small>Preserves the native role and browser interaction.</small></div></li><li><div><b>Visible content</b><small>Names the action, value, or status in plain language.</small></div></li><li><div><b>Component class</b><small>Reads shared roles from the token stylesheet.</small></div></li></ol></div></section>
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <ul class="list card card--flush" style="width: 100%;"><li><a class="list__item list__item--interactive" href="../../mocks/pages/appointment-detail/default.html"><span class="avatar" aria-hidden="true">NO</span><div class="list__body"><div class="list__title">Nia received your request</div><div class="list__meta">Today at 9:42 am · HP-1048</div></div>{{icon:chevron-right}}</a></li></ul>
+      <span class="ds-callout" style="left: 6%; top: 30%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 30%; top: 30%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 30%; top: 70%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 92%; top: 30%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Leading avatar or icon (optional)</b><small>Decorative when the title already names the person.</small></div></li>
+      <li><div><b>Title</b><small><code>.list__title</code>: label type at 16px.</small></div></li>
+      <li><div><b>Meta (optional)</b><small><code>.list__meta</code>: body-sm in <code>--color-fg-muted</code>; time first.</small></div></li>
+      <li><div><b>Trailing chevron or badge (optional)</b><small>Chevron for navigation rows; a badge for status.</small></div></li>
+    </ol>
+  </div>
+</section>
 
-<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2><p>Choose the variant by meaning and context. Keep status or action labels explicit.</p><ul><li><strong>Simple</strong> — use this form when the surrounding content calls for simple presentation.</li><li><strong>Two-line</strong> — use this form when the surrounding content calls for two-line presentation.</li><li><strong>Icon</strong> — use this form when the surrounding content calls for icon presentation.</li><li><strong>Interactive</strong> — use this form when the surrounding content calls for interactive presentation.</li><li><strong>Divided</strong> — use this form when the surrounding content calls for divided presentation.</li></ul>{{example:Base specimen}}<ul class="list"><li><a href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul>{{/example}}</section>
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:[stack]Simple, two-line with avatar, and an interactive notifications list with an unread row.}}
+<ul class="list card card--flush">
+  <li class="list__item">Medium knotless braids · from $180</li>
+  <li class="list__item">Passion twists · from $160</li>
+  <li class="list__item">Cornrows · from $90</li>
+</ul>
+<ul class="list card card--flush">
+  <li class="list__item"><span class="avatar" aria-hidden="true">NO</span><div class="list__body"><div class="list__title">Nia Okafor</div><div class="list__meta">Toronto West · 4.9 ★ from 86 reviews</div></div></li>
+  <li class="list__item"><span class="avatar" aria-hidden="true">AM</span><div class="list__body"><div class="list__title">Aisha Mensah</div><div class="list__meta">North York · 4.8 ★ from 64 reviews</div></div></li>
+</ul>
+<ul class="list card card--flush" aria-label="Notifications">
+  <li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/appointment-detail/default.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Nia received your request</div><div class="list__meta">Today at 9:42 am · She will confirm the time and final price.</div></div><span class="badge badge--warning">Unread</span></a></li>
+  <li><a class="list__item list__item--interactive" href="../../mocks/pages/care-and-review/default.html"><div class="list__body"><div class="list__title">How to prepare for knotless braids</div><div class="list__meta">Yesterday · Read Nia’s preparation checklist.</div></div>{{icon:chevron-right}}</a></li>
+</ul>
+  {{/example}}
+</section>
 
-<section class="ds-section" id="sizes" data-na="This component has one size; it adapts through content and layout tokens."><h2><a href="#sizes">Sizes</a></h2></section>
+<section class="ds-section" id="sizes" data-na="One row density; rows grow with a second line. Use a dense table for compact data."><h2><a href="#sizes">Sizes</a></h2></section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>The table forces pointer and focus states with <code>data-state</code> for review. Production interactions use native attributes and pseudo-classes.</p><div class="ds-matrix"><table><thead><tr><th scope="col">Specimen</th><th scope="col">default</th><th scope="col">hover</th><th scope="col">focus</th><th scope="col">active</th><th scope="col">disabled</th><th scope="col">selected</th></tr></thead><tbody><tr><th scope="row">List</th><td><ul class="list"><li><a href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul></td><td><ul class="list"><li><a data-state="hover" href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul></td><td><ul class="list"><li><a data-state="focus" href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul></td><td><ul class="list"><li><a data-state="active" href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul></td><td><ul class="list"><li><a data-state="disabled" href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul></td><td><ul class="list"><li><a data-state="selected" href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul></td></tr></tbody></table></div>{{themes}}<ul class="list"><li><a href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul>{{/themes}}</section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Only interactive rows have states. Hover tints the row; focus draws the shared ring inside the row; the current item uses <code>aria-current="true"</code> and the accent tint; unread rows add a dot and a hidden "Unread:" prefix.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Current</th><th scope="col">Unread</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Interactive</th>
+        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive" href="../../mocks/pages/help/default.html"><div class="list__title">How requests work</div></a></li></ul></td>
+        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive" data-state="hover" href="../../mocks/pages/help/default.html"><div class="list__title">How requests work</div></a></li></ul></td>
+        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive" data-state="focus" href="../../mocks/pages/help/default.html"><div class="list__title">How requests work</div></a></li></ul></td>
+        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive" aria-current="true" href="../../mocks/pages/help/default.html"><div class="list__title">How requests work</div></a></li></ul></td>
+        <td><ul class="list card card--flush"><li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/notification-center/unread.html"><div class="list__title"><span class="visually-hidden">Unread: </span>Time confirmed</div></a></li></ul></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  {{themes:stack}}<ul class="list card card--flush"><li><a class="list__item list__item--interactive list__item--unread" href="../../mocks/pages/notification-center/unread.html"><div class="list__body"><div class="list__title"><span class="visually-hidden">Unread: </span>Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li><li><a class="list__item list__item--interactive" data-state="hover" href="../../mocks/pages/care-and-review/default.html"><div class="list__body"><div class="list__title">How to prepare</div><div class="list__meta">Yesterday</div></div></a></li></ul>{{/themes}}
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>Keep the component within the 16px phone margin, allow text to wrap without clipping, and preserve a reachable 24px minimum target. At 768px and 1024px, let the containing grid set width rather than adding fixed dimensions.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Lists are one column at every width; on wide screens cap them with the detail grid's main column or <code>--layout-form-max</code> rather than stretching rows to 1280px.</li>
+    <li>Titles wrap; meta lines may use <code>.truncate</code> on phones when the full text is available on the next screen.</li>
+    <li>Trailing badges stay on the title row and never push the title below 50% of the row.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2><p>The same markup appears in light and dark themes. Use the semantic roles in the token table; override a component token only for a local variation.</p>{{themes}}<ul class="list"><li><a href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul>{{/themes}}</section>
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Rows read <code>--color-border-default</code> (dividers), <code>--color-bg-subtle</code> (hover), <code>--color-accent-subtle</code> (current) and <code>--color-accent</code> (unread dot). Place the list in a <code>.card.card--flush</code> for the surface and edge.</p>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><h3>Role and keyboard</h3><p>Tab and Shift+Tab follow DOM order; Enter or Space activates native controls, while links use Enter. Static content remains in reading order.</p><h3>Focus and labelling</h3><p>Keep the shared visible focus ring. The visible text supplies the accessible name; icon-only actions need an explicit label. Associate help and errors with the relevant control.</p><h3>Contrast, motion, and touch</h3><p>Text uses a 4.5:1 minimum, meaningful controls and focus boundaries use 3:1, and all actions keep a 24px minimum target with comfortable spacing. Reduced motion removes decorative transitions. Check the actual foreground and background pair in both themes on the <a href="../foundations/color.html">Color foundation</a>.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>A native <code>&lt;ul&gt;</code> (or <code>&lt;ol&gt;</code> when order matters) so the item count is announced. Interactive rows are <code>&lt;a&gt;</code> inside <code>&lt;li&gt;</code>; never <code>role="listbox"</code> unless the list is a selection widget.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves between row links.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Opens the focused row.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The shared ring on the row link. Each row is one tab stop; do not nest a second link inside an interactive row.</p>
+  <h3>Labelling</h3>
+  <p>Give a list a name when several sit on a page (<code>aria-label="Notifications"</code>). Unread state is in text ("Unread:" visually hidden, or a visible badge), not only the dot. Leading avatars repeat the title's name and are <code>aria-hidden</code>.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Title on row|--color-fg-default|--color-bg-surface|4.5}}
+    {{pair:Meta on row|--color-fg-muted|--color-bg-surface|4.5}}
+    {{pair:Title on hovered row|--color-fg-default|--color-bg-subtle|4.5}}
+    {{pair:Title on current row|--color-fg-default|--color-accent-subtle|4.5}}
+    {{pair:Unread dot on row|--color-accent|--color-bg-surface|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>Hover tint transitions over <code>--duration-fast</code>; reduced motion makes it instant.</p>
+  <h3>Touch</h3>
+  <p>Interactive rows are at least <code>--target-comfortable</code> (44px) tall and span the full width.</p>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>Use sentence case. For list, keep the wording concrete and close to the value or action it describes. Show “Awaiting reply” until the braider accepts; label a price estimate as an estimate.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Titles say what happened or what the item is ("Nia received your request").</li>
+    <li>Meta starts with time ("Today at 9:42 am", "Yesterday"), then one clause of detail.</li>
+    <li>Sentence case, no trailing full stop on titles.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><ul class="list"><li><a href="../../mocks/pages/appointment-detail/default.html">Nia Okafor · medium knotless braids</a></li><li><a href="../../mocks/pages/care-and-review/default.html">Care and review</a></li></ul></div><figcaption>Use the list for its stated job: show a sequence of related items with optional actions.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Unclear action</span></div><figcaption>Do not replace the semantic element with unlabelled text or a decorative shape.</figcaption></figure><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Pair colour with an explicit state label.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not make colour or a dot the only carrier of status.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><ul class="list card card--flush"><li><a class="list__item list__item--interactive" href="../../mocks/pages/appointment-detail/default.html"><div class="list__body"><div class="list__title">Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li></ul></div><figcaption>Make the whole row one link to the update.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card"><span class="badge badge--warning">Unread</span><p><b>Nia received your request</b></p><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div></div><figcaption>Give every notification its own card and primary button, as the notification-center mock does; several primaries compete on one page.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Unread</span></div><figcaption>Say "Unread" in text alongside the dot.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge badge--info">Read</span></div><figcaption>Badge every row "Read"; mark the exception (unread), not the norm.</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>{{tok:Color border default|--color-border-default}}{{tok:Color bg subtle|--color-bg-subtle}}{{tok:Space 3|--space-3}}</tbody></table></div></section>
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Title|--color-fg-default}}
+      {{tok:Meta|--color-fg-muted}}
+      {{tok:Divider|--color-border-default}}
+      {{tok:Hover|--color-bg-subtle}}
+      {{tok:Current|--color-accent-subtle}}
+      {{tok:Unread dot|--color-accent}}
+      {{tok:Row padding|--space-3|--space-4}}
+      {{tok:Gap|--space-3}}
+      {{tok:Row min height (interactive)|--target-comfortable}}
+      {{tok:Title / meta font|--text-label|--text-body-sm}}
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2><p>Copy the semantic markup and product class; replace the sample content with real data.</p><pre><code>&lt;ul class=&quot;list&quot;&gt;&lt;li&gt;&lt;a href=&quot;../../mocks/pages/appointment-detail/default.html&quot;&gt;Nia Okafor · medium knotless braids&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;../../mocks/pages/care-and-review/default.html&quot;&gt;Care and review&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</code></pre><p>Forced <code>data-state</code> values are for documentation snapshots only.</p></section>
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;ul class="list card card--flush" aria-label="Notifications"&gt;
+  &lt;li&gt;&lt;a class="list__item list__item--interactive list__item--unread" href="/appointments/hp-1048"&gt;
+    &lt;div class="list__body"&gt;
+      &lt;div class="list__title"&gt;&lt;span class="visually-hidden"&gt;Unread: &lt;/span&gt;Nia received your request&lt;/div&gt;
+      &lt;div class="list__meta"&gt;Today at 9:42 am&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.list</code></td><td>Unstyled vertical list.</td></tr>
+    <tr><td><code>.list__item</code></td><td>Row with padding and a bottom divider.</td></tr>
+    <tr><td><code>.list__item--interactive</code></td><td>Link row: 44px minimum, hover tint.</td></tr>
+    <tr><td><code>.list__item--unread</code></td><td>Accent dot before the title.</td></tr>
+    <tr><td><code>.list__body</code> <code>.list__title</code> <code>.list__meta</code></td><td>Text parts.</td></tr>
+    <tr><td><code>aria-current="true"</code></td><td>Current item tint.</td></tr>
+    <tr><td><code>.truncate</code></td><td>Single-line ellipsis for meta.</td></tr>
+  </tbody></table>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><ul>{{mock:pages/my-appointments/default|visible specimen}}</ul><p>The examples use the corresponding selectors in <a href="../assets/components.css">components.css</a>.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Core-set component: the mocks show list-shaped content as stacks of cards:</p>
+  <ul>
+    {{mock:pages/notification-center/default|notifications as cards, each with a primary button}}
+    {{mock:pages/notification-center/unread|unread badge on every unread card}}
+    {{mock:pages/appointment-detail/default|"Prepare for your visit" ordered list in prose}}
+  </ul>
+  <p>Drift recorded: notifications were cards with one primary button each and a "Read" badge on read items (system recommends an interactive list with an unread marker only on unread rows); the ordered list in the preparation card had no inline padding and its numbers hung outside the card padding.</p>
+</section>

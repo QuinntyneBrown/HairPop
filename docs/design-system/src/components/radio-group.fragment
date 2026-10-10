@@ -1,26 +1,169 @@
-<!--meta {"lead": "Choose exactly one option from a named set.", "description": "Choose exactly one option from a named set.", "variants": "vertical, horizontal, card style", "states": "default, hover, focus, active, disabled, checked, invalid", "sources": [], "pills": ["Core primitive · derived"]} -->
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Choose exactly one option from a named set. The customer mocks do not yet show this core primitive. Its roles and states extend the same tokens and interaction rules as the extracted components.</p><p>Use it for this job; choose a different component when the interaction or information hierarchy changes.</p></section>
+<!--meta {"lead": "A radio group asks for exactly one answer from a short list that people should compare: a 1-to-5 rating, one of Nia's offered times, a braid size.", "description": "Vertical, horizontal and card radio groups with checked, invalid and disabled states in both themes.", "pills": ["Native <code>&lt;input type=\"radio\"&gt;</code>", "Status: stable"], "variants": "vertical, horizontal, card-style, rating", "states": "default, hover, focus, checked, disabled, invalid", "sources": ["pages/care-and-review/default", "pages/care-and-review/invalid", "pages/booking-request/default", "pages/booking-request/invalid"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a radio group when exactly one option must be chosen and there are two to five options worth seeing together: rating a visit, choosing small, medium or large braids, picking one of Nia’s offered times. Use a <a href="select.html">select</a> for longer lists and <a href="checkbox.html">checkboxes</a> when several can be chosen.</p>
+  <ul>
+    <li><b>Vertical</b> is the default and handles long labels.</li>
+    <li><b>Horizontal</b> suits short, ordered labels such as ratings 1 to 5.</li>
+    <li><b>Card</b> carries a title and a description, such as a time with its estimate.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2><div class="ds-anatomy"><figure class="ds-anatomy__figure"><fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset></figure><ol class="ds-anatomy__list"><li><div><b>Semantic element</b><small>Preserves the native role and browser interaction.</small></div></li><li><div><b>Visible content</b><small>Names the action, value, or status in plain language.</small></div></li><li><div><b>Component class</b><small>Reads shared roles from the token stylesheet.</small></div></li></ol></div></section>
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <fieldset><legend>Braid size</legend><div class="choice-group"><label class="choice"><input type="radio" name="rg-anat"><span>Small</span></label><label class="choice"><input type="radio" name="rg-anat" checked><span>Medium</span></label><label class="choice"><input type="radio" name="rg-anat"><span>Large</span></label></div></fieldset>
+      <span class="ds-callout" style="left: 30%; top: 14%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 34%; top: 54%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 60%; top: 54%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Legend</b><small>The question; label font in a <code>&lt;fieldset&gt;</code>.</small></div></li>
+      <li><div><b>Radio</b><small>20px circle; checked fills with the accent and shows a centred dot.</small></div></li>
+      <li><div><b>Option label</b><small>Body text; the whole row is clickable.</small></div></li>
+    </ol>
+  </div>
+</section>
 
-<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2><p>Choose the variant by meaning and context. Keep status or action labels explicit.</p><ul><li><strong>Vertical</strong> — use this form when the surrounding content calls for vertical presentation.</li><li><strong>Horizontal</strong> — use this form when the surrounding content calls for horizontal presentation.</li><li><strong>Card style</strong> — use this form when the surrounding content calls for card style presentation.</li></ul>{{example:Base specimen}}<fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset>{{/example}}</section>
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:[stack,start]Horizontal rating and card-style offered times.}}
+<fieldset><legend>Rating, 1 to 5</legend><div class="choice-group choice-group--inline"><label class="choice"><input type="radio" name="rg-rate"><span>1</span></label><label class="choice"><input type="radio" name="rg-rate"><span>2</span></label><label class="choice"><input type="radio" name="rg-rate"><span>3</span></label><label class="choice"><input type="radio" name="rg-rate"><span>4</span></label><label class="choice"><input type="radio" name="rg-rate" checked><span>5 (excellent)</span></label></div></fieldset>
+<fieldset><legend>Preferred time</legend><div class="choice-group" style="gap: var(--space-2);"><label class="choice choice--card"><input type="radio" name="rg-time" checked><span class="choice__text"><span>Sat 24 Oct · 10:00 am</span><small>About 5 hours · estimate $180–$240</small></span></label><label class="choice choice--card"><input type="radio" name="rg-time"><span class="choice__text"><span>Sun 25 Oct · 11:00 am</span><small>About 5 hours · estimate $180–$240</small></span></label></div></fieldset>
+  {{/example}}
+</section>
 
-<section class="ds-section" id="sizes" data-na="This component has one size; it adapts through content and layout tokens."><h2><a href="#sizes">Sizes</a></h2></section>
+<section class="ds-section" id="sizes" data-na="Radios have one size: a 20px control in a row at least 24px tall; the card variant adds padding, not size."><h2><a href="#sizes">Sizes</a></h2></section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>The table forces pointer and focus states with <code>data-state</code> for review. Production interactions use native attributes and pseudo-classes.</p><div class="ds-matrix"><table><thead><tr><th scope="col">Specimen</th><th scope="col">default</th><th scope="col">hover</th><th scope="col">focus</th><th scope="col">active</th><th scope="col">disabled</th><th scope="col">checked</th><th scope="col">invalid</th></tr></thead><tbody><tr><th scope="row">Radio group</th><td><fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset></td><td><fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input data-state="hover" type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset></td><td><fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input data-state="focus" type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset></td><td><fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input data-state="active" type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset></td><td><fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input data-state="disabled" disabled type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset></td><td><fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input data-state="checked" type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset></td><td><fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input data-state="invalid" aria-invalid="true" type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset></td></tr></tbody></table></div>{{themes}}<fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset>{{/themes}}</section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Value</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Disabled</th><th scope="col">Invalid</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Unchecked</th>
+        <td><label class="choice"><input type="radio" name="rs-1"><span>Small</span></label></td>
+        <td><label class="choice"><input type="radio" name="rs-2" data-state="hover"><span>Small</span></label></td>
+        <td><label class="choice"><input type="radio" name="rs-3" data-state="focus"><span>Small</span></label></td>
+        <td><label class="choice"><input type="radio" name="rs-4" disabled><span>Small</span></label></td>
+        <td><label class="choice"><input type="radio" name="rs-5" aria-invalid="true"><span>Small</span></label></td></tr>
+      <tr><th scope="row">Checked</th>
+        <td><label class="choice"><input type="radio" name="rs-6" checked><span>Medium</span></label></td>
+        <td><label class="choice"><input type="radio" name="rs-7" checked data-state="hover"><span>Medium</span></label></td>
+        <td><label class="choice"><input type="radio" name="rs-8" checked data-state="focus"><span>Medium</span></label></td>
+        <td><label class="choice"><input type="radio" name="rs-9" checked disabled><span>Medium</span></label></td>
+        <td>—</td></tr>
+      <tr><th scope="row">Card</th>
+        <td><label class="choice choice--card"><input type="radio" name="rs-10"><span>Sun 11:00 am</span></label></td>
+        <td><label class="choice choice--card"><input type="radio" name="rs-11" data-state="hover"><span>Sun 11:00 am</span></label></td>
+        <td><label class="choice choice--card"><input type="radio" name="rs-12" data-state="focus"><span>Sun 11:00 am</span></label></td>
+        <td><label class="choice choice--card"><input type="radio" name="rs-13" disabled><span>Sun 11:00 am</span></label></td>
+        <td><label class="choice choice--card"><input type="radio" name="rs-14" aria-invalid="true"><span>Sun 11:00 am</span></label></td></tr>
+      <tr><th scope="row">Card, checked</th>
+        <td><label class="choice choice--card"><input type="radio" name="rs-15" checked><span>Sat 10:00 am</span></label></td>
+        <td>—</td>
+        <td><label class="choice choice--card"><input type="radio" name="rs-16" checked data-state="focus"><span>Sat 10:00 am</span></label></td>
+        <td><label class="choice choice--card"><input type="radio" name="rs-17" checked disabled><span>Sat 10:00 am</span></label></td>
+        <td>—</td></tr>
+    </tbody>
+  </table></div>
+  {{example:[stack,start]Invalid group: the fieldset is described by the error and every radio carries <code>aria-invalid</code>.}}
+<fieldset aria-describedby="rg-inv-error"><legend>Rating, 1 to 5</legend><div class="choice-group choice-group--inline"><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>1</span></label><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>2</span></label><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>3</span></label><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>4</span></label><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>5</span></label></div><span class="field__error" id="rg-inv-error">Choose a rating from 1 to 5.</span></fieldset>
+  {{/example}}
+  <h3>Both themes</h3>
+  {{themes:stack}}<label class="choice"><input type="radio" name="rt-l" checked><span>Medium</span></label><label class="choice"><input type="radio" name="rt-l"><span>Large</span></label><label class="choice choice--card"><input type="radio" name="rt-c" checked><span>Sat 24 Oct · 10:00 am</span></label>{{/themes}}
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>Keep the component within the 16px phone margin, allow text to wrap without clipping, and preserve a reachable 24px minimum target. At 768px and 1024px, let the containing grid set width rather than adding fixed dimensions.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Horizontal groups wrap; if options wrap onto three lines at 360px, switch to vertical.</li>
+    <li>Card options are full width on phones and may sit two per row from 768px.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2><p>The same markup appears in light and dark themes. Use the semantic roles in the token table; override a component token only for a local variation.</p>{{themes}}<fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset>{{/themes}}</section>
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Shares the checkbox's tokens: a <code>--color-border-strong</code> ring, <code>--color-accent</code> fill and <code>--color-fg-on-accent</code> dot. The card variant adds <code>--color-accent-subtle</code> when checked.</p>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><h3>Role and keyboard</h3><p>Tab enters the group; arrow keys move selection and focus among enabled options; Space selects the focused option.</p><h3>Focus and labelling</h3><p>Keep the shared visible focus ring. The visible text supplies the accessible name; icon-only actions need an explicit label. Associate help and errors with the relevant control.</p><h3>Contrast, motion, and touch</h3><p>Text uses a 4.5:1 minimum, meaningful controls and focus boundaries use 3:1, and all actions keep a 24px minimum target with comfortable spacing. Reduced motion removes decorative transitions. Check the actual foreground and background pair in both themes on the <a href="../foundations/color.html">Color foundation</a>.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Native radios sharing a <code>name</code>, in a <code>&lt;fieldset&gt;</code> with <code>&lt;legend&gt;</code>; see the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/radio/">APG Radio Group pattern</a>.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Moves into the group (to the checked radio, or the first) and out of it.</td></tr>
+    <tr><td><kbd>↓</kbd> / <kbd>→</kbd></td><td>Checks the next option, wrapping.</td></tr>
+    <tr><td><kbd>↑</kbd> / <kbd>←</kbd></td><td>Checks the previous option, wrapping.</td></tr>
+    <tr><td><kbd>Space</kbd></td><td>Checks the focused option if none is checked.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The ring surrounds the circle; on cards it stays on the radio so it is clear which control moves.</p>
+  <h3>Labelling</h3>
+  <p>The legend asks the question; option labels answer it. Ratings label their top end ("5 (excellent)") so the numbers have meaning.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Ring on card|--color-border-strong|--color-bg-surface|3}}
+    {{pair:Checked fill|--color-accent|--color-bg-surface|3}}
+    {{pair:Option text on checked card|--color-fg-default|--color-accent-subtle|4.5}}
+  </div>
+  <h3>Motion</h3>
+  <p>The fill transitions over <code>--duration-fast</code>.</p>
+  <h3>Touch</h3>
+  <p>Each label row is at least 24px tall; rating options sit 24px apart; cards are 52px or taller.</p>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>Use sentence case. For radio group, keep the wording concrete and close to the value or action it describes. Show “Awaiting reply” until the braider accepts; label a price estimate as an estimate.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Legends are questions or nouns: "Rating, 1 to 5", "Preferred time".</li>
+    <li>Options are parallel and mutually exclusive; times read "Sat 24 Oct · 10:00 am".</li>
+    <li>Pre-select an option only when there is a safe, likely default (the time Maya first asked for).</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><fieldset class="choice-group"><legend>Preferred appointment</legend><label class="choice"><input type="radio" name="time-preview" checked><span>Sat 24 Oct, 10:00 am</span></label><label class="choice"><input type="radio" name="time-preview"><span>Sun 25 Oct, 11:00 am</span></label></fieldset></div><figcaption>Use the radio group for its stated job: choose exactly one option from a named set.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Unclear action</span></div><figcaption>Do not replace the semantic element with unlabelled text or a decorative shape.</figcaption></figure><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Pair colour with an explicit state label.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not make colour or a dot the only carrier of status.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><fieldset><legend>Rating, 1 to 5</legend><div class="choice-group choice-group--inline"><label class="choice"><input type="radio" name="dd-r1"><span>1</span></label><label class="choice"><input type="radio" name="dd-r1"><span>2</span></label><label class="choice"><input type="radio" name="dd-r1"><span>3</span></label><label class="choice"><input type="radio" name="dd-r1"><span>4</span></label><label class="choice"><input type="radio" name="dd-r1" checked><span>5</span></label></div></fieldset></div><figcaption>Five ratings, all visible, one choice.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="dd-rnum">Rating, 1 to 5</label><input class="input" id="dd-rnum" type="number" value="5"></div></div><figcaption>The care-and-review mock asks for the rating in a number input, which accepts 0, 7 or 4.5.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><label class="choice choice--card"><input type="radio" name="dd-t" checked><span class="choice__text"><span>Sat 24 Oct · 10:00 am</span><small>Offered by Nia</small></span></label></div><figcaption>Offer Nia’s available times as choices.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="dd-dt">Preferred time</label><input class="input" id="dd-dt" type="datetime-local" value="2026-10-24T10:00"></div></div><figcaption>The booking-request mock uses a free date-time picker, so Maya can ask for a time Nia never offered.</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>{{tok:Color accent|--color-accent}}{{tok:Color border strong|--color-border-strong}}{{tok:Space 3|--space-3}}</tbody></table></div></section>
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Ring|--color-border-strong}}
+      {{tok:Checked fill|--color-accent}}
+      {{tok:Dot|--color-fg-on-accent}}
+      {{tok:Checked card tint|--color-accent-subtle}}
+      {{tok:Invalid ring|--color-danger-solid}}
+      {{tok:Radius|--radius-full}}
+      {{tok:Card padding / radius|--space-4|--radius-md}}
+      {{tok:Inline gap row / column|--space-2|--space-6}}
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2><p>Copy the semantic markup and product class; replace the sample content with real data.</p><pre><code>&lt;fieldset class=&quot;choice-group&quot;&gt;&lt;legend&gt;Preferred appointment&lt;/legend&gt;&lt;label class=&quot;choice&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;time-preview&quot; checked&gt;&lt;span&gt;Sat 24 Oct, 10:00 am&lt;/span&gt;&lt;/label&gt;&lt;label class=&quot;choice&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;time-preview&quot;&gt;&lt;span&gt;Sun 25 Oct, 11:00 am&lt;/span&gt;&lt;/label&gt;&lt;/fieldset&gt;</code></pre><p>Forced <code>data-state</code> values are for documentation snapshots only.</p></section>
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;fieldset aria-describedby="rating-error"&gt;
+  &lt;legend&gt;Rating, 1 to 5&lt;/legend&gt;
+  &lt;div class="choice-group choice-group--inline"&gt;
+    &lt;label class="choice"&gt;&lt;input type="radio" name="rating" value="1"&gt;&lt;span&gt;1&lt;/span&gt;&lt;/label&gt;
+    …
+    &lt;label class="choice"&gt;&lt;input type="radio" name="rating" value="5"&gt;&lt;span&gt;5 (excellent)&lt;/span&gt;&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.choice</code> with <code>type="radio"</code></td><td>Round control.</td></tr>
+    <tr><td><code>.choice-group</code> / <code>--inline</code></td><td>Vertical / wrapping horizontal group.</td></tr>
+    <tr><td><code>.choice--card</code></td><td>Card option; highlights with <code>:has(input:checked)</code>.</td></tr>
+    <tr><td><code>aria-invalid="true"</code> + <code>fieldset[aria-describedby]</code></td><td>Invalid group with its message.</td></tr>
+    <tr><td><code>data-state="hover|focus|checked"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><p>Core catalog primitive. Derived from <a href="../assets/components.css">the shared component stylesheet</a> and the related mock patterns; no direct screen specimen exists yet.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    {{mock:pages/care-and-review/default|rating as a number input}}
+    {{mock:pages/care-and-review/invalid|"Choose a rating from 1 to 5."}}
+    {{mock:pages/booking-request/default|preferred time as <code>datetime-local</code>}}
+    {{mock:pages/booking-request/invalid|"Choose an offered time."}}
+  </ul>
+  <p>Drift fixed during extraction: no mock used radios. The rating was a number input and the preferred time a free <code>datetime-local</code> although only 1–5 and Nia’s offered times are valid; both become radio groups. The card variant was added for offered times.</p>
+</section>

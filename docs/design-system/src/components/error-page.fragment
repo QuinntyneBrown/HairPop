@@ -1,26 +1,185 @@
-<!--meta {"lead": "Give a safe way forward when a whole page cannot be used.", "description": "Give a safe way forward when a whole page cannot be used.", "variants": "404, 403, 500, offline, maintenance", "states": "default, hover, focus, active, disabled, error, offline", "sources": ["pages/server-error/default"], "pills": ["Extracted"]} -->
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Give a safe way forward when a whole page cannot be used. This component appears in <a href="../../mocks/pages/server-error/default.html">pages/server-error/default</a>.</p><p>Use it for this job; choose a different component when the interaction or information hierarchy changes.</p></section>
+<!--meta {"lead": "Error pages keep HairPop’s shell around a full-page empty state when a whole page cannot be shown: it does not exist, this account cannot open it, the service failed, or the device is offline.", "description": "404, 403, 500 and offline pages inside the product shell, each with one recovery action.", "pills": ["Status: stable", "Keeps the shell"], "variants": "not found (404), forbidden (403), server error (500, with reference id), offline", "states": "default, action focused, retrying (busy), recovered", "sources": ["pages/not-found/default", "pages/forbidden/default", "pages/server-error/default", "pages/offline/default"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>An error page replaces the page content, not the page: the top bar, navigation and footer stay, so the person can still go anywhere. Inside the main region it is a full-size <a href="empty-state.html">empty state</a> whose title is the page's <code>h1</code>, with one sentence and one recovery action.</p>
+  <ul>
+    <li><b>Not found (404)</b>: the address is wrong or old. Recover with "Explore styles".</li>
+    <li><b>Forbidden (403)</b>: the page exists but belongs to another account (someone else's appointment). Recover with "Sign in".</li>
+    <li><b>Server error (500)</b>: HairPop failed. Say what did not happen ("Your booking request has not been resent"), offer "Try again" and show a reference id for support.</li>
+    <li><b>Offline</b>: the device has no connection. Say what still works ("Saved appointment details remain available") and offer "Try again".</li>
+  </ul>
+  <p>When only part of a page fails, keep the page and use a region error state or a warning alert instead.</p>
+</section>
 
-<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2><div class="ds-anatomy"><figure class="ds-anatomy__figure"><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></figure><ol class="ds-anatomy__list"><li><div><b>Semantic element</b><small>Preserves the native role and browser interaction.</small></div></li><li><div><b>Visible content</b><small>Names the action, value, or status in plain language.</small></div></li><li><div><b>Component class</b><small>Reads shared roles from the token stylesheet.</small></div></li></ol></div></section>
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure" style="padding: var(--space-4);">
+      <div class="ds-frame" style="width: 100%; margin: 0;">
+        <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html">{{icon:sparkle}}HairPop</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
+        <div class="ds-frame__body"><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:search}}</div><p class="empty__title">We couldn’t find that page</p><p class="empty__text">The link may be old, or the address may have changed.</p><div class="empty__actions"><a class="btn btn--primary btn--sm" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></div></section></div>
+      </div>
+      <span class="ds-callout" style="left: 6%; top: 10%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 44%; top: 34%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 24%; top: 58%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 36%; top: 82%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Product shell</b><small>Top bar, navigation and footer stay, so every route out remains.</small></div></li>
+      <li><div><b>Icon</b><small>Search (404), lock (403), alert (500), wifi-off (offline) in a tinted circle.</small></div></li>
+      <li><div><b>Heading and sentence</b><small>The page's <code>h1</code> (styled as the empty title) and one sentence on what happened and what is safe.</small></div></li>
+      <li><div><b>Recovery action</b><small>One primary action; a 500 page adds a reference id under it.</small></div></li>
+    </ol>
+  </div>
+</section>
 
-<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2><p>Choose the variant by meaning and context. Keep status or action labels explicit.</p><ul><li><strong>404</strong> — use this form when the surrounding content calls for 404 presentation.</li><li><strong>403</strong> — use this form when the surrounding content calls for 403 presentation.</li><li><strong>500</strong> — use this form when the surrounding content calls for 500 presentation.</li><li><strong>Offline</strong> — use this form when the surrounding content calls for offline presentation.</li><li><strong>Maintenance</strong> — use this form when the surrounding content calls for maintenance presentation.</li></ul>{{example:Base specimen}}<section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section>{{/example}}</section>
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>Four variants, one per cause. Each keeps the same structure and changes the icon, tint and copy. In production the title is <code>&lt;h1 class="empty__title"&gt;</code>; these frames use a paragraph so this page keeps one <code>h1</code>.</p>
+  <h3>Not found (404)</h3>
+  <div class="ds-frame">
+    <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html">{{icon:sparkle}}HairPop</a><nav class="topbar__nav" aria-label="Primary, not found example"><a class="nav-link" href="../../mocks/pages/style-gallery/default.html">Styles</a><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">Appointments</a></nav><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
+    <div class="ds-frame__body"><section class="empty"><div class="empty__icon" aria-hidden="true">{{icon:search|icon--lg}}</div><p class="empty__title">We couldn’t find that page</p><p class="empty__text">The link may be old, or the address may have changed.</p><div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></div></section></div>
+  </div>
+  <h3>Forbidden (403)</h3>
+  <div class="ds-frame">
+    <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html">{{icon:sparkle}}HairPop</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/sign-in/default.html">Sign in</a></header>
+    <div class="ds-frame__body"><section class="empty empty--warning"><div class="empty__icon" aria-hidden="true">{{icon:lock|icon--lg}}</div><p class="empty__title">You can’t open this page</p><p class="empty__text">Sign in with the account used for this appointment.</p><div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/sign-in/default.html">Sign in</a></div></section></div>
+  </div>
+  <h3>Server error (500)</h3>
+  <div class="ds-frame">
+    <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html">{{icon:sparkle}}HairPop</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
+    <div class="ds-frame__body"><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle|icon--lg}}</div><p class="empty__title">HairPop needs a moment</p><p class="empty__text">We couldn’t load this page. Your booking request has not been resent.</p><div class="empty__actions"><button class="btn btn--primary" type="button">Try again</button><a class="btn" href="../../mocks/pages/help/default.html">Contact support</a></div><p class="empty__reference">Reference: HP-ERR-7F3K2Q · Sat 10 Oct, 9:42 am</p></section></div>
+  </div>
+  <h3>Offline</h3>
+  <div class="ds-frame">
+    <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html">{{icon:sparkle}}HairPop</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
+    <div class="ds-frame__body"><section class="empty empty--warning"><div class="empty__icon" aria-hidden="true">{{icon:wifi-off|icon--lg}}</div><p class="empty__title">You’re offline</p><p class="empty__text">Saved appointment details remain available. Requests need a connection.</p><div class="empty__actions"><button class="btn btn--primary" type="button">Try again</button><a class="btn" href="../../mocks/pages/my-appointments/default.html">View saved appointments</a></div></section></div>
+  </div>
+</section>
 
-<section class="ds-section" id="sizes" data-na="This component has one size; it adapts through content and layout tokens."><h2><a href="#sizes">Sizes</a></h2></section>
+<section class="ds-section" id="sizes" data-na="Error pages always use the full empty-state size inside the page's main region; compact is for regions inside a page."><h2><a href="#sizes">Sizes</a></h2></section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>The table forces pointer and focus states with <code>data-state</code> for review. Production interactions use native attributes and pseudo-classes.</p><div class="ds-matrix"><table><thead><tr><th scope="col">Specimen</th><th scope="col">default</th><th scope="col">hover</th><th scope="col">focus</th><th scope="col">active</th><th scope="col">disabled</th><th scope="col">error</th><th scope="col">offline</th></tr></thead><tbody><tr><th scope="row">Error page</th><td><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a data-state="hover" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a data-state="focus" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a data-state="active" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a data-state="disabled" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a data-state="error" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a data-state="offline" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td></tr></tbody></table></div>{{themes}}<section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section>{{/themes}}</section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Error pages are static responses. They have no loading or nested error state of their own; the interactive states belong to the recovery action.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Action focused</th><th scope="col">Retrying</th><th scope="col">Recovered</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Server error</th>
+        <td><section class="empty empty--error empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle}}</div><p class="empty__title">HairPop needs a moment</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button">Try again</button></div></section></td>
+        <td><section class="empty empty--error empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle}}</div><p class="empty__title">HairPop needs a moment</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button" data-state="focus">Try again</button></div></section></td>
+        <td><section class="empty empty--error empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle}}</div><p class="empty__title">HairPop needs a moment</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button" aria-busy="true">Try again</button></div></section></td>
+        <td><p class="text-muted">The requested page loads in place.</p></td></tr>
+      <tr><th scope="row">Offline</th>
+        <td><section class="empty empty--warning empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:wifi-off}}</div><p class="empty__title">You’re offline</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button">Try again</button></div></section></td>
+        <td><section class="empty empty--warning empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:wifi-off}}</div><p class="empty__title">You’re offline</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button" data-state="focus">Try again</button></div></section></td>
+        <td><section class="empty empty--warning empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:wifi-off}}</div><p class="empty__title">You’re offline</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button" aria-busy="true">Try again</button></div></section></td>
+        <td><span class="inline-status inline-status--success" role="status">{{icon:check|icon--sm}}Back online</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  {{themes:stack}}<section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:search}}</div><p class="empty__title">We couldn’t find that page</p></section><section class="empty empty--error empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle}}</div><p class="empty__title">HairPop needs a moment</p><p class="empty__reference">Reference: HP-ERR-7F3K2Q</p></section><section class="empty empty--warning empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:wifi-off}}</div><p class="empty__title">You’re offline</p></section>{{/themes}}
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>Keep the component within the 16px phone margin, allow text to wrap without clipping, and preserve a reachable 24px minimum target. At 768px and 1024px, let the containing grid set width rather than adding fixed dimensions.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>The shell behaves as on every page: top-bar links collapse below 768px; the footer wraps.</li>
+    <li>The empty state centres in <code>.product-main</code> with the full padding; on phones its actions stack and the primary action may be full width.</li>
+    <li>The reference id wraps rather than overflowing; it is selectable text so it can be copied into a support email.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2><p>The same markup appears in light and dark themes. Use the semantic roles in the token table; override a component token only for a local variation.</p>{{themes}}<section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section>{{/themes}}</section>
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Error pages add no tokens: they inherit the shell and the empty-state tokens (<code>--empty-icon-bg</code>, <code>--empty-icon-fg</code>). 404 uses the accent tint so a wrong link does not feel like a failure; 403 and offline use warning; 500 uses danger. The reference id uses <code>--text-code</code> in <code>--color-fg-subtle</code>.</p>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><h3>Role and keyboard</h3><p>Tab and Shift+Tab follow DOM order; Enter or Space activates native controls, while links use Enter. Static content remains in reading order.</p><h3>Focus and labelling</h3><p>Keep the shared visible focus ring. The visible text supplies the accessible name; icon-only actions need an explicit label. Associate help and errors with the relevant control.</p><h3>Contrast, motion, and touch</h3><p>Text uses a 4.5:1 minimum, meaningful controls and focus boundaries use 3:1, and all actions keep a 24px minimum target with comfortable spacing. Reduced motion removes decorative transitions. Check the actual foreground and background pair in both themes on the <a href="../foundations/color.html">Color foundation</a>.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>A normal page: skip link, <code>header</code>, <code>nav</code>, <code>main</code> and <code>footer</code> landmarks, and an <code>&lt;h1 class="empty__title"&gt;</code>. The <code>&lt;title&gt;</code> names the error: "Page not found — HairPop". Serve the matching HTTP status (404, 403, 500).</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Skip link, top bar, then the recovery and secondary actions, then the footer. The icon and text are not focusable.</td></tr>
+    <tr><td><kbd>Enter</kbd> / <kbd>Space</kbd></td><td>Activate the recovery action.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>On a full page load focus starts at the top as usual. In the single-page app, when a route resolves to an error page, move focus to the <code>h1</code> (<code>tabindex="-1"</code>) so the change is announced. After "Try again" fails, keep focus on the button and announce the result.</p>
+  <h3>Labelling</h3>
+  <p>The icon is <code>aria-hidden</code>; the heading carries the meaning. The reference id is plain text labelled "Reference:".</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Heading on page|--color-fg-default|--color-bg-canvas|4.5}}
+    {{pair:Sentence on page|--color-fg-muted|--color-bg-canvas|4.5}}
+    {{pair:Reference id on page|--color-fg-subtle|--color-bg-canvas|4.5}}
+    {{pair:Danger icon on tint|--color-danger-icon|--color-danger-bg|3}}
+    {{pair:Warning icon on tint|--color-warning-icon|--color-warning-bg|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>None beyond the shell. The page does not animate in, and "Try again" shows the button's loading state.</p>
+  <h3>Touch</h3>
+  <p>The recovery action is at least 40px tall and full width on phones when it is the only action.</p>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>Use sentence case. For error page, keep the wording concrete and close to the value or action it describes. Show “Awaiting reply” until the braider accepts; label a price estimate as an estimate.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Heading in plain words, no codes: "We couldn’t find that page", "You can’t open this page", "HairPop needs a moment", "You’re offline".</li>
+    <li>One sentence on what happened and what is safe: "Your booking request has not been resent."</li>
+    <li>One recovery action: "Explore styles", "Sign in", "Try again". Add "Contact support" only for 500.</li>
+    <li>Never blame the person ("You typed the wrong address"). Never show stack traces.</li>
+    <li>500 pages show "Reference:" with an id and time support can find.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><section class="empty empty--error"><div class="empty__icon" aria-hidden="true">!</div><h3 class="empty__title">HairPop needs a moment</h3><p class="empty__text">We couldn’t load this page.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></div><figcaption>Use the error page for its stated job: give a safe way forward when a whole page cannot be used.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Unclear action</span></div><figcaption>Do not replace the semantic element with unlabelled text or a decorative shape.</figcaption></figure><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Pair colour with an explicit state label.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not make colour or a dot the only carrier of status.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><section class="empty empty--error empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle}}</div><p class="empty__title">HairPop needs a moment</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button">Try again</button></div><p class="empty__reference">Reference: HP-ERR-7F3K2Q</p></section></div><figcaption>A 500 page with a danger tint and a reference id support can trace.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">✦</div><p class="empty__title">HairPop needs a moment</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button">Try again</button></div></section></div><figcaption>The service-error mock has no reference id, and its ✦ glyph and accent tint look like a first-run state.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:search}}</div><p class="empty__title">We couldn’t find that page</p></section></div><figcaption>An error page is a static response, rendered immediately.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card" aria-hidden="true"><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div></div><figcaption>The not-found, forbidden and server-error mocks each have loading and "error" states, which an error page cannot meaningfully have.</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>{{tok:Color danger fg|--color-danger-fg}}{{tok:Color fg muted|--color-fg-muted}}{{tok:Space 6|--space-6}}</tbody></table></div></section>
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:404 icon circle|--color-accent-subtle|--color-fg-accent}}
+      {{tok:403 / offline icon circle|--color-warning-bg|--color-warning-icon}}
+      {{tok:500 icon circle|--color-danger-bg|--color-danger-icon}}
+      {{tok:Page background|--color-bg-canvas}}
+      {{tok:Reference id|--color-fg-subtle}}
+      {{tok:Reference font|--text-code|--font-size-xs}}
+      {{tok:Main padding|--space-8|--space-12}}
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2><p>Copy the semantic markup and product class; replace the sample content with real data.</p><pre><code>&lt;section class=&quot;empty empty--error&quot;&gt;&lt;div class=&quot;empty__icon&quot; aria-hidden=&quot;true&quot;&gt;!&lt;/div&gt;&lt;h3 class=&quot;empty__title&quot;&gt;HairPop needs a moment&lt;/h3&gt;&lt;p class=&quot;empty__text&quot;&gt;We couldn’t load this page.&lt;/p&gt;&lt;a class=&quot;btn btn--primary&quot; href=&quot;../../mocks/pages/style-gallery/default.html&quot;&gt;Explore styles&lt;/a&gt;&lt;/section&gt;</code></pre><p>Forced <code>data-state</code> values are for documentation snapshots only.</p></section>
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;main id="main" class="container product-main"&gt;
+  &lt;section class="empty empty--error"&gt;
+    &lt;div class="empty__icon" aria-hidden="true"&gt;&lt;svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"&gt;…&lt;/svg&gt;&lt;/div&gt;
+    &lt;h1 class="empty__title" tabindex="-1"&gt;HairPop needs a moment&lt;/h1&gt;
+    &lt;p class="empty__text"&gt;We couldn’t load this page. Your booking request has not been resent.&lt;/p&gt;
+    &lt;div class="empty__actions"&gt;
+      &lt;button class="btn btn--primary" type="button"&gt;Try again&lt;/button&gt;
+      &lt;a class="btn" href="/help"&gt;Contact support&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;p class="empty__reference"&gt;Reference: HP-ERR-7F3K2Q · Sat 10 Oct, 9:42 am&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.product-shell</code> / <code>.product-main</code></td><td>The normal shell; error pages never drop it.</td></tr>
+    <tr><td><code>.empty</code> + <code>.empty--error</code> / <code>.empty--warning</code></td><td>Full-size empty state with the cause's tint (404 uses the default).</td></tr>
+    <tr><td><code>h1.empty__title</code></td><td>The page heading; <code>tabindex="-1"</code> so client-side routes can focus it.</td></tr>
+    <tr><td><code>.empty__reference</code></td><td>Reference id for 500 pages.</td></tr>
+  </tbody></table>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><ul>{{mock:pages/server-error/default|visible specimen}}</ul><p>The examples use the corresponding selectors in <a href="../assets/components.css">components.css</a>.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    {{mock:pages/not-found/default|404}}
+    {{mock:pages/forbidden/default|403}}
+    {{mock:pages/server-error/default|500}}
+    {{mock:pages/offline/default|offline}}
+    {{mock:pages/not-found/loading|loading state on a static page}}
+    {{mock:pages/server-error/error|error state of an error page}}
+  </ul>
+  <p>Drift fixed during extraction: every error page used the ✦ glyph and the accent tint (now an icon and tint per cause); the 500 page had no reference id (now <code>.empty__reference</code>); the empty title was an <code>h2</code> repeating the page header's <code>h1</code> word for word (now the empty title is the page's only <code>h1</code>); the not-found, forbidden, server-error and offline mocks carry loading and error states that a static error response cannot have (dropped).</p>
+</section>
