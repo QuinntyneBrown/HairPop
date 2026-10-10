@@ -206,13 +206,13 @@
 </section>
 
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
-  <p>Core-set component: the mocks show list-shaped content as stacks of cards:</p>
   <ul>
-    <li><a href="../../mocks/pages/notification-center/default.html">pages/notification-center/default</a> (notifications as cards, each with a primary button)</li>
-    <li><a href="../../mocks/pages/notification-center/unread.html">pages/notification-center/unread</a> (unread badge on every unread card)</li>
-    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> ("Prepare for your visit" ordered list in prose)</li>
+    <li><a href="../../mocks/pages/notification-center/default.html">pages/notification-center/default</a> (notifications as an interactive list in a flush card)</li>
+    <li><a href="../../mocks/pages/notification-center/unread.html">pages/notification-center/unread</a> (unread rows with the dot and a hidden "Unread:" prefix)</li>
+    <li><a href="../../mocks/pages/notification-center/loading.html">pages/notification-center/loading</a> (skeleton rows in the same flush list)</li>
+    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> ("Prepare for your visit" ordered list in prose (not this component))</li>
   </ul>
-  <p>Drift recorded: notifications were cards with one primary button each and a "Read" badge on read items (system recommends an interactive list with an unread marker only on unread rows); the ordered list in the preparation card had no inline padding and its numbers hung outside the card padding. Fixed in the stylesheet: link rows lost the rule between rows (each <code>&lt;a&gt;</code> was the last child of its <code>&lt;li&gt;</code>); the focus ring was clipped by the flush card; a trailing badge squeezed long titles; the list and the card shared one element, which the components cannot (now nested).</p>
+  <p>Drift fixed: notifications were cards with one primary button each and a "Read" badge on read items (now an interactive list with an unread marker only on unread rows); the ordered list in the preparation card had no inline padding and its numbers hung outside the card padding. Fixed in the stylesheet: link rows lost the rule between rows (each <code>&lt;a&gt;</code> was the last child of its <code>&lt;li&gt;</code>); the focus ring was clipped by the flush card; a trailing badge squeezed long titles; the list and the card shared one element, which the components cannot (now nested).</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>
