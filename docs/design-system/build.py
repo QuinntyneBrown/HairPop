@@ -27,7 +27,7 @@ from __future__ import annotations
 import html
 import json
 import re
-from datetime import date
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent
@@ -210,7 +210,10 @@ def footer(prefix: str) -> str:
 def page(folder: str, slug: str, title: str, kicker: str) -> dict:
     meta, body = read_fragment(folder, slug)
     if meta.get("missing"):
-        raise FileNotFoundError(f"src/{folder}/{slug}.html is missing")
+        if "--allow-missing" not in sys.argv:
+            raise FileNotFoundError(f"src/{folder}/{slug}.html is missing")
+        print(f"skipped missing src/{folder}/{slug}.html")
+        return {"slug": slug, "title": title, "folder": folder, **meta}
     toc = "".join(f'<li><a href="#{sid}">{label}</a></li>' for sid, label in SECTION_RE.findall(body))
     pills = ['<span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span>'] if folder != "foundations" else []
     pills += [f'<span class="ds-pill">{p}</span>' for p in meta.get("pills", [])]

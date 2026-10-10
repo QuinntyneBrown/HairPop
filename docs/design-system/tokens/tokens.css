@@ -115,6 +115,106 @@
   --letter-spacing-normal: 0;
   --letter-spacing-wide: 0.14em;    /* uppercase overlines, eyebrows, badges */
 
+  /* ---------- Semantic: typography roles ------------------------------- */
+  --text-display: var(--font-weight-light) var(--font-size-5xl) / var(--line-height-tight) var(--font-family-display);
+  --text-h1: var(--font-weight-light) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-display);
+  --text-h2: var(--font-weight-light) var(--font-size-3xl) / var(--line-height-tight) var(--font-family-display);
+  --text-h3: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-snug) var(--font-family-sans);
+  --text-h4: var(--font-weight-semibold) var(--font-size-md) / var(--line-height-snug) var(--font-family-sans);
+  --text-body-lg: var(--font-weight-regular) var(--font-size-lg) / var(--line-height-relaxed) var(--font-family-sans);
+  --text-body: var(--font-weight-regular) var(--font-size-md) / var(--line-height-normal) var(--font-family-sans);
+  --text-body-sm: var(--font-weight-regular) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
+  --text-caption: var(--font-weight-medium) var(--font-size-xs) / var(--line-height-normal) var(--font-family-sans);
+  --text-label: var(--font-weight-semibold) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
+  --text-overline: var(--font-weight-semibold) var(--font-size-xs) / var(--line-height-normal) var(--font-family-sans);
+  --text-code: var(--font-weight-regular) var(--font-size-sm) / var(--line-height-normal) var(--font-family-mono);
+
+  /* ---------- Semantic: spacing (4px base) ----------------------------- */
+  --space-0: 0;
+  --space-0-5: 0.125rem; /* 2px  hairline gaps */
+  --space-1: 0.25rem;    /* 4px  icon-to-label, label-to-input */
+  --space-2: 0.5rem;     /* 8px  inside chips, between inline items */
+  --space-3: 0.75rem;    /* 12px compact padding, cluster gap */
+  --space-4: 1rem;       /* 16px default padding, stack gap */
+  --space-5: 1.25rem;    /* 20px */
+  --space-6: 1.5rem;     /* 24px card padding, dialog padding */
+  --space-8: 2rem;       /* 32px section gap */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px page bottom padding, empty-state padding */
+  --space-16: 4rem;      /* 64px hero spacing */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+
+  /* ---------- Semantic: layout ----------------------------------------- */
+  --layout-breakpoint-sm: 40rem;   /* 640px  large phones: dialogs centre, toasts dock right */
+  --layout-breakpoint-md: 48rem;   /* 768px  tablets: top nav links, 2-column grids */
+  --layout-breakpoint-lg: 64rem;   /* 1024px laptops: 3-column grids, 12 columns */
+  --layout-breakpoint-xl: 80rem;   /* 1280px desktops: container max */
+  --layout-breakpoint-2xl: 96rem;  /* 1536px wide: content stays at container max */
+
+  --layout-columns: 4;              /* grid columns at the current breakpoint */
+  --layout-gutter: var(--space-4);  /* gap between columns */
+  --layout-margin: var(--space-4);  /* viewport edge to content */
+  --layout-container-max: 80rem;    /* 1280px */
+  --layout-form-max: 38rem;         /* 608px  single-column form panels, auth cards */
+  --layout-measure: 65ch;           /* max line length for prose */
+  --layout-sidebar-width: 16rem;    /* 256px */
+  --layout-topbar-height: 3.5rem;   /* 56px */
+  --layout-card-min: 18rem;         /* 288px  smallest card in an auto-fill grid */
+
+  /* ---------- Semantic: shape ------------------------------------------ */
+  --radius-xs: 0.125rem;  /* 2px  checkbox */
+  --radius-sm: 0.25rem;   /* 4px  inline code, tooltips, skeleton text */
+  --radius-md: 0.5rem;    /* 8px  buttons, inputs, nav links, media */
+  --radius-lg: 0.75rem;   /* 12px cards, dialogs, tables */
+  --radius-xl: 1rem;      /* 16px bottom sheets */
+  --radius-full: 9999px;  /* pills, chips, badges, avatars */
+
+  --border-width-hairline: 1px;
+  --border-width-thick: 2px;
+  --border-width-accent: 4px;   /* alert and error-summary leading edge */
+
+  /* ---------- Semantic: motion ----------------------------------------- */
+  --duration-instant: 0ms;
+  --duration-fast: 120ms;       /* hover, colour changes */
+  --duration-base: 200ms;       /* reveal, menus, tooltips, toasts */
+  --duration-slow: 320ms;       /* dialogs, sheets */
+  --duration-deliberate: 500ms; /* progress fill */
+  --duration-loop-spin: 800ms;      /* one spinner revolution; keeps running under reduced motion */
+  --duration-loop-shimmer: 1400ms;  /* one skeleton shimmer / indeterminate sweep */
+  --duration-loop-pulse: 1600ms;    /* one live-dot pulse */
+  --motion-loop-state: running;     /* paused under prefers-reduced-motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---------- Semantic: z-order ---------------------------------------- */
+  --z-base: 0;
+  --z-raised: 1;
+  --z-sticky: 100;
+  --z-dropdown: 1000;
+  --z-overlay: 1200;
+  --z-modal: 1300;
+  --z-popover: 1400;
+  --z-toast: 1500;
+  --z-tooltip: 1600;
+
+  /* ---------- Semantic: interaction ------------------------------------ */
+  --target-min: 1.5rem;          /* 24px WCAG 2.2 AA minimum target size */
+  --target-comfortable: 2.75rem; /* 44px nav links, tabs, primary mobile actions */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --control-height-sm: 2rem;     /* 32px chips, small buttons, pagination */
+  --control-height-md: 2.5rem;   /* 40px default buttons and inputs */
+  --control-height-lg: 3rem;     /* 48px large buttons, hero search */
+
+}
+
+/* ---------- Light theme ---------------------------------------------------- */
+/* Themed tokens live here (not on bare :root) so a [data-theme="light"] wrapper
+   inside a dark page re-declares them, while layout tokens keep inheriting. */
+:root, [data-theme="light"] {
   /* ---------- Semantic: colour (light) --------------------------------- */
   --color-bg-canvas: var(--palette-gray-50);         /* page background */
   --color-bg-surface: var(--palette-white);          /* cards, panels, inputs */
@@ -178,65 +278,6 @@
   --color-danger-solid-hover: var(--palette-red-700);
   --color-fg-on-danger: var(--palette-white);
 
-  /* ---------- Semantic: typography roles ------------------------------- */
-  --text-display: var(--font-weight-light) var(--font-size-5xl) / var(--line-height-tight) var(--font-family-display);
-  --text-h1: var(--font-weight-light) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-display);
-  --text-h2: var(--font-weight-light) var(--font-size-3xl) / var(--line-height-tight) var(--font-family-display);
-  --text-h3: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-snug) var(--font-family-sans);
-  --text-h4: var(--font-weight-semibold) var(--font-size-md) / var(--line-height-snug) var(--font-family-sans);
-  --text-body-lg: var(--font-weight-regular) var(--font-size-lg) / var(--line-height-relaxed) var(--font-family-sans);
-  --text-body: var(--font-weight-regular) var(--font-size-md) / var(--line-height-normal) var(--font-family-sans);
-  --text-body-sm: var(--font-weight-regular) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
-  --text-caption: var(--font-weight-medium) var(--font-size-xs) / var(--line-height-normal) var(--font-family-sans);
-  --text-label: var(--font-weight-semibold) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
-  --text-overline: var(--font-weight-semibold) var(--font-size-xs) / var(--line-height-normal) var(--font-family-sans);
-  --text-code: var(--font-weight-regular) var(--font-size-sm) / var(--line-height-normal) var(--font-family-mono);
-
-  /* ---------- Semantic: spacing (4px base) ----------------------------- */
-  --space-0: 0;
-  --space-0-5: 0.125rem; /* 2px  hairline gaps */
-  --space-1: 0.25rem;    /* 4px  icon-to-label, label-to-input */
-  --space-2: 0.5rem;     /* 8px  inside chips, between inline items */
-  --space-3: 0.75rem;    /* 12px compact padding, cluster gap */
-  --space-4: 1rem;       /* 16px default padding, stack gap */
-  --space-5: 1.25rem;    /* 20px */
-  --space-6: 1.5rem;     /* 24px card padding, dialog padding */
-  --space-8: 2rem;       /* 32px section gap */
-  --space-10: 2.5rem;    /* 40px */
-  --space-12: 3rem;      /* 48px page bottom padding, empty-state padding */
-  --space-16: 4rem;      /* 64px hero spacing */
-  --space-20: 5rem;      /* 80px */
-  --space-24: 6rem;      /* 96px */
-
-  /* ---------- Semantic: layout ----------------------------------------- */
-  --layout-breakpoint-sm: 40rem;   /* 640px  large phones: dialogs centre, toasts dock right */
-  --layout-breakpoint-md: 48rem;   /* 768px  tablets: top nav links, 2-column grids */
-  --layout-breakpoint-lg: 64rem;   /* 1024px laptops: 3-column grids, 12 columns */
-  --layout-breakpoint-xl: 80rem;   /* 1280px desktops: container max */
-  --layout-breakpoint-2xl: 96rem;  /* 1536px wide: content stays at container max */
-
-  --layout-columns: 4;              /* grid columns at the current breakpoint */
-  --layout-gutter: var(--space-4);  /* gap between columns */
-  --layout-margin: var(--space-4);  /* viewport edge to content */
-  --layout-container-max: 80rem;    /* 1280px */
-  --layout-form-max: 38rem;         /* 608px  single-column form panels, auth cards */
-  --layout-measure: 65ch;           /* max line length for prose */
-  --layout-sidebar-width: 16rem;    /* 256px */
-  --layout-topbar-height: 3.5rem;   /* 56px */
-  --layout-card-min: 18rem;         /* 288px  smallest card in an auto-fill grid */
-
-  /* ---------- Semantic: shape ------------------------------------------ */
-  --radius-xs: 0.125rem;  /* 2px  checkbox */
-  --radius-sm: 0.25rem;   /* 4px  inline code, tooltips, skeleton text */
-  --radius-md: 0.5rem;    /* 8px  buttons, inputs, nav links, media */
-  --radius-lg: 0.75rem;   /* 12px cards, dialogs, tables */
-  --radius-xl: 1rem;      /* 16px bottom sheets */
-  --radius-full: 9999px;  /* pills, chips, badges, avatars */
-
-  --border-width-hairline: 1px;
-  --border-width-thick: 2px;
-  --border-width-accent: 4px;   /* alert and error-summary leading edge */
-
   /* ---------- Semantic: elevation -------------------------------------- */
   --shadow-color: 20 25 35;
   --shadow-1: 0 1px 2px rgb(var(--shadow-color) / 0.08);                                             /* cards */
@@ -244,41 +285,6 @@
   --shadow-3: 0 8px 24px rgb(var(--shadow-color) / 0.14), 0 2px 6px rgb(var(--shadow-color) / 0.08);  /* menus, popovers, toasts */
   --shadow-4: 0 20px 48px rgb(var(--shadow-color) / 0.22), 0 4px 12px rgb(var(--shadow-color) / 0.10); /* dialogs, sheets */
   --shadow-focus: 0 0 0 2px var(--color-focus-ring-offset), 0 0 0 4px var(--color-focus-ring);
-
-  /* ---------- Semantic: motion ----------------------------------------- */
-  --duration-instant: 0ms;
-  --duration-fast: 120ms;       /* hover, colour changes */
-  --duration-base: 200ms;       /* reveal, menus, tooltips, toasts */
-  --duration-slow: 320ms;       /* dialogs, sheets */
-  --duration-deliberate: 500ms; /* progress fill */
-  --duration-loop-spin: 800ms;      /* one spinner revolution; keeps running under reduced motion */
-  --duration-loop-shimmer: 1400ms;  /* one skeleton shimmer / indeterminate sweep */
-  --duration-loop-pulse: 1600ms;    /* one live-dot pulse */
-  --motion-loop-state: running;     /* paused under prefers-reduced-motion */
-  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --ease-enter: cubic-bezier(0, 0, 0, 1);
-  --ease-exit: cubic-bezier(0.3, 0, 1, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  /* ---------- Semantic: z-order ---------------------------------------- */
-  --z-base: 0;
-  --z-raised: 1;
-  --z-sticky: 100;
-  --z-dropdown: 1000;
-  --z-overlay: 1200;
-  --z-modal: 1300;
-  --z-popover: 1400;
-  --z-toast: 1500;
-  --z-tooltip: 1600;
-
-  /* ---------- Semantic: interaction ------------------------------------ */
-  --target-min: 1.5rem;          /* 24px WCAG 2.2 AA minimum target size */
-  --target-comfortable: 2.75rem; /* 44px nav links, tabs, primary mobile actions */
-  --focus-ring-width: 2px;
-  --focus-ring-offset: 2px;
-  --control-height-sm: 2rem;     /* 32px chips, small buttons, pagination */
-  --control-height-md: 2.5rem;   /* 40px default buttons and inputs */
-  --control-height-lg: 3rem;     /* 48px large buttons, hero search */
 
   color-scheme: light;
 }

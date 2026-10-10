@@ -4,7 +4,7 @@
 
 # HairPop
 
-HairPop helps customers discover hairstyles, find professional braiders who offer them, and choose with confidence through service details, portfolios, and reviews.
+HairPop connects customers with professional hair braiders. Customers can explore hairstyles, find braiders who offer them, and read reviews to choose a braider with confidence.
 
 The customer journey also covers appointment requests, updates, and care after a visit. The [requirements](docs/specs/L1.md) define the planned product; the [HTML mocks](docs/mocks/README.md) show its intended experience.
 
@@ -14,7 +14,7 @@ HairPop is being redesigned. The requirements, detailed designs, and customer jo
 
 | Area | Location | Status |
 | --- | --- | --- |
-| Product requirements | [L1](docs/specs/L1.md) and [L2](docs/specs/L2.md) | Written for the customer journey |
+| Product requirements | [L1](docs/specs/L1.md) and [L2](docs/specs/L2.md) | Customer platform and supporting braider capabilities |
 | Feature designs | [`docs/detailed-designs/`](docs/detailed-designs/) | In progress |
 | Screen and state mocks | [`docs/mocks/`](docs/mocks/README.md) | Available for review |
 | Design tokens | [`docs/design-system/`](docs/design-system/) | In progress |
@@ -41,9 +41,11 @@ npm start
 
 Open <http://localhost:4200/>. To run the admin prototype instead, use `npm run start:admin`. The Angular workspace has its own [setup and command guide](src/WebApp/README.md).
 
-## Architecture and repository layout
+## Target architecture
 
-The intended platform uses an Angular frontend and a PHP 8.3 / Laravel 11 backend. Laravel owns persistence, authentication, and business workflows. Playwright covers the browser journey. The [feature designs](docs/detailed-designs/) describe the planned behavior in more detail.
+The intended platform uses Angular web applications and a PHP 8.3 / Laravel 11 API. Laravel owns persistence, authentication, and business workflows. Playwright covers customer behavior and visual parity with the mocks in Chromium. Its API responses are mocked, so browser tests do not depend on Laravel, a database, or Docker. Backend behavior is covered by API integration tests. The [feature designs](docs/detailed-designs/) describe the planned behavior in more detail.
+
+## Repository layout
 
 ```text
 .
@@ -52,14 +54,25 @@ The intended platform uses an Angular frontend and a PHP 8.3 / Laravel 11 backen
 │   ├── specs/               Product and component requirements
 │   ├── detailed-designs/    Feature designs
 │   ├── mocks/               Static customer journey references
-│   └── design-system/       Design tokens and foundations
+│   ├── design-system/       Tokens, foundations, components, and patterns
+│   └── adr/                 Architecture decisions, added as needed
 ├── src/WebApp/              Existing Angular prototype
+├── .agents/skills/          Repository workflows for agents
+├── .claude/skills/          Repository workflows for Claude
 └── AGENTS.md                Project conventions and workflow
 ```
 
+## Implementation workflow
+
+Every production behavior change starts with [L1 and L2 requirements](docs/specs/), a [detailed design](docs/detailed-designs/), and a [mock](docs/mocks/README.md). Reusable Angular components also need a component requirements document in `docs/specs/components/` before implementation. Keep those artifacts aligned when behavior changes.
+
+Implementation proceeds in small acceptance test driven slices: write Given/When/Then criteria, add an acceptance test and confirm it fails for the expected reason, implement that slice, then run its regression checks. Backend acceptance tests exercise the API. Frontend acceptance tests use Playwright page objects and mocked API fixtures. Mocks and design-system artifacts are design work and do not require acceptance tests.
+
+Angular components are single-file `.ts` components. Reusable components belong in the shared library, API services in the API library, and pages use dialogs or dedicated screens for editing. Components use the design system's role-based CSS tokens and preserve the mocks' accessible states and class structure. The full coding, test, and component performance rules are in [AGENTS.md](AGENTS.md).
+
 ## Contributing
 
-Contributions to requirements, designs, mocks, documentation, and implementation are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change. Production behavior changes require a requirement, detailed design, mock, and acceptance tests before implementation; [AGENTS.md](AGENTS.md) has the full workflow.
+Contributions to requirements, designs, mocks, documentation, and implementation are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change and [AGENTS.md](AGENTS.md) for the complete development workflow.
 
 ## Community and support
 
