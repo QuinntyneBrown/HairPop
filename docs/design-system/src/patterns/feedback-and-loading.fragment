@@ -1,0 +1,124 @@
+<!--meta {"lead": "Every action Maya takes gets an answer in the right place and at the right volume: inline beside what changed, a toast for news, a banner for a condition, a dialog only when she must decide.", "description": "Which feedback for which action, and skeleton vs spinner vs progress for loading.", "covers": "Inline, toast, banner and dialog feedback; skeleton vs spinner vs progress; partial and offline; undo"} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Feedback is chosen by two questions: <b>where did the change happen</b>, and <b>does Maya need to act</b>? Loading is chosen by <b>whether we know the shape of what is coming</b>. The mocks cover every case: field errors, partial-load warnings, offline banners, booking-update toasts, busy dialogs, and skeleton screens for every page.</p>
+</section>
+
+<section class="ds-section" id="when"><h2><a href="#when">When to use which</a></h2>
+  <h3>Feedback</h3>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Situation</th><th scope="col">Use</th><th scope="col">Live region</th><th scope="col">HairPop example</th></tr></thead>
+    <tbody>
+      <tr><td>A field or control is wrong</td><td><a href="../components/inline-message.html">Inline message</a> under it</td><td>none (linked by <code>aria-describedby</code>)</td><td>"Choose a time Nia offers."</td></tr>
+      <tr><td>Part of the page failed to load</td><td>Warning <a href="../components/alert.html">alert</a> in place of that part, with a retry link</td><td>none</td><td>"Some details are unavailable. Reviews could not load."</td></tr>
+      <tr><td>A condition affects the whole screen</td><td>Banner at the top of main</td><td>none</td><td>"You’re offline. Saved details are shown."</td></tr>
+      <tr><td>Something finished or arrived</td><td><a href="../components/toast.html">Toast</a></td><td><code>status</code> (polite)</td><td>"Time confirmed: Nia confirmed Sat 24 Oct at 10:00 am."</td></tr>
+      <tr><td>An action failed and must be retried</td><td>Danger toast that persists, or a danger alert in the dialog</td><td><code>alert</code></td><td>"Update could not be sent."</td></tr>
+      <tr><td>Maya must decide before continuing</td><td><a href="../components/dialog.html">Dialog</a></td><td>focus moves in</td><td>"Cancel request HP-1048?"</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Loading</h3>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Wait</th><th scope="col">Use</th><th scope="col">Why</th></tr></thead>
+    <tbody>
+      <tr><td>A page or card whose layout we know</td><td><a href="../components/skeleton.html">Skeleton</a> shaped like the content</td><td>No layout shift when data lands.</td></tr>
+      <tr><td>An action Maya started (send, save, cancel)</td><td>Busy <a href="../components/button.html">button</a> + status text</td><td>Feedback at the point of action.</td></tr>
+      <tr><td>A small region refreshing</td><td><a href="../components/spinner.html">Spinner</a> with text</td><td>Shape unknown or tiny.</td></tr>
+      <tr><td>A measurable task (upload, multi-step)</td><td><a href="../components/progress-bar.html">Progress bar</a></td><td>Shows how long is left.</td></tr>
+      <tr><td>Under 300 ms</td><td>Nothing</td><td>Flashing a loader feels slower.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
+  <p>The four feedback levels on one appointment screen: inline, alert, banner (top of main) and toast (bottom right; bottom full width on phones).</p>
+  <div class="ds-frame">
+    <div class="alert alert--warning banner">{{icon:wifi-off}}<div><strong>You’re offline.</strong> Saved appointment details are shown. Actions need a connection.</div></div>
+    <div class="ds-frame__body">
+      <div class="detail-grid">
+        <section class="card stack" aria-label="Request HP-1048">
+          <span class="badge badge--warning">Awaiting reply</span>
+          <h2>Medium knotless braids</h2>
+          <p><strong>Sat 24 Oct · 10:00 am</strong> with Nia Okafor</p>
+          <div class="alert alert--warning">{{icon:warning}}<div><strong>Some details are unavailable.</strong> Reviews could not load. <a href="#structure">Retry reviews</a>.</div></div>
+          <p class="inline-status inline-status--success">{{icon:check|icon--sm}}Reminder saved</p>
+        </section>
+        <div class="toast-region toast-region--inline" role="status" aria-live="polite">
+          <div class="toast toast--success">{{icon:check-circle}}<div class="toast__body"><strong class="toast__title">Time confirmed</strong><span class="toast__text">Nia confirmed Sat 24 Oct at 10:00 am.</span><button class="toast__action" type="button">View appointment</button></div><button class="close" type="button" aria-label="Dismiss notification">{{icon:close|icon--sm}}</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <h3>Loading with a known layout</h3>
+  {{example:[start]Skeletons mirror the real card: photo at 3:2, eyebrow, title, one line of text. The container sets <code>aria-busy="true"</code>.}}
+<section class="feature-grid" aria-busy="true" aria-label="Loading styles" style="flex: 1 1 100%;">
+  <div class="card stack"><span class="skeleton skeleton--rect skeleton--hero"></span><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div>
+  <div class="card stack"><span class="skeleton skeleton--rect skeleton--hero"></span><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div>
+</section>
+  {{/example}}
+  <h3>Action in progress, refresh and progress</h3>
+  {{example:Busy button for an action; spinner with text for a region; progress bar for a measurable task.}}
+<button class="btn btn--danger" type="button" aria-busy="true">Cancel request</button>
+<span class="spinner-inline" role="status"><span class="spinner" aria-hidden="true"></span>Refreshing braiders near Toronto…</span>
+<div class="progress-field" style="flex: 1 1 16rem;"><span class="progress-field__label" id="pr-label">Uploading inspiration photos <output>2 of 3</output></span><div class="progress" role="progressbar" aria-labelledby="pr-label" aria-valuemin="0" aria-valuemax="3" aria-valuenow="2"><div class="progress__bar" style="--value: 66%;"></div></div></div>
+  {{/example}}
+  <h3>Undo instead of confirm</h3>
+  <p>When an action is reversible (removing a saved braider, clearing filters), do it at once and offer <b>Undo</b> in the toast. Only offer Undo when it really reverses the action; a review that has been posted, or a time Nia confirmed, has nothing to undo.</p>
+  {{themes:stack}}<div class="toast toast--info">{{icon:info}}<div class="toast__body"><strong class="toast__title">Filters cleared</strong><span class="toast__text">Showing all 12 braiders near Toronto.</span><button class="toast__action" type="button">Undo</button></div><button class="close" type="button" aria-label="Dismiss notification">{{icon:close|icon--sm}}</button></div>{{/themes}}
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
+  <ul>
+    <li>Toasts dock bottom right at 24rem from 640px and span the bottom edge on phones, above the safe area.</li>
+    <li>Banners span the full width of main and wrap their text; they never become toasts on phones.</li>
+    <li>Skeleton grids use the same <code>.feature-grid</code> columns as the loaded content, so nothing jumps at any width.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li>One polite <code>role="status"</code> region per page holds toasts; errors that need attention use <code>role="alert"</code> in a separate region, never nested inside the status region.</li>
+    <li>Status is colour + icon + text: every alert, banner and toast has an icon and a bold lead.</li>
+    <li>Skeleton containers set <code>aria-busy="true"</code> and an <code>aria-label</code> ("Loading styles"); the shapes themselves carry no content.</li>
+    <li>Toasts stay at least 8 seconds, pause on hover and focus, and danger toasts never auto-dismiss (2.2.1).</li>
+    <li>Under reduced motion, shimmer and pulse pause; spinners keep turning because they are the only sign of progress.</li>
+  </ul>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Toast text|--color-fg-inverse|--color-bg-inverse|4.5}}
+    {{pair:Warning alert text|--color-warning-fg|--color-warning-bg|4.5}}
+    {{pair:Success inline text|--color-success-fg|--color-bg-surface|4.5}}
+  </div>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Lead with the outcome in a few words, then one sentence of detail: "<b>Time needs a change.</b> Nia suggested Sun 25 Oct at 11:00 am."</li>
+    <li>Failures say what is safe: "Your request is still saved. Retry when connected."</li>
+    <li>Loading text names the thing: "Refreshing braiders near Toronto…", not "Loading…".</li>
+    <li>Actions in feedback are verbs that do the next step: "View appointment", "Retry reviews", "Undo".</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="alert alert--warning">{{icon:wifi-off}}<div><strong>You’re offline.</strong> Your details stay here.</div></div></div><figcaption>Banners carry an icon as well as colour.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="alert alert--warning"><div><strong>You’re offline.</strong> Your details stay here.</div></div></div><figcaption>The mocks’ offline banner relies on colour and the bold lead alone.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="toast toast--success">{{icon:check-circle}}<div class="toast__body"><strong class="toast__title">Review posted</strong><span class="toast__text">Thank you for helping others choose.</span></div></div></div><figcaption>A success toast with no action when nothing can be reversed.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="toast toast--success"><div class="toast__body"><strong class="toast__title">Review posted</strong><span class="toast__text">Thank you for helping others choose.</span><button class="toast__action" type="button">Undo</button></div></div></div><figcaption>"Undo" on a review that is already public. Offer it only when the action is truly reversible.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    {{mock:pages/style-detail/partial|partial-load warning with retry}}
+    {{mock:pages/appointment-detail/offline|offline banner}}
+    {{mock:pages/style-gallery/loading|loading skeletons}}
+    {{mock:dialogs/cancel-appointment/busy|busy action in a dialog}}
+    {{mock:dialogs/cancel-appointment/failed|failure inside a dialog}}
+    {{mock:notifications/booking-update/success|success toast}}
+    {{mock:notifications/review-feedback/success|"Undo" on a posted review}}
+  </ul>
+  <p>Drift fixed: every page used the same three generic skeleton cards (now skeletons match each screen’s layout); offline and partial banners had no icon; success toasts always offered "Undo", even when nothing could be undone; toasts with <code>role="alert"</code> sat inside the polite <code>role="status"</code> region (now two sibling regions).</p>
+</section>

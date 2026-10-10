@@ -1,0 +1,147 @@
+<!--meta {"lead": "A breadcrumb shows where a detail page sits and gives one tap back to its parent: Styles › Knotless braids, Braiders › Nia Okafor, Appointments › HP-1048.", "description": "Path to the current page with the current item marked; collapses to the parent link on phones.", "pills": ["<code>&lt;nav&gt;</code> + <code>&lt;ol&gt;</code>", "Status: core set, recommended for detail pages"], "variants": "full path, collapsed to parent (phones)", "states": "default, hover, focus, active, current", "sources": []} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a breadcrumb at the top of a detail page, above the <a href="page-header.html">page header</a>, when the page has a clear parent the customer may want to return to. The mocks' detail pages (Knotless braids, Nia's profile, appointment HP-1048) have none, so the only way back is the browser button or the top bar; the system adds one.</p>
+  <ul>
+    <li>Use it only for hierarchy (Styles › Knotless braids), not for the history of how someone arrived.</li>
+    <li>Skip it on top-level pages (Styles, Braiders, Appointments, Help) and on auth and error pages.</li>
+    <li>The last item is the current page, unlinked and marked with <code>aria-current="page"</code>.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <nav class="breadcrumb" aria-label="Breadcrumb, anatomy example"><ol><li><a href="../../mocks/pages/style-gallery/default.html">Styles</a></li><li><a href="../../mocks/pages/style-detail/default.html">Knotless braids</a></li><li><span aria-current="page">Braiders</span></li></ol></nav>
+      <span class="ds-callout" style="left: 22%; top: 24%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 37%; top: 24%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 70%; top: 24%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Ancestor link</b><small><code>--color-fg-muted</code>, underline on hover, 24px tall target.</small></div></li>
+      <li><div><b>Separator</b><small>"/" drawn by CSS in <code>--color-fg-subtle</code>; hidden from assistive technology.</small></div></li>
+      <li><div><b>Current page</b><small>Plain text, <code>--color-fg-default</code>, medium weight, <code>aria-current="page"</code>.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:[stack]Full path from 768px: every ancestor, then the current page.}}
+<nav class="breadcrumb" aria-label="Breadcrumb, appointment example"><ol><li><a href="../../mocks/pages/my-appointments/default.html">Appointments</a></li><li><span aria-current="page">HP-1048</span></li></ol></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb, profile example"><ol><li><a href="../../mocks/pages/matching-braiders/default.html">Braiders</a></li><li><span aria-current="page">Nia Okafor</span></li></ol></nav>
+  {{/example}}
+  {{example:Collapsed to the parent below 768px: one back link that names where it goes.}}
+<nav class="breadcrumb" aria-label="Breadcrumb, collapsed example"><ol><li><a href="../../mocks/pages/style-detail/default.html">{{icon:chevron-left|icon--sm}}Knotless braids</a></li></ol></nav>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes" data-na="The breadcrumb has one size: --text-body-sm with 24px link targets."><h2><a href="#sizes">Sizes</a></h2></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Item</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Active</th><th scope="col">Current</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Ancestor</th>
+        <td><nav class="breadcrumb" aria-label="State default"><ol><li><a href="../../mocks/pages/style-gallery/default.html">Styles</a></li></ol></nav></td>
+        <td><nav class="breadcrumb" aria-label="State hover"><ol><li><a href="../../mocks/pages/style-gallery/default.html" data-state="hover">Styles</a></li></ol></nav></td>
+        <td><nav class="breadcrumb" aria-label="State focus"><ol><li><a href="../../mocks/pages/style-gallery/default.html" data-state="focus">Styles</a></li></ol></nav></td>
+        <td><nav class="breadcrumb" aria-label="State active"><ol><li><a href="../../mocks/pages/style-gallery/default.html" data-state="hover">Styles</a></li></ol></nav></td>
+        <td><nav class="breadcrumb" aria-label="State current"><ol><li><span aria-current="page">Knotless braids</span></li></ol></nav></td></tr>
+    </tbody>
+  </table></div>
+  <p>The current item is not a link, so it has no hover or focus state; the pointer-down state keeps the hover look. Breadcrumb links are never disabled.</p>
+  <h3>Both themes</h3>
+  {{themes}}<nav class="breadcrumb" aria-label="Breadcrumb, themes example"><ol><li><a href="../../mocks/pages/style-gallery/default.html">Styles</a></li><li><a href="../../mocks/pages/style-detail/default.html" data-state="hover">Knotless braids</a></li><li><span aria-current="page">Braiders</span></li></ol></nav>{{/themes}}
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li><b>Below 768px</b>: render only the parent, with a leading chevron-left icon ("‹ Knotless braids"). It stays inside <code>&lt;nav aria-label="Breadcrumb"&gt;</code>; the current page is already the <code>&lt;h1&gt;</code>.</li>
+    <li><b>From 768px</b>: render the full path. Long paths wrap onto a second line rather than truncating.</li>
+    <li>Place it inside <code>.product-main</code> directly above the page header, aligned to the content edge.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The breadcrumb reads <code>--color-fg-muted</code> (links), <code>--color-fg-subtle</code> (separator) and <code>--color-fg-default</code> (current and hover). In dark they become grey 350, 400 and 150 on the grey 950 canvas. It has no component tokens; theme it through the semantic tier.</p>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><a href="https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/">APG Breadcrumb</a>: <code>&lt;nav aria-label="Breadcrumb"&gt;</code> containing an ordered list; the current page carries <code>aria-current="page"</code>. Separators are CSS content with empty alternative text (<code>content: "/" / ""</code>), so they are not read.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through the ancestor links; the current page is skipped.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Follows the link.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The shared 2px ring with 2px offset around each link.</p>
+  <h3>Labelling</h3>
+  <p>The landmark is labelled "Breadcrumb" (one breadcrumb per page). Link text is the destination page's topic ("Nia Okafor", not "Nia’s profile page").</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Ancestor link on page|--color-fg-muted|--color-bg-canvas|4.5}}
+    {{pair:Separator on page|--color-fg-subtle|--color-bg-canvas|4.5}}
+    {{pair:Current page|--color-fg-default|--color-bg-canvas|4.5}}
+    {{pair:Focus ring|--color-focus-ring|--color-bg-canvas|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>None; underline and colour change instantly.</p>
+  <h3>Touch</h3>
+  <p>Links are at least 24px tall (<code>--target-min</code>) with 8px between items. On phones the single parent link sits alone, well clear of the page header.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Each item is the short name of its page in sentence case: "Styles", "Knotless braids", "Nia Okafor", "HP-1048".</li>
+    <li>Do not add "Home"; Styles is HairPop's home.</li>
+    <li>The last item matches the page's <code>&lt;h1&gt;</code> topic.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><nav class="breadcrumb" aria-label="Breadcrumb, do example"><ol><li><a href="../../mocks/pages/matching-braiders/default.html">Braiders</a></li><li><span aria-current="page">Nia Okafor</span></li></ol></nav></div><figcaption>Give detail pages a path back to their parent list.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><p class="text-muted">Nia Okafor (no way back but the browser)</p></div><figcaption>Leave Nia's profile, Knotless braids and appointment HP-1048 without a breadcrumb, as the mocks do.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><nav class="breadcrumb" aria-label="Breadcrumb, do example two"><ol><li><a href="../../mocks/pages/style-gallery/default.html">Styles</a></li><li><span aria-current="page">Knotless braids</span></li></ol></nav></div><figcaption>Leave the current page as plain text.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><nav class="breadcrumb" aria-label="Breadcrumb, don't example two"><ol><li><a href="../../mocks/pages/style-gallery/default.html">Styles</a></li><li><a href="../../mocks/pages/style-detail/default.html">Knotless braids</a></li></ol></nav></div><figcaption>Link the current page to itself.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Ancestor link|--color-fg-muted}}
+      {{tok:Separator|--color-fg-subtle}}
+      {{tok:Current, hover|--color-fg-default}}
+      {{tok:Font|--text-body-sm}}
+      {{tok:Current weight|--font-weight-medium}}
+      {{tok:Gap|--space-2}}
+      {{tok:Link target|--target-min}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;nav class="breadcrumb" aria-label="Breadcrumb"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Styles&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span aria-current="page"&gt;Knotless braids&lt;/span&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.breadcrumb</code> on <code>&lt;nav&gt;</code> (or the <code>&lt;ol&gt;</code>)</td><td>Wrapping row of items with CSS separators.</td></tr>
+    <tr><td><code>aria-current="page"</code></td><td>Current page: default colour, medium weight.</td></tr>
+    <tr><td><code>data-state="hover|focus"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Core set. Recommended for these detail pages, which currently have no breadcrumb:</p>
+  <ul>
+    {{mock:pages/style-detail/default|Styles › Knotless braids}}
+    {{mock:pages/braider-profile/default|Braiders › Nia Okafor}}
+    {{mock:pages/appointment-detail/default|Appointments › HP-1048}}
+  </ul>
+  <p>Drift fixed during extraction: detail pages had no path back to their parent list (system adds a breadcrumb); the starter kit's separator was read aloud by screen readers (now CSS content with empty alternative text).</p>
+</section>

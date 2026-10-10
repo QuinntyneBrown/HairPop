@@ -1,0 +1,124 @@
+<!--meta {"lead": "One family, Manrope, in a light display voice for headlines and a clear semibold for labels. Body stays at 16px, nothing drops below 12px, and long text stops at 65 characters.", "description": "Families, the type scale, weights, line heights, letter spacing, twelve text roles and responsive type rules.", "covers": "Manrope and JetBrains Mono, nine-step scale with fluid display and h1, five weights, line heights, letter spacing, twelve role shorthands, measure, responsive rules."} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>HairPop type follows the Banaro typography tokens the mocks adopted: <b>Manrope</b> for everything people read, <b>JetBrains Mono</b> for codes and reference numbers. Headlines use the light weight (300) at large sizes with tight tracking, which gives the product its calm, editorial feel; labels and buttons use semibold (600) at 14px so they read as controls.</p>
+  <p>Components never set a size, weight and line height separately. They use a <b>role</b> shorthand: <code>font: var(--text-label)</code>. Roles are the twelve decisions below; the scale, weights and line heights are the primitives they are built from.</p>
+</section>
+
+<section class="ds-section" id="families"><h2><a href="#families">Families</a></h2>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--font-family-sans<br>Manrope 200–800</div><div style="font: var(--text-body-lg);">Find a style that feels like you. Knotless braids, passion twists and cornrows from braiders near Toronto.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--font-family-display<br>Manrope, light</div><div style="font: var(--font-weight-light) var(--font-size-3xl) / var(--line-height-tight) var(--font-family-display); letter-spacing: var(--letter-spacing-tight);">Your appointment with Nia</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--font-family-mono<br>JetBrains Mono 100–800</div><div style="font: var(--text-code);">HP-1048 · 2026-10-24T10:00</div></div>
+  <p>Both families ship as local Latin-subset WOFF2 files in <code>assets/fonts/</code> (SIL Open Font Licence 1.1) with <code>font-display: swap</code>, so pages render from disk and offline. The fallback stack is the platform UI font, which keeps similar metrics while Manrope loads.</p>
+</section>
+
+<section class="ds-section" id="scale"><h2><a href="#scale">Type scale</a></h2>
+  <p>Nine sizes. The two largest are fluid with <code>clamp()</code>, so a 68px headline on a laptop becomes 40px on a phone without a media query; every other step is fixed so it respects browser zoom exactly.</p>
+  <div class="ds-specimen"><div class="ds-specimen__meta">5xl · 44–84px fluid</div><div style="font: var(--font-weight-light) var(--font-size-5xl) / var(--line-height-tight) var(--font-family-display); letter-spacing: var(--letter-spacing-tight);">Braids</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">4xl · 40–68px fluid</div><div style="font: var(--font-weight-light) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-display); letter-spacing: var(--letter-spacing-tight);">Knotless braids</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">3xl · 36px</div><div style="font-size: var(--font-size-3xl); font-weight: var(--font-weight-light); line-height: var(--line-height-tight);">What to expect</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">2xl · 28px</div><div style="font-size: var(--font-size-2xl); line-height: var(--line-height-snug);">Request sent to Nia</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">xl · 22px</div><div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-medium); line-height: var(--line-height-snug);">Before you book</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">lg · 19px</div><div style="font-size: var(--font-size-lg);">Nia will review your details and confirm the time.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">md · 16px</div><div style="font-size: var(--font-size-md);">Estimated price: $180–$240. Nia will confirm the final price.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">sm · 14px</div><div style="font-size: var(--font-size-sm);">Toronto West · 4.9 from 86 reviews</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">xs · 12px</div><div style="font-size: var(--font-size-xs);">Updated today at 9:42 am</div></div>
+</section>
+
+<section class="ds-section" id="weights"><h2><a href="#weights">Weights, line height and tracking</a></h2>
+  <p>Five weights. Light (300) is reserved for display, h1 and h2, a deliberate brand choice carried from the mocks; regular is body; medium is h3 and captions; semibold is labels, h4 and overlines; bold is for rare emphasis inside running text.</p>
+  <div class="ds-example"><div class="ds-example__canvas" style="font-size: var(--font-size-xl);">
+    <span style="font-weight: var(--font-weight-light);">Light 300</span><span style="font-weight: var(--font-weight-regular);">Regular 400</span><span style="font-weight: var(--font-weight-medium);">Medium 500</span><span style="font-weight: var(--font-weight-semibold);">Semibold 600</span><span style="font-weight: var(--font-weight-bold);">Bold 700</span>
+  </div></div>
+  <ul>
+    <li><b>Line height</b>: tight 1.08 for display, h1 and h2; snug 1.3 for h3, h4 and labels in controls; normal 1.65 for body; relaxed 1.85 for lead paragraphs. The mocks gave h2 a raw 1.15; it now uses tight.</li>
+    <li><b>Letter spacing</b>: tight −0.03em on light headlines; normal everywhere else; wide 0.14em only on uppercase overlines, eyebrows and badges.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="roles"><h2><a href="#roles">Text roles</a></h2>
+  <p>Each role is a <code>font</code> shorthand. Headings h1 and h2 also add <code>letter-spacing: var(--letter-spacing-tight)</code>; overlines add wide tracking and uppercase.</p>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-display</div><div style="font: var(--text-display); letter-spacing: var(--letter-spacing-tight);">HairPop</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-h1 · page title</div><div style="font: var(--text-h1); letter-spacing: var(--letter-spacing-tight);">Find a style that feels like you</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-h2 · page section</div><div style="font: var(--text-h2); letter-spacing: var(--letter-spacing-tight);">Customer reviews</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-h3 · card and dialog title</div><div style="font: var(--text-h3);">Prepare for your visit</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-h4 · story card title, brand</div><div style="font: var(--text-h4);">Passion twists</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-body-lg · lead</div><div style="font: var(--text-body-lg);">Browse protective styles, compare typical time and price, and see real work.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-body</div><div style="font: var(--text-body);">Knotless braids start with your natural hair, then extensions are fed in gradually.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-body-sm · help, meta</div><div style="font: var(--text-body-sm);">Length, size and hair density affect the final quote.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-caption · counters, pills</div><div style="font: var(--text-caption);">120 / 500 characters</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-label · buttons, labels, nav</div><div style="font: var(--text-label);">Preferred time</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-overline · eyebrow, badge</div><div style="font: var(--text-overline); letter-spacing: var(--letter-spacing-wide); text-transform: uppercase; color: var(--color-fg-accent);">Most explored</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-code · references</div><div style="font: var(--text-code);">HP-1048</div></div>
+</section>
+
+<section class="ds-section" id="measure"><h2><a href="#measure">Measure</a></h2>
+  <p>Paragraphs stop at <code>--layout-measure</code> (65ch): the base stylesheet sets <code>p { max-width: var(--layout-measure) }</code> with <code>text-wrap: pretty</code>, and headings use <code>text-wrap: balance</code>. Empty-state text is narrower (36ch) because it is centred.</p>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><p>HairPop helps customers discover independent braiders and send appointment requests. A request is pending until the braider accepts it. Prices shown before confirmation are estimates; the braider confirms appointment details and policies directly with you.</p></div><div class="ds-example__caption"><span>The legal pages and long help answers read best at this width.</span></div></div>
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <ul>
+    <li>One <code>&lt;h1&gt;</code> per page, using the page title. Headings follow document order; pick the role by level, not by the size you want.</li>
+    <li>Section titles inside a card use the h3 role even when the element is an <code>&lt;h2&gt;</code>; the 36px h2 is for page sections on the canvas. The mocks rendered card titles such as "Medium knotless braids" at the full 36px h2; <code>components.css</code> now applies h3 inside cards.</li>
+    <li>Body copy is 16px everywhere, including phones; never shrink body text to fit.</li>
+    <li>Nothing is set below 12px (<code>--font-size-xs</code>). Uppercase is only for overlines, eyebrows and badges, always with wide tracking.</li>
+    <li>Prices, times, counts and ratings use <code>font-variant-numeric: tabular-nums</code> where they align in columns or change in place.</li>
+    <li>Reference numbers (HP-1048) may use the code role; everything else stays in Manrope.</li>
+  </ul>
+  <h3>Responsive type</h3>
+  <ul>
+    <li>Only display and h1 scale with the viewport, through <code>clamp()</code> with a rem floor, so user zoom still enlarges them.</li>
+    <li>Empty-state titles step from 22px to 28px at 768px; account links in the top bar from 14px to 16px.</li>
+    <li>Everything else is fixed. A breakpoint never changes body, label or caption size.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li>All sizes are in <code>rem</code>, so text resizes to 200% (1.4.4) and reflows at 320px (1.4.10).</li>
+    <li>Layouts survive text-spacing overrides (1.4.12): line height 1.5×, paragraph spacing 2×, letter spacing 0.12em, word spacing 0.16em. No text container has a fixed height.</li>
+    <li>Light 300 is used only at 36px and above, where it counts as large text and still exceeds 4.5:1 in both themes.</li>
+    <li>Glyphs in text ("✦", "★", "→") are wrapped in <code>aria-hidden="true"</code>; the words carry the meaning ("4.9 from 86 reviews").</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>
+    {{tok:Sans family|--font-family-sans}}
+    {{tok:Display family|--font-family-display}}
+    {{tok:Mono family|--font-family-mono}}
+    {{tok:Size xs (12px)|--font-size-xs}}
+    {{tok:Size sm (14px)|--font-size-sm}}
+    {{tok:Size md (16px)|--font-size-md}}
+    {{tok:Size lg (19px)|--font-size-lg}}
+    {{tok:Size xl (22px)|--font-size-xl}}
+    {{tok:Size 2xl (28px)|--font-size-2xl}}
+    {{tok:Size 3xl (36px)|--font-size-3xl}}
+    {{tok:Size 4xl (fluid)|--font-size-4xl}}
+    {{tok:Size 5xl (fluid)|--font-size-5xl}}
+    {{tok:Weight light|--font-weight-light}}
+    {{tok:Weight regular|--font-weight-regular}}
+    {{tok:Weight medium|--font-weight-medium}}
+    {{tok:Weight semibold|--font-weight-semibold}}
+    {{tok:Weight bold|--font-weight-bold}}
+    {{tok:Line height tight|--line-height-tight}}
+    {{tok:Line height snug|--line-height-snug}}
+    {{tok:Line height normal|--line-height-normal}}
+    {{tok:Line height relaxed|--line-height-relaxed}}
+    {{tok:Tracking tight|--letter-spacing-tight}}
+    {{tok:Tracking normal|--letter-spacing-normal}}
+    {{tok:Tracking wide|--letter-spacing-wide}}
+    {{tok:Role display|--text-display}}
+    {{tok:Role h1|--text-h1}}
+    {{tok:Role h2|--text-h2}}
+    {{tok:Role h3|--text-h3}}
+    {{tok:Role h4|--text-h4}}
+    {{tok:Role body large|--text-body-lg}}
+    {{tok:Role body|--text-body}}
+    {{tok:Role body small|--text-body-sm}}
+    {{tok:Role caption|--text-caption}}
+    {{tok:Role label|--text-label}}
+    {{tok:Role overline|--text-overline}}
+    {{tok:Role code|--text-code}}
+  </tbody></table></div>
+</section>

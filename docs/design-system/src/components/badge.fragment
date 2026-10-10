@@ -1,0 +1,181 @@
+<!--meta {"lead": "A badge labels status in a word or two, such as Awaiting reply or Confirmed, so people can scan a list of requests without opening each one.", "description": "Neutral, info, success, warning, danger, solid and count badges, in both themes.", "pills": ["Dot + text, never colour alone", "Status: stable"], "variants": "neutral, info, success, warning, danger; solid; count", "states": "static (not interactive); lifecycle: awaiting reply, confirmed, completed, cancelled", "sources": ["pages/my-appointments/default", "pages/appointment-detail/default", "pages/appointment-detail/success", "pages/notification-center/unread", "pages/style-gallery/default"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a badge for a short, read-only status attached to something: an appointment's state, the unread count on "Updates", a "New" marker. It is not a button and not a filter. Use a <a href="chip.html">chip</a> for anything people can select or remove, and an <a href="alert.html">alert</a> when the status needs a sentence of explanation.</p>
+  <ul>
+    <li><b>Tone</b> badges (neutral, info, success, warning, danger) describe state. Pick the tone by what the person should feel, then write the word.</li>
+    <li><b>Solid</b> is for the rare badge that must stand out on a busy photo or card ("New").</li>
+    <li><b>Count</b> is the unread number on "Updates" in the top bar.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <span class="badge badge--warning">Awaiting reply</span>
+      <span class="ds-callout" style="left: 31%; top: 22%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 52%; top: 22%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 70%; top: 70%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Dot</b><small>8px, <code>currentColor</code>; a shape cue beside the colour. Hidden on count badges.</small></div></li>
+      <li><div><b>Label</b><small>Overline style: 12px semibold, uppercase, 0.14em tracking. One to three words.</small></div></li>
+      <li><div><b>Pill</b><small>24px tall, <code>--radius-full</code>, 8px horizontal padding; hugs its content and never stretches.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>Tone follows meaning, and the words carry the meaning on their own: "Awaiting reply" is understandable in grey.</p>
+  {{example:Neutral, info, success, warning, danger.}}
+<span class="badge">Completed</span>
+<span class="badge badge--info">Unread</span>
+<span class="badge badge--success">Confirmed</span>
+<span class="badge badge--warning">Awaiting reply</span>
+<span class="badge badge--danger">Cancelled</span>
+  {{/example}}
+  <h3>Solid and count</h3>
+  {{example:Solid is for emphasis on a photo; the count sits inside the "Updates" link and reads as part of its name.}}
+<span class="badge badge--solid">New</span>
+<a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2<span class="visually-hidden"> unread</span></span></a>
+  {{/example}}
+  <h3>The request lifecycle</h3>
+  <p>One appointment moves through these badges; keep the words and tones identical on every screen (my appointments, appointment detail, notifications).</p>
+  {{example:Request sent → braider accepts → visit done; or either side cancels.}}
+<span class="badge badge--warning">Awaiting reply</span>
+<span class="badge badge--success">Confirmed</span>
+<span class="badge">Completed</span>
+<span class="badge badge--danger">Cancelled</span>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes" data-na="Badges have one size (24px). Scale emphasis with tone, not size."><h2><a href="#sizes">Sizes</a></h2></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>A badge is static: it has no hover, focus, active, disabled or selected state of its own and is never focusable. When it sits inside a link or card, the container owns the interaction; the matrix shows each tone in the places it appears, including a hovered container.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Tone</th><th scope="col">On a card</th><th scope="col">On the page</th><th scope="col">Inside a link</th><th scope="col">Container hovered</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Neutral</th><td><div class="card"><span class="badge">Completed</span></div></td><td><span class="badge">Completed</span></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">Past <span class="badge">3</span></a></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" data-state="hover">Past <span class="badge">3</span></a></td></tr>
+      <tr><th scope="row">Info</th><td><div class="card"><span class="badge badge--info">Unread</span></div></td><td><span class="badge badge--info">Unread</span></td><td><a class="nav-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--info">New</span></a></td><td><a class="nav-link" href="../../mocks/pages/notification-center/default.html" data-state="hover">Updates <span class="badge badge--info">New</span></a></td></tr>
+      <tr><th scope="row">Success</th><td><div class="card"><span class="badge badge--success">Confirmed</span></div></td><td><span class="badge badge--success">Confirmed</span></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/success.html">HP-1048 <span class="badge badge--success">Confirmed</span></a></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/success.html" data-state="hover">HP-1048 <span class="badge badge--success">Confirmed</span></a></td></tr>
+      <tr><th scope="row">Warning</th><td><div class="card"><span class="badge badge--warning">Awaiting reply</span></div></td><td><span class="badge badge--warning">Awaiting reply</span></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/default.html">HP-1048 <span class="badge badge--warning">Awaiting reply</span></a></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/default.html" data-state="hover">HP-1048 <span class="badge badge--warning">Awaiting reply</span></a></td></tr>
+      <tr><th scope="row">Danger</th><td><div class="card"><span class="badge badge--danger">Cancelled</span></div></td><td><span class="badge badge--danger">Cancelled</span></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">HP-0921 <span class="badge badge--danger">Cancelled</span></a></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" data-state="hover">HP-0921 <span class="badge badge--danger">Cancelled</span></a></td></tr>
+      <tr><th scope="row">Count</th><td><div class="card"><span class="badge badge--count">2</span></div></td><td><span class="badge badge--count">2</span></td><td><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2<span class="visually-hidden"> unread</span></span></a></td><td><a class="account-link" href="../../mocks/pages/notification-center/default.html" data-state="hover">Updates <span class="badge badge--count">2<span class="visually-hidden"> unread</span></span></a></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  {{themes}}<span class="badge">Completed</span><span class="badge badge--info">Unread</span><span class="badge badge--success">Confirmed</span><span class="badge badge--warning">Awaiting reply</span><span class="badge badge--danger">Cancelled</span><span class="badge badge--solid">New</span><span class="badge badge--count">2</span>{{/themes}}
+  <ul>
+    <li><b>Changing status</b> (Awaiting reply → Confirmed) is announced by the toast or live region that reports the change, not by the badge.</li>
+    <li><b>Unread</b> notifications use an info badge plus a bold title; <b>read</b> ones drop the badge. Warning is reserved for something that needs action.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>The badge never wraps (<code>white-space: nowrap</code>) and never stretches: inside a <code>.stack</code> it keeps its own width (<code>align-self: flex-start</code>).</li>
+    <li>At 360px, keep labels short enough to sit beside a title: "Awaiting reply" is the longest status in the product.</li>
+    <li>The count badge stays visible at every width, even when "Updates" is the only nav item left in the top bar.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Component tokens <code>--badge-bg</code> and <code>--badge-fg</code> map to the status tokens (<code>--color-warning-bg</code>/<code>--color-warning-fg</code> and so on); <code>--badge-height</code> sets the pill. Dark mode swaps every tone to a deep tint with a light label (amber-950 behind amber-300), keeping text above 4.5:1.</p>
+  <pre><code>/* A "Top rated" badge that borrows the accent */
+.badge--accent { --badge-bg: var(--color-accent-subtle); --badge-fg: var(--color-fg-accent); }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>A plain <code>&lt;span&gt;</code>; the text is the content. No role is needed. Status is never colour alone (WCAG 1.4.1): the word says it, and the dot adds a non-colour cue.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Skips the badge; it is not focusable. A badge inside a link is read as part of the link's name.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>None on the badge. The containing link or card shows the shared ring.</p>
+  <h3>Labelling</h3>
+  <p>Text badges need nothing extra. A count badge adds visually hidden words so it makes sense: <code>2&lt;span class="visually-hidden"&gt; unread&lt;/span&gt;</code>. Do not put <code>aria-label</code> on the link around it: "Updates 2 unread" keeps the visible label inside the accessible name (WCAG 2.5.3), where "Notifications, 2 unread" would not.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Neutral label|--color-fg-muted|--color-bg-subtle|4.5}}
+    {{pair:Info label|--color-info-fg|--color-info-bg|4.5}}
+    {{pair:Success label|--color-success-fg|--color-success-bg|4.5}}
+    {{pair:Warning label|--color-warning-fg|--color-warning-bg|4.5}}
+    {{pair:Danger label|--color-danger-fg|--color-danger-bg|4.5}}
+    {{pair:Count label|--color-fg-on-danger|--color-danger-solid|4.5}}
+    {{pair:Count pill on page|--color-danger-solid|--color-bg-canvas|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>None. A changing count does not bounce or pulse.</p>
+  <h3>Touch</h3>
+  <p>Not a target. The link containing a count badge is 44px tall (<code>.account-link</code>).</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>One to three words, written in sentence case in the source ("Awaiting reply"); CSS uppercases it.</li>
+    <li>Describe the state, not the action: "Confirmed", not "Confirm".</li>
+    <li>Use the same word for the same state everywhere: Awaiting reply, Confirmed, Completed, Cancelled.</li>
+    <li>Counts above 99 show "99+" with the hidden text " unread".</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><span class="badge badge--warning">Awaiting reply</span><p class="card__title">Medium knotless braids</p></div><figcaption>The badge hugs its label above the title it describes.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><span class="badge badge--warning" style="align-self: stretch; width: auto;">Awaiting reply</span><p class="card__title">Medium knotless braids</p></div><figcaption>A badge stretched across the card, as inside <code>.stack</code> on the appointment detail. It reads as a banner.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--info">Unread</span></div><figcaption>Unread is information: info tone, plus a bold title in the list.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge badge--warning">Unread</span></div><figcaption>Unread in warning amber (notification centre) suggests something is wrong. Keep warning for "needs your action".</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="chip chip--static">Knotless</span><span class="chip chip--static">Toronto</span><span class="chip chip--static">Under $150</span></div><figcaption>Applied filters are chips, one per filter.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge">Knotless · Toronto · under $150</span></div><figcaption>A badge used as a filter summary (no-results states). It cannot be cleared and is too long for a status.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Neutral background / label|--color-bg-subtle|--color-fg-muted}}
+      {{tok:Info background / label|--color-info-bg|--color-info-fg}}
+      {{tok:Success background / label|--color-success-bg|--color-success-fg}}
+      {{tok:Warning background / label|--color-warning-bg|--color-warning-fg}}
+      {{tok:Danger background / label|--color-danger-bg|--color-danger-fg}}
+      {{tok:Solid background / label|--color-info-solid|--color-fg-on-accent}}
+      {{tok:Count background / label|--color-danger-solid|--color-fg-on-danger}}
+      {{tok:Label font|--text-overline}}
+      {{tok:Tracking|--letter-spacing-wide}}
+      {{tok:Padding / gap|--space-2|--space-1}}
+      {{tok:Shape|--radius-full}}
+    </tbody>
+  </table></div>
+  <p>Component tokens: <code>--badge-bg</code>, <code>--badge-fg</code>, <code>--badge-height</code> (1.5rem).</p>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;span class="badge badge--warning"&gt;Awaiting reply&lt;/span&gt;
+&lt;span class="badge badge--success"&gt;Confirmed&lt;/span&gt;
+&lt;a class="account-link" href="/notifications"&gt;Updates
+  &lt;span class="badge badge--count"&gt;2&lt;span class="visually-hidden"&gt; unread&lt;/span&gt;&lt;/span&gt;
+&lt;/a&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.badge</code></td><td>Base: neutral tone, dot, uppercase overline label.</td></tr>
+    <tr><td><code>.badge--info</code> <code>.badge--success</code> <code>.badge--warning</code> <code>.badge--danger</code></td><td>Status tone.</td></tr>
+    <tr><td><code>.badge--solid</code></td><td>Filled accent, for emphasis on media.</td></tr>
+    <tr><td><code>.badge--count</code></td><td>Numeric count on danger red; no dot, tabular figures.</td></tr>
+    <tr><td><code>.visually-hidden</code> inside</td><td>Gives a count its meaning for screen readers.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    {{mock:pages/my-appointments/default|Awaiting reply and Completed on appointment rows}}
+    {{mock:pages/appointment-detail/default|warning badge inside a .stack card}}
+    {{mock:pages/appointment-detail/success|Confirmed}}
+    {{mock:pages/notification-center/unread|Unread and Read badges}}
+    {{mock:pages/style-gallery/default|count badge on Updates}}
+    {{mock:pages/matching-braiders/no-results|badge used as a filter summary}}
+  </ul>
+  <p>Drift fixed during extraction: badges stretched to full width inside <code>.stack</code> (now <code>align-self: flex-start</code>); the dot was 6px and the pill 22px, both off the 4px grid (now 8px and 24px); Unread used warning and Read used info (system: Unread is info plus a bold title, Read is neutral or no badge); the Updates link's <code>aria-label</code> "Notifications, 2 unread" did not contain its visible label (system: visible text plus hidden " unread"); "Completed" used success although nothing is pending (system: neutral); the filter-summary badge should be chips.</p>
+</section>

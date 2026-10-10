@@ -1,0 +1,178 @@
+<!--meta {"lead": "Tabs switch between views of the same content without leaving the page, such as Maya's upcoming and past appointments.", "description": "Underline tabs with counts, two sizes and horizontal scroll; APG Tabs with automatic activation.", "pills": ["APG Tabs", "Status: core set, not yet in a mock"], "variants": "underline, with counts, scrollable", "states": "default, hover, focus, selected, disabled", "sources": []} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use tabs to split one page into peer views that a person compares or switches between often: "Upcoming" and "Past" appointments, or "About", "Services" and "Reviews" on Nia's profile. Each tab shows a panel in place; the URL may update but the page does not reload.</p>
+  <ul>
+    <li>Use the <a href="top-bar.html">top bar</a> or <a href="sidebar-navigation.html">sidebar</a> to move between different pages.</li>
+    <li>Use filter <a href="chip.html">chips</a> to narrow one list by attribute (Braids, Twists, Locs), as the style gallery does.</li>
+    <li>Never use tabs for steps in a sequence; use a single form or a stepper.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="tabs" role="tablist" aria-label="Appointments, anatomy example" style="width: 100%;"><button class="tab" type="button" role="tab" id="tab-a-up" aria-selected="true" aria-controls="panel-a" tabindex="0">Upcoming<span class="badge badge--info">1</span></button><button class="tab" type="button" role="tab" id="tab-a-past" aria-selected="false" aria-controls="panel-a" tabindex="-1">Past</button></div>
+      <span class="ds-callout" style="left: 12%; top: 30%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 28%; top: 30%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 16%; top: 72%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 70%; top: 72%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Label</b><small>One or two words, <code>--text-label</code>.</small></div></li>
+      <li><div><b>Count (optional)</b><small>A neutral or info <a href="badge.html">badge</a> with the number of items.</small></div></li>
+      <li><div><b>Selected indicator</b><small>2px accent bar on the bottom edge, <code>--radius-xs</code> top corners.</small></div></li>
+      <li><div><b>Tab list</b><small>Hairline <code>--color-border-default</code> underneath; scrolls horizontally when it overflows.</small></div></li>
+    </ol>
+  </div>
+  <div id="panel-a" role="tabpanel" aria-labelledby="tab-a-up" class="visually-hidden">Upcoming appointments</div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>HairPop uses one visual style, the underline. Add counts when the number helps the choice; let the list scroll rather than wrap.</p>
+  {{example:[stack]Underline with counts, as My appointments would use them.}}
+<div class="tabs" role="tablist" aria-label="Appointments, counts example"><button class="tab" type="button" role="tab" id="tab-b-up" aria-selected="true" aria-controls="panel-b" tabindex="0">Upcoming<span class="badge badge--info">1</span></button><button class="tab" type="button" role="tab" id="tab-b-past" aria-selected="false" aria-controls="panel-b" tabindex="-1">Past<span class="badge">1</span></button><button class="tab" type="button" role="tab" id="tab-b-cancel" aria-selected="false" aria-controls="panel-b" tabindex="-1">Cancelled</button></div>
+<div id="panel-b" role="tabpanel" aria-labelledby="tab-b-up" tabindex="0"><p>Nia Okafor · knotless braids · Sat 24 Oct · 10:00 am · awaiting reply</p></div>
+  {{/example}}
+  {{example:[stack]Scrollable: on a narrow screen extra tabs scroll sideways; they never wrap to a second row.}}
+<div class="ds-phone"><div class="tabs" role="tablist" aria-label="Nia's profile, scrollable example"><button class="tab" type="button" role="tab" id="tab-c-about" aria-selected="true" aria-controls="panel-c" tabindex="0">About</button><button class="tab" type="button" role="tab" id="tab-c-services" aria-selected="false" aria-controls="panel-c" tabindex="-1">Services</button><button class="tab" type="button" role="tab" id="tab-c-reviews" aria-selected="false" aria-controls="panel-c" tabindex="-1">Reviews<span class="badge">86</span></button><button class="tab" type="button" role="tab" id="tab-c-policies" aria-selected="false" aria-controls="panel-c" tabindex="-1">Policies</button><button class="tab" type="button" role="tab" id="tab-c-portfolio" aria-selected="false" aria-controls="panel-c" tabindex="-1">Portfolio</button></div>
+<div id="panel-c" role="tabpanel" aria-labelledby="tab-c-about" tabindex="0"><p>Knotless braids and twists in Toronto West.</p></div></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <p>Medium (44px) is the default. Small (32px, <code>.tabs--sm</code>) is only for a tab set inside a card or dialog.</p>
+  {{example:[stack]Medium · 44px (<code>--target-comfortable</code>) and small · 32px (<code>--control-height-sm</code>).}}
+<div class="tabs" role="tablist" aria-label="Sizes example, medium"><button class="tab" type="button" role="tab" aria-selected="true" tabindex="0">Upcoming</button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Past</button></div>
+<div class="tabs tabs--sm" role="tablist" aria-label="Sizes example, small"><button class="tab" type="button" role="tab" aria-selected="true" tabindex="0">Upcoming</button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Past</button></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Forced with <code>data-state</code>; real pages use <code>:hover</code>, <code>:focus-visible</code>, <code>aria-selected</code> and <code>disabled</code>.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Tab</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Active</th><th scope="col">Selected</th><th scope="col">Disabled</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Underline</th>
+        <td><div class="tabs" role="tablist" aria-label="State default"><button class="tab" type="button" role="tab" aria-selected="false">Past</button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="State hover"><button class="tab" type="button" role="tab" aria-selected="false" data-state="hover">Past</button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="State focus"><button class="tab" type="button" role="tab" aria-selected="false" data-state="focus">Past</button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="State active"><button class="tab" type="button" role="tab" aria-selected="false" data-state="hover">Past</button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="State selected"><button class="tab" type="button" role="tab" aria-selected="true">Past</button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="State disabled"><button class="tab" type="button" role="tab" aria-selected="false" disabled>Past</button></div></td></tr>
+      <tr><th scope="row">With count</th>
+        <td><div class="tabs" role="tablist" aria-label="Count default"><button class="tab" type="button" role="tab" aria-selected="false">Reviews<span class="badge">86</span></button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="Count hover"><button class="tab" type="button" role="tab" aria-selected="false" data-state="hover">Reviews<span class="badge">86</span></button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="Count focus"><button class="tab" type="button" role="tab" aria-selected="false" data-state="focus">Reviews<span class="badge">86</span></button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="Count active"><button class="tab" type="button" role="tab" aria-selected="false" data-state="hover">Reviews<span class="badge">86</span></button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="Count selected"><button class="tab" type="button" role="tab" aria-selected="true">Reviews<span class="badge">86</span></button></div></td>
+        <td><div class="tabs" role="tablist" aria-label="Count disabled"><button class="tab" type="button" role="tab" aria-selected="false" disabled>Reviews<span class="badge">86</span></button></div></td></tr>
+    </tbody>
+  </table></div>
+  <p>Hover darkens the label and shows a grey indicator; the pointer-down state keeps the hover look and selection happens on click. Disabled tabs are rare: prefer showing the tab with an empty panel that explains why ("No cancelled appointments").</p>
+  <h3>Both themes</h3>
+  {{themes:stack}}<div class="tabs" role="tablist" aria-label="Themes example"><button class="tab" type="button" role="tab" aria-selected="true" tabindex="0">Upcoming<span class="badge badge--info">1</span></button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Past</button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-state="hover">Cancelled</button></div>{{/themes}}
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Tabs keep one row at every width. When they overflow, the list scrolls horizontally (<code>overflow-x: auto</code>, hidden scrollbar); scroll the selected tab into view on load.</li>
+    <li>On phones keep to four tabs or fewer and labels to one word, so at 360px at most one tab is partly hidden.</li>
+    <li>Tab height stays 44px at every breakpoint so it remains a comfortable touch target.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Each tab reads two component tokens: <code>--tab-fg</code> (label) and <code>--tab-indicator</code> (bottom bar). States set them from <code>--color-fg-muted</code>, <code>--color-fg-default</code>, <code>--color-border-strong</code>, <code>--color-fg-accent</code> and <code>--color-accent</code>. In the dark theme the selected label and bar become plum 300.</p>
+  <pre><code>/* A neutral tab set inside a dense card */
+.card .tab[aria-selected="true"] { --tab-fg: var(--color-fg-default); --tab-indicator: var(--color-fg-default); }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><a href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/">APG Tabs</a> with <b>automatic activation</b>: arrow keys move focus and select the tab, because panels are already loaded. <code>role="tablist"</code> with <code>aria-label</code>; each <code>&lt;button role="tab"&gt;</code> has <code>aria-selected</code>, <code>aria-controls</code> and a roving <code>tabindex</code>; each panel has <code>role="tabpanel"</code> and <code>aria-labelledby</code>. Switch to manual activation (<kbd>Enter</kbd>/<kbd>Space</kbd>) when a panel loads from the network.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Moves focus into the tab list (to the selected tab), then to the panel.</td></tr>
+    <tr><td><kbd>←</kbd> / <kbd>→</kbd></td><td>Moves to and selects the previous / next tab, wrapping at the ends; disabled tabs are skipped.</td></tr>
+    <tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>Selects the first / last tab.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The shared ring is drawn inside the tab (negative offset) so the scrolling list does not clip it. Focus stays on the tab after selection; the panel is reachable with <kbd>Tab</kbd> (<code>tabindex="0"</code> when it has no focusable content).</p>
+  <h3>Labelling</h3>
+  <p>The visible label is the tab's name. A count is read as part of the name ("Reviews 86"); add hidden text when the number alone is unclear ("Upcoming 1, 1 awaiting reply").</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Unselected label|--color-fg-muted|--color-bg-canvas|4.5}}
+    {{pair:Selected label|--color-fg-accent|--color-bg-canvas|4.5}}
+    {{pair:Selected indicator|--color-accent|--color-bg-canvas|3}}
+    {{pair:Focus ring|--color-focus-ring|--color-bg-canvas|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>The indicator colour changes over <code>--duration-fast</code>; panels swap instantly. Nothing moves under reduced motion.</p>
+  <h3>Touch</h3>
+  <p>Tabs are 44px tall with 4px between them; small tabs (32px) are used only inside cards and dialogs.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Labels are one or two words, nouns or adjectives, in sentence case: "Upcoming", "Past", "Reviews".</li>
+    <li>Order tabs by how often they are used; the first tab is selected by default.</li>
+    <li>Counts are plain numbers; never put a status word in a tab.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="tabs" role="tablist" aria-label="Do example"><button class="tab" type="button" role="tab" aria-selected="true">Upcoming</button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Past</button></div></div><figcaption>Split one list into peer views. My appointments mixes an awaiting request and a completed visit in one list today; tabs keep them apart.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="tabs" role="tablist" aria-label="Don't example"><button class="tab" type="button" role="tab" aria-selected="true">Styles</button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Braiders</button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Help</button></div></div><figcaption>Use tabs as site navigation; those are separate pages and belong in the top bar.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="chip-row"><button type="button" class="chip" aria-pressed="true">All styles</button><button type="button" class="chip" aria-pressed="false">Braids</button></div></div><figcaption>Use filter chips to narrow the style gallery, as the mocks do.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="tabs" role="tablist" aria-label="Don't example two"><button class="tab" type="button" role="tab" aria-selected="true">1. Details</button><button class="tab" type="button" role="tab" aria-selected="false" tabindex="-1">2. Review</button></div></div><figcaption>Number tabs as steps of the booking request; steps are a sequence, not peer views.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Label|--color-fg-muted}}
+      {{tok:Label, hover|--color-fg-default}}
+      {{tok:Hover indicator|--color-border-strong}}
+      {{tok:Selected label|--color-fg-accent}}
+      {{tok:Selected indicator|--color-accent}}
+      {{tok:Disabled label|--color-fg-disabled}}
+      {{tok:List rule|--color-border-default}}
+      {{tok:Height md / sm|--target-comfortable|--control-height-sm}}
+      {{tok:Padding|--space-3}}
+      {{tok:Indicator|--border-width-thick|--radius-xs}}
+      {{tok:Label font|--text-label}}
+      {{tok:Transition|--duration-fast|--ease-standard}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="tabs" role="tablist" aria-label="Appointments"&gt;
+  &lt;button class="tab" type="button" role="tab" id="tab-upcoming" aria-selected="true" aria-controls="panel-upcoming"&gt;Upcoming&lt;span class="badge badge--info"&gt;1&lt;/span&gt;&lt;/button&gt;
+  &lt;button class="tab" type="button" role="tab" id="tab-past" aria-selected="false" aria-controls="panel-past" tabindex="-1"&gt;Past&lt;/button&gt;
+&lt;/div&gt;
+&lt;div id="panel-upcoming" role="tabpanel" aria-labelledby="tab-upcoming" tabindex="0"&gt;…&lt;/div&gt;
+&lt;div id="panel-past" role="tabpanel" aria-labelledby="tab-past" tabindex="0" hidden&gt;…&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.tabs</code> + <code>role="tablist"</code></td><td>Row of tabs with a bottom rule; scrolls when it overflows.</td></tr>
+    <tr><td><code>.tabs--sm</code></td><td>32px tabs with extra-small labels.</td></tr>
+    <tr><td><code>.tab</code> + <code>role="tab"</code></td><td>One tab; <code>aria-selected="true"</code> shows the accent label and bar.</td></tr>
+    <tr><td><code>tabindex="-1"</code></td><td>On every tab except the selected one (roving tabindex).</td></tr>
+    <tr><td><code>disabled</code></td><td>Disabled tab; skipped by arrow keys.</td></tr>
+    <tr><td><code>--tab-fg</code>, <code>--tab-indicator</code></td><td>Component tokens for label and bar.</td></tr>
+    <tr><td><code>data-state="hover|focus|selected"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Core set: no HairPop mock uses tabs yet. The screens that would benefit:</p>
+  <ul>
+    {{mock:pages/my-appointments/default|awaiting and completed appointments in one list}}
+    {{mock:pages/braider-profile/default|about, reviews and policies stacked in cards}}
+  </ul>
+  <p>Drift fixed during extraction: the starter kit's tab indicator used a raw <code>2px 2px 0 0</code> radius (now <code>--radius-xs</code>) and a raw 2px height (now <code>--border-width-thick</code>); hover now also shows a grey indicator so the target is visible without relying on colour alone.</p>
+</section>

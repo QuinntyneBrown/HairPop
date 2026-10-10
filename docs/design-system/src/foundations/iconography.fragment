@@ -1,0 +1,116 @@
+<!--meta {"lead": "HairPop icons are simple line drawings on a 24-unit grid. They support a label; they rarely replace one.", "description": "Icon style, sizes, labelling rules and the full icon sheet, replacing the text glyphs used in the mocks.", "covers": "Icon grid and stroke, sizes, colour, labelling, the icon sheet, glyph-to-icon mapping"} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Every icon is an inline SVG drawn on a 24×24 grid with a 2px stroke, round caps and round joins, no fill, and <code>stroke: currentColor</code>, so it takes the colour of the text beside it in both themes. Icons are defined once (the <code>ICONS</code> table in <code>build.py</code>, and the matching icon component in the product) and rendered with the <code>.icon</code> class.</p>
+  <p>The mocks drew icons with text glyphs (✦, ×, ⌕, ✓, →, ★, ⚠). Glyphs render differently per font and platform, can be read aloud by screen readers, and do not follow the stroke style. The system replaces each with an SVG icon; see the <a href="#mapping">mapping</a>.</p>
+</section>
+
+<section class="ds-section" id="grid"><h2><a href="#grid">Grid and style</a></h2>
+  {{example:The calendar icon at 96px, 24px and 20px. Strokes stay 2 units wide on the 24-unit grid at every size.}}
+<svg class="icon" aria-hidden="true" viewBox="0 0 24 24" style="width: 6rem; height: 6rem; color: var(--color-fg-accent);"><path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"/></svg>
+{{icon:calendar|icon--lg}}
+{{icon:calendar}}
+  {{/example}}
+  <ul>
+    <li><b>Grid:</b> <code>viewBox="0 0 24 24"</code>; live area 20×20 centred; optical size matched, not mathematical (a circle reaches the live-area edge, a square sits 1 unit inside).</li>
+    <li><b>Stroke:</b> 2 units, <code>stroke-linecap: round</code>, <code>stroke-linejoin: round</code>, no fill. <code>.icon--fill</code> exists for the rare solid mark (a filled star in a rating) and is never used for UI controls.</li>
+    <li><b>Colour:</b> <code>currentColor</code> only. Status icons get their colour from the component (<code>--alert-icon</code>, <code>--toast-icon</code>), never from the SVG.</li>
+    <li><b>Metaphors:</b> one icon means one thing. The sparkle is the brand mark and the styles accent; it never means "new" or "AI".</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  {{example:<code>.icon--sm</code> 16px beside 14px text; <code>.icon</code> 20px beside body text and in buttons (1.25em); <code>.icon--lg</code> 24px for standalone use.}}
+<span class="cluster">{{icon:clock|icon--sm}}<small>Small · 16px</small></span>
+<span class="cluster">{{icon:clock}}<span>Default · 20px</span></span>
+<span class="cluster">{{icon:clock|icon--lg}}<span>Large · 24px</span></span>
+  {{/example}}
+  <ul>
+    <li>Inside a button the icon is <code>1.25em</code>, so it scales with the button size.</li>
+    <li>Leave <code>--space-1</code> to <code>--space-2</code> between an icon and its label; buttons and badges set this gap for you.</li>
+    <li>Do not scale icons with <code>transform</code>; change the size class so the stroke stays crisp.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="sheet"><h2><a href="#sheet">Icon sheet</a></h2>
+  <p>Every icon in the system. Names are kebab-case nouns or verbs and never describe shape ("close", not "x").</p>
+  <ul class="ds-icons">
+    <li>{{icon:sparkle}}sparkle</li>
+    <li>{{icon:close}}close</li>
+    <li>{{icon:search}}search</li>
+    <li>{{icon:check}}check</li>
+    <li>{{icon:check-circle}}check-circle</li>
+    <li>{{icon:info}}info</li>
+    <li>{{icon:alert-circle}}alert-circle</li>
+    <li>{{icon:warning}}warning</li>
+    <li>{{icon:arrow-right}}arrow-right</li>
+    <li>{{icon:arrow-left}}arrow-left</li>
+    <li>{{icon:chevron-down}}chevron-down</li>
+    <li>{{icon:chevron-left}}chevron-left</li>
+    <li>{{icon:chevron-right}}chevron-right</li>
+    <li>{{icon:star}}star</li>
+    <li>{{icon:calendar}}calendar</li>
+    <li>{{icon:clock}}clock</li>
+    <li>{{icon:map-pin}}map-pin</li>
+    <li>{{icon:bell}}bell</li>
+    <li>{{icon:user}}user</li>
+    <li>{{icon:menu}}menu</li>
+    <li>{{icon:filter}}filter</li>
+    <li>{{icon:plus}}plus</li>
+    <li>{{icon:edit}}edit</li>
+    <li>{{icon:trash}}trash</li>
+    <li>{{icon:external}}external</li>
+    <li>{{icon:eye}}eye</li>
+    <li>{{icon:eye-off}}eye-off</li>
+    <li>{{icon:more}}more</li>
+    <li>{{icon:refresh}}refresh</li>
+    <li>{{icon:wifi-off}}wifi-off</li>
+    <li>{{icon:lock}}lock</li>
+    <li>{{icon:mail}}mail</li>
+    <li>{{icon:message}}message</li>
+    <li>{{icon:log-out}}log-out</li>
+    <li>{{icon:help}}help</li>
+    <li>{{icon:home}}home</li>
+  </ul>
+  <h3>Both themes</h3>
+  {{themes}}{{icon:sparkle}}{{icon:calendar}}{{icon:map-pin}}{{icon:star}}<span style="color: var(--color-success-icon);">{{icon:check-circle}}</span><span style="color: var(--color-warning-icon);">{{icon:warning}}</span><span style="color: var(--color-danger-icon);">{{icon:alert-circle}}</span>{{/themes}}
+</section>
+
+<section class="ds-section" id="mapping"><h2><a href="#mapping">Glyph-to-icon mapping</a></h2>
+  <p>Where the mocks used a text glyph, use this icon instead.</p>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Mock glyph</th><th scope="col">Where</th><th scope="col">Icon</th></tr></thead>
+    <tbody>
+      <tr><td>✦</td><td>Brand in the top bar, style-card art, empty states</td><td>{{icon:sparkle}} <code>sparkle</code></td></tr>
+      <tr><td>×</td><td>Dialog close, toast dismiss</td><td>{{icon:close}} <code>close</code></td></tr>
+      <tr><td>⌕</td><td>No-results empty state</td><td>{{icon:search}} <code>search</code></td></tr>
+      <tr><td>!</td><td>Error empty states</td><td>{{icon:alert-circle}} <code>alert-circle</code></td></tr>
+      <tr><td>✓</td><td>Success empty states</td><td>{{icon:check-circle}} <code>check-circle</code></td></tr>
+      <tr><td>→</td><td>"Explore Knotless braids →" links</td><td>{{icon:arrow-right}} <code>arrow-right</code></td></tr>
+      <tr><td>★</td><td>"4.9 ★ · 86 reviews"</td><td>{{icon:star}} <code>star</code></td></tr>
+      <tr><td>⚠</td><td>Field error prefix</td><td>{{icon:warning}} <code>warning</code> (the CSS prefix is kept with empty alt text)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <ul>
+    <li>Pair icons with text. An icon alone is only for universally understood controls (close, menu, more, search) and always has an accessible name.</li>
+    <li>Status always combines colour, icon and words: a warning badge says "Awaiting reply"; the icon only reinforces it.</li>
+    <li>Do not mix glyphs, emoji or icon fonts with the SVG set.</li>
+    <li>Do not rotate or flip an icon to make a new meaning, except chevrons for direction.</li>
+  </ul>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--ghost btn--icon" type="button" aria-label="Dismiss notification">{{icon:close}}</button></div><figcaption>An SVG close icon inside a named button.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><button class="btn btn--ghost btn--icon" type="button" aria-label="Dismiss notification">×</button></div><figcaption>A multiplication sign as an icon; its size and weight change with the font.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li><b>Decorative icons</b> (next to a visible label) carry <code>aria-hidden="true"</code> and no <code>&lt;title&gt;</code>.</li>
+    <li><b>Icon-only controls</b> name the control, not the icon: <code>aria-label="Close dialog"</code>, not "X icon". Add a tooltip with the same words.</li>
+    <li><b>Informative standalone icons</b> (a star in "4.9 ★") get visually hidden text: "4.9 out of 5 stars".</li>
+    <li><b>Contrast:</b> icons that carry meaning reach 3:1 against their background (WCAG 1.4.11); the status icon tokens are checked in <code>contrast-pairs.json</code>.</li>
+    <li><b>Forced colours:</b> <code>currentColor</code> follows the system text colour, so icons stay visible in Windows High Contrast.</li>
+  </ul>
+</section>

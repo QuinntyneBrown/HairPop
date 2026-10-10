@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forms — HairPop design system</title>
+<meta name="description" content="Layout, labels, validation timing, the linked error summary, submit and success states.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Pattern</p><h1>Forms</h1><p class="ds-lead">Forms are where Maya commits: a booking request, a review, her contact details. Every HairPop form is one column, labelled above, validated on submit, and recoverable without retyping.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#when">When to use which</a></li><li><a href="#structure">Structure</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>A HairPop form is a <a href="../components/card.html">card</a> titled with what it collects, holding one column of <a href="../components/form-field.html">form fields</a>, an optional estimate or note, and one primary <a href="../components/button.html">button</a> that names the outcome ("Send request", "Post review", "Save changes"). The mocks use this shape for booking, care and review, account settings and every auth screen.</p>
+  <ul>
+    <li><b>One column.</b> Fields stack in reading order. Two columns appear only for short related pairs at 768px and up (<code>.form-row</code>).</li>
+    <li><b>Label above, help below the label, error below the input.</b> Placeholders are hints, never labels.</li>
+    <li><b>Validate on submit, then re-validate on input.</b> No errors while Maya is still typing a field for the first time.</li>
+    <li><b>Nothing is lost.</b> Errors, offline and failure states keep every value she entered.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="when"><h2><a href="#when">When to use which</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Situation</th><th scope="col">Use</th><th scope="col">Example</th></tr></thead>
+    <tbody>
+      <tr><td>Collecting several details that create or change something</td><td>Form page in a <code>.form-panel</code> card</td><td>Booking request, account settings</td></tr>
+      <tr><td>One or two fields that refine the current screen</td><td><a href="../components/dialog.html">Dialog</a> with a form body</td><td>Filter braiders, request a change</td></tr>
+      <tr><td>A final check before something is sent</td><td>Review dialog that repeats the key values</td><td>Review request</td></tr>
+      <tr><td>A destructive action</td><td>Confirmation dialog with a danger button; no form fields</td><td>Cancel appointment, sign out</td></tr>
+      <tr><td>Editing one value in a list or card</td><td>Button that opens a dialog; never an inline form in the page</td><td>Request a change on the appointment card</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
+  <p>Card title, fields, a note that sets expectations, then the action. The primary button is full width on phones and sits at the end of the form from 768px.</p>
+  <div class="ds-frame"><div class="ds-frame__body">
+    <section class="form-panel card" aria-labelledby="fs-title">
+      <h2 id="fs-title">Your details</h2>
+      <form class="stack" action="#structure" novalidate>
+        <div class="field"><label class="field__label" for="fs-service">Service</label><input class="input" id="fs-service" name="service" type="text" value="Medium knotless braids"></div>
+        <div class="field"><label class="field__label" for="fs-time">Preferred time</label><span class="field__help" id="fs-time-help">Choose one of the times Nia offers.</span><input class="input" id="fs-time" name="time" type="datetime-local" value="2026-10-24T10:00" aria-describedby="fs-time-help"></div>
+        <div class="form-row">
+          <div class="field"><label class="field__label" for="fs-email">Your email</label><input class="input" id="fs-email" name="email" type="email" autocomplete="email" value="maya.chen@example.com"></div>
+          <div class="field"><label class="field__label" for="fs-phone">Phone <span class="optional">(optional)</span></label><input class="input" id="fs-phone" name="phone" type="tel" autocomplete="tel" value="416-555-0148"></div>
+        </div>
+        <div class="field"><label class="field__label" for="fs-hair">Hair details</label><textarea class="textarea" id="fs-hair" name="hair">Shoulder length; bringing my own extensions</textarea></div>
+        <p class="text-muted">Estimate: $180–$240 · about 5 hours. Nia confirms the final price and time.</p>
+        <div class="form-actions"><button class="btn btn--primary" type="submit">Send request</button></div>
+      </form>
+    </section>
+  </div></div>
+  <ul>
+    <li>Gap between fields: <code>--space-4</code>. Label to input: <code>--space-1</code>. Panel width: <code>--layout-form-max</code> (38rem).</li>
+    <li>The card heading uses the h3 role, not the 36px page h2.</li>
+    <li>Mark the optional fields, not the required ones, when most fields are required.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <h3>Invalid: summary linked to fields</h3>
+  <p>On submit, show a danger <a href="../components/alert.html">alert</a> at the top of the form that names each problem and links to its field, move focus to the summary (it has <code>tabindex="-1"</code>), mark each field <code>aria-invalid="true"</code> and tie its message with <code>aria-describedby</code>.</p>
+  <div class="ds-frame"><div class="ds-frame__body">
+    <section class="form-panel card" aria-labelledby="fi-title">
+      <h2 id="fi-title">Your details</h2>
+      <div class="alert alert--danger form-summary" tabindex="-1" aria-labelledby="fi-sum-title"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg><div><strong id="fi-sum-title">Check 1 field before sending</strong><ul><li><a href="#fi-time">Preferred time: choose a time Nia offers</a></li></ul></div></div>
+      <form class="stack" action="#states" novalidate>
+        <div class="field"><label class="field__label" for="fi-service">Service</label><input class="input" id="fi-service" type="text" value="Medium knotless braids"></div>
+        <div class="field"><label class="field__label" for="fi-time">Preferred time</label><input class="input" id="fi-time" type="datetime-local" value="2026-10-24T08:00" aria-invalid="true" aria-describedby="fi-time-error"><span class="field__error" id="fi-time-error">Choose a time Nia offers. Her first slot on Sat 24 Oct is 10:00 am.</span></div>
+        <div class="form-actions"><button class="btn btn--primary" type="submit">Send request</button></div>
+      </form>
+    </section>
+  </div></div>
+  <h3>Submitting, success and offline</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--start">
+    <div class="card stack">
+      <p class="overline">Submitting</p>
+      <div class="field"><label class="field__label" for="fb-email">Your email</label><input class="input" id="fb-email" type="email" value="maya.chen@example.com"></div>
+      <button class="btn btn--primary" type="button" aria-busy="true">Send request</button>
+      <p class="inline-status" role="status"><span class="spinner spinner--sm" aria-hidden="true"></span>Sending your request to Nia…</p>
+    </div>
+    <div class="card"><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></svg></div><h2 class="empty__title">Request sent to Nia</h2><p class="empty__text">This is a request, not a confirmed appointment. Nia will reply with the final time and price.</p><div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div></section></div>
+    <div class="card stack">
+      <div class="alert alert--warning"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 3l18 18M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M12 20h.01M16.7 11.3A10 10 0 0 1 19 13M2 9a15 15 0 0 1 4.6-2.9M10.7 5.1A15 15 0 0 1 22 9"/></svg><div><strong>You’re offline.</strong> Your details stay here. Connect before sending.</div></div>
+      <div class="field"><label class="field__label" for="fo-email">Your email</label><input class="input" id="fo-email" type="email" value="maya.chen@example.com"></div>
+      <button class="btn btn--primary" type="button">Send request</button>
+    </div>
+  </div><div class="ds-example__caption"><span>Busy keeps the label and focus; success replaces the form with a next step; offline keeps the button enabled and explains on activation.</span></div></div>
+  <ul>
+    <li><b>Submitting</b>: only the pressed button gets <code>aria-busy="true"</code>; fields stay editable and nothing is disabled. Progress text goes to a <code>role="status"</code> region.</li>
+    <li><b>Failed</b> (server error): keep the form, add a danger alert above it ("We couldn’t send your request. Your details are still here. Try again."), and keep focus on the button.</li>
+    <li><b>Success</b>: replace the form with a success <a href="../components/empty-state.html">empty state</a> that states what happens next and links to it. Forms that stay on screen (account settings) use a success toast instead.</li>
+    <li><b>Destructive confirmation</b>: never a form. See <a href="dialogs-and-overlays.html">dialogs and overlays</a>.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
+  <ul>
+    <li>Under 768px: one column, the panel fills the container, the primary button is full width and first in <code>.form-actions</code>.</li>
+    <li>From 768px: <code>.form-row</code> pairs short related fields (email and phone, city and postal code); the primary returns to its natural width at the end.</li>
+    <li>Inputs stay 40px tall with 16px text at every width, which also stops iOS from zooming on focus.</li>
+    <li>The summary is not sticky; it scrolls into view because it receives focus.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li>Every input has a visible <code>&lt;label for&gt;</code>. Help and error text are siblings of the input, linked with <code>aria-describedby</code>; never inside the <code>&lt;label&gt;</code>, which would read the error as part of the name.</li>
+    <li><code>novalidate</code> on the form; validation messages are ours, written to name the fix (3.3.1, 3.3.3).</li>
+    <li>On a failed submit, focus moves to the summary (programmatically, not with <code>autofocus</code>), and each summary link moves focus to its field.</li>
+    <li><code>autocomplete</code> on name, email, phone and password fields (1.3.5); paste and password managers are always allowed (3.3.8).</li>
+    <li>Information Maya already gave (service, time chosen on Nia’s profile) is pre-filled (3.3.7).</li>
+    <li>Busy and offline states never disable the submit button, so it stays focusable and explains itself.</li>
+  </ul>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Error text on card</span><span class="ds-pair__ratio" data-contrast="--color-danger-fg|--color-bg-surface" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Invalid input edge</span><span class="ds-pair__ratio" data-contrast="--color-danger-solid|--color-bg-surface" data-min="3"></span></div>
+    <div class="ds-pair"><span>Input edge</span><span class="ds-pair__ratio" data-contrast="--color-border-strong|--color-bg-surface" data-min="3"></span></div>
+  </div>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Card titles say what is collected: "Your details", "Your review", "Contact details".</li>
+    <li>Labels are nouns in sentence case: "Preferred time", "Your email". Questions only when the answer is a choice: "How did it go?"</li>
+    <li>Error formula: <b>what to do + why or an example</b>. "Enter an email address like name@example.com." Not "Invalid input".</li>
+    <li>The summary title counts the problems: "Check 1 field before sending", "Check 2 fields before saving".</li>
+    <li>Set expectations beside the button when the outcome is not final: "Nia confirms the final price and time."</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="dd-email-a">Email</label><input class="input" id="dd-email-a" type="email" value="maya.chen@" aria-invalid="true" aria-describedby="dd-email-a-err"><span class="field__error" id="dd-email-a-err">Enter an email address like name@example.com.</span></div></div><figcaption>Error text beside the input, linked with <code>aria-describedby</code>, saying how to fix it.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="alert alert--danger form-summary"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg><div><strong>Check the highlighted field</strong><p>Correct the information below and try again.</p></div></div></div><figcaption>A summary that names no field and links nowhere, focused with <code>autofocus</code> (as the mocks’ invalid states do).</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--primary" type="button" aria-busy="true">Post review</button></div><figcaption>While sending, the button keeps its label and focus and sets <code>aria-busy</code>.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><button class="btn btn--primary" type="button" disabled>Working…</button></div><figcaption>Disabling the button and relabelling it "Working…" drops focus and hides what is happening.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    <li><a href="../../mocks/pages/booking-request/default.html">pages/booking-request/default</a> (form panel, estimate note)</li>
+    <li><a href="../../mocks/pages/booking-request/invalid.html">pages/booking-request/invalid</a> (error summary and field error)</li>
+    <li><a href="../../mocks/pages/booking-request/submitting.html">pages/booking-request/submitting</a> (busy submit)</li>
+    <li><a href="../../mocks/pages/booking-request/success.html">pages/booking-request/success</a> (success replaces the form)</li>
+    <li><a href="../../mocks/pages/booking-request/offline.html">pages/booking-request/offline</a> (offline banner above the form)</li>
+    <li><a href="../../mocks/pages/account-settings/invalid.html">pages/account-settings/invalid</a> (email error copy)</li>
+    <li><a href="../../mocks/pages/care-and-review/invalid.html">pages/care-and-review/invalid</a> (rating error copy)</li>
+    <li><a href="../../mocks/dialogs/filter-braiders/invalid.html">dialogs/filter-braiders/invalid</a> (form in a dialog)</li>
+  </ul>
+  <p>Drift fixed: the error summary named no field, linked nowhere and used <code>autofocus</code> (now lists linked errors and receives focus on submit); field errors were rendered inside the <code>&lt;label&gt;</code> (now a sibling linked with <code>aria-describedby</code>); busy buttons were disabled and relabelled "Working…" (now <code>aria-busy</code> only); offline forms disabled the button (now enabled, with the offline banner explaining).</p>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

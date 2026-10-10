@@ -1,0 +1,88 @@
+<!--meta {"lead": "Every gap, padding and margin is a multiple of 4px. Components stay tight inside (24px or less), layouts breathe between (24px or more), and three control heights keep buttons, inputs and chips aligned.", "description": "The 4px spacing scale, inside-versus-between rules, padding by component size and control heights.", "covers": "4px scale from 0 to 96px, inside vs between rules, padding by component size, the three control heights."} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Spacing tokens are named by multiples of 4px: <code>--space-4</code> is 16px, <code>--space-0-5</code> is 2px. All values are in rem so they grow with the reader's font size. The mocks used the scale everywhere; only a handful of hairline offsets (1px negative margins for joined borders, 0.1rem icon nudges) sat off it, and the nudges now use <code>--space-0-5</code>.</p>
+</section>
+
+<section class="ds-section" id="scale"><h2><a href="#scale">Scale</a></h2>
+  <div class="ds-scale">
+    <div class="ds-scale__row"><code>--space-0</code><span data-token="--space-0"></span><span class="ds-scale__bar" style="--size: var(--space-0);"></span></div>
+    <div class="ds-scale__row"><code>--space-0-5</code><span data-token="--space-0-5"></span><span class="ds-scale__bar" style="--size: var(--space-0-5);"></span></div>
+    <div class="ds-scale__row"><code>--space-1</code><span data-token="--space-1"></span><span class="ds-scale__bar" style="--size: var(--space-1);"></span></div>
+    <div class="ds-scale__row"><code>--space-2</code><span data-token="--space-2"></span><span class="ds-scale__bar" style="--size: var(--space-2);"></span></div>
+    <div class="ds-scale__row"><code>--space-3</code><span data-token="--space-3"></span><span class="ds-scale__bar" style="--size: var(--space-3);"></span></div>
+    <div class="ds-scale__row"><code>--space-4</code><span data-token="--space-4"></span><span class="ds-scale__bar" style="--size: var(--space-4);"></span></div>
+    <div class="ds-scale__row"><code>--space-5</code><span data-token="--space-5"></span><span class="ds-scale__bar" style="--size: var(--space-5);"></span></div>
+    <div class="ds-scale__row"><code>--space-6</code><span data-token="--space-6"></span><span class="ds-scale__bar" style="--size: var(--space-6);"></span></div>
+    <div class="ds-scale__row"><code>--space-8</code><span data-token="--space-8"></span><span class="ds-scale__bar" style="--size: var(--space-8);"></span></div>
+    <div class="ds-scale__row"><code>--space-10</code><span data-token="--space-10"></span><span class="ds-scale__bar" style="--size: var(--space-10);"></span></div>
+    <div class="ds-scale__row"><code>--space-12</code><span data-token="--space-12"></span><span class="ds-scale__bar" style="--size: var(--space-12);"></span></div>
+    <div class="ds-scale__row"><code>--space-16</code><span data-token="--space-16"></span><span class="ds-scale__bar" style="--size: var(--space-16);"></span></div>
+    <div class="ds-scale__row"><code>--space-20</code><span data-token="--space-20"></span><span class="ds-scale__bar" style="--size: var(--space-20);"></span></div>
+    <div class="ds-scale__row"><code>--space-24</code><span data-token="--space-24"></span><span class="ds-scale__bar" style="--size: var(--space-24);"></span></div>
+  </div>
+</section>
+
+<section class="ds-section" id="inside-between"><h2><a href="#inside-between">Inside and between</a></h2>
+  <p>Space inside a component is smaller than the space between components, so grouping reads at a glance.</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Relationship</th><th scope="col">Token</th><th scope="col">Where in HairPop</th></tr></thead><tbody>
+    <tr><td>Icon to label; label to input</td><td><code>--space-1</code></td><td>Field label, input and error; badge dot to text</td></tr>
+    <tr><td>Between chips; inside badges</td><td><code>--space-2</code></td><td>Style filter chips "All styles · Braids · Twists · Locs"; button icon gap</td></tr>
+    <tr><td>Related controls</td><td><code>--space-3</code></td><td>Search and "Find braiders"; dialog footer buttons; cluster gap</td></tr>
+    <tr><td>Stack inside a card; form fields</td><td><code>--space-4</code></td><td>Story card body; booking form fields</td></tr>
+    <tr><td>Card and dialog padding; page blocks</td><td><code>--space-6</code></td><td>Card padding; gap between page header, filters and grid</td></tr>
+    <tr><td>Page sections</td><td><code>--space-8</code></td><td>Main top padding from 768px</td></tr>
+    <tr><td>Page end, empty states</td><td><code>--space-12</code></td><td>Main bottom padding; empty-state padding</td></tr>
+  </tbody></table></div>
+  {{example:[start]A story card: 24px padding, 16px between parts, 8px under the eyebrow.}}
+<article class="card story-card" style="max-width: 20rem;"><div class="story-card__art" aria-hidden="true">✦</div><div class="stack"><p class="eyebrow">Protective style</p><h3 class="card__title">Passion twists</h3><p class="text-muted">Soft, textured finish · 3–6 hours · typically $140–$260</p><a href="#inside-between">Explore Passion twists <span aria-hidden="true">→</span></a></div></article>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="controls"><h2><a href="#controls">Padding by component size</a></h2>
+  <p>Controls come in three heights. Height and horizontal padding move together; the font steps with them.</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Height</th><th scope="col">Horizontal padding</th><th scope="col">Font</th><th scope="col">Used by</th></tr></thead><tbody>
+    <tr><td>sm</td><td><code>--control-height-sm</code> · <span data-token="--control-height-sm"></span></td><td><code>--space-3</code></td><td><code>--font-size-sm</code></td><td>Chips, small buttons, pagination, menu items</td></tr>
+    <tr><td>md</td><td><code>--control-height-md</code> · <span data-token="--control-height-md"></span></td><td><code>--space-4</code> (inputs <code>--space-3</code>)</td><td><code>--font-size-md</code></td><td>Default buttons and inputs, avatars</td></tr>
+    <tr><td>lg</td><td><code>--control-height-lg</code> · <span data-token="--control-height-lg"></span></td><td><code>--space-6</code></td><td><code>--font-size-lg</code></td><td>Hero search, primary mobile actions</td></tr>
+  </tbody></table></div>
+  {{example:Small, medium and large controls align on one row when mixed.}}
+<span class="chip chip--static">Braids</span>
+<button class="btn btn--sm" type="button">Small</button>
+<input class="input" style="max-width: 12rem;" aria-label="Medium input example" value="knotless braids">
+<button class="btn" type="button">Medium</button>
+<button class="btn btn--primary btn--lg" type="button">Large</button>
+  {{/example}}
+  <p>Other fixed paddings: cards and dialogs <code>--space-6</code>; toasts and alerts <code>--space-4</code>; table cells <code>--space-3</code> × <code>--space-4</code>; menus <code>--space-1</code> around with <code>--space-3</code> inside items; fact tiles <code>--space-3</code>.</p>
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <ul>
+    <li>Use a token for every margin, padding and gap. If no step fits, the design is wrong, not the scale.</li>
+    <li>Prefer <code>gap</code> on <code>.stack</code>, <code>.cluster</code> and grids over margins on children.</li>
+    <li>Components use <code>--space-6</code> or less inside; layout uses <code>--space-6</code> or more between.</li>
+    <li>Spacing never scales with viewport width. At a breakpoint the layout tokens (<code>--layout-gutter</code>, <code>--layout-margin</code>) change instead.</li>
+    <li>Do not borrow spacing tokens for element sizes. The mocks sized the profile avatar and the art panel with <code>--space-12</code>; those now use avatar size tokens and a 3:2 aspect ratio.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>
+    {{tok:None|--space-0}}
+    {{tok:Hairline (2px)|--space-0-5}}
+    {{tok:4px|--space-1}}
+    {{tok:8px|--space-2}}
+    {{tok:12px|--space-3}}
+    {{tok:16px|--space-4}}
+    {{tok:20px|--space-5}}
+    {{tok:24px|--space-6}}
+    {{tok:32px|--space-8}}
+    {{tok:40px|--space-10}}
+    {{tok:48px|--space-12}}
+    {{tok:64px|--space-16}}
+    {{tok:80px|--space-20}}
+    {{tok:96px|--space-24}}
+    {{tok:Control height small|--control-height-sm}}
+    {{tok:Control height medium|--control-height-md}}
+    {{tok:Control height large|--control-height-lg}}
+  </tbody></table></div>
+</section>

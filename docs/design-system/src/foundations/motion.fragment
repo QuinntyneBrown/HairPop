@@ -1,0 +1,124 @@
+<!--meta {"lead": "Motion in HairPop is quick and quiet: it confirms that something happened and shows where it went, then gets out of the way.", "description": "Five durations, four easings, three loops, choreography rules and reduced motion.", "covers": "Durations, easings and loops with replayable demos, choreography, reduced motion"} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Every transition reads a duration token and an easing token, so the whole product speeds up, slows down or stops in one place. Motion explains change: a dialog rises from where a phone thumb is, a toast slides up from the edge it lives on, a button presses down. It never decorates.</p>
+  <ul>
+    <li><b>Durations</b> are short. Colour and hover changes take 120ms, reveals 200ms, dialogs and sheets 320ms.</li>
+    <li><b>Easings</b> are asymmetric. Things that enter decelerate (<code>--ease-enter</code>); things that leave accelerate (<code>--ease-exit</code>).</li>
+    <li><b>Loops</b> (spinner, skeleton shimmer, live dot) have their own tokens because they repeat. Under reduced motion they pause, except the spinner.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="durations"><h2><a href="#durations">Durations</a></h2>
+  <p>Press a button to replay the dot moving with that duration and the standard easing.</p>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack">
+    <div class="ds-motion-demo" style="--demo-duration: var(--duration-instant);"><button class="btn btn--sm" type="button" data-motion-run>Play instant · 0ms</button><span class="dot"></span></div>
+    <div class="ds-motion-demo" style="--demo-duration: var(--duration-fast);"><button class="btn btn--sm" type="button" data-motion-run>Play fast · 120ms</button><span class="dot"></span></div>
+    <div class="ds-motion-demo" style="--demo-duration: var(--duration-base);"><button class="btn btn--sm" type="button" data-motion-run>Play base · 200ms</button><span class="dot"></span></div>
+    <div class="ds-motion-demo" style="--demo-duration: var(--duration-slow);"><button class="btn btn--sm" type="button" data-motion-run>Play slow · 320ms</button><span class="dot"></span></div>
+    <div class="ds-motion-demo" style="--demo-duration: var(--duration-deliberate);"><button class="btn btn--sm" type="button" data-motion-run>Play deliberate · 500ms</button><span class="dot"></span></div>
+  </div><div class="ds-example__caption"><span>Under reduced motion every demo snaps to its end position.</span></div></div>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Use it for</th></tr></thead>
+    <tbody>
+      <tr><td><code>--duration-instant</code></td><td>0ms</td><td>State that must not animate: focus rings, list selection, theme switches.</td></tr>
+      <tr><td><code>--duration-fast</code></td><td>120ms</td><td>Hover and press colour, borders, shadows; the button's 1px press; tooltips; the skip link dropping in.</td></tr>
+      <tr><td><code>--duration-base</code></td><td>200ms</td><td>Reveals: menus, toasts entering and leaving, the backdrop fade, switch thumbs.</td></tr>
+      <tr><td><code>--duration-slow</code></td><td>320ms</td><td>Large surfaces: dialogs, bottom sheets, page-level transitions.</td></tr>
+      <tr><td><code>--duration-deliberate</code></td><td>500ms</td><td>Progress-bar fill, where the change itself is the information.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="easings"><h2><a href="#easings">Easings</a></h2>
+  <p>Each demo uses the slow duration so the curve is easy to see.</p>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack">
+    <div class="ds-motion-demo" style="--demo-duration: var(--duration-slow); --demo-ease: var(--ease-standard);"><button class="btn btn--sm" type="button" data-motion-run>Play standard</button><span class="dot"></span></div>
+    <div class="ds-motion-demo" style="--demo-duration: var(--duration-slow); --demo-ease: var(--ease-enter);"><button class="btn btn--sm" type="button" data-motion-run>Play enter</button><span class="dot"></span></div>
+    <div class="ds-motion-demo" style="--demo-duration: var(--duration-slow); --demo-ease: var(--ease-exit);"><button class="btn btn--sm" type="button" data-motion-run>Play exit</button><span class="dot"></span></div>
+    <div class="ds-motion-demo" style="--demo-duration: var(--duration-slow); --demo-ease: var(--ease-spring);"><button class="btn btn--sm" type="button" data-motion-run>Play spring</button><span class="dot"></span></div>
+  </div><div class="ds-example__caption"><span>Standard for changes in place, enter for arrivals, exit for departures, spring sparingly for playful confirmation.</span></div></div>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Token</th><th scope="col">Curve</th><th scope="col">Use it for</th></tr></thead>
+    <tbody>
+      <tr><td><code>--ease-standard</code></td><td>Quick start, long settle</td><td>Anything that changes in place: hover, press, colour, size, progress.</td></tr>
+      <tr><td><code>--ease-enter</code></td><td>Decelerates to rest</td><td>Dialogs, sheets, menus, toasts and the backdrop arriving.</td></tr>
+      <tr><td><code>--ease-exit</code></td><td>Accelerates away</td><td>Toasts leaving, dialogs closing. Exits use the same or a shorter duration than the entrance.</td></tr>
+      <tr><td><code>--ease-spring</code></td><td>Overshoots slightly</td><td>Reserved for small confirmations such as a saved-braider toggle. Never on dialogs or text.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="choreography"><h2><a href="#choreography">Choreography</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Element</th><th scope="col">Enter</th><th scope="col">Exit</th></tr></thead>
+    <tbody>
+      <tr><td>Dialog, below 640px</td><td>Bottom sheet slides up 16px and fades in (<code>slide-up</code>), <code>--duration-slow</code>, <code>--ease-enter</code></td><td>Fades out, <code>--duration-base</code>, <code>--ease-exit</code></td></tr>
+      <tr><td>Dialog, 640px and up</td><td>Scales from 96% and fades in (<code>scale-in</code>), <code>--duration-slow</code>, <code>--ease-enter</code></td><td>Fades out, <code>--duration-base</code>, <code>--ease-exit</code></td></tr>
+      <tr><td>Backdrop</td><td>Fades in (<code>fade-in</code>), <code>--duration-base</code>, together with the panel</td><td>Fades out after the panel</td></tr>
+      <tr><td>Toast</td><td>Slides up from the region's edge (<code>slide-up</code>), <code>--duration-base</code>, <code>--ease-enter</code></td><td>Fades and drops 8px (<code>fade-out</code> via <code>data-state="leaving"</code>), <code>--duration-base</code>, <code>--ease-exit</code></td></tr>
+      <tr><td>Menu</td><td>Scales in from its anchor corner, <code>--duration-fast</code>, <code>--ease-enter</code></td><td>Disappears at once</td></tr>
+      <tr><td>Tooltip</td><td>Fades in after a 300ms hover delay, <code>--duration-fast</code></td><td>Fades out immediately on leave or blur</td></tr>
+      <tr><td>Interactive card</td><td>Lifts 1px and gains <code>--shadow-2</code> on hover, <code>--duration-fast</code></td><td>Settles back</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>Animate <code>opacity</code>, <code>translate</code> and <code>scale</code>; never <code>width</code>, <code>height</code> or <code>top</code>, which cause layout work. The progress bar's width is the single, documented exception.</li>
+    <li>One thing moves at a time. When a dialog opens, the page behind it does not move.</li>
+    <li>Entrances may be slower than exits; nobody waits for something to leave.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="loops"><h2><a href="#loops">Loops</a></h2>
+  <p>Loading indicators repeat, so they use loop tokens measured per cycle. They are not zeroed by reduced motion (a zeroed loop would flicker); decorative loops read <code>animation-play-state: var(--motion-loop-state)</code> instead.</p>
+  {{example:Spinner (<code>--duration-loop-spin</code> per turn), skeleton shimmer and indeterminate progress (<code>--duration-loop-shimmer</code>), live dot (<code>--duration-loop-pulse</code>).}}
+<span class="spinner" role="status"><span class="visually-hidden">Loading braiders</span></span>
+<span class="skeleton skeleton--text" style="width: 10rem;" aria-hidden="true"></span>
+<div class="progress progress--indeterminate" style="width: 10rem;" role="progressbar" aria-label="Sending your request"><div class="progress__bar"></div></div>
+<span class="inline-status inline-status--success"><span class="dot dot--pulse" aria-hidden="true"></span>Nia is online</span>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <ul>
+    <li>Always write <code>transition: &lt;property&gt; var(--duration-*) var(--ease-*)</code>. A raw duration or <code>ease-in-out</code> in component CSS is a bug.</li>
+    <li>Name the properties you transition; never <code>transition: all</code>.</li>
+    <li>Use the shared keyframes in <code>components.css</code> (<code>spin</code>, <code>fade-in</code>, <code>fade-out</code>, <code>slide-up</code>, <code>scale-in</code>, <code>shimmer</code>, <code>indeterminate</code>, <code>pulse</code>); do not add per-component copies.</li>
+    <li>A component never needs its own <code>prefers-reduced-motion</code> query: the tokens handle it.</li>
+    <li>No motion carries meaning on its own. A toast that slides in also says what happened; a pulsing dot also has a text label.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Reduced motion (WCAG 2.3.3)</h3>
+  <p>When the operating system asks for reduced motion, <code>tokens.css</code> sets the fast, base, slow and deliberate durations to <code>0.01ms</code> and <code>--motion-loop-state</code> to <code>paused</code>:</p>
+  <ul>
+    <li>Transitions and entrances (dialogs, sheets, toasts, menus, card lifts) complete instantly; their end states are unchanged.</li>
+    <li>Skeleton shimmer, indeterminate progress and the live-dot pulse pause, so the skeleton still shows its shape and the progress bar still shows a segment.</li>
+    <li>The spinner keeps turning. It is the only sign that work is in progress, it is small, and it does not travel across the screen.</li>
+    <li>Smooth scrolling switches to <code>auto</code>.</li>
+  </ul>
+  <h3>Flashes and timing</h3>
+  <p>Nothing flashes more than three times a second; the pulse dims to 35% once per 1.6s. Auto-dismissing toasts stay at least 8 seconds and pause on hover and focus (WCAG 2.2.1).</p>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Instant|--duration-instant}}
+      {{tok:Fast: hover, colour|--duration-fast}}
+      {{tok:Base: reveals, toasts, menus|--duration-base}}
+      {{tok:Slow: dialogs, sheets|--duration-slow}}
+      {{tok:Deliberate: progress fill|--duration-deliberate}}
+      {{tok:Spinner revolution|--duration-loop-spin}}
+      {{tok:Shimmer and indeterminate sweep|--duration-loop-shimmer}}
+      {{tok:Live-dot pulse|--duration-loop-pulse}}
+      {{tok:Loop play state|--motion-loop-state}}
+      {{tok:Standard easing|--ease-standard}}
+      {{tok:Enter easing|--ease-enter}}
+      {{tok:Exit easing|--ease-exit}}
+      {{tok:Spring easing|--ease-spring}}
+    </tbody>
+  </table></div>
+  <p>Durations and easings are the same in both themes; the reduced-motion values replace them whatever the theme.</p>
+</section>

@@ -1,0 +1,68 @@
+<!--meta {"lead": "Corners grow with the element: 8px on controls, 12px on cards and dialogs, 16px on sheets, and fully round for pills, chips, badges and avatars.", "description": "The radius scale, which radius for which size, and the three border widths.", "covers": "Five radii plus full, radius by element size, hairline / thick / accent border widths."} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>HairPop is soft but not bubbly. The mocks used five radii and full rounding consistently; one stray value (a 2px top-only radius on the tab indicator) now uses <code>--radius-xs</code>, and circles drawn with <code>50%</code> use <code>--radius-full</code>.</p>
+</section>
+
+<section class="ds-section" id="radii"><h2><a href="#radii">Radii</a></h2>
+  <div class="ds-scale">
+    <div class="ds-scale__row"><code>--radius-xs</code><span data-token="--radius-xs"></span><span class="ds-scale__box" style="--size: var(--radius-xs);"></span></div>
+    <div class="ds-scale__row"><code>--radius-sm</code><span data-token="--radius-sm"></span><span class="ds-scale__box" style="--size: var(--radius-sm);"></span></div>
+    <div class="ds-scale__row"><code>--radius-md</code><span data-token="--radius-md"></span><span class="ds-scale__box" style="--size: var(--radius-md);"></span></div>
+    <div class="ds-scale__row"><code>--radius-lg</code><span data-token="--radius-lg"></span><span class="ds-scale__box" style="--size: var(--radius-lg);"></span></div>
+    <div class="ds-scale__row"><code>--radius-xl</code><span data-token="--radius-xl"></span><span class="ds-scale__box" style="--size: var(--radius-xl);"></span></div>
+    <div class="ds-scale__row"><code>--radius-full</code><span data-token="--radius-full"></span><span class="ds-scale__box" style="--size: var(--radius-full);"></span></div>
+  </div>
+</section>
+
+<section class="ds-section" id="by-size"><h2><a href="#by-size">Radius by element size</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Radius</th><th scope="col">Elements</th></tr></thead><tbody>
+    <tr><td><code>--radius-xs</code></td><td>Checkbox, tab indicator</td></tr>
+    <tr><td><code>--radius-sm</code></td><td>Inline code, kbd, tooltips, skeleton text, menu items, alert close button</td></tr>
+    <tr><td><code>--radius-md</code></td><td>Buttons, inputs, selects, nav links, menus, alerts, toasts, photos and art panels, fact tiles</td></tr>
+    <tr><td><code>--radius-lg</code></td><td>Cards, dialogs (centred), table wrappers</td></tr>
+    <tr><td><code>--radius-xl</code></td><td>Bottom sheets on phones (top corners only)</td></tr>
+    <tr><td><code>--radius-full</code></td><td>Chips, badges, unread count, avatars, switches, radios, progress bars, spinners</td></tr>
+  </tbody></table></div>
+  {{example:From small to large: checkbox, button, chip, avatar and card.}}
+<label class="choice"><input type="checkbox" checked><span>Remember my choices</span></label>
+<button class="btn" type="button">Request a change</button>
+<span class="chip chip--static">Braids</span>
+<span class="avatar" aria-hidden="true">NO</span>
+<div class="card" style="flex: 0 1 12rem;">Card · 12px</div>
+  {{/example}}
+  <p>Nested corners: an element inside a padded container uses a smaller radius than its parent (photo <code>md</code> inside card <code>lg</code>), so the curves look concentric.</p>
+</section>
+
+<section class="ds-section" id="borders"><h2><a href="#borders">Border widths</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Width</th><th scope="col">Token</th><th scope="col">Used by</th></tr></thead><tbody>
+    <tr><td><span data-token="--border-width-hairline"></span></td><td><code>--border-width-hairline</code></td><td>Every control, card, divider and table rule</td></tr>
+    <tr><td><span data-token="--border-width-thick"></span></td><td><code>--border-width-thick</code></td><td>Tab indicator, kbd bottom edge, spinners, link underline on hover</td></tr>
+    <tr><td><span data-token="--border-width-accent"></span></td><td><code>--border-width-accent</code></td><td>Leading edge of alerts and the form error summary; blockquote rule</td></tr>
+  </tbody></table></div>
+  {{example:[stack]The 4px leading edge marks an alert; everything else is 1px.}}
+<div class="alert alert--warning"><div><strong class="alert__title">You’re offline.</strong><span>Your details remain here. Connect before sending.</span></div></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <ul>
+    <li>Choose the radius by the element's size and role from the table above; do not invent in-between values.</li>
+    <li>Joined controls (input groups) square the inner corners and keep the outer ones at <code>--radius-md</code>.</li>
+    <li>The focus ring is an <code>outline</code>, which follows the element's own radius.</li>
+    <li>Borders a person needs to see to operate a control are 1px <code>--color-border-strong</code>, at least 3:1 against the surface.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>
+    {{tok:Radius xs|--radius-xs}}
+    {{tok:Radius sm|--radius-sm}}
+    {{tok:Radius md|--radius-md}}
+    {{tok:Radius lg|--radius-lg}}
+    {{tok:Radius xl|--radius-xl}}
+    {{tok:Radius full|--radius-full}}
+    {{tok:Border hairline|--border-width-hairline}}
+    {{tok:Border thick|--border-width-thick}}
+    {{tok:Border accent|--border-width-accent}}
+  </tbody></table></div>
+</section>

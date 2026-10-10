@@ -1,0 +1,147 @@
+<!--meta {"lead": "A tooltip names an icon-only control or adds a short hint, on hover and on keyboard focus. It never holds anything the person must read to finish a task.", "description": "Text and shortcut tooltips on the inverse surface, shown on hover and focus, in both themes.", "pills": ["APG Tooltip", "Status: stable"], "variants": "text, with shortcut", "states": "hidden, visible on hover, visible on focus", "sources": []} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a tooltip to show the name of an icon-only button ("Close dialog", "Edit request") or a short supplementary hint. If the information is needed to complete a task (a price rule, a cancellation policy) put it on the page as text or a <a href="inline-message.html">field hint</a>; tooltips need hover or focus and are easy to miss on touch. Never put links, buttons or form fields in a tooltip; use a menu or dialog instead.</p>
+  <ul>
+    <li><b>Text</b>: two to five words, no full stop.</li>
+    <li><b>With shortcut</b>: the label followed by a <code>&lt;kbd&gt;</code> shortcut, for desktop power features.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div style="padding-top: var(--space-10);">
+        <span class="has-tooltip" data-state="open"><button class="btn btn--icon" type="button" aria-label="Edit request" aria-describedby="anat-tip">{{icon:edit}}</button><span class="tooltip" role="tooltip" id="anat-tip">Edit request</span></span>
+      </div>
+      <span class="ds-callout" style="left: 62%; top: 18%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 54%; top: 46%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 58%; top: 74%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Bubble</b><small><code>--color-bg-inverse</code>, <code>--radius-sm</code>, <code>--space-1</code> × <code>--space-2</code> padding, caption type, <code>--shadow-2</code>.</small></div></li>
+      <li><div><b>Arrow</b><small>4px triangle in the bubble colour, pointing at the trigger.</small></div></li>
+      <li><div><b>Trigger</b><small>A focusable control; linked with <code>aria-describedby</code>.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:Shown here with <code>data-state="open"</code>; in the product they appear on hover and focus.}}
+<div class="cluster" style="gap: var(--space-12); padding-top: var(--space-10);">
+  <span class="has-tooltip" data-state="open"><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog">{{icon:close}}</button><span class="tooltip" role="tooltip" id="var-tip-1">Close dialog</span></span>
+  <span class="has-tooltip" data-state="open"><button class="btn btn--icon" type="button" aria-label="Search styles" aria-describedby="var-tip-2">{{icon:search}}</button><span class="tooltip" role="tooltip" id="var-tip-2">Search styles<kbd>/</kbd></span></span>
+</div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes" data-na="Tooltips have one size; the bubble grows with its text up to one line."><h2><a href="#sizes">Sizes</a></h2></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>The tooltip is hidden by default and appears when the trigger is hovered or receives focus (<code>:focus-within</code>); it hides on pointer leave, blur or <kbd>Esc</kbd>.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Hidden</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Disabled trigger</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Text</th>
+        <td><div style="padding-top: var(--space-10);"><span class="has-tooltip"><button class="btn btn--icon" type="button" aria-label="Filters" aria-describedby="st-1">{{icon:filter}}</button><span class="tooltip" role="tooltip" id="st-1">Filters</span></span></div></td>
+        <td><div style="padding-top: var(--space-10);"><span class="has-tooltip" data-state="hover"><button class="btn btn--icon" type="button" data-state="hover" aria-label="Filters" aria-describedby="st-2">{{icon:filter}}</button><span class="tooltip" role="tooltip" id="st-2">Filters</span></span></div></td>
+        <td><div style="padding-top: var(--space-10);"><span class="has-tooltip" data-state="open"><button class="btn btn--icon" type="button" data-state="focus" aria-label="Filters" aria-describedby="st-3">{{icon:filter}}</button><span class="tooltip" role="tooltip" id="st-3">Filters</span></span></div></td>
+        <td><div style="padding-top: var(--space-10);"><span class="has-tooltip"><button class="btn btn--icon" type="button" disabled aria-label="Filters unavailable offline">{{icon:filter}}</button></span></div></td></tr>
+    </tbody>
+  </table></div>
+  <p>A disabled button cannot receive focus, so it cannot show a tooltip to keyboard users. Explain unavailability in visible text instead (the offline banner does this).</p>
+  <h3>Both themes</h3>
+  {{themes}}<div style="padding-top: var(--space-10);"><span class="has-tooltip" data-state="open"><button class="btn btn--icon" type="button" aria-label="Edit request">{{icon:edit}}</button><span class="tooltip" role="tooltip">Edit request</span></span></div>{{/themes}}
+  <p>The bubble is inverse in both themes: dark grey with light text on light pages, light grey with dark text on dark pages.</p>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Tooltips sit above the trigger, centred. Near a viewport edge the product flips or shifts them with the CDK Overlay so they never clip.</li>
+    <li>On touch devices (<code>hover: none</code>) tooltips are never the only label: icon-only buttons keep an <code>aria-label</code>, and important hints are shown inline.</li>
+    <li>Text never wraps; a hint that needs a second line belongs on the page.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The tooltip reads <code>--color-bg-inverse</code> and <code>--color-fg-inverse</code>, which swap in the dark theme, so it always contrasts with the page. It sits on <code>--z-tooltip</code>, above toasts and dialogs.</p>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><a href="https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/">APG Tooltip</a>: the bubble has <code>role="tooltip"</code> and an id; the trigger references it with <code>aria-describedby</code>. For an icon-only button the tooltip repeats the <code>aria-label</code>, so the name never lives only in the tooltip.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Focusing the trigger shows the tooltip.</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>Hides the tooltip without moving focus (WCAG 1.4.13, dismissible).</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Focus stays on the trigger; the tooltip is never focusable. It stays visible while the pointer moves onto it (hoverable) and until blur or <kbd>Esc</kbd> (persistent).</p>
+  <h3>Labelling</h3>
+  <p>Text matches the trigger's accessible name or adds a hint. Shortcuts use <code>&lt;kbd&gt;</code>.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Tooltip text|--color-fg-inverse|--color-bg-inverse|4.5}}
+  </div>
+  <h3>Motion</h3>
+  <p>Fades in over <code>--duration-fast</code> after a 300ms hover delay and hides immediately; reduced motion removes the fade. Focus shows it without delay.</p>
+  <h3>Touch</h3>
+  <p>No hover on touch, so tooltips are an enhancement only. The trigger keeps its own 24px minimum target.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Sentence case, no full stop, two to five words: "Edit request", "Close dialog".</li>
+    <li>Start with the verb for actions; use the noun for indicators ("Unread updates").</li>
+    <li>Never repeat a visible label; a button with text needs no tooltip.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div style="padding-top: var(--space-10);"><span class="has-tooltip" data-state="open"><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog">{{icon:close}}</button><span class="tooltip" role="tooltip">Close dialog</span></span></div></div><figcaption>Name an icon-only control with <code>aria-label</code> and show the same words in a tooltip.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog">×</button></div><figcaption>Rely on a "×" glyph with no visible name, as the dialog mocks' close button did.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><p class="text-muted">Nia confirms the final price and time.</p></div><figcaption>Put rules people need (price and confirmation) in visible text, as the booking mock does.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div style="padding-top: var(--space-10);"><span class="has-tooltip" data-state="open"><button class="btn btn--icon" type="button" aria-label="Price details">{{icon:info}}</button><span class="tooltip" role="tooltip">Final price set by Nia</span></span></div></div><figcaption>Hide the estimate rule in a tooltip; it is unreachable on touch.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Background, arrow|--color-bg-inverse}}
+      {{tok:Text|--color-fg-inverse}}
+      {{tok:Font|--text-caption}}
+      {{tok:Padding|--space-1|--space-2}}
+      {{tok:Offset from trigger|--space-2}}
+      {{tok:Radius|--radius-sm}}
+      {{tok:Shadow|--shadow-2}}
+      {{tok:Layer|--z-tooltip}}
+      {{tok:Fade|--duration-fast|--ease-standard}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;span class="has-tooltip"&gt;
+  &lt;button class="btn btn--icon" type="button" aria-label="Edit request" aria-describedby="tip-edit"&gt;
+    &lt;svg class="icon" aria-hidden="true" viewBox="0 0 24 24"&gt;…&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;span class="tooltip" role="tooltip" id="tip-edit"&gt;Edit request&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.has-tooltip</code></td><td>Positioning context; shows the tooltip on hover and <code>:focus-within</code>.</td></tr>
+    <tr><td><code>.tooltip</code> + <code>role="tooltip"</code></td><td>The bubble and arrow.</td></tr>
+    <tr><td><code>aria-describedby</code></td><td>Links the trigger to the tooltip.</td></tr>
+    <tr><td><code>data-state="open|hover"</code> on <code>.has-tooltip</code></td><td>Documentation only: shows the tooltip statically.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Core-set component: no mock shows a tooltip yet. It is needed by the icon-only controls the mocks already use:</p>
+  <ul>
+    {{mock:dialogs/filter-braiders/default|icon-only close button}}
+    {{mock:pages/booking-request/default|price rule shown as text, not a tooltip}}
+  </ul>
+  <p>Drift fixed during extraction: the tooltip arrow was a raw 5px border (now <code>--space-1</code>) and its offset a raw 8px (now <code>--space-2</code>); dialog close buttons relied on a "×" glyph with no tooltip.</p>
+</section>

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stat — HairPop design system</title>
+<meta name="description" content="The fact tile and fact grid from style and braider pages, plus the larger stat with a delta.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Component · Data display</p><h1>Stat</h1><p class="ds-lead">Fact tiles answer the questions people ask before they book: how long, how much, how long it lasts. One number, one label, side by side.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Tabular numbers</span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a <b>fact tile</b> for a short, comparable figure that helps a decision: "4–7 hours · Typical time", "$160–$300 · Typical price", "From $180 · Knotless braids". Group two to four in a <code>.fact-grid</code>. Use a <b>stat</b> (large value, label, optional delta) for summaries with a trend, such as a braider's requests this month. Use a <a href="description-list.html">description list</a> when the labels matter more than the values or there are more than four facts.</p>
+  <ul>
+    <li><b>Fact tile</b>: value first (h4 role), label beneath (muted, small), on a subtle background.</li>
+    <li><b>Stat</b>: label first, then a large value in the h2 role, then an optional delta with arrow, sign, colour and words.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="fact"><span class="fact__value">4–7 hours</span><span class="fact__label">Typical time</span></div>
+      <span class="ds-callout" style="left: 34%; top: 30%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 34%; top: 58%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 66%; top: 74%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Value</b><small>h4 role (16px semibold), tabular figures; an en dash for ranges.</small></div></li>
+      <li><div><b>Label</b><small>Body small, muted; what the number measures.</small></div></li>
+      <li><div><b>Tile</b><small><code>--color-bg-subtle</code>, <code>--radius-md</code>, 12px padding; tiles share a grid with 16px gaps.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="fact-grid">
+  <div class="fact"><span class="fact__value">4–7 hours</span><span class="fact__label">Typical time</span></div>
+  <div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div>
+  <div class="fact"><span class="fact__value">4–8 weeks</span><span class="fact__label">Typical wear</span></div>
+</div></div><div class="ds-example__caption"><span>Fact grid from the knotless braids page: tiles fill the row and wrap at 8rem each.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;fact-grid&quot;&gt;
+  &lt;div class=&quot;fact&quot;&gt;&lt;span class=&quot;fact__value&quot;&gt;4–7 hours&lt;/span&gt;&lt;span class=&quot;fact__label&quot;&gt;Typical time&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;fact&quot;&gt;&lt;span class=&quot;fact__value&quot;&gt;$160–$300&lt;/span&gt;&lt;span class=&quot;fact__label&quot;&gt;Typical price&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;fact&quot;&gt;&lt;span class=&quot;fact__value&quot;&gt;4–8 weeks&lt;/span&gt;&lt;span class=&quot;fact__label&quot;&gt;Typical wear&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="fact-grid">
+  <div class="fact"><span class="fact__value">From $180</span><span class="fact__label">Knotless braids</span></div>
+  <div class="fact"><span class="fact__value">5 hours</span><span class="fact__label">Typical duration</span></div>
+</div></div><div class="ds-example__caption"><span>On Nia's profile: her starting price and usual duration.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;fact-grid&quot;&gt;
+  &lt;div class=&quot;fact&quot;&gt;&lt;span class=&quot;fact__value&quot;&gt;From $180&lt;/span&gt;&lt;span class=&quot;fact__label&quot;&gt;Knotless braids&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;fact&quot;&gt;&lt;span class=&quot;fact__value&quot;&gt;5 hours&lt;/span&gt;&lt;span class=&quot;fact__label&quot;&gt;Typical duration&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div>
+  <h3>Stat with delta</h3>
+  <div class="ds-example"><div class="ds-example__canvas"><div class="stat"><span class="stat__label">Requests this month</span><span class="stat__value">24</span><span class="stat__delta stat__delta--up"><span aria-hidden="true">↑</span> +6 from September</span></div>
+<div class="stat"><span class="stat__label">Average reply time</span><span class="stat__value">3 h</span><span class="stat__delta stat__delta--down"><span aria-hidden="true">↓</span> 1 h slower than September</span></div></div><div class="ds-example__caption"><span>Delta = arrow + sign + colour + words; colour is never the only cue.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;stat&quot;&gt;&lt;span class=&quot;stat__label&quot;&gt;Requests this month&lt;/span&gt;&lt;span class=&quot;stat__value&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;stat__delta stat__delta--up&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;↑&lt;/span&gt; +6 from September&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;stat&quot;&gt;&lt;span class=&quot;stat__label&quot;&gt;Average reply time&lt;/span&gt;&lt;span class=&quot;stat__value&quot;&gt;3 h&lt;/span&gt;&lt;span class=&quot;stat__delta stat__delta--down&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;↓&lt;/span&gt; 1 h slower than September&lt;/span&gt;&lt;/div&gt;</code></pre></details></div>
+</section>
+
+<section class="ds-section" id="sizes" data-na="One size each: the fact tile uses the h4 role, the stat the h2 role. Use the stat when a value needs more presence."><h2><a href="#sizes">Sizes</a></h2><p class="ds-na">One size each: the fact tile uses the h4 role, the stat the h2 role. Use the stat when a value needs more presence.</p></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Facts are read-only and not focusable, so they have no hover, focus, active or disabled state. They change with the data:</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Loading</th><th scope="col">Not listed</th><th scope="col">Long value</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Fact tile</th><td><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></td><td><div class="fact" aria-hidden="true"><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div></td><td><div class="fact"><span class="fact__value">Ask Nia</span><span class="fact__label">Typical wear</span></div></td><td><div class="fact"><span class="fact__value">From $1,240</span><span class="fact__label">Waist-length knotless, extra small</span></div></td></tr>
+      <tr><th scope="row">Stat</th><td><div class="stat"><span class="stat__label">Requests</span><span class="stat__value">24</span></div></td><td><div class="stat" aria-hidden="true"><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--title"></span></div></td><td><div class="stat"><span class="stat__label">Requests</span><span class="stat__value">0</span><span class="stat__delta">No requests yet</span></div></td><td><div class="stat"><span class="stat__label">Reviews</span><span class="stat__value">1,284</span></div></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="fact-grid" style="margin: 0;"><div class="fact"><span class="fact__value">4–7 hours</span><span class="fact__label">Typical time</span></div><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></div><div class="stat"><span class="stat__label">Requests this month</span><span class="stat__value">24</span><span class="stat__delta stat__delta--up"><span aria-hidden="true">↑</span> +6 from September</span></div></div></div><div data-theme="dark"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="fact-grid" style="margin: 0;"><div class="fact"><span class="fact__value">4–7 hours</span><span class="fact__label">Typical time</span></div><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></div><div class="stat"><span class="stat__label">Requests this month</span><span class="stat__value">24</span><span class="stat__delta stat__delta--up"><span aria-hidden="true">↑</span> +6 from September</span></div></div></div></div>
+  <ul>
+    <li><b>Loading</b>: the tile keeps its size with a title and a text skeleton; the grid's container sets <code>aria-busy="true"</code>.</li>
+    <li><b>Not listed</b>: say who can answer ("Ask Nia") rather than a dash or "N/A".</li>
+    <li><b>Long value</b>: the value wraps inside its tile; tiles in the same row stretch to equal height.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>The grid is <code>repeat(auto-fit, minmax(8rem, 1fr))</code>: two tiles per row at 360px inside a card, three or four on wider cards. No breakpoints needed.</li>
+    <li>Values never truncate; they wrap. Keep them under about 12 characters so they stay on one line at 360px.</li>
+    <li>A stat's value keeps the h2 role, 36px at every width.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The tile reads <code>--color-bg-subtle</code> for its fill, <code>--color-fg-default</code> for the value and <code>--color-fg-muted</code> for the label; deltas read <code>--color-success-fg</code> and <code>--color-danger-fg</code>. In dark mode the tile becomes grey-800 on a grey-900 card, so it still reads as inset.</p>
+  <pre><code>/* Facts on a sunken well use the surface instead */
+.well .fact { background: var(--color-bg-surface); }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Plain elements; no ARIA pattern. Reading order is value then label ("4–7 hours, Typical time"), which makes sense spoken. Do not use <code>&lt;strong&gt;</code> for the value; the weight is visual, not importance.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Skips facts and stats; they are not interactive.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>None.</p>
+  <h3>Labelling</h3>
+  <p>Ranges use an en dash, which most screen readers read as "to". Arrows in deltas are <code>aria-hidden</code>; the words carry direction ("+6 from September", "1 h slower").</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Value on tile</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-subtle" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Label on tile</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-subtle" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Positive delta on card</span><span class="ds-pair__ratio" data-contrast="--color-success-fg|--color-bg-surface" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Negative delta on card</span><span class="ds-pair__ratio" data-contrast="--color-danger-fg|--color-bg-surface" data-min="4.5"></span></div>
+  </div>
+  <h3>Motion</h3>
+  <p>Values do not count up or animate. Skeletons pause under reduced motion.</p>
+  <h3>Touch</h3>
+  <p>Not a target.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Value: number plus unit, short: "4–7 hours", "$160–$300", "From $180". En dash for ranges, no spaces around it.</li>
+    <li>Label: what it measures, sentence case: "Typical time", "Typical price", "Typical wear".</li>
+    <li>Say "typical" or "from" for estimates; the braider confirms the final price.</li>
+    <li>Whole-dollar prices have no decimals: "$180", not "$180.00".</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="fact"><span class="fact__value">$160–$300</span><span class="fact__label">Typical price</span></div></div><figcaption>A range with an en dash and a label that says it is typical.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="fact"><span class="fact__value">$160 - $300</span><span class="fact__label">Price</span></div></div><figcaption>A spaced hyphen and an unqualified "Price" read as a quote the braider has not given.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="fact"><span class="fact__value">Ask Nia</span><span class="fact__label">Typical wear</span></div></div><figcaption>When a fact is missing, say who can answer.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="fact"><span class="fact__value">N/A</span><span class="fact__label">Typical wear</span></div></div><figcaption>"N/A" or a lone dash leaves the person guessing.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      <tr><td>Tile background</td><td><code>--color-bg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td></tr>
+      <tr><td>Value</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+      <tr><td>Label</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+      <tr><td>Delta up / down</td><td><code>--color-success-fg</code> / <code>--color-danger-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-success-fg" data-swatch></i><span data-token="--color-success-fg"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-success-fg" data-swatch></i><span data-token="--color-success-fg"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td></tr>
+      <tr><td>Value font, fact / stat</td><td><code>--text-h4</code> / <code>--text-h2</code></td><td colspan="2"><span data-token="--text-h4"></span> / <span data-token="--text-h2"></span></td></tr>
+      <tr><td>Label font, fact / stat</td><td><code>--text-body-sm</code> / <code>--text-label</code></td><td colspan="2"><span data-token="--text-body-sm"></span> / <span data-token="--text-label"></span></td></tr>
+      <tr><td>Tile padding / grid gap</td><td><code>--space-3</code> / <code>--space-4</code></td><td colspan="2"><span data-token="--space-3"></span> / <span data-token="--space-4"></span></td></tr>
+      <tr><td>Shape</td><td><code>--radius-md</code></td><td colspan="2"><span data-token="--radius-md"></span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="fact-grid"&gt;
+  &lt;div class="fact"&gt;&lt;span class="fact__value"&gt;4–7 hours&lt;/span&gt;&lt;span class="fact__label"&gt;Typical time&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="fact"&gt;&lt;span class="fact__value"&gt;$160–$300&lt;/span&gt;&lt;span class="fact__label"&gt;Typical price&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="stat"&gt;
+  &lt;span class="stat__label"&gt;Requests this month&lt;/span&gt;&lt;span class="stat__value"&gt;24&lt;/span&gt;
+  &lt;span class="stat__delta stat__delta--up"&gt;&lt;span aria-hidden="true"&gt;↑&lt;/span&gt; +6 from September&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.fact-grid</code></td><td>Auto-fit grid of tiles, 8rem minimum, 16px gap, 24px block margin.</td></tr>
+    <tr><td><code>.fact</code>, <code>.fact__value</code>, <code>.fact__label</code></td><td>Tile, value, label. The mocks' <code>.fact-grid &gt; div &gt; strong/span</code> markup is styled the same for parity.</td></tr>
+    <tr><td><code>.stat</code>, <code>.stat__label</code>, <code>.stat__value</code></td><td>Large stat.</td></tr>
+    <tr><td><code>.stat__delta--up</code> <code>.stat__delta--down</code></td><td>Delta colour; add an arrow and words.</td></tr>
+    <tr><td><code>aria-busy="true"</code> on the container</td><td>While skeleton tiles show.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    <li><a href="../../mocks/pages/style-detail/default.html">pages/style-detail/default</a> (typical time, price and wear)</li>
+    <li><a href="../../mocks/pages/braider-profile/default.html">pages/braider-profile/default</a> (starting price and duration)</li>
+    <li><a href="../../mocks/pages/style-detail/loading.html">pages/style-detail/loading</a> (skeleton cards)</li>
+  </ul>
+  <p>Drift fixed during extraction: values used <code>&lt;strong&gt;</code> for visual weight (system: <code>.fact__value</code>, no emphasis semantics); tiles had no class of their own (system adds <code>.fact</code> and keeps the old selectors working); a missing fact had no defined copy (system: "Ask Nia"); the stat with delta was added from the core set.</p>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

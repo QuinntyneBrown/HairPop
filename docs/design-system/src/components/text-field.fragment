@@ -1,0 +1,200 @@
+<!--meta {"lead": "Text fields collect short, typed answers: an email, a name, a phone number, a search. They always sit inside a form field with a visible label.", "description": "Text, email, password with show toggle, number, search, addons and counter; three sizes; every state in both themes.", "pills": ["Native <code>&lt;input&gt;</code>", "Status: stable"], "variants": "text, email, password with show toggle, tel, number, search, prefix/suffix addon, with icon, with counter", "states": "default, hover, focus, disabled, read-only, invalid, required", "sources": ["pages/sign-in/default", "pages/sign-in/invalid", "pages/account-settings/invalid", "pages/style-gallery/default", "dialogs/filter-braiders/invalid"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a text field for a single line of free text the person knows: name, email, phone, password, a search term. It is always wrapped in a <a href="form-field.html">form field</a> that supplies the label, help and error.</p>
+  <ul>
+    <li>For more than one sentence ("Your review", "Hair details") use a <a href="textarea.html">textarea</a>.</li>
+    <li>When the answer must be one of a known set (an offered time, a distance, a rating) use a <a href="select.html">select</a> or <a href="radio-group.html">radio group</a>, not free text.</li>
+    <li>Pick the right <code>type</code> and <code>autocomplete</code>: phones show the right keyboard and password managers fill the field (SC 1.3.5).</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="field" style="width: min(100%, 20rem);"><label class="field__label" for="tf-anat">Email</label><input class="input" id="tf-anat" type="email" autocomplete="email" placeholder="name@example.com" aria-describedby="tf-anat-help"><span class="field__help" id="tf-anat-help">We send request updates here.</span></div>
+      <span class="ds-callout" style="left: 14%; top: 18%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 48%; top: 46%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 80%; top: 46%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 40%; top: 78%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Label</b><small>Visible, above the field, from the <a href="form-field.html">form field</a>.</small></div></li>
+      <li><div><b>Value or placeholder</b><small>Body font; the placeholder is an example, never the label.</small></div></li>
+      <li><div><b>Container</b><small>40px tall, 1px <code>--color-border-strong</code>, <code>--radius-md</code>, 12px horizontal padding.</small></div></li>
+      <li><div><b>Help or error</b><small>Linked by <code>aria-describedby</code>.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:[stack]Types match the data; each sets <code>autocomplete</code> or <code>inputmode</code> so browsers and keyboards help.}}
+<div class="form-row">
+<div class="field"><label class="field__label" for="tf-name">Name</label><input class="input" id="tf-name" type="text" autocomplete="name" value="Maya Chen"></div>
+<div class="field"><label class="field__label" for="tf-email">Email</label><input class="input" id="tf-email" type="email" autocomplete="email" value="maya.chen@example.com"></div>
+<div class="field"><label class="field__label" for="tf-phone">Phone <span class="optional">(optional)</span></label><input class="input" id="tf-phone" type="tel" autocomplete="tel" value="416-555-0148"></div>
+<div class="field"><label class="field__label" for="tf-price">Maximum price</label><div class="input-group"><span class="addon" aria-hidden="true">$</span><input class="input" id="tf-price" type="number" inputmode="numeric" min="0" step="10" value="240"></div></div>
+</div>
+  {{/example}}
+  <h3>Password with show toggle</h3>
+  {{example:[stack]The toggle is a real button with <code>aria-pressed</code>; paste and password managers stay allowed (SC 3.3.8).}}
+<div class="field"><label class="field__label" for="tf-pw">Password</label><div class="input-group"><input class="input" id="tf-pw" type="password" autocomplete="current-password" value="correcthorse" aria-describedby="tf-pw-help"><button class="btn" type="button" aria-pressed="false" aria-controls="tf-pw">{{icon:eye}}Show</button></div><span class="field__help" id="tf-pw-help">Use at least 12 characters.</span></div>
+  {{/example}}
+  <h3>Search, unit addon and counter</h3>
+  {{example:[stack]Search uses <code>type="search"</code> and a leading icon; the counter appears only where a limit exists.}}
+<div class="filter-row"><div class="search search-box">{{icon:search}}<input class="input" type="search" value="knotless braids" aria-label="Search styles"></div><a class="btn" href="../../mocks/pages/matching-braiders/default.html">Find braiders</a></div>
+<div class="field"><label class="field__label" for="tf-reason">Reason for the report</label><input class="input" id="tf-reason" type="text" maxlength="80" value="Inaccurate service details" aria-describedby="tf-reason-count"><span class="field__counter" id="tf-reason-count">26 / 80</span></div>
+<div class="field"><label class="field__label" for="tf-dist">Distance from Toronto</label><div class="input-group"><input class="input" id="tf-dist" type="number" inputmode="numeric" value="10"><span class="addon">km</span></div></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <p>Medium is the default for every form. Small fits dense filter rows; large is for a hero search.</p>
+  {{example:[stack]Heights <code>--control-height-sm/md/lg</code> (32/40/48px); text <code>--font-size-sm/md/lg</code>.}}
+<input class="input input--sm" type="text" value="Small · 32px" aria-label="Small field example">
+<input class="input" type="text" value="Medium · 40px" aria-label="Medium field example">
+<input class="input input--lg" type="search" value="Large · 48px" aria-label="Large field example">
+  {{/example}}
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Hover darkens the border, focus replaces it with the 2px accent ring, invalid doubles the edge in danger red and adds the error message, read-only uses a sunken, dashed container, disabled flattens and dims.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Size</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Invalid</th><th scope="col">Read-only</th><th scope="col">Disabled</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Medium</th>
+        <td><input class="input" type="email" value="maya.chen@example.com" aria-label="Email, default"></td>
+        <td><input class="input" type="email" value="maya.chen@example.com" aria-label="Email, hover" data-state="hover"></td>
+        <td><input class="input" type="email" value="maya.chen@example.com" aria-label="Email, focus" data-state="focus"></td>
+        <td><input class="input" type="email" value="maya.chen@" aria-label="Email, invalid" aria-invalid="true"></td>
+        <td><input class="input" type="text" value="HP-1048" aria-label="Request number, read-only" readonly></td>
+        <td><input class="input" type="email" value="maya.chen@example.com" aria-label="Email, disabled" disabled></td></tr>
+      <tr><th scope="row">Small</th>
+        <td><input class="input input--sm" type="text" value="Toronto" aria-label="City, small default"></td>
+        <td><input class="input input--sm" type="text" value="Toronto" aria-label="City, small hover" data-state="hover"></td>
+        <td><input class="input input--sm" type="text" value="Toronto" aria-label="City, small focus" data-state="focus"></td>
+        <td><input class="input input--sm" type="text" value="" aria-label="City, small invalid" aria-invalid="true"></td>
+        <td><input class="input input--sm" type="text" value="Toronto" aria-label="City, small read-only" readonly></td>
+        <td><input class="input input--sm" type="text" value="Toronto" aria-label="City, small disabled" disabled></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Invalid and required, in context</h3>
+  {{example:[stack]Everything here is required, so only "(optional)" fields are marked; the error names the fix.}}
+<div class="field"><label class="field__label" for="tf-inv">Email</label><input class="input" id="tf-inv" type="email" autocomplete="email" value="maya.chen@" required aria-invalid="true" aria-describedby="tf-inv-error"><span class="field__error" id="tf-inv-error">Enter an email address like name@example.com.</span></div>
+  {{/example}}
+  <h3>Both themes</h3>
+  {{themes:stack}}<input class="input" type="email" value="maya.chen@example.com" aria-label="Email preview"><input class="input" type="email" value="maya.chen@" aria-label="Invalid email preview" aria-invalid="true"><input class="input" type="text" value="HP-1048" aria-label="Read-only preview" readonly><input class="input" type="text" placeholder="Search styles" aria-label="Placeholder preview">{{/themes}}
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Fields fill their column. Forms are one column below 768px; from 768px short related fields may pair in a <code>.form-row</code> (price and distance).</li>
+    <li>Text is 16px at every width so iOS does not zoom on focus; small fields are never used for typing on phones.</li>
+    <li>The search box in a filter row grows to fill the row and wraps the action below it when narrower than 18rem.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Component tokens: <code>--field-bg</code> (<code>--color-bg-surface</code>), <code>--field-fg</code>, <code>--field-border</code> (<code>--color-border-strong</code>), <code>--field-border-hover</code> (<code>--color-fg-muted</code>), <code>--field-height</code>. In dark the field is grey 900 on a grey 950 page with a grey 450 edge (above 3:1), so fields stay findable without shadows.</p>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Native <code>&lt;input&gt;</code> with a matching <code>type</code>, a <code>&lt;label for&gt;</code>, <code>autocomplete</code> for personal data (SC 1.3.5), and <code>aria-invalid</code> plus <code>aria-describedby</code> for help and errors.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves into and out of the field; the show-password toggle follows the field.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Submits the enclosing form.</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>In search fields, clears the value (native).</td></tr>
+    <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>In number fields, steps the value; never the only way to set it.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The border becomes the accent and a 2px ring sits flush (<code>outline-offset: 0</code>), so the focused field shows 3px of accent against the surface. On submit with errors focus moves to the error summary, not the field.</p>
+  <h3>Labelling</h3>
+  <p>Every field has a visible label (SC 3.3.2); placeholders are examples only. The error names the problem and the fix and is announced through <code>aria-describedby</code>. A field without a visible label (the gallery search) uses one <code>aria-label</code> and sits next to an obvious action.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Field edge on card|--color-border-strong|--color-bg-surface|3}}
+    {{pair:Field edge on page|--color-border-strong|--color-bg-canvas|3}}
+    {{pair:Placeholder in field|--color-fg-subtle|--color-bg-surface|4.5}}
+    {{pair:Invalid edge|--color-danger-solid|--color-bg-surface|3}}
+    {{pair:Error text|--color-danger-fg|--color-bg-surface|4.5}}
+    {{pair:Focus ring|--color-focus-ring|--color-bg-surface|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>Border colour and ring transition over <code>--duration-fast</code>; nothing moves. Reduced motion makes the change instant.</p>
+  <h3>Touch</h3>
+  <p>Medium fields are 40px tall and full width; tapping the label also focuses the field. The password toggle is a 40px button.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Labels are nouns in sentence case: "Email", "Phone", "New password". No colon.</li>
+    <li>Mark the minority: "(optional)" when most fields are required.</li>
+    <li>Placeholders show format only: "name@example.com". Never instructions that disappear on typing.</li>
+    <li>Errors say what to do: "Enter an email address like name@example.com.", not "Invalid input".</li>
+    <li>Help text is one sentence about why or how: "Use at least 12 characters."</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="tf-do1">Email</label><input class="input" id="tf-do1" type="email" value="maya.chen@" aria-invalid="true" aria-describedby="tf-do1-e"><span class="field__error" id="tf-do1-e">Enter an email address like name@example.com.</span></div></div><figcaption>Error outside the label, linked with <code>aria-describedby</code>.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><label class="field" for="tf-dont1"><span class="field__label">Email</span><input class="input" id="tf-dont1" type="email" value="maya.chen@" aria-invalid="true"><span class="field__error">Enter a valid email address.</span></label></div><figcaption>The mocks wrap the error inside the <code>&lt;label&gt;</code>, so it becomes part of the field's name and is read on every focus.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="tf-do2">Maximum price</label><div class="input-group"><span class="addon" aria-hidden="true">$</span><input class="input" id="tf-do2" type="number" min="160" value="160"></div></div></div><figcaption>Numbers in a number field with a unit addon and a sensible minimum.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="tf-dont2">Preferred time</label><input class="input" id="tf-dont2" type="text" value="Sat 24 Oct, 10:00 am"></div></div><figcaption>Free text for a value that must be one of Nia’s offered times (request-review dialog). Use a select or radio group.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Background|--color-bg-surface}}
+      {{tok:Text|--color-fg-default}}
+      {{tok:Border|--color-border-strong}}
+      {{tok:Border, hover|--color-fg-muted}}
+      {{tok:Placeholder|--color-fg-subtle}}
+      {{tok:Focus border and ring|--color-focus-ring}}
+      {{tok:Invalid edge|--color-danger-solid}}
+      {{tok:Read-only background|--color-bg-surface-sunken}}
+      {{tok:Disabled background / text|--color-bg-subtle|--color-fg-disabled}}
+      {{tok:Addon background|--color-bg-subtle}}
+      {{tok:Height sm / md / lg|--control-height-sm|--control-height-md|--control-height-lg}}
+      {{tok:Padding block / inline|--space-2|--space-3}}
+      {{tok:Radius|--radius-md}}
+      {{tok:Value font|--text-body}}
+      {{tok:Transition|--duration-fast|--ease-standard}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="field"&gt;
+  &lt;label class="field__label" for="email"&gt;Email&lt;/label&gt;
+  &lt;input class="input" id="email" name="email" type="email" autocomplete="email"
+         aria-invalid="true" aria-describedby="email-error"&gt;
+  &lt;span class="field__error" id="email-error"&gt;Enter an email address like name@example.com.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.input</code></td><td>The field; medium size.</td></tr>
+    <tr><td><code>.input--sm</code> <code>.input--lg</code></td><td>Size.</td></tr>
+    <tr><td><code>.input-group</code> + <code>.addon</code></td><td>Prefix or suffix (currency, unit) or an attached button.</td></tr>
+    <tr><td><code>.search</code> / <code>.search-box</code></td><td>Leading search icon / grows in a filter row.</td></tr>
+    <tr><td><code>aria-invalid="true"</code></td><td>Invalid edge; pair with <code>.field__error</code>.</td></tr>
+    <tr><td><code>readonly</code> / <code>disabled</code></td><td>Read-only (focusable, sunken) / disabled (not focusable, dimmed).</td></tr>
+    <tr><td><code>data-state="hover|focus|invalid|read-only|disabled"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    {{mock:pages/sign-in/default|email and password}}
+    {{mock:pages/sign-in/invalid|invalid email with error}}
+    {{mock:pages/account-settings/invalid|name, email, phone}}
+    {{mock:pages/style-gallery/default|search in a filter row}}
+    {{mock:dialogs/filter-braiders/invalid|number field with error}}
+    {{mock:dialogs/request-review/default|"Preferred time" as free text}}
+  </ul>
+  <p>Drift fixed during extraction: fields were wrapped in <code>&lt;label class="field"&gt;</code> with the error inside the label (now <code>&lt;div class="field"&gt;</code> + <code>&lt;label for&gt;</code>); no field set <code>autocomplete</code>; the password had no show toggle; "Distance from Toronto" was free text holding "10 km" (now a number with a unit addon, or a select); "Preferred time" was free text (now a choice of offered times); the gallery search had both a visually hidden label and an <code>aria-label</code> (keep one).</p>
+</section>

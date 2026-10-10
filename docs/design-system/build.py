@@ -1,6 +1,7 @@
 """Build the HairPop design-system documentation site.
 
-Pages are authored as section fragments in src/<folder>/<slug>.html. Each
+Pages are authored as section fragments in src/<folder>/<slug>.html (or
+.fragment for generated catalog entries). Each
 fragment starts with a metadata comment and then holds only the page's
 <section> blocks:
 
@@ -177,6 +178,8 @@ def expand(body: str) -> str:
 def read_fragment(folder: str, slug: str) -> tuple[dict, str]:
     path = SRC / folder / f"{slug}.html"
     if not path.is_file():
+        path = SRC / folder / f"{slug}.fragment"
+    if not path.is_file():
         return {"lead": "", "description": "", "missing": True}, ""
     text = path.read_text(encoding="utf-8")
     m = META_RE.match(text)
@@ -211,8 +214,8 @@ def page(folder: str, slug: str, title: str, kicker: str) -> dict:
     meta, body = read_fragment(folder, slug)
     if meta.get("missing"):
         if "--allow-missing" not in sys.argv:
-            raise FileNotFoundError(f"src/{folder}/{slug}.html is missing")
-        print(f"skipped missing src/{folder}/{slug}.html")
+            raise FileNotFoundError(f"src/{folder}/{slug}.html or .fragment is missing")
+        print(f"skipped missing src/{folder}/{slug}.html or .fragment")
         return {"slug": slug, "title": title, "folder": folder, **meta}
     toc = "".join(f'<li><a href="#{sid}">{label}</a></li>' for sid, label in SECTION_RE.findall(body))
     pills = ['<span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span>'] if folder != "foundations" else []

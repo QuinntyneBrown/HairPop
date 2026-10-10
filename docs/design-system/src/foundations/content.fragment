@@ -1,0 +1,140 @@
+<!--meta {"lead": "HairPop talks like a trusted braider: warm, plain and confident. It says what will happen, what it costs and what is still to be confirmed.", "description": "Voice and tone, casing, button verbs, dates, times and prices, error and empty-state formulas, and the microcopy library.", "covers": "Voice and tone, sentence case, button verbs, numbers/dates/prices, error and empty-state formulas, microcopy library"} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>People come to HairPop to make a personal decision that takes hours and costs real money. The words help them feel sure: they name the braider, the style, the time and the price range, and they are honest about what is not yet confirmed.</p>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">We are</th><th scope="col">We are not</th><th scope="col">Example</th></tr></thead>
+    <tbody>
+      <tr><td>Warm</td><td>Gushing</td><td>"Find a style that feels like you", not "Discover your most amazing look ever!"</td></tr>
+      <tr><td>Plain</td><td>Technical</td><td>"We couldn't load braiders", not "Request failed (503)".</td></tr>
+      <tr><td>Confident</td><td>Pushy</td><td>"Nia will confirm the final price and time", not "Book now before it's gone".</td></tr>
+      <tr><td>Honest</td><td>Vague</td><td>"Estimated price: $180–$240", not "Great prices".</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="request-vs-appointment"><h2><a href="#request-vs-appointment">Request versus appointment</a></h2>
+  <p>The most important word choice in the product. Until the braider accepts, it is a <b>request</b>; afterwards it is an <b>appointment</b>. Prices before confirmation are <b>estimates</b>.</p>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><span class="badge badge--warning">Awaiting reply</span><p>Request HP-1048 · Sat 24 Oct at 10:00 am · estimate $180–$240</p></div><figcaption>A pending request, an estimate, and who acts next.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><span class="badge badge--success">Booked</span><p>Your appointment is confirmed for $180.</p></div><figcaption>Calling a pending request "booked" or quoting the low end as the price.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="casing"><h2><a href="#casing">Casing and punctuation</a></h2>
+  <ul>
+    <li>Sentence case everywhere: headings, buttons, labels, menu items, badges in source text ("Awaiting reply"; CSS uppercases badges and eyebrows visually).</li>
+    <li>No full stop on headings, labels, buttons or single-sentence toasts titles; full stops on body sentences.</li>
+    <li>Curly apostrophes and quotes (’ “ ”); an en dash for ranges (4–7 hours); a middle dot with spaces to separate facts (Toronto West · 4.9 from 86 reviews).</li>
+    <li>No exclamation marks except in a genuine celebration, and never in errors.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="verbs"><h2><a href="#verbs">Button and link verbs</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Use</th><th scope="col">Instead of</th><th scope="col">Where</th></tr></thead>
+    <tbody>
+      <tr><td>Send request</td><td>Submit, Book now</td><td>Booking request form and review dialog</td></tr>
+      <tr><td>Request with Nia</td><td>Book</td><td>Braider profile</td></tr>
+      <tr><td>Request a change</td><td>Edit, Reschedule</td><td>Appointment detail</td></tr>
+      <tr><td>Cancel request / Keep browsing</td><td>Yes / No, OK / Cancel</td><td>Cancel appointment dialog</td></tr>
+      <tr><td>Find braiders, See braiders for this style</td><td>Search, Go</td><td>Style gallery and style detail</td></tr>
+      <tr><td>Explore Knotless braids</td><td>Learn more, Click here</td><td>Style cards (the link names its destination)</td></tr>
+      <tr><td>Post review</td><td>Submit</td><td>Care and review</td></tr>
+      <tr><td>Try again</td><td>Retry, Reload</td><td>Error states</td></tr>
+      <tr><td>Clear filters</td><td>Reset</td><td>No-results state</td></tr>
+      <tr><td>Save changes / Save preferences</td><td>Apply, Update</td><td>Account settings, cookie preferences</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="numbers"><h2><a href="#numbers">Numbers, dates, times and prices</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Thing</th><th scope="col">Format</th><th scope="col">Example</th></tr></thead>
+    <tbody>
+      <tr><td>Date with time</td><td>Short weekday, day, short month · time</td><td>Sat 24 Oct · 10:00 am</td></tr>
+      <tr><td>Date in a sentence</td><td>Same, with "at"</td><td>Sat 24 Oct at 10:00 am</td></tr>
+      <tr><td>Relative</td><td>Today, Yesterday, then the date</td><td>Today at 9:42 am</td></tr>
+      <tr><td>Time</td><td>12-hour, lowercase am/pm with a space, minutes always shown</td><td>10:00 am</td></tr>
+      <tr><td>Price range</td><td>Dollar sign on both ends, en dash, no spaces, no cents</td><td>$180–$240</td></tr>
+      <tr><td>Starting price</td><td>"from" lowercase</td><td>from $180</td></tr>
+      <tr><td>Duration</td><td>Hours as a range, or "about" for a single estimate</td><td>4–7 hours · about 5 hours</td></tr>
+      <tr><td>Rating</td><td>One decimal, with the count</td><td>4.9 from 86 reviews</td></tr>
+      <tr><td>Counts</td><td>Numerals, thousands separator</td><td>1,284 reviews</td></tr>
+      <tr><td>References</td><td>Uppercase prefix, hyphen</td><td>HP-1048</td></tr>
+      <tr><td>Distance</td><td>Number, space, unit</td><td>10 km</td></tr>
+    </tbody>
+  </table></div>
+  <p>Numbers in tables and fact tiles use tabular figures (<code>font-variant-numeric: tabular-nums</code>) so columns align.</p>
+</section>
+
+<section class="ds-section" id="errors"><h2><a href="#errors">Error messages</a></h2>
+  <p><b>Formula:</b> what happened + what is safe + what to do next. Never blame the person, never show a code without words.</p>
+  {{example:[stack] An inline error, a page error and an action toast written with the formula.}}
+<p class="field__error">Enter an email address like name@example.com.</p>
+<div class="alert alert--danger" role="alert"><div><strong>We couldn’t save this change.</strong> Your details remain here. Please try again.</div></div>
+  {{/example}}
+  <ul>
+    <li><b>Field errors</b> name the fix, not the rule that failed: "Choose a rating from 1 to 5", not "Invalid input".</li>
+    <li><b>Page errors</b> reassure first: "We couldn't load braiders. Check your connection and try again. Your details are safe."</li>
+    <li><b>Offline</b> says what still works: "You're offline. Saved appointment details remain available. Requests need a connection."</li>
+    <li><b>Server errors</b> say what did not happen: "Your booking request has not been resent."</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="empty"><h2><a href="#empty">Empty states</a></h2>
+  <p><b>Formula:</b> a short title that names the situation + one sentence on why or what will appear + one action.</p>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Situation</th><th scope="col">Title</th><th scope="col">Sentence</th><th scope="col">Action</th></tr></thead>
+    <tbody>
+      <tr><td>First run</td><td>Nothing here yet</td><td>When you request a visit, you’ll find its status and details here.</td><td>Explore styles</td></tr>
+      <tr><td>No results</td><td>No matches for these filters</td><td>Try a wider price range or distance to see more options.</td><td>Clear filters</td></tr>
+      <tr><td>Nothing nearby</td><td>Nothing here yet</td><td>No braiders have listed this style near Toronto yet. Try another style.</td><td>Explore styles</td></tr>
+      <tr><td>Load error</td><td>We couldn’t load my appointments</td><td>Check your connection and try again. Your details are safe.</td><td>Try again</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="microcopy"><h2><a href="#microcopy">Microcopy library</a></h2>
+  <p>Reuse these exactly; they come from the mocks and keep the same words for the same things everywhere.</p>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Context</th><th scope="col">Copy</th></tr></thead>
+    <tbody>
+      <tr><td>Skip link</td><td>Skip to content</td></tr>
+      <tr><td>Primary navigation</td><td>Styles · Braiders · Appointments · Help</td></tr>
+      <tr><td>Notifications link</td><td>Updates (with count: "Updates, 2 unread")</td></tr>
+      <tr><td>Footer</td><td>HairPop · Made for confident hair decisions · Terms · Privacy</td></tr>
+      <tr><td>Status badges</td><td>Awaiting reply · Confirmed · Completed · Unread · Read</td></tr>
+      <tr><td>Dialog close</td><td>Close dialog</td></tr>
+      <tr><td>Toast dismiss</td><td>Dismiss notification</td></tr>
+      <tr><td>Toast actions</td><td>Undo · View update</td></tr>
+      <tr><td>Error summary</td><td>Check the highlighted field · Correct the information below and try again.</td></tr>
+      <tr><td>Offline banner</td><td>You’re offline. Saved details are shown. Actions need a connection.</td></tr>
+      <tr><td>Partial load</td><td>Some details are unavailable. Reviews could not load. Retry reviews.</td></tr>
+      <tr><td>Request sent</td><td>Request sent to Nia · This is a request, not a confirmed appointment. Nia will reply with the final time and price.</td></tr>
+      <tr><td>Saved</td><td>Your changes are saved</td></tr>
+      <tr><td>Confirmation warning</td><td>Check before continuing. This action updates your account and cannot be undone here.</td></tr>
+      <tr><td>Loading (visually hidden)</td><td>Loading braiders · Loading your appointments · Sending your request…</td></tr>
+      <tr><td>Optional field</td><td>(optional)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <ul>
+    <li>Use people's first names once a relationship exists: "Your appointment with Nia". Use full names on first mention and in lists: "Nia Okafor".</li>
+    <li>Address the customer as "you"; HairPop is "we" only when HairPop itself acts ("We couldn't load…", "We'll send a secure link").</li>
+    <li>Keep headings under about eight words and buttons under four.</li>
+    <li>Describe hair respectfully and specifically ("medium knotless braids", "shoulder length"); avoid "good hair", "manageable" and similar judgements.</li>
+    <li>Do not change the label of a busy button to "Working…"; keep the verb and announce progress separately.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li>Link and button text makes sense out of context (WCAG 2.4.4): "Explore Passion twists", "Retry reviews".</li>
+    <li>An accessible name begins with the visible words (2.5.3).</li>
+    <li>Alt text describes the hair in the photo, not the file: "Medium knotless braids shown from the back and side".</li>
+    <li>Write for reading level grade 7–8; short sentences help everyone, including people reading in a second language.</li>
+    <li>Do not rely on direction or shape alone: "the purple button on the right" means nothing to a screen-reader user.</li>
+  </ul>
+</section>

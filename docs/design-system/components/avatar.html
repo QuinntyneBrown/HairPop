@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avatar — HairPop design system</title>
+<meta name="description" content="Image, initials and icon avatars in four sizes, with a status dot and a stacked group.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Component · Data display</p><h1>Avatar</h1><p class="ds-lead">An avatar puts a face, or the initials, beside a braider's or customer's name, so people recognise who they are booking with at a glance.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Decorative beside a name</span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use an avatar next to a person's name: Nia's profile header, a braider row in matching results, the reviewer on a review. It helps recognition; it never carries information on its own, so the name always sits beside it. Use a <a href="card.html">story card photo</a> when the picture shows work (the braids themselves), not the person.</p>
+  <ul>
+    <li><b>Image</b> is the braider's own portrait. It is the default when a photo exists.</li>
+    <li><b>Initials</b> ("NO" for Nia Okafor) are the fallback when there is no photo or it fails to load. Two letters, first and last name.</li>
+    <li><b>Icon</b> (a person outline) stands in when the name is unknown, such as a signed-out account menu.</li>
+    <li><b>Group</b> stacks up to three avatars with a "+N" overflow, for example braiders who offer a style.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <span class="avatar avatar--xl"><img src="../../mocks/assets/photos/nia.jpg" alt=""><span class="avatar__status"></span></span>
+      <span class="ds-callout" style="left: 40%; top: 24%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 54%; top: 46%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 56%; top: 72%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Frame</b><small>Circle (<code>--radius-full</code>) sized by <code>--avatar-size</code>; the plum-50 fill shows while the image loads.</small></div></li>
+      <li><div><b>Content</b><small>An <code>&lt;img&gt;</code> cropped with <code>object-fit: cover</code>, or two initials, or a 24-unit icon.</small></div></li>
+      <li><div><b>Status dot (optional)</b><small>A quarter of the size, success colour, with a 2px ring in the surface colour. Never the only signal.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>Choose by what you know about the person. A photo beats initials; initials beat an icon.</p>
+  <div class="ds-example"><div class="ds-example__canvas"><span class="avatar"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span>
+<span class="avatar" aria-hidden="true">NO</span>
+<span class="avatar" aria-hidden="true"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 20a8 8 0 0 1 16 0"/></svg></span>
+<span class="avatar"><img src="../../mocks/assets/photos/nia.jpg" alt=""><span class="avatar__status"></span></span></div><div class="ds-example__caption"><span>Image, initials, icon and image with status. Next to a visible name, all are decorative (<code>alt=""</code> or <code>aria-hidden</code>).</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;span class=&quot;avatar&quot;&gt;&lt;img src=&quot;../../mocks/assets/photos/nia.jpg&quot; alt=&quot;&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;avatar&quot; aria-hidden=&quot;true&quot;&gt;NO&lt;/span&gt;
+&lt;span class=&quot;avatar&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 20a8 8 0 0 1 16 0&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+&lt;span class=&quot;avatar&quot;&gt;&lt;img src=&quot;../../mocks/assets/photos/nia.jpg&quot; alt=&quot;&quot;&gt;&lt;span class=&quot;avatar__status&quot;&gt;&lt;/span&gt;&lt;/span&gt;</code></pre></details></div>
+  <h3>Group with overflow</h3>
+  <div class="ds-example"><div class="ds-example__canvas"><div class="avatar-group" role="img" aria-label="Nia Okafor, Aisha Mensah, Jules Baptiste and 9 more braiders">
+  <span class="avatar"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span>
+  <span class="avatar" aria-hidden="true">AM</span>
+  <span class="avatar" aria-hidden="true">JB</span>
+  <span class="avatar" aria-hidden="true">+9</span>
+</div></div><div class="ds-example__caption"><span>A group names everyone in one accessible label; the overflow count is part of it.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;avatar-group&quot; role=&quot;img&quot; aria-label=&quot;Nia Okafor, Aisha Mensah, Jules Baptiste and 9 more braiders&quot;&gt;
+  &lt;span class=&quot;avatar&quot;&gt;&lt;img src=&quot;../../mocks/assets/photos/nia.jpg&quot; alt=&quot;&quot;&gt;&lt;/span&gt;
+  &lt;span class=&quot;avatar&quot; aria-hidden=&quot;true&quot;&gt;AM&lt;/span&gt;
+  &lt;span class=&quot;avatar&quot; aria-hidden=&quot;true&quot;&gt;JB&lt;/span&gt;
+  &lt;span class=&quot;avatar&quot; aria-hidden=&quot;true&quot;&gt;+9&lt;/span&gt;
+&lt;/div&gt;</code></pre></details></div>
+  <h3>Beside a name</h3>
+  <div class="ds-example"><div class="ds-example__canvas"><div class="profile-head">
+  <span class="avatar avatar--xl"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span>
+  <div><p class="card__title">Nia Okafor</p><p class="text-muted">Toronto West · 4.9 from 86 reviews</p></div>
+</div></div><div class="ds-example__caption"><span>The profile head from the braider profile: avatar, name, location and rating.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;profile-head&quot;&gt;
+  &lt;span class=&quot;avatar avatar--xl&quot;&gt;&lt;img src=&quot;../../mocks/assets/photos/nia.jpg&quot; alt=&quot;&quot;&gt;&lt;/span&gt;
+  &lt;div&gt;&lt;p class=&quot;card__title&quot;&gt;Nia Okafor&lt;/p&gt;&lt;p class=&quot;text-muted&quot;&gt;Toronto West · 4.9 from 86 reviews&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div>
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <p>Medium (40px) is the default in lists and rows. Small sits inline with body text and in reviewer groups; large leads a card; extra large is the profile header and grows from 48px to 64px at 768px.</p>
+  <div class="ds-example"><div class="ds-example__canvas"><span class="avatar avatar--sm" aria-hidden="true">NO</span>
+<span class="avatar" aria-hidden="true">NO</span>
+<span class="avatar avatar--lg" aria-hidden="true">NO</span>
+<span class="avatar avatar--xl" aria-hidden="true">NO</span></div><div class="ds-example__caption"><span><code>.avatar--sm</code> 32px · default 40px · <code>.avatar--lg</code> 48px · <code>.avatar--xl</code> 48→64px. The initials font scales with the size.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;span class=&quot;avatar avatar--sm&quot; aria-hidden=&quot;true&quot;&gt;NO&lt;/span&gt;
+&lt;span class=&quot;avatar&quot; aria-hidden=&quot;true&quot;&gt;NO&lt;/span&gt;
+&lt;span class=&quot;avatar avatar--lg&quot; aria-hidden=&quot;true&quot;&gt;NO&lt;/span&gt;
+&lt;span class=&quot;avatar avatar--xl&quot; aria-hidden=&quot;true&quot;&gt;NO&lt;/span&gt;</code></pre></details></div>
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>The avatar itself is not interactive, so it has no hover, focus, active or disabled state. When it sits inside a link (a braider row), the link owns those states and the focus ring. What changes is its content:</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Size</th><th scope="col">Image loaded</th><th scope="col">Image missing</th><th scope="col">Unknown person</th><th scope="col">With status</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Small</th><td><span class="avatar avatar--sm"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span></td><td><span class="avatar avatar--sm" aria-hidden="true">NO</span></td><td><span class="avatar avatar--sm" aria-hidden="true"><svg class="icon icon--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 20a8 8 0 0 1 16 0"/></svg></span></td><td><span class="avatar avatar--sm" aria-hidden="true">NO<span class="avatar__status"></span></span></td></tr>
+      <tr><th scope="row">Medium</th><td><span class="avatar"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span></td><td><span class="avatar" aria-hidden="true">NO</span></td><td><span class="avatar" aria-hidden="true"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 20a8 8 0 0 1 16 0"/></svg></span></td><td><span class="avatar"><img src="../../mocks/assets/photos/nia.jpg" alt=""><span class="avatar__status"></span></span></td></tr>
+      <tr><th scope="row">Large</th><td><span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span></td><td><span class="avatar avatar--lg" aria-hidden="true">NO</span></td><td><span class="avatar avatar--lg" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 20a8 8 0 0 1 16 0"/></svg></span></td><td><span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt=""><span class="avatar__status"></span></span></td></tr>
+      <tr><th scope="row">Extra large</th><td><span class="avatar avatar--xl"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span></td><td><span class="avatar avatar--xl" aria-hidden="true">NO</span></td><td><span class="avatar avatar--xl" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 20a8 8 0 0 1 16 0"/></svg></span></td><td><span class="avatar avatar--xl"><img src="../../mocks/assets/photos/nia.jpg" alt=""><span class="avatar__status"></span></span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span><span class="avatar avatar--lg" aria-hidden="true">NO</span><span class="avatar avatar--lg" aria-hidden="true"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 20a8 8 0 0 1 16 0"/></svg></span><div class="avatar-group" role="img" aria-label="Nia Okafor, Aisha Mensah and 9 more braiders"><span class="avatar" aria-hidden="true">NO</span><span class="avatar" aria-hidden="true">AM</span><span class="avatar" aria-hidden="true">+9</span></div></div></div><div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span><span class="avatar avatar--lg" aria-hidden="true">NO</span><span class="avatar avatar--lg" aria-hidden="true"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 20a8 8 0 0 1 16 0"/></svg></span><div class="avatar-group" role="img" aria-label="Nia Okafor, Aisha Mensah and 9 more braiders"><span class="avatar" aria-hidden="true">NO</span><span class="avatar" aria-hidden="true">AM</span><span class="avatar" aria-hidden="true">+9</span></div></div></div></div>
+  <ul>
+    <li><b>Loading</b>: the plum-50 frame shows while the image downloads and reserves the size, so nothing shifts. In a loading list use a <a href="skeleton.html">circle skeleton</a> instead.</li>
+    <li><b>Failed image</b>: swap to initials on the image's <code>error</code> event; never show a broken-image icon.</li>
+    <li><b>Status</b>: the dot means "available this week" on matching results and is always repeated in text ("Available Sat 24 Oct").</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Only <code>.avatar--xl</code> changes with the viewport: 48px on phones, 64px from <code>--layout-breakpoint-md</code> (768px), so the profile head keeps the name readable at 360px.</li>
+    <li>In a <code>.profile-head</code> the avatar and name wrap onto two lines when the name is long ("Amara Nkiruka Adeyemi-Williams"); the avatar never shrinks (<code>flex: none</code>).</li>
+    <li>Groups show at most three faces plus the overflow at every width.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Two component tokens drive the size: <code>--avatar-size</code> and <code>--avatar-font</code>. Initials read <code>--color-fg-accent</code> on <code>--color-accent-subtle</code>; the status dot reads <code>--color-success-icon</code> with a ring in <code>--color-bg-surface</code>. In dark mode the frame becomes plum-950 and the initials plum-300.</p>
+  <pre><code>/* A neutral avatar for support staff */
+.avatar--neutral { background: var(--color-bg-subtle); color: var(--color-fg-muted); }
+/* A custom size in a reviewer list */
+.review .avatar { --avatar-size: 2.25rem; }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>A plain <code>&lt;span&gt;</code> with an <code>&lt;img&gt;</code> inside, or with initials. No ARIA pattern applies. A group that stands alone uses <code>role="img"</code> with one <code>aria-label</code> naming everyone.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Skips the avatar; it is never focusable. When the avatar sits in a link, focus lands on the link.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>None on the avatar. The surrounding link or card shows the shared ring.</p>
+  <h3>Labelling</h3>
+  <p>Beside a visible name the avatar is decorative: <code>alt=""</code> on the image, <code>aria-hidden="true"</code> on initials and icons, so a screen reader does not say "N O, Nia Okafor". Alone, the image's <code>alt</code> is the person's name ("Nia Okafor"), never "Portrait of a braider". The status dot is decorative because the status is also written out.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Initials on avatar</span><span class="ds-pair__ratio" data-contrast="--color-fg-accent|--color-accent-subtle" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Status dot on surface</span><span class="ds-pair__ratio" data-contrast="--color-success-solid|--color-bg-surface" data-min="3"></span></div>
+  </div>
+  <h3>Motion</h3>
+  <p>None. Images do not fade in; the frame is visible from the first paint.</p>
+  <h3>Touch</h3>
+  <p>Not a target. When an avatar is the only visible part of a link (an account menu), the link is at least 44px square.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Initials are the first letters of the first and last name, uppercase: "NO", "AM", "JB". One letter for a single name.</li>
+    <li>Use the person's own photo; never stock imagery or a hairstyle photo in an avatar.</li>
+    <li>Alt text for a standalone avatar is the full name only. Do not describe the photo.</li>
+    <li>Overflow reads "+9", and the group label says "and 9 more braiders".</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="profile-head"><span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt=""></span><p class="card__title">Nia Okafor</p></div></div><figcaption>Next to the name, mark the avatar decorative so the name is read once.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="avatar avatar--lg"><img src="../../mocks/assets/photos/nia.jpg" alt="Portrait of a braider"></span></div><figcaption>Generic alt text such as "Portrait of a braider" (the matching-braiders card) tells nobody who it is. Use the name, or <code>alt=""</code> beside it.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="avatar avatar--xl" aria-hidden="true">NO</span></div><figcaption>Use <code>.avatar--xl</code> for the profile header; it already grows at 768px.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="avatar" aria-hidden="true">Nia</span></div><figcaption>Do not squeeze a first name into the circle, or size an avatar with spacing tokens as <code>.profile-avatar</code> did. Two initials, sized by <code>--avatar-size</code>.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      <tr><td>Frame background</td><td><code>--color-accent-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-accent-subtle" data-swatch></i><span data-token="--color-accent-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-accent-subtle" data-swatch></i><span data-token="--color-accent-subtle"></span></span></td></tr>
+      <tr><td>Initials and icon</td><td><code>--color-fg-accent</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-accent" data-swatch></i><span data-token="--color-fg-accent"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-accent" data-swatch></i><span data-token="--color-fg-accent"></span></span></td></tr>
+      <tr><td>Status dot</td><td><code>--color-success-icon</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-success-icon" data-swatch></i><span data-token="--color-success-icon"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-success-icon" data-swatch></i><span data-token="--color-success-icon"></span></span></td></tr>
+      <tr><td>Status ring and group ring</td><td><code>--color-bg-surface</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td></tr>
+      <tr><td>Shape</td><td><code>--radius-full</code></td><td colspan="2"><span data-token="--radius-full"></span></td></tr>
+      <tr><td>Initials font sm / md / lg / xl</td><td><code>--text-caption</code> / <code>--text-label</code> / <code>--text-h4</code> / <code>--text-h3</code></td><td colspan="2"><span data-token="--text-caption"></span> / <span data-token="--text-label"></span> / <span data-token="--text-h4"></span> / <span data-token="--text-h3"></span></td></tr>
+      <tr><td>Overlap in a group</td><td><code>--space-2</code></td><td colspan="2"><span data-token="--space-2"></span></td></tr>
+    </tbody>
+  </table></div>
+  <p>Sizes are component tokens: <code>--avatar-size</code> is 2rem, 2.5rem, 3rem and 3rem→4rem for sm, md, lg and xl.</p>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;span class="avatar avatar--xl"&gt;&lt;img src="/media/nia-okafor.jpg" alt=""&gt;&lt;/span&gt;
+&lt;span class="avatar" aria-hidden="true"&gt;NO&lt;/span&gt;
+&lt;span class="avatar"&gt;&lt;img src="…" alt=""&gt;&lt;span class="avatar__status"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;div class="avatar-group" role="img" aria-label="Nia Okafor, Aisha Mensah and 9 more braiders"&gt;…&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.avatar</code></td><td>Base: 40px circle with initials or an image.</td></tr>
+    <tr><td><code>.avatar--sm</code> <code>.avatar--lg</code> <code>.avatar--xl</code></td><td>Size; omit for medium.</td></tr>
+    <tr><td><code>.profile-avatar</code></td><td>Alias of <code>.avatar--xl</code>, kept for parity with the mocks.</td></tr>
+    <tr><td><code>.avatar__status</code></td><td>Status dot, bottom right.</td></tr>
+    <tr><td><code>.avatar-group</code></td><td>Overlapping stack with surface rings.</td></tr>
+    <tr><td><code>alt=""</code> / <code>aria-hidden="true"</code></td><td>Decorative beside a visible name.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    <li><a href="../../mocks/pages/braider-profile/default.html">pages/braider-profile/default</a> (initials avatar in the profile head)</li>
+    <li><a href="../../mocks/pages/braider-profile/edge.html">pages/braider-profile/edge</a> (long braider name)</li>
+    <li><a href="../../mocks/pages/matching-braiders/default.html">pages/matching-braiders/default</a> (braider photo on the result card)</li>
+  </ul>
+  <p>Drift fixed during extraction: <code>.profile-avatar</code> duplicated the avatar with its own rules and sized itself with <code>--space-12</code> (now an alias of <code>.avatar--xl</code>, sized by <code>--avatar-size</code>); Nia's photo used the generic alt "Portrait of a braider" (system: the name, or <code>alt=""</code> beside it); the image, group and status variants were added from the core set.</p>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

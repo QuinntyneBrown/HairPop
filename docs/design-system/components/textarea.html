@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Textarea — HairPop design system</title>
+<meta name="description" content="Multi-line text with auto-grow and an optional counter; every state in both themes.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Component · Inputs</p><h1>Textarea</h1><p class="ds-lead">A textarea collects a few sentences in the person's own words: a review of their visit with Nia, hair details for a request, a reason for a report.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Native <code>&lt;textarea&gt;</code></span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a textarea when the answer is more than one line: "Your review", "Hair details", "Anything Nia should know?". For a single value use a <a href="text-field.html">text field</a>. The textarea always sits inside a <a href="form-field.html">form field</a>.</p>
+  <ul>
+    <li><b>Default</b> starts at 100px (2.5× the control height) and can be resized vertically.</li>
+    <li><b>Auto-grow</b> grows with the text up to about ten lines, then scrolls; use it for reviews.</li>
+    <li><b>With counter</b> shows "used / limit" when a limit exists and turns red beyond it.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="field" style="width: min(100%, 22rem);"><label class="field__label" for="ta-anat">Your review</label><textarea class="textarea" id="ta-anat" maxlength="500" aria-describedby="ta-anat-help ta-anat-count">Nia explained each step and the braids feel comfortable.</textarea><span class="field__help" id="ta-anat-help">What should others know about your visit?</span><span class="field__counter" id="ta-anat-count">56 / 500</span></div>
+      <span class="ds-callout" style="left: 14%; top: 12%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 48%; top: 36%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 40%; top: 74%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 84%; top: 86%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Label</b><small>Visible, from the form field.</small></div></li>
+      <li><div><b>Text area</b><small>Body font, 8 × 12px padding, <code>--radius-md</code>, at least 100px tall.</small></div></li>
+      <li><div><b>Help</b><small>One sentence; linked by <code>aria-describedby</code>.</small></div></li>
+      <li><div><b>Counter (optional)</b><small>Caption, tabular numbers, right aligned.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="field"><label class="field__label" for="ta-hair">Hair details <span class="optional">(optional)</span></label><textarea class="textarea" id="ta-hair" rows="3">Shoulder length; bringing my own extensions.</textarea></div>
+<div class="field"><label class="field__label" for="ta-grow">Your review</label><textarea class="textarea" id="ta-grow" rows="2" style="field-sizing: content; max-height: calc(var(--control-height-md) * 6);">The parts were so neat and Nia checked that nothing felt too tight. I would book her again for my next set.</textarea></div>
+<div class="field"><label class="field__label" for="ta-why">Why does this review need a closer look?</label><textarea class="textarea" id="ta-why" maxlength="300" aria-describedby="ta-why-count">It describes a service Nia does not offer.</textarea><span class="field__counter" id="ta-why-count">42 / 300</span></div></div><div class="ds-example__caption"><span>Default (resizable), auto-grow with <code>field-sizing: content</code>, and with a counter.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;ta-hair&quot;&gt;Hair details &lt;span class=&quot;optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;&lt;textarea class=&quot;textarea&quot; id=&quot;ta-hair&quot; rows=&quot;3&quot;&gt;Shoulder length; bringing my own extensions.&lt;/textarea&gt;&lt;/div&gt;
+&lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;ta-grow&quot;&gt;Your review&lt;/label&gt;&lt;textarea class=&quot;textarea&quot; id=&quot;ta-grow&quot; rows=&quot;2&quot; style=&quot;field-sizing: content; max-height: calc(var(--control-height-md) * 6);&quot;&gt;The parts were so neat and Nia checked that nothing felt too tight. I would book her again for my next set.&lt;/textarea&gt;&lt;/div&gt;
+&lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;ta-why&quot;&gt;Why does this review need a closer look?&lt;/label&gt;&lt;textarea class=&quot;textarea&quot; id=&quot;ta-why&quot; maxlength=&quot;300&quot; aria-describedby=&quot;ta-why-count&quot;&gt;It describes a service Nia does not offer.&lt;/textarea&gt;&lt;span class=&quot;field__counter&quot; id=&quot;ta-why-count&quot;&gt;42 / 300&lt;/span&gt;&lt;/div&gt;</code></pre></details></div>
+</section>
+
+<section class="ds-section" id="sizes" data-na="Textareas come in one size (medium text); the number of rows sets the height."><h2><a href="#sizes">Sizes</a></h2><p class="ds-na">Textareas come in one size (medium text); the number of rows sets the height.</p></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Invalid</th><th scope="col">Read-only</th><th scope="col">Disabled</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Default</th>
+        <td><textarea class="textarea" rows="2" aria-label="Review, default">Comfortable and neat.</textarea></td>
+        <td><textarea class="textarea" rows="2" aria-label="Review, hover" data-state="hover">Comfortable and neat.</textarea></td>
+        <td><textarea class="textarea" rows="2" aria-label="Review, focus" data-state="focus">Comfortable and neat.</textarea></td>
+        <td><textarea class="textarea" rows="2" aria-label="Review, invalid" aria-invalid="true"></textarea></td>
+        <td><textarea class="textarea" rows="2" aria-label="Review, read-only" readonly>Comfortable and neat.</textarea></td>
+        <td><textarea class="textarea" rows="2" aria-label="Review, disabled" disabled>Comfortable and neat.</textarea></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Invalid and over the limit</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="field"><label class="field__label" for="ta-inv">Your review</label><textarea class="textarea" id="ta-inv" aria-invalid="true" aria-describedby="ta-inv-error"></textarea><span class="field__error" id="ta-inv-error">Write a few words about your visit with Nia.</span></div>
+<div class="field"><label class="field__label" for="ta-over">Anything Nia should know?</label><textarea class="textarea" id="ta-over" aria-invalid="true" aria-describedby="ta-over-error ta-over-count">I have very thick, waist-length hair and would like small knotless braids with curled ends, a middle part and a few gold cuffs. Could you also bring 1B extensions? I can arrive early if that helps with the five-hour estimate.</textarea><span class="field__error" id="ta-over-error">Shorten this to 200 characters or fewer.</span><span class="field__counter" id="ta-over-count" data-over="true">231 / 200</span></div></div><div class="ds-example__caption"><span>Empty required review, and a counter over its limit.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;ta-inv&quot;&gt;Your review&lt;/label&gt;&lt;textarea class=&quot;textarea&quot; id=&quot;ta-inv&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;ta-inv-error&quot;&gt;&lt;/textarea&gt;&lt;span class=&quot;field__error&quot; id=&quot;ta-inv-error&quot;&gt;Write a few words about your visit with Nia.&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;ta-over&quot;&gt;Anything Nia should know?&lt;/label&gt;&lt;textarea class=&quot;textarea&quot; id=&quot;ta-over&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;ta-over-error ta-over-count&quot;&gt;I have very thick, waist-length hair and would like small knotless braids with curled ends, a middle part and a few gold cuffs. Could you also bring 1B extensions? I can arrive early if that helps with the five-hour estimate.&lt;/textarea&gt;&lt;span class=&quot;field__error&quot; id=&quot;ta-over-error&quot;&gt;Shorten this to 200 characters or fewer.&lt;/span&gt;&lt;span class=&quot;field__counter&quot; id=&quot;ta-over-count&quot; data-over=&quot;true&quot;&gt;231 / 200&lt;/span&gt;&lt;/div&gt;</code></pre></details></div>
+  <h3>Both themes</h3>
+  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><textarea class="textarea" rows="2" aria-label="Review preview">Nia explained each step.</textarea><textarea class="textarea" rows="2" aria-label="Invalid review preview" aria-invalid="true"></textarea></div></div><div data-theme="dark"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><textarea class="textarea" rows="2" aria-label="Review preview">Nia explained each step.</textarea><textarea class="textarea" rows="2" aria-label="Invalid review preview" aria-invalid="true"></textarea></div></div></div>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Full width of the form column at every breakpoint; never paired in a two-column row.</li>
+    <li>On phones prefer auto-grow over a manual resize handle, which is hard to drag on touch screens.</li>
+    <li>Text stays 16px so iOS does not zoom on focus.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Shares the text field's component tokens (<code>--field-bg</code>, <code>--field-fg</code>, <code>--field-border</code>, <code>--field-border-hover</code>). The counter reads <code>--color-fg-subtle</code> and switches to <code>--color-danger-fg</code> with <code>data-over="true"</code>.</p>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Native <code>&lt;textarea&gt;</code> with <code>&lt;label for&gt;</code>; help, error and counter joined in <code>aria-describedby</code>.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves into and out of the textarea (Tab never inserts a tab character).</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Inserts a new line; it does not submit.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Same as the text field: accent border plus a flush 2px ring.</p>
+  <h3>Labelling</h3>
+  <p>The label asks the question. The counter is announced politely only when the person pauses near the limit (a debounced live region), not on every key.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Edge on card</span><span class="ds-pair__ratio" data-contrast="--color-border-strong|--color-bg-surface" data-min="3"></span></div>
+    <div class="ds-pair"><span>Counter</span><span class="ds-pair__ratio" data-contrast="--color-fg-subtle|--color-bg-surface" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Over-limit counter and error</span><span class="ds-pair__ratio" data-contrast="--color-danger-fg|--color-bg-surface" data-min="4.5"></span></div>
+  </div>
+  <h3>Motion</h3>
+  <p>Border and ring transition over <code>--duration-fast</code>; auto-grow is immediate.</p>
+  <h3>Touch</h3>
+  <p>At least two rows tall (well over 44px); tapping the label also focuses it.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Label as a question or noun phrase: "Your review", "Anything Nia should know?".</li>
+    <li>Help text suggests what a useful answer covers, not rules.</li>
+    <li>State limits in characters: "Shorten this to 200 characters or fewer."</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="ta-do1">Your review</label><textarea class="textarea" id="ta-do1" rows="3">Nia explained each step and the braids feel comfortable.</textarea></div></div><figcaption>A review gets room for several sentences.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="ta-dont1">Your review</label><input class="input" id="ta-dont1" type="text" value="Nia explained each step and the braids feel comfortable."></div></div><figcaption>The care-and-review mock collects the review in a one-line input, hiding most of what was typed.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="ta-do2">Hair details</label><textarea class="textarea" id="ta-do2" rows="2" aria-describedby="ta-do2-h">Shoulder length; bringing my own extensions.</textarea><span class="field__help" id="ta-do2-h">Length, density and any extensions you’ll bring.</span></div></div><figcaption>Help text that stays visible while typing.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="ta-dont2">Hair details</label><textarea class="textarea" id="ta-dont2" rows="2" placeholder="Tell Nia your length, density and any extensions"></textarea></div></div><figcaption>Guidance in the placeholder vanishes as soon as typing starts.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      <tr><td>Background</td><td><code>--color-bg-surface</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td></tr>
+      <tr><td>Border</td><td><code>--color-border-strong</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td></tr>
+      <tr><td>Focus</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+      <tr><td>Invalid edge</td><td><code>--color-danger-solid</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td></tr>
+      <tr><td>Counter</td><td><code>--color-fg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-subtle" data-swatch></i><span data-token="--color-fg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-subtle" data-swatch></i><span data-token="--color-fg-subtle"></span></span></td></tr>
+      <tr><td>Over-limit counter</td><td><code>--color-danger-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td></tr>
+      <tr><td>Minimum height base</td><td><code>--control-height-md</code></td><td colspan="2"><span data-token="--control-height-md"></span></td></tr>
+      <tr><td>Padding block / inline</td><td><code>--space-2</code> / <code>--space-3</code></td><td colspan="2"><span data-token="--space-2"></span> / <span data-token="--space-3"></span></td></tr>
+      <tr><td>Radius</td><td><code>--radius-md</code></td><td colspan="2"><span data-token="--radius-md"></span></td></tr>
+      <tr><td>Counter font</td><td><code>--text-caption</code></td><td colspan="2"><span data-token="--text-caption"></span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="field"&gt;
+  &lt;label class="field__label" for="review"&gt;Your review&lt;/label&gt;
+  &lt;textarea class="textarea" id="review" name="review" maxlength="500"
+            aria-describedby="review-help review-count"&gt;&lt;/textarea&gt;
+  &lt;span class="field__help" id="review-help"&gt;What should others know about your visit?&lt;/span&gt;
+  &lt;span class="field__counter" id="review-count"&gt;0 / 500&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.textarea</code></td><td>Multi-line field, 100px minimum, vertical resize.</td></tr>
+    <tr><td><code>style="field-sizing: content"</code></td><td>Auto-grow (progressive; falls back to manual resize).</td></tr>
+    <tr><td><code>.field__counter[data-over="true"]</code></td><td>Counter in danger colour.</td></tr>
+    <tr><td><code>aria-invalid</code> / <code>readonly</code> / <code>disabled</code></td><td>States, as for text fields.</td></tr>
+    <tr><td><code>data-state="hover|focus"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    <li><a href="../../mocks/pages/care-and-review/default.html">pages/care-and-review/default</a> ("Your review")</li>
+    <li><a href="../../mocks/pages/booking-request/default.html">pages/booking-request/default</a> ("Hair details")</li>
+    <li><a href="../../mocks/dialogs/report-review/default.html">dialogs/report-review/default</a> ("Reason")</li>
+  </ul>
+  <p>Drift fixed during extraction: every multi-line answer in the mocks ("Your review", "Hair details", the report "Reason") used a single-line <code>&lt;input&gt;</code>; the system uses a textarea. The kit's <code>.textarea</code> class existed but no mock used it.</p>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

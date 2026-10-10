@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Badge — HairPop design system</title>
+<meta name="description" content="Neutral, info, success, warning, danger, solid and count badges, in both themes.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Component · Data display</p><h1>Badge</h1><p class="ds-lead">A badge labels status in a word or two, such as Awaiting reply or Confirmed, so people can scan a list of requests without opening each one.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Dot + text, never colour alone</span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a badge for a short, read-only status attached to something: an appointment's state, the unread count on "Updates", a "New" marker. It is not a button and not a filter. Use a <a href="chip.html">chip</a> for anything people can select or remove, and an <a href="alert.html">alert</a> when the status needs a sentence of explanation.</p>
+  <ul>
+    <li><b>Tone</b> badges (neutral, info, success, warning, danger) describe state. Pick the tone by what the person should feel, then write the word.</li>
+    <li><b>Solid</b> is for the rare badge that must stand out on a busy photo or card ("New").</li>
+    <li><b>Count</b> is the unread number on "Updates" in the top bar.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <span class="badge badge--warning">Awaiting reply</span>
+      <span class="ds-callout" style="left: 31%; top: 22%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 52%; top: 22%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 70%; top: 70%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Dot</b><small>8px, <code>currentColor</code>; a shape cue beside the colour. Hidden on count badges.</small></div></li>
+      <li><div><b>Label</b><small>Overline style: 12px semibold, uppercase, 0.14em tracking. One to three words.</small></div></li>
+      <li><div><b>Pill</b><small>24px tall, <code>--radius-full</code>, 8px horizontal padding; hugs its content and never stretches.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>Tone follows meaning, and the words carry the meaning on their own: "Awaiting reply" is understandable in grey.</p>
+  <div class="ds-example"><div class="ds-example__canvas"><span class="badge">Completed</span>
+<span class="badge badge--info">Unread</span>
+<span class="badge badge--success">Confirmed</span>
+<span class="badge badge--warning">Awaiting reply</span>
+<span class="badge badge--danger">Cancelled</span></div><div class="ds-example__caption"><span>Neutral, info, success, warning, danger.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;span class=&quot;badge&quot;&gt;Completed&lt;/span&gt;
+&lt;span class=&quot;badge badge--info&quot;&gt;Unread&lt;/span&gt;
+&lt;span class=&quot;badge badge--success&quot;&gt;Confirmed&lt;/span&gt;
+&lt;span class=&quot;badge badge--warning&quot;&gt;Awaiting reply&lt;/span&gt;
+&lt;span class=&quot;badge badge--danger&quot;&gt;Cancelled&lt;/span&gt;</code></pre></details></div>
+  <h3>Solid and count</h3>
+  <div class="ds-example"><div class="ds-example__canvas"><span class="badge badge--solid">New</span>
+<a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2<span class="visually-hidden"> unread</span></span></a></div><div class="ds-example__caption"><span>Solid is for emphasis on a photo; the count sits inside the "Updates" link and reads as part of its name.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;span class=&quot;badge badge--solid&quot;&gt;New&lt;/span&gt;
+&lt;a class=&quot;account-link&quot; href=&quot;../../mocks/pages/notification-center/default.html&quot;&gt;Updates &lt;span class=&quot;badge badge--count&quot;&gt;2&lt;span class=&quot;visually-hidden&quot;&gt; unread&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;</code></pre></details></div>
+  <h3>The request lifecycle</h3>
+  <p>One appointment moves through these badges; keep the words and tones identical on every screen (my appointments, appointment detail, notifications).</p>
+  <div class="ds-example"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span>
+<span class="badge badge--success">Confirmed</span>
+<span class="badge">Completed</span>
+<span class="badge badge--danger">Cancelled</span></div><div class="ds-example__caption"><span>Request sent → braider accepts → visit done; or either side cancels.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;span class=&quot;badge badge--warning&quot;&gt;Awaiting reply&lt;/span&gt;
+&lt;span class=&quot;badge badge--success&quot;&gt;Confirmed&lt;/span&gt;
+&lt;span class=&quot;badge&quot;&gt;Completed&lt;/span&gt;
+&lt;span class=&quot;badge badge--danger&quot;&gt;Cancelled&lt;/span&gt;</code></pre></details></div>
+</section>
+
+<section class="ds-section" id="sizes" data-na="Badges have one size (24px). Scale emphasis with tone, not size."><h2><a href="#sizes">Sizes</a></h2><p class="ds-na">Badges have one size (24px). Scale emphasis with tone, not size.</p></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>A badge is static: it has no hover, focus, active, disabled or selected state of its own and is never focusable. When it sits inside a link or card, the container owns the interaction; the matrix shows each tone in the places it appears, including a hovered container.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Tone</th><th scope="col">On a card</th><th scope="col">On the page</th><th scope="col">Inside a link</th><th scope="col">Container hovered</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Neutral</th><td><div class="card"><span class="badge">Completed</span></div></td><td><span class="badge">Completed</span></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">Past <span class="badge">3</span></a></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" data-state="hover">Past <span class="badge">3</span></a></td></tr>
+      <tr><th scope="row">Info</th><td><div class="card"><span class="badge badge--info">Unread</span></div></td><td><span class="badge badge--info">Unread</span></td><td><a class="nav-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--info">New</span></a></td><td><a class="nav-link" href="../../mocks/pages/notification-center/default.html" data-state="hover">Updates <span class="badge badge--info">New</span></a></td></tr>
+      <tr><th scope="row">Success</th><td><div class="card"><span class="badge badge--success">Confirmed</span></div></td><td><span class="badge badge--success">Confirmed</span></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/success.html">HP-1048 <span class="badge badge--success">Confirmed</span></a></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/success.html" data-state="hover">HP-1048 <span class="badge badge--success">Confirmed</span></a></td></tr>
+      <tr><th scope="row">Warning</th><td><div class="card"><span class="badge badge--warning">Awaiting reply</span></div></td><td><span class="badge badge--warning">Awaiting reply</span></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/default.html">HP-1048 <span class="badge badge--warning">Awaiting reply</span></a></td><td><a class="nav-link" href="../../mocks/pages/appointment-detail/default.html" data-state="hover">HP-1048 <span class="badge badge--warning">Awaiting reply</span></a></td></tr>
+      <tr><th scope="row">Danger</th><td><div class="card"><span class="badge badge--danger">Cancelled</span></div></td><td><span class="badge badge--danger">Cancelled</span></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">HP-0921 <span class="badge badge--danger">Cancelled</span></a></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" data-state="hover">HP-0921 <span class="badge badge--danger">Cancelled</span></a></td></tr>
+      <tr><th scope="row">Count</th><td><div class="card"><span class="badge badge--count">2</span></div></td><td><span class="badge badge--count">2</span></td><td><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2<span class="visually-hidden"> unread</span></span></a></td><td><a class="account-link" href="../../mocks/pages/notification-center/default.html" data-state="hover">Updates <span class="badge badge--count">2<span class="visually-hidden"> unread</span></span></a></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><span class="badge">Completed</span><span class="badge badge--info">Unread</span><span class="badge badge--success">Confirmed</span><span class="badge badge--warning">Awaiting reply</span><span class="badge badge--danger">Cancelled</span><span class="badge badge--solid">New</span><span class="badge badge--count">2</span></div></div><div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><span class="badge">Completed</span><span class="badge badge--info">Unread</span><span class="badge badge--success">Confirmed</span><span class="badge badge--warning">Awaiting reply</span><span class="badge badge--danger">Cancelled</span><span class="badge badge--solid">New</span><span class="badge badge--count">2</span></div></div></div>
+  <ul>
+    <li><b>Changing status</b> (Awaiting reply → Confirmed) is announced by the toast or live region that reports the change, not by the badge.</li>
+    <li><b>Unread</b> notifications use an info badge plus a bold title; <b>read</b> ones drop the badge. Warning is reserved for something that needs action.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>The badge never wraps (<code>white-space: nowrap</code>) and never stretches: inside a <code>.stack</code> it keeps its own width (<code>align-self: flex-start</code>).</li>
+    <li>At 360px, keep labels short enough to sit beside a title: "Awaiting reply" is the longest status in the product.</li>
+    <li>The count badge stays visible at every width, even when "Updates" is the only nav item left in the top bar.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Component tokens <code>--badge-bg</code> and <code>--badge-fg</code> map to the status tokens (<code>--color-warning-bg</code>/<code>--color-warning-fg</code> and so on); <code>--badge-height</code> sets the pill. Dark mode swaps every tone to a deep tint with a light label (amber-950 behind amber-300), keeping text above 4.5:1.</p>
+  <pre><code>/* A "Top rated" badge that borrows the accent */
+.badge--accent { --badge-bg: var(--color-accent-subtle); --badge-fg: var(--color-fg-accent); }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>A plain <code>&lt;span&gt;</code>; the text is the content. No role is needed. Status is never colour alone (WCAG 1.4.1): the word says it, and the dot adds a non-colour cue.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Skips the badge; it is not focusable. A badge inside a link is read as part of the link's name.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>None on the badge. The containing link or card shows the shared ring.</p>
+  <h3>Labelling</h3>
+  <p>Text badges need nothing extra. A count badge adds visually hidden words so it makes sense: <code>2&lt;span class="visually-hidden"&gt; unread&lt;/span&gt;</code>. Do not put <code>aria-label</code> on the link around it: "Updates 2 unread" keeps the visible label inside the accessible name (WCAG 2.5.3), where "Notifications, 2 unread" would not.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Neutral label</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-subtle" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Info label</span><span class="ds-pair__ratio" data-contrast="--color-info-fg|--color-info-bg" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Success label</span><span class="ds-pair__ratio" data-contrast="--color-success-fg|--color-success-bg" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Warning label</span><span class="ds-pair__ratio" data-contrast="--color-warning-fg|--color-warning-bg" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Danger label</span><span class="ds-pair__ratio" data-contrast="--color-danger-fg|--color-danger-bg" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Count label</span><span class="ds-pair__ratio" data-contrast="--color-fg-on-danger|--color-danger-solid" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Count pill on page</span><span class="ds-pair__ratio" data-contrast="--color-danger-solid|--color-bg-canvas" data-min="3"></span></div>
+  </div>
+  <h3>Motion</h3>
+  <p>None. A changing count does not bounce or pulse.</p>
+  <h3>Touch</h3>
+  <p>Not a target. The link containing a count badge is 44px tall (<code>.account-link</code>).</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>One to three words, written in sentence case in the source ("Awaiting reply"); CSS uppercases it.</li>
+    <li>Describe the state, not the action: "Confirmed", not "Confirm".</li>
+    <li>Use the same word for the same state everywhere: Awaiting reply, Confirmed, Completed, Cancelled.</li>
+    <li>Counts above 99 show "99+" with the hidden text " unread".</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><span class="badge badge--warning">Awaiting reply</span><p class="card__title">Medium knotless braids</p></div><figcaption>The badge hugs its label above the title it describes.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><span class="badge badge--warning" style="align-self: stretch; width: auto;">Awaiting reply</span><p class="card__title">Medium knotless braids</p></div><figcaption>A badge stretched across the card, as inside <code>.stack</code> on the appointment detail. It reads as a banner.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--info">Unread</span></div><figcaption>Unread is information: info tone, plus a bold title in the list.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge badge--warning">Unread</span></div><figcaption>Unread in warning amber (notification centre) suggests something is wrong. Keep warning for "needs your action".</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="chip chip--static">Knotless</span><span class="chip chip--static">Toronto</span><span class="chip chip--static">Under $150</span></div><figcaption>Applied filters are chips, one per filter.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge">Knotless · Toronto · under $150</span></div><figcaption>A badge used as a filter summary (no-results states). It cannot be cleared and is too long for a status.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      <tr><td>Neutral background / label</td><td><code>--color-bg-subtle</code> / <code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+      <tr><td>Info background / label</td><td><code>--color-info-bg</code> / <code>--color-info-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-info-bg" data-swatch></i><span data-token="--color-info-bg"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-info-fg" data-swatch></i><span data-token="--color-info-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-info-bg" data-swatch></i><span data-token="--color-info-bg"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-info-fg" data-swatch></i><span data-token="--color-info-fg"></span></span></td></tr>
+      <tr><td>Success background / label</td><td><code>--color-success-bg</code> / <code>--color-success-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-success-bg" data-swatch></i><span data-token="--color-success-bg"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-success-fg" data-swatch></i><span data-token="--color-success-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-success-bg" data-swatch></i><span data-token="--color-success-bg"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-success-fg" data-swatch></i><span data-token="--color-success-fg"></span></span></td></tr>
+      <tr><td>Warning background / label</td><td><code>--color-warning-bg</code> / <code>--color-warning-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-warning-bg" data-swatch></i><span data-token="--color-warning-bg"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-warning-fg" data-swatch></i><span data-token="--color-warning-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-warning-bg" data-swatch></i><span data-token="--color-warning-bg"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-warning-fg" data-swatch></i><span data-token="--color-warning-fg"></span></span></td></tr>
+      <tr><td>Danger background / label</td><td><code>--color-danger-bg</code> / <code>--color-danger-fg</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-bg" data-swatch></i><span data-token="--color-danger-bg"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-bg" data-swatch></i><span data-token="--color-danger-bg"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-fg" data-swatch></i><span data-token="--color-danger-fg"></span></span></td></tr>
+      <tr><td>Solid background / label</td><td><code>--color-info-solid</code> / <code>--color-fg-on-accent</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-info-solid" data-swatch></i><span data-token="--color-info-solid"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-on-accent" data-swatch></i><span data-token="--color-fg-on-accent"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-info-solid" data-swatch></i><span data-token="--color-info-solid"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-on-accent" data-swatch></i><span data-token="--color-fg-on-accent"></span></span></td></tr>
+      <tr><td>Count background / label</td><td><code>--color-danger-solid</code> / <code>--color-fg-on-danger</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-on-danger" data-swatch></i><span data-token="--color-fg-on-danger"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-on-danger" data-swatch></i><span data-token="--color-fg-on-danger"></span></span></td></tr>
+      <tr><td>Label font</td><td><code>--text-overline</code></td><td colspan="2"><span data-token="--text-overline"></span></td></tr>
+      <tr><td>Tracking</td><td><code>--letter-spacing-wide</code></td><td colspan="2"><span data-token="--letter-spacing-wide"></span></td></tr>
+      <tr><td>Padding / gap</td><td><code>--space-2</code> / <code>--space-1</code></td><td colspan="2"><span data-token="--space-2"></span> / <span data-token="--space-1"></span></td></tr>
+      <tr><td>Shape</td><td><code>--radius-full</code></td><td colspan="2"><span data-token="--radius-full"></span></td></tr>
+    </tbody>
+  </table></div>
+  <p>Component tokens: <code>--badge-bg</code>, <code>--badge-fg</code>, <code>--badge-height</code> (1.5rem).</p>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;span class="badge badge--warning"&gt;Awaiting reply&lt;/span&gt;
+&lt;span class="badge badge--success"&gt;Confirmed&lt;/span&gt;
+&lt;a class="account-link" href="/notifications"&gt;Updates
+  &lt;span class="badge badge--count"&gt;2&lt;span class="visually-hidden"&gt; unread&lt;/span&gt;&lt;/span&gt;
+&lt;/a&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.badge</code></td><td>Base: neutral tone, dot, uppercase overline label.</td></tr>
+    <tr><td><code>.badge--info</code> <code>.badge--success</code> <code>.badge--warning</code> <code>.badge--danger</code></td><td>Status tone.</td></tr>
+    <tr><td><code>.badge--solid</code></td><td>Filled accent, for emphasis on media.</td></tr>
+    <tr><td><code>.badge--count</code></td><td>Numeric count on danger red; no dot, tabular figures.</td></tr>
+    <tr><td><code>.visually-hidden</code> inside</td><td>Gives a count its meaning for screen readers.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    <li><a href="../../mocks/pages/my-appointments/default.html">pages/my-appointments/default</a> (Awaiting reply and Completed on appointment rows)</li>
+    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> (warning badge inside a .stack card)</li>
+    <li><a href="../../mocks/pages/appointment-detail/success.html">pages/appointment-detail/success</a> (Confirmed)</li>
+    <li><a href="../../mocks/pages/notification-center/unread.html">pages/notification-center/unread</a> (Unread and Read badges)</li>
+    <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (count badge on Updates)</li>
+    <li><a href="../../mocks/pages/matching-braiders/no-results.html">pages/matching-braiders/no-results</a> (badge used as a filter summary)</li>
+  </ul>
+  <p>Drift fixed during extraction: badges stretched to full width inside <code>.stack</code> (now <code>align-self: flex-start</code>); the dot was 6px and the pill 22px, both off the 4px grid (now 8px and 24px); Unread used warning and Read used info (system: Unread is info plus a bold title, Read is neutral or no badge); the Updates link's <code>aria-label</code> "Notifications, 2 unread" did not contain its visible label (system: visible text plus hidden " unread"); "Completed" used success although nothing is pending (system: neutral); the filter-summary badge should be chips.</p>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

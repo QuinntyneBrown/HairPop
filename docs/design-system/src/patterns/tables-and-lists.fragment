@@ -1,0 +1,100 @@
+<!--meta {"lead": "Customers scan HairPop collections to choose: styles, braiders, appointments, updates. Lists of cards do most of that work; tables appear only when Maya compares the same facts across rows.", "description": "Card grid vs list vs table, density, sorting, filtering, pagination, long and edge content, responsive strategy.", "covers": "Card grid vs list vs table, filtering, sorting, pagination vs load more, long names, responsive strategy"} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>The mocks show four collections: the style gallery and matching braiders as <b>card grids</b>, my appointments as a <b>list of row cards</b>, and the notification center as a <b>list</b> of updates. Each sits under a filter row (search, chips, a Filters button) and, when long, ends with <a href="../components/pagination.html">pagination</a> that says how many there are ("Showing 1–3 of 126").</p>
+</section>
+
+<section class="ds-section" id="when"><h2><a href="#when">When to use which</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Collection</th><th scope="col">Use</th><th scope="col">Why</th></tr></thead>
+    <tbody>
+      <tr><td>Things chosen by look (styles, braiders)</td><td>Story <a href="../components/card.html">cards</a> in <code>.feature-grid</code></td><td>The photo is the information.</td></tr>
+      <tr><td>Maya’s own items with a status and one next step</td><td>Row cards (<code>.card.appointment-row</code>) or a <a href="../components/list.html">list</a></td><td>Status badge, title, facts and action together.</td></tr>
+      <tr><td>Updates in time order</td><td>List with unread markers</td><td>Read state and time matter more than layout.</td></tr>
+      <tr><td>Comparing the same 3+ facts across many rows (appointment history)</td><td><a href="../components/table.html">Table</a></td><td>Columns make comparison fast.</td></tr>
+      <tr><td>Facts about one thing</td><td><a href="../components/description-list.html">Description list</a> or <a href="../components/stat.html">fact tiles</a></td><td>Key and value, not rows.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
+  <p>Filter row, collection, pagination. Applied filters are visible as pressed chips, and the count changes with them.</p>
+  <div class="ds-frame"><div class="ds-frame__body stack">
+    <div class="filter-row"><label class="search-box"><span class="visually-hidden">Search braiders</span><input class="input" type="search" value="knotless braids" aria-label="Search braiders"></label><button class="btn" type="button">{{icon:filter}}Filters</button></div>
+    <div class="chip-row" role="group" aria-label="Availability and price"><button class="chip" type="button" aria-pressed="true">Any day</button><button class="chip" type="button" aria-pressed="false">This weekend</button><button class="chip" type="button" aria-pressed="false">Under $200</button></div>
+    <div class="feature-grid">
+      <article class="card story-card"><img class="story-card__photo" src="../../mocks/assets/photos/nia.jpg" alt="Portrait of Nia Okafor"><div class="stack"><p class="eyebrow">Available Sat 24 Oct</p><h2 class="card__title">Nia Okafor</h2><p class="text-muted">4.9 ★ · 86 reviews · Toronto West · knotless braids from $180</p><a href="../../mocks/pages/braider-profile/default.html">View Nia’s profile <span aria-hidden="true">→</span></a></div></article>
+      <article class="card story-card"><div class="story-card__art" aria-hidden="true">{{icon:sparkle|icon--fill}}</div><div class="stack"><p class="eyebrow">Next week</p><h2 class="card__title">Aisha Mensah</h2><p class="text-muted">4.8 ★ · 64 reviews · North York · from $195</p><a href="../../mocks/pages/braider-profile/default.html">View Aisha’s profile <span aria-hidden="true">→</span></a></div></article>
+      <article class="card story-card"><div class="story-card__art" aria-hidden="true">{{icon:sparkle|icon--fill}}</div><div class="stack"><p class="eyebrow">Available Sun 25 Oct</p><h2 class="card__title">Jules Baptiste</h2><p class="text-muted">4.9 ★ · 41 reviews · Scarborough · from $170</p><a href="../../mocks/pages/braider-profile/default.html">View Jules’s profile <span aria-hidden="true">→</span></a></div></article>
+    </div>
+    <nav class="pagination" aria-label="Results pages"><span class="pagination__summary">Showing 1–3 of 12</span><a href="#structure" aria-disabled="true">Previous</a><a href="#structure" aria-current="page">1</a><a href="#structure">2</a><a href="#structure">3</a><a href="#structure">Next</a></nav>
+  </div></div>
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <h3>Row list and table</h3>
+  {{example:[stack]Row cards for Maya’s appointments; a table for comparing her visit history.}}
+<div class="card appointment-row"><div class="stack stack--sm"><span class="badge badge--warning">Awaiting reply</span><h2 class="card__title">Nia Okafor · knotless braids</h2><p class="text-muted">Sat 24 Oct · 10:00 am · estimate $180–$240</p></div><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div>
+<div class="table-wrap"><table class="table"><caption>Past appointments</caption><thead><tr><th scope="col" aria-sort="descending"><button type="button">Date</button></th><th scope="col">Braider</th><th scope="col">Style</th><th scope="col" class="num">Paid</th></tr></thead><tbody><tr><td>Sat 3 Oct</td><td>Nia Okafor</td><td>Medium knotless braids</td><td class="num">$210</td></tr><tr data-state="hover"><td>Sat 15 Aug</td><td>Nia Okafor</td><td>Passion twists</td><td class="num">$185</td></tr></tbody></table></div>
+  {{/example}}
+  <ul>
+    <li><b>Loading</b>: skeletons in the collection’s own shape (card grid or rows); the filter row stays usable.</li>
+    <li><b>Empty</b>: a first-run <a href="../components/empty-state.html">empty state</a> replaces the collection; filters hide.</li>
+    <li><b>No results</b>: filters stay visible with the applied values, and the empty state offers "Clear filters".</li>
+    <li><b>Long</b>: pagination with a count. Prefer pages to infinite scroll so the footer and position are reachable and Back works.</li>
+    <li><b>Edge</b>: long names wrap (never truncate a person’s name); missing photos fall back to the art panel at the same 3:2 ratio.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
+  <ul>
+    <li>Card grids: 1 column under 768px, 2 to 1023px, 3 from 1024px (<code>.feature-grid</code>).</li>
+    <li>Row cards wrap the action under the text on phones.</li>
+    <li>Tables scroll horizontally inside <code>.table-wrap</code>; tables with four or fewer columns may switch to row cards under 768px when the page says so.</li>
+    <li>The pagination summary takes its own line under 640px.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li>Cards in a collection are <code>&lt;article&gt;</code> with a heading; each has one real link whose text names the item ("View Nia’s profile").</li>
+    <li>Filter chips are toggle buttons with <code>aria-pressed</code>, grouped and labelled; changing a filter announces the new count in a status region ("12 braiders").</li>
+    <li>Tables have a <code>&lt;caption&gt;</code>, <code>scope</code> on headers, and <code>aria-sort</code> on the sorted column; the sort control is a button.</li>
+    <li>Pagination is a labelled <code>nav</code>; the current page has <code>aria-current="page"</code>.</li>
+    <li>Status is badge text plus colour: "Awaiting reply", "Completed", "Unread".</li>
+  </ul>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Table header text|--color-fg-muted|--color-bg-surface-sunken|4.5}}
+    {{pair:Selected chip label|--color-fg-accent|--color-accent-subtle|4.5}}
+    {{pair:Warning badge|--color-warning-fg|--color-warning-bg|4.5}}
+  </div>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Card summaries are one line of facts separated by " · ": rating, reviews, area, starting price.</li>
+    <li>Counts use numerals and en dashes: "Showing 1–3 of 126".</li>
+    <li>Statuses are short and specific: "Awaiting reply", "Confirmed", "Completed", "Cancelled".</li>
+    <li>Link text names the item: "View Nia’s profile", not "View profile" repeated three times.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><a href="#do-dont">View Nia’s profile <span aria-hidden="true">→</span></a></div><figcaption>Link text that says what opens.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><a href="#do-dont">Explore Nia Okafor <span aria-hidden="true">→</span></a></div><figcaption>The mocks reuse "Explore [name]" for braiders and styles alike.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="chip-row" role="group" aria-label="Applied filters"><span class="chip chip--static">Knotless<button class="remove" type="button" aria-label="Remove filter: knotless">{{icon:close|icon--sm}}</button></span><span class="chip chip--static">Under $150<button class="remove" type="button" aria-label="Remove filter: under $150">{{icon:close|icon--sm}}</button></span></div></div><figcaption>Applied filters as chips Maya can remove one by one.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge">Knotless · Toronto · under $150</span></div><figcaption>Applied filters as one static badge (the mocks’ no-results state).</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    {{mock:pages/style-gallery/default|card grid, filter chips}}
+    {{mock:pages/matching-braiders/default|braider cards, Filters button}}
+    {{mock:pages/matching-braiders/long|pagination}}
+    {{mock:pages/matching-braiders/edge|long names}}
+    {{mock:pages/matching-braiders/no-results|filters as a badge}}
+    {{mock:pages/my-appointments/default|row cards with status}}
+  </ul>
+  <p>Drift fixed: pagination used an ad-hoc <code>.pagination-row</code> of bare links (now the pagination component; the class is kept as an alias); applied filters on no-results were a static badge (now removable chips); braider cards reused "Explore [name]"; art panels were shorter than photos (now both 3:2).</p>
+</section>

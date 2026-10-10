@@ -1,0 +1,186 @@
+<!--meta {"lead": "Layout primitives place everything else: the container sets page margins and the maximum width, stacks and clusters space siblings, and grids divide the width into the tokens' columns and gutters.", "description": "Container, stack, cluster, grid, auto grid, feature grid, detail grid and the app shell, driven by layout tokens, with a live grid demo.", "pills": ["Layout", "Status: stable"], "variants": "container, container--narrow, stack (sm, default, lg), cluster (start, between, end), grid, grid--auto, feature-grid, detail-grid, product-shell", "states": "none (static); responsive columns, gutters and margins", "sources": ["pages/style-gallery/default", "pages/style-detail/default", "pages/braider-profile/default", "pages/booking-request/default"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Never position components with ad-hoc margins. Compose a page from these primitives so spacing and columns come from the layout tokens and change in one place at each breakpoint.</p>
+  <ul>
+    <li><b>Container</b> (<code>.container</code>) centres content, caps it at <code>--layout-container-max</code> (1280px) and applies <code>--layout-margin</code> on both sides. <code>.container--narrow</code> caps at <code>--layout-form-max</code> (608px) for forms and auth.</li>
+    <li><b>Stack</b> (<code>.stack</code>) is a vertical flow with one gap: 8, 16 or 32px.</li>
+    <li><b>Cluster</b> (<code>.cluster</code>) is a wrapping row with a 12px gap: buttons, chips, metadata.</li>
+    <li><b>Grid</b> (<code>.grid</code>) uses <code>--layout-columns</code> (4, 8, 12) and <code>--layout-gutter</code>; <code>.grid--auto</code> fills with cards at least <code>--layout-card-min</code> (288px) wide.</li>
+    <li><b>Feature grid</b> (<code>.feature-grid</code>) is the 1 → 2 → 3 column card grid of the gallery and matching braiders; <b>detail grid</b> (<code>.detail-grid</code>) is the 2:1 main and aside of style detail and braider profile.</li>
+    <li><b>App shell</b> (<code>.product-shell</code> + <code>.product-main</code>) keeps the footer at the bottom and spaces the page's top-level blocks 24px apart.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="ds-grid-demo" style="width: 100%;" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <span class="ds-callout" style="left: 3%; top: 50%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 26%; top: 18%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 31%; top: 82%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Margin</b><small>Viewport edge to content: <code>--layout-margin</code> 16 → 32 → 48px.</small></div></li>
+      <li><div><b>Column</b><small><code>--layout-columns</code> 4 → 8 → 12 equal tracks (<code>minmax(0, 1fr)</code>).</small></div></li>
+      <li><div><b>Gutter</b><small>Between columns: <code>--layout-gutter</code> 16 → 24 → 32px.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <h3>Live grid</h3>
+  <p>This grid reads the real layout tokens: resize the window and the column count, gutter and margin change at 768px and 1024px. With fewer columns than cells, the twelve cells wrap into rows of four or eight.</p>
+  <div class="ds-grid-demo" role="img" aria-label="Live grid of twelve cells using the current layout columns, gutter and margin"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div>
+  <h3>Stack and cluster</h3>
+  {{example:[start]Stack spaces blocks vertically; cluster wraps inline items with one gap.}}
+<div class="stack" style="flex: 1 1 14rem;">
+  <p class="eyebrow">Stack · 16px</p>
+  <div class="well">Service · Medium knotless braids</div>
+  <div class="well">Preferred time · Sat 24 Oct, 10:00 am</div>
+</div>
+<div class="stack stack--sm" style="flex: 1 1 14rem;">
+  <p class="eyebrow">Cluster · 12px</p>
+  <div class="cluster"><button class="chip" type="button" aria-pressed="true">All styles</button><button class="chip" type="button" aria-pressed="false">Braids</button><button class="chip" type="button" aria-pressed="false">Twists</button><button class="chip" type="button" aria-pressed="false">Locs</button></div>
+  <div class="cluster cluster--between"><span class="text-muted">Showing 1–3 of 126</span><a class="btn btn--sm" href="../../mocks/pages/matching-braiders/long.html">Next</a></div>
+</div>
+  {{/example}}
+  <h3>Feature grid</h3>
+  {{example:[stack]One column on phones, two from 768px, three from 1024px.}}
+<div class="feature-grid">
+  <div class="card"><h3 class="card__title">Knotless braids</h3><p class="text-muted">4–7 hours</p></div>
+  <div class="card"><h3 class="card__title">Passion twists</h3><p class="text-muted">3–6 hours</p></div>
+  <div class="card"><h3 class="card__title">Cornrows</h3><p class="text-muted">2–4 hours</p></div>
+</div>
+  {{/example}}
+  <h3>Detail grid</h3>
+  {{example:[stack]Main content 2fr and an aside of at least 256px; the aside drops below on phones.}}
+<div class="detail-grid">
+  <section class="card" aria-labelledby="dg-main"><h3 id="dg-main">What to expect</h3><p class="text-muted">Knotless braids start with your natural hair, then extensions are fed in gradually.</p></section>
+  <aside class="card" aria-labelledby="dg-aside"><h3 id="dg-aside">Make it yours</h3><p class="text-muted">Choose small, medium or large braids.</p></aside>
+</div>
+  {{/example}}
+  <h3>Auto grid and spans</h3>
+  {{example:[stack]<code>.grid--auto</code> fits as many 288px cards as the width allows; <code>.span-full</code> spans every column of a <code>.grid</code>.}}
+<div class="grid grid--auto">
+  <div class="card"><b>Nia Okafor</b></div><div class="card"><b>Aisha Mensah</b></div><div class="card"><b>Jules Baptiste</b></div>
+</div>
+<div class="grid"><div class="card span-full"><b>Full-width notice</b></div></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Primitive</th><th scope="col">Size</th><th scope="col">Value</th><th scope="col">Use for</th></tr></thead><tbody>
+    <tr><td><code>.container</code></td><td>default</td><td>max 1280px</td><td>Every product page.</td></tr>
+    <tr><td><code>.container--narrow</code> / <code>.form-panel</code></td><td>narrow</td><td>max 608px</td><td>Booking request, account settings, sign in.</td></tr>
+    <tr><td><code>.stack--sm</code> / <code>.stack</code> / <code>.stack--lg</code></td><td>8 / 16 / 32px</td><td><code>--space-2/4/8</code></td><td>Label groups / fields and card content / page sections.</td></tr>
+    <tr><td><code>.cluster</code></td><td>12px</td><td><code>--space-3</code></td><td>Buttons, chips, filter rows.</td></tr>
+    <tr><td><code>.grid</code></td><td>responsive</td><td><code>--layout-gutter</code></td><td>Column layouts.</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="ds-section" id="states" data-na="Layout primitives are static; their only changes are the responsive column, gutter and margin steps documented under Responsive."><h2><a href="#states">States</a></h2></section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Width</th><th scope="col">Columns</th><th scope="col">Gutter</th><th scope="col">Margin</th><th scope="col">Feature grid</th><th scope="col">Detail grid</th></tr></thead><tbody>
+    <tr><td>0–767px</td><td>4</td><td>16px</td><td>16px</td><td>1 column</td><td>stacked</td></tr>
+    <tr><td>768–1023px</td><td>8</td><td>24px</td><td>32px</td><td>2 columns</td><td>2fr + aside</td></tr>
+    <tr><td>1024px and up</td><td>12</td><td>32px</td><td>48px</td><td>3 columns</td><td>2fr + aside</td></tr>
+    <tr><td>1280px and up</td><td>12</td><td>32px</td><td>48px, content centred</td><td>3 columns</td><td>2fr + aside</td></tr>
+  </tbody></table></div>
+  <ul>
+    <li>Media queries are <code>min-width</code> only, in rem, so they follow the reader's font size.</li>
+    <li>Content reflows to 320px CSS width with no horizontal scroll (WCAG 1.4.10).</li>
+    <li><code>.product-main</code> has 24px top padding on phones and 32px from 768px, with 48px at the bottom.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Layout primitives use no colour. They read <code>--layout-*</code> and <code>--space-*</code> tokens only, which themes do not change. A denser product could override <code>--layout-gutter</code> and <code>--layout-margin</code> at <code>:root</code>; every grid follows.</p>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Primitives are <code>&lt;div&gt;</code>s with no role; landmarks come from the shell: <code>&lt;header class="topbar"&gt;</code>, <code>&lt;main id="main" class="container product-main"&gt;</code>, <code>&lt;footer class="site-footer"&gt;</code>, and <code>&lt;aside&gt;</code> for the detail grid's second column.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Follows DOM order, which must match visual order. Never reorder with <code>order</code> or grid placement in a way that breaks reading order.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Not focusable. <code>scroll-padding-top</code> on <code>html</code> keeps focused elements clear of the sticky topbar (WCAG 2.4.11).</p>
+  <h3>Labelling</h3>
+  <p>A <code>&lt;section&gt;</code> or <code>&lt;aside&gt;</code> used as a region gets <code>aria-labelledby</code> pointing at its heading.</p>
+  <h3>Contrast</h3>
+  <p>Not applicable: primitives draw nothing.</p>
+  <h3>Motion</h3>
+  <p>None.</p>
+  <h3>Touch</h3>
+  <p>Cluster and stack gaps keep adjacent targets at least 8px apart.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Keep prose within <code>--layout-measure</code> (65ch); paragraphs cap themselves.</li>
+    <li>Order content by importance in the DOM: the detail grid's main column comes first, the aside second.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="feature-grid"><div class="card"><b>Nia</b></div><div class="card"><b>Aisha</b></div></div></div><figcaption>Let the grid set card widths and gutters.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="card" style="width: 9rem; margin-right: var(--space-5);"><b>Nia</b></div><div class="card" style="width: 9rem;"><b>Aisha</b></div></div><figcaption>Fix widths and margins per card; they drift from the gutter and break at 360px.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="form-panel card"><b>Your details</b></div></div><figcaption>Cap forms with <code>--layout-form-max</code>.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><p class="text-muted">.form-panel 38rem · .container--narrow 42rem · .auth-card 26rem</p></div><figcaption>Keep near-identical narrow widths, as the mocks' kit did. The system collapses the first two into one token.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Columns (current)|--layout-columns}}
+      {{tok:Gutter (current)|--layout-gutter}}
+      {{tok:Margin (current)|--layout-margin}}
+      {{tok:Container max|--layout-container-max}}
+      {{tok:Narrow / form max|--layout-form-max}}
+      {{tok:Auto-grid card min|--layout-card-min}}
+      {{tok:Aside min|--layout-sidebar-width}}
+      {{tok:Measure|--layout-measure}}
+      {{tok:Stack gaps|--space-2|--space-4|--space-8}}
+      {{tok:Cluster gap|--space-3}}
+      {{tok:Breakpoints md / lg|--layout-breakpoint-md|--layout-breakpoint-lg}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="product-shell"&gt;
+  &lt;header class="topbar"&gt;…&lt;/header&gt;
+  &lt;main id="main" class="container product-main"&gt;
+    &lt;div class="page-header"&gt;…&lt;/div&gt;
+    &lt;div class="detail-grid"&gt;
+      &lt;section class="card"&gt;…&lt;/section&gt;
+      &lt;aside class="card"&gt;…&lt;/aside&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+  &lt;footer class="site-footer"&gt;…&lt;/footer&gt;
+&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.container</code> <code>.container--narrow</code></td><td>Centred, capped width with page margins.</td></tr>
+    <tr><td><code>.stack</code> <code>.stack--sm</code> <code>.stack--lg</code></td><td>Vertical flex with an 8, 16 or 32px gap.</td></tr>
+    <tr><td><code>.cluster</code> <code>.cluster--between</code> <code>.cluster--end</code></td><td>Wrapping row with a 12px gap; alignment modifiers.</td></tr>
+    <tr><td><code>.grid</code> <code>.grid--auto</code> <code>.span-full</code></td><td>Token-driven columns; auto-fill cards; full-row item.</td></tr>
+    <tr><td><code>.feature-grid</code> <code>.detail-grid</code></td><td>Product card grid; main + aside.</td></tr>
+    <tr><td><code>.product-shell</code> <code>.product-main</code> <code>.section</code></td><td>App shell; main padding and block rhythm; 32px section margin.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    {{mock:pages/style-gallery/default|shell, container, stack, filter-row cluster, feature grid}}
+    {{mock:pages/style-detail/default|detail grid}}
+    {{mock:pages/braider-profile/default|detail grid with a stacked main column}}
+    {{mock:pages/booking-request/default|narrow form panel}}
+  </ul>
+  <p>Drift fixed during extraction: <code>.form-panel</code> (38rem) and <code>.container--narrow</code> (42rem) collapsed into <code>--layout-form-max</code>; the shell used <code>max-width: 47.99rem</code> queries to shrink padding (rewritten mobile-first with <code>min-width</code>); the detail grid's aside minimum was a raw 16rem (now <code>--layout-sidebar-width</code>).</p>
+</section>

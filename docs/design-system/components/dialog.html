@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dialog — HairPop design system</title>
+<meta name="description" content="Modal dialog with form, confirmation and destructive variants, three widths, busy, invalid and failed states, and a bottom sheet on phones.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Component · Containers and overlays</p><h1>Dialog</h1><p class="ds-lead">A dialog interrupts the page to finish one short task or confirm one decision: filter braiders, review a request, cancel an appointment. Everything behind it waits.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">APG Dialog (modal)</span><span class="ds-pill">Angular CDK Dialog</span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a dialog when the person must finish or decide something before going on, and the task fits on one short screen: two or three fields, or one decision with consequences. Use a page for anything longer (booking a request is a page, not a dialog), a <a href="toast.html">toast</a> to report an outcome, and an <a href="alert.html">inline alert</a> for information that needs no decision. In the product, dialogs open through the Angular CDK Dialog; never hand-roll a modal.</p>
+  <ul>
+    <li><b>Form dialog</b> collects a few values and applies them: "Filter braiders", "Request a change", "Report a review", "Cookie preferences".</li>
+    <li><b>Confirmation dialog</b> asks the person to check details before an important but safe action: "Review request" before Nia receives it.</li>
+    <li><b>Destructive dialog</b> confirms a loss with a danger icon and a danger button that names the loss: "Cancel request", "Sign out".</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="dialog dialog--inline" style="width: 100%;">
+        <div class="dialog__panel" role="dialog" aria-labelledby="anat-title" aria-describedby="anat-desc">
+          <div class="dialog__header"><div><h2 class="dialog__title" id="anat-title">Request a change</h2><p id="anat-desc" class="text-muted">Tell Nia which new time works for you.</p></div><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+          <div class="dialog__body"><div class="field"><label class="field__label" for="anat-time">New preferred time</label><input class="input" id="anat-time" type="text" value="Sun 25 Oct, 11:00 am"></div></div>
+          <div class="dialog__footer"><button class="btn" type="button">Keep current time</button><button class="btn btn--primary" type="button">Send change request</button></div>
+        </div>
+      </div>
+      <span class="ds-callout" style="left: 4%; top: 6%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 18%; top: 22%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 84%; top: 22%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 18%; top: 50%;" aria-hidden="true">4</span>
+      <span class="ds-callout" style="left: 50%; top: 80%;" aria-hidden="true">5</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Backdrop</b><small><code>--color-bg-backdrop</code> scrim at <code>--z-overlay</code>; the page behind is <code>inert</code>.</small></div></li>
+      <li><div><b>Header: title and description</b><small><code>.dialog__title</code> (h3 role) is the accessible name; the sentence under it is the description.</small></div></li>
+      <li><div><b>Close button</b><small>Ghost icon button, <code>aria-label="Close dialog"</code>; same as Esc.</small></div></li>
+      <li><div><b>Body</b><small>Fields, alerts or a short paragraph; <code>--space-4</code> × <code>--space-6</code> padding; scrolls when tall.</small></div></li>
+      <li><div><b>Footer</b><small>Safe action then the confirm; sticky at the bottom; top divider.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <h3>Form dialog</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="dialog dialog--inline">
+  <div class="dialog__panel" role="dialog" aria-labelledby="v-filter-title" aria-describedby="v-filter-desc">
+    <div class="dialog__header"><div><h2 class="dialog__title" id="v-filter-title">Filter braiders</h2><p id="v-filter-desc" class="text-muted">Choose the travel distance and price range that work for you.</p></div><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="dialog__body stack">
+      <div class="field"><label class="field__label" for="v-price">Maximum price</label><div class="input-group"><span class="addon">$</span><input class="input" id="v-price" type="number" value="240"></div></div>
+      <div class="field"><label class="field__label" for="v-distance">Distance from Toronto</label><input class="input" id="v-distance" type="text" value="10 km"></div>
+    </div>
+    <div class="dialog__footer"><button class="btn" type="button">Clear filters</button><button class="btn btn--primary" type="button">Show braiders</button></div>
+  </div>
+</div></div><div class="ds-example__caption"><span>Initial focus goes to the first field. The confirm names the result ("Show braiders").</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;dialog dialog--inline&quot;&gt;
+  &lt;div class=&quot;dialog__panel&quot; role=&quot;dialog&quot; aria-labelledby=&quot;v-filter-title&quot; aria-describedby=&quot;v-filter-desc&quot;&gt;
+    &lt;div class=&quot;dialog__header&quot;&gt;&lt;div&gt;&lt;h2 class=&quot;dialog__title&quot; id=&quot;v-filter-title&quot;&gt;Filter braiders&lt;/h2&gt;&lt;p id=&quot;v-filter-desc&quot; class=&quot;text-muted&quot;&gt;Choose the travel distance and price range that work for you.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;btn btn--ghost btn--icon&quot; type=&quot;button&quot; aria-label=&quot;Close dialog&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
+    &lt;div class=&quot;dialog__body stack&quot;&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;v-price&quot;&gt;Maximum price&lt;/label&gt;&lt;div class=&quot;input-group&quot;&gt;&lt;span class=&quot;addon&quot;&gt;$&lt;/span&gt;&lt;input class=&quot;input&quot; id=&quot;v-price&quot; type=&quot;number&quot; value=&quot;240&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;v-distance&quot;&gt;Distance from Toronto&lt;/label&gt;&lt;input class=&quot;input&quot; id=&quot;v-distance&quot; type=&quot;text&quot; value=&quot;10 km&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;dialog__footer&quot;&gt;&lt;button class=&quot;btn&quot; type=&quot;button&quot;&gt;Clear filters&lt;/button&gt;&lt;button class=&quot;btn btn--primary&quot; type=&quot;button&quot;&gt;Show braiders&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div>
+  <h3>Destructive dialog</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="dialog dialog--inline">
+  <div class="dialog__panel dialog__panel--sm" role="alertdialog" aria-labelledby="v-cancel-title" aria-describedby="v-cancel-desc">
+    <div class="dialog__header"><span class="dialog__icon dialog__icon--danger"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg></span><div><h2 class="dialog__title" id="v-cancel-title">Cancel request HP-1048?</h2><p id="v-cancel-desc" class="text-muted">Nia will see that you no longer need Sat 24 Oct at 10:00 am. You can send a new request later.</p></div></div>
+    <div class="dialog__footer"><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button">Cancel request</button></div>
+  </div>
+</div></div><div class="ds-example__caption"><span>Danger icon, a description that says what happens, a safe action that says what staying means, and a danger confirm that names the loss.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;dialog dialog--inline&quot;&gt;
+  &lt;div class=&quot;dialog__panel dialog__panel--sm&quot; role=&quot;alertdialog&quot; aria-labelledby=&quot;v-cancel-title&quot; aria-describedby=&quot;v-cancel-desc&quot;&gt;
+    &lt;div class=&quot;dialog__header&quot;&gt;&lt;span class=&quot;dialog__icon dialog__icon--danger&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;div&gt;&lt;h2 class=&quot;dialog__title&quot; id=&quot;v-cancel-title&quot;&gt;Cancel request HP-1048?&lt;/h2&gt;&lt;p id=&quot;v-cancel-desc&quot; class=&quot;text-muted&quot;&gt;Nia will see that you no longer need Sat 24 Oct at 10:00 am. You can send a new request later.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;dialog__footer&quot;&gt;&lt;button class=&quot;btn&quot; type=&quot;button&quot;&gt;Keep request&lt;/button&gt;&lt;button class=&quot;btn btn--danger&quot; type=&quot;button&quot;&gt;Cancel request&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div>
+  <h3>Confirmation dialog</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="dialog dialog--inline">
+  <div class="dialog__panel" role="dialog" aria-labelledby="v-review-title" aria-describedby="v-review-desc">
+    <div class="dialog__header"><span class="dialog__icon dialog__icon--info"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 11v5M12 7.5v.01"/></svg></span><div><h2 class="dialog__title" id="v-review-title">Review request</h2><p id="v-review-desc" class="text-muted">Check your details before Nia receives your request.</p></div><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="dialog__body"><dl class="dl"><dt>Service</dt><dd>Medium knotless braids</dd><dt>Preferred time</dt><dd>Sat 24 Oct · 10:00 am</dd><dt>Estimate</dt><dd>$180–$240 · about 5 hours</dd></dl></div>
+    <div class="dialog__footer"><button class="btn" type="button">Edit details</button><button class="btn btn--primary" type="button">Send request</button></div>
+  </div>
+</div></div><div class="ds-example__caption"><span>Checks details before an important, safe action. A description list makes the facts scan.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;dialog dialog--inline&quot;&gt;
+  &lt;div class=&quot;dialog__panel&quot; role=&quot;dialog&quot; aria-labelledby=&quot;v-review-title&quot; aria-describedby=&quot;v-review-desc&quot;&gt;
+    &lt;div class=&quot;dialog__header&quot;&gt;&lt;span class=&quot;dialog__icon dialog__icon--info&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 11v5M12 7.5v.01&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;div&gt;&lt;h2 class=&quot;dialog__title&quot; id=&quot;v-review-title&quot;&gt;Review request&lt;/h2&gt;&lt;p id=&quot;v-review-desc&quot; class=&quot;text-muted&quot;&gt;Check your details before Nia receives your request.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;btn btn--ghost btn--icon&quot; type=&quot;button&quot; aria-label=&quot;Close dialog&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
+    &lt;div class=&quot;dialog__body&quot;&gt;&lt;dl class=&quot;dl&quot;&gt;&lt;dt&gt;Service&lt;/dt&gt;&lt;dd&gt;Medium knotless braids&lt;/dd&gt;&lt;dt&gt;Preferred time&lt;/dt&gt;&lt;dd&gt;Sat 24 Oct · 10:00 am&lt;/dd&gt;&lt;dt&gt;Estimate&lt;/dt&gt;&lt;dd&gt;$180–$240 · about 5 hours&lt;/dd&gt;&lt;/dl&gt;&lt;/div&gt;
+    &lt;div class=&quot;dialog__footer&quot;&gt;&lt;button class=&quot;btn&quot; type=&quot;button&quot;&gt;Edit details&lt;/button&gt;&lt;button class=&quot;btn btn--primary&quot; type=&quot;button&quot;&gt;Send request&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div>
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <p>Width caps only; the panel is always full width on phones. Pick the smallest width that keeps fields on one line.</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Class</th><th scope="col">Max width</th><th scope="col">Use for</th></tr></thead><tbody>
+    <tr><td>Small</td><td><code>.dialog__panel--sm</code></td><td>24rem (384px)</td><td>Destructive and yes/no confirmations: Cancel request, Sign out.</td></tr>
+    <tr><td>Medium (default)</td><td><code>.dialog__panel</code></td><td>32rem (512px)</td><td>Form dialogs with one to three fields: Filter braiders, Request a change.</td></tr>
+    <tr><td>Large</td><td><code>.dialog__panel--lg</code></td><td>48rem (768px)</td><td>Reading-heavy content such as cookie categories with descriptions.</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>The dialog's own states live in its footer and body: the confirm button carries busy, the body carries invalid and failed messages. Hover, focus and active belong to the controls inside (see <a href="button.html">button</a> and <a href="text-field.html">text field</a>).</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">State</th><th scope="col">What changes</th><th scope="col">Footer</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Default</th><td>Initial focus on the first field, or on the safe action in a destructive dialog.</td><td><button class="btn" type="button">Keep request</button> <button class="btn btn--danger" type="button">Cancel request</button></td></tr>
+      <tr><th scope="row">Hover</th><td>Only the hovered control changes.</td><td><button class="btn" type="button">Keep request</button> <button class="btn btn--danger" type="button" data-state="hover">Cancel request</button></td></tr>
+      <tr><th scope="row">Focus</th><td>The shared ring on the focused control; focus is trapped inside the panel.</td><td><button class="btn" type="button" data-state="focus">Keep request</button> <button class="btn btn--danger" type="button">Cancel request</button></td></tr>
+      <tr><th scope="row">Busy</th><td>Confirm sets <code>aria-busy="true"</code> and keeps its label; Esc, close and backdrop are ignored until the request settles.</td><td><button class="btn" type="button">Keep request</button> <button class="btn btn--danger" type="button" aria-busy="true">Cancel request</button></td></tr>
+      <tr><th scope="row">Invalid</th><td>An error summary at the top of the body takes focus; each field gets <code>aria-invalid</code> and its message.</td><td><button class="btn" type="button">Clear filters</button> <button class="btn btn--primary" type="button">Show braiders</button></td></tr>
+      <tr><th scope="row">Failed</th><td>A danger alert at the top of the body says the change was not made and entries are kept; the confirm becomes "Try again".</td><td><button class="btn" type="button">Keep request</button> <button class="btn btn--danger" type="button">Try again</button></td></tr>
+      <tr><th scope="row">Disabled confirm</th><td>Avoid. Keep the confirm enabled and explain on activation.</td><td><button class="btn" type="button">Clear filters</button> <button class="btn btn--primary" type="button" disabled>Show braiders</button></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Invalid</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="dialog dialog--inline">
+  <div class="dialog__panel" role="dialog" aria-labelledby="s-inv-title">
+    <div class="dialog__header"><div><h2 class="dialog__title" id="s-inv-title">Filter braiders</h2></div><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="dialog__body stack">
+      <div class="alert alert--danger form-summary" tabindex="-1"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg><div><p class="alert__title">Check the highlighted field</p><ul><li><a href="#s-inv-price">Enter a price of at least $160 for this style.</a></li></ul></div></div>
+      <div class="field"><label class="field__label" for="s-inv-price">Maximum price</label><input class="input" id="s-inv-price" type="number" value="150" aria-invalid="true" aria-describedby="s-inv-price-error"><span class="field__error" id="s-inv-price-error">Enter a price of at least $160 for this style.</span></div>
+    </div>
+    <div class="dialog__footer"><button class="btn" type="button">Clear filters</button><button class="btn btn--primary" type="button">Show braiders</button></div>
+  </div>
+</div></div><div class="ds-example__caption"><span>The summary links to the field; the field message says how to fix it.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;dialog dialog--inline&quot;&gt;
+  &lt;div class=&quot;dialog__panel&quot; role=&quot;dialog&quot; aria-labelledby=&quot;s-inv-title&quot;&gt;
+    &lt;div class=&quot;dialog__header&quot;&gt;&lt;div&gt;&lt;h2 class=&quot;dialog__title&quot; id=&quot;s-inv-title&quot;&gt;Filter braiders&lt;/h2&gt;&lt;/div&gt;&lt;button class=&quot;btn btn--ghost btn--icon&quot; type=&quot;button&quot; aria-label=&quot;Close dialog&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
+    &lt;div class=&quot;dialog__body stack&quot;&gt;
+      &lt;div class=&quot;alert alert--danger form-summary&quot; tabindex=&quot;-1&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01&quot;/&gt;&lt;/svg&gt;&lt;div&gt;&lt;p class=&quot;alert__title&quot;&gt;Check the highlighted field&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#s-inv-price&quot;&gt;Enter a price of at least $160 for this style.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;s-inv-price&quot;&gt;Maximum price&lt;/label&gt;&lt;input class=&quot;input&quot; id=&quot;s-inv-price&quot; type=&quot;number&quot; value=&quot;150&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;s-inv-price-error&quot;&gt;&lt;span class=&quot;field__error&quot; id=&quot;s-inv-price-error&quot;&gt;Enter a price of at least $160 for this style.&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;dialog__footer&quot;&gt;&lt;button class=&quot;btn&quot; type=&quot;button&quot;&gt;Clear filters&lt;/button&gt;&lt;button class=&quot;btn btn--primary&quot; type=&quot;button&quot;&gt;Show braiders&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div>
+  <h3>Failed</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="dialog dialog--inline">
+  <div class="dialog__panel dialog__panel--sm" role="alertdialog" aria-labelledby="s-fail-title" aria-describedby="s-fail-desc">
+    <div class="dialog__header"><span class="dialog__icon dialog__icon--danger"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg></span><div><h2 class="dialog__title" id="s-fail-title">Cancel request HP-1048?</h2><p id="s-fail-desc" class="text-muted">Nia will see that you no longer need this time.</p></div></div>
+    <div class="dialog__body"><div class="alert alert--danger" role="alert"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg><div><p class="alert__title">We couldn’t cancel this request.</p><p>Your request is unchanged. Check your connection and try again.</p></div></div></div>
+    <div class="dialog__footer"><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button">Try again</button></div>
+  </div>
+</div></div><div class="ds-example__caption"><span>Errors persist in the dialog; nothing the person chose is lost.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;dialog dialog--inline&quot;&gt;
+  &lt;div class=&quot;dialog__panel dialog__panel--sm&quot; role=&quot;alertdialog&quot; aria-labelledby=&quot;s-fail-title&quot; aria-describedby=&quot;s-fail-desc&quot;&gt;
+    &lt;div class=&quot;dialog__header&quot;&gt;&lt;span class=&quot;dialog__icon dialog__icon--danger&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;div&gt;&lt;h2 class=&quot;dialog__title&quot; id=&quot;s-fail-title&quot;&gt;Cancel request HP-1048?&lt;/h2&gt;&lt;p id=&quot;s-fail-desc&quot; class=&quot;text-muted&quot;&gt;Nia will see that you no longer need this time.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;dialog__body&quot;&gt;&lt;div class=&quot;alert alert--danger&quot; role=&quot;alert&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01&quot;/&gt;&lt;/svg&gt;&lt;div&gt;&lt;p class=&quot;alert__title&quot;&gt;We couldn’t cancel this request.&lt;/p&gt;&lt;p&gt;Your request is unchanged. Check your connection and try again.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;dialog__footer&quot;&gt;&lt;button class=&quot;btn&quot; type=&quot;button&quot;&gt;Keep request&lt;/button&gt;&lt;button class=&quot;btn btn--danger&quot; type=&quot;button&quot;&gt;Try again&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details></div>
+  <h3>Both themes</h3>
+  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="dialog dialog--inline"><div class="dialog__panel dialog__panel--sm" role="alertdialog" aria-label="Sign out"><div class="dialog__header"><span class="dialog__icon dialog__icon--danger"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg></span><div><p class="dialog__title">Sign out?</p><p class="text-muted">You can return to browse styles at any time.</p></div></div><div class="dialog__footer"><button class="btn" type="button">Stay signed in</button><button class="btn btn--danger" type="button">Sign out</button></div></div></div></div></div><div data-theme="dark"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="dialog dialog--inline"><div class="dialog__panel dialog__panel--sm" role="alertdialog" aria-label="Sign out"><div class="dialog__header"><span class="dialog__icon dialog__icon--danger"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg></span><div><p class="dialog__title">Sign out?</p><p class="text-muted">You can return to browse styles at any time.</p></div></div><div class="dialog__footer"><button class="btn" type="button">Stay signed in</button><button class="btn btn--danger" type="button">Sign out</button></div></div></div></div></div></div>
+  <p>The dark panel is <code>--color-bg-surface-raised</code> (grey 800), lighter than the grey 900 surface it covers, so it reads as raised even under a darker scrim.</p>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Below <code>--layout-breakpoint-sm</code> (640px) the panel becomes a bottom sheet: full width, <code>--radius-xl</code> top corners, slides up, and pads the bottom by <code>env(safe-area-inset-bottom)</code>.</li>
+    <li>From 640px it is centred with 24px around it and <code>--radius-lg</code> corners; it scales in.</li>
+    <li>The panel never exceeds the viewport height minus 48px; the body scrolls and the footer stays pinned (<code>position: sticky</code>).</li>
+    <li>Footer buttons share the row; on phones they stretch and wrap with the confirm first in reading order (<code>wrap-reverse</code>).</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The panel reads <code>--dialog-bg</code> (<code>--color-bg-surface-raised</code>) and <code>--dialog-width</code>; the backdrop reads <code>--color-bg-backdrop</code>, darker and more opaque in the dark theme. Icon chips use status tokens (<code>--color-danger-bg</code>/<code>--color-danger-icon</code>, <code>--color-info-bg</code>/<code>--color-info-icon</code>).</p>
+  <pre><code>/* A wider filter dialog without a new class */
+.filters-dialog .dialog__panel { --dialog-width: 40rem; }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><a href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/">APG Dialog (Modal)</a>: <code>role="dialog"</code> (or <code>role="alertdialog"</code> for destructive confirmations), <code>aria-modal="true"</code>, <code>aria-labelledby</code> the title and <code>aria-describedby</code> the description. Everything behind is <code>inert</code>. The Angular CDK Dialog provides the focus trap, Esc handling and focus restoration. (The live examples on this page omit <code>aria-modal</code> because they are not modal here.)</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through the dialog's controls and wraps; focus never leaves the panel.</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>Closes the dialog like the close button, unless it is busy.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Submits a form dialog from a text field; never confirms a destructive dialog by default.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>On open, focus moves to the first field in a form dialog, or to the safe action ("Keep request") in a destructive one. On invalid submit, focus moves to the error summary. On close, focus returns to the control that opened the dialog.</p>
+  <h3>Labelling</h3>
+  <p>The title names the task ("Filter braiders", "Cancel request HP-1048?"). The description says what happens. The icon chip is decorative (its SVG is <code>aria-hidden</code>). The close button is named "Close dialog".</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Title in dialog</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface-raised" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Description in dialog</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface-raised" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Input border in dialog</span><span class="ds-pair__ratio" data-contrast="--color-border-strong|--color-bg-surface-raised" data-min="3"></span></div>
+    <div class="ds-pair"><span>Focus ring in dialog</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-surface-raised" data-min="3"></span></div>
+    <div class="ds-pair"><span>Danger confirm edge in dialog</span><span class="ds-pair__ratio" data-contrast="--color-danger-solid|--color-bg-surface-raised" data-min="3"></span></div>
+    <div class="ds-pair"><span>Danger confirm label</span><span class="ds-pair__ratio" data-contrast="--color-fg-on-danger|--color-danger-solid" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Danger icon on chip</span><span class="ds-pair__ratio" data-contrast="--color-danger-icon|--color-danger-bg" data-min="3"></span></div>
+  </div>
+  <h3>Motion</h3>
+  <p>The backdrop fades in over <code>--duration-base</code>; the panel scales in (or slides up as a sheet) over <code>--duration-slow</code> with <code>--ease-enter</code>. Reduced motion makes both instant.</p>
+  <h3>Touch</h3>
+  <p>The close button is 40px square; footer buttons stretch on phones and are 40px tall. Tapping the backdrop closes a form dialog but not a busy or destructive one.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Title: the task as a noun phrase ("Filter braiders") or the decision as a question ("Cancel request HP-1048?").</li>
+    <li>Description: one sentence on the consequence, naming people and times ("Nia will see that you no longer need Sat 24 Oct at 10:00 am.").</li>
+    <li>Confirm: a verb phrase naming the result ("Show braiders", "Send change request", "Cancel request"), never "OK" or "Confirm".</li>
+    <li>Safe action: what staying means ("Keep request", "Stay signed in"); "Cancel" is ambiguous next to "Cancel request".</li>
+    <li>Failure: say what did not happen and that entries are kept ("We couldn’t cancel this request. Your request is unchanged.").</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button">Cancel request</button></div><figcaption>Put initial focus on the safe action in a destructive dialog, and name it by what it keeps.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><a class="btn" href="../../mocks/pages/appointment-detail/default.html">Keep browsing</a><button class="btn btn--danger" type="button">Cancel request</button></div><figcaption>Autofocus a "Keep browsing" link that navigates away, as the dialog mocks did; it leaves the task instead of closing the dialog.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--danger" type="button" aria-busy="true">Cancel request</button></div><figcaption>While busy, keep the label and set <code>aria-busy</code>.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="alert alert--warning"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4L2.5 20h19zM12 10v4M12 17v.01"/></svg><div><p class="alert__title">Check before continuing.</p></div></div><button class="btn btn--danger" type="button" disabled>Working…</button></div><figcaption>Stack a warning alert on a destructive dialog, or disable and relabel the confirm while busy (the cancel and sign-out mocks). The dialog already is the warning.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      <tr><td>Backdrop</td><td><code>--color-bg-backdrop</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-backdrop" data-swatch></i><span data-token="--color-bg-backdrop"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-backdrop" data-swatch></i><span data-token="--color-bg-backdrop"></span></span></td></tr>
+      <tr><td>Panel background</td><td><code>--color-bg-surface-raised</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface-raised" data-swatch></i><span data-token="--color-bg-surface-raised"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface-raised" data-swatch></i><span data-token="--color-bg-surface-raised"></span></span></td></tr>
+      <tr><td>Title and body</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+      <tr><td>Description</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+      <tr><td>Footer divider</td><td><code>--color-border-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td></tr>
+      <tr><td>Danger icon chip</td><td><code>--color-danger-bg</code> / <code>--color-danger-icon</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-bg" data-swatch></i><span data-token="--color-danger-bg"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-icon" data-swatch></i><span data-token="--color-danger-icon"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-bg" data-swatch></i><span data-token="--color-danger-bg"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-icon" data-swatch></i><span data-token="--color-danger-icon"></span></span></td></tr>
+      <tr><td>Info icon chip</td><td><code>--color-info-bg</code> / <code>--color-info-icon</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-info-bg" data-swatch></i><span data-token="--color-info-bg"></span></span> <span class="ds-swatch-cell" data-theme="light"><i data-token="--color-info-icon" data-swatch></i><span data-token="--color-info-icon"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-info-bg" data-swatch></i><span data-token="--color-info-bg"></span></span> <span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-info-icon" data-swatch></i><span data-token="--color-info-icon"></span></span></td></tr>
+      <tr><td>Shadow</td><td><code>--shadow-4</code></td><td colspan="2"><span data-token="--shadow-4"></span></td></tr>
+      <tr><td>Radius (centred / sheet)</td><td><code>--radius-lg</code> / <code>--radius-xl</code></td><td colspan="2"><span data-token="--radius-lg"></span> / <span data-token="--radius-xl"></span></td></tr>
+      <tr><td>Padding (sides / between parts)</td><td><code>--space-6</code> / <code>--space-4</code></td><td colspan="2"><span data-token="--space-6"></span> / <span data-token="--space-4"></span></td></tr>
+      <tr><td>Layers (backdrop / panel)</td><td><code>--z-overlay</code> / <code>--z-modal</code></td><td colspan="2"><span data-token="--z-overlay"></span> / <span data-token="--z-modal"></span></td></tr>
+      <tr><td>Enter motion</td><td><code>--duration-slow</code> / <code>--ease-enter</code></td><td colspan="2"><span data-token="--duration-slow"></span> / <span data-token="--ease-enter"></span></td></tr>
+      <tr><td>Sheet breakpoint</td><td><code>--layout-breakpoint-sm</code></td><td colspan="2"><span data-token="--layout-breakpoint-sm"></span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="backdrop"&gt;&lt;/div&gt;
+&lt;div class="dialog"&gt;
+  &lt;div class="dialog__panel dialog__panel--sm" role="alertdialog" aria-modal="true"
+       aria-labelledby="cancel-title" aria-describedby="cancel-desc"&gt;
+    &lt;div class="dialog__header"&gt;
+      &lt;span class="dialog__icon dialog__icon--danger"&gt;&lt;svg class="icon" aria-hidden="true" …&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;div&gt;&lt;h2 class="dialog__title" id="cancel-title"&gt;Cancel request HP-1048?&lt;/h2&gt;
+        &lt;p class="text-muted" id="cancel-desc"&gt;Nia will see that you no longer need this time.&lt;/p&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="dialog__footer"&gt;
+      &lt;button class="btn" type="button"&gt;Keep request&lt;/button&gt;
+      &lt;button class="btn btn--danger" type="button"&gt;Cancel request&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.backdrop</code></td><td>Fixed scrim at <code>--z-overlay</code>.</td></tr>
+    <tr><td><code>.dialog</code></td><td>Fixed positioning layer at <code>--z-modal</code>; bottom sheet below 640px, centred above.</td></tr>
+    <tr><td><code>.dialog__panel</code> <code>--sm</code> <code>--lg</code></td><td>The surface; width cap.</td></tr>
+    <tr><td><code>.dialog__header</code> <code>.dialog__title</code> <code>.dialog__body</code> <code>.dialog__footer</code></td><td>Parts; footer is sticky.</td></tr>
+    <tr><td><code>.dialog__icon--danger</code> <code>.dialog__icon--info</code></td><td>Leading icon chip.</td></tr>
+    <tr><td><code>role="dialog"</code> / <code>role="alertdialog"</code>, <code>aria-modal="true"</code></td><td>Modal semantics; alertdialog for destructive confirmations.</td></tr>
+    <tr><td><code>.dialog--inline</code></td><td>Documentation only: shows a dialog in the page flow.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    <li><a href="../../mocks/dialogs/filter-braiders/default.html">dialogs/filter-braiders/default</a> (form dialog)</li>
+    <li><a href="../../mocks/dialogs/filter-braiders/invalid.html">dialogs/filter-braiders/invalid</a> (error summary and invalid field)</li>
+    <li><a href="../../mocks/dialogs/cancel-appointment/default.html">dialogs/cancel-appointment/default</a> (destructive confirm)</li>
+    <li><a href="../../mocks/dialogs/cancel-appointment/busy.html">dialogs/cancel-appointment/busy</a> (busy confirm)</li>
+    <li><a href="../../mocks/dialogs/cancel-appointment/failed.html">dialogs/cancel-appointment/failed</a> (failure alert in body)</li>
+    <li><a href="../../mocks/dialogs/sign-out/confirm.html">dialogs/sign-out/confirm</a> (warning alert stacked on a danger dialog)</li>
+    <li><a href="../../mocks/dialogs/cookie-preferences/default.html">dialogs/cookie-preferences/default</a> (checkbox in a dialog)</li>
+  </ul>
+  <p>Drift fixed during extraction: the close button was a "×" text glyph (now the close icon); the footer's secondary action was an <code>&lt;a autofocus&gt;</code> "Keep browsing" that navigated away (now a button that closes, with initial focus on the first field or the safe action); busy states disabled the confirm and relabelled it "Working…" (now <code>aria-busy</code> with the label kept); confirm states stacked a warning alert on a danger dialog (the description carries the consequence); destructive dialogs had no danger icon and used <code>role="dialog"</code> (now the danger chip and <code>role="alertdialog"</code>); the error summary had no links to fields (now it links each field).</p>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

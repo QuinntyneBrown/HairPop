@@ -1,0 +1,99 @@
+<!--meta {"lead": "Mobile first: one column at 360px, more columns as space allows, and content that never runs wider than 1280px or prose wider than 65 characters.", "description": "Breakpoints, columns, gutters and margins, the container, a live grid and the four HairPop page templates.", "covers": "Five breakpoints, 4/8/12 columns, gutters 16/24/32, margins 16/32/48, container and form widths, live grid, shell / gallery / detail / form templates."} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Base styles target a 360px phone. Breakpoints only add: more columns, wider gutters and margins, the top-bar links, two- and three-column grids. Media queries are <code>min-width</code> in rem (<code>48rem</code>, <code>64rem</code>) so they follow the reader's font size; the mocks also had two <code>max-width</code> queries (<code>47.99rem</code>, <code>39.99rem</code>) that the system rewrote mobile-first.</p>
+  <ul>
+    <li><b>Margin</b>: viewport edge to content (<code>--layout-margin</code>).</li>
+    <li><b>Gutter</b>: space between columns (<code>--layout-gutter</code>; card grids use <code>--space-4</code>).</li>
+    <li><b>Container</b>: caps content at <code>--layout-container-max</code> and centres it.</li>
+    <li><b>Measure</b>: caps prose at <code>--layout-measure</code>.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="breakpoints"><h2><a href="#breakpoints">Breakpoints</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Token</th><th scope="col">Width</th><th scope="col">Columns</th><th scope="col">Gutter</th><th scope="col">Margin</th><th scope="col">What changes in HairPop</th></tr></thead><tbody>
+    <tr><td>(base)</td><td>0–639px</td><td>4</td><td>16px</td><td>16px</td><td>One-column grids; dialogs are bottom sheets; toasts full width; primary actions full width</td></tr>
+    <tr><td><code>--layout-breakpoint-sm</code></td><td><span data-token="--layout-breakpoint-sm"></span> · 640px</td><td>4</td><td>16px</td><td>16px</td><td>Dialogs centre; toasts dock bottom right at 24rem</td></tr>
+    <tr><td><code>--layout-breakpoint-md</code></td><td><span data-token="--layout-breakpoint-md"></span> · 768px</td><td>8</td><td>24px</td><td>32px</td><td>Top-bar links appear; two-column feature grid; detail grid gains its aside; form rows go side by side</td></tr>
+    <tr><td><code>--layout-breakpoint-lg</code></td><td><span data-token="--layout-breakpoint-lg"></span> · 1024px</td><td>12</td><td>32px</td><td>48px</td><td>Three-column feature grid; sidebar navigation shows</td></tr>
+    <tr><td><code>--layout-breakpoint-xl</code></td><td><span data-token="--layout-breakpoint-xl"></span> · 1280px</td><td>12</td><td>32px</td><td>48px</td><td>Content reaches the container max</td></tr>
+    <tr><td><code>--layout-breakpoint-2xl</code></td><td><span data-token="--layout-breakpoint-2xl"></span> · 1536px</td><td>12</td><td>32px</td><td>auto</td><td>Content stays at 1280px, centred</td></tr>
+  </tbody></table></div>
+  <p>Custom properties cannot be read inside <code>@media</code>, so the rem values are repeated in queries by convention: <code>@media (min-width: 48rem)</code> means md. <code>tokens.css</code> updates <code>--layout-columns</code>, <code>--layout-gutter</code> and <code>--layout-margin</code> at md and lg; components read those instead of writing their own queries.</p>
+</section>
+
+<section class="ds-section" id="grid"><h2><a href="#grid">Columns, gutters and margins</a></h2>
+  <p>A live grid: resize the window to watch it move from 4 to 8 to 12 columns. Current values: <b><span data-token="--layout-columns"></span></b> columns, <b><span data-token="--layout-gutter"></span></b> gutter, <b><span data-token="--layout-margin"></span></b> margin.</p>
+  <div class="ds-grid-demo" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div>
+  <p>The grid is <code>repeat(var(--layout-columns), minmax(0, 1fr))</code> with <code>gap: var(--layout-gutter)</code> (<code>.grid</code>); extra cells wrap to a new row. Card collections use <code>.grid--auto</code> (<code>auto-fill, minmax(--layout-card-min, 1fr)</code>) or the fixed 1/2/3 <code>.feature-grid</code>.</p>
+</section>
+
+<section class="ds-section" id="containers"><h2><a href="#containers">Containers and fixed sizes</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Token</th><th scope="col">Used by</th></tr></thead><tbody>
+    <tr><td>Container max</td><td><code>--layout-container-max</code> · <span data-token="--layout-container-max"></span></td><td><code>.container</code> on every product page</td></tr>
+    <tr><td>Form max</td><td><code>--layout-form-max</code> · <span data-token="--layout-form-max"></span></td><td><code>.form-panel</code>, <code>.container--narrow</code>: booking request, care and review, account and auth forms</td></tr>
+    <tr><td>Measure</td><td><code>--layout-measure</code> · <span data-token="--layout-measure"></span></td><td>Paragraphs, legal copy</td></tr>
+    <tr><td>Card minimum</td><td><code>--layout-card-min</code> · <span data-token="--layout-card-min"></span></td><td><code>.grid--auto</code> cards; search box minimum width</td></tr>
+    <tr><td>Sidebar width</td><td><code>--layout-sidebar-width</code> · <span data-token="--layout-sidebar-width"></span></td><td>Sidebar navigation; minimum width of the detail aside</td></tr>
+    <tr><td>Top bar height</td><td><code>--layout-topbar-height</code> · <span data-token="--layout-topbar-height"></span></td><td><code>.topbar</code>; <code>scroll-padding-top</code> so focus is never hidden under it</td></tr>
+  </tbody></table></div>
+  <p>The mocks had two narrow widths for the same job (<code>.form-panel</code> 38rem and <code>.container--narrow</code> 42rem); both now read <code>--layout-form-max</code>.</p>
+</section>
+
+<section class="ds-section" id="templates"><h2><a href="#templates">Page templates</a></h2>
+  <p>Every HairPop screen is one of four templates inside the same shell. The frames below are live and reflow with the window.</p>
+  <h3>Shell</h3>
+  <p>Sticky top bar, <code>main.container.product-main</code> with the page header, then the site footer. Error pages (404, 403, 500, offline) keep the shell and put an empty state in <code>main</code>.</p>
+  <div class="ds-frame">
+    <header class="topbar"><a class="topbar__brand" href="#templates">✦ HairPop</a><nav class="topbar__nav" aria-label="Example primary"><a class="nav-link" href="#templates" aria-current="page">Styles</a><a class="nav-link" href="#templates">Braiders</a><a class="nav-link" href="#templates">Appointments</a></nav><span class="topbar__spacer"></span><a class="account-link" href="#templates">Maya</a></header>
+    <div class="ds-frame__body"><div class="page-header" style="margin: 0;"><div><p class="eyebrow">Discover</p><p style="font: var(--text-h2); letter-spacing: var(--letter-spacing-tight);">Find a style that feels like you</p><p class="subtitle">Browse protective styles and see real work.</p></div></div></div>
+    <footer class="site-footer"><span>HairPop · Made for confident hair decisions</span><span><a href="#templates">Terms</a> · <a href="#templates">Privacy</a></span></footer>
+  </div>
+  <h3>Gallery</h3>
+  <p><code>.filter-row</code> (search and one action), a <code>.chip-row</code>, then <code>.feature-grid</code>: 1 column, 2 from 768px, 3 from 1024px. Used by the style gallery, matching braiders and help.</p>
+  <div class="ds-frame"><div class="ds-frame__body"><div class="feature-grid">
+    <div class="card"><p class="eyebrow">Most explored</p><p class="card__title">Knotless braids</p><p class="text-muted">4–7 hours · $160–$300</p></div>
+    <div class="card"><p class="eyebrow">Protective style</p><p class="card__title">Passion twists</p><p class="text-muted">3–6 hours · $140–$260</p></div>
+    <div class="card"><p class="eyebrow">Classic</p><p class="card__title">Cornrows</p><p class="text-muted">2–4 hours</p></div>
+  </div></div></div>
+  <h3>Detail</h3>
+  <p><code>.detail-grid</code>: main content and an aside. One column on phones (aside after main); from 768px the main takes 2fr and the aside at least <code>--layout-sidebar-width</code>. Used by style detail, braider profile and appointment detail.</p>
+  <div class="ds-frame"><div class="ds-frame__body"><div class="detail-grid">
+    <div class="card stack"><span class="badge badge--warning">Awaiting reply</span><p class="card__title">Medium knotless braids</p><p><strong>Sat 24 Oct · 10:00 am</strong> with Nia Okafor</p></div>
+    <aside class="card" aria-label="Example aside"><p class="card__title">Prepare for your visit</p><p class="text-muted">Wash and detangle your hair.</p></aside>
+  </div></div></div>
+  <h3>Form</h3>
+  <p><code>.form-panel.card</code> centred at <code>--layout-form-max</code>; fields stack at <code>--space-4</code>; the submit is full width on phones. Used by booking request, care and review, account settings and every auth screen.</p>
+  <div class="ds-frame"><div class="ds-frame__body"><div class="form-panel card">
+    <p style="font: var(--text-h3);">Your details</p>
+    <div class="stack"><div class="field"><label class="field__label" for="tpl-email">Your email</label><input class="input" id="tpl-email" type="email" value="maya.chen@example.com" autocomplete="email"></div><button class="btn btn--primary btn--block" type="button">Send request</button></div>
+  </div></div></div>
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <ul>
+    <li>Start every layout at 360px and add columns with <code>min-width</code> queries; never write a <code>max-width</code> query to undo a desktop style.</li>
+    <li>Pages put content in <code>.container</code>; nothing touches the viewport edge except the top bar, banners and the footer rule.</li>
+    <li>Vertical rhythm: <code>--space-6</code> between page blocks, <code>--space-8</code> to <code>--space-12</code> between page sections, <code>--space-4</code> to <code>--space-6</code> inside cards.</li>
+    <li>No two-dimensional scrolling at 320px except inside <code>.table-wrap</code>.</li>
+    <li>Media fills its column and keeps a 3:2 ratio (<code>aspect-ratio: 3 / 2</code>), so loading skeletons and art panels reserve the same space as the photo. The mocks sized art panels with spacing tokens (<code>min-height: var(--space-12)</code>, hero <code>calc(var(--space-12) * 4)</code>), which made them shorter than photos.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>
+    {{tok:Breakpoint sm|--layout-breakpoint-sm}}
+    {{tok:Breakpoint md|--layout-breakpoint-md}}
+    {{tok:Breakpoint lg|--layout-breakpoint-lg}}
+    {{tok:Breakpoint xl|--layout-breakpoint-xl}}
+    {{tok:Breakpoint 2xl|--layout-breakpoint-2xl}}
+    {{tok:Columns (current)|--layout-columns}}
+    {{tok:Gutter (current)|--layout-gutter}}
+    {{tok:Margin (current)|--layout-margin}}
+    {{tok:Container max|--layout-container-max}}
+    {{tok:Form max|--layout-form-max}}
+    {{tok:Measure|--layout-measure}}
+    {{tok:Sidebar width|--layout-sidebar-width}}
+    {{tok:Top bar height|--layout-topbar-height}}
+    {{tok:Card minimum|--layout-card-min}}
+  </tbody></table></div>
+</section>

@@ -8,73 +8,73 @@ Pages are generated: edit the fragments in `src/`, then run `python docs/design-
 
 | Page | Covers |
 |---|---|
-| [Color](foundations/color.html) |  |
-| [Typography](foundations/typography.html) |  |
-| [Spacing](foundations/spacing.html) |  |
-| [Layout](foundations/layout.html) |  |
-| [Elevation](foundations/elevation.html) |  |
-| [Shape](foundations/shape.html) |  |
-| [Motion](foundations/motion.html) |  |
-| [Iconography](foundations/iconography.html) |  |
-| [Theming](foundations/theming.html) |  |
-| [Responsive](foundations/responsive.html) |  |
-| [Accessibility](foundations/accessibility.html) |  |
-| [Content](foundations/content.html) |  |
+| [Color](foundations/color.html) | Primitive ramps (grey, plum, green, amber, red), semantic roles, status colours, light and dark side by side, 77 live contrast pairs, adding a brand theme. |
+| [Typography](foundations/typography.html) | Manrope and JetBrains Mono, nine-step scale with fluid display and h1, five weights, line heights, letter spacing, twelve role shorthands, measure, responsive rules. |
+| [Spacing](foundations/spacing.html) | 4px scale from 0 to 96px, inside vs between rules, padding by component size, the three control heights. |
+| [Layout](foundations/layout.html) | Five breakpoints, 4/8/12 columns, gutters 16/24/32, margins 16/32/48, container and form widths, live grid, shell / gallery / detail / form templates. |
+| [Elevation](foundations/elevation.html) | Four shadow levels plus focus, surface hierarchy (canvas, surface, raised, sunken, inverse), dark-theme elevation, nine z-order layers. |
+| [Shape](foundations/shape.html) | Five radii plus full, radius by element size, hairline / thick / accent border widths. |
+| [Motion](foundations/motion.html) | Durations, easings and loops with replayable demos, choreography, reduced motion |
+| [Iconography](foundations/iconography.html) | Icon grid and stroke, sizes, colour, labelling, the icon sheet, glyph-to-icon mapping |
+| [Theming](foundations/theming.html) | data-theme and prefers-color-scheme, token tiers, adding a theme, contrast and forced colours, tokens.json |
+| [Responsive](foundations/responsive.html) | Mobile-first rules, breakpoints, per-component behaviour, touch, safe areas, testing matrix |
+| [Accessibility](foundations/accessibility.html) | WCAG 2.2 AA checklist, focus ring, target sizes, component contract, testing procedure |
+| [Content](foundations/content.html) | Voice and tone, sentence case, button verbs, numbers/dates/prices, error and empty-state formulas, microcopy library |
 
 ## Components
 
 | Component | Group | Variants | States | Source mocks |
 |---|---|---|---|---|
 | [Button](components/button.html) | Actions | primary, secondary, ghost, link, danger; leading/trailing icon; icon-only; block | default, hover, focus, active, disabled, loading, pressed | [pages/booking-request/default](../mocks/pages/booking-request/default.html), [pages/appointment-detail/default](../mocks/pages/appointment-detail/default.html), [dialogs/cancel-appointment/default](../mocks/dialogs/cancel-appointment/default.html), [pages/booking-request/submitting](../mocks/pages/booking-request/submitting.html) |
-| [Link](components/link.html) | Actions |  |  | core set (not yet in a mock) |
-| [Menu](components/menu.html) | Actions |  |  | core set (not yet in a mock) |
-| [Text field](components/text-field.html) | Inputs |  |  | core set (not yet in a mock) |
-| [Textarea](components/textarea.html) | Inputs |  |  | core set (not yet in a mock) |
-| [Select](components/select.html) | Inputs |  |  | core set (not yet in a mock) |
-| [Checkbox](components/checkbox.html) | Inputs |  |  | core set (not yet in a mock) |
-| [Radio group](components/radio-group.html) | Inputs |  |  | core set (not yet in a mock) |
-| [Switch](components/switch.html) | Inputs |  |  | core set (not yet in a mock) |
-| [Form field](components/form-field.html) | Inputs |  |  | core set (not yet in a mock) |
-| [Form layout](components/form-layout.html) | Inputs |  |  | core set (not yet in a mock) |
-| [Top bar](components/top-bar.html) | Navigation |  |  | core set (not yet in a mock) |
-| [Sidebar navigation](components/sidebar-navigation.html) | Navigation |  |  | core set (not yet in a mock) |
-| [Tabs](components/tabs.html) | Navigation |  |  | core set (not yet in a mock) |
-| [Breadcrumb](components/breadcrumb.html) | Navigation |  |  | core set (not yet in a mock) |
-| [Pagination](components/pagination.html) | Navigation |  |  | core set (not yet in a mock) |
-| [Page header](components/page-header.html) | Navigation |  |  | core set (not yet in a mock) |
-| [Footer](components/footer.html) | Navigation |  |  | core set (not yet in a mock) |
-| [Skip link](components/skip-link.html) | Navigation |  |  | core set (not yet in a mock) |
-| [Card](components/card.html) | Containers and overlays |  |  | core set (not yet in a mock) |
-| [Dialog](components/dialog.html) | Containers and overlays |  |  | core set (not yet in a mock) |
-| [Tooltip](components/tooltip.html) | Containers and overlays |  |  | core set (not yet in a mock) |
-| [Divider](components/divider.html) | Containers and overlays |  |  | core set (not yet in a mock) |
-| [Container, grid and stack](components/container.html) | Containers and overlays |  |  | core set (not yet in a mock) |
-| [Table](components/table.html) | Data display |  |  | core set (not yet in a mock) |
-| [List](components/list.html) | Data display |  |  | core set (not yet in a mock) |
-| [Description list](components/description-list.html) | Data display |  |  | core set (not yet in a mock) |
-| [Avatar](components/avatar.html) | Data display |  |  | core set (not yet in a mock) |
-| [Badge](components/badge.html) | Data display |  |  | core set (not yet in a mock) |
-| [Chip](components/chip.html) | Data display |  |  | core set (not yet in a mock) |
-| [Stat](components/stat.html) | Data display |  |  | core set (not yet in a mock) |
-| [Toast](components/toast.html) | Feedback |  |  | core set (not yet in a mock) |
-| [Alert and banner](components/alert.html) | Feedback |  |  | core set (not yet in a mock) |
-| [Inline message](components/inline-message.html) | Feedback |  |  | core set (not yet in a mock) |
-| [Progress bar](components/progress-bar.html) | Feedback |  |  | core set (not yet in a mock) |
-| [Spinner](components/spinner.html) | Feedback |  |  | core set (not yet in a mock) |
-| [Skeleton](components/skeleton.html) | Feedback |  |  | core set (not yet in a mock) |
-| [Empty state](components/empty-state.html) | Feedback |  |  | core set (not yet in a mock) |
-| [Error page](components/error-page.html) | Feedback |  |  | core set (not yet in a mock) |
+| [Link](components/link.html) | Actions | inline, standalone with arrow, external, inherit (in alerts and footers) | default, hover, focus, active | [pages/style-gallery/default](../mocks/pages/style-gallery/default.html), [pages/braider-profile/default](../mocks/pages/braider-profile/default.html), [pages/terms/default](../mocks/pages/terms/default.html), [pages/style-detail/partial](../mocks/pages/style-detail/partial.html) |
+| [Menu](components/menu.html) | Actions | with icons, with shortcuts, with sections, danger item, checkable items | closed, open, item hover, item focus, item disabled, item checked | core set (not yet in a mock) |
+| [Text field](components/text-field.html) | Inputs | text, email, password with show toggle, tel, number, search, prefix/suffix addon, with icon, with counter | default, hover, focus, disabled, read-only, invalid, required | [pages/sign-in/default](../mocks/pages/sign-in/default.html), [pages/sign-in/invalid](../mocks/pages/sign-in/invalid.html), [pages/account-settings/invalid](../mocks/pages/account-settings/invalid.html), [pages/style-gallery/default](../mocks/pages/style-gallery/default.html), [dialogs/filter-braiders/invalid](../mocks/dialogs/filter-braiders/invalid.html) |
+| [Textarea](components/textarea.html) | Inputs | default, auto-grow, with counter | default, hover, focus, disabled, read-only, invalid, over limit | [pages/care-and-review/default](../mocks/pages/care-and-review/default.html), [pages/booking-request/default](../mocks/pages/booking-request/default.html), [dialogs/report-review/default](../mocks/dialogs/report-review/default.html) |
+| [Select](components/select.html) | Inputs | native, placeholder option | default, hover, focus, active, disabled, invalid | [pages/booking-request/default](../mocks/pages/booking-request/default.html) |
+| [Checkbox](components/checkbox.html) | Inputs | single, group, with description | default, hover, focus, active, disabled, checked, indeterminate, invalid | [dialogs/cookie-preferences/default](../mocks/dialogs/cookie-preferences/default.html) |
+| [Radio group](components/radio-group.html) | Inputs | vertical, horizontal, card style | default, hover, focus, active, disabled, checked, invalid | core set (not yet in a mock) |
+| [Switch](components/switch.html) | Inputs | label left, label right, description | default, hover, focus, active, disabled, on, off | [dialogs/cookie-preferences/default](../mocks/dialogs/cookie-preferences/default.html) |
+| [Form field](components/form-field.html) | Inputs | label and help, label and error, counter | default, hover, focus, active, disabled, invalid, required | [pages/account-settings/invalid](../mocks/pages/account-settings/invalid.html) |
+| [Form layout](components/form-layout.html) | Inputs | single column, paired fields, inline, actions bar, error summary | default, hover, focus, active, disabled, submitting, invalid | [pages/account-settings/default](../mocks/pages/account-settings/default.html) |
+| [Top bar](components/top-bar.html) | Navigation | default (desktop), compact with menu button (phone), menu open | link default, hover, focus, active, current; menu collapsed, expanded | [pages/style-gallery/default](../mocks/pages/style-gallery/default.html), [pages/matching-braiders/default](../mocks/pages/matching-braiders/default.html), [pages/my-appointments/default](../mocks/pages/my-appointments/default.html), [pages/help/default](../mocks/pages/help/default.html) |
+| [Sidebar navigation](components/sidebar-navigation.html) | Navigation | grouped, collapsible groups, with counts | default, hover, focus, active, current, group expanded / collapsed, drawer open | core set (not yet in a mock) |
+| [Tabs](components/tabs.html) | Navigation | underline, pill, counts, scrollable | default, hover, focus, active, disabled, selected | core set (not yet in a mock) |
+| [Breadcrumb](components/breadcrumb.html) | Navigation | full path, collapsed to parent (phones) | default, hover, focus, active, current | core set (not yet in a mock) |
+| [Pagination](components/pagination.html) | Navigation | numbered, previous and next, page size | default, hover, focus, active, disabled, current | [pages/style-gallery/long](../mocks/pages/style-gallery/long.html) |
+| [Page header](components/page-header.html) | Navigation | title and description, with actions, with eyebrow | default, hover, focus, active, disabled | [pages/style-gallery/default](../mocks/pages/style-gallery/default.html) |
+| [Footer](components/footer.html) | Navigation | simple, multi-column | default, hover, focus, active, disabled | [pages/style-gallery/default](../mocks/pages/style-gallery/default.html) |
+| [Skip link](components/skip-link.html) | Navigation | visible on focus | default, hover, focus, active, disabled, focused | [pages/style-gallery/default](../mocks/pages/style-gallery/default.html) |
+| [Card](components/card.html) | Containers and overlays | default, story (photo or art), interactive (stretched link), selected, flush, row, with header/footer | default, hover, focus, selected | [pages/style-gallery/default](../mocks/pages/style-gallery/default.html), [pages/matching-braiders/default](../mocks/pages/matching-braiders/default.html), [pages/braider-profile/default](../mocks/pages/braider-profile/default.html), [pages/appointment-detail/default](../mocks/pages/appointment-detail/default.html), [pages/my-appointments/default](../mocks/pages/my-appointments/default.html) |
+| [Dialog](components/dialog.html) | Containers and overlays | form, confirmation, destructive (danger icon + danger confirm); bottom sheet below 640px | default, focus, busy, invalid, failed | [dialogs/filter-braiders/default](../mocks/dialogs/filter-braiders/default.html), [dialogs/filter-braiders/invalid](../mocks/dialogs/filter-braiders/invalid.html), [dialogs/cancel-appointment/default](../mocks/dialogs/cancel-appointment/default.html), [dialogs/cancel-appointment/busy](../mocks/dialogs/cancel-appointment/busy.html), [dialogs/cancel-appointment/failed](../mocks/dialogs/cancel-appointment/failed.html), [dialogs/sign-out/confirm](../mocks/dialogs/sign-out/confirm.html), [dialogs/cookie-preferences/default](../mocks/dialogs/cookie-preferences/default.html) |
+| [Tooltip](components/tooltip.html) | Containers and overlays | text, with shortcut | hidden, visible on hover, visible on focus | core set (not yet in a mock) |
+| [Divider](components/divider.html) | Containers and overlays | horizontal, vertical, with label | none (static) | [pages/style-gallery/default](../mocks/pages/style-gallery/default.html), [pages/appointment-detail/default](../mocks/pages/appointment-detail/default.html) |
+| [Container, grid and stack](components/container.html) | Containers and overlays | container, grid, stack, cluster | default, hover, focus, active, disabled | [pages/style-gallery/default](../mocks/pages/style-gallery/default.html) |
+| [Table](components/table.html) | Data display | default, dense, sortable, selectable, row actions, sticky, expandable, responsive | default, hover, focus, active, disabled, loading, empty, error, row hover, selected | core set (not yet in a mock) |
+| [List](components/list.html) | Data display | simple, two-line, icon, interactive, divided | default, hover, focus, active, disabled, selected | [pages/my-appointments/default](../mocks/pages/my-appointments/default.html) |
+| [Description list](components/description-list.html) | Data display | horizontal, vertical | default, hover, focus, active, disabled | [pages/appointment-detail/default](../mocks/pages/appointment-detail/default.html) |
+| [Avatar](components/avatar.html) | Data display | image, initials, icon; with status dot; group with overflow | image loaded, image missing (initials fallback), unknown person, with status | [pages/braider-profile/default](../mocks/pages/braider-profile/default.html), [pages/matching-braiders/default](../mocks/pages/matching-braiders/default.html), [pages/braider-profile/edge](../mocks/pages/braider-profile/edge.html) |
+| [Badge](components/badge.html) | Data display | neutral, info, success, warning, danger; solid; count | static (not interactive); lifecycle: awaiting reply, confirmed, completed, cancelled | [pages/my-appointments/default](../mocks/pages/my-appointments/default.html), [pages/appointment-detail/default](../mocks/pages/appointment-detail/default.html), [pages/appointment-detail/success](../mocks/pages/appointment-detail/success.html), [pages/notification-center/unread](../mocks/pages/notification-center/unread.html), [pages/style-gallery/default](../mocks/pages/style-gallery/default.html) |
+| [Chip](components/chip.html) | Data display | filter (toggle), input (removable), static | default, hover, focus, active, selected (pressed), disabled | [pages/style-gallery/default](../mocks/pages/style-gallery/default.html), [pages/style-gallery/no-results](../mocks/pages/style-gallery/no-results.html), [pages/matching-braiders/no-results](../mocks/pages/matching-braiders/no-results.html) |
+| [Stat](components/stat.html) | Data display | fact tile in a fact grid; stat with label, value and delta | default, loading, not listed, long value | [pages/style-detail/default](../mocks/pages/style-detail/default.html), [pages/braider-profile/default](../mocks/pages/braider-profile/default.html), [pages/style-detail/loading](../mocks/pages/style-detail/loading.html) |
+| [Toast](components/toast.html) | Feedback | info, success, warning, danger, action, stacked | default, hover, focus, active, disabled, leaving, persistent | [notifications/booking-update/success](../mocks/notifications/booking-update/success.html) |
+| [Alert and banner](components/alert.html) | Feedback | info, success, warning, danger, page banner, actions | default, hover, focus, active, disabled, persistent, dismissible | [pages/braider-profile/partial](../mocks/pages/braider-profile/partial.html) |
+| [Inline message](components/inline-message.html) | Feedback | hint, error, success | default, hover, focus, active, disabled, invalid | [pages/booking-request/invalid](../mocks/pages/booking-request/invalid.html) |
+| [Progress bar](components/progress-bar.html) | Feedback | determinate, indeterminate, with label and value, success, danger | in progress, complete, failed, reduced motion | core set (not yet in a mock) |
+| [Spinner](components/spinner.html) | Feedback | standalone, inline with text, inside a button (loading) | spinning, reduced motion (keeps turning), finished (removed) | [pages/booking-request/submitting](../mocks/pages/booking-request/submitting.html) |
+| [Skeleton](components/skeleton.html) | Feedback | text, title, circle, rect, card | default, hover, focus, active, disabled, loading | [pages/style-gallery/loading](../mocks/pages/style-gallery/loading.html) |
+| [Empty state](components/empty-state.html) | Feedback | first run, no results, permission, error | default, hover, focus, active, disabled, empty | [pages/my-appointments/empty](../mocks/pages/my-appointments/empty.html) |
+| [Error page](components/error-page.html) | Feedback | 404, 403, 500, offline, maintenance | default, hover, focus, active, disabled, error, offline | [pages/server-error/default](../mocks/pages/server-error/default.html) |
 
 ## Patterns
 
 | Pattern | Covers |
 |---|---|
-| [Forms](patterns/forms.html) |  |
-| [Feedback and loading](patterns/feedback-and-loading.html) |  |
-| [Empty and error states](patterns/empty-and-error-states.html) |  |
-| [Navigation and page structure](patterns/navigation.html) |  |
-| [Dialogs and overlays](patterns/dialogs-and-overlays.html) |  |
-| [Tables and lists](patterns/tables-and-lists.html) |  |
+| [Forms](patterns/forms.html) | Layout, label placement, validation timing, linked error summary, submitting and success, offline, destructive confirmation |
+| [Feedback and loading](patterns/feedback-and-loading.html) | Inline, toast, banner and dialog feedback; skeleton vs spinner vs progress; partial and offline; undo |
+| [Empty and error states](patterns/empty-and-error-states.html) | First-run, no results, error as empty, 404/403/500/offline pages, copy formulas, reference ids |
+| [Navigation and page structure](patterns/navigation.html) | Shell, top bar, page header, breadcrumbs, tabs vs sub-pages, back behaviour, mobile menu |
+| [Dialogs and overlays](patterns/dialogs-and-overlays.html) | Dialog vs page vs menu vs tooltip, confirmation and form dialogs, initial focus, stacking, bottom sheets |
+| [Tables and lists](patterns/tables-and-lists.html) | Card grid vs list vs table, filtering, sorting, pagination vs load more, long names, responsive strategy |
 | [Notifications](patterns/notifications.html) |  |
 | [Content and tone](patterns/content-and-tone.html) |  |
 
@@ -85,3 +85,26 @@ Pages are generated: edit the fragments in `src/`, then run `python docs/design-
 - [`tokens/contrast-pairs.json`](tokens/contrast-pairs.json) — every foreground/background pairing the components rely on, checked in both themes.
 - [`assets/components.css`](assets/components.css) — the component stylesheet; token-driven, with `data-state` hooks for static state previews.
 - [`assets/fonts/`](assets/fonts/fonts.css) — local Manrope and JetBrains Mono (SIL OFL 1.1).
+
+## Drift found in the mocks
+
+Every deviation corrected during extraction. "Resolution" says what the system now does; the mocks pick it up through the shared stylesheets (see Verification) or need a markup change in `docs/mocks/build.py` where noted.
+
+| Mock | Issue | Resolution |
+|---|---|---|
+| `assets/tokens.css` (all mocks) | Brand ramp was named `--palette-blue-*` although every value is purple. | Renamed to `--palette-plum-*`; semantic tokens unchanged, so no mock markup changes. |
+| `assets/tokens.css` (dark theme) | Dark semantic tokens held raw hex (`#14181e`, `#e9ecf1`, `#b3bac5`, `#959eab`, `#2f3640`, `#8d97a5`) instead of primitives. | Added `--palette-gray-150/350/450/750/925`; dark tokens alias them. |
+| `assets/tokens.css` (dark theme) | `--color-fg-subtle` `#959eab` was a near-duplicate of `--palette-gray-400`. | Collapsed into `--palette-gray-400` (`#a3abb8`), which also raises its contrast. |
+| `assets/tokens.css` | `--text-h2` used a raw `1.15` line height. | Snapped to `--line-height-tight`. |
+| `assets/tokens.css` | Light theme lived on bare `:root`, so a light preview inside a dark page inherited dark values. | Themed tokens moved to `:root, [data-theme="light"]`. |
+| `assets/ui.css` | Reduced motion was a global `animation-duration: 0.01ms !important`, which also froze spinners and made infinite loops flicker. | Token-driven: durations zero, loops pause through `--motion-loop-state`, spinners keep turning. |
+| `assets/ui.css` | Raw loop durations (`0.8s`, `1.4s`, `1.6s`). | `--duration-loop-spin/shimmer/pulse`. |
+| `assets/ui.css` | Off-grid sizes: badge height 22px, badge dot 6px, indeterminate bar `0.65rem`, button spinner `1.1em`, tab indicator `2px 2px 0 0`, icon nudge `0.1rem`. | Badge 24px, dot 8px, bar `0.75rem`, spinner `1.25em` (icon size), `--radius-xs`, `--space-0-5`. |
+| `assets/ui.css` | `max-width` media queries (`47.99rem`, `39.99rem`) mixed with mobile-first rules; `.topbar` gap declared twice. | Rewritten mobile-first with `min-width` only; one gap. |
+| `assets/ui.css` | Layout sizes borrowed spacing tokens: profile avatar `--space-12` wide, art panel `min-height: --space-12`, hero `calc(--space-12 * 4)`, skeleton hero `calc(--space-12 * 3)`. | Avatar uses `.avatar--xl` (`--avatar-size`); art, hero photo and skeleton hero share a 3:2 aspect ratio, so loading causes no layout shift. |
+| `assets/ui.css` | `.form-panel` 38rem and `.container--narrow` 42rem were near-duplicates. | One token, `--layout-form-max` (38rem). |
+| `assets/ui.css` | `.profile-avatar` duplicated `.avatar`; `.site-footer` duplicated `.footer`; `.eyebrow` duplicated `.overline` with another colour; `.pagination-row` duplicated `.pagination`. | Kept the mock class names as aliases of one rule each, documented once. |
+| `assets/ui.css` | Generated content (`⚠`, `/`, `↑`, `↓`, `✓`) was read aloud by screen readers. | `content: "⚠" / ""` alt-text syntax. |
+| `pages/appointment-detail/default`, `pages/my-appointments/default`, all detail cards | Badges stretched to full width inside `.stack`. | `.badge` sets `align-self: flex-start; width: fit-content`. |
+| `pages/appointment-detail/default`, `pages/style-detail/default`, `pages/braider-profile/default` | Section headings inside cards rendered at the 36px light page `h2`. | `.card h2` uses `--text-h3`; story cards keep `.card__title`. |
+| `pages/style-gallery/default`, `pages/matching-braiders/default` | Art panels were shorter than photo cards in the same row. | Photo and art share `aspect-ratio: 3 / 2`. |

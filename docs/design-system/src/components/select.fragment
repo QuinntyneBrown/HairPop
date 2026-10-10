@@ -1,0 +1,165 @@
+<!--meta {"lead": "A select picks one value from a list the person does not need to compare side by side: a travel distance, a sort order, one of Nia's offered times when there are many.", "description": "Native select with placeholder option and option groups, three sizes and every state in both themes.", "pills": ["Native <code>&lt;select&gt;</code>", "Status: stable"], "variants": "native, with placeholder option, with option groups", "states": "default, hover, focus, disabled, invalid", "sources": ["dialogs/filter-braiders/default", "dialogs/request-review/default", "dialogs/change-appointment/default"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a native <code>&lt;select&gt;</code> when the answer is one value from a known list of more than five options. With five or fewer options that people should compare, use a <a href="radio-group.html">radio group</a>. When people need to type to find an option among hundreds, a combobox (not yet in the system) is the right tool.</p>
+  <ul>
+    <li>Native select is the default: it gets the platform picker on phones, works with every assistive technology and needs no script.</li>
+    <li>A custom listbox is only built when the native control cannot do the job, and then follows the APG Listbox pattern.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="field" style="width: min(100%, 18rem);"><label class="field__label" for="sel-anat">Distance from Toronto</label><select class="select" id="sel-anat"><option>Within 5 km</option><option selected>Within 10 km</option><option>Within 25 km</option></select></div>
+      <span class="ds-callout" style="left: 18%; top: 18%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 40%; top: 64%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 76%; top: 64%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Label</b><small>Visible, from the form field.</small></div></li>
+      <li><div><b>Selected value</b><small>Body font; the field reserves 40px on the right for the chevron.</small></div></li>
+      <li><div><b>Chevron</b><small>Two CSS gradients in <code>currentColor</code>, so it follows the text colour and the disabled state.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:[stack]Native select; with a placeholder option that cannot be submitted; with option groups.}}
+<div class="form-row">
+<div class="field"><label class="field__label" for="sel-sort">Sort braiders by</label><select class="select" id="sel-sort"><option>Best match</option><option>Lowest price</option><option>Highest rated</option><option>Nearest</option></select></div>
+<div class="field"><label class="field__label" for="sel-ph">Distance from Toronto</label><select class="select" id="sel-ph" required><option value="" disabled selected>Choose a distance</option><option>Within 5 km</option><option>Within 10 km</option><option>Within 25 km</option></select></div>
+</div>
+<div class="field"><label class="field__label" for="sel-time">New preferred time</label><select class="select" id="sel-time"><optgroup label="Sat 24 Oct"><option>10:00 am</option><option>1:00 pm</option></optgroup><optgroup label="Sun 25 Oct"><option selected>11:00 am</option><option>2:00 pm</option></optgroup></select></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  {{example:[stack]Heights <code>--control-height-sm/md/lg</code>; medium is the default.}}
+<select class="select select--sm" aria-label="Small select example"><option>Small · 32px</option></select>
+<select class="select" aria-label="Medium select example"><option>Medium · 40px</option></select>
+<select class="select select--lg" aria-label="Large select example"><option>Large · 48px</option></select>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Size</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Invalid</th><th scope="col">Disabled</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Medium</th>
+        <td><select class="select" aria-label="Distance, default"><option>Within 10 km</option></select></td>
+        <td><select class="select" aria-label="Distance, hover" data-state="hover"><option>Within 10 km</option></select></td>
+        <td><select class="select" aria-label="Distance, focus" data-state="focus"><option>Within 10 km</option></select></td>
+        <td><select class="select" aria-label="Distance, invalid" aria-invalid="true"><option>Choose a distance</option></select></td>
+        <td><select class="select" aria-label="Distance, disabled" disabled><option>Within 10 km</option></select></td></tr>
+      <tr><th scope="row">Small</th>
+        <td><select class="select select--sm" aria-label="Sort, small default"><option>Best match</option></select></td>
+        <td><select class="select select--sm" aria-label="Sort, small hover" data-state="hover"><option>Best match</option></select></td>
+        <td><select class="select select--sm" aria-label="Sort, small focus" data-state="focus"><option>Best match</option></select></td>
+        <td><select class="select select--sm" aria-label="Sort, small invalid" aria-invalid="true"><option>Best match</option></select></td>
+        <td><select class="select select--sm" aria-label="Sort, small disabled" disabled><option>Best match</option></select></td></tr>
+    </tbody>
+  </table></div>
+  {{example:[stack]Invalid with its message.}}
+<div class="field"><label class="field__label" for="sel-inv">New preferred time</label><select class="select" id="sel-inv" aria-invalid="true" aria-describedby="sel-inv-error"><option value="" selected>Choose a time</option><option>Sun 25 Oct, 11:00 am</option></select><span class="field__error" id="sel-inv-error">Choose one of the times Nia has offered.</span></div>
+  {{/example}}
+  <h3>Both themes</h3>
+  {{themes:stack}}<select class="select" aria-label="Distance preview"><option>Within 10 km</option></select><select class="select" aria-label="Invalid preview" aria-invalid="true"><option>Choose a time</option></select>{{/themes}}
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Full width of its column; on phones the operating system's picker opens, which is why the native select is preferred.</li>
+    <li>From 768px two short selects may share a <code>.form-row</code> (distance and sort).</li>
+    <li>The platform truncates long option text in the closed field; keep options under 30 characters.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Uses the field tokens (<code>--field-bg</code>, <code>--field-border</code> …) plus <code>--select-chevron</code> for the chevron size. <code>color-scheme</code> in each theme makes the native option list dark in the dark theme.</p>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Native <code>&lt;select&gt;</code> with <code>&lt;label for&gt;</code>. Changing the value never submits or navigates by itself (SC 3.2.2); results update after an explicit "Show braiders".</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Focuses the select.</td></tr>
+    <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Changes the value (Windows) or opens the list (macOS).</td></tr>
+    <tr><td><kbd>Space</kbd> / <kbd>Alt</kbd>+<kbd>↓</kbd></td><td>Opens the list.</td></tr>
+    <tr><td>Type a letter</td><td>Jumps to the matching option.</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>Closes the list without changing the value.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Accent border plus a flush 2px ring, as for text fields.</p>
+  <h3>Labelling</h3>
+  <p>The visible label names the choice. A placeholder option ("Choose a distance") is <code>disabled</code> and has an empty value so it cannot be submitted.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Edge on card|--color-border-strong|--color-bg-surface|3}}
+    {{pair:Edge in dialog|--color-border-strong|--color-bg-surface-raised|3}}
+    {{pair:Value and chevron|--color-fg-default|--color-bg-surface|4.5}}
+  </div>
+  <h3>Motion</h3>
+  <p>The border transitions over <code>--duration-fast</code>; the list is the platform's.</p>
+  <h3>Touch</h3>
+  <p>40px tall and full width; the platform picker provides large targets.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Options are short and parallel: "Within 5 km", "Within 10 km", "Within 25 km".</li>
+    <li>Order options logically (ascending distance, chronological times), not alphabetically.</li>
+    <li>Placeholder options start with "Choose".</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="sel-do1">Distance from Toronto</label><select class="select" id="sel-do1"><option>Within 5 km</option><option selected>Within 10 km</option><option>Within 25 km</option></select></div></div><figcaption>Offer the distances the search supports.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="sel-dont1">Distance from Toronto</label><input class="input" id="sel-dont1" type="text" value="10 km"></div></div><figcaption>The filter-braiders mock asks for distance as free text ("10 km"), which must be parsed and cannot be validated.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="sel-do2">New preferred time</label><select class="select" id="sel-do2"><option>Sun 25 Oct, 11:00 am</option><option>Sun 25 Oct, 2:00 pm</option></select></div></div><figcaption>Only Nia’s offered times can be chosen, so the change request is valid by construction.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="sel-dont2">New preferred time</label><input class="input" id="sel-dont2" type="text" value="Sun 25 Oct, 11:00 am"></div></div><figcaption>The change-appointment mock takes the new time as free text, so Maya can ask for a time Nia never offered.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Background|--color-bg-surface}}
+      {{tok:Text and chevron|--color-fg-default}}
+      {{tok:Border|--color-border-strong}}
+      {{tok:Focus|--color-focus-ring}}
+      {{tok:Invalid edge|--color-danger-solid}}
+      {{tok:Height sm / md / lg|--control-height-sm|--control-height-md|--control-height-lg}}
+      {{tok:Chevron room / position|--space-10|--space-5}}
+      {{tok:Radius|--radius-md}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="field"&gt;
+  &lt;label class="field__label" for="distance"&gt;Distance from Toronto&lt;/label&gt;
+  &lt;select class="select" id="distance" name="distance" required&gt;
+    &lt;option value="" disabled selected&gt;Choose a distance&lt;/option&gt;
+    &lt;option value="5"&gt;Within 5 km&lt;/option&gt;
+    &lt;option value="10"&gt;Within 10 km&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.select</code></td><td>Native select with the system chevron replaced.</td></tr>
+    <tr><td><code>.select--sm</code> <code>.select--lg</code></td><td>Size.</td></tr>
+    <tr><td><code>aria-invalid="true"</code> / <code>disabled</code></td><td>Invalid edge / disabled.</td></tr>
+    <tr><td><code>data-state="hover|focus"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    {{mock:dialogs/filter-braiders/default|"Distance from Toronto"}}
+    {{mock:dialogs/request-review/default|"Preferred time"}}
+    {{mock:dialogs/change-appointment/default|"New preferred time"}}
+  </ul>
+  <p>Drift fixed during extraction: no mock used a select; the distance and preferred-time questions were free-text inputs (now selects of supported values). The chevron offsets were raw pixels (now spacing tokens and <code>--select-chevron</code>).</p>
+</section>

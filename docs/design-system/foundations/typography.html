@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typography — HairPop design system</title>
+<meta name="description" content="Families, the type scale, weights, line heights, letter spacing, twelve text roles and responsive type rules.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Foundation</p><h1>Typography</h1><p class="ds-lead">One family, Manrope, in a light display voice for headlines and a clear semibold for labels. Body stays at 16px, nothing drops below 12px, and long text stops at 65 characters.</p><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#families">Families</a></li><li><a href="#scale">Type scale</a></li><li><a href="#weights">Weights, line height and tracking</a></li><li><a href="#roles">Text roles</a></li><li><a href="#measure">Measure</a></li><li><a href="#usage">Usage</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#tokens">Tokens</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>HairPop type follows the Banaro typography tokens the mocks adopted: <b>Manrope</b> for everything people read, <b>JetBrains Mono</b> for codes and reference numbers. Headlines use the light weight (300) at large sizes with tight tracking, which gives the product its calm, editorial feel; labels and buttons use semibold (600) at 14px so they read as controls.</p>
+  <p>Components never set a size, weight and line height separately. They use a <b>role</b> shorthand: <code>font: var(--text-label)</code>. Roles are the twelve decisions below; the scale, weights and line heights are the primitives they are built from.</p>
+</section>
+
+<section class="ds-section" id="families"><h2><a href="#families">Families</a></h2>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--font-family-sans<br>Manrope 200–800</div><div style="font: var(--text-body-lg);">Find a style that feels like you. Knotless braids, passion twists and cornrows from braiders near Toronto.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--font-family-display<br>Manrope, light</div><div style="font: var(--font-weight-light) var(--font-size-3xl) / var(--line-height-tight) var(--font-family-display); letter-spacing: var(--letter-spacing-tight);">Your appointment with Nia</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--font-family-mono<br>JetBrains Mono 100–800</div><div style="font: var(--text-code);">HP-1048 · 2026-10-24T10:00</div></div>
+  <p>Both families ship as local Latin-subset WOFF2 files in <code>assets/fonts/</code> (SIL Open Font Licence 1.1) with <code>font-display: swap</code>, so pages render from disk and offline. The fallback stack is the platform UI font, which keeps similar metrics while Manrope loads.</p>
+</section>
+
+<section class="ds-section" id="scale"><h2><a href="#scale">Type scale</a></h2>
+  <p>Nine sizes. The two largest are fluid with <code>clamp()</code>, so a 68px headline on a laptop becomes 40px on a phone without a media query; every other step is fixed so it respects browser zoom exactly.</p>
+  <div class="ds-specimen"><div class="ds-specimen__meta">5xl · 44–84px fluid</div><div style="font: var(--font-weight-light) var(--font-size-5xl) / var(--line-height-tight) var(--font-family-display); letter-spacing: var(--letter-spacing-tight);">Braids</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">4xl · 40–68px fluid</div><div style="font: var(--font-weight-light) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-display); letter-spacing: var(--letter-spacing-tight);">Knotless braids</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">3xl · 36px</div><div style="font-size: var(--font-size-3xl); font-weight: var(--font-weight-light); line-height: var(--line-height-tight);">What to expect</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">2xl · 28px</div><div style="font-size: var(--font-size-2xl); line-height: var(--line-height-snug);">Request sent to Nia</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">xl · 22px</div><div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-medium); line-height: var(--line-height-snug);">Before you book</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">lg · 19px</div><div style="font-size: var(--font-size-lg);">Nia will review your details and confirm the time.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">md · 16px</div><div style="font-size: var(--font-size-md);">Estimated price: $180–$240. Nia will confirm the final price.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">sm · 14px</div><div style="font-size: var(--font-size-sm);">Toronto West · 4.9 from 86 reviews</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">xs · 12px</div><div style="font-size: var(--font-size-xs);">Updated today at 9:42 am</div></div>
+</section>
+
+<section class="ds-section" id="weights"><h2><a href="#weights">Weights, line height and tracking</a></h2>
+  <p>Five weights. Light (300) is reserved for display, h1 and h2, a deliberate brand choice carried from the mocks; regular is body; medium is h3 and captions; semibold is labels, h4 and overlines; bold is for rare emphasis inside running text.</p>
+  <div class="ds-example"><div class="ds-example__canvas" style="font-size: var(--font-size-xl);">
+    <span style="font-weight: var(--font-weight-light);">Light 300</span><span style="font-weight: var(--font-weight-regular);">Regular 400</span><span style="font-weight: var(--font-weight-medium);">Medium 500</span><span style="font-weight: var(--font-weight-semibold);">Semibold 600</span><span style="font-weight: var(--font-weight-bold);">Bold 700</span>
+  </div></div>
+  <ul>
+    <li><b>Line height</b>: tight 1.08 for display, h1 and h2; snug 1.3 for h3, h4 and labels in controls; normal 1.65 for body; relaxed 1.85 for lead paragraphs. The mocks gave h2 a raw 1.15; it now uses tight.</li>
+    <li><b>Letter spacing</b>: tight −0.03em on light headlines; normal everywhere else; wide 0.14em only on uppercase overlines, eyebrows and badges.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="roles"><h2><a href="#roles">Text roles</a></h2>
+  <p>Each role is a <code>font</code> shorthand. Headings h1 and h2 also add <code>letter-spacing: var(--letter-spacing-tight)</code>; overlines add wide tracking and uppercase.</p>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-display</div><div style="font: var(--text-display); letter-spacing: var(--letter-spacing-tight);">HairPop</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-h1 · page title</div><div style="font: var(--text-h1); letter-spacing: var(--letter-spacing-tight);">Find a style that feels like you</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-h2 · page section</div><div style="font: var(--text-h2); letter-spacing: var(--letter-spacing-tight);">Customer reviews</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-h3 · card and dialog title</div><div style="font: var(--text-h3);">Prepare for your visit</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-h4 · story card title, brand</div><div style="font: var(--text-h4);">Passion twists</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-body-lg · lead</div><div style="font: var(--text-body-lg);">Browse protective styles, compare typical time and price, and see real work.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-body</div><div style="font: var(--text-body);">Knotless braids start with your natural hair, then extensions are fed in gradually.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-body-sm · help, meta</div><div style="font: var(--text-body-sm);">Length, size and hair density affect the final quote.</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-caption · counters, pills</div><div style="font: var(--text-caption);">120 / 500 characters</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-label · buttons, labels, nav</div><div style="font: var(--text-label);">Preferred time</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-overline · eyebrow, badge</div><div style="font: var(--text-overline); letter-spacing: var(--letter-spacing-wide); text-transform: uppercase; color: var(--color-fg-accent);">Most explored</div></div>
+  <div class="ds-specimen"><div class="ds-specimen__meta">--text-code · references</div><div style="font: var(--text-code);">HP-1048</div></div>
+</section>
+
+<section class="ds-section" id="measure"><h2><a href="#measure">Measure</a></h2>
+  <p>Paragraphs stop at <code>--layout-measure</code> (65ch): the base stylesheet sets <code>p { max-width: var(--layout-measure) }</code> with <code>text-wrap: pretty</code>, and headings use <code>text-wrap: balance</code>. Empty-state text is narrower (36ch) because it is centred.</p>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><p>HairPop helps customers discover independent braiders and send appointment requests. A request is pending until the braider accepts it. Prices shown before confirmation are estimates; the braider confirms appointment details and policies directly with you.</p></div><div class="ds-example__caption"><span>The legal pages and long help answers read best at this width.</span></div></div>
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <ul>
+    <li>One <code>&lt;h1&gt;</code> per page, using the page title. Headings follow document order; pick the role by level, not by the size you want.</li>
+    <li>Section titles inside a card use the h3 role even when the element is an <code>&lt;h2&gt;</code>; the 36px h2 is for page sections on the canvas. The mocks rendered card titles such as "Medium knotless braids" at the full 36px h2; <code>components.css</code> now applies h3 inside cards.</li>
+    <li>Body copy is 16px everywhere, including phones; never shrink body text to fit.</li>
+    <li>Nothing is set below 12px (<code>--font-size-xs</code>). Uppercase is only for overlines, eyebrows and badges, always with wide tracking.</li>
+    <li>Prices, times, counts and ratings use <code>font-variant-numeric: tabular-nums</code> where they align in columns or change in place.</li>
+    <li>Reference numbers (HP-1048) may use the code role; everything else stays in Manrope.</li>
+  </ul>
+  <h3>Responsive type</h3>
+  <ul>
+    <li>Only display and h1 scale with the viewport, through <code>clamp()</code> with a rem floor, so user zoom still enlarges them.</li>
+    <li>Empty-state titles step from 22px to 28px at 768px; account links in the top bar from 14px to 16px.</li>
+    <li>Everything else is fixed. A breakpoint never changes body, label or caption size.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li>All sizes are in <code>rem</code>, so text resizes to 200% (1.4.4) and reflows at 320px (1.4.10).</li>
+    <li>Layouts survive text-spacing overrides (1.4.12): line height 1.5×, paragraph spacing 2×, letter spacing 0.12em, word spacing 0.16em. No text container has a fixed height.</li>
+    <li>Light 300 is used only at 36px and above, where it counts as large text and still exceeds 4.5:1 in both themes.</li>
+    <li>Glyphs in text ("✦", "★", "→") are wrapped in <code>aria-hidden="true"</code>; the words carry the meaning ("4.9 from 86 reviews").</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>
+    <tr><td>Sans family</td><td><code>--font-family-sans</code></td><td colspan="2"><span data-token="--font-family-sans"></span></td></tr>
+    <tr><td>Display family</td><td><code>--font-family-display</code></td><td colspan="2"><span data-token="--font-family-display"></span></td></tr>
+    <tr><td>Mono family</td><td><code>--font-family-mono</code></td><td colspan="2"><span data-token="--font-family-mono"></span></td></tr>
+    <tr><td>Size xs (12px)</td><td><code>--font-size-xs</code></td><td colspan="2"><span data-token="--font-size-xs"></span></td></tr>
+    <tr><td>Size sm (14px)</td><td><code>--font-size-sm</code></td><td colspan="2"><span data-token="--font-size-sm"></span></td></tr>
+    <tr><td>Size md (16px)</td><td><code>--font-size-md</code></td><td colspan="2"><span data-token="--font-size-md"></span></td></tr>
+    <tr><td>Size lg (19px)</td><td><code>--font-size-lg</code></td><td colspan="2"><span data-token="--font-size-lg"></span></td></tr>
+    <tr><td>Size xl (22px)</td><td><code>--font-size-xl</code></td><td colspan="2"><span data-token="--font-size-xl"></span></td></tr>
+    <tr><td>Size 2xl (28px)</td><td><code>--font-size-2xl</code></td><td colspan="2"><span data-token="--font-size-2xl"></span></td></tr>
+    <tr><td>Size 3xl (36px)</td><td><code>--font-size-3xl</code></td><td colspan="2"><span data-token="--font-size-3xl"></span></td></tr>
+    <tr><td>Size 4xl (fluid)</td><td><code>--font-size-4xl</code></td><td colspan="2"><span data-token="--font-size-4xl"></span></td></tr>
+    <tr><td>Size 5xl (fluid)</td><td><code>--font-size-5xl</code></td><td colspan="2"><span data-token="--font-size-5xl"></span></td></tr>
+    <tr><td>Weight light</td><td><code>--font-weight-light</code></td><td colspan="2"><span data-token="--font-weight-light"></span></td></tr>
+    <tr><td>Weight regular</td><td><code>--font-weight-regular</code></td><td colspan="2"><span data-token="--font-weight-regular"></span></td></tr>
+    <tr><td>Weight medium</td><td><code>--font-weight-medium</code></td><td colspan="2"><span data-token="--font-weight-medium"></span></td></tr>
+    <tr><td>Weight semibold</td><td><code>--font-weight-semibold</code></td><td colspan="2"><span data-token="--font-weight-semibold"></span></td></tr>
+    <tr><td>Weight bold</td><td><code>--font-weight-bold</code></td><td colspan="2"><span data-token="--font-weight-bold"></span></td></tr>
+    <tr><td>Line height tight</td><td><code>--line-height-tight</code></td><td colspan="2"><span data-token="--line-height-tight"></span></td></tr>
+    <tr><td>Line height snug</td><td><code>--line-height-snug</code></td><td colspan="2"><span data-token="--line-height-snug"></span></td></tr>
+    <tr><td>Line height normal</td><td><code>--line-height-normal</code></td><td colspan="2"><span data-token="--line-height-normal"></span></td></tr>
+    <tr><td>Line height relaxed</td><td><code>--line-height-relaxed</code></td><td colspan="2"><span data-token="--line-height-relaxed"></span></td></tr>
+    <tr><td>Tracking tight</td><td><code>--letter-spacing-tight</code></td><td colspan="2"><span data-token="--letter-spacing-tight"></span></td></tr>
+    <tr><td>Tracking normal</td><td><code>--letter-spacing-normal</code></td><td colspan="2"><span data-token="--letter-spacing-normal"></span></td></tr>
+    <tr><td>Tracking wide</td><td><code>--letter-spacing-wide</code></td><td colspan="2"><span data-token="--letter-spacing-wide"></span></td></tr>
+    <tr><td>Role display</td><td><code>--text-display</code></td><td colspan="2"><span data-token="--text-display"></span></td></tr>
+    <tr><td>Role h1</td><td><code>--text-h1</code></td><td colspan="2"><span data-token="--text-h1"></span></td></tr>
+    <tr><td>Role h2</td><td><code>--text-h2</code></td><td colspan="2"><span data-token="--text-h2"></span></td></tr>
+    <tr><td>Role h3</td><td><code>--text-h3</code></td><td colspan="2"><span data-token="--text-h3"></span></td></tr>
+    <tr><td>Role h4</td><td><code>--text-h4</code></td><td colspan="2"><span data-token="--text-h4"></span></td></tr>
+    <tr><td>Role body large</td><td><code>--text-body-lg</code></td><td colspan="2"><span data-token="--text-body-lg"></span></td></tr>
+    <tr><td>Role body</td><td><code>--text-body</code></td><td colspan="2"><span data-token="--text-body"></span></td></tr>
+    <tr><td>Role body small</td><td><code>--text-body-sm</code></td><td colspan="2"><span data-token="--text-body-sm"></span></td></tr>
+    <tr><td>Role caption</td><td><code>--text-caption</code></td><td colspan="2"><span data-token="--text-caption"></span></td></tr>
+    <tr><td>Role label</td><td><code>--text-label</code></td><td colspan="2"><span data-token="--text-label"></span></td></tr>
+    <tr><td>Role overline</td><td><code>--text-overline</code></td><td colspan="2"><span data-token="--text-overline"></span></td></tr>
+    <tr><td>Role code</td><td><code>--text-code</code></td><td colspan="2"><span data-token="--text-code"></span></td></tr>
+  </tbody></table></div>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

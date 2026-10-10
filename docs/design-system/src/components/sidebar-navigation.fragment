@@ -1,0 +1,157 @@
+<!--meta {"lead": "Sidebar navigation lists many destinations in labelled groups beside the page. HairPop's customer screens do not need it yet; it is reserved for account areas and the future braider studio.", "description": "Vertical grouped navigation with current page, counts and collapsible groups; a drawer below 1024px.", "pills": ["<code>&lt;nav&gt;</code> landmark", "Status: core set, not yet in a mock"], "variants": "grouped, collapsible groups, with counts", "states": "default, hover, focus, active, current, group expanded / collapsed, drawer open", "sources": []} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use sidebar navigation when an area has more than six destinations or needs grouping, such as a future account area (Appointments, Updates, Saved braiders, Account settings, Privacy choices) or a braider studio. For the customer journey's four destinations, use the <a href="top-bar.html">top bar</a>; for switching views of one list, use <a href="tabs.html">tabs</a>.</p>
+  <ul>
+    <li><b>Grouped</b> lists links under small uppercase group labels.</li>
+    <li><b>Collapsible groups</b> use <code>&lt;details&gt;</code> so long sections can fold away; the group holding the current page stays open.</li>
+    <li><b>With counts</b> adds a badge to a link (unread updates, pending requests).</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <nav class="sidebar" data-open="true" style="position: static; height: auto; width: 100%; max-width: var(--layout-sidebar-width);" aria-label="Account, anatomy example"><p class="sidebar__group">Your HairPop</p><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" aria-current="page">{{icon:calendar}}Appointments</a><a class="nav-link" href="../../mocks/pages/notification-center/default.html">{{icon:bell}}Updates<span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a></nav>
+      <span class="ds-callout" style="left: 24%; top: 14%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 24%; top: 46%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 74%; top: 72%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 80%; top: 22%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Group label</b><small><code>.sidebar__group</code>: overline, <code>--color-fg-subtle</code>, not a link.</small></div></li>
+      <li><div><b>Current link</b><small><code>.nav-link</code> with <code>aria-current="page"</code>; accent-subtle background, accent label.</small></div></li>
+      <li><div><b>Count (optional)</b><small>A count <a href="badge.html">badge</a> pushed to the end of the link.</small></div></li>
+      <li><div><b>Container</b><small>256px (<code>--layout-sidebar-width</code>), surface, right hairline, <code>--space-4</code> padding, 4px between links.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>Group by the customer's task, not by system object. Put icons on every link or on none.</p>
+  {{example:[start]Grouped with icons and a count (left) and collapsible groups (right). The <code>style</code> overrides only release the sticky, full-height layout for this page.}}
+<nav class="sidebar" data-open="true" style="position: static; height: auto; width: var(--layout-sidebar-width);" aria-label="Account, grouped example"><p class="sidebar__group">Your HairPop</p><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" aria-current="page">{{icon:calendar}}Appointments</a><a class="nav-link" href="../../mocks/pages/notification-center/default.html">{{icon:bell}}Updates<span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a><p class="sidebar__group">Account</p><a class="nav-link" href="../../mocks/pages/account-settings/default.html">{{icon:user}}Account settings</a><a class="nav-link" href="../../mocks/pages/help/default.html">{{icon:help}}Help</a></nav>
+<nav class="sidebar" data-open="true" style="position: static; height: auto; width: var(--layout-sidebar-width);" aria-label="Account, collapsible example"><details open><summary class="sidebar__group">Your HairPop</summary><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">Appointments</a><a class="nav-link" href="../../mocks/pages/care-and-review/default.html" aria-current="page">Care and review</a></details><details><summary class="sidebar__group">Legal</summary><a class="nav-link" href="../../mocks/pages/terms/default.html">Terms of use</a><a class="nav-link" href="../../mocks/pages/privacy/default.html">Privacy</a></details></nav>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes" data-na="Sidebar navigation has one width (--layout-sidebar-width, 256px) and one link height (44px)."><h2><a href="#sizes">Sizes</a></h2></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Links share the <a href="top-bar.html#states">top bar's nav-link states</a>, forced here with <code>data-state</code>.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Element</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Active</th><th scope="col">Current</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Link</th><td><a class="nav-link" href="../../mocks/pages/account-settings/default.html">Account settings</a></td><td><a class="nav-link" href="../../mocks/pages/account-settings/default.html" data-state="hover">Account settings</a></td><td><a class="nav-link" href="../../mocks/pages/account-settings/default.html" data-state="focus">Account settings</a></td><td><a class="nav-link" href="../../mocks/pages/account-settings/default.html" data-state="hover">Account settings</a></td><td><a class="nav-link" href="../../mocks/pages/account-settings/default.html" aria-current="page">Account settings</a></td></tr>
+      <tr><th scope="row">Link with count</th><td><a class="nav-link" href="../../mocks/pages/notification-center/default.html">Updates<span class="badge badge--count">2</span></a></td><td><a class="nav-link" href="../../mocks/pages/notification-center/default.html" data-state="hover">Updates<span class="badge badge--count">2</span></a></td><td><a class="nav-link" href="../../mocks/pages/notification-center/default.html" data-state="focus">Updates<span class="badge badge--count">2</span></a></td><td><a class="nav-link" href="../../mocks/pages/notification-center/default.html" data-state="hover">Updates<span class="badge badge--count">2</span></a></td><td><a class="nav-link" href="../../mocks/pages/notification-center/default.html" aria-current="page">Updates<span class="badge badge--count">2</span></a></td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><b>Group expanded or collapsed</b>: native <code>&lt;details open&gt;</code>; the browser exposes the state, no ARIA needed.</li>
+    <li><b>Drawer open</b> (below 1024px): <code>data-open="true"</code> shows the sidebar; the button that opens it has <code>aria-expanded="true"</code>.</li>
+    <li>Links are never disabled; remove a destination the customer cannot reach.</li>
+  </ul>
+  <h3>Both themes</h3>
+  {{themes}}<nav class="sidebar" data-open="true" style="position: static; height: auto; width: 100%;" aria-label="Account, themes example"><p class="sidebar__group">Your HairPop</p><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" aria-current="page">Appointments</a><a class="nav-link" href="../../mocks/pages/notification-center/default.html" data-state="hover">Updates<span class="badge badge--count">2</span></a></nav>{{/themes}}
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li><b>From 1024px</b> (<code>--layout-breakpoint-lg</code>): the sidebar is a sticky, full-height column in <code>.sidebar-layout</code> and scrolls on its own when its links overflow.</li>
+    <li><b>Below 1024px</b>: it is hidden and opens as a drawer from a menu button in the top bar (<code>data-open="true"</code>), full width below 640px.</li>
+    <li>Group labels and counts stay visible at every width; labels never truncate (keep them to three words).</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The sidebar reads <code>--color-bg-surface</code>, <code>--color-border-default</code> and the nav-link tokens; group labels read <code>--color-fg-subtle</code>. In the dark theme the column becomes grey 900 against the grey 950 canvas and the current link plum 300 on plum 950. Re-theme by overriding semantic tokens on a wrapper, not the rules.</p>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><code>&lt;nav aria-label="Account"&gt;</code> landmark containing plain links. Collapsible groups use native <code>&lt;details&gt;/&lt;summary&gt;</code> (<a href="https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/">APG Disclosure</a>). The drawer below 1024px follows the <a href="dialog.html">dialog</a> rules when it covers content.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through group summaries and links in order.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Follows a link.</td></tr>
+    <tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>On a group summary: expands or collapses it.</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>In the drawer: closes it and returns focus to the menu button.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The shared ring on each link and summary. Opening the drawer moves focus to its first link; closing returns focus to the menu button.</p>
+  <h3>Labelling</h3>
+  <p>The nav has its own label, different from the top bar's "Primary". The current page uses <code>aria-current="page"</code>. A count badge needs hidden text that says what it counts ("Updates 2, 2 unread").</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Link label on sidebar|--color-fg-muted|--color-bg-surface|4.5}}
+    {{pair:Group label on sidebar|--color-fg-subtle|--color-bg-surface|4.5}}
+    {{pair:Current link|--color-fg-accent|--color-accent-subtle|4.5}}
+    {{pair:Focus ring on sidebar|--color-focus-ring|--color-bg-surface|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>Link colours change over <code>--duration-fast</code>; the drawer slides in over <code>--duration-slow</code>. Both are instant under reduced motion.</p>
+  <h3>Touch</h3>
+  <p>Links are 44px tall with 4px between them; summaries are at least 24px tall.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Links name destinations as nouns in sentence case: "Appointments", "Account settings", "Care and review".</li>
+    <li>Group labels are short and describe ownership or purpose: "Your HairPop", "Account", "Legal".</li>
+    <li>Use the same name for a destination here, in the top bar and in the page's <code>&lt;h1&gt;</code>.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><nav class="sidebar" data-open="true" style="position: static; height: auto; width: 100%;" aria-label="Account, do example"><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" aria-current="page">Appointments</a><a class="nav-link" href="../../mocks/pages/account-settings/default.html">Account settings</a></nav></div><figcaption>Mark the current page with <code>aria-current</code> as well as colour.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><nav class="sidebar" data-open="true" style="position: static; height: auto; width: 100%;" aria-label="Account, don't example"><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" style="background: var(--color-accent-subtle); color: var(--color-fg-accent);">Appointments</a><a class="nav-link" href="../../mocks/pages/account-settings/default.html">Account settings</a></nav></div><figcaption>Show the current page with colour alone; screen-reader users cannot tell where they are.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><p>Styles, Braiders, Appointments and Help stay in the top bar.</p></div><figcaption>Keep the four customer destinations in the top bar.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><p>A sidebar holding only Styles and Braiders.</p></div><figcaption>Add a sidebar for two or three links; it costs 256px of every page for no benefit.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Background|--color-bg-surface}}
+      {{tok:Edge|--color-border-default}}
+      {{tok:Group label|--color-fg-subtle}}
+      {{tok:Link label|--color-fg-muted}}
+      {{tok:Current background / label|--color-accent-subtle|--color-fg-accent}}
+      {{tok:Width|--layout-sidebar-width}}
+      {{tok:Padding|--space-4}}
+      {{tok:Link height|--target-comfortable}}
+      {{tok:Group label font|--text-overline}}
+      {{tok:Breakpoint|--layout-breakpoint-lg}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="sidebar-layout"&gt;
+  &lt;nav class="sidebar" id="account-nav" aria-label="Account"&gt;
+    &lt;p class="sidebar__group"&gt;Your HairPop&lt;/p&gt;
+    &lt;a class="nav-link" href="/appointments" aria-current="page"&gt;Appointments&lt;/a&gt;
+    &lt;a class="nav-link" href="/notifications"&gt;Updates&lt;span class="badge badge--count"&gt;2&lt;/span&gt;&lt;span class="visually-hidden"&gt;, 2 unread&lt;/span&gt;&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;main id="main"&gt;…&lt;/main&gt;
+&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.sidebar-layout</code></td><td>One column; sidebar + content from 1024px.</td></tr>
+    <tr><td><code>.sidebar</code></td><td>Hidden below 1024px; sticky full-height column from 1024px.</td></tr>
+    <tr><td><code>data-open="true"</code></td><td>Shows the sidebar below 1024px (drawer).</td></tr>
+    <tr><td><code>.sidebar__group</code></td><td>Group label; on a <code>&lt;summary&gt;</code> for collapsible groups.</td></tr>
+    <tr><td><code>.nav-link</code> + <code>aria-current="page"</code></td><td>Full-width link; current page look.</td></tr>
+    <tr><td><code>data-state="hover|focus"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Core set: no HairPop mock uses a sidebar yet. The link styles are the top bar's nav links, extracted from:</p>
+  <ul>
+    {{mock:pages/my-appointments/default|nav link current state}}
+    {{mock:pages/account-settings/default|account destinations a sidebar would group}}
+  </ul>
+  <p>Drift fixed during extraction: none; the mocks' starter kit defined <code>.sidebar</code> without using it.</p>
+</section>

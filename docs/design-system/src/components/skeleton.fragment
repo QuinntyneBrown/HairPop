@@ -1,0 +1,196 @@
+<!--meta {"lead": "Skeletons hold the shape of content while it loads, so the page settles into place instead of jumping when the style cards, braider profiles or appointments arrive.", "description": "Text, title, circle, rect and 3:2 media blocks, composed into story-card and list-row skeletons.", "pills": ["<code>aria-hidden</code> + <code>aria-busy</code>", "Status: stable"], "variants": "text, title, circle, rect, hero (3:2 media); composed story card, list row, appointment row", "states": "loading (shimmer), reduced motion (still), loaded (replaced), failed (replaced by error)", "sources": ["pages/style-gallery/loading", "pages/matching-braiders/loading", "pages/braider-profile/loading", "pages/my-appointments/loading"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use skeletons on first load of any screen whose layout you know: the style gallery, matching braiders, a braider profile, my appointments. They draw the structure that is coming (media, title, two lines of text) in neutral blocks with a soft shimmer.</p>
+  <ul>
+    <li>A skeleton mirrors the loaded layout: the same grid, the same card, the same 3:2 media. It is not a generic placeholder.</li>
+    <li>For a short in-place refresh of something already on screen, keep the old content and show an inline <a href="spinner.html">spinner</a>.</li>
+    <li>If loading fails, the skeleton is replaced by an error <a href="empty-state.html">empty state</a>, never left shimmering.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="card story-card" aria-busy="true" style="width: 100%; max-width: 18rem;">
+        <span class="skeleton skeleton--hero" aria-hidden="true"></span>
+        <div aria-hidden="true"><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div>
+        <span class="visually-hidden" role="status">Loading styles</span>
+      </div>
+      <span class="ds-callout" style="left: 50%; top: 28%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 54%; top: 68%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 70%; top: 80%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 18%; top: 10%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Media block</b><small><code>.skeleton--hero</code>: 3:2 aspect ratio, <code>--radius-md</code>, same as the photo it stands for.</small></div></li>
+      <li><div><b>Title bar</b><small><code>.skeleton--title</code>: 1.5em tall, 40% wide.</small></div></li>
+      <li><div><b>Text lines</b><small><code>.skeleton--text</code>: one line of body text; the last line is 60% wide.</small></div></li>
+      <li><div><b>Busy container</b><small>The real card with <code>aria-busy="true"</code> and one visually hidden status message.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>Five primitive blocks, sized in <code>em</code> so they follow the type they replace.</p>
+  {{example:[stack]Title, text lines, circle (avatar), rect (button or field) and hero (3:2 media).}}
+<div aria-hidden="true">
+  <span class="skeleton skeleton--title"></span>
+  <span class="skeleton skeleton--text"></span>
+  <span class="skeleton skeleton--text"></span>
+</div>
+<div class="cluster" aria-hidden="true">
+  <span class="skeleton skeleton--circle"></span>
+  <span class="skeleton skeleton--rect" style="width: 8rem; height: var(--control-height-md);"></span>
+</div>
+<span class="skeleton skeleton--hero" aria-hidden="true" style="max-width: 18rem;"></span>
+  {{/example}}
+  <h3>Composed: style gallery</h3>
+  <p>The gallery skeleton is the gallery: the same <code>.feature-grid</code> of <code>.story-card</code>s, with media, eyebrow, title and summary blocks.</p>
+  {{example:[stack]Three story-card skeletons in the real grid; the grid region is <code>aria-busy</code> with one status message.}}
+<section class="feature-grid" aria-busy="true" aria-label="Styles">
+  <span class="visually-hidden" role="status">Loading styles</span>
+  <div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div></div>
+  <div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div></div>
+  <div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div><span class="skeleton skeleton--text" style="width: 30%;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div></div>
+</section>
+  {{/example}}
+  <h3>Composed: list row and appointment card</h3>
+  {{example:[stack]A notification list row (avatar, two lines) and an appointment row (badge, title, meta, action).}}
+<div class="card card--flush"><ul class="list" aria-busy="true" aria-label="Notifications">
+  <li class="list__item" aria-hidden="true"><span class="skeleton skeleton--circle"></span><div class="list__body"><span class="skeleton skeleton--text" style="width: 50%;"></span><span class="skeleton skeleton--text"></span></div></li>
+  <li class="list__item" aria-hidden="true"><span class="skeleton skeleton--circle"></span><div class="list__body"><span class="skeleton skeleton--text" style="width: 50%;"></span><span class="skeleton skeleton--text"></span></div></li>
+</ul></div>
+<div class="card appointment-row" aria-busy="true">
+  <span class="visually-hidden" role="status">Loading your appointments</span>
+  <div style="flex: 1;" aria-hidden="true"><span class="skeleton skeleton--rect" style="width: 7rem; height: 1.5rem;"></span><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div>
+  <span class="skeleton skeleton--rect" style="width: 8rem; height: var(--control-height-md);" aria-hidden="true"></span>
+</div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes" data-na="Skeletons have no sizes of their own: each block takes the size of the content it stands for (em-based text, 3:2 media, control heights)."><h2><a href="#sizes">Sizes</a></h2></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Skeletons are not interactive: no hover, focus, active or disabled. Their life has three visible states, plus failure.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Block</th><th scope="col">Loading (shimmer)</th><th scope="col">Reduced motion (still)</th><th scope="col">Loaded</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Text</th><td style="min-width: 10rem;"><div aria-hidden="true"><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div></td><td style="min-width: 10rem;"><div aria-hidden="true" style="--motion-loop-state: paused;"><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div></td><td><p class="text-muted">Gentle at the root · 4–7 hours</p></td></tr>
+      <tr><th scope="row">Circle</th><td><span class="skeleton skeleton--circle" aria-hidden="true"></span></td><td><span class="skeleton skeleton--circle" aria-hidden="true" style="--motion-loop-state: paused;"></span></td><td><span class="avatar" aria-hidden="true">NO</span></td></tr>
+      <tr><th scope="row">Hero (3:2)</th><td style="min-width: 10rem;"><span class="skeleton skeleton--hero" aria-hidden="true"></span></td><td style="min-width: 10rem;"><span class="skeleton skeleton--hero" aria-hidden="true" style="--motion-loop-state: paused;"></span></td><td style="min-width: 10rem;"><img class="story-card__photo" src="../../mocks/assets/photos/knotless-braids.png" alt="Medium knotless braids shown from the back and side"></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  {{themes:stack}}<div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div></div>{{/themes}}
+  <ul>
+    <li><b>Loading</b>: the shimmer sweeps once per <code>--duration-loop-shimmer</code> (1.4s) between <code>--color-bg-subtle</code> and <code>--color-bg-subtle-hover</code>.</li>
+    <li><b>Reduced motion</b>: the sweep pauses (<code>--motion-loop-state: paused</code>); the blocks stay as still shapes.</li>
+    <li><b>Loaded</b>: content replaces the blocks in one update, the container drops <code>aria-busy</code>, and the status message clears or gives a count ("12 braiders").</li>
+    <li><b>Failed</b>: the whole region is replaced by an error empty state; partial failures replace only the failed card with a warning alert (see the braider profile "partial" mock).</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Skeletons live inside the real layout classes (<code>.feature-grid</code>, <code>.detail-grid</code>, <code>.stack</code>), so they reflow exactly like the content: one column on phones, two from 768px, three from 1024px.</li>
+    <li>Render as many skeleton cards as fill the first viewport for that breakpoint (one or two on phones, three on desktop), not a fixed number.</li>
+    <li>Media blocks keep the 3:2 aspect ratio at every width, so the loaded photo lands in exactly the same box (no layout shift).</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The shimmer is a gradient of <code>--color-bg-subtle</code> and <code>--color-bg-subtle-hover</code>, both semantic, so the dark theme gets grey 800 and grey 700 blocks that read as recessed on a grey 900 card. Corners use <code>--radius-sm</code> for text and <code>--radius-md</code> for media and controls.</p>
+  <pre><code>/* Skeletons on an accent art panel */
+.story-card__art .skeleton { background-image: linear-gradient(90deg, var(--color-accent-subtle) 25%, var(--color-accent-subtle-hover) 37%, var(--color-accent-subtle) 63%); }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Every skeleton block is <code>aria-hidden="true"</code>: it has no meaning to announce. The container that will hold the content sets <code>aria-busy="true"</code> while loading, and one polite <code>role="status"</code> message names what is loading ("Loading styles"). See <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-busy">WAI-ARIA aria-busy</a>.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Not focusable. Skeleton cards contain no links or buttons; real controls (search, filters) outside the loading region stay usable.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Focus is not moved when content arrives. If focus was inside the region (a "Try again" button that started the reload), return it to the region's heading.</p>
+  <h3>Labelling</h3>
+  <p>One status message per loading region, never one per block. Name the content: "Loading styles", "Loading Nia’s reviews", "Loading your appointments".</p>
+  <h3>Contrast</h3>
+  <p>Skeleton blocks are decorative placeholders and exempt from 1.4.11; the status message is announced, not seen. The content that replaces them meets the text pairs:</p>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Muted text that replaces a line|--color-fg-muted|--color-bg-surface|4.5}}
+    {{pair:Body text that replaces a title|--color-fg-default|--color-bg-surface|4.5}}
+  </div>
+  <h3>Motion</h3>
+  <p>The shimmer loops on <code>--duration-loop-shimmer</code> with <code>animation-play-state: var(--motion-loop-state)</code>; under <code>prefers-reduced-motion</code> it pauses and the blocks stay still. The shimmer is low contrast and slow, far below flash thresholds.</p>
+  <h3>Touch</h3>
+  <p>Not a target. Do not make skeleton cards tappable; links appear only when content loads.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>The status message is "Loading" plus the content's name, in sentence case: "Loading styles", "Loading Nia’s profile".</li>
+    <li>No visible "Loading…" text on top of skeletons; the shapes already say it.</li>
+    <li>If loading passes about ten seconds, add a visible line under the region: "Still loading. Check your connection." with a Try again link.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card story-card" aria-hidden="true"><span class="skeleton skeleton--hero"></span><div><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span></div></div></div><figcaption>Mirror the loaded card: 3:2 media, title, summary, in the real grid.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card" aria-hidden="true"><span class="skeleton skeleton--title"></span><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></div><div class="card" aria-hidden="true"><span class="skeleton skeleton--rect" style="min-height: 6rem;"></span><span class="skeleton skeleton--text"></span></div></div><figcaption>The mocks show the same three generic cards on every screen, so the page jumps when the real layout arrives.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><section aria-busy="true" aria-label="Styles"><span class="visually-hidden" role="status">Loading styles</span><span class="skeleton skeleton--text" aria-hidden="true"></span></section></div><figcaption>Mark the region <code>aria-busy</code> and give it one status message.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><section aria-label="Loading content"><span class="skeleton skeleton--text"></span><span class="skeleton skeleton--text"></span></section></div><figcaption>An <code>aria-label</code> alone (as in the mocks) is not announced as loading, and blocks without <code>aria-hidden</code> clutter the reading order.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Block base|--color-bg-subtle}}
+      {{tok:Shimmer highlight|--color-bg-subtle-hover}}
+      {{tok:Text and title radius|--radius-sm}}
+      {{tok:Media and control radius|--radius-md}}
+      {{tok:Circle|--radius-full|--control-height-md}}
+      {{tok:Shimmer loop|--duration-loop-shimmer|--ease-standard}}
+      {{tok:Reduced motion|--motion-loop-state}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;section class="feature-grid" aria-busy="true" aria-label="Styles"&gt;
+  &lt;span class="visually-hidden" role="status"&gt;Loading styles&lt;/span&gt;
+  &lt;div class="card story-card" aria-hidden="true"&gt;
+    &lt;span class="skeleton skeleton--hero"&gt;&lt;/span&gt;
+    &lt;div&gt;
+      &lt;span class="skeleton skeleton--title"&gt;&lt;/span&gt;
+      &lt;span class="skeleton skeleton--text"&gt;&lt;/span&gt;
+      &lt;span class="skeleton skeleton--text"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.skeleton</code></td><td>Base block with shimmer; min-height 1em.</td></tr>
+    <tr><td><code>.skeleton--text</code></td><td>One line of text; the last in a group is 60% wide.</td></tr>
+    <tr><td><code>.skeleton--title</code></td><td>Heading bar, 1.5em tall, 40% wide.</td></tr>
+    <tr><td><code>.skeleton--circle</code></td><td>Round block (avatar), 40px by default.</td></tr>
+    <tr><td><code>.skeleton--rect</code></td><td>Rounded block; set width and height for buttons, badges, fields.</td></tr>
+    <tr><td><code>.skeleton--hero</code></td><td>Full-width 3:2 media block.</td></tr>
+    <tr><td><code>aria-hidden="true"</code></td><td>On every block or on the skeleton card wrapper.</td></tr>
+    <tr><td><code>aria-busy="true"</code> + <code>role="status"</code></td><td>On the loading region and its one status message.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    {{mock:pages/style-gallery/loading|generic three-card skeleton}}
+    {{mock:pages/matching-braiders/loading|same generic skeleton}}
+    {{mock:pages/braider-profile/loading|same generic skeleton for a detail layout}}
+    {{mock:pages/my-appointments/loading|same generic skeleton for a list}}
+    {{mock:pages/not-found/loading|skeleton on a static error page}}
+  </ul>
+  <p>Drift fixed during extraction: every loading mock shows the same three generic skeleton cards whatever the real layout (system: the skeleton mirrors the loaded layout); the hero block had a fixed <code>min-height</code> of three times <code>--space-12</code> (now a 3:2 aspect ratio matching the photo, no layout shift); the loading region had only <code>aria-label="Loading content"</code> (now <code>aria-busy</code> plus a named status message, blocks <code>aria-hidden</code>); text lines were 0.9em with 0.3em margins, off-scale (now 0.875em and 0.375em); the shimmer used a raw 1.4s duration and stopped through a global <code>!important</code> override (now <code>--duration-loop-shimmer</code>, paused through <code>--motion-loop-state</code>).</p>
+</section>

@@ -1,0 +1,185 @@
+<!--meta {"lead": "Chips are compact pill controls for narrowing a list: pick a style type, show an applied filter, remove it again.", "description": "Filter (toggle), input (removable) and static chips in two sizes, with every state in both themes.", "pills": ["Native <code>&lt;button&gt;</code> + <code>aria-pressed</code>", "Status: stable"], "variants": "filter (toggle), input (removable), static", "states": "default, hover, focus, active, selected (pressed), disabled", "sources": ["pages/style-gallery/default", "pages/style-gallery/no-results", "pages/matching-braiders/no-results"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use chips for quick, reversible choices that filter what is on screen: style type on the gallery, applied filters above braider results. Use a <a href="button.html">button</a> for an action, a <a href="badge.html">badge</a> for read-only status, and a <a href="radio-group.html">radio group</a> or <a href="select.html">select</a> inside forms.</p>
+  <ul>
+    <li><b>Filter</b> chips toggle with <code>aria-pressed</code>. In a single-choice set ("All styles", "Braids", "Twists", "Locs") exactly one is pressed at a time and pressing it again does nothing.</li>
+    <li><b>Input</b> chips show an applied filter ("Under $200", "Within 10 km") and carry a remove button.</li>
+    <li><b>Static</b> chips are tags on content ("Knotless", "Toronto West") with no interaction.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <span class="chip chip--static chip--md">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200">{{icon:close|icon--sm}}</button></span>
+      <span class="ds-callout" style="left: 40%; top: 20%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 61%; top: 20%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 34%; top: 74%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Label</b><small>Label font (14px semibold); a noun or short phrase.</small></div></li>
+      <li><div><b>Remove button (input chips)</b><small>24px circular target with the close icon and its own <code>aria-label</code>.</small></div></li>
+      <li><div><b>Pill</b><small>32px (or 40px) tall, <code>--radius-full</code>, 1px strong border, 12px padding.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:Filter chips in a labelled group; one pressed at a time for a single-choice set.}}
+<div class="chip-row" role="group" aria-label="Style type">
+  <button type="button" class="chip" aria-pressed="true">All styles</button>
+  <button type="button" class="chip" aria-pressed="false">Braids</button>
+  <button type="button" class="chip" aria-pressed="false">Twists</button>
+  <button type="button" class="chip" aria-pressed="false">Locs</button>
+</div>
+  {{/example}}
+  {{example:Input chips: the chip is a label, the remove button is the control.}}
+<div class="chip-row" role="group" aria-label="Applied filters">
+  <span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200">{{icon:close|icon--sm}}</button></span>
+  <span class="chip chip--static">Within 10 km<button class="remove" type="button" aria-label="Remove filter: within 10 km">{{icon:close|icon--sm}}</button></span>
+  <button class="btn btn--link btn--sm" type="button">Clear filters</button>
+</div>
+  {{/example}}
+  {{example:Static chips tag content; they are not focusable.}}
+<div class="chip-row"><span class="chip chip--static">Knotless</span><span class="chip chip--static">Twists</span><span class="chip chip--static">Toronto West</span></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <p>Small (32px) is the default in filter rows. Medium (40px) lines chips up with a 40px search field or button on the same row.</p>
+  {{example:Default <code>--control-height-sm</code> (32px) · <code>.chip--md</code> <code>--control-height-md</code> (40px).}}
+<button type="button" class="chip" aria-pressed="true">Braids · 32px</button>
+<button type="button" class="chip chip--md" aria-pressed="true">Braids · 40px</button>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Pointer and focus states are forced here with <code>data-state</code>; real pages get them from <code>:hover</code>, <code>:focus-visible</code>, <code>:active</code>, <code>:disabled</code> and <code>aria-pressed</code>.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Active</th><th scope="col">Selected</th><th scope="col">Selected hover</th><th scope="col">Disabled</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Filter</th><td><button type="button" class="chip" aria-pressed="false">Braids</button></td><td><button type="button" class="chip" aria-pressed="false" data-state="hover">Braids</button></td><td><button type="button" class="chip" aria-pressed="false" data-state="focus">Braids</button></td><td><button type="button" class="chip" aria-pressed="false" data-state="active">Braids</button></td><td><button type="button" class="chip" aria-pressed="true">Braids</button></td><td><button type="button" class="chip" aria-pressed="true" data-state="hover">Braids</button></td><td><button type="button" class="chip" aria-pressed="false" disabled>Braids</button></td></tr>
+      <tr><th scope="row">Filter, md</th><td><button type="button" class="chip chip--md" aria-pressed="false">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="false" data-state="hover">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="false" data-state="focus">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="false" data-state="active">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="true">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="true" data-state="hover">Twists</button></td><td><button type="button" class="chip chip--md" aria-pressed="false" disabled>Twists</button></td></tr>
+      <tr><th scope="row">Input</th><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200">{{icon:close|icon--sm}}</button></span></td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (hover)" style="background: var(--color-bg-subtle-hover);">{{icon:close|icon--sm}}</button></span></td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (focus)" data-state="focus">{{icon:close|icon--sm}}</button></span></td><td><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (active)" style="background: var(--color-bg-subtle-hover);">{{icon:close|icon--sm}}</button></span></td><td>—</td><td>—</td><td><span class="chip chip--static" data-state="disabled">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200 (disabled)" disabled>{{icon:close|icon--sm}}</button></span></td></tr>
+      <tr><th scope="row">Static</th><td><span class="chip chip--static">Knotless</span></td><td colspan="6">No interactive states.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  {{themes}}<button type="button" class="chip" aria-pressed="true">All styles</button><button type="button" class="chip" aria-pressed="false">Braids</button><span class="chip chip--static">Under $200<button class="remove" type="button" aria-label="Remove filter: under $200">{{icon:close|icon--sm}}</button></span><span class="chip chip--static">Knotless</span>{{/themes}}
+  <ul>
+    <li><b>Selected</b> is <code>aria-pressed="true"</code>: plum-50 fill, plum border and plum label, the same selected look as the current nav link.</li>
+    <li><b>Disabled</b> is rare: keep a filter enabled and show "No matches" rather than greying out choices people might want.</li>
+    <li><b>Loading</b>: after a chip is pressed, the results area, not the chip, shows the busy state.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Chip rows wrap (<code>.chip-row</code>, <code>flex-wrap: wrap</code>, 8px gap); they never scroll sideways and never shrink a label.</li>
+    <li>At 360px the style-type row ("All styles", "Braids", "Twists", "Locs") fits on one line; a longer set wraps to two.</li>
+    <li>The small chip is 32px tall; with 8px between neighbours it meets the 24px target rule. Prefer <code>.chip--md</code> when a row is the main control on a phone screen.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Component tokens <code>--chip-bg</code>, <code>--chip-fg</code>, <code>--chip-border</code> and <code>--chip-height</code> map to surface, default text, strong border and the small control height; the selected state swaps them to <code>--color-accent-subtle</code>, <code>--color-fg-accent</code> and <code>--color-accent</code>. Dark mode uses plum-950 with a plum-300 label.</p>
+  <pre><code>/* Chips on a sunken well */
+.well .chip { --chip-bg: var(--color-bg-surface-raised); }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Filter chips are <code>&lt;button type="button" aria-pressed&gt;</code> toggle buttons (<a href="https://www.w3.org/WAI/ARIA/apg/patterns/button/">APG Button, toggle</a>) inside <code>role="group"</code> with an <code>aria-label</code> naming the set. Input chips are a text label plus a real remove <code>&lt;button&gt;</code>. Static chips are spans.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves between chips (each is a tab stop) and remove buttons.</td></tr>
+    <tr><td><kbd>Space</kbd> / <kbd>Enter</kbd></td><td>Toggles a filter chip; activates a remove button.</td></tr>
+    <tr><td><kbd>Backspace</kbd> / <kbd>Delete</kbd></td><td>On a focused remove button, also removes the filter.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The shared ring on <code>:focus-visible</code>. After a filter is removed, focus moves to the next chip, or to "Clear filters" when none are left; never to the top of the page.</p>
+  <h3>Labelling</h3>
+  <p>The chip text is the name and <code>aria-pressed</code> carries the state ("Braids, toggle button, pressed"). Remove buttons name what they remove: "Remove filter: under $200". Announce the new result count in a polite live region after each change ("12 braiders").</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Label on chip|--color-fg-default|--color-bg-surface|4.5}}
+    {{pair:Label on hovered chip|--color-fg-default|--color-bg-subtle|4.5}}
+    {{pair:Selected label|--color-fg-accent|--color-accent-subtle|4.5}}
+    {{pair:Selected label, hover|--color-fg-accent|--color-accent-subtle-hover|4.5}}
+    {{pair:Chip border on page|--color-border-strong|--color-bg-canvas|3}}
+    {{pair:Focus ring on page|--color-focus-ring|--color-bg-canvas|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>Background and border transition over <code>--duration-fast</code>; zero under reduced motion.</p>
+  <h3>Touch</h3>
+  <p>32px chips with 8px gaps pass the 24px minimum; the remove button is a 24px circle. Use 40px chips where the row is a phone screen's primary control.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Sentence-case nouns: "Braids", "Twists", "All styles". One or two words.</li>
+    <li>Input chips state the value, not the field: "Under $200", "Within 10 km".</li>
+    <li>Put "All …" first in a single-choice set, pressed by default.</li>
+    <li>Pair applied-filter chips with "Clear filters" when there are two or more.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="chip-row" role="group" aria-label="Style type (example)"><button type="button" class="chip" aria-pressed="true">All styles</button><button type="button" class="chip" aria-pressed="false">Braids</button><button type="button" class="chip" aria-pressed="false">Twists</button></div></div><figcaption>A labelled group where every chip states <code>aria-pressed</code>, and exactly one is pressed.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="chip-row"><button type="button" class="chip" aria-pressed="true">All styles</button><button type="button" class="chip">Braids</button><button type="button" class="chip">Twists</button></div></div><figcaption>Only the pressed chip says it is a toggle and the row has no group label, as on the style gallery. The others read as plain buttons.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="chip chip--static">Knotless<button class="remove" type="button" aria-label="Remove filter: knotless">{{icon:close|icon--sm}}</button></span><span class="chip chip--static">Under $150<button class="remove" type="button" aria-label="Remove filter: under $150">{{icon:close|icon--sm}}</button></span></div><figcaption>One removable chip per applied filter.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge">Knotless · Toronto · under $150</span></div><figcaption>Applied filters squeezed into one badge (no-results states) cannot be removed one at a time.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Background|--color-bg-surface}}
+      {{tok:Background, hover / active|--color-bg-subtle|--color-bg-subtle-hover}}
+      {{tok:Label|--color-fg-default}}
+      {{tok:Border|--color-border-strong}}
+      {{tok:Selected background / hover|--color-accent-subtle|--color-accent-subtle-hover}}
+      {{tok:Selected label / border|--color-fg-accent|--color-accent}}
+      {{tok:Focus ring|--color-focus-ring}}
+      {{tok:Height sm / md|--control-height-sm|--control-height-md}}
+      {{tok:Padding / gap|--space-3|--space-1}}
+      {{tok:Label font|--text-label}}
+      {{tok:Shape|--radius-full}}
+      {{tok:Transition|--duration-fast|--ease-standard}}
+    </tbody>
+  </table></div>
+  <p>Component tokens: <code>--chip-bg</code>, <code>--chip-fg</code>, <code>--chip-border</code>, <code>--chip-height</code>.</p>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="chip-row" role="group" aria-label="Style type"&gt;
+  &lt;button type="button" class="chip" aria-pressed="true"&gt;All styles&lt;/button&gt;
+  &lt;button type="button" class="chip" aria-pressed="false"&gt;Braids&lt;/button&gt;
+&lt;/div&gt;
+&lt;span class="chip chip--static"&gt;Under $200
+  &lt;button class="remove" type="button" aria-label="Remove filter: under $200"&gt;…&lt;/button&gt;
+&lt;/span&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.chip</code></td><td>Base: 32px pill, interactive.</td></tr>
+    <tr><td><code>.chip--md</code></td><td>40px chip.</td></tr>
+    <tr><td><code>.chip--static</code></td><td>Non-interactive tag or input-chip label.</td></tr>
+    <tr><td><code>.chip .remove</code></td><td>Remove button inside an input chip; needs <code>aria-label</code>.</td></tr>
+    <tr><td><code>.chip-row</code></td><td>Wrapping row with 8px gap; add <code>role="group"</code> and a label.</td></tr>
+    <tr><td><code>aria-pressed="true|false"</code></td><td>Toggle state; <code>"true"</code> shows the selected look.</td></tr>
+    <tr><td><code>disabled</code></td><td>Disabled, 50% opacity.</td></tr>
+    <tr><td><code>data-state="hover|focus|active|selected|disabled"</code></td><td>Documentation and mocks only.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    {{mock:pages/style-gallery/default|style-type filter chips}}
+    {{mock:pages/style-gallery/no-results|filter summary that should be input chips}}
+    {{mock:pages/matching-braiders/no-results|filter summary badge}}
+  </ul>
+  <p>Drift fixed during extraction: only the pressed chip carried <code>aria-pressed</code> and the row had no group label (system: every chip states <code>aria-pressed</code>, the row is a labelled group, one pressed at a time for single-choice sets); applied filters were shown as one badge (system: removable input chips); the remove button was 20px (now 24px to meet the target minimum).</p>
+</section>

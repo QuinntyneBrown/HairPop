@@ -1,0 +1,132 @@
+<!--meta {"lead": "Choosing a braider should be as easy with a screen reader, a keyboard or 400% zoom as with a thumb. HairPop meets WCAG 2.2 AA by construction, in both themes.", "description": "The WCAG 2.2 AA commitments, focus and target sizes, the component contract and how to test.", "covers": "WCAG 2.2 AA checklist, focus ring, target sizes, component contract, testing procedure"} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Accessibility is built into the tokens and components, not added per screen. Contrast is a property of token pairs, focus is one shared ring, targets come from size tokens, motion respects the person's preference through the motion tokens, and every component page states its role, keyboard model, labelling, contrast, motion and touch behaviour.</p>
+  <ul class="ds-checklist">
+    <li>Every text and control pairing passes in light and dark (148 pairs, checked by script).</li>
+    <li>One visible focus ring on every interactive element.</li>
+    <li>Every target at least 24×24px; primary mobile actions 44px.</li>
+    <li>Native elements first; ARIA only following the WAI-ARIA Authoring Practices patterns named on each component page.</li>
+    <li>Status is never colour alone: colour plus icon plus words.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="perceivable"><h2><a href="#perceivable">Perceivable</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Requirement</th><th scope="col">SC</th><th scope="col">Rule in HairPop</th></tr></thead>
+    <tbody>
+      <tr><td>Text contrast</td><td>1.4.3</td><td>Body, label and secondary text at least 4.5:1 on every surface; large text at least 3:1. Pairs live in <code>tokens/contrast-pairs.json</code>.</td></tr>
+      <tr><td>Non-text contrast</td><td>1.4.11</td><td>Input borders, focus rings, switch tracks, meaningful icons and the unread-count badge at least 3:1. Card edges and dividers are decorative and exempt.</td></tr>
+      <tr><td>Use of colour</td><td>1.4.1</td><td>Badges say "Awaiting reply" as well as being amber; links are underlined; field errors have text and an icon.</td></tr>
+      <tr><td>Resize and reflow</td><td>1.4.4, 1.4.10</td><td>Sizes in <code>rem</code>; every screen reflows to 320 CSS px with no two-dimensional scroll except tables.</td></tr>
+      <tr><td>Text spacing</td><td>1.4.12</td><td>No fixed heights on text containers; nothing clips at 1.5 line height or 0.12em letter spacing.</td></tr>
+      <tr><td>Images</td><td>1.1.1</td><td>Style photos describe the style ("Medium knotless braids shown from the back and side"); decorative SVGs are <code>aria-hidden</code>.</td></tr>
+      <tr><td>Orientation and motion</td><td>1.3.4, 2.3.3</td><td>No orientation lock; reduced motion handled by tokens (see <a href="motion.html">Motion</a>).</td></tr>
+      <tr><td>Input purpose</td><td>1.3.5</td><td><code>autocomplete</code> on name, email, phone and password fields.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="operable"><h2><a href="#operable">Operable</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Requirement</th><th scope="col">SC</th><th scope="col">Rule in HairPop</th></tr></thead>
+    <tbody>
+      <tr><td>Keyboard</td><td>2.1.1, 2.1.2</td><td>Everything works with Tab, Shift+Tab, Enter, Space and arrows where a pattern says so. Only modal dialogs trap focus, and Escape releases them.</td></tr>
+      <tr><td>Focus visible</td><td>2.4.7</td><td>2px <code>--color-focus-ring</code> outline, 2px offset, on <code>:focus-visible</code>.</td></tr>
+      <tr><td>Focus not obscured</td><td>2.4.11</td><td>The sticky top bar is offset by <code>scroll-padding-top</code>; toasts and the cookie banner never cover the focused element.</td></tr>
+      <tr><td>Focus order</td><td>2.4.3</td><td>DOM order is visual order; no positive <code>tabindex</code>; dialogs move focus in and return it to the trigger.</td></tr>
+      <tr><td>Target size</td><td>2.5.8</td><td>At least 24×24px everywhere; 44px for nav links, tabs and a screen's primary mobile action.</td></tr>
+      <tr><td>Dragging</td><td>2.5.7</td><td>No drag-only interaction; any future slider has number inputs beside it.</td></tr>
+      <tr><td>Timing</td><td>2.2.1, 2.2.2</td><td>Success toasts last at least 8 seconds and pause on hover and focus; error toasts persist until dismissed; skeletons and pulses pause under reduced motion.</td></tr>
+      <tr><td>Bypass blocks</td><td>2.4.1</td><td>A skip link to <code>#main</code> on every screen; landmarks <code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>.</td></tr>
+      <tr><td>Titles and headings</td><td>2.4.2, 2.4.6</td><td>Unique <code>&lt;title&gt;</code>; one <code>&lt;h1&gt;</code>; headings in order (card titles are <code>h2</code> under the page's <code>h1</code>).</td></tr>
+      <tr><td>Link purpose</td><td>2.4.4</td><td>"Explore Knotless braids", "View Nia's profile"; never "click here" or a bare "More".</td></tr>
+      <tr><td>Label in name</td><td>2.5.3</td><td>An accessible name starts with the visible label: "Updates, 2 unread", not "Notifications, 2 unread" on a link that says "Updates".</td></tr>
+      <tr><td>Pointer cancellation</td><td>2.5.2</td><td>Actions fire on click or key up, never on pointer down.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="understandable"><h2><a href="#understandable">Understandable</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Requirement</th><th scope="col">SC</th><th scope="col">Rule in HairPop</th></tr></thead>
+    <tbody>
+      <tr><td>Labels</td><td>3.3.2</td><td>A visible label on every control; placeholders are hints, never labels; optional fields say "(optional)".</td></tr>
+      <tr><td>Error identification and suggestion</td><td>3.3.1, 3.3.3</td><td>Errors name the field and the fix ("Choose a rating from 1 to 5"); <code>aria-invalid</code> plus <code>aria-describedby</code>; an error summary links each error to its field and receives focus on submit.</td></tr>
+      <tr><td>Error prevention</td><td>3.3.4</td><td>Booking requests are reviewed before sending; cancelling asks for confirmation.</td></tr>
+      <tr><td>Redundant entry</td><td>3.3.7</td><td>Contact details and the chosen style carry into the booking request.</td></tr>
+      <tr><td>Accessible authentication</td><td>3.3.8</td><td>No puzzles; paste and password managers allowed; reset by email link.</td></tr>
+      <tr><td>Consistent navigation</td><td>3.2.3, 3.2.4</td><td>Same top bar, same order, same names on every screen.</td></tr>
+      <tr><td>Language</td><td>3.1.1</td><td><code>&lt;html lang="en"&gt;</code>; <code>lang</code> on inline phrases in another language.</td></tr>
+      <tr><td>On input</td><td>3.2.2</td><td>Choosing a filter chip or checkbox never navigates or submits on its own.</td></tr>
+      <tr><td>Consistent help</td><td>3.2.6</td><td>The Help link sits in the same place in the top bar on every screen.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="robust"><h2><a href="#robust">Robust</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Requirement</th><th scope="col">SC</th><th scope="col">Rule in HairPop</th></tr></thead>
+    <tbody>
+      <tr><td>Name, role, value</td><td>4.1.2</td><td><code>button</code>, <code>a</code>, <code>input</code>, <code>select</code>, <code>details</code> first; ARIA fills gaps following the pattern named on each component page.</td></tr>
+      <tr><td>Status messages</td><td>4.1.3</td><td>One polite <code>role="status"</code> toast region; errors in a separate <code>role="alert"</code> region, never nested inside the polite one.</td></tr>
+      <tr><td>Valid HTML</td><td>–</td><td>No duplicate ids; no interactive element inside another; errors live outside the <code>&lt;label&gt;</code>.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="focus"><h2><a href="#focus">Focus and targets</a></h2>
+  {{example:The shared ring on a button, a field, a nav link and a chip, forced with <code>data-state="focus"</code>.}}
+<button class="btn btn--primary" type="button" data-state="focus">Send request</button>
+<label class="search-box" style="flex: 0 1 14rem;"><span class="visually-hidden">Search styles (focus demo)</span><input class="input" type="search" value="knotless braids" data-state="focus"></label>
+<a class="nav-link" href="#focus" data-state="focus">Braiders</a>
+<button class="chip" type="button" aria-pressed="true" data-state="focus">All styles</button>
+  {{/example}}
+  {{themes}}<button class="btn btn--primary" type="button" data-state="focus">Send request</button><button class="btn" type="button" data-state="focus">Filters</button>{{/themes}}
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Focus ring on page|--color-focus-ring|--color-bg-canvas|3}}
+    {{pair:Focus ring on card|--color-focus-ring|--color-bg-surface|3}}
+    {{pair:Focus ring in dialog|--color-focus-ring|--color-bg-surface-raised|3}}
+  </div>
+  {{example:24px minimum (dismiss buttons, chip remove) and 44px comfortable (nav links, tabs).}}
+<span style="display: inline-grid; place-items: center; width: var(--target-min); height: var(--target-min); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-sm); font: var(--text-caption);">24</span>
+<span style="display: inline-grid; place-items: center; width: var(--target-comfortable); height: var(--target-comfortable); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-sm); font: var(--text-caption);">44</span>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="contract"><h2><a href="#contract">Component contract</a></h2>
+  <p>Every component page's Accessibility section answers the same seven questions:</p>
+  <ol>
+    <li><b>Role and pattern</b>: the element or ARIA pattern, linked to the WAI-ARIA Authoring Practices Guide.</li>
+    <li><b>Keyboard</b>: a key table (Tab, Shift+Tab, Enter, Space, Escape, arrows, Home and End).</li>
+    <li><b>Focus</b>: where it starts, where it goes on close, how the ring looks.</li>
+    <li><b>Labelling</b>: what must be named, how, and what is announced.</li>
+    <li><b>Contrast</b>: the token pairs with live ratios in both themes.</li>
+    <li><b>Motion</b>: what animates and what reduced motion does.</li>
+    <li><b>Touch</b>: target sizes and the alternative to hover.</li>
+  </ol>
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <h3>Testing procedure</h3>
+  <ol>
+    <li><b>Contrast:</b> <code>python .claude/skills/extracting-design-systems/scripts/check_contrast.py docs/design-system/tokens/tokens.css</code> must report 0 failures for light and dark.</li>
+    <li><b>Structure:</b> <code>check_design_system.py docs/design-system</code> checks labels, names, alt text, landmarks, headings and links.</li>
+    <li><b>Keyboard:</b> Tab through each changed screen; every control is reachable, the order matches the layout, the ring is always visible, dialogs trap and return focus, Escape closes.</li>
+    <li><b>Screen reader:</b> NVDA with Chrome or VoiceOver with Safari on one form (booking request), one dialog (cancel appointment) and one list (my appointments).</li>
+    <li><b>Zoom:</b> 200% text size and 400% page zoom at 1280px; nothing clips or scrolls sideways.</li>
+    <li><b>Preferences:</b> emulate <code>prefers-reduced-motion</code>, <code>prefers-contrast: more</code> and <code>forced-colors: active</code> in Chromium DevTools.</li>
+  </ol>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Minimum target (WCAG 2.5.8)|--target-min}}
+      {{tok:Comfortable target|--target-comfortable}}
+      {{tok:Focus ring width|--focus-ring-width}}
+      {{tok:Focus ring offset|--focus-ring-offset}}
+    </tbody>
+  </table></div>
+  <p>The ring colour is <code>--color-focus-ring</code>, documented with the other colours on the <a href="color.html">colour</a> page.</p>
+</section>

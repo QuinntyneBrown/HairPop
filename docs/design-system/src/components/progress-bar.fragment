@@ -1,0 +1,189 @@
+<!--meta {"lead": "A progress bar shows how far a task with a known length has come, or that a longer task is still moving when its length is unknown.", "description": "Determinate and indeterminate bars, success and danger endings, with a label and value.", "pills": ["<code>role=\"progressbar\"</code>", "Status: stable", "Core set"], "variants": "determinate, indeterminate, with label and value, success, danger", "states": "in progress, complete, failed, reduced motion", "sources": []} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a progress bar when a task takes longer than about a second and you can say how far along it is: uploading inspiration photos for Nia, saving a long review with photos, importing past appointments. Use the indeterminate bar only when the task is long and its length is truly unknown.</p>
+  <ul>
+    <li>For content that is loading into a known layout, use a <a href="skeleton.html">skeleton</a> instead.</li>
+    <li>For a short wait tied to one control ("Send request"), use the button's loading state or an inline <a href="spinner.html">spinner</a>.</li>
+    <li>No mock uses a progress bar yet; it is part of the core set so the first upload flow has a ready, accessible pattern.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="progress-field" style="width: 100%; max-width: 24rem;">
+        <div class="progress-field__label"><span id="anat-progress-label">Uploading inspiration photos</span><output>2 of 3</output></div>
+        <div class="progress" role="progressbar" aria-labelledby="anat-progress-label" aria-valuemin="0" aria-valuemax="3" aria-valuenow="2" aria-valuetext="2 of 3 photos"><div class="progress__bar" style="--value: 66%;"></div></div>
+      </div>
+      <span class="ds-callout" style="left: 12%; top: 26%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 82%; top: 26%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 70%; top: 66%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 34%; top: 66%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Label</b><small>Says what is happening, in the present tense; it names the progress bar.</small></div></li>
+      <li><div><b>Value (optional)</b><small>An <code>&lt;output&gt;</code> with a count or percentage, tabular numbers.</small></div></li>
+      <li><div><b>Track</b><small>8px tall, full radius, <code>--color-bg-subtle-hover</code>.</small></div></li>
+      <li><div><b>Fill</b><small>Width from <code>--value</code>; <code>--progress-fill</code> (accent, success or danger).</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>Choose determinate whenever you can count something (bytes, files, steps). The ending colour tells the outcome, and the label always says it too.</p>
+  {{example:[stack]Determinate, indeterminate, success and danger. The fill colour is never the only signal: the label changes with it.}}
+<div class="progress-field">
+  <div class="progress-field__label"><span id="pb-v1">Uploading inspiration photos</span><output>2 of 3</output></div>
+  <div class="progress" role="progressbar" aria-labelledby="pb-v1" aria-valuemin="0" aria-valuemax="3" aria-valuenow="2" aria-valuetext="2 of 3 photos"><div class="progress__bar" style="--value: 66%;"></div></div>
+</div>
+<div class="progress-field">
+  <div class="progress-field__label"><span id="pb-v2">Importing your past appointments</span></div>
+  <div class="progress progress--indeterminate" role="progressbar" aria-labelledby="pb-v2"><div class="progress__bar"></div></div>
+</div>
+<div class="progress-field">
+  <div class="progress-field__label"><span id="pb-v3">Photos uploaded</span><output>3 of 3</output></div>
+  <div class="progress progress--success" role="progressbar" aria-labelledby="pb-v3" aria-valuemin="0" aria-valuemax="3" aria-valuenow="3" aria-valuetext="3 of 3 photos"><div class="progress__bar" style="--value: 100%;"></div></div>
+</div>
+<div class="progress-field">
+  <div class="progress-field__label"><span id="pb-v4">Upload stopped: connection lost</span><output>1 of 3</output></div>
+  <div class="progress progress--danger" role="progressbar" aria-labelledby="pb-v4" aria-valuemin="0" aria-valuemax="3" aria-valuenow="1" aria-valuetext="1 of 3 photos, stopped"><div class="progress__bar" style="--value: 33%;"></div></div>
+</div>
+  {{/example}}
+  <h3>Bar only</h3>
+  <p>Inside a dense row (a photo thumbnail, a list item) the bar can stand alone, but it still needs an accessible name through <code>aria-label</code>.</p>
+  {{example:[stack]A bare bar named with <code>aria-label</code>.}}
+<div class="progress" role="progressbar" aria-label="Uploading braids-front.jpg" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><div class="progress__bar" style="--value: 40%;"></div></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes" data-na="One size: an 8px track. Emphasis comes from the label, not a thicker bar."><h2><a href="#sizes">Sizes</a></h2></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>A progress bar is not interactive, so it has no hover, focus, active or disabled states. Its states are where the task is.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Starting (0%)</th><th scope="col">In progress</th><th scope="col">Complete</th><th scope="col">Failed</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Determinate</th>
+        <td style="min-width: 10rem;"><div class="progress" role="progressbar" aria-label="Upload, starting" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress__bar" style="--value: 0%;"></div></div></td>
+        <td style="min-width: 10rem;"><div class="progress" role="progressbar" aria-label="Upload, in progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60"><div class="progress__bar" style="--value: 60%;"></div></div></td>
+        <td style="min-width: 10rem;"><div class="progress progress--success" role="progressbar" aria-label="Upload, complete" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="progress__bar" style="--value: 100%;"></div></div></td>
+        <td style="min-width: 10rem;"><div class="progress progress--danger" role="progressbar" aria-label="Upload, failed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35"><div class="progress__bar" style="--value: 35%;"></div></div></td></tr>
+      <tr><th scope="row">Indeterminate</th>
+        <td><div class="progress progress--indeterminate" role="progressbar" aria-label="Import, starting"><div class="progress__bar"></div></div></td>
+        <td><div class="progress progress--indeterminate" role="progressbar" aria-label="Import, in progress"><div class="progress__bar"></div></div></td>
+        <td><div class="progress progress--success" role="progressbar" aria-label="Import, complete" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="progress__bar" style="--value: 100%;"></div></div></td>
+        <td><div class="progress progress--danger" role="progressbar" aria-label="Import, failed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="progress__bar" style="--value: 100%;"></div></div></td></tr>
+    </tbody>
+  </table></div>
+  <p>An indeterminate task that finishes switches to a full success or danger bar so the ending is visible; the label changes in the same update ("Appointments imported", "Import stopped").</p>
+  <h3>Both themes</h3>
+  {{themes:stack}}<div class="progress" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60"><div class="progress__bar" style="--value: 60%;"></div></div><div class="progress progress--success" role="progressbar" aria-label="Upload complete" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="progress__bar" style="--value: 100%;"></div></div><div class="progress progress--danger" role="progressbar" aria-label="Upload failed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35"><div class="progress__bar" style="--value: 35%;"></div></div>{{/themes}}
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>The bar is always 100% of its container; it never sets its own width. Place it in a <code>.progress-field</code> inside the form or dialog it reports on.</li>
+    <li>The label and value share one row and wrap onto two lines at 360px rather than truncating; keep the label short so it rarely wraps.</li>
+    <li>In a bottom-sheet dialog on phones, the progress field sits above the sticky footer so it is never covered.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The fill reads one component token, <code>--progress-fill</code>, which <code>.progress--success</code> and <code>.progress--danger</code> point at <code>--color-success-solid</code> and <code>--color-danger-solid</code>. The track is <code>--color-bg-subtle-hover</code>. In the dark theme the accent lightens to plum 300 and the track to grey 700, so the fill stays clearly brighter than the track.</p>
+  <pre><code>/* A quieter bar inside a toast */
+.toast .progress { --progress-fill: var(--color-fg-inverse); }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><code>role="progressbar"</code> on <code>.progress</code> (see <a href="https://www.w3.org/TR/wai-aria-1.2/#progressbar">WAI-ARIA progressbar</a>). Determinate bars set <code>aria-valuemin</code>, <code>aria-valuemax</code> and <code>aria-valuenow</code>, plus <code>aria-valuetext</code> when a count reads better than a percentage ("2 of 3 photos"). Indeterminate bars omit <code>aria-valuenow</code>. The region it reports on sets <code>aria-busy="true"</code> until the task ends.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Not focusable; focus stays on the control that started the task (or a Cancel button beside the bar).</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The bar never takes focus. If the task can be stopped, put a "Cancel upload" button next to the label; it receives focus with the shared ring.</p>
+  <h3>Labelling</h3>
+  <p>Name the bar with <code>aria-labelledby</code> pointing at the visible label, or <code>aria-label</code> when there is none. Do not announce every percentage: screen readers read the value on demand. Announce the start and the outcome once through a polite live region or toast ("Photos uploaded", "Upload stopped: connection lost").</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Accent fill on surface|--color-accent|--color-bg-surface|3}}
+    {{pair:Success fill on surface|--color-success-solid|--color-bg-surface|3}}
+    {{pair:Danger fill on surface|--color-danger-solid|--color-bg-surface|3}}
+    {{pair:Label on surface|--color-fg-default|--color-bg-surface|4.5}}
+    {{pair:Value on surface|--color-fg-muted|--color-bg-surface|4.5}}
+  </div>
+  <p>The track itself is decorative; the fill, label and value carry the information.</p>
+  <h3>Motion</h3>
+  <p>Determinate fills animate width over <code>--duration-deliberate</code> (500ms); reduced motion makes the change instant. The indeterminate sweep loops on <code>--duration-loop-shimmer</code> and pauses under <code>prefers-reduced-motion</code> through <code>--motion-loop-state</code>, leaving a still 40% segment; the label still says the task is running.</p>
+  <h3>Touch</h3>
+  <p>Not a target. Any Cancel or Retry button next to it follows the button sizes (40px or more).</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Label the task in the present tense while it runs ("Uploading inspiration photos") and the outcome when it ends ("Photos uploaded", "Upload stopped: connection lost").</li>
+    <li>Prefer counts people understand ("2 of 3 photos") over raw percentages; never show both.</li>
+    <li>On failure, say what is kept and what to do: "Your other photos are saved. Retry when connected."</li>
+    <li>Do not promise a time remaining unless it is accurate.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="progress-field"><div class="progress-field__label"><span id="dd-pb-1">Uploading inspiration photos</span><output>2 of 3</output></div><div class="progress" role="progressbar" aria-labelledby="dd-pb-1" aria-valuemin="0" aria-valuemax="3" aria-valuenow="2" aria-valuetext="2 of 3 photos"><div class="progress__bar" style="--value: 66%;"></div></div></div></div><figcaption>Label the task and show a count people understand.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="progress" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="66"><div class="progress__bar" style="--value: 66%;"></div></div></div><figcaption>A bare bar named "Progress" says nothing about what is happening.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--primary" type="button" aria-busy="true">Send request</button></div><figcaption>A short submit (like sending a booking request) uses the button's loading state, not a progress bar.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="progress progress--indeterminate" role="progressbar" aria-label="Sending request"><div class="progress__bar"></div></div><button class="btn btn--primary" type="button" disabled>Working…</button></div><figcaption>Stacking an indeterminate bar on a disabled "Working…" button (the mocks' submitting pattern) doubles the noise and loses focus.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Fill (default)|--color-accent}}
+      {{tok:Fill (success)|--color-success-solid}}
+      {{tok:Fill (danger)|--color-danger-solid}}
+      {{tok:Track|--color-bg-subtle-hover}}
+      {{tok:Label|--color-fg-default}}
+      {{tok:Value|--color-fg-muted}}
+      {{tok:Track height / radius|--space-2|--radius-full}}
+      {{tok:Label font|--text-label}}
+      {{tok:Fill transition|--duration-deliberate|--ease-standard}}
+      {{tok:Indeterminate loop|--duration-loop-shimmer|--motion-loop-state}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="progress-field"&gt;
+  &lt;div class="progress-field__label"&gt;&lt;span id="upload-label"&gt;Uploading inspiration photos&lt;/span&gt;&lt;output&gt;2 of 3&lt;/output&gt;&lt;/div&gt;
+  &lt;div class="progress" role="progressbar" aria-labelledby="upload-label"
+       aria-valuemin="0" aria-valuemax="3" aria-valuenow="2" aria-valuetext="2 of 3 photos"&gt;
+    &lt;div class="progress__bar" style="--value: 66%"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="progress progress--indeterminate" role="progressbar" aria-label="Importing your past appointments"&gt;
+  &lt;div class="progress__bar"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.progress</code></td><td>Track; carries <code>role="progressbar"</code>.</td></tr>
+    <tr><td><code>.progress__bar</code></td><td>Fill; width from <code>--value</code>.</td></tr>
+    <tr><td><code>style="--value: 66%"</code></td><td>Fill amount; keep in step with <code>aria-valuenow</code>.</td></tr>
+    <tr><td><code>.progress--indeterminate</code></td><td>Looping sweep; omit <code>aria-valuenow</code>.</td></tr>
+    <tr><td><code>.progress--success</code> <code>.progress--danger</code></td><td>Outcome fill colour.</td></tr>
+    <tr><td><code>.progress-field</code>, <code>.progress-field__label</code></td><td>Label row (label and <code>&lt;output&gt;</code>) above the bar.</td></tr>
+    <tr><td><code>aria-valuemin/max/now</code>, <code>aria-valuetext</code></td><td>Determinate value for assistive technology.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>No mock shows a progress bar; it is part of the core set and its CSS comes from the mocks' kit (<code>docs/mocks/assets/ui.css</code>). The closest mocks, where a submit is pending, show why a button state is preferred for short tasks:</p>
+  <ul>
+    {{mock:pages/booking-request/submitting|short submit; button loading state instead of a bar}}
+    {{mock:dialogs/cookie-preferences/busy|busy dialog footer}}
+  </ul>
+  <p>Drift fixed during extraction: the indeterminate loop used a raw 1.4s duration (now <code>--duration-loop-shimmer</code>) and was stopped by a global <code>!important</code> reduced-motion override (now paused through <code>--motion-loop-state</code>); the fill transition used <code>--duration-slow</code> (now <code>--duration-deliberate</code>, the token reserved for progress).</p>
+</section>

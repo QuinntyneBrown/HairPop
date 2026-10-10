@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Divider — HairPop design system</title>
+<meta name="description" content="Horizontal, vertical and labelled hairline dividers in the decorative border colour.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Component · Containers and overlays</p><h1>Divider</h1><p class="ds-lead">A divider is a hairline that separates groups when space alone is not enough: a card footer, a menu group, the line above the site footer.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill"><code>&lt;hr&gt;</code> / <code>role="separator"</code></span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Reach for spacing first: the 4px scale already separates most groups. Use a divider when two adjacent groups would otherwise read as one, such as a card's footer actions, a menu's destructive group, or a long settings form split into topics. Do not add a rule under every list item inside a bordered card; one edge is enough.</p>
+  <ul>
+    <li><b>Horizontal</b>: <code>&lt;hr&gt;</code> or <code>.divider</code> between blocks; 24px above and below.</li>
+    <li><b>Vertical</b>: separates inline groups in a toolbar or footer row.</li>
+    <li><b>With label</b>: names the split ("or", "Earlier"), for example between sign-in methods or notification dates.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div style="width: 100%;"><div class="divider divider--label"><span>Earlier</span></div></div>
+      <span class="ds-callout" style="left: 20%; top: 30%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 50%; top: 30%;" aria-hidden="true">2</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Rule</b><small>1px <code>--border-width-hairline</code> in <code>--color-border-default</code>; decorative.</small></div></li>
+      <li><div><b>Label (optional)</b><small>Overline type in <code>--color-fg-subtle</code>, centred with <code>--space-3</code> either side.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card">
+  <p><strong>Nia received your request</strong><br><span class="text-muted">Today at 9:42 am</span></p>
+  <div class="divider divider--label"><span>Earlier</span></div>
+  <p><strong>How to prepare for knotless braids</strong><br><span class="text-muted">Yesterday</span></p>
+  <hr>
+  <p class="text-muted">Notifications older than 30 days are archived.</p>
+</div></div><div class="ds-example__caption"><span>Horizontal and labelled dividers inside a card.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;card&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Nia received your request&lt;/strong&gt;&lt;br&gt;&lt;span class=&quot;text-muted&quot;&gt;Today at 9:42 am&lt;/span&gt;&lt;/p&gt;
+  &lt;div class=&quot;divider divider--label&quot;&gt;&lt;span&gt;Earlier&lt;/span&gt;&lt;/div&gt;
+  &lt;p&gt;&lt;strong&gt;How to prepare for knotless braids&lt;/strong&gt;&lt;br&gt;&lt;span class=&quot;text-muted&quot;&gt;Yesterday&lt;/span&gt;&lt;/p&gt;
+  &lt;hr&gt;
+  &lt;p class=&quot;text-muted&quot;&gt;Notifications older than 30 days are archived.&lt;/p&gt;
+&lt;/div&gt;</code></pre></details></div>
+  <div class="ds-example"><div class="ds-example__canvas"><div class="cluster"><span class="text-muted">HairPop · Made for confident hair decisions</span><span class="divider divider--vertical" role="separator" aria-orientation="vertical"></span><a href="../../mocks/pages/terms/default.html">Terms</a><a href="../../mocks/pages/privacy/default.html">Privacy</a></div></div><div class="ds-example__caption"><span>A vertical divider separates the tagline from the legal links in a footer row.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;cluster&quot;&gt;&lt;span class=&quot;text-muted&quot;&gt;HairPop · Made for confident hair decisions&lt;/span&gt;&lt;span class=&quot;divider divider--vertical&quot; role=&quot;separator&quot; aria-orientation=&quot;vertical&quot;&gt;&lt;/span&gt;&lt;a href=&quot;../../mocks/pages/terms/default.html&quot;&gt;Terms&lt;/a&gt;&lt;a href=&quot;../../mocks/pages/privacy/default.html&quot;&gt;Privacy&lt;/a&gt;&lt;/div&gt;</code></pre></details></div>
+</section>
+
+<section class="ds-section" id="sizes" data-na="One weight: the hairline. Use space, not a thicker rule, for stronger separation."><h2><a href="#sizes">Sizes</a></h2><p class="ds-na">One weight: the hairline. Use space, not a thicker rule, for stronger separation.</p></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Dividers are static and have no interactive states. They change only with the theme and with <code>prefers-contrast: more</code>, where <code>--color-border-default</code> becomes the strong border.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">On surface</th><th scope="col">On sunken surface</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Horizontal</th><td><hr style="margin: 0; width: 10rem;"></td><td><div class="well"><hr style="margin: 0; width: 10rem;"></div></td></tr>
+      <tr><th scope="row">With label</th><td><div class="divider divider--label" style="margin: 0; width: 12rem;"><span>or</span></div></td><td><div class="well"><div class="divider divider--label" style="margin: 0; width: 12rem;"><span>or</span></div></div></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><hr style="margin: 0;"><div class="divider divider--label" style="margin: 0;"><span>Earlier</span></div></div></div><div data-theme="dark"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><hr style="margin: 0;"><div class="divider divider--label" style="margin: 0;"><span>Earlier</span></div></div></div></div>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Horizontal dividers span their container at every width.</li>
+    <li>Vertical dividers only appear in rows that stay on one line; when a row wraps on phones (footer, toolbars), drop the vertical divider and rely on the wrap gap.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Dividers read <code>--color-border-default</code> (grey 200 light, grey 750 dark) and <code>--border-width-hairline</code>. The label reads <code>--color-fg-subtle</code>. The high-contrast preference strengthens the rule automatically.</p>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><code>&lt;hr&gt;</code> has the implicit <code>separator</code> role and is announced as a thematic break; use it between topics. Purely decorative lines (card footers, the topbar edge) are CSS borders, not elements. A vertical separator uses <code>role="separator" aria-orientation="vertical"</code>. A labelled divider is plain text with decorative lines, so the label is read.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td>None</td><td>Dividers are not focusable and not interactive.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Not applicable; dividers never take focus.</p>
+  <h3>Labelling</h3>
+  <p>Label text is real content ("or", "Earlier"). Do not add <code>aria-label</code> to decorative rules.</p>
+  <h3>Contrast</h3>
+  <p>The rule is decorative and exempt from 1.4.11; grouping is also conveyed by spacing and headings. The label text meets text contrast:</p>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Divider label on card</span><span class="ds-pair__ratio" data-contrast="--color-fg-subtle|--color-bg-surface" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Divider label on page</span><span class="ds-pair__ratio" data-contrast="--color-fg-subtle|--color-bg-canvas" data-min="4.5"></span></div>
+  </div>
+  <h3>Motion</h3>
+  <p>None.</p>
+  <h3>Touch</h3>
+  <p>Not a target. Keep at least 8px between a divider and any neighbouring target.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Labels are one or two words in sentence case ("or", "Earlier", "This week"); styled as overline.</li>
+    <li>A label that needs a sentence is a heading, not a divider.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card"><p>Request HP-1048</p><div class="card__footer"><button class="btn" type="button">Request a change</button></div></div></div><figcaption>Use the card footer's built-in top rule to separate actions from content.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card"><p>Request HP-1048</p><hr><hr><button class="btn" type="button">Request a change</button></div></div><figcaption>Stack rules or add one under every line; spacing already groups them.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="text-muted">HairPop</span><a href="../../mocks/pages/terms/default.html">Terms</a><a href="../../mocks/pages/privacy/default.html">Privacy</a></div><figcaption>Separate footer links with the cluster gap.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span><a href="../../mocks/pages/terms/default.html">Terms</a> · <a href="../../mocks/pages/privacy/default.html">Privacy</a></span></div><figcaption>Join links with a typed " · " as the footer mock does; the dot is read aloud and the small links sit too close together.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      <tr><td>Rule</td><td><code>--color-border-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td></tr>
+      <tr><td>Label</td><td><code>--color-fg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-subtle" data-swatch></i><span data-token="--color-fg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-subtle" data-swatch></i><span data-token="--color-fg-subtle"></span></span></td></tr>
+      <tr><td>Weight</td><td><code>--border-width-hairline</code></td><td colspan="2"><span data-token="--border-width-hairline"></span></td></tr>
+      <tr><td>Space above and below</td><td><code>--space-6</code></td><td colspan="2"><span data-token="--space-6"></span></td></tr>
+      <tr><td>Label gap</td><td><code>--space-3</code></td><td colspan="2"><span data-token="--space-3"></span></td></tr>
+      <tr><td>Label font</td><td><code>--text-overline</code></td><td colspan="2"><span data-token="--text-overline"></span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;hr&gt;
+&lt;div class="divider divider--label"&gt;&lt;span&gt;Earlier&lt;/span&gt;&lt;/div&gt;
+&lt;span class="divider divider--vertical" role="separator" aria-orientation="vertical"&gt;&lt;/span&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>hr</code> / <code>.divider</code></td><td>Horizontal hairline with <code>--space-6</code> above and below.</td></tr>
+    <tr><td><code>.divider--vertical</code></td><td>Vertical hairline in a flex row.</td></tr>
+    <tr><td><code>.divider--label</code></td><td>Centred label between two rules.</td></tr>
+    <tr><td><code>role="separator"</code> <code>aria-orientation="vertical"</code></td><td>Semantics for a non-<code>hr</code> separator.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>The mocks use hairlines as borders rather than elements:</p>
+  <ul>
+    <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (topbar bottom edge and site-footer top edge)</li>
+    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> (card edges separate the summary from the preparation list; no in-card rules yet)</li>
+  </ul>
+  <p>Drift fixed during extraction: the footer separated Terms and Privacy with a typed " · " (now a cluster gap); <code>hr</code> and <code>.divider</code> had no labelled or vertical form.</p>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

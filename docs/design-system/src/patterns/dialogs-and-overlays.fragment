@@ -1,0 +1,98 @@
+<!--meta {"lead": "A dialog interrupts Maya, so HairPop uses one only when she must decide or give a small piece of information before going on. Everything else stays on the page.", "description": "Dialog vs page vs menu vs tooltip; confirmation, form and review dialogs; focus, stacking and mobile sheets.", "covers": "Dialog vs page vs menu vs tooltip, confirmation and form dialogs, initial focus, stacking, bottom sheets"} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>The mocks use seven dialogs: filter braiders, review request, cancel appointment, request a change, report a review, sign out and cookie preferences. Each opens from a page that stays behind a backdrop (inert), has a title and one sentence that says what will happen, a short body, and a footer with a safe action and one emphasised action. All are built with the <a href="../components/dialog.html">dialog</a> component on the Angular CDK Dialog.</p>
+</section>
+
+<section class="ds-section" id="when"><h2><a href="#when">When to use which</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Need</th><th scope="col">Use</th><th scope="col">Example</th></tr></thead>
+    <tbody>
+      <tr><td>Confirm a destructive or account-level action</td><td>Confirmation dialog, danger button</td><td>Cancel request HP-1048, sign out</td></tr>
+      <tr><td>One to three fields that refine or change something</td><td>Form dialog</td><td>Filter braiders, request a change, report a review</td></tr>
+      <tr><td>Check details before sending</td><td>Review dialog that repeats the key values</td><td>Review request</td></tr>
+      <tr><td>Four or more fields, or content worth a URL</td><td>A page</td><td>Booking request, account settings</td></tr>
+      <tr><td>Several actions from one trigger</td><td><a href="../components/menu.html">Menu</a></td><td>More actions on an appointment</td></tr>
+      <tr><td>Name an icon-only control</td><td><a href="../components/tooltip.html">Tooltip</a></td><td>"Close dialog"</td></tr>
+      <tr><td>Tell Maya something happened</td><td>A <a href="../components/toast.html">toast</a>, never a dialog</td><td>"Time confirmed"</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
+  <p>Header (title, description, close), body, footer (safe action, then the emphasised action). Shown in flow here; in the product the panel is fixed over a backdrop and the page behind is <code>inert</code>.</p>
+  <div class="dialog dialog--inline">
+    <div class="dialog__panel" role="dialog" aria-modal="true" aria-labelledby="dlg-s-title" aria-describedby="dlg-s-desc">
+      <div class="dialog__header"><div><h2 class="dialog__title" id="dlg-s-title">Request a change</h2><p class="text-muted" id="dlg-s-desc">Tell Nia which new time works for you.</p></div><button class="btn btn--ghost btn--icon" type="button" aria-label="Close dialog">{{icon:close}}</button></div>
+      <div class="dialog__body stack"><div class="field"><label class="field__label" for="dlg-s-time">New preferred time</label><input class="input" id="dlg-s-time" type="text" value="Sun 25 Oct, 11:00 am"></div><div class="field"><label class="field__label" for="dlg-s-note">Note for Nia <span class="optional">(optional)</span></label><textarea class="textarea" id="dlg-s-note">Saturday no longer works for me.</textarea></div></div>
+      <div class="dialog__footer"><button class="btn" type="button">Keep current time</button><button class="btn btn--primary" type="button">Send change request</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <h3>Confirmation (light) and failed while retrying (dark)</h3>
+  <div class="ds-themes">
+    <div data-theme="light"><div class="dialog dialog--inline"><div class="dialog__panel dialog__panel--sm" role="dialog" aria-modal="true" aria-labelledby="dlg-c-title" aria-describedby="dlg-c-desc"><div class="dialog__header"><span class="dialog__icon dialog__icon--danger" aria-hidden="true">{{icon:alert-circle}}</span><div><h2 class="dialog__title" id="dlg-c-title">Cancel request HP-1048?</h2><p class="text-muted" id="dlg-c-desc">Nia will see that you no longer need Sat 24 Oct at 10:00 am.</p></div></div><div class="dialog__footer"><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button">Cancel request</button></div></div></div></div>
+    <div data-theme="dark"><div class="dialog dialog--inline"><div class="dialog__panel dialog__panel--sm" role="dialog" aria-modal="true" aria-labelledby="dlg-f-title" aria-describedby="dlg-f-desc"><div class="dialog__header"><span class="dialog__icon dialog__icon--danger" aria-hidden="true">{{icon:alert-circle}}</span><div><h2 class="dialog__title" id="dlg-f-title">Cancel request HP-1048?</h2><p class="text-muted" id="dlg-f-desc">Nia will see that you no longer need Sat 24 Oct at 10:00 am.</p></div></div><div class="dialog__body"><div class="alert alert--danger" role="alert">{{icon:alert-circle}}<div><strong>We couldn’t cancel this request.</strong> It’s still active. Try again.</div></div></div><div class="dialog__footer"><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button" aria-busy="true">Cancel request</button></div></div></div></div>
+  </div>
+  <ul>
+    <li><b>Default</b>: focus starts on the first field in a form dialog, and on the safe action ("Keep request") in a destructive confirmation.</li>
+    <li><b>Busy</b>: the pressed button sets <code>aria-busy</code>; the dialog stays open and Esc is ignored until the request settles.</li>
+    <li><b>Invalid</b>: field errors appear inline; a summary is only needed for more than one field.</li>
+    <li><b>Failed</b>: a danger alert at the top of the body; values kept; focus returns to the emphasised button.</li>
+    <li><b>Success</b>: the dialog closes, focus returns to the trigger, and a toast confirms ("Change request sent to Nia").</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
+  <ul>
+    <li>Below 640px the panel is a bottom sheet: full width, top corners <code>--radius-xl</code>, footer sticky at the bottom above the safe area, buttons full width with the emphasised action first.</li>
+    <li>From 640px the panel is centred, 32rem wide (24rem small, 48rem large), and the emphasised action is last on the right.</li>
+    <li>The panel never exceeds the viewport height minus 48px; the body scrolls, the header and footer stay.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/">APG Dialog (Modal)</a>: <code>role="dialog"</code>, <code>aria-modal="true"</code>, labelled by the title and described by the sentence under it; the page behind is <code>inert</code>.</li>
+    <li>Focus is trapped while open; <kbd>Esc</kbd> and the close button dismiss; focus returns to the element that opened it.</li>
+    <li>One dialog at a time. If a decision needs another decision, the second replaces the first, never stacks on it.</li>
+    <li>Menus and tooltips are not modal: Esc closes them, tooltips never take focus, and a menu returns focus to its button.</li>
+  </ul>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Title on dialog|--color-fg-default|--color-bg-surface-raised|4.5}}
+    {{pair:Description on dialog|--color-fg-muted|--color-bg-surface-raised|4.5}}
+    {{pair:Input edge in dialog|--color-border-strong|--color-bg-surface-raised|3}}
+  </div>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Confirmation titles are the question with the object: "Cancel request HP-1048?", "Sign out of HairPop?"</li>
+    <li>The description says the consequence for Nia or Maya, not "Are you sure?".</li>
+    <li>Buttons are verbs that answer the title: "Keep request" / "Cancel request". Never "Yes" / "No" or "OK".</li>
+    <li>The safe action names what staying means; avoid "Cancel" as the safe label in a dialog about cancelling.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="dialog__icon dialog__icon--danger" aria-hidden="true">{{icon:alert-circle}}</span><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button">Cancel request</button></div><figcaption>The danger icon and button carry the warning; the safe action gets initial focus.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="alert alert--warning"><div><strong>Check before continuing.</strong> This action cannot be undone here.</div></div><button class="btn btn--danger" type="button">Sign out</button></div><figcaption>A warning alert stacked on a danger dialog repeats the warning twice (the mocks’ confirm states).</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn" type="button">Keep browsing</button><button class="btn btn--primary" type="button">Show braiders</button></div><figcaption>Both footer actions are buttons; the dialog closes in place.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><a class="btn" href="../../mocks/pages/matching-braiders/default.html">Keep browsing</a></div><figcaption>A footer link with <code>autofocus</code> that navigates away; dismissing a dialog should close it and restore focus.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    {{mock:dialogs/change-appointment/default|form dialog}}
+    {{mock:dialogs/cancel-appointment/default|destructive confirmation}}
+    {{mock:dialogs/cancel-appointment/confirm|warning stacked on danger}}
+    {{mock:dialogs/cancel-appointment/failed|failure in the body}}
+    {{mock:dialogs/sign-out/busy|busy confirm}}
+    {{mock:dialogs/request-review/default|review dialog}}
+    {{mock:dialogs/filter-braiders/invalid|invalid field in a dialog}}
+  </ul>
+  <p>Drift fixed: the safe action was a link with <code>autofocus</code> that navigated to the source page (now a button that closes and restores focus); confirm states stacked a warning alert on a danger dialog; the close button was a "×" glyph; destructive dialogs had no danger icon; busy buttons were disabled.</p>
+</section>

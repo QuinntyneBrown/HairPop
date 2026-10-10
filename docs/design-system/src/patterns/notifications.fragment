@@ -1,0 +1,107 @@
+<!--meta {"lead": "Booking news reaches Maya in two places: a toast while she is here, and the notification center so nothing is missed. Each update says what changed and links to it.", "description": "Toast vs banner vs notification center; priority, grouping, persistence and auto-dismiss rules.", "covers": "Toast vs banner vs notification center, priority, stacking, auto-dismiss and persistence, unread state, cookie consent"} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>The mocks define four notification families: <b>booking update</b> (request received, time confirmed, time needs a change, update could not be sent), <b>review feedback</b>, <b>account feedback</b> and <b>cookie consent</b>, each in info, success, warning and danger tones, with an action, stacked, and persistent. Every booking update also lands in the notification center, reached from "Updates" in the top bar with its unread count.</p>
+</section>
+
+<section class="ds-section" id="when"><h2><a href="#when">When to use which</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Message</th><th scope="col">Channel</th><th scope="col">Lifetime</th></tr></thead>
+    <tbody>
+      <tr><td>Result of Maya’s own action (details updated, preferences saved)</td><td>Success <a href="../components/toast.html">toast</a></td><td>8 s, pauses on hover and focus</td></tr>
+      <tr><td>News from Nia (time confirmed, change suggested)</td><td>Toast while on HairPop + notification center entry + unread count</td><td>Toast 8 s; entry until read</td></tr>
+      <tr><td>Something failed and needs a retry</td><td>Danger toast with "Try again"</td><td>Until dismissed</td></tr>
+      <tr><td>A condition that lasts (offline, email not verified)</td><td><a href="../components/alert.html">Banner</a> at the top of main</td><td>While the condition lasts</td></tr>
+      <tr><td>A choice Maya must make (cookies)</td><td>Persistent banner with the choices; never blocks content</td><td>Until she chooses</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
+  <p>Two live regions side by side: a polite one for news, an assertive one for failures. Newest toast at the bottom, at most three at once. The notification center keeps the record.</p>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--canvas ds-example__canvas--start">
+    <div class="stack" style="flex: 1 1 18rem; max-width: 24rem;">
+      <div class="toast-region toast-region--inline" role="status" aria-live="polite">
+        <div class="toast toast--info">{{icon:info}}<div class="toast__body"><strong class="toast__title">Request received</strong><span class="toast__text">Nia has your request and will reply soon.</span></div><button class="close" type="button" aria-label="Dismiss notification">{{icon:close|icon--sm}}</button></div>
+        <div class="toast toast--success">{{icon:check-circle}}<div class="toast__body"><strong class="toast__title">Time confirmed</strong><span class="toast__text">Nia confirmed Sat 24 Oct at 10:00 am.</span><button class="toast__action" type="button">View appointment</button></div><button class="close" type="button" aria-label="Dismiss notification">{{icon:close|icon--sm}}</button></div>
+      </div>
+      <div class="toast-region toast-region--inline" role="alert">
+        <div class="toast toast--danger">{{icon:alert-circle}}<div class="toast__body"><strong class="toast__title">Update could not be sent</strong><span class="toast__text">Your request is still saved. Retry when connected.</span><button class="toast__action" type="button">Try again</button></div><button class="close" type="button" aria-label="Dismiss notification">{{icon:close|icon--sm}}</button></div>
+      </div>
+    </div>
+    <div class="card card--flush" style="flex: 1 1 18rem;"><ul class="list" aria-label="Notifications">
+      <li class="list__item list__item--unread"><div class="list__body"><p class="list__title">Nia received your request</p><p class="list__meta">Today at 9:42 am · She will confirm the time and final price.</p></div><a class="btn btn--sm" href="../../mocks/pages/appointment-detail/default.html">View request</a></li>
+      <li class="list__item"><div class="list__body"><p class="list__title">How to prepare for knotless braids</p><p class="list__meta">Yesterday · Read Nia’s preparation checklist.</p></div><a class="btn btn--sm" href="../../mocks/pages/care-and-review/default.html">View care</a></li>
+    </ul></div>
+  </div><div class="ds-example__caption"><span>Toasts announce; the notification center keeps the record. Unread entries carry a dot and bold title, not a warning badge.</span></div></div>
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <h3>Tones</h3>
+  {{themes:stack}}<div class="toast toast--info">{{icon:info}}<div class="toast__body"><strong class="toast__title">Request received</strong><span class="toast__text">Nia will reply soon.</span></div></div><div class="toast toast--success">{{icon:check-circle}}<div class="toast__body"><strong class="toast__title">Details updated</strong><span class="toast__text">Nia can reach you at your new number.</span></div></div><div class="toast toast--warning">{{icon:warning}}<div class="toast__body"><strong class="toast__title">Time needs a change</strong><span class="toast__text">Nia suggested Sun 25 Oct at 11:00 am.</span><button class="toast__action" type="button">Review time</button></div></div><div class="toast toast--danger">{{icon:alert-circle}}<div class="toast__body"><strong class="toast__title">Changes not saved</strong><span class="toast__text">Your edits are still here. Try again.</span></div></div>{{/themes}}
+  <h3>Persistent cookie choice</h3>
+  {{example:[stack]A banner, not a toast: it waits for a choice and never covers focused content.}}
+<div class="alert alert--info banner">{{icon:info}}<div><strong>Your privacy choices</strong><span>Choose whether optional usage data may be stored.</span><div class="alert__actions"><button class="btn btn--sm btn--primary" type="button">Allow optional data</button><button class="btn btn--sm" type="button">Essential only</button><a href="../../mocks/dialogs/cookie-preferences/default.html">Cookie preferences</a></div></div></div>
+  {{/example}}
+  <ul>
+    <li><b>Stacked</b>: up to three toasts; a fourth replaces the oldest non-danger toast. Toasts about the same request merge ("2 updates from Nia").</li>
+    <li><b>With action</b>: one action, a verb; the toast stays while it has focus.</li>
+    <li><b>Leaving</b>: fades and drops 8px over <code>--duration-base</code>; instant under reduced motion.</li>
+    <li><b>Unread / read</b> in the center: unread has a dot and the accent marker; reading it updates the top bar count.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
+  <ul>
+    <li>Toasts: bottom right, 24rem, from 640px; full width along the bottom on phones, above <code>env(safe-area-inset-bottom)</code>.</li>
+    <li>The cookie banner spans the bottom of the viewport at every width and the page adds bottom padding equal to its height so it never covers the footer.</li>
+    <li>The notification center list is single column at every width; actions wrap under the text on phones.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li>Polite news in a <code>role="status"</code> region; failures in a separate <code>role="alert"</code> region. Never nest one live region in another.</li>
+    <li>Auto-dismiss at no less than 8 seconds, paused on hover and focus; danger and persistent messages never auto-dismiss (2.2.1).</li>
+    <li>Toasts never take focus. Their action is reachable by Tab, and the same action exists in the notification center.</li>
+    <li>Toasts and banners never cover the focused element (2.4.11).</li>
+    <li>The unread count is part of the Updates link name ("Updates, 2 unread").</li>
+  </ul>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Toast text|--color-fg-inverse|--color-bg-inverse|4.5}}
+    {{pair:Success icon on toast|--color-success-icon-inverse|--color-bg-inverse|3}}
+    {{pair:Danger icon on toast|--color-danger-icon-inverse|--color-bg-inverse|3}}
+    {{pair:Unread count|--color-fg-on-danger|--color-danger-solid|4.5}}
+  </div>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Title: the change in two to four words ("Time confirmed"). Text: one sentence with the specifics ("Nia confirmed Sat 24 Oct at 10:00 am.").</li>
+    <li>Use Nia’s name; Maya chose her and recognises it.</li>
+    <li>Failures say what is safe first: "Your request is still saved."</li>
+    <li>Never call a request confirmed before Nia accepts it: "Request received", then "Time confirmed".</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--info">Unread</span></div><figcaption>Unread is information, not a warning.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge badge--warning">Unread</span></div><figcaption>The mocks’ notification center marks unread with a warning badge.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="toast toast--danger">{{icon:alert-circle}}<div class="toast__body"><strong class="toast__title">Review not posted</strong><span class="toast__text">Your words are saved.</span></div><button class="close" type="button" aria-label="Dismiss notification">{{icon:close|icon--sm}}</button></div></div><figcaption>Errors persist until dismissed.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="toast toast--success"><div class="toast__body"><strong class="toast__title">Time confirmed</strong><span class="toast__text">Nia confirmed Sat 24 Oct.</span><button class="toast__action" type="button">Undo</button></div></div></div><figcaption>"Undo" on news Maya did not cause and cannot reverse.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    {{mock:notifications/booking-update/info|request received}}
+    {{mock:notifications/booking-update/success|time confirmed}}
+    {{mock:notifications/booking-update/stacked|three tones stacked}}
+    {{mock:notifications/booking-update/with-action|warning with action}}
+    {{mock:notifications/cookie-consent/persistent|cookie choice}}
+    {{mock:notifications/account-feedback/danger|failure copy}}
+    {{mock:pages/notification-center/unread|unread entries}}
+    {{mock:pages/notification-center/read|read entries}}
+  </ul>
+  <p>Drift fixed: danger toasts with <code>role="alert"</code> were nested inside the polite status region (now two sibling regions); success toasts offered "Undo" on news Maya did not cause; toasts had no icons; cookie consent was a toast (now a persistent banner with the choices); unread entries used a warning badge.</p>
+</section>

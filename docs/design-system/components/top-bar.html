@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top bar — HairPop design system</title>
+<meta name="description" content="Sticky app header with brand, primary navigation, updates count, account link and a phone menu button.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Component · Navigation</p><h1>Top bar</h1><p class="ds-lead">The top bar is the same on every HairPop screen: the brand, the four primary destinations, unread updates and Maya's account. It is how people move between styles, braiders and their appointments.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill"><code>&lt;header&gt;</code> + <code>&lt;nav&gt;</code></span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Every product screen starts with the top bar inside <code>.product-shell</code>. It holds exactly what a customer needs from anywhere: the HairPop brand (back to the style gallery), the primary navigation, the <b>Updates</b> link with an unread count, and the account link with Maya's first name. Keep page-specific actions out of it; they belong in the <a href="page-header.html">page header</a>.</p>
+  <ul>
+    <li><b>Desktop and tablet</b> (from 768px) show the brand, the four primary links (Styles, Braiders, Appointments, Help), then Updates and the account link on the right.</li>
+    <li><b>Phones</b> (below 768px) collapse the four links behind a menu button so every destination is still one tap away.</li>
+    <li>Use <a href="sidebar-navigation.html">sidebar navigation</a> instead only for a future tool with more than six destinations, such as a braider studio.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure" style="padding: var(--space-6) var(--space-4);">
+      <div class="ds-frame" style="width: 100%; margin: 0;">
+        <header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a><nav class="topbar__nav" aria-label="Primary, anatomy example"><a class="nav-link" href="../../mocks/pages/style-gallery/default.html" aria-current="page">Styles</a><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a></nav><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header>
+      </div>
+      <span class="ds-callout" style="left: 10%; top: 18%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 36%; top: 18%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 74%; top: 18%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 89%; top: 18%;" aria-hidden="true">4</span>
+      <span class="ds-callout" style="left: 52%; top: 80%;" aria-hidden="true">5</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Brand</b><small>Sparkle icon + "HairPop" in <code>--text-h4</code>, <code>--color-fg-accent</code>; links to the style gallery.</small></div></li>
+      <li><div><b>Primary navigation</b><small><code>&lt;nav aria-label="Primary"&gt;</code> of nav links, 44px tall; the current page uses <code>aria-current="page"</code>.</small></div></li>
+      <li><div><b>Updates</b><small>Account link with a count <a href="badge.html">badge</a>; the count is part of the visible name.</small></div></li>
+      <li><div><b>Account</b><small>The customer's first name; links to account settings.</small></div></li>
+      <li><div><b>Container</b><small>56px (<code>--layout-topbar-height</code>), surface background, bottom hairline, sticky at <code>--z-sticky</code>, side padding <code>--layout-margin</code>.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>One component, two arrangements decided by the viewport, plus the open menu on phones.</p>
+  <h3>Default (768px and wider)</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="ds-frame" style="margin: 0;"><header class="topbar"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a><nav class="topbar__nav" id="topbar-nav-default" aria-label="Primary, default example"><a class="nav-link" href="../../mocks/pages/style-gallery/default.html" aria-current="page">Styles</a><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">Appointments</a><a class="nav-link" href="../../mocks/pages/help/default.html">Help</a></nav><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a><button class="btn btn--ghost btn--icon topbar__menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="topbar-nav-default"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></header></div></div><div class="ds-example__caption"><span>Brand, four primary links, then Updates and the account on the right. This frame follows your window width.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;ds-frame&quot; style=&quot;margin: 0;&quot;&gt;&lt;header class=&quot;topbar&quot;&gt;&lt;a class=&quot;topbar__brand&quot; href=&quot;../../mocks/pages/style-gallery/default.html&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z&quot;/&gt;&lt;/svg&gt;HairPop&lt;/a&gt;&lt;nav class=&quot;topbar__nav&quot; id=&quot;topbar-nav-default&quot; aria-label=&quot;Primary, default example&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;../../mocks/pages/style-gallery/default.html&quot; aria-current=&quot;page&quot;&gt;Styles&lt;/a&gt;&lt;a class=&quot;nav-link&quot; href=&quot;../../mocks/pages/matching-braiders/default.html&quot;&gt;Braiders&lt;/a&gt;&lt;a class=&quot;nav-link&quot; href=&quot;../../mocks/pages/my-appointments/default.html&quot;&gt;Appointments&lt;/a&gt;&lt;a class=&quot;nav-link&quot; href=&quot;../../mocks/pages/help/default.html&quot;&gt;Help&lt;/a&gt;&lt;/nav&gt;&lt;span class=&quot;topbar__spacer&quot;&gt;&lt;/span&gt;&lt;a class=&quot;account-link&quot; href=&quot;../../mocks/pages/notification-center/default.html&quot;&gt;Updates &lt;span class=&quot;badge badge--count&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;visually-hidden&quot;&gt;, 2 unread&lt;/span&gt;&lt;/a&gt;&lt;button class=&quot;btn btn--ghost btn--icon topbar__menu&quot; type=&quot;button&quot; aria-label=&quot;Menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;topbar-nav-default&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M4 6h16M4 12h16M4 18h16&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;a class=&quot;account-link&quot; href=&quot;../../mocks/pages/account-settings/default.html&quot;&gt;Maya&lt;/a&gt;&lt;/header&gt;&lt;/div&gt;</code></pre></details></div>
+  <h3>Compact with menu open (phones)</h3>
+  <p>Below 768px the primary links hide and the menu button appears. Opening it reveals the same four links, in the same order, directly under the bar; the current page stays marked.</p>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="ds-frame ds-phone" style="margin: 0;"><div class="topbar" style="position: static;"><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a><button class="btn btn--ghost btn--icon" type="button" aria-label="Menu" aria-expanded="true" aria-controls="topbar-nav-phone"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><nav id="topbar-nav-phone" class="stack stack--sm" style="padding: var(--space-2) var(--space-4) var(--space-4); background: var(--color-bg-surface); border-bottom: var(--border-width-hairline) solid var(--color-border-default);" aria-label="Primary, phone example"><a class="nav-link" href="../../mocks/pages/style-gallery/default.html">Styles</a><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" aria-current="page">Appointments</a><a class="nav-link" href="../../mocks/pages/help/default.html">Help</a><a class="nav-link" href="../../mocks/pages/account-settings/default.html">Maya · account</a></nav></div></div><div class="ds-example__caption"><span>Shown at phone width. The panel is the same <code>&lt;nav&gt;</code>, revealed by the button; it pushes content down rather than covering it.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;ds-frame ds-phone&quot; style=&quot;margin: 0;&quot;&gt;&lt;div class=&quot;topbar&quot; style=&quot;position: static;&quot;&gt;&lt;a class=&quot;topbar__brand&quot; href=&quot;../../mocks/pages/style-gallery/default.html&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z&quot;/&gt;&lt;/svg&gt;HairPop&lt;/a&gt;&lt;span class=&quot;topbar__spacer&quot;&gt;&lt;/span&gt;&lt;a class=&quot;account-link&quot; href=&quot;../../mocks/pages/notification-center/default.html&quot;&gt;Updates &lt;span class=&quot;badge badge--count&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;visually-hidden&quot;&gt;, 2 unread&lt;/span&gt;&lt;/a&gt;&lt;button class=&quot;btn btn--ghost btn--icon&quot; type=&quot;button&quot; aria-label=&quot;Menu&quot; aria-expanded=&quot;true&quot; aria-controls=&quot;topbar-nav-phone&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;&lt;nav id=&quot;topbar-nav-phone&quot; class=&quot;stack stack--sm&quot; style=&quot;padding: var(--space-2) var(--space-4) var(--space-4); background: var(--color-bg-surface); border-bottom: var(--border-width-hairline) solid var(--color-border-default);&quot; aria-label=&quot;Primary, phone example&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;../../mocks/pages/style-gallery/default.html&quot;&gt;Styles&lt;/a&gt;&lt;a class=&quot;nav-link&quot; href=&quot;../../mocks/pages/matching-braiders/default.html&quot;&gt;Braiders&lt;/a&gt;&lt;a class=&quot;nav-link&quot; href=&quot;../../mocks/pages/my-appointments/default.html&quot; aria-current=&quot;page&quot;&gt;Appointments&lt;/a&gt;&lt;a class=&quot;nav-link&quot; href=&quot;../../mocks/pages/help/default.html&quot;&gt;Help&lt;/a&gt;&lt;a class=&quot;nav-link&quot; href=&quot;../../mocks/pages/account-settings/default.html&quot;&gt;Maya · account&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;</code></pre></details></div>
+</section>
+
+<section class="ds-section" id="sizes" data-na="The top bar has one height (56px, --layout-topbar-height) at every breakpoint; only its contents change."><h2><a href="#sizes">Sizes</a></h2><p class="ds-na">The top bar has one height (56px, --layout-topbar-height) at every breakpoint; only its contents change.</p></section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>The bar itself has no states; its links and menu button do. Pointer and focus states are forced with <code>data-state</code>; real pages use <code>:hover</code>, <code>:focus-visible</code>, <code>aria-current</code> and <code>aria-expanded</code>.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Element</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Active</th><th scope="col">Current / expanded</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Nav link</th><td><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a></td><td><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html" data-state="hover">Braiders</a></td><td><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html" data-state="focus">Braiders</a></td><td><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html" data-state="hover">Braiders</a></td><td><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html" aria-current="page">Braiders</a></td></tr>
+      <tr><th scope="row">Brand</th><td><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a></td><td><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html" style="color: var(--color-fg-link-hover);"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a></td><td><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html" data-state="focus"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a></td><td><a class="topbar__brand" href="../../mocks/pages/style-gallery/default.html" style="color: var(--color-fg-link-hover);"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</a></td><td>–</td></tr>
+      <tr><th scope="row">Account link</th><td><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></td><td><a class="account-link" href="../../mocks/pages/account-settings/default.html" data-state="hover">Maya</a></td><td><a class="account-link" href="../../mocks/pages/account-settings/default.html" data-state="focus">Maya</a></td><td><a class="account-link" href="../../mocks/pages/account-settings/default.html" data-state="active">Maya</a></td><td>–</td></tr>
+      <tr><th scope="row">Menu button</th><td><button class="btn btn--ghost btn--icon" type="button" aria-label="Menu" aria-expanded="false"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></td><td><button class="btn btn--ghost btn--icon" type="button" aria-label="Menu" aria-expanded="false" data-state="hover"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></td><td><button class="btn btn--ghost btn--icon" type="button" aria-label="Menu" aria-expanded="false" data-state="focus"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></td><td><button class="btn btn--ghost btn--icon" type="button" aria-label="Menu" aria-expanded="false" data-state="active"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></td><td><button class="btn btn--ghost btn--icon" type="button" aria-label="Menu" aria-expanded="true"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></td></tr>
+    </tbody>
+  </table></div>
+  <p>Nav links have no separate pressed look: the active (pointer down) state keeps the hover background. Navigation links are never disabled; a destination the customer cannot use (for example Appointments while signed out) still links, and the destination explains why.</p>
+  <h3>Both themes</h3>
+  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="topbar" style="position: static; padding-inline: var(--space-4);"><span class="topbar__brand"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</span><a class="nav-link" href="../../mocks/pages/style-gallery/default.html" aria-current="page">Styles</a><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a></div></div></div><div data-theme="dark"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><div class="topbar" style="position: static; padding-inline: var(--space-4);"><span class="topbar__brand"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</span><a class="nav-link" href="../../mocks/pages/style-gallery/default.html" aria-current="page">Styles</a><a class="nav-link" href="../../mocks/pages/matching-braiders/default.html">Braiders</a><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a></div></div></div></div>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li><b>Below 768px</b> (<code>--layout-breakpoint-md</code>): <code>.topbar__nav</code> hides and <code>.topbar__menu</code> shows. The menu button controls the nav panel with <code>aria-expanded</code> + <code>aria-controls</code>. The account link drops to <code>--font-size-sm</code>.</li>
+    <li><b>From 768px</b>: the four links show inline after the brand and the menu button hides. Links never wrap to a second row; at 768px all four fit with the brand, Updates and Maya.</li>
+    <li>The bar stays 56px tall and sticky at every width. <code>scroll-padding-top</code> on <code>html</code> equals the bar height plus <code>--space-4</code>, so focused or anchored content is never hidden behind it (WCAG 2.4.11).</li>
+    <li>Side padding follows <code>--layout-margin</code> (16 → 32 → 48px), so the brand lines up with the page content below.</li>
+    <li>At 320px the brand, Updates with its count and the menu button still fit; the account link moves into the menu panel.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The bar reads <code>--topbar-bg</code> (aliasing <code>--color-bg-surface</code>) and <code>--color-border-default</code>; links read the nav-link tokens. Override <code>--topbar-bg</code> for a campaign or partner theme, never the rules. In the dark theme the surface becomes grey 900 over the grey 950 canvas so the bar still reads as a layer, the brand and current link turn plum 300, and the current-link background becomes plum 950.</p>
+  <pre><code>/* A studio sub-brand with a sunken bar */
+.studio .topbar { --topbar-bg: var(--color-bg-surface-sunken); }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><code>&lt;header class="topbar"&gt;</code> is the page's banner landmark; the links sit in <code>&lt;nav aria-label="Primary"&gt;</code>. The phone menu follows the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/">APG Disclosure</a> pattern: a <code>&lt;button aria-expanded aria-controls="primary-nav"&gt;</code> that shows the same <code>&lt;nav&gt;</code>. It is not an ARIA <code>menu</code>; links stay plain links in Tab order.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>After the skip link: brand, primary links in order, Updates, menu button (phones), account.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Follows a link.</td></tr>
+    <tr><td><kbd>Enter</kbd>, <kbd>Space</kbd></td><td>On the menu button: opens or closes the nav panel and toggles <code>aria-expanded</code>.</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>With the panel open: closes it and returns focus to the menu button.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The shared 2px plum ring with 2px offset. Opening the phone menu leaves focus on the button (the panel follows it in DOM order); choosing a link navigates, and the new page starts focus at the skip link.</p>
+  <h3>Labelling</h3>
+  <p>The nav is labelled "Primary" (use a different label for any second nav on the page). The current page uses <code>aria-current="page"</code>, never colour alone. The Updates link's accessible name must contain its visible text: "Updates" + count + visually hidden ", 2 unread" reads "Updates 2, 2 unread". Do not put a second <code>aria-label</code> on the badge inside the link. The menu button is labelled "Menu" and states its expansion.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Nav link on bar</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Current link on its background</span><span class="ds-pair__ratio" data-contrast="--color-fg-accent|--color-accent-subtle" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Hovered link</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-subtle" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Brand on bar</span><span class="ds-pair__ratio" data-contrast="--color-fg-accent|--color-bg-surface" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Unread count</span><span class="ds-pair__ratio" data-contrast="--color-fg-on-danger|--color-danger-solid" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Focus ring on bar</span><span class="ds-pair__ratio" data-contrast="--color-focus-ring|--color-bg-surface" data-min="3"></span></div>
+  </div>
+  <h3>Motion</h3>
+  <p>Link background and colour change over <code>--duration-fast</code>. The phone panel appears without a slide; under reduced motion every transition is instant because the tokens zero the durations.</p>
+  <h3>Touch</h3>
+  <p>Nav links, the brand and the account links are 44px tall (<code>--target-comfortable</code>); the menu button is 40px square with at least 12px to its neighbours.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Primary links are one-word nouns, in this order everywhere: Styles, Braiders, Appointments, Help.</li>
+    <li>The account link shows the customer's first name ("Maya"); when signed out it reads "Sign in".</li>
+    <li>"Updates" shows the unread count only when it is above zero; above 99 it shows "99+" with the full number in the hidden text.</li>
+    <li>The brand is the word "HairPop" with the sparkle icon; never a tagline in the bar.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="topbar" style="position: static; width: 100%;"><span class="topbar__brand"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>HairPop</span><span class="topbar__spacer"></span><button class="btn btn--ghost btn--icon" type="button" aria-label="Menu" aria-expanded="false"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div></div><figcaption>On phones, keep every destination reachable behind a labelled menu button.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="topbar" style="position: static; width: 100%;"><span class="topbar__brand">✦ HairPop</span><span class="topbar__spacer"></span><a class="account-link" href="../../mocks/pages/account-settings/default.html">Maya</a></div></div><figcaption>Hide the links below 768px with no menu, as the mocks do: Braiders, Appointments and Help become unreachable on phones.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><a class="account-link" href="../../mocks/pages/notification-center/default.html">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a></div><figcaption>The accessible name starts with the visible word: "Updates 2, 2 unread".</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><a class="account-link" href="../../mocks/pages/notification-center/default.html" aria-label="Notifications, 2 unread">Updates <span class="badge badge--count">2</span></a></div><figcaption>Label "Updates" as "Notifications" for screen readers. Voice users saying "click Updates" get no match (WCAG 2.5.3).</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      <tr><td>Bar background</td><td><code>--color-bg-surface</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td></tr>
+      <tr><td>Bottom edge</td><td><code>--color-border-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-default" data-swatch></i><span data-token="--color-border-default"></span></span></td></tr>
+      <tr><td>Brand</td><td><code>--color-fg-accent</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-accent" data-swatch></i><span data-token="--color-fg-accent"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-accent" data-swatch></i><span data-token="--color-fg-accent"></span></span></td></tr>
+      <tr><td>Nav link label</td><td><code>--color-fg-muted</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-muted" data-swatch></i><span data-token="--color-fg-muted"></span></span></td></tr>
+      <tr><td>Nav link hover background</td><td><code>--color-bg-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-subtle" data-swatch></i><span data-token="--color-bg-subtle"></span></span></td></tr>
+      <tr><td>Current link background</td><td><code>--color-accent-subtle</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-accent-subtle" data-swatch></i><span data-token="--color-accent-subtle"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-accent-subtle" data-swatch></i><span data-token="--color-accent-subtle"></span></span></td></tr>
+      <tr><td>Account link</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+      <tr><td>Unread count</td><td><code>--color-danger-solid</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td></tr>
+      <tr><td>Height</td><td><code>--layout-topbar-height</code></td><td colspan="2"><span data-token="--layout-topbar-height"></span></td></tr>
+      <tr><td>Side padding</td><td><code>--layout-margin</code></td><td colspan="2"><span data-token="--layout-margin"></span></td></tr>
+      <tr><td>Link height</td><td><code>--target-comfortable</code></td><td colspan="2"><span data-token="--target-comfortable"></span></td></tr>
+      <tr><td>Layer</td><td><code>--z-sticky</code></td><td colspan="2"><span data-token="--z-sticky"></span></td></tr>
+      <tr><td>Brand font / link font</td><td><code>--text-h4</code> / <code>--text-label</code></td><td colspan="2"><span data-token="--text-h4"></span> / <span data-token="--text-label"></span></td></tr>
+      <tr><td>Transition</td><td><code>--duration-fast</code> / <code>--ease-standard</code></td><td colspan="2"><span data-token="--duration-fast"></span> / <span data-token="--ease-standard"></span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;header class="topbar"&gt;
+  &lt;a class="topbar__brand" href="/"&gt;&lt;svg class="icon" aria-hidden="true" …&gt;…&lt;/svg&gt;HairPop&lt;/a&gt;
+  &lt;nav class="topbar__nav" id="primary-nav" aria-label="Primary"&gt;
+    &lt;a class="nav-link" href="/" aria-current="page"&gt;Styles&lt;/a&gt;
+    &lt;a class="nav-link" href="/braiders"&gt;Braiders&lt;/a&gt;
+    &lt;a class="nav-link" href="/appointments"&gt;Appointments&lt;/a&gt;
+    &lt;a class="nav-link" href="/help"&gt;Help&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;span class="topbar__spacer"&gt;&lt;/span&gt;
+  &lt;a class="account-link" href="/notifications"&gt;Updates &lt;span class="badge badge--count"&gt;2&lt;/span&gt;&lt;span class="visually-hidden"&gt;, 2 unread&lt;/span&gt;&lt;/a&gt;
+  &lt;button class="btn btn--ghost btn--icon topbar__menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav"&gt;…&lt;/button&gt;
+  &lt;a class="account-link" href="/settings"&gt;Maya&lt;/a&gt;
+&lt;/header&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.topbar</code></td><td>Sticky 56px bar; flex row with <code>--space-3</code> gaps.</td></tr>
+    <tr><td><code>.topbar__brand</code></td><td>Brand link in the accent colour, 44px tall.</td></tr>
+    <tr><td><code>.topbar__nav</code></td><td>Primary links; hidden below 768px, flex from 768px.</td></tr>
+    <tr><td><code>.topbar__spacer</code></td><td>Pushes Updates and the account to the right.</td></tr>
+    <tr><td><code>.topbar__menu</code></td><td>Menu button; shown below 768px only.</td></tr>
+    <tr><td><code>.nav-link</code> + <code>aria-current="page"</code></td><td>Navigation link; current page gets the accent-subtle look.</td></tr>
+    <tr><td><code>.account-link</code></td><td>Right-hand utility link (Updates, account), 44px tall.</td></tr>
+    <tr><td><code>aria-expanded</code> / <code>aria-controls</code></td><td>Menu button state and the id of the nav it opens.</td></tr>
+    <tr><td><code>--topbar-bg</code></td><td>Component token for the bar background.</td></tr>
+    <tr><td><code>data-state="hover|focus|active|current"</code></td><td>Documentation only: forces a link state.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from the shell shared by every mock, notably:</p>
+  <ul>
+    <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (Styles current)</li>
+    <li><a href="../../mocks/pages/matching-braiders/default.html">pages/matching-braiders/default</a> (Braiders current)</li>
+    <li><a href="../../mocks/pages/my-appointments/default.html">pages/my-appointments/default</a> (Appointments current)</li>
+    <li><a href="../../mocks/pages/help/default.html">pages/help/default</a> (Help current)</li>
+    <li><a href="../../mocks/pages/notification-center/default.html">pages/notification-center/default</a> (Updates destination)</li>
+  </ul>
+  <p>Drift fixed during extraction: below 768px the mocks hide the primary nav with no menu button (system adds a disclosure menu button); the Updates link was labelled "Notifications, 2 unread", which does not contain its visible text (system appends hidden ", 2 unread" to the visible text); the count badge also carried its own <code>aria-label</code> inside the labelled link (removed); the brand used a "✦" text glyph (system uses the sparkle icon, <code>aria-hidden</code>); <code>.topbar</code> declared its gap twice (single <code>--space-3</code>); the account link used a <code>max-width</code> query for its phone size (rewritten mobile-first).</p>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tables and lists — HairPop design system</title>
+<meta name="description" content="Card grid vs list vs table, density, sorting, filtering, pagination, long and edge content, responsive strategy.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/ds.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ds-shell">
+<nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
+<main id="main" class="ds-main">
+<header class="ds-header"><p class="ds-kicker">Pattern</p><h1>Tables and lists</h1><p class="ds-lead">Customers scan HairPop collections to choose: styles, braiders, appointments, updates. Lists of cards do most of that work; tables appear only when Maya compares the same facts across rows.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#when">When to use which</a></li><li><a href="#structure">Structure</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>The mocks show four collections: the style gallery and matching braiders as <b>card grids</b>, my appointments as a <b>list of row cards</b>, and the notification center as a <b>list</b> of updates. Each sits under a filter row (search, chips, a Filters button) and, when long, ends with <a href="../components/pagination.html">pagination</a> that says how many there are ("Showing 1–3 of 126").</p>
+</section>
+
+<section class="ds-section" id="when"><h2><a href="#when">When to use which</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Collection</th><th scope="col">Use</th><th scope="col">Why</th></tr></thead>
+    <tbody>
+      <tr><td>Things chosen by look (styles, braiders)</td><td>Story <a href="../components/card.html">cards</a> in <code>.feature-grid</code></td><td>The photo is the information.</td></tr>
+      <tr><td>Maya’s own items with a status and one next step</td><td>Row cards (<code>.card.appointment-row</code>) or a <a href="../components/list.html">list</a></td><td>Status badge, title, facts and action together.</td></tr>
+      <tr><td>Updates in time order</td><td>List with unread markers</td><td>Read state and time matter more than layout.</td></tr>
+      <tr><td>Comparing the same 3+ facts across many rows (appointment history)</td><td><a href="../components/table.html">Table</a></td><td>Columns make comparison fast.</td></tr>
+      <tr><td>Facts about one thing</td><td><a href="../components/description-list.html">Description list</a> or <a href="../components/stat.html">fact tiles</a></td><td>Key and value, not rows.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
+  <p>Filter row, collection, pagination. Applied filters are visible as pressed chips, and the count changes with them.</p>
+  <div class="ds-frame"><div class="ds-frame__body stack">
+    <div class="filter-row"><label class="search-box"><span class="visually-hidden">Search braiders</span><input class="input" type="search" value="knotless braids" aria-label="Search braiders"></label><button class="btn" type="button"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16l-6 8v6l-4-2v-4z"/></svg>Filters</button></div>
+    <div class="chip-row" role="group" aria-label="Availability and price"><button class="chip" type="button" aria-pressed="true">Any day</button><button class="chip" type="button" aria-pressed="false">This weekend</button><button class="chip" type="button" aria-pressed="false">Under $200</button></div>
+    <div class="feature-grid">
+      <article class="card story-card"><img class="story-card__photo" src="../../mocks/assets/photos/nia.jpg" alt="Portrait of Nia Okafor"><div class="stack"><p class="eyebrow">Available Sat 24 Oct</p><h2 class="card__title">Nia Okafor</h2><p class="text-muted">4.9 ★ · 86 reviews · Toronto West · knotless braids from $180</p><a href="../../mocks/pages/braider-profile/default.html">View Nia’s profile <span aria-hidden="true">→</span></a></div></article>
+      <article class="card story-card"><div class="story-card__art" aria-hidden="true"><svg class="icon icon--fill" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></div><div class="stack"><p class="eyebrow">Next week</p><h2 class="card__title">Aisha Mensah</h2><p class="text-muted">4.8 ★ · 64 reviews · North York · from $195</p><a href="../../mocks/pages/braider-profile/default.html">View Aisha’s profile <span aria-hidden="true">→</span></a></div></article>
+      <article class="card story-card"><div class="story-card__art" aria-hidden="true"><svg class="icon icon--fill" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></div><div class="stack"><p class="eyebrow">Available Sun 25 Oct</p><h2 class="card__title">Jules Baptiste</h2><p class="text-muted">4.9 ★ · 41 reviews · Scarborough · from $170</p><a href="../../mocks/pages/braider-profile/default.html">View Jules’s profile <span aria-hidden="true">→</span></a></div></article>
+    </div>
+    <nav class="pagination" aria-label="Results pages"><span class="pagination__summary">Showing 1–3 of 12</span><a href="#structure" aria-disabled="true">Previous</a><a href="#structure" aria-current="page">1</a><a href="#structure">2</a><a href="#structure">3</a><a href="#structure">Next</a></nav>
+  </div></div>
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <h3>Row list and table</h3>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card appointment-row"><div class="stack stack--sm"><span class="badge badge--warning">Awaiting reply</span><h2 class="card__title">Nia Okafor · knotless braids</h2><p class="text-muted">Sat 24 Oct · 10:00 am · estimate $180–$240</p></div><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div>
+<div class="table-wrap"><table class="table"><caption>Past appointments</caption><thead><tr><th scope="col" aria-sort="descending"><button type="button">Date</button></th><th scope="col">Braider</th><th scope="col">Style</th><th scope="col" class="num">Paid</th></tr></thead><tbody><tr><td>Sat 3 Oct</td><td>Nia Okafor</td><td>Medium knotless braids</td><td class="num">$210</td></tr><tr data-state="hover"><td>Sat 15 Aug</td><td>Nia Okafor</td><td>Passion twists</td><td class="num">$185</td></tr></tbody></table></div></div><div class="ds-example__caption"><span>Row cards for Maya’s appointments; a table for comparing her visit history.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;card appointment-row&quot;&gt;&lt;div class=&quot;stack stack--sm&quot;&gt;&lt;span class=&quot;badge badge--warning&quot;&gt;Awaiting reply&lt;/span&gt;&lt;h2 class=&quot;card__title&quot;&gt;Nia Okafor · knotless braids&lt;/h2&gt;&lt;p class=&quot;text-muted&quot;&gt;Sat 24 Oct · 10:00 am · estimate $180–$240&lt;/p&gt;&lt;/div&gt;&lt;a class=&quot;btn btn--primary&quot; href=&quot;../../mocks/pages/appointment-detail/default.html&quot;&gt;View request&lt;/a&gt;&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;&lt;table class=&quot;table&quot;&gt;&lt;caption&gt;Past appointments&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot; aria-sort=&quot;descending&quot;&gt;&lt;button type=&quot;button&quot;&gt;Date&lt;/button&gt;&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Braider&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Style&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;num&quot;&gt;Paid&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Sat 3 Oct&lt;/td&gt;&lt;td&gt;Nia Okafor&lt;/td&gt;&lt;td&gt;Medium knotless braids&lt;/td&gt;&lt;td class=&quot;num&quot;&gt;$210&lt;/td&gt;&lt;/tr&gt;&lt;tr data-state=&quot;hover&quot;&gt;&lt;td&gt;Sat 15 Aug&lt;/td&gt;&lt;td&gt;Nia Okafor&lt;/td&gt;&lt;td&gt;Passion twists&lt;/td&gt;&lt;td class=&quot;num&quot;&gt;$185&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</code></pre></details></div>
+  <ul>
+    <li><b>Loading</b>: skeletons in the collection’s own shape (card grid or rows); the filter row stays usable.</li>
+    <li><b>Empty</b>: a first-run <a href="../components/empty-state.html">empty state</a> replaces the collection; filters hide.</li>
+    <li><b>No results</b>: filters stay visible with the applied values, and the empty state offers "Clear filters".</li>
+    <li><b>Long</b>: pagination with a count. Prefer pages to infinite scroll so the footer and position are reachable and Back works.</li>
+    <li><b>Edge</b>: long names wrap (never truncate a person’s name); missing photos fall back to the art panel at the same 3:2 ratio.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
+  <ul>
+    <li>Card grids: 1 column under 768px, 2 to 1023px, 3 from 1024px (<code>.feature-grid</code>).</li>
+    <li>Row cards wrap the action under the text on phones.</li>
+    <li>Tables scroll horizontally inside <code>.table-wrap</code>; tables with four or fewer columns may switch to row cards under 768px when the page says so.</li>
+    <li>The pagination summary takes its own line under 640px.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li>Cards in a collection are <code>&lt;article&gt;</code> with a heading; each has one real link whose text names the item ("View Nia’s profile").</li>
+    <li>Filter chips are toggle buttons with <code>aria-pressed</code>, grouped and labelled; changing a filter announces the new count in a status region ("12 braiders").</li>
+    <li>Tables have a <code>&lt;caption&gt;</code>, <code>scope</code> on headers, and <code>aria-sort</code> on the sorted column; the sort control is a button.</li>
+    <li>Pagination is a labelled <code>nav</code>; the current page has <code>aria-current="page"</code>.</li>
+    <li>Status is badge text plus colour: "Awaiting reply", "Completed", "Unread".</li>
+  </ul>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Table header text</span><span class="ds-pair__ratio" data-contrast="--color-fg-muted|--color-bg-surface-sunken" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Selected chip label</span><span class="ds-pair__ratio" data-contrast="--color-fg-accent|--color-accent-subtle" data-min="4.5"></span></div>
+    <div class="ds-pair"><span>Warning badge</span><span class="ds-pair__ratio" data-contrast="--color-warning-fg|--color-warning-bg" data-min="4.5"></span></div>
+  </div>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Card summaries are one line of facts separated by " · ": rating, reviews, area, starting price.</li>
+    <li>Counts use numerals and en dashes: "Showing 1–3 of 126".</li>
+    <li>Statuses are short and specific: "Awaiting reply", "Confirmed", "Completed", "Cancelled".</li>
+    <li>Link text names the item: "View Nia’s profile", not "View profile" repeated three times.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><a href="#do-dont">View Nia’s profile <span aria-hidden="true">→</span></a></div><figcaption>Link text that says what opens.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><a href="#do-dont">Explore Nia Okafor <span aria-hidden="true">→</span></a></div><figcaption>The mocks reuse "Explore [name]" for braiders and styles alike.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="chip-row" role="group" aria-label="Applied filters"><span class="chip chip--static">Knotless<button class="remove" type="button" aria-label="Remove filter: knotless"><svg class="icon icon--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span><span class="chip chip--static">Under $150<button class="remove" type="button" aria-label="Remove filter: under $150"><svg class="icon icon--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></div></div><figcaption>Applied filters as chips Maya can remove one by one.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge">Knotless · Toronto · under $150</span></div><figcaption>Applied filters as one static badge (the mocks’ no-results state).</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (card grid, filter chips)</li>
+    <li><a href="../../mocks/pages/matching-braiders/default.html">pages/matching-braiders/default</a> (braider cards, Filters button)</li>
+    <li><a href="../../mocks/pages/matching-braiders/long.html">pages/matching-braiders/long</a> (pagination)</li>
+    <li><a href="../../mocks/pages/matching-braiders/edge.html">pages/matching-braiders/edge</a> (long names)</li>
+    <li><a href="../../mocks/pages/matching-braiders/no-results.html">pages/matching-braiders/no-results</a> (filters as a badge)</li>
+    <li><a href="../../mocks/pages/my-appointments/default.html">pages/my-appointments/default</a> (row cards with status)</li>
+  </ul>
+  <p>Drift fixed: pagination used an ad-hoc <code>.pagination-row</code> of bare links (now the pagination component; the class is kept as an alias); applied filters on no-results were a static badge (now removable chips); braider cards reused "Explore [name]"; art panels were shorter than photos (now both 3:2).</p>
+</section>
+<footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
+</main>
+</div>
+<script src="../assets/ds.js"></script>
+</body>
+</html>

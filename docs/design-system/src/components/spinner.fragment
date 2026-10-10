@@ -1,0 +1,163 @@
+<!--meta {"lead": "A spinner says “working on it” for a short wait that has no shape yet: sending a message to Nia, checking an email address, refreshing a list in place.", "description": "Three sizes and an inline form with status text; announced through role=\"status\".", "pills": ["<code>role=\"status\"</code>", "Status: stable", "Core set"], "variants": "standalone, inline with text, inside a button (loading)", "states": "spinning, reduced motion (keeps turning), finished (removed)", "sources": ["pages/booking-request/submitting"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a spinner for waits of roughly one to ten seconds where nothing better can stand in: a small region refreshing in place ("Checking Nia’s availability…"), an action inside a row, or the button that was pressed (the button draws its own spinner through <code>aria-busy</code>; see <a href="button.html">Button</a>).</p>
+  <ul>
+    <li>Loading a page or a list whose layout you know? Use a <a href="skeleton.html">skeleton</a>; it shows the shape and avoids layout shift.</li>
+    <li>A long task you can measure (uploads)? Use a <a href="progress-bar.html">progress bar</a>.</li>
+    <li>Never replace a whole page with a centred spinner.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <span class="spinner-inline" role="status"><span class="spinner spinner--lg" aria-hidden="true"></span>Checking Nia’s availability…</span>
+      <span class="ds-callout" style="left: 18%; top: 22%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 26%; top: 70%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 62%; top: 30%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Arc</b><small>Quarter of the ring in <code>--color-accent</code>; turns once per <code>--duration-loop-spin</code>.</small></div></li>
+      <li><div><b>Track</b><small>The rest of the ring in <code>--color-border-default</code>, 2px (3px at large).</small></div></li>
+      <li><div><b>Status text</b><small>Visible or visually hidden; the element with <code>role="status"</code> announces it.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>The spinner is decorative (<code>aria-hidden</code>); the text beside it, visible or hidden, carries the meaning.</p>
+  {{example:Standalone with visually hidden text, inline with visible text, and the button's own loading state.}}
+<span role="status"><span class="spinner" aria-hidden="true"></span><span class="visually-hidden">Loading reviews</span></span>
+<span class="spinner-inline" role="status"><span class="spinner spinner--sm" aria-hidden="true"></span>Sending your message to Nia…</span>
+<button class="btn btn--primary" type="button" aria-busy="true">Send request</button>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <p>Match the spinner to the text or region it stands for: small beside body-small text, medium beside body text and in rows, large in the middle of a card or empty region.</p>
+  {{example:<code>.spinner--sm</code> 16px, default 20px, <code>.spinner--lg</code> 40px (3px ring).}}
+<span role="status"><span class="spinner spinner--sm" aria-hidden="true"></span><span class="visually-hidden">Loading, small</span></span>
+<span role="status"><span class="spinner" aria-hidden="true"></span><span class="visually-hidden">Loading, medium</span></span>
+<span role="status"><span class="spinner spinner--lg" aria-hidden="true"></span><span class="visually-hidden">Loading, large</span></span>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>The spinner is not interactive (no hover, focus, active or disabled). It is either present while work runs or removed when it ends, replaced by the result or a message.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Spinning</th><th scope="col">Finished: success</th><th scope="col">Finished: failed</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Small, inline</th><td><span class="spinner-inline" role="status"><span class="spinner spinner--sm" aria-hidden="true"></span>Saving…</span></td><td><span class="inline-status inline-status--success" role="status">{{icon:check|icon--sm}}Saved</span></td><td><span class="inline-status inline-status--danger" role="status">{{icon:alert-circle|icon--sm}}Not saved. Try again.</span></td></tr>
+      <tr><th scope="row">Medium</th><td><span role="status"><span class="spinner" aria-hidden="true"></span><span class="visually-hidden">Refreshing appointments</span></span></td><td><span class="inline-status inline-status--success">{{icon:check}}Up to date</span></td><td><span class="inline-status inline-status--danger">{{icon:alert-circle}}Couldn’t refresh</span></td></tr>
+      <tr><th scope="row">Large</th><td><span role="status"><span class="spinner spinner--lg" aria-hidden="true"></span><span class="visually-hidden">Loading reviews</span></span></td><td><span class="text-muted">Content replaces it</span></td><td><span class="text-muted">An error empty state replaces it</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  {{themes}}<span role="status"><span class="spinner spinner--sm" aria-hidden="true"></span><span class="visually-hidden">Loading</span></span><span role="status"><span class="spinner" aria-hidden="true"></span><span class="visually-hidden">Loading</span></span><span role="status"><span class="spinner spinner--lg" aria-hidden="true"></span><span class="visually-hidden">Loading</span></span><span class="spinner-inline" role="status"><span class="spinner spinner--sm" aria-hidden="true"></span>Sending…</span>{{/themes}}
+  <ul>
+    <li>Show the spinner only after about 300ms so fast responses do not flash it, and keep it at least 500ms once shown.</li>
+    <li>When the wait passes ten seconds, add text that says what is still happening, or switch to a progress bar.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Sizes do not change with the viewport; the spinner follows the text size it sits beside.</li>
+    <li>Inline status text wraps under the spinner's row at 360px rather than truncating; keep it under about 40 characters.</li>
+    <li>A large spinner centred in a card keeps the card's loaded height (set by its skeleton or minimum height), so nothing jumps when content arrives.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The arc reads <code>--color-accent</code> and the track <code>--color-border-default</code>; the size is the component token <code>--spinner-size</code>. In the dark theme the arc becomes plum 300 on a grey 750 track. Inside a button the spinner is drawn by the button in <code>--btn-fg</code>, so it always matches the label colour.</p>
+  <pre><code>/* A spinner on an inverse toast */
+.toast .spinner { border-color: var(--color-border-inverse); border-top-color: var(--color-fg-inverse); }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Wrap the spinner in an element with <code>role="status"</code> (a polite live region, <a href="https://www.w3.org/TR/wai-aria-1.2/#status">WAI-ARIA status</a>) that holds the text; the ring itself is <code>aria-hidden="true"</code>. Mark the region being refreshed with <code>aria-busy="true"</code> until it is done. The live region must exist before its text changes, or the change is not announced.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Not focusable. Focus stays on the control that started the work.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Never move focus to a spinner. When the result arrives, leave focus where it was unless the result is a new view, in which case move focus to its heading.</p>
+  <h3>Labelling</h3>
+  <p>Say what is loading: "Loading reviews", "Sending your message to Nia". Generic "Loading" is acceptable only when the surrounding region's heading already says what. Announce the end too ("Reviews loaded" or the error).</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Arc on surface|--color-accent|--color-bg-surface|3}}
+    {{pair:Arc on page|--color-accent|--color-bg-canvas|3}}
+    {{pair:Inline status text on surface|--color-fg-muted|--color-bg-surface|4.5}}
+  </div>
+  <h3>Motion</h3>
+  <p>One revolution per <code>--duration-loop-spin</code> (800ms), linear. Under <code>prefers-reduced-motion</code> the spinner keeps turning: it is the only sign work is in progress and it does not travel across the screen. Shimmer and pulse loops, by contrast, pause.</p>
+  <h3>Touch</h3>
+  <p>Not a target. Never put a spinner in place of a button people still need to press.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Use a present-participle phrase that names the thing: "Checking Nia’s availability…", "Sending your request…".</li>
+    <li>End with an ellipsis character (…), not three dots.</li>
+    <li>Replace the text with the outcome when the wait ends: "Saved", "Couldn’t refresh. Try again."</li>
+    <li>Do not add humour or apologies to waits under ten seconds.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><span class="spinner-inline" role="status"><span class="spinner spinner--sm" aria-hidden="true"></span>Sending your request…</span></div><figcaption>Pair the spinner with text in a status region that names the work.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><button class="btn btn--primary" type="button" disabled>Working…</button></div><figcaption>The mocks' submitting state swaps the label for "Working…" and disables the button. Keep the label, set <code>aria-busy</code>, and let the button draw the spinner.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card story-card" aria-busy="true"><span class="skeleton skeleton--hero" aria-hidden="true"></span><span class="skeleton skeleton--title" aria-hidden="true"></span><span class="visually-hidden" role="status">Loading styles</span></div></div><figcaption>Loading a known layout: use a skeleton that matches it.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas" style="justify-content: center; min-height: 8rem;"><span role="status"><span class="spinner spinner--lg" aria-hidden="true"></span><span class="visually-hidden">Loading</span></span></div><figcaption>A lone centred spinner for a whole page hides what is coming and shifts the layout when it arrives.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Arc|--color-accent}}
+      {{tok:Track|--color-border-default}}
+      {{tok:Status text|--color-fg-muted}}
+      {{tok:Ring width|--border-width-thick}}
+      {{tok:Radius|--radius-full}}
+      {{tok:Revolution|--duration-loop-spin}}
+      {{tok:Text font|--text-body-sm}}
+      {{tok:Gap to text|--space-2}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;section aria-busy="true" aria-labelledby="reviews-title"&gt;
+  &lt;h2 id="reviews-title"&gt;Customer reviews&lt;/h2&gt;
+  &lt;span role="status"&gt;
+    &lt;span class="spinner spinner--lg" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;span class="visually-hidden"&gt;Loading reviews&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/section&gt;
+
+&lt;span class="spinner-inline" role="status"&gt;
+  &lt;span class="spinner spinner--sm" aria-hidden="true"&gt;&lt;/span&gt;Sending your message to Nia…
+&lt;/span&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.spinner</code></td><td>20px ring; always <code>aria-hidden="true"</code>.</td></tr>
+    <tr><td><code>.spinner--sm</code> <code>.spinner--lg</code></td><td>16px and 40px.</td></tr>
+    <tr><td><code>.spinner-inline</code></td><td>Spinner plus visible status text in one row.</td></tr>
+    <tr><td><code>role="status"</code></td><td>On the wrapper that holds the text; announces politely.</td></tr>
+    <tr><td><code>aria-busy="true"</code></td><td>On the region being loaded or refreshed, until it is done.</td></tr>
+    <tr><td><code>.btn[aria-busy="true"]</code></td><td>Button loading state; the button draws its own spinner.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>No mock shows a standalone spinner; it is part of the core set. The only spinner in the mocks is the button's busy state:</p>
+  <ul>
+    {{mock:pages/booking-request/submitting|busy submit button}}
+    {{mock:dialogs/cancel-appointment/busy|busy danger button in a dialog}}
+  </ul>
+  <p>Drift fixed during extraction: the spin duration was a raw 0.8s (now <code>--duration-loop-spin</code>); the mocks' global reduced-motion override cut every animation to one 0.01ms iteration, which froze the spinner mid-turn (spinners now keep turning); the button spinner was 1.1em (now 1.25em, the icon size); busy buttons replaced their label with "Working…" (labels now stay).</p>
+</section>

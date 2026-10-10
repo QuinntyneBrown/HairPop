@@ -212,7 +212,7 @@ def run_checks(root: Path) -> tuple[list[str], list[str], dict]:
     for name in REQUIRED_FOUNDATIONS:
         if not (root / "foundations" / f"{name}.html").is_file():
             errors.append(f"missing foundation page foundations/{name}.html")
-    pages = sorted(p for p in root.rglob("*.html") if ".cache" not in p.parts)
+    pages = sorted(p for p in root.rglob("*.html") if ".cache" not in p.parts and "src" not in p.relative_to(root).parts)
     components = sorted((root / "components").glob("*.html")) if (root / "components").is_dir() else []
     patterns = sorted((root / "patterns").glob("*.html")) if (root / "patterns").is_dir() else []
     if not components:

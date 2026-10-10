@@ -1,0 +1,73 @@
+<!--meta {"lead": "Elevation says what sits above what: cards rest on the page, menus and toasts float, dialogs sit over a scrim. Four shadows and nine named layers cover every case.", "description": "Shadow levels, the surface hierarchy in both themes, the focus shadow and the z-order layers.", "covers": "Four shadow levels plus focus, surface hierarchy (canvas, surface, raised, sunken, inverse), dark-theme elevation, nine z-order layers."} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Elevation has two parts: a <b>shadow</b> that suggests height, and a <b>surface colour</b> that confirms it. In light, surfaces are the same white and shadows do the work; in dark, shadows are hard to see, so higher surfaces are also lighter grey. Stacking order is a separate decision made with <code>--z-*</code> layers; no component sets a raw <code>z-index</code>.</p>
+</section>
+
+<section class="ds-section" id="shadows"><h2><a href="#shadows">Shadows</a></h2>
+  <div class="ds-shadow-grid">
+    <div style="--shadow: var(--shadow-1);">1 · cards</div>
+    <div style="--shadow: var(--shadow-2);">2 · hovered cards, tooltips</div>
+    <div style="--shadow: var(--shadow-3);">3 · menus, toasts</div>
+    <div style="--shadow: var(--shadow-4);">4 · dialogs, sheets</div>
+    <div style="--shadow: var(--shadow-focus);">focus</div>
+  </div>
+  <p>Shadows are built from <code>--shadow-color</code> (an RGB triplet) with alpha, so the dark theme swaps the colour and raises the alpha without new shadow shapes. <code>--shadow-focus</code> draws a two-ring halo (surface gap, then ring) for elements where an outline would be clipped.</p>
+  {{themes}}<div class="card" style="flex: 1 1 10rem;">Card · shadow 1</div><div class="card" style="flex: 1 1 10rem; --card-shadow: var(--shadow-3);">Floating · shadow 3</div>{{/themes}}
+</section>
+
+<section class="ds-section" id="surfaces"><h2><a href="#surfaces">Surface hierarchy</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Level</th><th scope="col">Surface</th><th scope="col">Shadow</th><th scope="col">Examples</th></tr></thead><tbody>
+    <tr><td>Sunken</td><td><code>--color-bg-surface-sunken</code></td><td>none</td><td>Wells, code blocks, table headers</td></tr>
+    <tr><td>Page</td><td><code>--color-bg-canvas</code></td><td>none</td><td>The page behind everything</td></tr>
+    <tr><td>Resting</td><td><code>--color-bg-surface</code></td><td><code>--shadow-1</code></td><td>Cards, top bar, inputs</td></tr>
+    <tr><td>Lifted</td><td><code>--color-bg-surface</code></td><td><code>--shadow-2</code></td><td>Interactive card on hover</td></tr>
+    <tr><td>Floating</td><td><code>--color-bg-surface-raised</code></td><td><code>--shadow-3</code></td><td>Menus, popovers</td></tr>
+    <tr><td>Floating, inverse</td><td><code>--color-bg-inverse</code></td><td><code>--shadow-3</code></td><td>Toasts; tooltips use <code>--shadow-2</code></td></tr>
+    <tr><td>Modal</td><td><code>--color-bg-surface-raised</code> over <code>--color-bg-backdrop</code></td><td><code>--shadow-4</code></td><td>Dialogs and bottom sheets</td></tr>
+  </tbody></table></div>
+  <p>In the dark theme, canvas (grey 950) &lt; surface (grey 900) &lt; raised (grey 800): a dialog reads as raised even with no visible shadow.</p>
+  {{themes}}<div style="background: var(--color-bg-canvas); padding: var(--space-4); border-radius: var(--radius-md); flex: 1;"><div class="card" style="--card-padding: var(--space-4);">Surface<div style="background: var(--color-bg-surface-raised); box-shadow: var(--shadow-3); padding: var(--space-3); border-radius: var(--radius-md); margin-top: var(--space-3);">Raised</div></div></div>{{/themes}}
+</section>
+
+<section class="ds-section" id="z-order"><h2><a href="#z-order">Z-order</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Layer</th><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Used by</th></tr></thead><tbody>
+    <tr><td>Base</td><td><code>--z-base</code></td><td><span data-token="--z-base"></span></td><td>Normal flow</td></tr>
+    <tr><td>Raised</td><td><code>--z-raised</code></td><td><span data-token="--z-raised"></span></td><td>A selected segment over its neighbours</td></tr>
+    <tr><td>Sticky</td><td><code>--z-sticky</code></td><td><span data-token="--z-sticky"></span></td><td>Top bar</td></tr>
+    <tr><td>Dropdown</td><td><code>--z-dropdown</code></td><td><span data-token="--z-dropdown"></span></td><td>Menus</td></tr>
+    <tr><td>Overlay</td><td><code>--z-overlay</code></td><td><span data-token="--z-overlay"></span></td><td>Modal backdrop</td></tr>
+    <tr><td>Modal</td><td><code>--z-modal</code></td><td><span data-token="--z-modal"></span></td><td>Dialogs</td></tr>
+    <tr><td>Popover</td><td><code>--z-popover</code></td><td><span data-token="--z-popover"></span></td><td>Popovers opened from inside a dialog</td></tr>
+    <tr><td>Toast</td><td><code>--z-toast</code></td><td><span data-token="--z-toast"></span></td><td>Toast region, above dialogs so feedback after a dialog action is seen</td></tr>
+    <tr><td>Tooltip</td><td><code>--z-tooltip</code></td><td><span data-token="--z-tooltip"></span></td><td>Tooltips, skip link</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="ds-section" id="usage"><h2><a href="#usage">Usage</a></h2>
+  <ul>
+    <li>Use the shadow that matches the level, never a custom one. Two shadows in the mocks are not elevation: the invalid input's inner ring and the selected card's 1px ring are borders drawn with <code>box-shadow</code> and stay in the component.</li>
+    <li>A surface floats only when it is temporary (menus, toasts, dialogs). Permanent content rests at shadow 1.</li>
+    <li>Pick the z-layer by role. If two things collide, the higher role wins; do not add 1 to a token. (The mock chrome bar's <code>calc(var(--z-tooltip) + 10)</code> is documentation chrome, not product UI.)</li>
+    <li>Sticky and fixed elements never cover the focused element (WCAG 2.4.11): the top bar sets <code>scroll-padding-top</code>, and toasts dock away from form actions.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>
+    <tr><td>Shadow colour (RGB)</td><td><code>--shadow-color</code></td><td><span data-theme="light" data-token="--shadow-color"></span></td><td><span data-theme="dark" data-token="--shadow-color"></span></td></tr>
+    <tr><td>Shadow 1</td><td><code>--shadow-1</code></td><td><span data-theme="light" data-token="--shadow-1"></span></td><td><span data-theme="dark" data-token="--shadow-1"></span></td></tr>
+    <tr><td>Shadow 2</td><td><code>--shadow-2</code></td><td><span data-theme="light" data-token="--shadow-2"></span></td><td><span data-theme="dark" data-token="--shadow-2"></span></td></tr>
+    <tr><td>Shadow 3</td><td><code>--shadow-3</code></td><td><span data-theme="light" data-token="--shadow-3"></span></td><td><span data-theme="dark" data-token="--shadow-3"></span></td></tr>
+    <tr><td>Shadow 4</td><td><code>--shadow-4</code></td><td><span data-theme="light" data-token="--shadow-4"></span></td><td><span data-theme="dark" data-token="--shadow-4"></span></td></tr>
+    <tr><td>Focus shadow</td><td><code>--shadow-focus</code></td><td><span data-theme="light" data-token="--shadow-focus"></span></td><td><span data-theme="dark" data-token="--shadow-focus"></span></td></tr>
+    {{tok:Z base|--z-base}}
+    {{tok:Z raised|--z-raised}}
+    {{tok:Z sticky|--z-sticky}}
+    {{tok:Z dropdown|--z-dropdown}}
+    {{tok:Z overlay|--z-overlay}}
+    {{tok:Z modal|--z-modal}}
+    {{tok:Z popover|--z-popover}}
+    {{tok:Z toast|--z-toast}}
+    {{tok:Z tooltip|--z-tooltip}}
+  </tbody></table></div>
+</section>

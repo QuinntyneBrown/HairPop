@@ -1,0 +1,250 @@
+<!--meta {"lead": "Cards group one subject on a raised surface: a style to explore, a braider to compare, an appointment to check. Every card answers one question and offers at most one main action.", "description": "Default, story (media), interactive, selected, flush and row cards, with header and footer parts, in both themes.", "pills": ["<code>&lt;article&gt;</code> or <code>&lt;section&gt;</code>", "Status: stable"], "variants": "default, story (photo or art), interactive (stretched link), selected, flush, row, with header/footer", "states": "default, hover, focus, selected", "sources": ["pages/style-gallery/default", "pages/matching-braiders/default", "pages/braider-profile/default", "pages/appointment-detail/default", "pages/my-appointments/default"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a card when a piece of content stands on its own and could be moved, compared or repeated: a style in the gallery, a braider in the matching list, the appointment summary, a review. Do not use a card to frame a whole page or to fake a section heading; a page section is plain content on the canvas.</p>
+  <ul>
+    <li><b>Default card</b> holds a section of a detail page: "What to expect", "Before you book", "Prepare for your visit".</li>
+    <li><b>Story card</b> leads with a 3:2 photo or art panel, then an eyebrow, a title, one line of facts and one link: the style gallery and matching braiders grids.</li>
+    <li><b>Interactive card</b> makes the whole surface a target by stretching its one real link (<code>.card__link</code>); the card itself is never the control.</li>
+    <li><b>Row card</b> (<code>.appointment-row</code>) puts the summary and its action on one line, wrapping on phones: My appointments.</li>
+    <li><b>Selected card</b> marks the chosen option in a set, such as the time or braider picked in a flow.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <article class="card story-card" style="max-width: 18rem;">
+        <img class="story-card__photo" src="../../mocks/assets/photos/knotless-braids.png" alt="Medium knotless braids shown from the back and side">
+        <div class="stack">
+          <p class="eyebrow">Most explored</p>
+          <h3 class="card__title">Knotless braids</h3>
+          <p class="text-muted">Gentle at the root · 4–7 hours · typically $160–$300</p>
+          <a href="../../mocks/pages/style-detail/default.html">Explore Knotless braids <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <span class="ds-callout" style="left: 30%; top: 22%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 30%; top: 52%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 30%; top: 60%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 66%; top: 70%;" aria-hidden="true">4</span>
+      <span class="ds-callout" style="left: 30%; top: 84%;" aria-hidden="true">5</span>
+      <span class="ds-callout" style="left: 70%; top: 8%;" aria-hidden="true">6</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Media (optional)</b><small>3:2 photo with real <code>alt</code>, or a decorative art panel (<code>aria-hidden</code>). <code>--radius-md</code>.</small></div></li>
+      <li><div><b>Eyebrow (optional)</b><small>Overline in <code>--color-fg-accent</code>: why this card is here ("Most explored", "Available Sat 24 Oct").</small></div></li>
+      <li><div><b>Title</b><small>A heading at the right level for the page; <code>.card__title</code> (h4 role) in grids, the h3 role inside detail cards.</small></div></li>
+      <li><div><b>Summary</b><small>One line of facts in <code>--color-fg-muted</code>, separated by middle dots.</small></div></li>
+      <li><div><b>Action</b><small>One link or button that names its target ("Explore Knotless braids").</small></div></li>
+      <li><div><b>Container</b><small><code>--color-bg-surface</code>, 1px <code>--color-border-default</code>, <code>--radius-lg</code>, <code>--shadow-1</code>, <code>--space-6</code> padding.</small></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>Pick the variant by what the person does with the card: read it (default), choose from many (story or interactive), act on a record (row), or confirm a choice (selected).</p>
+  <h3>Default, with header and footer</h3>
+  {{example:[start]A detail-page section. Headings inside a card use the h3 role, never the 36px page h2.}}
+<section class="card" aria-labelledby="card-expect">
+  <h2 id="card-expect">What to expect</h2>
+  <p>Knotless braids start with your natural hair, then extensions are fed in gradually. The finish is flexible and usually feels lighter at the roots.</p>
+  <p class="text-muted">Length, size, hair density and supplied extensions affect the final quote.</p>
+</section>
+<section class="card" aria-labelledby="card-request">
+  <div class="card__header"><h2 id="card-request">Request HP-1048</h2><span class="badge badge--warning">Awaiting reply</span></div>
+  <p><strong>Sat 24 Oct · 10:00 am</strong> with Nia Okafor</p>
+  <p class="text-muted">Estimated price: $180–$240 · about 5 hours.</p>
+  <div class="card__footer"><button class="btn" type="button">Request a change</button><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div>
+</section>
+  {{/example}}
+  <h3>Story card: photo and art panel</h3>
+  {{example:[start]Photo and art panels share the 3:2 ratio, so a grid of mixed cards lines up.}}
+<article class="card story-card">
+  <img class="story-card__photo" src="../../mocks/assets/photos/nia.jpg" alt="Portrait of Nia Okafor">
+  <div class="stack">
+    <p class="eyebrow">Available Sat 24 Oct</p>
+    <h3 class="card__title">Nia Okafor</h3>
+    <p class="text-muted">4.9 ★ · 86 reviews · Toronto West · knotless braids from $180</p>
+    <a href="../../mocks/pages/braider-profile/default.html">View Nia’s profile <span aria-hidden="true">→</span></a>
+  </div>
+</article>
+<article class="card story-card">
+  <div class="story-card__art" aria-hidden="true">✦</div>
+  <div class="stack">
+    <p class="eyebrow">Protective style</p>
+    <h3 class="card__title">Passion twists</h3>
+    <p class="text-muted">Soft, textured finish · 3–6 hours · typically $140–$260</p>
+    <a href="../../mocks/pages/style-detail/default.html">Explore Passion twists <span aria-hidden="true">→</span></a>
+  </div>
+</article>
+  {{/example}}
+  <h3>Interactive card</h3>
+  {{example:[start]The link's <code>::after</code> covers the card, so the whole surface is a target while the accessible name stays the link text.}}
+<article class="card story-card card--interactive">
+  <img class="story-card__photo" src="../../mocks/assets/photos/knotless-braids.png" alt="Medium knotless braids shown from the back and side">
+  <div class="stack">
+    <p class="eyebrow">Most explored</p>
+    <h3 class="card__title"><a class="card__link" href="../../mocks/pages/style-detail/default.html">Knotless braids</a></h3>
+    <p class="text-muted">Gentle at the root · 4–7 hours · typically $160–$300</p>
+  </div>
+</article>
+  {{/example}}
+  <h3>Row, selected and flush</h3>
+  {{example:[stack]Row cards wrap their action below the summary on phones; selected uses the accent edge; flush drops the padding for media or tables.}}
+<div class="card appointment-row">
+  <div><span class="badge badge--success">Completed</span><h3 class="card__title">Nia Okafor · knotless braids</h3><p class="text-muted">Sat 3 Oct · review ready</p></div>
+  <a class="btn" href="../../mocks/pages/care-and-review/default.html">View care and review</a>
+</div>
+<div class="card card--selected">
+  <h3 class="card__title">Sat 24 Oct · 10:00 am</h3><p class="text-muted">Selected · Nia’s first offered time · about 5 hours</p>
+</div>
+<div class="card card--flush"><img class="story-card__photo" src="../../mocks/assets/photos/knotless-braids.png" alt="Long medium knotless braids with neat, visible parting"></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <p>Cards have one padding (<code>--space-6</code>, 24px) and take their width from the grid they sit in. Use <code>.card--flush</code> for edge-to-edge media or a table, and <code>.well</code> (sunken, 16px padding) for a box inside a card. Never nest a card in a card.</p>
+  {{example:[start]Grid width sets the card width: <code>.feature-grid</code> gives 1, 2 or 3 columns; <code>.detail-grid</code> gives a main card and an aside.}}
+<div class="card" style="flex: 2 1 20rem;"><h3 class="card__title">Main · 2fr</h3><p class="text-muted">Style detail, appointment detail, braider profile.</p><div class="well">A well inside a card for a note or a reference such as HP-1048.</div></div>
+<div class="card" style="flex: 1 1 12rem;"><h3 class="card__title">Aside · 1fr</h3><p class="text-muted">Make it yours, Before you book.</p></div>
+  {{/example}}
+</section>
+
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Only interactive and selectable cards have states. Hover lifts the card 1px with <code>--shadow-2</code> and a strong border; focus draws the shared ring around the whole card while its link has focus; selected uses the accent edge. Static cards have no hover and no disabled state.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Selected</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Interactive</th>
+        <td><div class="card card--interactive"><a class="card__link" href="../../mocks/pages/braider-profile/default.html">Nia Okafor</a><p class="text-muted">Toronto West</p></div></td>
+        <td><div class="card card--interactive" data-state="hover"><a class="card__link" href="../../mocks/pages/braider-profile/default.html">Aisha Mensah</a><p class="text-muted">North York</p></div></td>
+        <td><div class="card card--interactive" data-state="focus"><a class="card__link" href="../../mocks/pages/braider-profile/default.html">Jules Baptiste</a><p class="text-muted">Scarborough</p></div></td>
+        <td><div class="card card--interactive card--selected"><a class="card__link" href="../../mocks/pages/braider-profile/default.html" aria-current="true">Nia Okafor</a><p class="text-muted">Chosen</p></div></td></tr>
+      <tr><th scope="row">Default</th>
+        <td><div class="card"><b>Before you book</b><p class="text-muted">Static</p></div></td>
+        <td><div class="card"><b>Before you book</b><p class="text-muted">No change</p></div></td>
+        <td><div class="card"><b>Before you book</b><p class="text-muted">Focus goes to its links</p></div></td>
+        <td><div class="card" data-state="selected"><b>Sat 24 Oct</b><p class="text-muted">Selected option</p></div></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  {{themes}}<div class="card" style="flex: 1 1 14rem;"><span class="badge badge--warning">Awaiting reply</span><h3 class="card__title">Medium knotless braids</h3><p class="text-muted">Sat 24 Oct · 10:00 am with Nia Okafor</p></div><div class="card card--interactive" data-state="hover" style="flex: 1 1 14rem;"><a class="card__link" href="../../mocks/pages/style-detail/default.html">Passion twists</a><p class="text-muted">3–6 hours</p></div>{{/themes}}
+  <p>In the dark theme the surface is grey 900 on a grey 950 canvas, so cards read as raised through lightness as well as their deeper shadow.</p>
+</section>
+
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Cards fill their grid track. <code>.feature-grid</code> shows 1 column below 768px, 2 from 768px and 3 from 1024px; <code>.detail-grid</code> stacks the aside under the main card below 768px.</li>
+    <li>Padding stays 24px at every width; on a 360px phone with 16px page margins that leaves 278px of content, enough for every card in the mocks.</li>
+    <li>Row cards (<code>.appointment-row</code>) wrap: the action drops below the summary when the line is too narrow.</li>
+    <li>Media keeps its 3:2 ratio at every width, so the grid does not jump while images load.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The card reads four component tokens: <code>--card-bg</code> (<code>--color-bg-surface</code>), <code>--card-border</code> (<code>--color-border-default</code>), <code>--card-shadow</code> (<code>--shadow-1</code>) and <code>--card-padding</code> (<code>--space-6</code>). Hover and selected states change the component tokens, not the rules.</p>
+  <pre><code>/* A quiet highlighted card, e.g. "Most explored" */
+.card--highlight { --card-bg: var(--color-accent-subtle); --card-border: var(--color-accent-subtle-hover); --card-shadow: none; }</code></pre>
+</section>
+
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>A card is an <code>&lt;article&gt;</code> when it can stand alone (a style, a braider, a review) or a <code>&lt;section aria-labelledby&gt;</code> when it is a named part of a page. It has no ARIA role of its own. An interactive card contains exactly one real link or button; the card is never <code>role="button"</code> or a wrapping <code>&lt;a&gt;</code> around block content with other controls inside.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through the card's links and buttons; an interactive card is one tab stop (its <code>.card__link</code>).</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Follows the card's link.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>When <code>.card__link</code> has focus the ring is drawn around the whole card (<code>:has(.card__link:focus-visible)</code>), so the target and the ring match.</p>
+  <h3>Labelling</h3>
+  <p>The card title is a real heading at the right level for the page (h2 in a grid under the page h1, h3 inside a section). Link text names the target ("Explore Knotless braids", not "Learn more"); a decorative arrow is <code>aria-hidden</code>. Photos have <code>alt</code> describing the hair, not "image". Selected state is said in text or <code>aria-current</code>, never only by the accent edge.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Title on card|--color-fg-default|--color-bg-surface|4.5}}
+    {{pair:Summary on card|--color-fg-muted|--color-bg-surface|4.5}}
+    {{pair:Eyebrow on card|--color-fg-accent|--color-bg-surface|4.5}}
+    {{pair:Link on card|--color-fg-link|--color-bg-surface|4.5}}
+    {{pair:Selected edge on card|--color-accent|--color-bg-surface|3}}
+    {{pair:Focus ring on card|--color-focus-ring|--color-bg-surface|3}}
+  </div>
+  <p>The default card border is decorative: the surface and shadow separate the card.</p>
+  <h3>Motion</h3>
+  <p>Hover lift, shadow and border transition over <code>--duration-fast</code>; reduced motion makes them instant.</p>
+  <h3>Touch</h3>
+  <p>Interactive cards are large targets by construction. In story cards the link is at least 24px tall and sits apart from other targets.</p>
+</section>
+
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Title: the thing, not a sentence ("Knotless braids", "Nia Okafor", "Medium knotless braids").</li>
+    <li>Summary: one line of facts in a fixed order (rating, reviews, area, price; or time, duration, price), separated by " · ".</li>
+    <li>Eyebrow: one short reason the card is here ("Most explored", "Available Sat 24 Oct"), sentence case in source, uppercase by style.</li>
+    <li>Prices are ranges with an en dash and no spaces ("$180–$240"); times read "Sat 24 Oct · 10:00 am".</li>
+    <li>One action per card, named by its target.</li>
+  </ul>
+</section>
+
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><section class="card" style="flex: 1;" aria-label="Do example"><h3>Prepare for your visit</h3><p class="text-muted">Wash and detangle your hair.</p></section></div><figcaption>Use the h3 role for a section heading inside a card.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="card" style="flex: 1;"><p style="font: var(--text-h2); letter-spacing: var(--letter-spacing-tight);">Prepare for your visit</p></div></div><figcaption>Render a card heading at the 36px page h2, as the appointment and profile mocks did; it competes with the page title.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="card story-card" style="flex: 1;"><div class="story-card__art" aria-hidden="true">✦</div><b>Cornrows</b></div><div class="card story-card" style="flex: 1;"><img class="story-card__photo" src="../../mocks/assets/photos/knotless-braids.png" alt="Medium knotless braids"><b>Knotless braids</b></div></div><figcaption>Give art panels and photos the same 3:2 ratio so titles line up.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="card" style="flex: 1;"><div class="card"><b>Nested card</b></div></div></div><figcaption>Put a card inside a card. Use a <code>.well</code> or a divider instead.</figcaption></figure>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Background|--color-bg-surface}}
+      {{tok:Border|--color-border-default}}
+      {{tok:Border, hover|--color-border-strong}}
+      {{tok:Selected edge|--color-accent}}
+      {{tok:Title|--color-fg-default}}
+      {{tok:Summary|--color-fg-muted}}
+      {{tok:Eyebrow, art panel glyph|--color-fg-accent}}
+      {{tok:Art panel background|--color-accent-subtle}}
+      {{tok:Well background|--color-bg-surface-sunken}}
+      {{tok:Shadow, hover shadow|--shadow-1|--shadow-2}}
+      {{tok:Radius, media radius|--radius-lg|--radius-md}}
+      {{tok:Padding, internal gap|--space-6|--space-4}}
+      {{tok:Transition|--duration-fast|--ease-standard}}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;article class="card story-card card--interactive"&gt;
+  &lt;img class="story-card__photo" src="knotless-braids.png" alt="Medium knotless braids shown from the back and side"&gt;
+  &lt;div class="stack"&gt;
+    &lt;p class="eyebrow"&gt;Most explored&lt;/p&gt;
+    &lt;h2 class="card__title"&gt;&lt;a class="card__link" href="/styles/knotless-braids"&gt;Knotless braids&lt;/a&gt;&lt;/h2&gt;
+    &lt;p class="text-muted"&gt;Gentle at the root · 4–7 hours · typically $160–$300&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.card</code></td><td>Surface, border, radius, shadow, 24px padding; block children get 16px between them.</td></tr>
+    <tr><td><code>.story-card</code> <code>.story-card__photo</code> <code>.story-card__art</code></td><td>Media-first card; 3:2 media.</td></tr>
+    <tr><td><code>.card--interactive</code> + <code>.card__link</code></td><td>Whole card is the link's target; hover lift; focus ring on the card.</td></tr>
+    <tr><td><code>.card--selected</code> (or <code>aria-selected="true"</code> on a <code>role="option"</code> card)</td><td>Accent edge for the chosen option.</td></tr>
+    <tr><td><code>.card--flush</code></td><td>No padding; clips media to the radius.</td></tr>
+    <tr><td><code>.card__header</code> <code>.card__title</code> <code>.card__footer</code></td><td>Title row with a trailing badge or action; h4-role title; footer actions with a top divider.</td></tr>
+    <tr><td><code>.appointment-row</code> <code>.profile-head</code></td><td>Row layouts used inside cards.</td></tr>
+    <tr><td><code>.well</code></td><td>Sunken box inside a card.</td></tr>
+    <tr><td><code>data-state="hover|focus|selected"</code></td><td>Documentation only: forces a state.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    {{mock:pages/style-gallery/default|story cards with photo and art panels}}
+    {{mock:pages/matching-braiders/default|braider story cards}}
+    {{mock:pages/style-detail/default|detail and aside cards, fact tiles}}
+    {{mock:pages/braider-profile/default|profile head, review card}}
+    {{mock:pages/appointment-detail/default|appointment summary card}}
+    {{mock:pages/my-appointments/default|row cards}}
+  </ul>
+  <p>Drift fixed during extraction: section headings inside detail cards rendered at the 36px light page h2 (system uses the h3 role); story-card art panels were a fixed 48px min-height plus a 5xl glyph, so they came out shorter than photo cards (both are now 3:2); only the "Explore X →" link was clickable with no whole-card option (system adds <code>.card--interactive</code> with a stretched <code>.card__link</code>); a badge inside a <code>.stack</code> card stretched full width (badges now align to the start).</p>
+</section>
