@@ -6,6 +6,11 @@
       "kind": "page",
       "title": "Style gallery",
       "route": "/",
+      "requirements": [
+        "L2-001",
+        "L2-002",
+        "L2-035"
+      ],
       "states": [
         "default",
         "loading",
@@ -23,6 +28,9 @@
       "kind": "page",
       "title": "Knotless braids",
       "route": "/styles/knotless-braids",
+      "requirements": [
+        "L2-003"
+      ],
       "states": [
         "default",
         "loading",
@@ -39,6 +47,12 @@
       "kind": "page",
       "title": "Matching braiders",
       "route": "/styles/knotless-braids/braiders",
+      "requirements": [
+        "L2-004",
+        "L2-005",
+        "L2-006",
+        "L2-008"
+      ],
       "states": [
         "default",
         "loading",
@@ -56,6 +70,11 @@
       "kind": "page",
       "title": "Nia’s profile",
       "route": "/braiders/nia-okafor",
+      "requirements": [
+        "L2-007",
+        "L2-008",
+        "L2-009"
+      ],
       "states": [
         "default",
         "loading",
@@ -72,6 +91,11 @@
       "kind": "page",
       "title": "Booking request",
       "route": "/book/nia-okafor",
+      "requirements": [
+        "L2-015",
+        "L2-016",
+        "L2-017"
+      ],
       "states": [
         "default",
         "loading",
@@ -89,6 +113,12 @@
       "kind": "page",
       "title": "Appointment detail",
       "route": "/appointments/hp-1048",
+      "requirements": [
+        "L2-019",
+        "L2-021",
+        "L2-022",
+        "L2-024"
+      ],
       "states": [
         "default",
         "loading",
@@ -105,6 +135,10 @@
       "kind": "page",
       "title": "My appointments",
       "route": "/appointments",
+      "requirements": [
+        "L2-018",
+        "L2-023"
+      ],
       "states": [
         "default",
         "loading",
@@ -122,6 +156,11 @@
       "kind": "page",
       "title": "Care and review",
       "route": "/appointments/hp-0992/care",
+      "requirements": [
+        "L2-023",
+        "L2-024",
+        "L2-025"
+      ],
       "states": [
         "default",
         "loading",
@@ -139,6 +178,10 @@
       "kind": "page",
       "title": "Sign in",
       "route": "/sign-in",
+      "requirements": [
+        "L2-011",
+        "L2-040"
+      ],
       "states": [
         "default",
         "loading",
@@ -156,6 +199,9 @@
       "kind": "page",
       "title": "Create account",
       "route": "/sign-up",
+      "requirements": [
+        "L2-010"
+      ],
       "states": [
         "default",
         "loading",
@@ -173,6 +219,9 @@
       "kind": "page",
       "title": "Forgot password",
       "route": "/forgot-password",
+      "requirements": [
+        "L2-012"
+      ],
       "states": [
         "default",
         "loading",
@@ -190,6 +239,9 @@
       "kind": "page",
       "title": "Reset password",
       "route": "/reset-password",
+      "requirements": [
+        "L2-012"
+      ],
       "states": [
         "default",
         "loading",
@@ -207,6 +259,9 @@
       "kind": "page",
       "title": "Verify email",
       "route": "/verify-email",
+      "requirements": [
+        "L2-013"
+      ],
       "states": [
         "default",
         "loading",
@@ -223,6 +278,10 @@
       "kind": "page",
       "title": "Notifications",
       "route": "/notifications",
+      "requirements": [
+        "L2-029",
+        "L2-030"
+      ],
       "states": [
         "default",
         "loading",
@@ -239,6 +298,10 @@
       "kind": "page",
       "title": "Account settings",
       "route": "/settings",
+      "requirements": [
+        "L2-014",
+        "L2-011"
+      ],
       "states": [
         "default",
         "loading",
@@ -257,6 +320,9 @@
       "kind": "page",
       "title": "Help",
       "route": "/help",
+      "requirements": [
+        "L2-032"
+      ],
       "states": [
         "default",
         "loading",
@@ -272,6 +338,9 @@
       "kind": "page",
       "title": "Page not found",
       "route": "/404",
+      "requirements": [
+        "L2-037"
+      ],
       "states": [
         "default",
         "loading",
@@ -286,6 +355,9 @@
       "kind": "page",
       "title": "Access unavailable",
       "route": "/403",
+      "requirements": [
+        "L2-037"
+      ],
       "states": [
         "default",
         "loading",
@@ -300,6 +372,9 @@
       "kind": "page",
       "title": "Service error",
       "route": "/500",
+      "requirements": [
+        "L2-037"
+      ],
       "states": [
         "default",
         "loading",
@@ -314,6 +389,10 @@
       "kind": "page",
       "title": "Offline",
       "route": "/offline",
+      "requirements": [
+        "L2-036",
+        "L2-045"
+      ],
       "states": [
         "default",
         "loading",
@@ -328,6 +407,9 @@
       "kind": "page",
       "title": "Terms of use",
       "route": "/terms",
+      "requirements": [
+        "L2-033"
+      ],
       "states": [
         "default",
         "loading",
@@ -342,6 +424,10 @@
       "kind": "page",
       "title": "Privacy",
       "route": "/privacy",
+      "requirements": [
+        "L2-033",
+        "L2-034"
+      ],
       "states": [
         "default",
         "loading",
@@ -352,10 +438,110 @@
       }
     },
     {
+      "id": "braider-sign-in",
+      "kind": "page",
+      "title": "Braider sign in",
+      "route": "/manage/sign-in",
+      "requirements": [
+        "L2-046"
+      ],
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "invalid",
+        "submitting",
+        "denied"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "braider-requests",
+      "kind": "page",
+      "title": "Braider requests",
+      "route": "/manage/requests",
+      "requirements": [
+        "L2-020",
+        "L2-021",
+        "L2-047"
+      ],
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "braider-services",
+      "kind": "page",
+      "title": "Braider services",
+      "route": "/manage/services",
+      "requirements": [
+        "L2-026",
+        "L2-047"
+      ],
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "braider-profile-content",
+      "kind": "page",
+      "title": "Braider profile content",
+      "route": "/manage/profile",
+      "requirements": [
+        "L2-027",
+        "L2-047"
+      ],
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "invalid",
+        "submitting",
+        "success",
+        "offline",
+        "conflict"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "braider-availability",
+      "kind": "page",
+      "title": "Braider availability",
+      "route": "/manage/availability",
+      "requirements": [
+        "L2-028",
+        "L2-047"
+      ],
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
       "id": "filter-braiders",
       "kind": "dialog",
       "title": "Filter braiders",
       "opens_from": "matching-braiders",
+      "requirements": [
+        "L2-005"
+      ],
       "states": [
         "default",
         "busy",
@@ -369,6 +555,10 @@
       "kind": "dialog",
       "title": "Review request",
       "opens_from": "booking-request",
+      "requirements": [
+        "L2-016",
+        "L2-017"
+      ],
       "states": [
         "default",
         "busy",
@@ -380,12 +570,14 @@
     {
       "id": "cancel-appointment",
       "kind": "dialog",
-      "title": "Cancel appointment",
+      "title": "Cancel request HP-1048?",
       "opens_from": "appointment-detail",
+      "requirements": [
+        "L2-022"
+      ],
       "states": [
         "default",
         "busy",
-        "confirm",
         "failed"
       ],
       "not_applicable": {
@@ -397,6 +589,9 @@
       "kind": "dialog",
       "title": "Request a change",
       "opens_from": "appointment-detail",
+      "requirements": [
+        "L2-021"
+      ],
       "states": [
         "default",
         "busy",
@@ -410,6 +605,9 @@
       "kind": "dialog",
       "title": "Report a review",
       "opens_from": "braider-profile",
+      "requirements": [
+        "L2-009"
+      ],
       "states": [
         "default",
         "busy",
@@ -421,12 +619,16 @@
     {
       "id": "sign-out",
       "kind": "dialog",
-      "title": "Sign out",
+      "title": "Sign out of HairPop?",
       "opens_from": "account-settings",
+      "requirements": [
+        "L2-011",
+        "L2-045"
+      ],
       "states": [
         "default",
         "busy",
-        "confirm"
+        "failed"
       ],
       "not_applicable": {
         "invalid": "This confirmation dialog has no inputs."
@@ -437,6 +639,9 @@
       "kind": "dialog",
       "title": "Cookie preferences",
       "opens_from": "style-gallery",
+      "requirements": [
+        "L2-034"
+      ],
       "states": [
         "default",
         "busy",
@@ -446,10 +651,133 @@
       "not_applicable": {}
     },
     {
+      "id": "respond-to-request",
+      "kind": "dialog",
+      "title": "Respond to request HP-1048",
+      "opens_from": "braider-requests",
+      "requirements": [
+        "L2-020",
+        "L2-021"
+      ],
+      "states": [
+        "default",
+        "busy",
+        "invalid",
+        "failed",
+        "conflict"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "edit-service",
+      "kind": "dialog",
+      "title": "Edit service",
+      "opens_from": "braider-services",
+      "requirements": [
+        "L2-026",
+        "L2-047"
+      ],
+      "states": [
+        "default",
+        "busy",
+        "invalid",
+        "failed",
+        "conflict"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "remove-service",
+      "kind": "dialog",
+      "title": "Remove Boho knotless braids?",
+      "opens_from": "braider-services",
+      "requirements": [
+        "L2-026"
+      ],
+      "states": [
+        "default",
+        "busy",
+        "failed"
+      ],
+      "not_applicable": {
+        "invalid": "This confirmation dialog has no inputs."
+      }
+    },
+    {
+      "id": "add-portfolio-item",
+      "kind": "dialog",
+      "title": "Add a portfolio photo",
+      "opens_from": "braider-profile-content",
+      "requirements": [
+        "L2-027"
+      ],
+      "states": [
+        "default",
+        "busy",
+        "invalid",
+        "failed"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "add-slot",
+      "kind": "dialog",
+      "title": "Add an offered time",
+      "opens_from": "braider-availability",
+      "requirements": [
+        "L2-028"
+      ],
+      "states": [
+        "default",
+        "busy",
+        "invalid",
+        "failed"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "withdraw-slot",
+      "kind": "dialog",
+      "title": "Withdraw Sun 25 Oct at 11:00 am?",
+      "opens_from": "braider-availability",
+      "requirements": [
+        "L2-028"
+      ],
+      "states": [
+        "default",
+        "busy",
+        "failed"
+      ],
+      "not_applicable": {
+        "invalid": "This confirmation dialog has no inputs."
+      }
+    },
+    {
+      "id": "braider-sign-out",
+      "kind": "dialog",
+      "title": "Sign out of HairPop for braiders?",
+      "opens_from": "braider-profile-content",
+      "requirements": [
+        "L2-046"
+      ],
+      "states": [
+        "default",
+        "busy",
+        "failed"
+      ],
+      "not_applicable": {
+        "invalid": "This confirmation dialog has no inputs."
+      }
+    },
+    {
       "id": "booking-update",
       "kind": "notification",
       "title": "Booking update",
       "opens_from": "appointment-detail",
+      "requirements": [
+        "L2-029",
+        "L2-031"
+      ],
       "states": [
         "info",
         "success",
@@ -465,6 +793,10 @@
       "kind": "notification",
       "title": "Review feedback",
       "opens_from": "care-and-review",
+      "requirements": [
+        "L2-029",
+        "L2-031"
+      ],
       "states": [
         "info",
         "success",
@@ -480,6 +812,10 @@
       "kind": "notification",
       "title": "Account feedback",
       "opens_from": "account-settings",
+      "requirements": [
+        "L2-029",
+        "L2-031"
+      ],
       "states": [
         "info",
         "success",
@@ -495,6 +831,28 @@
       "kind": "notification",
       "title": "Cookie consent",
       "opens_from": "style-gallery",
+      "requirements": [
+        "L2-031",
+        "L2-034"
+      ],
+      "states": [
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "with-action",
+        "stacked",
+        "persistent"
+      ]
+    },
+    {
+      "id": "braider-feedback",
+      "kind": "notification",
+      "title": "Braider feedback",
+      "opens_from": "braider-requests",
+      "requirements": [
+        "L2-047"
+      ],
       "states": [
         "info",
         "success",

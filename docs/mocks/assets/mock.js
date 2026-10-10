@@ -17,6 +17,9 @@
   function applyTheme(theme, persist) {
     root.dataset.theme = theme;
     if (persist) store('mock-theme', theme);
+    document.querySelectorAll('[data-product-theme-toggle]').forEach(function (button) {
+      button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    });
     document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
       button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
       button.textContent = theme === 'dark' ? '☀ Light' : '☾ Dark';
@@ -36,7 +39,8 @@
     if (closeDialog) { dismissDialog(); return; }
     var closeToast = event.target.closest('.toast .close');
     if (closeToast) { closeToast.closest('.toast').remove(); return; }
-    var toggle = event.target.closest('[data-theme-toggle]');
+    if (event.target.closest('.dialog [data-close-dialog]')) { dismissDialog(); return; }
+    var toggle = event.target.closest('[data-theme-toggle], [data-product-theme-toggle]');
     if (toggle) { applyTheme(currentTheme() === 'dark' ? 'light' : 'dark', true); return; }
     var chrome = event.target.closest('[data-chrome-toggle]');
     if (chrome) { root.dataset.chrome = root.dataset.chrome === 'off' ? 'on' : 'off'; return; }
@@ -61,7 +65,7 @@
     if (backdrop) backdrop.remove();
     var behind = document.querySelector('.product-shell[inert]');
     if (behind) { behind.removeAttribute('inert'); behind.removeAttribute('aria-hidden'); }
-    var trigger = document.querySelector('main a[href*="dialogs/"]');
+    var trigger = document.querySelector('main a[aria-haspopup="dialog"], main a[href*="dialogs/"]');
     if (trigger) trigger.focus();
   }
 
