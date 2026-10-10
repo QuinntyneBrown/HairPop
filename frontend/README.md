@@ -1,59 +1,44 @@
 # Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.26.
+Angular 21 workspace for HairPop's web applications. It currently holds one project:
 
-## Development server
+| Project      | Path                  | Purpose                                                                                                                                   |
+| ------------ | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `components` | `projects/components` | `@hairpop/components`, the shared components library built to the CRDs in [`docs/specs/components/`](../docs/specs/components/README.md). |
 
-To start a local development server, run:
+## Commands
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Run from this folder:
 
 ```bash
-ng generate component component-name
+npm install            # also installs the husky pre-commit hook
+npm run build          # ng build components → dist/components
+npm run lint           # angular-eslint
+npm run format:check   # Prettier
+npm run format         # Prettier, write
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The pre-commit hook runs `lint-staged`, which applies `eslint --fix` and Prettier to staged frontend files.
 
-```bash
-ng generate --help
+## Using the components library
+
+Applications import components from `@hairpop/components` and bind them in standalone component `imports`. Every component uses the `hp` prefix, for example `<button hp-button variant="primary">` or `<hp-empty-state>`.
+
+Each application lists the library's global stylesheets in `angular.json` `styles`, in this order, before any page styles:
+
+```json
+"styles": [
+  "dist/components/styles/tokens.css",
+  "dist/components/styles/fonts.css",
+  "dist/components/styles/foundation.css",
+  "dist/components/styles/layout.css",
+  "node_modules/@angular/cdk/overlay-prebuilt.css"
+]
 ```
 
-## Building
+- `tokens.css`: design tokens, light and dark themes (`data-theme` or `prefers-color-scheme`).
+- `fonts.css`: local Manrope and JetBrains Mono.
+- `foundation.css`: base typography, the shared focus ring, `.visually-hidden`, `.icon` and shared keyframes.
+- `layout.css`: `.container`, `.stack`, `.cluster`, grids and the app shell classes.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Applications that show toasts call `provideToasts()` in `app.config.ts`.
