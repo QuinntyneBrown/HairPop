@@ -1,0 +1,509 @@
+{
+  "project": "HairPop",
+  "screens": [
+    {
+      "id": "style-gallery",
+      "kind": "page",
+      "title": "Style gallery",
+      "route": "/",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "no-results",
+        "long",
+        "edge",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "style-detail",
+      "kind": "page",
+      "title": "Knotless braids",
+      "route": "/styles/knotless-braids",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "partial",
+        "edge",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "matching-braiders",
+      "kind": "page",
+      "title": "Matching braiders",
+      "route": "/styles/knotless-braids/braiders",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "no-results",
+        "long",
+        "edge",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "braider-profile",
+      "kind": "page",
+      "title": "Nia’s profile",
+      "route": "/braiders/nia-okafor",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "partial",
+        "edge",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "booking-request",
+      "kind": "page",
+      "title": "Booking request",
+      "route": "/book/nia-okafor",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "invalid",
+        "submitting",
+        "success",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "appointment-detail",
+      "kind": "page",
+      "title": "Appointment detail",
+      "route": "/appointments/hp-1048",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "partial",
+        "success",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "my-appointments",
+      "kind": "page",
+      "title": "My appointments",
+      "route": "/appointments",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "no-results",
+        "long",
+        "edge",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "care-and-review",
+      "kind": "page",
+      "title": "Care and review",
+      "route": "/appointments/hp-0992/care",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "invalid",
+        "submitting",
+        "success",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "sign-in",
+      "kind": "page",
+      "title": "Sign in",
+      "route": "/sign-in",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "invalid",
+        "submitting",
+        "success"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "sign-up",
+      "kind": "page",
+      "title": "Create account",
+      "route": "/sign-up",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "invalid",
+        "submitting",
+        "success"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "forgot-password",
+      "kind": "page",
+      "title": "Forgot password",
+      "route": "/forgot-password",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "invalid",
+        "submitting",
+        "success"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "reset-password",
+      "kind": "page",
+      "title": "Reset password",
+      "route": "/reset-password",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "invalid",
+        "submitting",
+        "success"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "verify-email",
+      "kind": "page",
+      "title": "Verify email",
+      "route": "/verify-email",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "submitting",
+        "success"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "notification-center",
+      "kind": "page",
+      "title": "Notifications",
+      "route": "/notifications",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "unread",
+        "read",
+        "offline"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "account-settings",
+      "kind": "page",
+      "title": "Account settings",
+      "route": "/settings",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "invalid",
+        "submitting",
+        "success",
+        "offline"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "help",
+      "kind": "page",
+      "title": "Help",
+      "route": "/help",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "offline"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "not-found",
+      "kind": "page",
+      "title": "Page not found",
+      "route": "/404",
+      "states": [
+        "default",
+        "loading",
+        "error"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "forbidden",
+      "kind": "page",
+      "title": "Access unavailable",
+      "route": "/403",
+      "states": [
+        "default",
+        "loading",
+        "error"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "server-error",
+      "kind": "page",
+      "title": "Service error",
+      "route": "/500",
+      "states": [
+        "default",
+        "loading",
+        "error"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "offline",
+      "kind": "page",
+      "title": "Offline",
+      "route": "/offline",
+      "states": [
+        "default",
+        "loading",
+        "error"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "terms",
+      "kind": "page",
+      "title": "Terms of use",
+      "route": "/terms",
+      "states": [
+        "default",
+        "loading",
+        "error"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "privacy",
+      "kind": "page",
+      "title": "Privacy",
+      "route": "/privacy",
+      "states": [
+        "default",
+        "loading",
+        "error"
+      ],
+      "not_applicable": {
+        "empty": "This screen has no collection to become empty."
+      }
+    },
+    {
+      "id": "filter-braiders",
+      "kind": "dialog",
+      "title": "Filter braiders",
+      "opens_from": "matching-braiders",
+      "states": [
+        "default",
+        "busy",
+        "invalid",
+        "failed"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "request-review",
+      "kind": "dialog",
+      "title": "Review request",
+      "opens_from": "booking-request",
+      "states": [
+        "default",
+        "busy",
+        "invalid",
+        "failed"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "cancel-appointment",
+      "kind": "dialog",
+      "title": "Cancel appointment",
+      "opens_from": "appointment-detail",
+      "states": [
+        "default",
+        "busy",
+        "confirm",
+        "failed"
+      ],
+      "not_applicable": {
+        "invalid": "This confirmation dialog has no inputs."
+      }
+    },
+    {
+      "id": "change-appointment",
+      "kind": "dialog",
+      "title": "Request a change",
+      "opens_from": "appointment-detail",
+      "states": [
+        "default",
+        "busy",
+        "invalid",
+        "failed"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "report-review",
+      "kind": "dialog",
+      "title": "Report a review",
+      "opens_from": "braider-profile",
+      "states": [
+        "default",
+        "busy",
+        "invalid",
+        "failed"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "sign-out",
+      "kind": "dialog",
+      "title": "Sign out",
+      "opens_from": "account-settings",
+      "states": [
+        "default",
+        "busy",
+        "confirm"
+      ],
+      "not_applicable": {
+        "invalid": "This confirmation dialog has no inputs."
+      }
+    },
+    {
+      "id": "cookie-preferences",
+      "kind": "dialog",
+      "title": "Cookie preferences",
+      "opens_from": "style-gallery",
+      "states": [
+        "default",
+        "busy",
+        "invalid",
+        "failed"
+      ],
+      "not_applicable": {}
+    },
+    {
+      "id": "booking-update",
+      "kind": "notification",
+      "title": "Booking update",
+      "opens_from": "appointment-detail",
+      "states": [
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "with-action",
+        "stacked",
+        "persistent"
+      ]
+    },
+    {
+      "id": "review-feedback",
+      "kind": "notification",
+      "title": "Review feedback",
+      "opens_from": "care-and-review",
+      "states": [
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "with-action",
+        "stacked",
+        "persistent"
+      ]
+    },
+    {
+      "id": "account-feedback",
+      "kind": "notification",
+      "title": "Account feedback",
+      "opens_from": "account-settings",
+      "states": [
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "with-action",
+        "stacked",
+        "persistent"
+      ]
+    },
+    {
+      "id": "cookie-consent",
+      "kind": "notification",
+      "title": "Cookie consent",
+      "opens_from": "style-gallery",
+      "states": [
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "with-action",
+        "stacked",
+        "persistent"
+      ]
+    }
+  ]
+}
