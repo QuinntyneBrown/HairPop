@@ -92,6 +92,139 @@
           }
         }
       }
+    },
+    "api": {
+      "projectType": "library",
+      "root": "projects/api",
+      "sourceRoot": "projects/api/src",
+      "prefix": "hp",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/api/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/api/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/api/**/*.ts", "projects/api/**/*.html"],
+            "eslintConfig": "projects/api/eslint.config.js"
+          }
+        }
+      }
+    },
+    "customer": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/customer",
+      "sourceRoot": "projects/customer/src",
+      "prefix": "hp",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/customer/src/main.ts",
+            "tsConfig": "projects/customer/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/customer/public"
+              }
+            ],
+            "styles": [
+              "projects/components/styles/tokens.css",
+              "projects/components/styles/fonts.css",
+              "projects/components/styles/foundation.css",
+              "projects/components/styles/layout.css",
+              "projects/customer/src/styles.css"
+            ],
+            "server": "projects/customer/src/main.server.ts",
+            "outputMode": "server",
+            "security": {
+              "allowedHosts": ["localhost", "127.0.0.1"]
+            },
+            "ssr": {
+              "entry": "projects/customer/src/server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "customer:build:production"
+            },
+            "development": {
+              "buildTarget": "customer:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/customer/**/*.ts", "projects/customer/**/*.html"],
+            "eslintConfig": "projects/customer/eslint.config.js"
+          }
+        }
+      }
     }
   }
 }
