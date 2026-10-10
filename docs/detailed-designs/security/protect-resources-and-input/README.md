@@ -6,7 +6,24 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`ProtectedCustomerPages` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `AuthorizeAndValidate` is the proposed Laravel application action. Its responsibility is to authorize each owned resource, validate untrusted input and enforce configured limits. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `ProtectedResource` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`ProtectedCustomerPages` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `AuthorizeAndValidate` is the proposed Laravel application action. Its responsibility is to authorize each owned resource, validate untrusted input and enforce configured limits. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `ProtectedResource` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** User text renders through Angular interpolation only; no `innerHTML` binds user content (L2-039 AC2).
+
+| Part | Value |
+|------|-------|
+| Application | customer and braider |
+| Route | protected routes |
+| Components | `authGuard`, `braiderGuard`, `ProtectedCustomerPages` |
+| API token | `AUTH_API` |
+| Render mode | Browser for protected routes (`RenderMode.Client`) |
+| Mocks | `pages/forbidden/*`, `pages/sign-in/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| — | every `/api/appointments*`, `/api/account`, `/api/notifications*`, `/api/booking-requests`, `/api/braider/*` endpoint requires a session; discovery, braider profiles and content are public | — | — | — | 401 / 403 / 404 without private fields |
 
 ## Requirements
 

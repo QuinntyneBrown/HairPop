@@ -6,7 +6,24 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`AppointmentDetailPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `PrepareRepeatBooking` is the proposed Laravel application action. Its responsibility is to start a new draft from a completed visit using a currently offered service. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `BookingDraft` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`AppointmentDetailPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `PrepareRepeatBooking` is the proposed Laravel application action. Its responsibility is to start a new draft from a completed visit using a currently offered service. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BookingDraft` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** Book again navigates to the booking form with the service preselected and no slot chosen (L2-023 AC1). `service_unavailable` opens the braider's profile with a warning toast (L2-023 AC2).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/appointments/:ref` and `/appointments/:ref/care` → `/book/:braiderSlug?service=:id` |
+| Components | `AppointmentDetailPage`, `CareAndReviewPage` |
+| API token | `APPOINTMENTS_API` (`AppointmentsApi.repeatBooking`) |
+| Render mode | Browser |
+| Mocks | `pages/my-appointments/default`, `pages/care-and-review/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/appointments/{ref}/repeat-booking` | customer (owner) | — | 200 `{ braiderSlug: string; serviceId: string }` | 409 `service_unavailable`; 404 |
 
 ## Requirements
 

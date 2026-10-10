@@ -6,7 +6,32 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`StyleGalleryPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ListPublishedStyles` is the proposed Laravel application action. Its responsibility is to select published styles using the current search and category. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `Style` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`StyleGalleryPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ListPublishedStyles` is the proposed Laravel application action. Its responsibility is to select published styles using the current search and category. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `Style` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** The search box updates the `search` query parameter after 300 ms of inactivity or on submit; the category chips set `category`; both are reflected in the URL so a reload keeps the criteria. The next page keeps both parameters (L2-002).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/` |
+| Components | `StyleGalleryPage` |
+| API token | `STYLES_API` (`StylesApi`) |
+| Render mode | Server |
+| Mocks | `pages/style-gallery/*`, `notifications/cookie-consent/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/styles?search&category&page` | public | query: `search` (≤ 80 chars), `category` (`braids` \| `twists` \| `locs`), `page` (≥ 1) | 200 `Page<StyleSummary>` | 422 invalid query |
+
+```ts
+type StyleCategory = 'braids' | 'twists' | 'locs';
+interface StyleSummary {
+  slug: string; name: string; category: StyleCategory; eyebrow: string; summary: string;
+  image: Image | null; typicalHours: Range | null; typicalPrice: Range | null;
+}
+```
 
 ## Requirements
 

@@ -6,7 +6,24 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`ReportReviewDialog` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ReportPublishedReview` is the proposed Laravel application action. Its responsibility is to record a reason against a published review for moderation. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `ReviewReport` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`ReportReviewDialog` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ReportPublishedReview` is the proposed Laravel application action. Its responsibility is to record a reason against a published review for moderation. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `ReviewReport` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** A signed-out visitor who chooses Report review is sent to `/sign-in?returnUrl=…` before the dialog opens (L2-009 AC4).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | dialog over `/braiders/:slug` |
+| Components | `ReportReviewDialog` |
+| API token | `BRAIDERS_API` (`BraidersApi.reportReview`) |
+| Render mode | Browser |
+| Mocks | `dialogs/report-review/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| POST | `/api/reviews/{id}/reports` | customer | `{ reason: 'not_real_visit' \| 'offensive' \| 'private_info' \| 'other'; details: string \| null }` | 201 `{ reportId: string }` | 401 signed out; 404; 422 `errors.reason`; 429 `retryAfter` |
 
 ## Requirements
 

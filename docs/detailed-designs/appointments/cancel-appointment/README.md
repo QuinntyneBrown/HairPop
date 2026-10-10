@@ -6,7 +6,24 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`CancelAppointmentDialog` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `CancelOwnedAppointment` is the proposed Laravel application action. Its responsibility is to apply permitted cancellation once after the owner reviews current terms. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `Appointment` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`CancelAppointmentDialog` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `CancelOwnedAppointment` is the proposed Laravel application action. Its responsibility is to apply permitted cancellation once after the owner reviews current terms. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `Appointment` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** The destructive dialog shows the reference and current terms before confirmation; dismissing leaves the status unchanged (L2-022).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | dialog over `/appointments/:ref` |
+| Components | `CancelAppointmentDialog` |
+| API token | `APPOINTMENTS_API` (`AppointmentsApi.cancel`) |
+| Render mode | Browser |
+| Mocks | `dialogs/cancel-appointment/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| POST | `/api/appointments/{ref}/cancellation` | customer (owner) | `{}` | 200 `{ status: 'cancelled' }` (repeat calls return the same) | 409 `not_cancellable`; 404 |
 
 ## Requirements
 

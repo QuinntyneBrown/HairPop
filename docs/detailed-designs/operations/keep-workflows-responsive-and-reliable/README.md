@@ -6,7 +6,24 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`CustomerRouteShell` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ExecuteReliableWorkflow` is the proposed Laravel application action. Its responsibility is to measure reads, reconcile durable mutations and protect offline appointment summaries. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `OperationRecord` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`CustomerRouteShell` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ExecuteReliableWorkflow` is the proposed Laravel application action. Its responsibility is to measure reads, reconcile durable mutations and protect offline appointment summaries. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `OperationRecord` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** On the server, `API_ORIGIN` prefixes relative `/api` URLs and the incoming `Cookie` header is forwarded; in the browser the API is same-origin (ADR 0002). Offline is detected from `navigator.onLine` and failed requests.
+
+| Part | Value |
+|------|-------|
+| Application | customer and braider |
+| Route | every route |
+| Components | `apiOriginInterceptor`, `idempotencyKey()`, `OfflineStatus` |
+| API token | `API_ORIGIN` |
+| Render mode | both |
+| Mocks | `pages/*/offline`, `pages/server-error/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| — | every mutation that creates a record sends `Idempotency-Key`; every response carries `X-Correlation-Id` | — | — | — | — |
 
 ## Requirements
 

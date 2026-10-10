@@ -6,7 +6,29 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`AccountSettingsPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `UpdateCustomerDetails` is the proposed Laravel application action. Its responsibility is to save owned contact details and invalidate verification after an email change. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `CustomerAccount` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`AccountSettingsPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `UpdateCustomerDetails` is the proposed Laravel application action. Its responsibility is to save owned contact details and invalidate verification after an email change. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `CustomerAccount` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** A changed email comes back as `pendingEmail` until verified (L2-014 AC3).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/settings` |
+| Components | `AccountSettingsPage` |
+| API token | `ACCOUNT_API` (`AccountApi`) |
+| Render mode | Browser (signed in) |
+| Mocks | `pages/account-settings/*`, `notifications/account-feedback/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/account` | customer | — | 200 `Account` | 401 |
+| PATCH | `/api/account` | customer | `{ name, email, phone: string \| null }` | 200 `Account` | 422 field errors |
+
+```ts
+interface Account { name: string; email: string; emailVerified: boolean; pendingEmail: string | null; phone: string | null }
+```
 
 ## Requirements
 

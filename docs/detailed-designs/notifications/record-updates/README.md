@@ -6,7 +6,24 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`NotificationCenterPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `RecordCustomerUpdate` is the proposed Laravel application action. Its responsibility is to create owned notifications from durable account, booking, review and privacy events. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `CustomerNotification` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`NotificationCenterPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `RecordCustomerUpdate` is the proposed Laravel application action. Its responsibility is to create owned notifications from durable account, booking, review and privacy events. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `CustomerNotification` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** Toast copy names the completed action and only claims what the response confirmed (L2-029 AC2, L2-031).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | every signed-in page (toasts) |
+| Components | `FeedbackService` over the library `ToastService` |
+| API token | `NOTIFICATIONS_API` |
+| Render mode | Browser |
+| Mocks | `notifications/booking-update/*`, `review-feedback/*`, `account-feedback/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| — | records are written by the API when events occur; the frontend reads them through `GET /api/notifications` | — | — | — | — |
 
 ## Requirements
 

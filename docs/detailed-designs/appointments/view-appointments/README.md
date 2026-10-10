@@ -6,7 +6,44 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`AppointmentsPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ReadOwnedAppointments` is the proposed Laravel application action. Its responsibility is to load only owned summaries and lifecycle detail with state-dependent disclosure. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `Appointment` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`AppointmentsPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ReadOwnedAppointments` is the proposed Laravel application action. Its responsibility is to load only owned summaries and lifecycle detail with state-dependent disclosure. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `Appointment` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** A 404 for a reference renders the access-unavailable page (L2-019 AC4, L2-037 AC3). The last successful detail per reference is kept in session storage for the offline state and cleared at sign-out (L2-045).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/appointments` and `/appointments/:ref` |
+| Components | `AppointmentsPage`, `AppointmentDetailPage` |
+| API token | `APPOINTMENTS_API` (`AppointmentsApi`) |
+| Render mode | Browser (signed in) |
+| Mocks | `pages/my-appointments/*`, `pages/appointment-detail/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/appointments?filter&search&page` | customer | query: `filter` (`all` \| `upcoming` \| `past`), `search`, `page` | 200 `Page<AppointmentSummary>` | 401 |
+| GET | `/api/appointments/{ref}` | customer (owner) | — | 200 `AppointmentDetail` | 401; 404 unknown or another customer's reference (no disclosure) |
+
+```ts
+type AppointmentStatus = 'awaiting_reply' | 'confirmed' | 'declined' | 'cancelled' | 'completed';
+interface Price { kind: 'estimate' | 'agreed'; min: number; max: number | null }
+interface AppointmentSummary {
+  reference: string; status: AppointmentStatus; service: string; braider: { slug: string; name: string };
+  start: IsoDateTime; timeZone: string; price: Price;
+}
+interface AppointmentDetail extends AppointmentSummary {
+  durationHours: number; location: { area: string; address: string | null };   // address only once confirmed
+  contact: { email: string; phone: string | null };
+  policy: { changes: string; cancellation: string };
+  preparation: string[] | null;
+  pendingChange: { start: IsoDateTime } | null;
+  allowed: { change: boolean; cancel: boolean; rebook: boolean; review: boolean };
+  unavailable: 'preparation'[];
+  updatedAt: IsoDateTime;
+}
+```
 
 ## Requirements
 

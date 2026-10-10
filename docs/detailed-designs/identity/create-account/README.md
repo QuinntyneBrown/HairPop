@@ -6,7 +6,24 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`RegisterPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `RegisterCustomer` is the proposed Laravel application action. Its responsibility is to normalize the email and create one account with a verification challenge. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `CustomerAccount` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`RegisterPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `RegisterCustomer` is the proposed Laravel application action. Its responsibility is to normalize the email and create one account with a verification challenge. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `CustomerAccount` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** Success shows the next step and links to `/verify-email`; a registered email receives a sign-in reminder instead, so the response reveals nothing (L2-010 AC3).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/sign-up` |
+| Components | `RegisterPage` |
+| API token | `AUTH_API` (`AuthApi.register`) |
+| Render mode | Server |
+| Mocks | `pages/sign-up/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| POST | `/api/auth/register` | public | header `Idempotency-Key`; body `{ name, email, password (≥ 12) }` | 202 `{ email: string }`, the same whether or not the email exists | 422 `errors.email`, `errors.password`; 429 |
 
 ## Requirements
 

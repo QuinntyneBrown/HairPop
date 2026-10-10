@@ -6,7 +6,35 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`BookingRequestPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `PrepareBookingRequest` is the proposed Laravel application action. Its responsibility is to validate the selected service and slot and present current terms for review. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `BookingDraft` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`BookingRequestPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `PrepareBookingRequest` is the proposed Laravel application action. Its responsibility is to validate the selected service and slot and present current terms for review. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BookingDraft` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** Review request opens a CDK dialog with the current values; closing it keeps every entry (L2-016 AC2). No slots renders the empty state.
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/book/:braiderSlug?service=:id` |
+| Components | `BookingRequestPage`, `RequestReviewDialog` |
+| API token | `BOOKING_API` (`BookingApi`) |
+| Render mode | Browser (signed in) |
+| Mocks | `pages/booking-request/*`, `dialogs/request-review/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/braiders/{slug}/booking-options` | customer | — | 200 `BookingOptions` | 401; 404 |
+
+```ts
+interface BookingOptions {
+  braider: { slug: string; name: string; area: string };
+  services: { id: string; name: string; startingPrice: number; typicalHours: number; estimate: Range }[];
+  slots: { id: string; start: IsoDateTime }[];
+  policy: { version: string; changes: string; cancellation: string };
+  contact: { email: string; phone: string | null };
+  timeZone: string;                                          // America/Toronto
+}
+```
 
 ## Requirements
 

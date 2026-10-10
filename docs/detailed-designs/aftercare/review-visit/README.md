@@ -6,7 +6,24 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`CareAndReviewPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `SubmitVisitReview` is the proposed Laravel application action. Its responsibility is to save one valid rating and written review for an owned completed visit. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `Review` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`CareAndReviewPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `SubmitVisitReview` is the proposed Laravel application action. Its responsibility is to save one valid rating and written review for an owned completed visit. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `Review` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** The rating is a horizontal radio group and the text a textarea; both keep their values after a failure (L2-025 AC5).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/appointments/:ref/care` |
+| Components | `CareAndReviewPage` |
+| API token | `APPOINTMENTS_API` (`AppointmentsApi.submitReview`) |
+| Render mode | Browser (signed in) |
+| Mocks | `pages/care-and-review/*`, `notifications/review-feedback/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| POST | `/api/appointments/{ref}/review` | customer (owner) | header `Idempotency-Key`; body `{ rating: 1–5; text: string (1–1000) }` | 201 `{ reviewId: string; status: 'published' \| 'pending' }` | 403 not completed or not owner; 409 `already_reviewed`; 422 `errors.rating`, `errors.text` |
 
 ## Requirements
 

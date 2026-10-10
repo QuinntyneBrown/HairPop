@@ -6,7 +6,24 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`CustomerRouteShell` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ResolveInterfacePreferences` is the proposed Laravel application action. Its responsibility is to keep keyboard, screen-reader, responsive and theme behavior across customer surfaces. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `InterfacePreference` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`CustomerRouteShell` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ResolveInterfacePreferences` is the proposed Laravel application action. Its responsibility is to keep keyboard, screen-reader, responsive and theme behavior across customer surfaces. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `InterfacePreference` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** The route shell moves focus to the page heading after client-side navigation and announces the page title.
+
+| Part | Value |
+|------|-------|
+| Application | customer and braider |
+| Route | every route |
+| Components | `CustomerRouteShell`, `BraiderRouteShell`, library `ThemeToggle` and `ThemeService` |
+| API token | — |
+| Render mode | both; `THEME_INIT_SCRIPT` runs before first paint |
+| Mocks | every mock (top bar) |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| — | no endpoint; the theme is a local essential preference (`localStorage` `hp-theme`) | — | — | — | — |
 
 ## Requirements
 
@@ -14,6 +31,7 @@ HairPop connects customers with braiders through published styles, service offer
 |-------|--------------|-------------|
 | `L2-041` | `L1-013` | Customer pages, dialogs, forms, notifications, and navigation must meet WCAG 2.2 AA behavior and retain the mock's accessible labels and state semantics. |
 | `L2-042` | `L1-013` | Every customer-facing mock screen and dialog must remain usable at extra-small (<576 px), small (576–767 px), medium (768–991 px), large (992–1199 px), and extra-large (≥1200 px) widths, and in light and dark themes. |
+| `L2-048` | `L1-013` | The customer and braider app shells must offer a visible light and dark theme control whose current state is exposed to assistive technology. Without a saved choice, the theme must follow the system preference. |
 
 ## Diagrams
 
