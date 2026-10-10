@@ -10,6 +10,13 @@ export const routes: Routes = [
       import('./pages/style-gallery/style-gallery.page').then((m) => m.StyleGalleryPage),
   },
   {
+    path: 'styles/:slug',
+    title: 'Style · HairPop',
+    data: { nav: 'styles' },
+    loadComponent: () =>
+      import('./pages/style-detail/style-detail.page').then((m) => m.StyleDetailPage),
+  },
+  {
     path: '404',
     title: 'Page not found · HairPop',
     loadComponent: () => import('./pages/errors/not-found.page').then((m) => m.NotFoundPage),

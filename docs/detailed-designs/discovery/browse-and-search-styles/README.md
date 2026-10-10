@@ -28,7 +28,7 @@ HairPop connects customers with braiders through published styles, service offer
 ```ts
 type StyleCategory = 'braids' | 'twists' | 'locs';
 interface StyleSummary {
-  slug: string; name: string; category: StyleCategory; eyebrow: string; summary: string;
+  slug: string; name: string; category: StyleCategory; eyebrow: string;
   image: Image | null; typicalHours: Range | null; typicalPrice: Range | null;
 }
 ```
