@@ -1,26 +1,163 @@
-<!--meta {"lead": "Move between bounded result pages.", "description": "Move between bounded result pages.", "variants": "numbered, previous and next, page size", "states": "default, hover, focus, active, disabled, current", "sources": ["pages/style-gallery/long"], "pills": ["Extracted"]} -->
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Move between bounded result pages. This component appears in <a href="../../mocks/pages/style-gallery/long.html">pages/style-gallery/long</a>.</p><p>Use it for this job; choose a different component when the interaction or information hierarchy changes.</p></section>
+<!--meta {"lead": "Pagination splits long results, such as 126 styles or Toronto braiders, into pages, and says where the customer is.", "description": "Numbered and previous/next pagination with a result summary; current and disabled ends.", "pills": ["<code>&lt;nav&gt;</code> landmark", "Status: stable"], "variants": "numbered with summary, simple previous/next", "states": "default, hover, focus, active, current, disabled", "sources": ["pages/style-gallery/long", "pages/matching-braiders/long", "pages/my-appointments/long"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use pagination under a list or grid of results when there is more than one screen of items and people need to come back to a place in them: the style gallery, matching braiders and long appointment histories. The summary ("Showing 1–3 of 126") tells them how much there is before they page.</p>
+  <ul>
+    <li><b>Numbered with summary</b> is the default for results lists.</li>
+    <li><b>Simple previous/next</b> suits short sequences where page numbers mean little, such as reviews on Nia's profile.</li>
+    <li>Prefer "Show more" (a secondary <a href="button.html">button</a> that appends) for feeds where position does not matter, such as notifications.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2><div class="ds-anatomy"><figure class="ds-anatomy__figure"><nav class="pagination" aria-label="Pagination"><a href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></figure><ol class="ds-anatomy__list"><li><div><b>Semantic element</b><small>Preserves the native role and browser interaction.</small></div></li><li><div><b>Visible content</b><small>Names the action, value, or status in plain language.</small></div></li><li><div><b>Component class</b><small>Reads shared roles from the token stylesheet.</small></div></li></ol></div></section>
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <nav class="pagination" aria-label="Results pages, anatomy example" style="margin: 0;"><span class="pagination__summary">Showing 1–3 of 126</span><a role="link" aria-disabled="true">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">1</a><a href="../../mocks/pages/style-gallery/long.html">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav>
+      <span class="ds-callout" style="left: 18%; top: 22%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 38%; top: 22%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 54%; top: 22%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 70%; top: 22%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Summary</b><small>Range and total in <code>--text-body-sm</code>, <code>--color-fg-muted</code>.</small></div></li>
+      <li><div><b>Previous / Next</b><small>Text links; the unavailable end is <code>aria-disabled="true"</code> with no <code>href</code>.</small></div></li>
+      <li><div><b>Current page</b><small><code>aria-current="page"</code>: accent-subtle fill, accent border and label.</small></div></li>
+      <li><div><b>Page link</b><small>32px square minimum (<code>--control-height-sm</code>), <code>--radius-md</code>.</small></div></li>
+    </ol>
+  </div>
+</section>
 
-<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2><p>Choose the variant by meaning and context. Keep status or action labels explicit.</p><ul><li><strong>Numbered</strong> — use this form when the surrounding content calls for numbered presentation.</li><li><strong>Previous and next</strong> — use this form when the surrounding content calls for previous and next presentation.</li><li><strong>Page size</strong> — use this form when the surrounding content calls for page size presentation.</li></ul>{{example:Base specimen}}<nav class="pagination" aria-label="Pagination"><a href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav>{{/example}}</section>
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:[stack]Numbered with summary (page 2 of 3, both ends available) and simple previous/next.}}
+<nav class="pagination" aria-label="Braiders pages, numbered example" style="margin: 0;"><span class="pagination__summary">Showing 4–6 of 12 braiders</span><a href="../../mocks/pages/matching-braiders/long.html">Previous</a><a href="../../mocks/pages/matching-braiders/long.html">1</a><a href="../../mocks/pages/matching-braiders/long.html" aria-current="page">2</a><a href="../../mocks/pages/matching-braiders/long.html">3</a><a href="../../mocks/pages/matching-braiders/long.html">Next</a></nav>
+<nav class="pagination" aria-label="Review pages, simple example" style="margin: 0;"><a href="../../mocks/pages/braider-profile/default.html">{{icon:chevron-left|icon--sm}}<span class="visually-hidden">Previous reviews</span></a><span class="pagination__summary" style="flex-basis: auto; margin: 0;">Reviews 11–20 of 86</span><a href="../../mocks/pages/braider-profile/default.html">{{icon:chevron-right|icon--sm}}<span class="visually-hidden">Next reviews</span></a></nav>
+  {{/example}}
+  <p>With many pages, show the first, the last, and two either side of the current page, with a non-interactive "…" between gaps: 1 … 5 6 <b>7</b> 8 9 … 42.</p>
+</section>
 
-<section class="ds-section" id="sizes" data-na="This component has one size; it adapts through content and layout tokens."><h2><a href="#sizes">Sizes</a></h2></section>
+<section class="ds-section" id="sizes" data-na="Pagination has one size: 32px items (--control-height-sm)."><h2><a href="#sizes">Sizes</a></h2></section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>The table forces pointer and focus states with <code>data-state</code> for review. Production interactions use native attributes and pseudo-classes.</p><div class="ds-matrix"><table><thead><tr><th scope="col">Specimen</th><th scope="col">default</th><th scope="col">hover</th><th scope="col">focus</th><th scope="col">active</th><th scope="col">disabled</th><th scope="col">current</th></tr></thead><tbody><tr><th scope="row">Pagination</th><td><nav class="pagination" aria-label="Pagination"><a href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></td><td><nav class="pagination" aria-label="Pagination"><a data-state="hover" href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></td><td><nav class="pagination" aria-label="Pagination"><a data-state="focus" href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></td><td><nav class="pagination" aria-label="Pagination"><a data-state="active" href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></td><td><nav class="pagination" aria-label="Pagination"><a data-state="disabled" href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></td><td><nav class="pagination" aria-label="Pagination"><a data-state="current" href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></td></tr></tbody></table></div>{{themes}}<nav class="pagination" aria-label="Pagination"><a href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav>{{/themes}}</section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>Forced with <code>data-state</code>; real pages use <code>:hover</code>, <code>:focus-visible</code>, <code>aria-current</code> and <code>aria-disabled</code>.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Item</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Active</th><th scope="col">Current</th><th scope="col">Disabled</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Page number</th>
+        <td><nav class="pagination" aria-label="Number default" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html">2</a></nav></td>
+        <td><nav class="pagination" aria-label="Number hover" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html" data-state="hover">2</a></nav></td>
+        <td><nav class="pagination" aria-label="Number focus" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html" data-state="focus">2</a></nav></td>
+        <td><nav class="pagination" aria-label="Number active" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html" data-state="hover">2</a></nav></td>
+        <td><nav class="pagination" aria-label="Number current" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a></nav></td>
+        <td>–</td></tr>
+      <tr><th scope="row">Previous / Next</th>
+        <td><nav class="pagination" aria-label="Next default" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></td>
+        <td><nav class="pagination" aria-label="Next hover" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html" data-state="hover">Next</a></nav></td>
+        <td><nav class="pagination" aria-label="Next focus" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html" data-state="focus">Next</a></nav></td>
+        <td><nav class="pagination" aria-label="Next active" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html" data-state="hover">Next</a></nav></td>
+        <td>–</td>
+        <td><nav class="pagination" aria-label="Previous disabled" style="margin: 0;"><a role="link" aria-disabled="true">Previous</a></nav></td></tr>
+    </tbody>
+  </table></div>
+  <p>The pointer-down state keeps the hover look. A disabled end stays in place so the layout does not jump between pages.</p>
+  <h3>Both themes</h3>
+  {{themes}}<nav class="pagination" aria-label="Results pages, themes example" style="margin: 0;"><span class="pagination__summary">Showing 1–3 of 126</span><a role="link" aria-disabled="true">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">1</a><a href="../../mocks/pages/style-gallery/long.html" data-state="hover">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav>{{/themes}}
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>Preserve Previous and Next on narrow screens; collapse the numbered range when space is limited.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li><b>Below 640px</b>: the summary takes its own centred line above the controls; show at most five numbers (first, current ±1, last) so the row fits at 360px.</li>
+    <li><b>From 640px</b>: summary and controls share one centred row.</li>
+    <li>Items stay 32px tall with 4px gaps. Previous and Next keep their words; arrow-only controls carry hidden labels.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2><p>The same markup appears in light and dark themes. Use the semantic roles in the token table; override a component token only for a local variation.</p>{{themes}}<nav class="pagination" aria-label="Pagination"><a href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav>{{/themes}}</section>
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Items read <code>--color-fg-muted</code>; hover reads <code>--color-bg-subtle</code> + <code>--color-fg-default</code>; current reads <code>--color-accent-subtle</code> + <code>--color-accent</code> + <code>--color-fg-accent</code> (the same selected look as chips and the current nav link). In the dark theme the current page becomes plum 300 on plum 950.</p>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><h3>Role and keyboard</h3><p>Tab and Shift+Tab follow DOM order; Enter or Space activates native controls, while links use Enter. Static content remains in reading order.</p><h3>Focus and labelling</h3><p>Keep the shared visible focus ring. The visible text supplies the accessible name; icon-only actions need an explicit label. Associate help and errors with the relevant control.</p><h3>Contrast, motion, and touch</h3><p>Text uses a 4.5:1 minimum, meaningful controls and focus boundaries use 3:1, and all actions keep a 24px minimum target with comfortable spacing. Reduced motion removes decorative transitions. Check the actual foreground and background pair in both themes on the <a href="../foundations/color.html">Color foundation</a>.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><code>&lt;nav aria-label="Results pages"&gt;</code> landmark with plain links (each page has its own URL, so <code>?page=2</code> can be bookmarked). The current page has <code>aria-current="page"</code>. An unavailable end is <code>&lt;a role="link" aria-disabled="true"&gt;</code> without <code>href</code>, so it is announced but not focusable.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Moves through available links; disabled ends are skipped.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Loads that page.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The shared ring. After a new page loads, move focus to the results heading (or the list) and announce the new range ("Showing 4–6 of 126") so keyboard users do not restart at the top bar.</p>
+  <h3>Labelling</h3>
+  <p>Label the nav for what it pages ("Results pages", "Braiders pages"); a page with two paginations uses two labels. Number links read as "2"; add hidden text ("Page 2") if the context is unclear. Icon-only previous/next carry hidden text ("Next reviews").</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Page link on page|--color-fg-muted|--color-bg-canvas|4.5}}
+    {{pair:Hovered link|--color-fg-default|--color-bg-subtle|4.5}}
+    {{pair:Current page|--color-fg-accent|--color-accent-subtle|4.5}}
+    {{pair:Current page edge|--color-accent|--color-bg-canvas|3}}
+    {{pair:Focus ring|--color-focus-ring|--color-bg-canvas|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>None beyond instant colour changes. Do not smooth-scroll to the results when reduced motion is set.</p>
+  <h3>Touch</h3>
+  <p>Items are 32px with 4px gaps, above the 24px minimum. On phones, keep to five numbers so each item can be at least 32px wide.</p>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>Use sentence case. For pagination, keep the wording concrete and close to the value or action it describes. Show “Awaiting reply” until the braider accepts; label a price estimate as an estimate.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Summary formula: "Showing {first}–{last} of {total}" with an en dash; add the noun when the context is unclear ("of 12 braiders").</li>
+    <li>"Previous" and "Next", not "Prev", "«" or "Older".</li>
+    <li>Numbers use tabular figures; totals above 999 use a grouping comma ("1,284").</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><nav class="pagination" aria-label="Pagination"><a href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></div><figcaption>Use the pagination for its stated job: move between bounded result pages.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Unclear action</span></div><figcaption>Do not replace the semantic element with unlabelled text or a decorative shape.</figcaption></figure><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Pair colour with an explicit state label.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not make colour or a dot the only carrier of status.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><nav class="pagination" aria-label="Do example" style="margin: 0;"><a role="link" aria-disabled="true">Previous</a><a href="../../mocks/pages/style-gallery/long.html" aria-current="page">1</a><a href="../../mocks/pages/style-gallery/long.html">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></div><figcaption>On page 1, Previous is visibly unavailable and skipped by Tab.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><nav class="pagination" aria-label="Don't example" style="margin: 0;"><a href="../../mocks/pages/style-gallery/default.html">Previous</a><a href="../../mocks/pages/style-gallery/default.html" aria-current="page">1</a><a href="../../mocks/pages/style-gallery/long.html">2</a><a href="../../mocks/pages/style-gallery/long.html">Next</a></nav></div><figcaption>Leave Previous live on page 1, as the mocks' long states do; it reloads the same page.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><nav class="pagination" aria-label="Do example two" style="margin: 0;"><span class="pagination__summary">Showing 1–3 of 126</span></nav></div><figcaption>Say how many results there are before people page.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><nav class="pagination" aria-label="Don't example two" style="margin: 0;"><a href="../../mocks/pages/style-gallery/long.html">›</a></nav></div><figcaption>Use a lone arrow glyph as the whole accessible name.</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>{{tok:Color accent subtle|--color-accent-subtle}}{{tok:Color fg accent|--color-fg-accent}}{{tok:Target min|--target-min}}</tbody></table></div></section>
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Link label|--color-fg-muted}}
+      {{tok:Hover background|--color-bg-subtle}}
+      {{tok:Current background|--color-accent-subtle}}
+      {{tok:Current border|--color-accent}}
+      {{tok:Current label|--color-fg-accent}}
+      {{tok:Item size|--control-height-sm}}
+      {{tok:Item padding / gap|--space-2|--space-1}}
+      {{tok:Radius|--radius-md}}
+      {{tok:Label / summary font|--text-label|--text-body-sm}}
+      {{tok:Top margin|--space-6}}
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2><p>Copy the semantic markup and product class; replace the sample content with real data.</p><pre><code>&lt;nav class=&quot;pagination&quot; aria-label=&quot;Pagination&quot;&gt;&lt;a href=&quot;../../mocks/pages/style-gallery/default.html&quot;&gt;Previous&lt;/a&gt;&lt;a href=&quot;../../mocks/pages/style-gallery/long.html&quot; aria-current=&quot;page&quot;&gt;2&lt;/a&gt;&lt;a href=&quot;../../mocks/pages/style-gallery/long.html&quot;&gt;Next&lt;/a&gt;&lt;/nav&gt;</code></pre><p>Forced <code>data-state</code> values are for documentation snapshots only.</p></section>
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;nav class="pagination" aria-label="Results pages"&gt;
+  &lt;span class="pagination__summary"&gt;Showing 1–3 of 126&lt;/span&gt;
+  &lt;a role="link" aria-disabled="true"&gt;Previous&lt;/a&gt;
+  &lt;a href="?page=1" aria-current="page"&gt;1&lt;/a&gt;
+  &lt;a href="?page=2"&gt;2&lt;/a&gt;
+  &lt;a href="?page=2"&gt;Next&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.pagination</code></td><td>Centred, wrapping row; 24px top margin. <code>.pagination-row</code> is the mocks' alias and renders the same.</td></tr>
+    <tr><td><code>.pagination__summary</code></td><td>Range text; full-width line below 640px.</td></tr>
+    <tr><td><code>aria-current="page"</code></td><td>Current page look.</td></tr>
+    <tr><td><code>aria-disabled="true"</code> (no <code>href</code>)</td><td>Unavailable end: 50% opacity, no pointer events.</td></tr>
+    <tr><td><code>data-state="hover|focus"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><ul>{{mock:pages/style-gallery/long|visible specimen}}</ul><p>The examples use the corresponding selectors in <a href="../assets/components.css">components.css</a>.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from the long states:</p>
+  <ul>
+    {{mock:pages/style-gallery/long|styles, 126 results}}
+    {{mock:pages/matching-braiders/long|braiders}}
+    {{mock:pages/my-appointments/long|appointment history}}
+  </ul>
+  <p>Drift fixed during extraction: the mocks use an ad-hoc <code>.pagination-row</code> instead of the kit's <code>.pagination</code> (now one component, with the old class kept as an alias); Previous and "1" both link to the current page and Previous is live on page 1 (system disables it with <code>aria-disabled</code>); the summary had no styling of its own (now <code>.pagination__summary</code>).</p>
+</section>

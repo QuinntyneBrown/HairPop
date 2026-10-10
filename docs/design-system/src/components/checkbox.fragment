@@ -1,26 +1,157 @@
-<!--meta {"lead": "Choose one or more independent options.", "description": "Choose one or more independent options.", "variants": "single, group, with description", "states": "default, hover, focus, active, disabled, checked, indeterminate, invalid", "sources": ["dialogs/cookie-preferences/default"], "pills": ["Extracted"]} -->
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Choose one or more independent options. This component appears in <a href="../../mocks/dialogs/cookie-preferences/default.html">dialogs/cookie-preferences/default</a>.</p><p>Use it for this job; choose a different component when the interaction or information hierarchy changes.</p></section>
+<!--meta {"lead": "Checkboxes turn independent options on or off before the person saves: remembering optional usage choices, confirming Nia's policy, picking several styles to filter by.", "description": "Single, grouped, described and card checkboxes with checked, indeterminate, invalid and disabled states in both themes.", "pills": ["Native <code>&lt;input type=\"checkbox\"&gt;</code>", "Status: stable"], "variants": "single, group in fieldset, with description, card", "states": "default, hover, focus, checked, indeterminate, disabled, invalid", "sources": ["dialogs/cookie-preferences/default", "dialogs/cookie-preferences/invalid"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a checkbox for an option that is independent of the others and takes effect when the form is saved: "Remember my optional usage choices" in cookie preferences, "I’ve read Nia’s cancellation policy" on a booking request. Use a <a href="switch.html">switch</a> when the setting applies immediately, and a <a href="radio-group.html">radio group</a> when exactly one option must be chosen.</p>
+</section>
 
-<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2><div class="ds-anatomy"><figure class="ds-anatomy__figure"><label class="choice"><input type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></figure><ol class="ds-anatomy__list"><li><div><b>Semantic element</b><small>Preserves the native role and browser interaction.</small></div></li><li><div><b>Visible content</b><small>Names the action, value, or status in plain language.</small></div></li><li><div><b>Component class</b><small>Reads shared roles from the token stylesheet.</small></div></li></ol></div></section>
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <label class="choice"><input type="checkbox" checked><span class="choice__text"><span>Remember my optional usage choices</span><small>Helps us improve search. You can change this any time.</small></span></label>
+      <span class="ds-callout" style="left: 6%; top: 18%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 46%; top: 18%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 46%; top: 76%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Box</b><small>20px, 1px <code>--color-border-strong</code>, <code>--radius-xs</code>; fills with the accent when checked.</small></div></li>
+      <li><div><b>Label</b><small>Body text; the whole label is clickable.</small></div></li>
+      <li><div><b>Description (optional)</b><small>Body-sm, muted; part of the label.</small></div></li>
+    </ol>
+  </div>
+</section>
 
-<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2><p>Choose the variant by meaning and context. Keep status or action labels explicit.</p><ul><li><strong>Single</strong> — use this form when the surrounding content calls for single presentation.</li><li><strong>Group</strong> — use this form when the surrounding content calls for group presentation.</li><li><strong>With description</strong> — use this form when the surrounding content calls for with description presentation.</li></ul>{{example:Base specimen}}<label class="choice"><input type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label>{{/example}}</section>
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  {{example:[stack,start]Single; group in a fieldset with a legend; card style for weightier choices.}}
+<label class="choice"><input type="checkbox" required><span>I’ve read Nia’s cancellation policy</span></label>
+<fieldset><legend>Styles to include</legend><div class="choice-group"><label class="choice"><input type="checkbox" checked><span>Knotless braids</span></label><label class="choice"><input type="checkbox" checked><span>Passion twists</span></label><label class="choice"><input type="checkbox"><span>Cornrows</span></label></div></fieldset>
+<label class="choice choice--card"><input type="checkbox" checked><span class="choice__text"><span>Email me when Nia replies</span><small>Updates about HP-1048 go to maya.chen@example.com.</small></span></label>
+  {{/example}}
+</section>
 
-<section class="ds-section" id="sizes" data-na="This component has one size; it adapts through content and layout tokens."><h2><a href="#sizes">Sizes</a></h2></section>
+<section class="ds-section" id="sizes" data-na="Checkboxes have one size: a 20px box in a row at least 24px tall."><h2><a href="#sizes">Sizes</a></h2></section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>The table forces pointer and focus states with <code>data-state</code> for review. Production interactions use native attributes and pseudo-classes.</p><div class="ds-matrix"><table><thead><tr><th scope="col">Specimen</th><th scope="col">default</th><th scope="col">hover</th><th scope="col">focus</th><th scope="col">active</th><th scope="col">disabled</th><th scope="col">checked</th><th scope="col">indeterminate</th><th scope="col">invalid</th></tr></thead><tbody><tr><th scope="row">Checkbox</th><td><label class="choice"><input type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></td><td><label class="choice"><input data-state="hover" type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></td><td><label class="choice"><input data-state="focus" type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></td><td><label class="choice"><input data-state="active" type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></td><td><label class="choice"><input data-state="disabled" disabled type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></td><td><label class="choice"><input data-state="checked" type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></td><td><label class="choice"><input data-state="indeterminate" type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></td><td><label class="choice"><input data-state="invalid" aria-invalid="true" type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></td></tr></tbody></table></div>{{themes}}<label class="choice"><input type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label>{{/themes}}</section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Value</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Disabled</th><th scope="col">Invalid</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Unchecked</th>
+        <td><label class="choice"><input type="checkbox"><span>Braids</span></label></td>
+        <td><label class="choice"><input type="checkbox" data-state="hover"><span>Braids</span></label></td>
+        <td><label class="choice"><input type="checkbox" data-state="focus"><span>Braids</span></label></td>
+        <td><label class="choice"><input type="checkbox" disabled><span>Braids</span></label></td>
+        <td><label class="choice"><input type="checkbox" aria-invalid="true"><span>Braids</span></label></td></tr>
+      <tr><th scope="row">Checked</th>
+        <td><label class="choice"><input type="checkbox" checked><span>Twists</span></label></td>
+        <td><label class="choice"><input type="checkbox" checked data-state="hover"><span>Twists</span></label></td>
+        <td><label class="choice"><input type="checkbox" checked data-state="focus"><span>Twists</span></label></td>
+        <td><label class="choice"><input type="checkbox" checked disabled><span>Twists</span></label></td>
+        <td>—</td></tr>
+      <tr><th scope="row">Indeterminate</th>
+        <td><label class="choice"><input type="checkbox" data-state="indeterminate"><span>All styles</span></label></td>
+        <td>—</td>
+        <td>—</td>
+        <td><label class="choice"><input type="checkbox" data-state="indeterminate" disabled><span>All styles</span></label></td>
+        <td>—</td></tr>
+    </tbody>
+  </table></div>
+  <p>Indeterminate is set by script (<code>input.indeterminate = true</code>) on a parent whose children are partly checked; the matrix forces it with <code>data-state</code>.</p>
+  {{example:[stack,start]Invalid required checkbox with its message.}}
+<div class="field"><label class="choice"><input type="checkbox" aria-invalid="true" aria-describedby="cb-inv-error"><span>I’ve read Nia’s cancellation policy</span></label><span class="field__error" id="cb-inv-error">Confirm you’ve read the policy to send your request.</span></div>
+  {{/example}}
+  <h3>Both themes</h3>
+  {{themes:stack}}<label class="choice"><input type="checkbox" checked><span>Remember my choices</span></label><label class="choice"><input type="checkbox"><span>Email me updates</span></label><label class="choice"><input type="checkbox" disabled><span>Unavailable option</span></label>{{/themes}}
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>Keep the component within the 16px phone margin, allow text to wrap without clipping, and preserve a reachable 24px minimum target. At 768px and 1024px, let the containing grid set width rather than adding fixed dimensions.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Groups stack vertically below 768px; a short group of one-word options may run inline (<code>.choice-group--inline</code>) from 768px.</li>
+    <li>Labels wrap under themselves, never under the box (flex row, box aligned to the first line).</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2><p>The same markup appears in light and dark themes. Use the semantic roles in the token table; override a component token only for a local variation.</p>{{themes}}<label class="choice"><input type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label>{{/themes}}</section>
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Unchecked: a <code>--color-bg-surface</code> box with a <code>--color-border-strong</code> edge. Checked and indeterminate: <code>--color-accent</code> fill with a <code>--color-fg-on-accent</code> mark. In dark the fill is plum 300 and the mark plum 950. Override <code>--choice-size</code> only for touch-heavy kiosks.</p>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><h3>Role and keyboard</h3><p>Tab reaches the checkbox; Space toggles its checked state.</p><h3>Focus and labelling</h3><p>Keep the shared visible focus ring. The visible text supplies the accessible name; icon-only actions need an explicit label. Associate help and errors with the relevant control.</p><h3>Contrast, motion, and touch</h3><p>Text uses a 4.5:1 minimum, meaningful controls and focus boundaries use 3:1, and all actions keep a 24px minimum target with comfortable spacing. Reduced motion removes decorative transitions. Check the actual foreground and background pair in both themes on the <a href="../foundations/color.html">Color foundation</a>.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Native checkbox inside its <code>&lt;label&gt;</code>; groups in <code>&lt;fieldset&gt;</code> with <code>&lt;legend&gt;</code>. See the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/">APG Checkbox pattern</a> for the tri-state parent.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Moves to each checkbox in turn.</td></tr>
+    <tr><td><kbd>Space</kbd></td><td>Toggles the focused checkbox.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>The 2px ring with 2px offset surrounds the box only.</p>
+  <h3>Labelling</h3>
+  <p>The label states the option positively ("Email me when Nia replies"). Descriptions sit inside the label. Required checkboxes say why in their error.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Box edge on card|--color-border-strong|--color-bg-surface|3}}
+    {{pair:Checked fill in dialog|--color-accent|--color-bg-surface-raised|3}}
+    {{pair:Check mark on fill|--color-fg-on-accent|--color-accent|4.5}}
+  </div>
+  <h3>Motion</h3>
+  <p>Fill and border transition over <code>--duration-fast</code>.</p>
+  <h3>Touch</h3>
+  <p>The whole label row (at least 24px) toggles the box.</p>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>Use sentence case. For checkbox, keep the wording concrete and close to the value or action it describes. Show “Awaiting reply” until the braider accepts; label a price estimate as an estimate.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Write labels as statements that are true when checked; avoid negatives ("Don’t email me").</li>
+    <li>Explain consequences in the description, not the label.</li>
+    <li>Legends name the group: "Styles to include".</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><label class="choice"><input type="checkbox" checked><span class="choice__text">Remember my optional usage choices</span></label></div><figcaption>Use the checkbox for its stated job: choose one or more independent options.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Unclear action</span></div><figcaption>Do not replace the semantic element with unlabelled text or a decorative shape.</figcaption></figure><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Pair colour with an explicit state label.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not make colour or a dot the only carrier of status.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><label class="choice"><input type="checkbox" checked><span class="choice__text"><span>Remember my optional usage choices</span><small>Helps us improve search. Turn it off any time in settings.</small></span></label></div><figcaption>Say what an optional data choice does.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><label class="choice"><input type="checkbox" checked><span>Remember my optional usage choices</span></label></div><figcaption>The cookie-preferences mock gives no description, so people cannot tell what they agree to.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><fieldset><legend>Styles to include</legend><div class="choice-group"><label class="choice"><input type="checkbox" checked><span>Braids</span></label><label class="choice"><input type="checkbox"><span>Twists</span></label></div></fieldset></div><figcaption>Group related checkboxes under a legend.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><label class="choice"><input type="checkbox"><span>Don’t share my data</span></label></div><figcaption>Negative labels make "checked" mean "off".</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>{{tok:Color accent|--color-accent}}{{tok:Color border strong|--color-border-strong}}{{tok:Target min|--target-min}}</tbody></table></div></section>
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Box background|--color-bg-surface}}
+      {{tok:Box edge|--color-border-strong}}
+      {{tok:Checked fill / hover edge|--color-accent}}
+      {{tok:Check mark|--color-fg-on-accent}}
+      {{tok:Invalid edge|--color-danger-solid}}
+      {{tok:Disabled box / label|--color-bg-subtle|--color-fg-disabled}}
+      {{tok:Radius|--radius-xs}}
+      {{tok:Box-to-label gap|--space-3}}
+      {{tok:Row min height|--target-min}}
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2><p>Copy the semantic markup and product class; replace the sample content with real data.</p><pre><code>&lt;label class=&quot;choice&quot;&gt;&lt;input type=&quot;checkbox&quot; checked&gt;&lt;span class=&quot;choice__text&quot;&gt;Remember my optional usage choices&lt;/span&gt;&lt;/label&gt;</code></pre><p>Forced <code>data-state</code> values are for documentation snapshots only.</p></section>
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;label class="choice"&gt;
+  &lt;input type="checkbox" name="usage" checked&gt;
+  &lt;span class="choice__text"&gt;
+    &lt;span&gt;Remember my optional usage choices&lt;/span&gt;
+    &lt;small&gt;Helps us improve search.&lt;/small&gt;
+  &lt;/span&gt;
+&lt;/label&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.choice</code></td><td>Label row with a styled native checkbox or radio.</td></tr>
+    <tr><td><code>.choice__text</code></td><td>Label plus description.</td></tr>
+    <tr><td><code>.choice--card</code></td><td>Bordered card; highlights when checked.</td></tr>
+    <tr><td><code>.choice-group</code>, <code>.choice-group--inline</code></td><td>Vertical or wrapped inline group.</td></tr>
+    <tr><td><code>aria-invalid="true"</code></td><td>Invalid edge.</td></tr>
+    <tr><td><code>data-state="hover|focus|checked|indeterminate|disabled"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><ul>{{mock:dialogs/cookie-preferences/default|visible specimen}}</ul><p>The examples use the corresponding selectors in <a href="../assets/components.css">components.css</a>.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    {{mock:dialogs/cookie-preferences/default|single checkbox}}
+    {{mock:dialogs/cookie-preferences/invalid|checkbox under an error summary}}
+  </ul>
+  <p>Drift fixed during extraction: the cookie checkbox had no description; the indeterminate bar was 0.65rem (off grid, now 0.75rem); the box had no hover state (now an accent edge); the kit's <code>.choice input:disabled + *</code> missed descriptions (now <code>~ *</code>).</p>
+</section>

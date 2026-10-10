@@ -1,26 +1,222 @@
-<!--meta {"lead": "Explain the absence of content and provide one useful next step.", "description": "Explain the absence of content and provide one useful next step.", "variants": "first run, no results, permission, error", "states": "default, hover, focus, active, disabled, empty", "sources": ["pages/my-appointments/empty"], "pills": ["Extracted"]} -->
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Explain the absence of content and provide one useful next step. This component appears in <a href="../../mocks/pages/my-appointments/empty.html">pages/my-appointments/empty</a>.</p><p>Use it for this job; choose a different component when the interaction or information hierarchy changes.</p></section>
+<!--meta {"lead": "An empty state fills a region that has nothing to show yet, nothing that matches, or nothing it could load, and gives the person one clear next step.", "description": "First-run, no-results, error, permission and success variants, full and compact.", "pills": ["Status: stable", "Icon + title + one sentence + one action"], "variants": "first-run, no results, error, permission, success; full and compact", "states": "default, action focused, retrying (busy)", "sources": ["pages/my-appointments/empty", "pages/style-gallery/no-results", "pages/style-gallery/error", "pages/booking-request/success"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use an empty state when a list, gallery or panel has no items to render. It always has four parts: an icon in a tinted circle, a title that says what is (or is not) here, one sentence that explains why or what happens next, and one primary action that moves the person forward.</p>
+  <ul>
+    <li><b>First-run</b>: nothing exists yet ("No appointments yet"). Point to how things get here.</li>
+    <li><b>No results</b>: search or filters excluded everything. Offer to widen or clear them.</li>
+    <li><b>Error</b>: the content could not load. Say the person's work is safe and offer "Try again".</li>
+    <li><b>Permission</b>: the content exists but this account cannot see it. Offer to sign in with the right account.</li>
+    <li><b>Success</b>: a form's job is done (request sent, review posted). The region becomes a confirmation with the next step.</li>
+  </ul>
+  <p>Full-page errors inside the shell (404, 403, 500, offline) are documented as <a href="error-page.html">Error page</a>.</p>
+</section>
 
-<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2><div class="ds-anatomy"><figure class="ds-anatomy__figure"><section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></figure><ol class="ds-anatomy__list"><li><div><b>Semantic element</b><small>Preserves the native role and browser interaction.</small></div></li><li><div><b>Visible content</b><small>Names the action, value, or status in plain language.</small></div></li><li><div><b>Component class</b><small>Reads shared roles from the token stylesheet.</small></div></li></ol></div></section>
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <section class="empty">
+        <div class="empty__icon" aria-hidden="true">{{icon:calendar|icon--lg}}</div>
+        <p class="empty__title">No appointments yet</p>
+        <p class="empty__text">When you request a visit, you’ll find its status and details here.</p>
+        <div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></div>
+      </section>
+      <span class="ds-callout" style="left: 40%; top: 14%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 22%; top: 42%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 14%; top: 60%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 36%; top: 82%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Icon</b><small>64px circle (48px compact), tinted by variant; a 24px SVG icon, <code>aria-hidden</code>.</small></div></li>
+      <li><div><b>Title</b><small><code>--text-h3</code>, 28px from 768px; a real heading at the right level for the region.</small></div></li>
+      <li><div><b>Text</b><small>One sentence, <code>--color-fg-muted</code>, capped at 36ch.</small></div></li>
+      <li><div><b>Actions</b><small>One primary button; an optional secondary button or link.</small></div></li>
+    </ol>
+  </div>
+</section>
 
-<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2><p>Choose the variant by meaning and context. Keep status or action labels explicit.</p><ul><li><strong>First run</strong> — use this form when the surrounding content calls for first run presentation.</li><li><strong>No results</strong> — use this form when the surrounding content calls for no results presentation.</li><li><strong>Permission</strong> — use this form when the surrounding content calls for permission presentation.</li><li><strong>Error</strong> — use this form when the surrounding content calls for error presentation.</li></ul>{{example:Base specimen}}<section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section>{{/example}}</section>
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <p>The variant sets the icon tint and the copy formula; the layout never changes. (Examples here use <code>&lt;p class="empty__title"&gt;</code> to keep this page's outline; production uses a heading.)</p>
+  {{example:[stack]First-run (accent), no results (accent), error (danger), permission (warning), success (accent with check).}}
+<section class="empty">
+  <div class="empty__icon" aria-hidden="true">{{icon:calendar|icon--lg}}</div>
+  <p class="empty__title">No appointments yet</p>
+  <p class="empty__text">When you request a visit, you’ll find its status and details here.</p>
+  <div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></div>
+</section>
+<section class="empty">
+  <div class="empty__icon" aria-hidden="true">{{icon:search|icon--lg}}</div>
+  <p class="empty__title">No matches for these filters</p>
+  <p class="empty__text">Try a wider price range or distance to see more options.</p>
+  <div class="empty__actions"><button class="btn btn--primary" type="button">Clear filters</button></div>
+</section>
+<section class="empty empty--error">
+  <div class="empty__icon" aria-hidden="true">{{icon:alert-circle|icon--lg}}</div>
+  <p class="empty__title">We couldn’t load the style gallery</p>
+  <p class="empty__text">Check your connection and try again. Your details are safe.</p>
+  <div class="empty__actions"><button class="btn btn--primary" type="button">Try again</button><a class="btn" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></div>
+</section>
+<section class="empty empty--warning">
+  <div class="empty__icon" aria-hidden="true">{{icon:lock|icon--lg}}</div>
+  <p class="empty__title">This appointment belongs to another account</p>
+  <p class="empty__text">Sign in with the account used for this appointment.</p>
+  <div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/sign-in/default.html">Sign in</a></div>
+</section>
+<section class="empty">
+  <div class="empty__icon" aria-hidden="true">{{icon:check|icon--lg}}</div>
+  <p class="empty__title">Request sent to Nia</p>
+  <p class="empty__text">This is a request, not a confirmed appointment. Nia will reply with the final time and price.</p>
+  <div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View appointment</a></div>
+</section>
+  {{/example}}
+</section>
 
-<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2><ul><li><strong>compact</strong> — align height and padding to the compact control role; keep touch targets reachable.</li><li><strong>full</strong> — align height and padding to the full control role; keep touch targets reachable.</li></ul><p>Small, medium, and large control heights are defined by <code>--control-height-sm</code>, <code>--control-height-md</code>, and <code>--control-height-lg</code>.</p></section>
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <p>Full is for a page's main region or a whole gallery. Compact is for a card, a panel in the detail grid, or a dialog body.</p>
+  {{example:[start]Full: 48px block padding, 64px icon. Compact (<code>.empty--compact</code>): 32px padding, 48px icon.}}
+<div class="card" style="flex: 1 1 18rem;">
+  <section class="empty">
+    <div class="empty__icon" aria-hidden="true">{{icon:star|icon--lg}}</div>
+    <p class="empty__title">No reviews yet</p>
+    <p class="empty__text">Nia’s first reviews will appear here after her next appointments.</p>
+  </section>
+</div>
+<div class="card" style="flex: 1 1 18rem;">
+  <section class="empty empty--compact">
+    <div class="empty__icon" aria-hidden="true">{{icon:star}}</div>
+    <p class="empty__title">No reviews yet</p>
+    <p class="empty__text">Nia’s first reviews will appear here after her next appointments.</p>
+  </section>
+</div>
+  {{/example}}
+</section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>The table forces pointer and focus states with <code>data-state</code> for review. Production interactions use native attributes and pseudo-classes.</p><div class="ds-matrix"><table><thead><tr><th scope="col">Specimen</th><th scope="col">default</th><th scope="col">hover</th><th scope="col">focus</th><th scope="col">active</th><th scope="col">disabled</th><th scope="col">empty</th></tr></thead><tbody><tr><th scope="row">Empty state</th><td><section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a data-state="hover" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a data-state="focus" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a data-state="active" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a data-state="disabled" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td><td><section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a data-state="empty" class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></td></tr></tbody></table></div>{{themes}}<section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section>{{/themes}}</section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <p>The empty state itself is static; its states are its actions'. The buttons follow <a href="button.html">Button</a>, so hover, focus, active and loading come from there.</p>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Variant</th><th scope="col">Default</th><th scope="col">Action focused</th><th scope="col">Retrying</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Error</th>
+        <td><section class="empty empty--error empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle}}</div><p class="empty__title">Reviews didn’t load</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button">Try again</button></div></section></td>
+        <td><section class="empty empty--error empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle}}</div><p class="empty__title">Reviews didn’t load</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button" data-state="focus">Try again</button></div></section></td>
+        <td><section class="empty empty--error empty--compact" aria-busy="true"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle}}</div><p class="empty__title">Reviews didn’t load</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button" aria-busy="true">Try again</button></div></section></td></tr>
+      <tr><th scope="row">No results</th>
+        <td><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:search}}</div><p class="empty__title">No matches</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button">Clear filters</button></div></section></td>
+        <td><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:search}}</div><p class="empty__title">No matches</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button" data-state="focus">Clear filters</button></div></section></td>
+        <td><section class="empty empty--compact" aria-busy="true"><div class="empty__icon" aria-hidden="true">{{icon:search}}</div><p class="empty__title">No matches</p><div class="empty__actions"><button class="btn btn--primary btn--sm" type="button" aria-busy="true">Clear filters</button></div></section></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Both themes</h3>
+  {{themes:stack}}<section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:calendar}}</div><p class="empty__title">No appointments yet</p><p class="empty__text">When you request a visit, you’ll find its status and details here.</p></section><section class="empty empty--error empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:alert-circle}}</div><p class="empty__title">We couldn’t load your appointments</p><p class="empty__text">Check your connection and try again. Your details are safe.</p></section><section class="empty empty--warning empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:lock}}</div><p class="empty__title">You can’t open this page</p></section>{{/themes}}
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>Keep the component within the 16px phone margin, allow text to wrap without clipping, and preserve a reachable 24px minimum target. At 768px and 1024px, let the containing grid set width rather than adding fixed dimensions.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Centred at every width. The title grows from 22px to 28px at 768px; the text stays capped at 36ch so it never runs the full card width.</li>
+    <li>Actions wrap and centre; on phones a single primary action may be full width when the empty state fills the screen.</li>
+    <li>Below 640px, use the compact size inside cards and dialogs so the action stays above the fold.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2><p>The same markup appears in light and dark themes. Use the semantic roles in the token table; override a component token only for a local variation.</p>{{themes}}<section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section>{{/themes}}</section>
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The icon circle reads <code>--empty-icon-bg</code> and <code>--empty-icon-fg</code>, which the variants map to the accent, danger or warning tokens. In the dark theme those become deep tints (plum 950, red 950, amber 950) with light icons, so the circle reads as part of the surface rather than a bright spot.</p>
+  <pre><code>/* A success variant with the success tint */
+.empty--success .empty__icon { --empty-icon-bg: var(--color-success-bg); --empty-icon-fg: var(--color-success-icon); }</code></pre>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><h3>Role and keyboard</h3><p>Tab and Shift+Tab follow DOM order; Enter or Space activates native controls, while links use Enter. Static content remains in reading order.</p><h3>Focus and labelling</h3><p>Keep the shared visible focus ring. The visible text supplies the accessible name; icon-only actions need an explicit label. Associate help and errors with the relevant control.</p><h3>Contrast, motion, and touch</h3><p>Text uses a 4.5:1 minimum, meaningful controls and focus boundaries use 3:1, and all actions keep a 24px minimum target with comfortable spacing. Reduced motion removes decorative transitions. Check the actual foreground and background pair in both themes on the <a href="../foundations/color.html">Color foundation</a>.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>A plain <code>&lt;section&gt;</code> with a real heading at the right level for its region (<code>h2</code> in a page's main area). No ARIA role is needed for first-run and no-results. When an empty or error state replaces content after a search or retry, announce it once: put the title text in a polite <code>role="status"</code> region ("No matches for these filters"), or use <code>role="alert"</code> only when an action the person took failed.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>The icon, title and text are not focusable; Tab reaches the primary action, then the secondary.</td></tr>
+    <tr><td><kbd>Enter</kbd> / <kbd>Space</kbd></td><td>Activate the action (buttons) or follow it (links, Enter only).</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Do not move focus to an empty state that appears on page load. After a failed retry or a filter change that empties the list, keep focus on the control the person used. On a success state that replaces a form, move focus to the empty-state title (<code>tabindex="-1"</code>) so the confirmation is read.</p>
+  <h3>Labelling</h3>
+  <p>The icon is decorative (<code>aria-hidden</code>); the title carries the meaning. Never rely on the tint: "We couldn’t load…" says it is an error.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Title on page|--color-fg-default|--color-bg-canvas|4.5}}
+    {{pair:Text on page|--color-fg-muted|--color-bg-canvas|4.5}}
+    {{pair:Text on card|--color-fg-muted|--color-bg-surface|4.5}}
+    {{pair:Icon on accent tint|--color-fg-accent|--color-accent-subtle|3}}
+    {{pair:Icon on danger tint|--color-danger-icon|--color-danger-bg|3}}
+    {{pair:Icon on warning tint|--color-warning-icon|--color-warning-bg|3}}
+  </div>
+  <h3>Motion</h3>
+  <p>None. An empty state appears in place, without entrance animation, so it never delays the action.</p>
+  <h3>Touch</h3>
+  <p>Actions are medium buttons (40px) or larger; two actions keep 12px between them.</p>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>Use sentence case. For empty state, keep the wording concrete and close to the value or action it describes. Show “Awaiting reply” until the braider accepts; label a price estimate as an estimate.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li><b>Title</b> names the specific thing: "No appointments yet", "No matches for these filters", "We couldn’t load the style gallery". Never a generic "Nothing here yet".</li>
+    <li><b>Text</b> is one sentence: why it is empty or what happens next. Errors say what is safe: "Your details are safe."</li>
+    <li><b>Action</b> is the next step as a verb phrase: "Explore styles", "Clear filters", "Try again", "Sign in".</li>
+    <li>Use the cast: "Nia’s first reviews will appear here…", not "This braider has no reviews."</li>
+    <li>Success is a request, not a booking, until the braider accepts: "Request sent to Nia", never "Appointment booked".</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><section class="empty"><div class="empty__icon" aria-hidden="true">✦</div><h3 class="empty__title">Nothing here yet</h3><p class="empty__text">Explore styles to find your next visit.</p><a class="btn btn--primary" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></section></div><figcaption>Use the empty state for its stated job: explain the absence of content and provide one useful next step.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Unclear action</span></div><figcaption>Do not replace the semantic element with unlabelled text or a decorative shape.</figcaption></figure><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Pair colour with an explicit state label.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not make colour or a dot the only carrier of status.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:calendar}}</div><p class="empty__title">No appointments yet</p><p class="empty__text">When you request a visit, you’ll find its status and details here.</p></section></div><figcaption>A title that names the thing, and an SVG icon that matches it.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">✦</div><p class="empty__title">Nothing here yet</p><p class="empty__text">There’s no information to show here yet.</p></section></div><figcaption>The mocks use "Nothing here yet" and a ✦ glyph on every empty screen; neither says what is missing.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:star}}</div><p class="empty__title">No portfolio photos yet</p><p class="empty__text">You can still read Nia’s services and policies.</p><div class="empty__actions"><a class="btn btn--primary btn--sm" href="../../mocks/pages/booking-request/default.html">Request with Nia</a></div></section></div><figcaption>The action continues the task on this screen.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:star}}</div><p class="empty__title">No portfolio photos yet</p><div class="empty__actions"><a class="btn btn--primary btn--sm" href="../../mocks/pages/style-gallery/default.html">Explore styles</a></div></section></div><figcaption>The empty braider profile mock sends people away with "Explore styles" when they came to book Nia.</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>{{tok:Color fg muted|--color-fg-muted}}{{tok:Space 6|--space-6}}{{tok:Text h2|--text-h2}}</tbody></table></div></section>
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Icon circle (default)|--color-accent-subtle|--color-fg-accent}}
+      {{tok:Icon circle (error)|--color-danger-bg|--color-danger-icon}}
+      {{tok:Icon circle (permission)|--color-warning-bg|--color-warning-icon}}
+      {{tok:Title|--color-fg-default}}
+      {{tok:Text|--color-fg-muted}}
+      {{tok:Title font|--text-h3|--font-size-2xl}}
+      {{tok:Padding full / compact|--space-12|--space-8}}
+      {{tok:Gap between parts|--space-3}}
+      {{tok:Icon circle radius|--radius-full}}
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2><p>Copy the semantic markup and product class; replace the sample content with real data.</p><pre><code>&lt;section class=&quot;empty&quot;&gt;&lt;div class=&quot;empty__icon&quot; aria-hidden=&quot;true&quot;&gt;✦&lt;/div&gt;&lt;h3 class=&quot;empty__title&quot;&gt;Nothing here yet&lt;/h3&gt;&lt;p class=&quot;empty__text&quot;&gt;Explore styles to find your next visit.&lt;/p&gt;&lt;a class=&quot;btn btn--primary&quot; href=&quot;../../mocks/pages/style-gallery/default.html&quot;&gt;Explore styles&lt;/a&gt;&lt;/section&gt;</code></pre><p>Forced <code>data-state</code> values are for documentation snapshots only.</p></section>
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;section class="empty empty--error"&gt;
+  &lt;div class="empty__icon" aria-hidden="true"&gt;&lt;svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"&gt;…&lt;/svg&gt;&lt;/div&gt;
+  &lt;h2 class="empty__title"&gt;We couldn’t load the style gallery&lt;/h2&gt;
+  &lt;p class="empty__text"&gt;Check your connection and try again. Your details are safe.&lt;/p&gt;
+  &lt;div class="empty__actions"&gt;
+    &lt;button class="btn btn--primary" type="button"&gt;Try again&lt;/button&gt;
+    &lt;a class="btn" href="/"&gt;Explore styles&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.empty</code></td><td>Centred column, full padding.</td></tr>
+    <tr><td><code>.empty--compact</code></td><td>Less padding, 48px icon; for cards, panels and dialogs.</td></tr>
+    <tr><td><code>.empty--error</code> <code>.empty--warning</code></td><td>Danger or warning icon tint.</td></tr>
+    <tr><td><code>.empty__icon</code>, <code>.empty__title</code>, <code>.empty__text</code>, <code>.empty__actions</code></td><td>The four parts; the title is a heading in production.</td></tr>
+    <tr><td><code>.empty__reference</code></td><td>Monospace reference id for support (error pages).</td></tr>
+    <tr><td><code>role="status"</code></td><td>Optional; announces an empty state that replaces content after an action.</td></tr>
+  </tbody></table>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><ul>{{mock:pages/my-appointments/empty|visible specimen}}</ul><p>The examples use the corresponding selectors in <a href="../assets/components.css">components.css</a>.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <p>Extracted from these mocks:</p>
+  <ul>
+    {{mock:pages/my-appointments/empty|first-run}}
+    {{mock:pages/notification-center/empty|first-run}}
+    {{mock:pages/braider-profile/empty|first-run in a detail page}}
+    {{mock:pages/style-gallery/no-results|no results with a filter badge}}
+    {{mock:pages/my-appointments/no-results|no results}}
+    {{mock:pages/style-gallery/error|error with retry}}
+    {{mock:pages/booking-request/success|success replaces the form}}
+    {{mock:pages/forbidden/default|permission}}
+  </ul>
+  <p>Drift fixed during extraction: icons were text glyphs (✦, !, ⌕, ✓) that some screen readers announce (now SVG icons, <code>aria-hidden</code>); every first-run screen used the same title "Nothing here yet" (now a specific title per screen); the empty braider profile offered "Explore styles" instead of continuing to book; the empty title used the 36px light <code>h2</code> role (now <code>--text-h3</code>, 28px from 768px); success states reused <code>.empty</code> with a ✓ glyph (kept as the success variant, with a check icon and focus moved to the title).</p>
+</section>

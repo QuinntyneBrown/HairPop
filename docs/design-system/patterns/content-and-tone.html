@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Content and tone — HairPop design system</title>
-<meta name="description" content="Write clear copy that earns confidence without promising unconfirmed details.">
+<meta name="description" content="Voice, sentence case, button verbs, numbers, dates, times and prices, request vs appointment vocabulary, message formulas and a microcopy library.">
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../assets/components.css">
@@ -15,24 +15,145 @@
 <div class="ds-shell">
 <nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
 <main id="main" class="ds-main">
-<header class="ds-header"><p class="ds-kicker">Pattern</p><h1>Content and tone</h1><p class="ds-lead">Write clear copy that earns confidence without promising unconfirmed details.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#when">When</a></li><li><a href="#structure">Structure</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do dont</a></li><li><a href="#sources">Sources</a></li></ul></header>
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Write clear copy that earns confidence without promising unconfirmed details. The reference journey is <a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a>.</p></section>
+<header class="ds-header"><p class="ds-kicker">Pattern</p><h1>Content and tone</h1><p class="ds-lead">HairPop sounds like a knowledgeable friend who books braiders: warm, specific and honest about what is confirmed and what is not.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#when">When to use which</a></li><li><a href="#structure">Structure</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Customers choose someone to spend five hours with their hair. Copy builds that confidence by being <b>specific</b> (Nia, Sat 24 Oct, $180–$240), <b>honest</b> (an estimate is an estimate; a request is not an appointment), and <b>calm</b> (failures say what is safe before what went wrong). The <a href="../foundations/content.html">content foundation</a> has the full style rules; this pattern shows how they combine on screens.</p>
+  <ul>
+    <li><b>Warm, not cute.</b> "Find a style that feels like you." Not "Slay your next look!!"</li>
+    <li><b>Specific, not generic.</b> "Nia will reply with the final time and price." Not "We’ll be in touch."</li>
+    <li><b>Honest about status.</b> "Awaiting Nia’s reply", never "Booked" before she accepts.</li>
+    <li><b>Second person for Maya, first names for braiders.</b></li>
+  </ul>
+</section>
 
-<section class="ds-section" id="when"><h2><a href="#when">When</a></h2><p>Use concrete verbs, sentence case, local date and time, and an explicit price status: typical, starting, estimated, or confirmed.</p><p>Choose this composition when its information and action hierarchy matches the task; keep a simpler component when one action is sufficient.</p></section>
+<section class="ds-section" id="when"><h2><a href="#when">When to use which</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Moment</th><th scope="col">Tone</th><th scope="col">Example</th></tr></thead>
+    <tbody>
+      <tr><td>Discovery (gallery, style detail)</td><td>Inviting, sensory</td><td>"Gentle at the root · 4–7 hours · typically $160–$300"</td></tr>
+      <tr><td>Choosing a braider</td><td>Factual, comparable</td><td>"4.9 ★ · 86 reviews · Toronto West · knotless braids from $180"</td></tr>
+      <tr><td>Requesting and waiting</td><td>Clear about what happens next</td><td>"This is a request, not a confirmed appointment."</td></tr>
+      <tr><td>Something went wrong</td><td>Calm, reassuring first</td><td>"Your details are safe. Check your connection and try again."</td></tr>
+      <tr><td>Legal, privacy, cookies</td><td>Plain, short sentences</td><td>"Choose whether optional usage data may be stored."</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Request or appointment?</h3>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Status</th><th scope="col">Say</th><th scope="col">Never say</th></tr></thead>
+    <tbody>
+      <tr><td>Sent, waiting for the braider</td><td>request, "Awaiting reply", "estimated price"</td><td>booking, appointment, confirmed, "your price"</td></tr>
+      <tr><td>Braider accepted</td><td>appointment, "Confirmed", "confirmed estimate: $210"</td><td>request</td></tr>
+      <tr><td>Visit happened</td><td>"Completed", "your visit with Nia on Sat 3 Oct"</td><td>"past booking"</td></tr>
+      <tr><td>Withdrawn by Maya</td><td>"Cancelled", "request cancelled"</td><td>"deleted"</td></tr>
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2><p>Use concrete verbs, sentence case, local date and time, and an explicit price status: typical, starting, estimated, or confirmed.</p><div class="ds-example"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><div class="ds-example__caption"><span>Composed example</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;span class=&quot;badge badge--warning&quot;&gt;Awaiting reply&lt;/span&gt;</code></pre></details></div></section>
+<section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
+  <p>One screen, every content rule: eyebrow, a title that speaks to Maya, a subtitle of facts, an honest status, a next step named with a verb.</p>
+  <div class="ds-frame"><div class="ds-frame__body">
+    <div class="page-header"><div><p class="eyebrow">Your HairPop</p><p style="font: var(--text-h1); letter-spacing: var(--letter-spacing-tight);">Your appointment with Nia</p><p class="subtitle">Request HP-1048 · Sat 24 Oct at 10:00 am · awaiting Nia’s reply.</p></div></div>
+    <section class="card stack" aria-label="Request HP-1048">
+      <span class="badge badge--warning">Awaiting reply</span>
+      <h2>Medium knotless braids</h2>
+      <p><strong>Sat 24 Oct · 10:00 am</strong> with Nia Okafor</p>
+      <p>Estimated price: $180–$240. Nia will confirm the final price.</p>
+      <p>Location shared after Nia accepts.</p>
+      <div class="cluster"><a class="btn" href="../../mocks/dialogs/change-appointment/default.html">Request a change</a><a class="btn btn--link" href="../../mocks/dialogs/cancel-appointment/default.html">Cancel request</a></div>
+    </section>
+  </div></div>
+</section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>A request is Awaiting reply until accepted. Errors describe what happened, preserve work, and name the next action.</p><p>Check default, loading or busy, empty where applicable, validation, success, error, and offline against the relevant mock states.</p></section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <h3>Message formulas</h3>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Message</th><th scope="col">Formula</th><th scope="col">Example</th></tr></thead>
+    <tbody>
+      <tr><td>Field error</td><td>What to do + example or limit</td><td>"Enter an email address like name@example.com."</td></tr>
+      <tr><td>Load error</td><td>We couldn’t [verb] [thing] + what is safe + what to try</td><td>"We couldn’t load your appointments. Your details are safe. Try again."</td></tr>
+      <tr><td>Action failed</td><td>[Thing] not [done] + what is kept + retry</td><td>"Review not posted. Your words are saved. Please try again."</td></tr>
+      <tr><td>Empty</td><td>No [things] yet + when they appear + action</td><td>"No appointments yet. When you request a visit, you’ll find it here."</td></tr>
+      <tr><td>No results</td><td>No [things] match + the one change most likely to help</td><td>"No braiders match these filters. Try a wider price range."</td></tr>
+      <tr><td>Success</td><td>Outcome + what happens next</td><td>"Request sent to Nia. She will reply with the final time and price."</td></tr>
+      <tr><td>Confirmation</td><td>Question with object + consequence</td><td>"Cancel request HP-1048? Nia will see that you no longer need this time."</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Numbers, dates, times and prices</h3>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Thing</th><th scope="col">Write</th><th scope="col">Not</th></tr></thead>
+    <tbody>
+      <tr><td>Date</td><td>Sat 24 Oct (add the year only outside the current one)</td><td>10/24/2026, October 24th</td></tr>
+      <tr><td>Time</td><td>10:00 am, 9:42 am</td><td>10AM, 10:00</td></tr>
+      <tr><td>Date and time</td><td>Sat 24 Oct · 10:00 am, or "Sat 24 Oct at 10:00 am" in a sentence</td><td>24 Oct, 10am</td></tr>
+      <tr><td>Price range</td><td>$180–$240 (en dash, no spaces, both dollar signs)</td><td>$180-240, $180 - $240</td></tr>
+      <tr><td>Durations</td><td>4–7 hours, about 5 hours</td><td>4-7hrs</td></tr>
+      <tr><td>Ratings and counts</td><td>4.9 ★ · 86 reviews; 1,284 reviews</td><td>4.90/5 (86)</td></tr>
+      <tr><td>References</td><td>HP-1048</td><td>#1048, hp1048</td></tr>
+      <tr><td>Punctuation</td><td>Curly apostrophes and quotes (you’re, Nia’s), the ellipsis character (…)</td><td>you're, ...</td></tr>
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>At 360px, stack related elements in reading order and keep actions reachable. At 768px, allow compact pairs; at 1024px, use the wider grid without stretching prose beyond the measure token.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2>
+  <ul>
+    <li>Write once for 360px: titles of eight words or fewer, button labels of three or four words, subtitles that can wrap at a " · " separator.</li>
+    <li>Never truncate a person’s name, a price or a date; let it wrap.</li>
+    <li>Do not write different copy per breakpoint; shorten the source instead.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><p>Use native landmarks and controls. Keep focus visible, follow the visual reading order, announce async results, and associate errors with fields. Modal compositions return focus to their trigger. Check both themes, reflow, zoom, and reduced motion.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <ul>
+    <li>Link and button text make sense alone: "View Nia’s profile", "Cancel request" (2.4.4).</li>
+    <li>Icon-only controls get a verb-and-object label: "Close dialog", "Dismiss notification".</li>
+    <li>A visible label is part of the accessible name (2.5.3): the link that reads "Updates" is named "Updates, 2 unread".</li>
+    <li>Status words appear as text, not colour alone: "Awaiting reply" on the badge.</li>
+    <li>Plain language: short sentences, common words, no idioms that do not translate.</li>
+    <li>Decorative glyphs (★, →, ·) are carried by the surrounding text or <code>aria-hidden</code>; a rating on its own reads "4.9 out of 5 stars" through visually hidden text.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>A request is Awaiting reply until accepted. Errors describe what happened, preserve work, and name the next action. Name the action or state in words; never rely on colour alone. Use the cast, dates, and price language in the source mock as an example, not as live data.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <h3>Microcopy library</h3>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Context</th><th scope="col">Use</th></tr></thead>
+    <tbody>
+      <tr><td>Primary actions</td><td>Send request · Request with Nia · See braiders for this style · Post review · Save changes · Sign in · Create account · Send reset link · Save password · Resend email</td></tr>
+      <tr><td>Secondary actions</td><td>Find braiders · Filters · Request a change · View request · View appointment · Explore styles</td></tr>
+      <tr><td>Safe actions in dialogs</td><td>Keep request · Keep current time · Keep browsing · Stay signed in</td></tr>
+      <tr><td>Destructive</td><td>Cancel request · Sign out · Send report</td></tr>
+      <tr><td>Recovery</td><td>Try again · Retry reviews · Clear filters</td></tr>
+      <tr><td>Statuses</td><td>Awaiting reply · Confirmed · Completed · Cancelled · Unread · Read</td></tr>
+      <tr><td>Optional field</td><td>(optional) after the label</td></tr>
+      <tr><td>Loading</td><td>Sending your request to Nia… · Refreshing braiders near Toronto…</td></tr>
+      <tr><td>Offline</td><td>You’re offline. Your details stay here. Connect before sending.</td></tr>
+      <tr><td>Footer</td><td>HairPop · Made for confident hair decisions · Terms · Privacy</td></tr>
+    </tbody>
+  </table></div>
+  <p>Sentence case everywhere, including buttons, titles, tabs and badges (badges are uppercased by CSS but written in sentence case).</p>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Use the semantic component and explicit text from the source journey.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not leave the task or status encoded only in decoration.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><p>Estimated price: $180–$240. Nia will confirm the final price.</p></div><figcaption>An estimate is labelled as one, with who confirms it.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><p>Your appointment is booked for $180.</p></div><figcaption>Calling a pending request booked, with a single price.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--primary" type="button">Send request</button></div><figcaption>A verb phrase that says what happens.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><button class="btn btn--primary" type="button">Submit</button><button class="btn" type="button">OK</button></div><figcaption>Generic labels that could mean anything.</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><ul><li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> (source state)</li></ul><p>See the <a href="../components/badge.html">badge component</a> for its individual contract.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    <li><a href="../../mocks/pages/appointment-detail/default.html">pages/appointment-detail/default</a> (pending request copy)</li>
+    <li><a href="../../mocks/pages/appointment-detail/success.html">pages/appointment-detail/success</a> (confirmed appointment copy)</li>
+    <li><a href="../../mocks/pages/booking-request/success.html">pages/booking-request/success</a> (request vs appointment)</li>
+    <li><a href="../../mocks/pages/style-gallery/default.html">pages/style-gallery/default</a> (discovery tone)</li>
+    <li><a href="../../mocks/pages/matching-braiders/default.html">pages/matching-braiders/default</a> (comparable facts)</li>
+    <li><a href="../../mocks/notifications/booking-update/warning.html">notifications/booking-update/warning</a> (change suggested)</li>
+    <li><a href="../../mocks/pages/my-appointments/empty.html">pages/my-appointments/empty</a> (empty copy)</li>
+  </ul>
+  <p>Drift fixed: generic "Nothing here yet" titles; busy labels "Working…" replaced the action name; non-booking forms fell back to "You can continue exploring HairPop" on success (each success now says what happens next); the confirm warning "This action updates your account and cannot be undone here" appeared on unrelated dialogs; the Updates link was named "Notifications".</p>
+</section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>
 </div>

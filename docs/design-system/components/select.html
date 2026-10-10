@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Select — HairPop design system</title>
-<meta name="description" content="Choose one value from a finite list with a native control.">
+<meta name="description" content="Native select with placeholder option and option groups, three sizes and every state in both themes.">
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../assets/components.css">
@@ -15,32 +15,171 @@
 <div class="ds-shell">
 <nav class="ds-nav" aria-label="Design system"><div class="ds-nav__brand"><a href="../index.html">HairPop DS</a><button class="ds-theme-toggle" type="button" aria-pressed="false">☾ Dark</button></div><details open><summary>Foundations</summary><ul><li><a href="../foundations/color.html">Color</a></li><li><a href="../foundations/typography.html">Typography</a></li><li><a href="../foundations/spacing.html">Spacing</a></li><li><a href="../foundations/layout.html">Layout</a></li><li><a href="../foundations/elevation.html">Elevation</a></li><li><a href="../foundations/shape.html">Shape</a></li><li><a href="../foundations/motion.html">Motion</a></li><li><a href="../foundations/iconography.html">Iconography</a></li><li><a href="../foundations/theming.html">Theming</a></li><li><a href="../foundations/responsive.html">Responsive</a></li><li><a href="../foundations/accessibility.html">Accessibility</a></li><li><a href="../foundations/content.html">Content</a></li></ul></details><details open><summary>Actions</summary><ul><li><a href="../components/button.html">Button</a></li><li><a href="../components/link.html">Link</a></li><li><a href="../components/menu.html">Menu</a></li></ul></details><details open><summary>Inputs</summary><ul><li><a href="../components/text-field.html">Text field</a></li><li><a href="../components/textarea.html">Textarea</a></li><li><a href="../components/select.html">Select</a></li><li><a href="../components/checkbox.html">Checkbox</a></li><li><a href="../components/radio-group.html">Radio group</a></li><li><a href="../components/switch.html">Switch</a></li><li><a href="../components/form-field.html">Form field</a></li><li><a href="../components/form-layout.html">Form layout</a></li></ul></details><details open><summary>Navigation</summary><ul><li><a href="../components/top-bar.html">Top bar</a></li><li><a href="../components/sidebar-navigation.html">Sidebar navigation</a></li><li><a href="../components/tabs.html">Tabs</a></li><li><a href="../components/breadcrumb.html">Breadcrumb</a></li><li><a href="../components/pagination.html">Pagination</a></li><li><a href="../components/page-header.html">Page header</a></li><li><a href="../components/footer.html">Footer</a></li><li><a href="../components/skip-link.html">Skip link</a></li></ul></details><details open><summary>Containers and overlays</summary><ul><li><a href="../components/card.html">Card</a></li><li><a href="../components/dialog.html">Dialog</a></li><li><a href="../components/tooltip.html">Tooltip</a></li><li><a href="../components/divider.html">Divider</a></li><li><a href="../components/container.html">Container, grid and stack</a></li></ul></details><details open><summary>Data display</summary><ul><li><a href="../components/table.html">Table</a></li><li><a href="../components/list.html">List</a></li><li><a href="../components/description-list.html">Description list</a></li><li><a href="../components/avatar.html">Avatar</a></li><li><a href="../components/badge.html">Badge</a></li><li><a href="../components/chip.html">Chip</a></li><li><a href="../components/stat.html">Stat</a></li></ul></details><details open><summary>Feedback</summary><ul><li><a href="../components/toast.html">Toast</a></li><li><a href="../components/alert.html">Alert and banner</a></li><li><a href="../components/inline-message.html">Inline message</a></li><li><a href="../components/progress-bar.html">Progress bar</a></li><li><a href="../components/spinner.html">Spinner</a></li><li><a href="../components/skeleton.html">Skeleton</a></li><li><a href="../components/empty-state.html">Empty state</a></li><li><a href="../components/error-page.html">Error page</a></li></ul></details><details open><summary>Patterns</summary><ul><li><a href="../patterns/forms.html">Forms</a></li><li><a href="../patterns/feedback-and-loading.html">Feedback and loading</a></li><li><a href="../patterns/empty-and-error-states.html">Empty and error states</a></li><li><a href="../patterns/navigation.html">Navigation and page structure</a></li><li><a href="../patterns/dialogs-and-overlays.html">Dialogs and overlays</a></li><li><a href="../patterns/tables-and-lists.html">Tables and lists</a></li><li><a href="../patterns/notifications.html">Notifications</a></li><li><a href="../patterns/content-and-tone.html">Content and tone</a></li></ul></details></nav>
 <main id="main" class="ds-main">
-<header class="ds-header"><p class="ds-kicker">Component · Inputs</p><h1>Select</h1><p class="ds-lead">Choose one value from a finite list with a native control.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Extracted</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do dont</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Choose one value from a finite list with a native control. This component appears in <a href="../../mocks/pages/booking-request/default.html">pages/booking-request/default</a>.</p><p>Use it for this job; choose a different component when the interaction or information hierarchy changes.</p></section>
+<header class="ds-header"><p class="ds-kicker">Component · Inputs</p><h1>Select</h1><p class="ds-lead">A select picks one value from a list the person does not need to compare side by side: a travel distance, a sort order, one of Nia's offered times when there are many.</p><div class="ds-meta"><span class="ds-pill ds-pill--ok">WCAG 2.2 AA</span><span class="ds-pill">Native <code>&lt;select&gt;</code></span><span class="ds-pill">Status: stable</span></div><ul class="ds-toc"><li><a href="#overview">Overview</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#variants">Variants</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#states">States</a></li><li><a href="#responsive">Responsive behaviour</a></li><li><a href="#theming">Theming</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#content">Content</a></li><li><a href="#do-dont">Do and don't</a></li><li><a href="#tokens">Tokens</a></li><li><a href="#code">Code</a></li><li><a href="#sources">Sources</a></li></ul></header>
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Use a native <code>&lt;select&gt;</code> when the answer is one value from a known list of more than five options. With five or fewer options that people should compare, use a <a href="radio-group.html">radio group</a>. When people need to type to find an option among hundreds, a combobox (not yet in the system) is the right tool.</p>
+  <ul>
+    <li>Native select is the default: it gets the platform picker on phones, works with every assistive technology and needs no script.</li>
+    <li>A custom listbox is only built when the native control cannot do the job, and then follows the APG Listbox pattern.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2><div class="ds-anatomy"><figure class="ds-anatomy__figure"><label class="field">Service<select class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></figure><ol class="ds-anatomy__list"><li><div><b>Semantic element</b><small>Preserves the native role and browser interaction.</small></div></li><li><div><b>Visible content</b><small>Names the action, value, or status in plain language.</small></div></li><li><div><b>Component class</b><small>Reads shared roles from the token stylesheet.</small></div></li></ol></div></section>
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <div class="field" style="width: min(100%, 18rem);"><label class="field__label" for="sel-anat">Distance from Toronto</label><select class="select" id="sel-anat"><option>Within 5 km</option><option selected>Within 10 km</option><option>Within 25 km</option></select></div>
+      <span class="ds-callout" style="left: 18%; top: 18%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 40%; top: 64%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 76%; top: 64%;" aria-hidden="true">3</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Label</b><small>Visible, from the form field.</small></div></li>
+      <li><div><b>Selected value</b><small>Body font; the field reserves 40px on the right for the chevron.</small></div></li>
+      <li><div><b>Chevron</b><small>Two CSS gradients in <code>currentColor</code>, so it follows the text colour and the disabled state.</small></div></li>
+    </ol>
+  </div>
+</section>
 
-<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2><p>Choose the variant by meaning and context. Keep status or action labels explicit.</p><ul><li><strong>Native</strong> — use this form when the surrounding content calls for native presentation.</li><li><strong>Placeholder option</strong> — use this form when the surrounding content calls for placeholder option presentation.</li></ul><div class="ds-example"><div class="ds-example__canvas"><label class="field">Service<select class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></div><div class="ds-example__caption"><span>Base specimen</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;label class=&quot;field&quot;&gt;Service&lt;select class=&quot;select&quot;&gt;&lt;option&gt;Medium knotless braids&lt;/option&gt;&lt;option&gt;Passion twists&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;</code></pre></details></div></section>
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="form-row">
+<div class="field"><label class="field__label" for="sel-sort">Sort braiders by</label><select class="select" id="sel-sort"><option>Best match</option><option>Lowest price</option><option>Highest rated</option><option>Nearest</option></select></div>
+<div class="field"><label class="field__label" for="sel-ph">Distance from Toronto</label><select class="select" id="sel-ph" required><option value="" disabled selected>Choose a distance</option><option>Within 5 km</option><option>Within 10 km</option><option>Within 25 km</option></select></div>
+</div>
+<div class="field"><label class="field__label" for="sel-time">New preferred time</label><select class="select" id="sel-time"><optgroup label="Sat 24 Oct"><option>10:00 am</option><option>1:00 pm</option></optgroup><optgroup label="Sun 25 Oct"><option selected>11:00 am</option><option>2:00 pm</option></optgroup></select></div></div><div class="ds-example__caption"><span>Native select; with a placeholder option that cannot be submitted; with option groups.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;form-row&quot;&gt;
+&lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;sel-sort&quot;&gt;Sort braiders by&lt;/label&gt;&lt;select class=&quot;select&quot; id=&quot;sel-sort&quot;&gt;&lt;option&gt;Best match&lt;/option&gt;&lt;option&gt;Lowest price&lt;/option&gt;&lt;option&gt;Highest rated&lt;/option&gt;&lt;option&gt;Nearest&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+&lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;sel-ph&quot;&gt;Distance from Toronto&lt;/label&gt;&lt;select class=&quot;select&quot; id=&quot;sel-ph&quot; required&gt;&lt;option value=&quot;&quot; disabled selected&gt;Choose a distance&lt;/option&gt;&lt;option&gt;Within 5 km&lt;/option&gt;&lt;option&gt;Within 10 km&lt;/option&gt;&lt;option&gt;Within 25 km&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;sel-time&quot;&gt;New preferred time&lt;/label&gt;&lt;select class=&quot;select&quot; id=&quot;sel-time&quot;&gt;&lt;optgroup label=&quot;Sat 24 Oct&quot;&gt;&lt;option&gt;10:00 am&lt;/option&gt;&lt;option&gt;1:00 pm&lt;/option&gt;&lt;/optgroup&gt;&lt;optgroup label=&quot;Sun 25 Oct&quot;&gt;&lt;option selected&gt;11:00 am&lt;/option&gt;&lt;option&gt;2:00 pm&lt;/option&gt;&lt;/optgroup&gt;&lt;/select&gt;&lt;/div&gt;</code></pre></details></div>
+</section>
 
-<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2><ul><li><strong>sm</strong> — align height and padding to the sm control role; keep touch targets reachable.</li><li><strong>md</strong> — align height and padding to the md control role; keep touch targets reachable.</li><li><strong>lg</strong> — align height and padding to the lg control role; keep touch targets reachable.</li></ul><p>Small, medium, and large control heights are defined by <code>--control-height-sm</code>, <code>--control-height-md</code>, and <code>--control-height-lg</code>.</p></section>
+<section class="ds-section" id="sizes"><h2><a href="#sizes">Sizes</a></h2>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><select class="select select--sm" aria-label="Small select example"><option>Small · 32px</option></select>
+<select class="select" aria-label="Medium select example"><option>Medium · 40px</option></select>
+<select class="select select--lg" aria-label="Large select example"><option>Large · 48px</option></select></div><div class="ds-example__caption"><span>Heights <code>--control-height-sm/md/lg</code>; medium is the default.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;select class=&quot;select select--sm&quot; aria-label=&quot;Small select example&quot;&gt;&lt;option&gt;Small · 32px&lt;/option&gt;&lt;/select&gt;
+&lt;select class=&quot;select&quot; aria-label=&quot;Medium select example&quot;&gt;&lt;option&gt;Medium · 40px&lt;/option&gt;&lt;/select&gt;
+&lt;select class=&quot;select select--lg&quot; aria-label=&quot;Large select example&quot;&gt;&lt;option&gt;Large · 48px&lt;/option&gt;&lt;/select&gt;</code></pre></details></div>
+</section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>The table forces pointer and focus states with <code>data-state</code> for review. Production interactions use native attributes and pseudo-classes.</p><div class="ds-matrix"><table><thead><tr><th scope="col">Specimen</th><th scope="col">default</th><th scope="col">hover</th><th scope="col">focus</th><th scope="col">active</th><th scope="col">disabled</th><th scope="col">invalid</th></tr></thead><tbody><tr><th scope="row">Select</th><td><label class="field">Service<select class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></td><td><label class="field">Service<select data-state="hover" class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></td><td><label class="field">Service<select data-state="focus" class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></td><td><label class="field">Service<select data-state="active" class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></td><td><label class="field">Service<select data-state="disabled" disabled class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></td><td><label class="field">Service<select data-state="invalid" aria-invalid="true" class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></td></tr></tbody></table></div><div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><label class="field">Service<select class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></div></div><div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><label class="field">Service<select class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></div></div></div></section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <div class="ds-matrix"><table>
+    <thead><tr><th scope="col">Size</th><th scope="col">Default</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Invalid</th><th scope="col">Disabled</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Medium</th>
+        <td><select class="select" aria-label="Distance, default"><option>Within 10 km</option></select></td>
+        <td><select class="select" aria-label="Distance, hover" data-state="hover"><option>Within 10 km</option></select></td>
+        <td><select class="select" aria-label="Distance, focus" data-state="focus"><option>Within 10 km</option></select></td>
+        <td><select class="select" aria-label="Distance, invalid" aria-invalid="true"><option>Choose a distance</option></select></td>
+        <td><select class="select" aria-label="Distance, disabled" disabled><option>Within 10 km</option></select></td></tr>
+      <tr><th scope="row">Small</th>
+        <td><select class="select select--sm" aria-label="Sort, small default"><option>Best match</option></select></td>
+        <td><select class="select select--sm" aria-label="Sort, small hover" data-state="hover"><option>Best match</option></select></td>
+        <td><select class="select select--sm" aria-label="Sort, small focus" data-state="focus"><option>Best match</option></select></td>
+        <td><select class="select select--sm" aria-label="Sort, small invalid" aria-invalid="true"><option>Best match</option></select></td>
+        <td><select class="select select--sm" aria-label="Sort, small disabled" disabled><option>Best match</option></select></td></tr>
+    </tbody>
+  </table></div>
+  <div class="ds-example"><div class="ds-example__canvas ds-example__canvas--stack"><div class="field"><label class="field__label" for="sel-inv">New preferred time</label><select class="select" id="sel-inv" aria-invalid="true" aria-describedby="sel-inv-error"><option value="" selected>Choose a time</option><option>Sun 25 Oct, 11:00 am</option></select><span class="field__error" id="sel-inv-error">Choose one of the times Nia has offered.</span></div></div><div class="ds-example__caption"><span>Invalid with its message.</span></div><details class="ds-example__code"><summary>HTML</summary><pre><code>&lt;div class=&quot;field&quot;&gt;&lt;label class=&quot;field__label&quot; for=&quot;sel-inv&quot;&gt;New preferred time&lt;/label&gt;&lt;select class=&quot;select&quot; id=&quot;sel-inv&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;sel-inv-error&quot;&gt;&lt;option value=&quot;&quot; selected&gt;Choose a time&lt;/option&gt;&lt;option&gt;Sun 25 Oct, 11:00 am&lt;/option&gt;&lt;/select&gt;&lt;span class=&quot;field__error&quot; id=&quot;sel-inv-error&quot;&gt;Choose one of the times Nia has offered.&lt;/span&gt;&lt;/div&gt;</code></pre></details></div>
+  <h3>Both themes</h3>
+  <div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><select class="select" aria-label="Distance preview"><option>Within 10 km</option></select><select class="select" aria-label="Invalid preview" aria-invalid="true"><option>Choose a time</option></select></div></div><div data-theme="dark"><div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0;"><select class="select" aria-label="Distance preview"><option>Within 10 km</option></select><select class="select" aria-label="Invalid preview" aria-invalid="true"><option>Choose a time</option></select></div></div></div>
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>Keep the component within the 16px phone margin, allow text to wrap without clipping, and preserve a reachable 24px minimum target. At 768px and 1024px, let the containing grid set width rather than adding fixed dimensions.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Full width of its column; on phones the operating system's picker opens, which is why the native select is preferred.</li>
+    <li>From 768px two short selects may share a <code>.form-row</code> (distance and sort).</li>
+    <li>The platform truncates long option text in the closed field; keep options under 30 characters.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2><p>The same markup appears in light and dark themes. Use the semantic roles in the token table; override a component token only for a local variation.</p><div class="ds-themes"><div data-theme="light"><div class="ds-example__canvas" style="padding: 0;"><label class="field">Service<select class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></div></div><div data-theme="dark"><div class="ds-example__canvas" style="padding: 0;"><label class="field">Service<select class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></div></div></div></section>
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>Uses the field tokens (<code>--field-bg</code>, <code>--field-border</code> …) plus <code>--select-chevron</code> for the chevron size. <code>color-scheme</code> in each theme makes the native option list dark in the dark theme.</p>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><h3>Role and keyboard</h3><p>Tab reaches the select; native arrows change the option and Escape closes the native popup.</p><h3>Focus and labelling</h3><p>Keep the shared visible focus ring. The visible text supplies the accessible name; icon-only actions need an explicit label. Associate help and errors with the relevant control.</p><h3>Contrast, motion, and touch</h3><p>Text uses a 4.5:1 minimum, meaningful controls and focus boundaries use 3:1, and all actions keep a 24px minimum target with comfortable spacing. Reduced motion removes decorative transitions. Check the actual foreground and background pair in both themes on the <a href="../foundations/color.html">Color foundation</a>.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p>Native <code>&lt;select&gt;</code> with <code>&lt;label for&gt;</code>. Changing the value never submits or navigates by itself (SC 3.2.2); results update after an explicit "Show braiders".</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Focuses the select.</td></tr>
+    <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Changes the value (Windows) or opens the list (macOS).</td></tr>
+    <tr><td><kbd>Space</kbd> / <kbd>Alt</kbd>+<kbd>↓</kbd></td><td>Opens the list.</td></tr>
+    <tr><td>Type a letter</td><td>Jumps to the matching option.</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>Closes the list without changing the value.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>Accent border plus a flush 2px ring, as for text fields.</p>
+  <h3>Labelling</h3>
+  <p>The visible label names the choice. A placeholder option ("Choose a distance") is <code>disabled</code> and has an empty value so it cannot be submitted.</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    <div class="ds-pair"><span>Edge on card</span><span class="ds-pair__ratio" data-contrast="--color-border-strong|--color-bg-surface" data-min="3"></span></div>
+    <div class="ds-pair"><span>Edge in dialog</span><span class="ds-pair__ratio" data-contrast="--color-border-strong|--color-bg-surface-raised" data-min="3"></span></div>
+    <div class="ds-pair"><span>Value and chevron</span><span class="ds-pair__ratio" data-contrast="--color-fg-default|--color-bg-surface" data-min="4.5"></span></div>
+  </div>
+  <h3>Motion</h3>
+  <p>The border transitions over <code>--duration-fast</code>; the list is the platform's.</p>
+  <h3>Touch</h3>
+  <p>40px tall and full width; the platform picker provides large targets.</p>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>Use sentence case. For select, keep the wording concrete and close to the value or action it describes. Show “Awaiting reply” until the braider accepts; label a price estimate as an estimate.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Options are short and parallel: "Within 5 km", "Within 10 km", "Within 25 km".</li>
+    <li>Order options logically (ascending distance, chronological times), not alphabetically.</li>
+    <li>Placeholder options start with "Choose".</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><label class="field">Service<select class="select"><option>Medium knotless braids</option><option>Passion twists</option></select></label></div><figcaption>Use the select for its stated job: choose one value from a finite list with a native control.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Unclear action</span></div><figcaption>Do not replace the semantic element with unlabelled text or a decorative shape.</figcaption></figure><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Pair colour with an explicit state label.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not make colour or a dot the only carrier of status.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="sel-do1">Distance from Toronto</label><select class="select" id="sel-do1"><option>Within 5 km</option><option selected>Within 10 km</option><option>Within 25 km</option></select></div></div><figcaption>Offer the distances the search supports.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="sel-dont1">Distance from Toronto</label><input class="input" id="sel-dont1" type="text" value="10 km"></div></div><figcaption>The filter-braiders mock asks for distance as free text ("10 km"), which must be parsed and cannot be validated.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="sel-do2">New preferred time</label><select class="select" id="sel-do2"><option>Sun 25 Oct, 11:00 am</option><option>Sun 25 Oct, 2:00 pm</option></select></div></div><figcaption>Only Nia’s offered times can be chosen, so the change request is valid by construction.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="field"><label class="field__label" for="sel-dont2">New preferred time</label><input class="input" id="sel-dont2" type="text" value="Sun 25 Oct, 11:00 am"></div></div><figcaption>The change-appointment mock takes the new time as free text, so Maya can ask for a time Nia never offered.</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody><tr><td>Color bg surface</td><td><code>--color-bg-surface</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td></tr><tr><td>Color border strong</td><td><code>--color-border-strong</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td></tr><tr><td>Control height md</td><td><code>--control-height-md</code></td><td colspan="2"><span data-token="--control-height-md"></span></td></tr></tbody></table></div></section>
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      <tr><td>Background</td><td><code>--color-bg-surface</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-bg-surface" data-swatch></i><span data-token="--color-bg-surface"></span></span></td></tr>
+      <tr><td>Text and chevron</td><td><code>--color-fg-default</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-fg-default" data-swatch></i><span data-token="--color-fg-default"></span></span></td></tr>
+      <tr><td>Border</td><td><code>--color-border-strong</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-border-strong" data-swatch></i><span data-token="--color-border-strong"></span></span></td></tr>
+      <tr><td>Focus</td><td><code>--color-focus-ring</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-focus-ring" data-swatch></i><span data-token="--color-focus-ring"></span></span></td></tr>
+      <tr><td>Invalid edge</td><td><code>--color-danger-solid</code></td><td><span class="ds-swatch-cell" data-theme="light"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td><td><span class="ds-swatch-cell" data-theme="dark"><i data-token="--color-danger-solid" data-swatch></i><span data-token="--color-danger-solid"></span></span></td></tr>
+      <tr><td>Height sm / md / lg</td><td><code>--control-height-sm</code> / <code>--control-height-md</code> / <code>--control-height-lg</code></td><td colspan="2"><span data-token="--control-height-sm"></span> / <span data-token="--control-height-md"></span> / <span data-token="--control-height-lg"></span></td></tr>
+      <tr><td>Chevron room / position</td><td><code>--space-10</code> / <code>--space-5</code></td><td colspan="2"><span data-token="--space-10"></span> / <span data-token="--space-5"></span></td></tr>
+      <tr><td>Radius</td><td><code>--radius-md</code></td><td colspan="2"><span data-token="--radius-md"></span></td></tr>
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2><p>Copy the semantic markup and product class; replace the sample content with real data.</p><pre><code>&lt;label class=&quot;field&quot;&gt;Service&lt;select class=&quot;select&quot;&gt;&lt;option&gt;Medium knotless braids&lt;/option&gt;&lt;option&gt;Passion twists&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;</code></pre><p>Forced <code>data-state</code> values are for documentation snapshots only.</p></section>
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;div class="field"&gt;
+  &lt;label class="field__label" for="distance"&gt;Distance from Toronto&lt;/label&gt;
+  &lt;select class="select" id="distance" name="distance" required&gt;
+    &lt;option value="" disabled selected&gt;Choose a distance&lt;/option&gt;
+    &lt;option value="5"&gt;Within 5 km&lt;/option&gt;
+    &lt;option value="10"&gt;Within 10 km&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.select</code></td><td>Native select with the system chevron replaced.</td></tr>
+    <tr><td><code>.select--sm</code> <code>.select--lg</code></td><td>Size.</td></tr>
+    <tr><td><code>aria-invalid="true"</code> / <code>disabled</code></td><td>Invalid edge / disabled.</td></tr>
+    <tr><td><code>data-state="hover|focus"</code></td><td>Documentation only.</td></tr>
+  </tbody></table>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><ul><li><a href="../../mocks/pages/booking-request/default.html">pages/booking-request/default</a> (visible specimen)</li></ul><p>The examples use the corresponding selectors in <a href="../assets/components.css">components.css</a>.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    <li><a href="../../mocks/dialogs/filter-braiders/default.html">dialogs/filter-braiders/default</a> ("Distance from Toronto")</li>
+    <li><a href="../../mocks/dialogs/request-review/default.html">dialogs/request-review/default</a> ("Preferred time")</li>
+    <li><a href="../../mocks/dialogs/change-appointment/default.html">dialogs/change-appointment/default</a> ("New preferred time")</li>
+  </ul>
+  <p>Drift fixed during extraction: no mock used a select; the distance and preferred-time questions were free-text inputs (now selects of supported values). The chevron offsets were raw pixels (now spacing tokens and <code>--select-chevron</code>).</p>
+</section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>
 </div>
