@@ -1,0 +1,110 @@
+name: Component perf test
+
+# Renders every component scenario in frontend/projects/perf-test on the branch and on the base
+# branch and fails on a Possible regression or a scenario that fails to render. See AGENTS.md,
+# "Component perf tests — mandatory". Only a maintainer may add the perf-regression-accepted label.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+    paths:
+      - "frontend/**"
+      - "e2e/perf-test/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: perf-test-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  perf-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      BASE_REF: ${{ github.base_ref }}
+      REGRESSION_ACCEPTED: ${{ contains(github.event.pull_request.labels.*.name, 'perf-regression-accepted') }}
+    steps:
+      - name: Check out the branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            e2e/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Install e2e dependencies
+        working-directory: e2e
+        run: npm ci
+
+      - name: Install Chromium
+        working-directory: e2e
+        run: npx playwright install --with-deps chromium
+
+      - name: Build the branch
+        working-directory: frontend
+        run: |
+          npx ng build components
+          NG_BUILD_MANGLE=0 npx ng build perf-test
+          cp -r dist/perf-test/browser "$RUNNER_TEMP/branch"
+
+      - name: Build the base branch
+        id: base
+        run: |
+          git worktree add "$RUNNER_TEMP/base" "origin/$BASE_REF"
+          if [ -d "$RUNNER_TEMP/base/frontend/projects/perf-test" ]; then
+            cd "$RUNNER_TEMP/base/frontend"
+            npm ci
+            npx ng build components
+            NG_BUILD_MANGLE=0 npx ng build perf-test
+            echo "dist=$RUNNER_TEMP/base/frontend/dist/perf-test/browser" >> "$GITHUB_OUTPUT"
+          else
+            echo "The base branch has no perf-test app; measuring the branch without a baseline."
+          fi
+
+      - name: Run the perf test
+        working-directory: e2e
+        env:
+          BASE_DIST: ${{ steps.base.outputs.dist }}
+        run: |
+          args=(--dist "$RUNNER_TEMP/branch")
+          if [ -n "$BASE_DIST" ]; then
+            args+=(--baseline "$BASE_DIST")
+          fi
+          # The label accepts an intended regression; a scenario that fails to render still fails.
+          if [ "$REGRESSION_ACCEPTED" != "true" ]; then
+            args+=(--fail-on-regression)
+          else
+            echo "perf-regression-accepted: regressions are reported but do not fail the check."
+          fi
+          npm run perf-test -- "${args[@]}"
+
+      - name: Publish the comparison table
+        if: always()
+        run: |
+          if [ -f e2e/perf-results/summary.md ]; then
+            cat e2e/perf-results/summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload CPU profiles
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-test-cpuprofiles
+          path: |
+            e2e/perf-results/**/*.cpuprofile
+            e2e/perf-results/summary.md
+            e2e/perf-results/results.json
+          if-no-files-found: ignore
+          retention-days: 14
