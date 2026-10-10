@@ -40,7 +40,18 @@ export class Api {
   private readonly recorded: RecordedRequest[] = [];
   private readonly unmatched: string[] = [];
 
-  constructor(readonly id: string) {}
+  constructor(
+    readonly id: string,
+    private readonly context: BrowserContext,
+  ) {}
+
+  /** Cuts or restores the browser's connection (offline states, L2-036 AC5). */
+  async setOffline(offline: boolean): Promise<void> {
+    this.offline = offline;
+    await this.context.setOffline(offline);
+  }
+
+  private offline = false;
 
   /** Adds rules; later rules take precedence over earlier ones and over the defaults. */
   async given(...rules: (ApiRule | ApiRule[])[]): Promise<void> {
@@ -54,6 +65,11 @@ export class Api {
   }
 
   async handle(route: Route, request: Request): Promise<void> {
+    if (this.offline) {
+      // Route handlers run before the network, so an offline context must fail requests here.
+      await route.abort('internetdisconnected');
+      return;
+    }
     const url = new URL(request.url());
     const method = request.method();
     let body: unknown = request.postData();
@@ -124,7 +140,7 @@ async function install(context: BrowserContext, page: Page, api: Api): Promise<v
 
 export const test = base.extend<{ api: Api }>({
   api: async ({ context, page }, use, testInfo) => {
-    const api = new Api(`${testInfo.workerIndex}-${testInfo.testId}-${testInfo.retry}`);
+    const api = new Api(`${testInfo.workerIndex}-${testInfo.testId}-${testInfo.retry}`, context);
     const consoleErrors: string[] = [];
     page.on('console', (message) => {
       // Error statuses a test asks for are logged by the browser; anything else is a defect.
