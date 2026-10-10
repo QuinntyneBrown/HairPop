@@ -38,7 +38,7 @@ Every `.alert` in `docs/mocks/`, grouped by configuration. The mocks follow the 
 | `pages/style-detail/partial`, `pages/braider-profile/partial`, `pages/appointment-detail/partial` | warning, inline, present on load, with action | title "Some details are unavailable"; text "Reviews could not load."; action `a[hp-link] variant="inherit"` "Retry reviews" in `.alert__actions` | default, link hover, link focus, persistent until the retry succeeds | canvas, first in the content under the page header (on the profile the reviews card is left out) |
 | Error summary on every form page with an `invalid` mock (`sign-in`, `sign-up`, `forgot-password`, `reset-password`, `account-settings`, `booking-request`, `care-and-review`) and every dialog with an `invalid` mock (`filter-braiders`, `change-appointment`, `report-review`) | danger, `class="form-summary"`, `tabindex="-1"`, `role="group"`, no `heading` (the form layout projects its own title) | title "Check 1 field before sending" (form layout); list of links "Preferred time: Choose a time Nia offers. Her first slot on Sat 24 Oct is 10:00 am." | focused, link hover, link focus | form panel or dialog body |
 | Dialog failure in `dialogs/cancel-appointment/failed`, `change-appointment/failed`, `filter-braiders/failed`, `report-review/failed`, `request-review/failed`, `cookie-preferences/failed` | danger, inline, `announce` | "We couldn’t cancel this request." / "Your request is unchanged. Check your connection and try again."; elsewhere "We couldn’t save this change." / "Your details remain here. Please try again." | persistent until success or close | dialog body (raised) |
-| `pages/account-settings/failed` (above the form panel) | danger, inline, `announce` | title "We couldn’t save this change."; text "Your details remain here. Please try again." | persistent until the next save succeeds | canvas, above the form panel |
+| `pages/account-settings/failed` (above the form panel) | danger, inline, `announce` | title "We couldn’t save this change"; text "Your details remain here. Please try again." | persistent until the next save succeeds | canvas, above the form panel |
 | Page save failure with a retry (design system *States*) | danger, inline, `announce`, with action `button[hp-button] variant="link" size="sm"` "Try again" | "We couldn’t save this change" / "Your details remain here. Please try again." | default, action hover, action focus | canvas or card |
 | Booking estimate note (design system *Variants*) | info, inline | "Prices are estimates" / "Nia confirms the final price and time when she accepts your request." | default | canvas |
 | Account saved (design system *Variants*) | success, inline, `announce`, with action "Back to settings" | "Your changes are saved" / "Braiders will use your new phone number, 416-555-0148." | default | canvas |
@@ -152,7 +152,7 @@ One size: the alert fills its container's width; the banner fills the viewport's
 <!-- rendered: dialog failure, announced -->
 <hp-alert class="alert alert--danger" role="alert">
   <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5v5M12 16v.01"/></svg>
-  <div class="alert__body"><p class="alert__title">We couldn’t cancel this request.</p><p>Your request is unchanged. Check your connection and try again.</p></div>
+  <div class="alert__body"><p class="alert__title">We couldn’t cancel this request</p><p>Your request is unchanged. Check your connection and try again.</p></div>
 </hp-alert>
 ```
 

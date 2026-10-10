@@ -71,7 +71,7 @@
     </div>
     <div class="card"><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">{{icon:check}}</div><h2 class="empty__title">Request sent to Nia</h2><p class="empty__text">This is a request, not a confirmed appointment. Nia will reply with the final time and price.</p><div class="empty__actions"><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div></section></div>
     <div class="card stack">
-      <div class="alert alert--warning">{{icon:wifi-off}}<div><strong>You’re offline.</strong> Your details stay here. Connect before sending.</div></div>
+      <div class="alert alert--warning">{{icon:wifi-off}}<div class="alert__body"><p class="alert__title">You’re offline</p><p>Your details remain here. Connect before sending.</p></div></div>
       <div class="field"><label class="field__label" for="fo-email">Your email</label><input class="input" id="fo-email" type="email" value="maya.chen@example.com"></div>
       <button class="btn btn--primary" type="button">Send request</button>
     </div>

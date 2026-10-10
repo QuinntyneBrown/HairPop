@@ -1,6 +1,6 @@
 # Component requirements documents
 
-One CRD per reusable component in the shared components library. Each is a pair of files: `<component>.md` holds the requirements and Given/When/Then acceptance criteria, and `<component>.html` renders every variant, size and state in light and dark. Each criterion traces to an L2 requirement in [`../L2.md`](../L2.md). Write and check them with the `writing-component-requirements-documents` skill.
+One CRD per reusable component in the shared components library. Each is a pair of files: `<component>.md` holds the requirements and Given/When/Then acceptance criteria, and `<component>.html` renders every variant, size and state in light and dark. Each criterion traces to an L2 requirement in [`../L2.md`](../L2.md). Write and check them with the `writing-component-requirements-documents` skill. The [alignment audit](../../alignment-audit.md) records how the CRDs, the design system and the mocks were reconciled.
 
 | Component | Selector | Status | Criteria | L2 trace | Requirements | Rendering | Design system |
 |---|---|---|---|---|---|---|---|
@@ -26,7 +26,7 @@ One CRD per reusable component in the shared components library. Each is a pair 
 | Link | `a[hp-link]` | planned | 22 | L2-001, L2-006, L2-009, L2-033, L2-036, L2-041, L2-042 | [link.md](link.md) | [link.html](link.html) | [link](../../design-system/components/link.html) |
 | List | `ul[hp-list]`, `ol[hp-list]`, `li[hp-list-item]`, `a[hp-list-item]` | planned | 20 | L2-029, L2-030, L2-035, L2-041, L2-042 | [list.md](list.md) | [list.html](list.html) | [list](../../design-system/components/list.html) |
 | Menu | `ul[hp-menu]`, `button[hp-menu-item]`, `a[hp-menu-item]`, `button[hp-menu-item-radio]`, `button[hp-menu-item-checkbox]`, `li[hpMenuGroupLabel]`, `li[hpMenuDivider]`, `button[hpMenuTriggerFor]` | planned | 20 | L2-011, L2-022, L2-041, L2-042 | [menu.md](menu.md) | [menu.html](menu.html) | [menu](../../design-system/components/menu.html) |
-| Page header | `hp-page-header` | planned | 17 | L2-018, L2-019, L2-035, L2-037, L2-041, L2-042 | [page-header.md](page-header.md) | [page-header.html](page-header.html) | [page-header](../../design-system/components/page-header.html) |
+| Page header | `hp-page-header` | planned | 17 | L2-018, L2-019, L2-032, L2-035, L2-041, L2-042 | [page-header.md](page-header.md) | [page-header.html](page-header.html) | [page-header](../../design-system/components/page-header.html) |
 | Pagination | `hp-pagination` | planned | 24 | L2-002, L2-005, L2-035, L2-041, L2-042 | [pagination.md](pagination.md) | [pagination.html](pagination.html) | [pagination](../../design-system/components/pagination.html) |
 | Progress bar | `div[hp-progress]`, `hp-progress-field` | planned | 17 | L2-036, L2-041, L2-042, L2-045 | [progress-bar.md](progress-bar.md) | [progress-bar.html](progress-bar.html) | [progress-bar](../../design-system/components/progress-bar.html) |
 | Radio group | `hp-radio-group`, `label[hp-radio]` | planned | 25 | L2-015, L2-025, L2-036, L2-041, L2-042 | [radio-group.md](radio-group.md) | [radio-group.html](radio-group.html) | [radio-group](../../design-system/components/radio-group.html) |

@@ -36,7 +36,7 @@ Out of scope:
 | Reviews on `pages/braider-profile/default` (and design-system *Variants*) | simple, `label` "Review pages", `queryParam` `reviews` | mock: "Reviews 1–10 of 86", page 1 of 9; design system: "Reviews 11–20 of 86"; hidden "Previous reviews", "Next reviews" | first page with Previous unavailable; both ends available; last page with Next unavailable | surface (reviews card) |
 | Many pages (design-system *Variants*) | numbered with gaps | 1 … 5 6 7 8 9 … 42 from 768 px; 1 … 7 … 42 below (D-4) | current in the middle, ellipses | canvas |
 
-The first mocks used an ad-hoc `.pagination-row` with an unstyled `<span>` summary; the design system replaced both (`.pagination`, `.pagination__summary`), the mocks now render the design-system classes, and `components.css` keeps `.pagination-row` only as an alias. The component renders the design-system classes. Every row is buildable with the API below.
+The first mocks used an ad-hoc `.pagination-row` with an unstyled `<span>` summary; the design system replaced both (`.pagination`, `.pagination__summary`), the mocks now render the design-system classes, and `components.css` no longer carries the `.pagination-row` alias. The component renders the design-system classes. Every row is buildable with the API below.
 
 ## Anatomy
 
@@ -354,7 +354,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - Folder `frontend/projects/components/src/lib/pagination/`; file `pagination.ts` exporting the standalone component `Pagination` with `selector: 'hp-pagination'` and `changeDetection: OnPush`; export it from the library's `public-api.ts`.
 - Item model: a `computed` producing `{ kind: 'page' | 'gap' | 'previous' | 'next', page?, wide: boolean, narrow: boolean, available: boolean }[]` from two windows: radius 2 (wide) and radius 0 (narrow) around the current page, plus the first and last page, where a one-page gap is filled with that page (D-5). Items in only one window get `.pagination__wide` or `.pagination__narrow`. A gap after page 1 and a gap before the last page are the only gap positions.
 - Links: `<a [routerLink]="[]" [queryParams]="{ [queryParam()]: n === 1 ? null : n }" queryParamsHandling="merge">`. Unavailable ends render a separate `<a role="link" aria-disabled="true">` without `routerLink`.
-- Scoped `styles`: `:host { display: block }` and the `.pagination` rules from `docs/design-system/assets/components.css` (without the `.pagination-row` alias), including `.pagination__ellipsis`, `.pagination--simple`, the window media queries, tabular figures and the forced-colours outline (D-3, D-4, D-6, D-9).
+- Scoped `styles`: `:host { display: block }` and the `.pagination` rules from `docs/design-system/assets/components.css` , including `.pagination__ellipsis`, `.pagination--simple`, the window media queries, tabular figures and the forced-colours outline (D-3, D-4, D-6, D-9).
 - Development check (D-8): `page` outside 1…`pageCount` logs `console.error` naming `hp-pagination` when `isDevMode()`.
 - Imports `RouterLink` and the icon component: `<svg hp-icon name="chevron-left" size="sm">` and `name="chevron-right"` in the simple variant. No CDK primitive. Does not use the button component: the design system's pagination items are their own anchors, not `.btn`.
 - Perf-test scenario `frontend/projects/perf-test/src/scenarios/Pagination.ts`, exported from `src/scenarios/index.ts`, with iterations added to `e2e/perf-test/config/scenario-iterations.mjs`; it provides a router so `routerLink` resolves.

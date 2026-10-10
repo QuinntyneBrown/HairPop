@@ -98,7 +98,7 @@
     <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card"><p>Request HP-1048</p><div class="card__footer"><button class="btn" type="button">Request a change</button></div></div></div><figcaption>Use the card footer's built-in top rule to separate actions from content.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card"><p>Request HP-1048</p><hr><hr><button class="btn" type="button">Request a change</button></div></div><figcaption>Stack rules or add one under every line; spacing already groups them.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><span class="text-muted">HairPop</span><a href="../../mocks/pages/terms/default.html">Terms</a><a href="../../mocks/pages/privacy/default.html">Privacy</a></div><figcaption>Separate footer links with the cluster gap.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas"><span><a href="../../mocks/pages/terms/default.html">Terms</a> · <a href="../../mocks/pages/privacy/default.html">Privacy</a></span></div><figcaption>Join links with a typed " · " as the footer mock does; the dot is read aloud and the small links sit too close together.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><span><a href="../../mocks/pages/terms/default.html">Terms</a> · <a href="../../mocks/pages/privacy/default.html">Privacy</a></span></div><figcaption>Join links with a typed " · " as the first footer mock did; the dot is read aloud and the small links sit too close together.</figcaption></figure>
   </div>
 </section>
 

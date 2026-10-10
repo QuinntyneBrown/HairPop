@@ -97,5 +97,5 @@
     {{mock:pages/matching-braiders/no-results|filters as a badge}}
     {{mock:pages/my-appointments/default|row cards with status}}
   </ul>
-  <p>Drift fixed: pagination used an ad-hoc <code>.pagination-row</code> of bare links (now the pagination component; the class is kept as an alias); applied filters on no-results were a static badge (now removable chips); braider cards reused "Explore [name]"; art panels were shorter than photos (now both 3:2).</p>
+  <p>Drift fixed: pagination used an ad-hoc <code>.pagination-row</code> of bare links (now the pagination component; the alias was removed once the mocks moved to it); applied filters on no-results were a static badge (now removable chips); braider cards reused "Explore [name]"; art panels were shorter than photos (now both 3:2).</p>
 </section>

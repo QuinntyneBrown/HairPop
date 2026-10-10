@@ -162,7 +162,7 @@
   &lt;a href="?page=2"&gt;Next&lt;/a&gt;
 &lt;/nav&gt;</code></pre>
   <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
-    <tr><td><code>.pagination</code></td><td>Centred, wrapping row; 24px top margin. <code>.pagination-row</code> is the mocks' alias and renders the same.</td></tr>
+    <tr><td><code>.pagination</code></td><td>Centred, wrapping row; 24px top margin.</td></tr>
     <tr><td><code>.pagination__summary</code></td><td>Range text; full-width line below 640px.</td></tr>
     <tr><td><code>.pagination--simple</code></td><td>Previous/next with icon-only arrows and hidden labels; the summary stays inline between them at every width.</td></tr>
     <tr><td><code>.pagination__ellipsis</code></td><td>Non-interactive "…" in an item-sized box; <code>aria-hidden="true"</code>.</td></tr>
@@ -181,7 +181,7 @@
     <li><a href="../../mocks/pages/my-appointments/long.html">pages/my-appointments/long</a> (appointment history, page 1 of 3)</li>
     <li><a href="../../mocks/pages/braider-profile/default.html">pages/braider-profile/default</a> (simple: Nia's reviews)</li>
   </ul>
-  <p>Drift fixed during extraction: the first mocks used an ad-hoc <code>.pagination-row</code> instead of the kit's <code>.pagination</code> (now one component, with the old class kept as an alias); Previous and "1" both linked to the current page and Previous was live on page 1 (system disables it with <code>aria-disabled</code>); the summary had no styling of its own (now <code>.pagination__summary</code>). The mocks now render <code>.pagination</code>. Added since: the ellipsis box, the simple modifier, the two page windows, tabular figures and the forced-colours outline on the current page.</p>
+  <p>Drift fixed during extraction: the first mocks used an ad-hoc <code>.pagination-row</code> instead of the kit's <code>.pagination</code> (now one component; the old class was removed once the mocks moved to <code>.pagination</code>); Previous and "1" both linked to the current page and Previous was live on page 1 (system disables it with <code>aria-disabled</code>); the summary had no styling of its own (now <code>.pagination__summary</code>). The mocks now render <code>.pagination</code>. Added since: the ellipsis box, the simple modifier, the two page windows, tabular figures and the forced-colours outline on the current page.</p>
 </section>
 <footer class="ds-footer"><span>HairPop design system · extracted from <a href="../../mocks/index.html">docs/mocks</a> on 2026-10-10</span><a href="#top">Back to top</a></footer>
 </main>

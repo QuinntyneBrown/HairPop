@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Iconography — HairPop design system</title>
-<meta name="description" content="Icon style, sizes, labelling rules and the full icon sheet, replacing the text glyphs used in the mocks.">
+<meta name="description" content="Icon style, sizes, labelling rules and the full icon sheet, replacing the text glyphs used in the first mocks.">
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../assets/components.css">
@@ -19,7 +19,7 @@
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Every icon is an inline SVG drawn on a 24×24 grid with a 2px stroke, round caps and round joins, no fill, and <code>stroke: currentColor</code>, so it takes the colour of the text beside it in both themes. Icons are defined once (the <code>ICONS</code> table in <code>build.py</code>, and the matching icon component in the product) and rendered with the <code>.icon</code> class.</p>
   <p>Every page, mock and component writes the icon inline, with nothing else around it: <code>&lt;svg class="icon" aria-hidden="true" viewBox="0 0 24 24"&gt;&lt;path d="…"/&gt;&lt;/svg&gt;</code>, where the path is the icon's entry in <code>ICONS</code>, copied verbatim. Size modifiers (<code>icon--sm</code>, <code>icon--lg</code>) and <code>icon--fill</code> go on the same <code>class</code>. There is no sprite sheet, no <code>&lt;use href&gt;</code>, no icon font and no <code>&lt;img&gt;</code>; the product's icon component renders exactly this markup.</p>
-  <p>The mocks drew icons with text glyphs (✦, ×, ⌕, !, ✓, →, ★, ⚠, ↑, ↓). Glyphs render differently per font and platform, can be read aloud by screen readers, and do not follow the stroke style. The system replaces each with an SVG icon; see the <a href="#mapping">mapping</a>.</p>
+  <p>The first mocks drew icons with text glyphs (✦, ×, ⌕, !, ✓, →, ★, ⚠, ↑, ↓). Glyphs render differently per font and platform, can be read aloud by screen readers, and do not follow the stroke style. The system replaces each with an SVG icon; see the <a href="#mapping">mapping</a>.</p>
 </section>
 
 <section class="ds-section" id="grid"><h2><a href="#grid">Grid and style</a></h2>
@@ -97,7 +97,7 @@
 </section>
 
 <section class="ds-section" id="mapping"><h2><a href="#mapping">Glyph-to-icon mapping</a></h2>
-  <p>Where the mocks used a text glyph, use this icon instead.</p>
+  <p>Where the first mocks used a text glyph, use this icon instead; the mocks now render these icons.</p>
   <div class="ds-table-wrap"><table class="ds-table">
     <thead><tr><th scope="col">Mock glyph</th><th scope="col">Where</th><th scope="col">Icon</th></tr></thead>
     <tbody>

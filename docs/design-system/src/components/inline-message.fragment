@@ -1,4 +1,4 @@
-<!--meta {"lead": "Inline messages sit right next to what they describe: a hint under a field, the error that says how to fix it, a quiet Saved beside a form.", "description": "Field hint, field error, character counter and inline status (neutral, success, warning, danger), in both themes.", "pills": ["Linked with <code>aria-describedby</code>", "Status: stable"], "variants": "field hint, field error, counter, inline status (neutral, success, warning, danger), live dot", "states": "hint, invalid, over limit, saving, saved, failed", "sources": ["pages/booking-request/invalid", "pages/account-settings/invalid", "pages/reset-password/invalid", "dialogs/filter-braiders/invalid", "pages/booking-request/submitting", "pages/account-settings/submitting"]} -->
+<!--meta {"lead": "Inline messages sit right next to what they describe: a hint under a field, the error that says how to fix it, a quiet Saved beside a form.", "description": "Field hint, field error, character counter and inline status (neutral, success, warning, danger), in both themes.", "pills": ["Linked with <code>aria-describedby</code>", "Status: stable"], "variants": "field hint, field error, counter, inline status (neutral, success, warning, danger), live dot", "states": "hint, invalid, over limit, saving, saved, failed", "sources": ["pages/booking-request/invalid", "pages/account-settings/invalid", "pages/reset-password/invalid", "dialogs/filter-braiders/invalid", "pages/booking-request/submitting", "pages/account-settings/submitting", "pages/account-settings/success", "pages/account-settings/failed"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use an inline message for feedback that belongs to one control or one small area, placed where the eye already is. Use an <a href="alert.html">alert</a> for a condition that affects a region or the page (and the error summary that lists every invalid field), and a <a href="toast.html">toast</a> for feedback about an action that has finished elsewhere.</p>
   <ul>
@@ -156,12 +156,14 @@
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
   <p>Extracted from these mocks:</p>
   <ul>
-    {{mock:pages/booking-request/invalid|"Choose an offered time."}}
+    {{mock:pages/booking-request/invalid|"Choose a time Nia offers. Her first slot on Sat 24 Oct is 10:00 am."}}
     {{mock:pages/account-settings/invalid|email format error}}
     {{mock:pages/reset-password/invalid|password length error}}
     {{mock:dialogs/filter-braiders/invalid|error inside a dialog}}
     {{mock:pages/booking-request/submitting|"Sending your request to Nia…" status beside the busy button}}
     {{mock:pages/account-settings/submitting|"Saving…" status beside the busy button}}
+    {{mock:pages/account-settings/success|"Saved just now" success status}}
+    {{mock:pages/account-settings/failed|"Not saved" danger status}}
   </ul>
   <p>Drift fixed during extraction: the error <code>&lt;span&gt;</code> was nested inside the <code>&lt;label class="field"&gt;</code>, making it part of the field's accessible name (system: <code>div.field</code> with <code>label for</code> and the error outside); the "⚠" glyph was read aloud (now empty alternative text); the fallback error "Enter a valid value to continue." was vague; no field had a hint, so rules such as the 12-character password appeared only as errors; the hint, counter and inline-status variants were added from the core set.</p>
 </section>

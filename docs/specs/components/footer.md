@@ -28,12 +28,12 @@ Out of scope:
 
 ## Usage
 
-All 181 mocks end with the same product footer:
+All 170 mocks end with the same product footer:
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| Every page, dialog and notification mock (181), and every product screen (design system *Variants*, product footer; the cookie banner it pairs with is `notifications/cookie-consent/*`) | brand line in a `<p>` + four links in a `ul.site-footer__links` (D-2, D-4) | "Help", "Cookie preferences" (opens `dialogs/cookie-preferences`), "Terms", "Privacy" | default, hover, focus, active | canvas |
-| `pages/booking-request/*`, `pages/sign-up/*`, `pages/account-settings/*` | same footer; the flows link to Terms and Privacy from here as well as in their own copy | as above | — | canvas |
+| Every page, dialog and notification mock (170), and every product screen (design system *Variants*, product footer; the cookie banner it pairs with is `notifications/cookie-consent/*`) | brand line in a `<p>` + four links in a `ul.site-footer__links` (D-2, D-4) | "Help", "Cookie preferences" (opens `dialogs/cookie-preferences`), "Terms", "Privacy" | default, hover, focus, active | canvas |
+| `pages/booking-request/*`, `pages/sign-up/*`, `pages/account-settings/*` | same footer; the flows' own copy has no Terms or Privacy link, so the footer is where they are reached | as above | — | canvas |
 | `pages/terms/*`, `pages/privacy/*`, `pages/help/*` | same footer on the destinations themselves | as above | link to the current page stays a plain link | canvas |
 | Error pages (`not-found`, `forbidden`, `server-error`, `offline`) | same footer; the shell is kept (layout foundation) | as above | — | canvas |
 

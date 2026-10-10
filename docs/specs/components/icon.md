@@ -14,7 +14,7 @@
 
 An icon is a small line drawing that supports a label: the calendar in "Request with Nia", the close mark in a dialog header, the search glass in an empty no-results state, the star in "4.9 from 86 reviews". HairPop draws every icon from one set of inline SVGs on a 24-unit grid with a 2-unit round stroke in `currentColor`, so an icon always takes the colour of the text or control around it, in both themes. The component turns a name into that SVG and nothing else.
 
-The mocks drew icons with text glyphs (✦, ×, ⌕, !, ✓, →, ★). The iconography foundation replaces every glyph with an inline SVG icon, written as `<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="…"/></svg>` with the path copied from the design system's `ICONS` table; this component is how the product renders exactly that markup. There is no sprite sheet and no `<use href>`, so mocks, design-system pages and the product share one markup.
+The first mocks drew icons with text glyphs (✦, ×, ⌕, !, ✓, →, ★). The iconography foundation replaces every glyph with an inline SVG icon, written as `<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="…"/></svg>` with the path copied from the design system's `ICONS` table; this component is how the product renders exactly that markup. There is no sprite sheet and no `<use href>`, so mocks, design-system pages and the product share one markup.
 
 Use something else when:
 
@@ -36,23 +36,23 @@ Every place the product draws an icon, from the mocks' glyphs (mapped by the fou
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
-| Top bar brand on every page (mock ✦) | `sparkle`, md, decorative | before the text "HairPop" | default, dark | surface (top bar) |
+| Top bar brand on every page (first mocks: ✦) | `sparkle`, md, decorative | before the text "HairPop" | default, dark | surface (top bar) |
 | Style card art panels, `tables-and-lists` pattern | `sparkle`, `fill`, decorative, sized by the panel | none | default, dark | accent-subtle panel |
-| Empty style gallery "No styles to explore yet" on `pages/style-gallery/empty` (mock ✦ with "Nothing here yet") | `sparkle`, lg, inside `.empty__icon` | none | default, dark | canvas |
-| Dialog header close in every dialog (`dialogs/*`, mock ×) | `close`, md, inside a ghost icon-only button named "Close dialog" | none | button hover and focus | raised (dialog) |
-| Toast dismiss (`notifications/*`, mock ×), alert dismiss, chip remove | `close`, sm, inside `.close` / `.remove` named "Dismiss notification", "Dismiss: Prices are estimates", "Remove Knotless" | none | control hover and focus | inverse (toast), tinted (alert), surface (chip) |
-| No-results on `pages/matching-braiders/no-results`, `pages/style-gallery/no-results`, `pages/my-appointments/no-results` (mock ⌕); not-found page | `search`, lg, inside `.empty__icon` | none | default, dark | canvas |
+| Empty style gallery "No styles to explore yet" on `pages/style-gallery/empty` (first mocks: ✦ with "Nothing here yet") | `sparkle`, lg, inside `.empty__icon` | none | default, dark | canvas |
+| Dialog header close in every non-destructive dialog (`dialogs/*`, first mocks: ×) | `close`, md, inside a ghost icon-only button named "Close dialog" | none | button hover and focus | raised (dialog) |
+| Toast dismiss (`notifications/*`, first mocks: ×), alert dismiss, chip remove | `close`, sm, inside `.close` / `.remove` named "Dismiss: Request received", "Dismiss: New: request a change", "Remove filter: knotless" | none | control hover and focus | inverse (toast), tinted (alert), surface (chip) |
+| No-results on `pages/matching-braiders/no-results`, `pages/style-gallery/no-results`, `pages/my-appointments/no-results` (first mocks: ⌕); not-found page | `search`, lg, inside `.empty__icon` | none | default, dark | canvas |
 | Search boxes on `pages/style-gallery`, `pages/matching-braiders`, `pages/my-appointments` | `search`, md, `.search .icon` in `--color-fg-subtle` | none | default | surface (input) |
-| Error states on every `pages/*/error` (mock "!"), service error page, danger alerts and toasts, cancel dialog | `alert-circle`, lg inside `.empty--error .empty__icon`; md in `.alert--danger`, `.toast--danger`, `.dialog__icon--danger` | none | default, dark | canvas, tinted, inverse, raised |
-| Success states: `pages/booking-request/success` "Request sent to Nia" and every `success` page (mock ✓) | `check`, lg, inside the `.empty__icon` circle | none | default, dark | canvas |
+| Error states on every `pages/*/error` (first mocks: "!"), service error page, danger alerts and toasts, cancel dialog | `alert-circle`, lg inside `.empty--error .empty__icon`; md in `.alert--danger`, `.toast--danger`, `.dialog__icon--danger` | none | default, dark | canvas, tinted, inverse, raised |
+| Success states: `pages/booking-request/success` "Request sent to Nia" and every `success` page (first mocks: ✓) | `check`, lg, inside the `.empty__icon` circle | none | default, dark | canvas |
 | Success alerts and toasts: "Time confirmed" (`notifications/booking-update/success`), "Your changes are saved" | `check-circle`, md | none | default, dark | inverse (toast), tinted (alert) |
 | Info alerts ("Prices are estimates"), info toasts, the review-request dialog icon | `info`, md | none | default, dark | tinted, inverse, raised |
 | Warning alerts ("Some details are unavailable"), warning toasts, inline field messages | `warning`, md | none | default, dark | tinted, surface |
 | Offline page and offline banners ("You're offline") | `wifi-off`, lg on the page, md in banners | none | default, dark | canvas, tinted |
 | Forbidden page "You can't open this page" | `lock`, lg | none | default | canvas |
-| Rating meta on `pages/braider-profile` and `pages/matching-braiders` ("4.9 ★ from 86 reviews", mock ★) | `star`, sm, `fill`, `label="out of 5 stars"` | none | default, dark | surface (card) |
+| Rating meta on `pages/braider-profile` and `pages/matching-braiders` ("4.9 ★ from 86 reviews", first mocks: ★) | `star`, sm, `fill`, `label="out of 5 stars"` | none | default, dark | surface (card) |
 | Portfolio empty state "No portfolio photos yet" | `star`, md or lg, inside `.empty__icon` | none | default | surface |
-| Story links "Explore Nia Okafor" on `pages/matching-braiders`, `pages/style-gallery`, `pages/help` (mock →) | `arrow-right`, sm, inside `.link__arrow` | none | link hover moves it | surface |
+| Story links "Explore Knotless braids", "View Nia’s profile", "See how requests work" on `pages/style-gallery`, `pages/matching-braiders`, `pages/help` (first mocks: →) | `arrow-right`, sm, inside `.link__arrow` | none | link hover moves it | surface |
 | Partner site link | `external`, sm, after the link text | none | default | surface |
 | "Request with Nia" on `pages/braider-profile` | `calendar`, md, leading, inside a primary button (1.25 em) | none | button states | surface |
 | "Filters" on `pages/matching-braiders` | `filter`, md, trailing, inside a secondary button | none | button states | surface |
@@ -61,7 +61,7 @@ Every place the product draws an icon, from the mocks' glyphs (mapped by the fou
 | Menus (appointment actions, account) | `chevron-down` sm on the trigger, `more` on an overflow trigger, item icons `calendar`, `message`, `trash`, `log-out`, `user`, `bell` | none | item hover, focus | raised (menu) |
 | Sidebar navigation | `calendar`, `bell`, `user`, `help`, `home` | before the link text | current, hover | surface |
 | Breadcrumb, pagination, list rows | `chevron-left`, `chevron-right`, sm or md | none | default | surface |
-| Password fields on sign-in, sign-up, reset-password | `eye` (show), `eye-off` (hide) inside the visibility toggle | none | toggled | surface (input) |
+| Password fields on sign-in, sign-up, reset-password | not used: the visibility toggle is the word "Show" with no icon (text-field D-13); `eye` and `eye-off` stay in the set | — | — | — |
 | Sign-out dialog | `log-out`, md, inside `.dialog__icon--danger` | none | default | raised |
 | Avatar for an unknown person | `user`, sm / md / lg by avatar size (drawn by `avatar.md`) | none | default | accent-subtle frame |
 | Stat delta (`stat.md`) | `arrow-up`, `arrow-down`, sm (D-6) | none | default | surface |
@@ -113,7 +113,7 @@ The set: 38 names. Names are kebab-case nouns or verbs and never describe shape 
 | `info` | Information | Info alerts and toasts, the review-request dialog |
 | `alert-circle` | Error status | Error states, danger alerts and toasts, cancel dialog, service error page |
 | `warning` | Needs attention | Warning alerts and toasts, field messages, offline banners in forms |
-| `arrow-right` | Go forward to | "Explore Nia Okafor" links |
+| `arrow-right` | Go forward to | Story links ("Explore Knotless braids", "View Nia’s profile") |
 | `arrow-left` | Go back to | Back links |
 | `arrow-up` | Increase | Stat delta up (D-6) |
 | `arrow-down` | Decrease | Stat delta down (D-6) |
@@ -132,8 +132,8 @@ The set: 38 names. Names are kebab-case nouns or verbs and never describe shape 
 | `edit` | Edit | "Edit request" |
 | `trash` | Remove permanently | Menu delete item |
 | `external` | Leaves HairPop | Partner site links |
-| `eye` | Show | Show password |
-| `eye-off` | Hide | Hide password |
+| `eye` | Show | Reserved (the password toggle is text only, text-field D-13) |
+| `eye-off` | Hide | Reserved (as `eye`) |
 | `more` | More actions | Overflow menu trigger |
 | `refresh` | Retry, refresh | Retry actions |
 | `wifi-off` | Offline | Offline page and banners |
@@ -146,7 +146,7 @@ The set: 38 names. Names are kebab-case nouns or verbs and never describe shape 
 
 Paths are the `ICONS` table of the design system's `build.py`, copied verbatim into the registry: 38 entries, including `arrow-up` (`M12 19V5M6 11l6-6 6 6`) and `arrow-down` (`M12 5v14M6 13l6 6 6-6`) (D-6).
 
-Glyph mapping (the mocks' glyph → the icon the product renders): ✦ → `sparkle`; × → `close`; ⌕ → `search`; "!" → `alert-circle`; ✓ → `check` inside the `.empty__icon` circle and `check-circle` everywhere else (D-7); → → `arrow-right`; ★ → `star` (filled, labelled); ⚠ → `warning`; ↑ and ↓ → `arrow-up` and `arrow-down` (D-6). The iconography foundation's mapping table lists the same rows. The mock navigation bar's ⌂, ☾ and × are review chrome, not product UI, and are not mapped.
+Glyph mapping (the first mocks' glyph → the icon the product renders): ✦ → `sparkle`; × → `close`; ⌕ → `search`; "!" → `alert-circle`; ✓ → `check` inside the `.empty__icon` circle and `check-circle` everywhere else (D-7); → → `arrow-right`; ★ → `star` (filled, labelled); ⚠ → `warning`; ↑ and ↓ → `arrow-up` and `arrow-down` (D-6). The iconography foundation's mapping table lists the same rows. The mock navigation bar's ⌂, ☾ and × are review chrome, not product UI, and are not mapped.
 
 | Size | Modifier | Box | Use |
 |---|---|---|---|
@@ -197,7 +197,7 @@ Rendered DOM. Classes and attributes are the e2e contract; the `<svg>` is the ho
 ```html
 <!-- rendered: inside parents (their classes, not the icon's) -->
 <div class="empty__icon" aria-hidden="true"><svg class="icon icon--lg" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4"></path></svg></div>
-<div class="alert alert--warning" role="status"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4L2.5 20h19zM12 10v4M12 17v.01"></path></svg><div><strong>Some details are unavailable.</strong> Reviews could not load.</div></div>
+<div class="alert alert--warning" role="status"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4L2.5 20h19zM12 10v4M12 17v.01"></path></svg><div class="alert__body"><p class="alert__title">Some details are unavailable</p><p>Reviews could not load.</p></div></div>
 ```
 
 ```html
@@ -226,7 +226,7 @@ Consumer templates:
 4.9 <svg hp-icon name="star" size="sm" fill label="out of 5 stars"></svg> from 86 reviews
 
 <!-- consumer: a name that changes -->
-<svg hp-icon [name]="visible() ? 'eye-off' : 'eye'"></svg>
+<svg hp-icon [name]="menuOpen() ? 'close' : 'menu'"></svg>
 ```
 
 Free to change: attribute order, and whether `aria-hidden` is written before or after `viewBox`.
@@ -335,7 +335,7 @@ None. Icons do not spin, pulse or move; the link arrow's nudge on hover is the l
 - **AC-2** Given an icon in its default size beside body text, when its computed style is read, then it is 20 × 20 px with `fill: none`, `stroke-width: 2`, round line caps and joins, and its stroke colour equals the colour of the surrounding text. (L2-041)
 - **AC-3** Given three `search` icons with `size` `sm`, `md` and `lg` at default text size, when they render, then they measure 16, 20 and 24 px square and carry the classes `icon icon--sm`, `icon` and `icon icon--lg`. (L2-041)
 - **AC-4** Given each of the 38 names listed under *Variants*, when an icon renders with that name, then its path has a non-empty `d` and its drawing's bounding box lies inside the 24 × 24 grid. (L2-041)
-- **AC-5** Given the show-password toggle on sign-in with `[name]="visible() ? 'eye-off' : 'eye'"`, when the customer shows the password, then the same `<svg>` element now draws `eye-off` and no element is added or removed. (L2-041)
+- **AC-5** Given the top bar's menu button with `[name]="menuOpen() ? 'close' : 'menu'"`, when the customer opens the menu, then the same `<svg>` element now draws `close` and no element is added or removed. (L2-041)
 - **AC-6** Given `<svg hp-icon name="star" size="sm" fill label="out of 5 stars">`, when it renders, then it has the classes `icon icon--sm icon--fill`, a solid `currentColor` fill and no stroke. (L2-041)
 
 ### States

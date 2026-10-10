@@ -505,12 +505,12 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
 }
 
 /* ---------- Pagination --------------------------------------------------- */
-.pagination, .pagination-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-1); list-style: none; padding: 0; margin: var(--space-6) 0 0; }
-.pagination__summary, .pagination-row > span { color: var(--color-fg-muted); font: var(--text-body-sm); font-variant-numeric: tabular-nums; margin-right: var(--space-2); flex-basis: 100%; text-align: center; }
-@media (min-width: 40rem) { .pagination__summary, .pagination-row > span { flex-basis: auto; } }
+.pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-1); list-style: none; padding: 0; margin: var(--space-6) 0 0; }
+.pagination__summary { color: var(--color-fg-muted); font: var(--text-body-sm); font-variant-numeric: tabular-nums; margin-right: var(--space-2); flex-basis: 100%; text-align: center; }
+@media (min-width: 40rem) { .pagination__summary { flex-basis: auto; } }
 /* Simple previous/next: the summary always sits inline between the two arrows. */
 .pagination--simple .pagination__summary { flex-basis: auto; margin: 0; }
-.pagination a, .pagination button, .pagination-row a {
+.pagination a, .pagination button {
   display: inline-grid; place-items: center; min-width: var(--control-height-sm); height: var(--control-height-sm); padding-inline: var(--space-2);
   border-radius: var(--radius-md); border: var(--border-width-hairline) solid transparent; background: none; color: var(--color-fg-muted); font: var(--text-label); font-variant-numeric: tabular-nums; text-decoration: none; cursor: pointer;
 }
@@ -523,9 +523,9 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
   .pagination .pagination__wide { display: inline-grid; }
   .pagination .pagination__narrow { display: none; }
 }
-.pagination a:hover, .pagination button:hover, .pagination-row a:hover, .pagination [data-state="hover"] { background: var(--color-bg-subtle); color: var(--color-fg-default); }
-.pagination [aria-current="page"], .pagination-row [aria-current="page"] { background: var(--color-accent-subtle); color: var(--color-fg-accent); border-color: var(--color-accent); }
-.pagination [aria-disabled="true"], .pagination-row [aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.pagination a:hover, .pagination button:hover, .pagination [data-state="hover"] { background: var(--color-bg-subtle); color: var(--color-fg-default); }
+.pagination [aria-current="page"] { background: var(--color-accent-subtle); color: var(--color-fg-accent); border-color: var(--color-accent); }
+.pagination [aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
 
 /* ---------- Footer ------------------------------------------------------- */
 .site-footer, .footer { border-top: var(--border-width-hairline) solid var(--color-border-default); display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: space-between; padding: var(--space-6) var(--layout-margin); color: var(--color-fg-muted); font: var(--text-body-sm); }
@@ -793,7 +793,7 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
   .input:focus-visible, .select:focus-visible, .textarea:focus-visible { outline-color: Highlight; border-color: Highlight; }
   .btn--primary { forced-color-adjust: none; background: Highlight; color: HighlightText; }
   .nav-link[aria-current="page"], .tab[aria-selected="true"], .chip[aria-pressed="true"] { outline: var(--border-width-thick) solid Highlight; }
-  .pagination [aria-current="page"], .pagination-row [aria-current="page"] { outline: var(--border-width-thick) solid Highlight; }
+  .pagination [aria-current="page"] { outline: var(--border-width-thick) solid Highlight; }
   .choice input:checked { forced-color-adjust: none; background: Highlight; }
   .switch input { border: var(--border-width-hairline) solid CanvasText; }
   .switch input::before { forced-color-adjust: none; background: CanvasText; }

@@ -7,7 +7,7 @@
 | Status | planned |
 | Traces to | L2-014, L2-036, L2-041, L2-042 |
 | Design system | [`inline-message.html`](../../design-system/components/inline-message.html) |
-| Source mocks | [`pages/booking-request/invalid`](../../mocks/pages/booking-request/invalid.html), [`pages/account-settings/invalid`](../../mocks/pages/account-settings/invalid.html), [`pages/reset-password/invalid`](../../mocks/pages/reset-password/invalid.html), [`pages/sign-in/invalid`](../../mocks/pages/sign-in/invalid.html), [`pages/care-and-review/invalid`](../../mocks/pages/care-and-review/invalid.html), [`dialogs/filter-braiders/invalid`](../../mocks/dialogs/filter-braiders/invalid.html), [`dialogs/report-review/invalid`](../../mocks/dialogs/report-review/invalid.html), [`pages/booking-request/submitting`](../../mocks/pages/booking-request/submitting.html), [`pages/account-settings/submitting`](../../mocks/pages/account-settings/submitting.html) |
+| Source mocks | [`pages/booking-request/invalid`](../../mocks/pages/booking-request/invalid.html), [`pages/account-settings/invalid`](../../mocks/pages/account-settings/invalid.html), [`pages/reset-password/invalid`](../../mocks/pages/reset-password/invalid.html), [`pages/sign-in/invalid`](../../mocks/pages/sign-in/invalid.html), [`pages/care-and-review/invalid`](../../mocks/pages/care-and-review/invalid.html), [`dialogs/filter-braiders/invalid`](../../mocks/dialogs/filter-braiders/invalid.html), [`dialogs/report-review/invalid`](../../mocks/dialogs/report-review/invalid.html), [`pages/booking-request/submitting`](../../mocks/pages/booking-request/submitting.html), [`pages/account-settings/submitting`](../../mocks/pages/account-settings/submitting.html), [`pages/account-settings/success`](../../mocks/pages/account-settings/success.html), [`pages/account-settings/failed`](../../mocks/pages/account-settings/failed.html), [`pages/braider-profile/partial`](../../mocks/pages/braider-profile/partial.html) |
 | Rendering | [`inline-message.html`](inline-message.html) |
 
 ## Purpose and scope
@@ -29,16 +29,17 @@ Out of scope:
 
 ## Usage
 
-Every `.field__error`, `.field__help` and `.inline-status` in `docs/mocks/`, plus the configurations the design system and the forms pattern define for the same screens. The mocks show hints on reset password and account settings and the in-progress status beside the busy submit button on booking request and account settings; no mock shows a counter or a toned status yet. Error copy is the form field's (its *Usage*); where a mock's wording differs, the form field's copy wins.
+Every `.field__error`, `.field__help` and `.inline-status` in `docs/mocks/`, plus the configurations the design system and the forms pattern define for the same screens. The mocks show hints on sign-up, reset password, account settings and care and review; counters on booking request, care and review and report a review; the in-progress status beside the busy submit button on booking request, care and review and account settings; and toned statuses after account settings saves ("Saved just now", "Not saved"). Error copy is the form field's (its *Usage*); where a mock's wording differs, the form field's copy wins.
 
 | Where | Configuration | Slots / content | States seen | Surface |
 |---|---|---|---|---|
 | Field errors on `pages/sign-in`, `sign-up`, `forgot-password`, `reset-password`, `account-settings`, `booking-request`, `care-and-review` (`invalid`) | `kind="error"` in a form field | "Enter an email address like name@example.com.", "Enter the email address on your account.", "Use at least 12 characters.", "Choose a time Nia offers. Her first slot on Sat 24 Oct is 10:00 am.", "Choose a rating from 1 to 5.", "Write a few words about your visit with Nia." | invalid | surface (form panel) |
-| Field errors in `dialogs/filter-braiders`, `change-appointment`, `request-review`, `report-review` (`invalid`) | `kind="error"` | "Enter a price of at least $160 for this style.", "Choose one of the times Nia has offered.", "Choose an offered time.", "Tell us what needs review." | invalid | raised (dialog) |
-| Hints on `pages/reset-password` and `pages/account-settings` (all states with the form), and on sign-up and care and review (design system *Variants*) | `kind="hint"` | "Use at least 12 characters.", "Braiders text this number.", "What should others know about your visit?" | default, beside an error, under a disabled control ("Verify your email to change this.") | surface |
-| Counters on care and review, booking request, report a review | `kind="counter"` | "56 of 500 characters", "225 of 200 characters", "42 of 300 characters" | default, over limit | surface, raised |
-| `pages/booking-request/submitting`, `pages/account-settings/submitting` (forms pattern *Submitting*) | `kind="status"`, `progress`, `p` host in `.form-actions` | "Sending your request to Nia…", "Saving…" | progress | surface |
-| Account settings after saving (design system *Variants*) | `kind="status"` with tone and a leading icon | "Saved just now" (success, check), "Saved on this device only" (warning, warning), "Not saved" (danger, alert-circle) | success, warning, danger | surface |
+| Field errors in `dialogs/filter-braiders`, `change-appointment`, `report-review` (`invalid`; the review-request and cookie-preferences dialogs have no invalid state) | `kind="error"` | "Enter a price of at least $160 for this style.", "Choose one of the times Nia has offered.", "Tell us what needs review." | invalid | raised (dialog) |
+| Hints on `pages/sign-up`, `pages/reset-password`, `pages/account-settings` and `pages/care-and-review` (all states with the form) | `kind="hint"` | "Use at least 12 characters.", "Braiders text this number.", "What should others know about your visit?" | default, beside an error, under a disabled control ("Verify your email to change this.") | surface |
+| Counters on `pages/care-and-review`, `pages/booking-request`, `dialogs/report-review` | `kind="counter"` | "56 of 500 characters" ("0 of 500 characters" in `invalid`), "43 of 200 characters", "26 of 300 characters" ("0 of 300 characters" in `invalid`); over limit "225 of 200 characters" (design system; no mock) | default, over limit | surface, raised |
+| `pages/booking-request/submitting`, `pages/care-and-review/submitting`, `pages/account-settings/submitting` (forms pattern *Submitting*); empty in every other form state | `kind="status"`, `progress`, `p` host in `.form-actions` | "Sending your request to Nia…", "Posting your review…", "Saving…" | progress, empty | surface |
+| `pages/account-settings/success` and `failed`, in `.form-actions`; the warning tone from the design system *Variants* | `kind="status"` with tone and a leading `icon--sm` icon | "Saved just now" (success, check), "Not saved" (danger, alert-circle); "Saved on this device only" (warning, warning; no mock) | success, danger, warning | surface |
+| "Reviews" value in the "Before you book" list on `pages/braider-profile/partial` | `kind="status"`, danger tone, no icon, not live, followed by the link "Retry reviews" | "Couldn’t load" | danger | surface (aside card) |
 
 Every row is buildable with the API below: one host, a `kind`, and for status a `tone`, `progress` and `live`, with all copy projected.
 
@@ -116,7 +117,7 @@ Rendered DOM. Classes and attributes are the e2e contract.
 
 ```html
 <!-- rendered: hint, error, counter (inside a form field, which sets the ids) -->
-<span class="field__help" id="hp-field-2-hint">Use at least 12 characters.</span>
+<span class="field__help" id="hp-field-2-help">Use at least 12 characters.</span>
 <span class="field__error" id="hp-field-1-error">Enter an email address like name@example.com.</span>
 <span class="field__counter" id="hp-field-9-counter">56 of 500 characters</span>
 <span class="field__counter" id="hp-field-5-counter" data-over="true">225 of 200 characters</span>
@@ -325,7 +326,7 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - **D-5** *Are tone icons built in?* No. Like the button, the component colours one projected `svg[hp-icon]` with `size="sm"`, so the icon set can change without touching this API; the design system pairs check, warning and alert-circle with success, warning and danger, and pages follow it.
 - **D-6** *Counter copy?* "56 of 500 characters" (form field D-9): the inline-message labelling rule beats the slash form on the form-field and textarea pages.
 - **D-7** *Long words?* All kinds break a word longer than the line (`overflow-wrap: anywhere`, in `components.css` and on the inline-message page). Measured at 360 px with 200 % text: "Enter an email address like name@example.com." needs 322 px in a 296 px column without it, an L2-042 failure.
-- **D-8** *The mocks' `⚠` was read aloud. What does the error render?* The glyph stays as CSS generated content with empty alternative text, as the design system fixed; no DOM node, no `aria-hidden` span to forget.
+- **D-8** *The first mocks' `⚠` was read aloud. What does the error render?* The glyph stays as CSS generated content with empty alternative text, as the design system fixed; no DOM node, no `aria-hidden` span to forget.
 - **D-9** *`span` or `p`?* Both are allowed hosts. Hints, errors and counters are `span`s inside a field; a status that stands as its own line in `.form-actions` may be a `p`, as the forms pattern draws it. The look is identical.
 - **D-10** *Do errors announce themselves?* No live role on hints, errors or counters. Announcing each error as it appears on blur would interrupt the next field; the error summary announces failed submits and each control reads its error on focus (form field).
 - **D-11** *What does `tone` do on a non-status kind?* Nothing. Hint, error and counter colours are fixed by their kind, so a stray tone cannot make an error look like a success.

@@ -5,7 +5,7 @@
     <li><b>Inline</b> links sit inside running text: "Read <a href="#overview">Nia’s cancellation policy</a> before you send a request."</li>
     <li><b>Standalone</b> links end a card or section and carry an arrow: "Explore Knotless braids". One per card.</li>
     <li><b>External</b> links leave HairPop. They show the external icon and say "opens in a new tab" when they do.</li>
-    <li><b>Inherit</b> links take the colour of their container in alerts, toasts, breadcrumbs and the footer, and stay underlined.</li>
+    <li><b>Inherit</b> links take the colour of their container in alerts, toasts and the footer, and stay underlined. Breadcrumb links are not link components: the breadcrumb draws muted plain anchors that underline on hover.</li>
   </ul>
 </section>
 
@@ -64,7 +64,7 @@
 </section>
 
 <section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
-  <p>Links read <code>--color-fg-link</code> and <code>--color-fg-link-hover</code>. In light they are plum 700 and 800; in dark plum 300 and 200, all above 7:1 on every surface. Inside alerts, toasts, breadcrumbs and the footer the link inherits (<code>.link--inherit</code>, <code>color: inherit</code>) so it never introduces a new contrast pair; containers set <code>--link-inherit-font-weight</code> and <code>--link-inherit-hover-fg</code> to re-skin it.</p>
+  <p>Links read <code>--color-fg-link</code> and <code>--color-fg-link-hover</code>. In light they are plum 700 and 800; in dark plum 300 and 200, all above 7:1 on every surface. Inside alerts, toasts and the footer the link inherits (<code>.link--inherit</code>, <code>color: inherit</code>) so it never introduces a new contrast pair; containers set <code>--link-inherit-font-weight</code> and <code>--link-inherit-hover-fg</code> to re-skin it.</p>
 </section>
 
 <section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>

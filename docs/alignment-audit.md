@@ -97,6 +97,21 @@ Every row below is fixed in the files named. "DS" means the design-system fragme
 | Avatar D-8 (result photo `alt=""`) against card AC-4 (alt "Portrait of Nia Okafor") | Card alt. Avatar D-8 allows the name as alt text. |
 | Hint ids `-hint` against `-help` | `-help`, as the design system writes it. |
 
+## Second pass: CRDs and design-system pages against the generated mocks
+
+Many CRD and design-system statements had been written against requested mocks before those mocks were generated. Two reviewers checked every Usage row, source-mock list, quoted string and acceptance criterion against the generated mocks. They fixed counts (181 to 170 mocks), state lists, copy, ids and markup samples in 34 CRDs and their design-system pages. They also found these substantive gaps:
+
+| Gap | Resolution |
+|---|---|
+| The mocks place the offline banner between the top bar and `<main>`, but the app shell (container CRD) had no slot for it. | The container CRD adds a `[slot=banner]` slot (anatomy, slots, AC-1, D-8). |
+| Form-field D-15 generated message ids (`hp-field-{n}-error`). The mocks derive them from the control's id (`email-error`, `phone-help`). | Message ids derive from the control's or fieldset's `id`; generated ids are used only when no id is set. |
+| Radio groups had no native `required` (radio group D-13). | The mocks add `required` to the rating and preferred-time radios. |
+| The toast mock note gave 8 s for every timed toast. Toast D-4 gives 10 s when there is an action. | Note corrected. |
+| The page-header CRD said every mock has a page header and traced AC-4 to the not-found page. | Error pages have none (new page-header D-11). AC-4 moved to the help page, and its trace changed from L2-037 to L2-032 (also in the CRD index). |
+| Alert examples in five CRD renderings and four design-system pages still used the bold run-in the alert CRD (D-1) replaced. Failure titles ended with a period, against the alert content rule. | Converted to `.alert__body` / `.alert__title` / `.alert__actions`. Titles read "We couldn’t save this change", "We couldn’t cancel this request". |
+| `.pagination-row` stayed in `components.css` as an alias after the mocks moved to `.pagination`. | Alias removed. |
+| The empty portfolio card on `braider-profile/empty` was a `div` named by `aria-labelledby`. | A `section`. |
+
 ## Mock catalog changes
 
 - Error pages keep only `default`. The manifest marks loading and error not applicable.
@@ -113,6 +128,8 @@ These are unchanged by the audit. They are recorded in the CRDs as needing confi
 - Toast D-9: whether a posted review can be withdrawn (no Undo shown).
 - No-results screens show "Clear filters" twice, in the chip row and the empty state. Both CRDs require their own control.
 - `.btn[aria-expanded="true"]` also styles the top bar's open menu button with the active fill. Button D-13 specifies the selector unscoped.
+- The partial state of style detail and appointment detail reuses the braider profile's "Reviews could not load. Retry reviews" alert, although neither page shows reviews. This is the mocks' original copy, and several CRDs quote it. Product should name what fails to load on those two pages.
+- Two API additions from the second pass need maintainer review: the container's `[slot=banner]` and the form field's id-derived message ids.
 
 ## Verification
 

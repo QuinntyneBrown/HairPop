@@ -546,7 +546,7 @@ def form_content(screen, state):
     if state == "offline":
         banner = alert("warning", "wifi-off", "You’re offline", "Your details remain here. Connect before sending.")
     if state == "failed":
-        banner = alert("danger", "alert-circle", "We couldn’t save this change.", "Your details remain here. Please try again.", role="alert")
+        banner = alert("danger", "alert-circle", "We couldn’t save this change", "Your details remain here. Please try again.", role="alert")
     trailing = after_form if screen == "sign-in" and state in ("default", "invalid", "submitting") else ''
     form = f'<form class="stack" id="{screen}-form" action="{href(screen)}" novalidate>{summary_html}{"".join(fields)}{foot}{form_actions(label, busy=busy, status=status, tone=tone)}</form>'
     return f'{banner}<section class="form-panel card" aria-labelledby="details-title"><h2 id="details-title">{esc(heading)}</h2>{form}{trailing}</section>{after}'
@@ -628,8 +628,8 @@ def braider_profile(state):
     profile = (f'<div class="card"><div class="profile-head"><span class="avatar avatar--xl" aria-hidden="true">NO</span><div><h2>Nia Okafor</h2><p>Toronto West · 4.9 {STAR} from 86 reviews</p></div></div>'
                f'<p>I specialize in comfortable, neat braids. Bring inspiration photos and we’ll confirm the details together.</p>{facts}{request}</div>')
     if state == "empty":
-        portfolio = ('<div class="card" aria-labelledby="portfolio-title"><h2 id="portfolio-title">Portfolio</h2><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">' + icon("star")
-                     + f'</div><h3 class="empty__title">No portfolio photos yet</h3><p class="empty__text">You can still read Nia’s services and policies.</p><div class="empty__actions"><a class="btn btn--primary btn--sm" href="{href("booking-request")}">Request with Nia</a></div>{status_slot()}</section></div>')
+        portfolio = ('<section class="card" aria-labelledby="portfolio-title"><h2 id="portfolio-title">Portfolio</h2><section class="empty empty--compact"><div class="empty__icon" aria-hidden="true">' + icon("star")
+                     + f'</div><h3 class="empty__title">No portfolio photos yet</h3><p class="empty__text">You can still read Nia’s services and policies.</p><div class="empty__actions"><a class="btn btn--primary btn--sm" href="{href("booking-request")}">Request with Nia</a></div>{status_slot()}</section></section>')
     else:
         portfolio = ''
     if state == "partial":
@@ -707,9 +707,9 @@ def dialog_content(item, state):
     failure = ''
     if failed:
         if screen == "cancel-appointment":
-            failure = alert("danger", "alert-circle", "We couldn’t cancel this request.", "Your request is unchanged. Check your connection and try again.", role="alert")
+            failure = alert("danger", "alert-circle", "We couldn’t cancel this request", "Your request is unchanged. Check your connection and try again.", role="alert")
         else:
-            failure = alert("danger", "alert-circle", "We couldn’t save this change.", "Your details remain here. Please try again.", role="alert")
+            failure = alert("danger", "alert-circle", "We couldn’t save this change", "Your details remain here. Please try again.", role="alert")
     fields, summary = dialog_fields(screen, invalid, failed)
     is_form = bool(fields)
     if is_form:

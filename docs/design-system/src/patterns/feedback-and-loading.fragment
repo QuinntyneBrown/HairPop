@@ -32,14 +32,14 @@
 <section class="ds-section" id="structure"><h2><a href="#structure">Structure</a></h2>
   <p>The four feedback levels on one appointment screen: inline, alert, banner (top of main) and toast (bottom right; bottom full width on phones).</p>
   <div class="ds-frame">
-    <div class="alert alert--warning banner">{{icon:wifi-off}}<div><strong>You’re offline.</strong> Saved appointment details are shown. Actions need a connection.</div></div>
+    <div class="alert alert--warning banner" role="status">{{icon:wifi-off}}<div class="alert__body"><p class="alert__title">You’re offline</p><p>Saved details are shown. Actions need a connection.</p></div></div>
     <div class="ds-frame__body">
       <div class="detail-grid">
         <section class="card stack" aria-label="Request HP-1048">
           <span class="badge badge--warning">Awaiting reply</span>
           <h2>Medium knotless braids</h2>
           <p><strong>Sat 24 Oct · 10:00 am</strong> with Nia Okafor</p>
-          <div class="alert alert--warning">{{icon:warning}}<div><strong>Some details are unavailable.</strong> Reviews could not load. <a href="#structure">Retry reviews</a>.</div></div>
+          <div class="alert alert--warning">{{icon:warning}}<div class="alert__body"><p class="alert__title">Some details are unavailable</p><p>Reviews could not load.</p><div class="alert__actions"><a class="link link--inherit" href="#structure">Retry reviews</a></div></div></div>
           <p class="inline-status inline-status--success">{{icon:check|icon--sm}}Reminder saved</p>
         </section>
         <div class="toast-region toast-region--inline" role="status" aria-live="polite">
@@ -102,7 +102,7 @@
 
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
-    <figure class="ds-do"><div class="ds-example__canvas"><div class="alert alert--warning">{{icon:wifi-off}}<div><strong>You’re offline.</strong> Your details stay here.</div></div></div><figcaption>Banners carry an icon as well as colour.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="alert alert--warning">{{icon:wifi-off}}<div class="alert__body"><p class="alert__title">You’re offline</p><p>Your details remain here. Connect before sending.</p></div></div></div><figcaption>Banners carry an icon as well as colour.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><div class="alert alert--warning"><div><strong>You’re offline.</strong> Your details stay here.</div></div></div><figcaption>The mocks’ offline banner relies on colour and the bold lead alone.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><div class="toast toast--success">{{icon:check-circle}}<div class="toast__body"><strong class="toast__title">Review posted</strong><span class="toast__text">Thank you for helping others choose.</span></div></div></div><figcaption>A success toast with no action when nothing can be reversed.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><div class="toast toast--success"><div class="toast__body"><strong class="toast__title">Review posted</strong><span class="toast__text">Thank you for helping others choose.</span><button class="toast__action" type="button">Undo</button></div></div></div><figcaption>"Undo" on a review that is already public. Offer it only when the action is truly reversible.</figcaption></figure>

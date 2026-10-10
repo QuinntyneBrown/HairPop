@@ -38,13 +38,13 @@ Every `.field` in `docs/mocks/` (a `<div>` with `<label for>`, or a `fieldset.fi
 | `pages/sign-up` | Name, Email, Password; password has hint and suffix "Show" | "Name", "Email", "Password", hint "Use at least 12 characters." | default, invalid email, invalid password "Use at least 12 characters." | surface |
 | `pages/forgot-password` | Email | "Email" | invalid "Enter the email address on your account." | surface |
 | `pages/reset-password` | New password with hint and "Show"; Confirm password with "Show" | "New password", "Confirm password", hint "Use at least 12 characters." | invalid "Use at least 12 characters." | surface |
-| `pages/account-settings` | Name, Email, Phone with optional marker and hint | "Name", "Email", "Phone" + "(optional)", hint "Braiders text this number." | default, invalid "Enter an email address like name@example.com.", offline, failed, submitting | surface |
-| `pages/booking-request` | Service (select), Preferred time (group variant hosting a radio card group), Your email and Phone in a `.form-row`, Hair details (textarea with counter, limit 200) | "Service", "Preferred time", "Your email", "Phone" + "(optional)", "Hair details" + "(optional)" | default, invalid "Choose a time Nia offers. Her first slot on Sat 24 Oct is 10:00 am.", over limit "Shorten this to 200 characters or fewer." | surface |
-| `pages/care-and-review` | Rating (group variant hosting an inline radio group), Your review (textarea, auto-grow, hint, counter, limit 500) | "Rating, 1 to 5", "Your review", hint "What should others know about your visit?", counter "56 of 500 characters" | invalid "Choose a rating from 1 to 5.", invalid "Write a few words about your visit with Nia." | surface |
+| `pages/account-settings` | Name, Email, Phone with optional marker and hint | "Name", "Email", "Phone" + "(optional)", hint "Braiders text this number." | default, invalid "Enter an email address like name@example.com.", offline, failed, submitting, success (the form stays with its inline status) | surface |
+| `pages/booking-request` | Service (select), Preferred time (group variant hosting a radio card group), Your email and Phone in a `.form-row`, Hair details (textarea with counter, limit 200) | "Service", "Preferred time", "Your email", "Phone" + "(optional)", "Hair details" + "(optional)" | default, invalid "Choose a time Nia offers. Her first slot on Sat 24 Oct is 10:00 am." (on the radio group's fieldset, `time-error`); over limit "Shorten this to 200 characters or fewer." (textarea CRD; no mock) | surface |
+| `pages/care-and-review` | Rating (group variant hosting an inline radio group), Your review (textarea, auto-grow, hint, counter, limit 500) | "Rating, 1 to 5", "Your review", hint "What should others know about your visit?", counter "56 of 500 characters" | default; invalid "Choose a rating from 1 to 5." and "Write a few words about your visit with Nia." (review empty, counter "0 of 500 characters"); submitting | surface |
 | `dialogs/filter-braiders` | Maximum price (number text field with hidden `$` prefix addon), Distance from Toronto (select) | "Maximum price", "Distance from Toronto" | invalid "Enter a price of at least $160 for this style.", busy, failed | raised (dialog) |
 | `dialogs/change-appointment` | New preferred time (select with option groups) | "New preferred time" | invalid "Choose one of the times Nia has offered." | raised |
-| `dialogs/report-review` | Reason (textarea with counter, limit 300) | "Reason" | invalid "Tell us what needs review." | raised |
-| `dialogs/cookie-preferences` | choice field hosting one checkbox | checkbox "Remember my optional usage choices" | default, busy, failed | raised |
+| `dialogs/report-review` | Reason (textarea with counter, limit 300) | "Reason", counter "26 of 300 characters" | default, invalid "Tell us what needs review." (blank, "0 of 300 characters"), busy, failed | raised |
+| `dialogs/cookie-preferences` | choice field (`div.field`) hosting one checkbox with its own description | checkbox "Remember my optional usage choices" | default, busy, failed | raised |
 | Design system text field *Variants* | div field with `km` suffix addon on a number field | "Distance from Toronto" + "km" | default | surface |
 | Design system form field *Variants* | div field with hidden `$` prefix addon; choice mode | "Maximum price" + "$"; "Remember my optional usage choices" | default | surface |
 | Design system checkbox *States* | choice field with an error | "I’ve read Nia’s cancellation policy", error "Confirm you’ve read the policy to send your request." | invalid | surface |
@@ -195,8 +195,8 @@ Rendered DOM. Classes, ids and ARIA attributes are the e2e contract.
 <!-- rendered: optional marker and hint (account settings) -->
 <div class="field">
   <label class="field__label" for="hp-field-3-control">Phone <span class="optional">(optional)</span></label>
-  <input class="input" id="hp-field-3-control" name="phone" type="tel" autocomplete="tel" aria-describedby="hp-field-3-hint">
-  <span class="field__help" id="hp-field-3-hint">Braiders text this number.</span>
+  <input class="input" id="hp-field-3-control" name="phone" type="tel" autocomplete="tel" aria-describedby="hp-field-3-help">
+  <span class="field__help" id="hp-field-3-help">Braiders text this number.</span>
 </div>
 ```
 
@@ -206,10 +206,10 @@ Rendered DOM. Classes, ids and ARIA attributes are the e2e contract.
   <label class="field__label" for="hp-field-2-control">Password</label>
   <div class="input-group">
     <input class="input" id="hp-field-2-control" name="password" type="password" autocomplete="new-password"
-           aria-invalid="true" aria-describedby="hp-field-2-error hp-field-2-hint">
+           aria-invalid="true" aria-describedby="hp-field-2-error hp-field-2-help">
     <button class="btn" type="button" aria-pressed="false" aria-controls="hp-field-2-control">Show</button>
   </div>
-  <span class="field__help" id="hp-field-2-hint">Use at least 12 characters.</span>
+  <span class="field__help" id="hp-field-2-help">Use at least 12 characters.</span>
   <span class="field__error" id="hp-field-2-error">Use at least 12 characters.</span>
 </div>
 ```
@@ -246,14 +246,14 @@ Rendered DOM. Classes, ids and ARIA attributes are the e2e contract.
 
 ```html
 <!-- rendered: group variant, invalid (care and review rating) -->
-<fieldset class="field" aria-describedby="hp-field-4-error">
+<fieldset class="field" aria-describedby="rating-error"><!-- consumer: <fieldset hp-form-field id="rating" …> -->
   <legend>Rating, 1 to 5</legend>
   <div class="choice-group choice-group--inline"><!-- rendered by hp-radio-group (radio group CRD); its host element is omitted here -->
     <label class="choice"><input type="radio" name="rating" id="rating-1" value="1" aria-invalid="true"><span>1</span></label>
     …
     <label class="choice"><input type="radio" name="rating" id="rating-5" value="5" aria-invalid="true"><span>5 (excellent)</span></label>
   </div>
-  <span class="field__error" id="hp-field-4-error">Choose a rating from 1 to 5.</span>
+  <span class="field__error" id="rating-error">Choose a rating from 1 to 5.</span>
 </fieldset>
 ```
 
@@ -502,5 +502,5 @@ Render cost is measured by the perf-test scenario named under *Performance* and 
 - **D-12** *How are addons and the "Show" button placed without declaring a slot twice?* The three slots live in one `<ng-template>` rendered with `ngTemplateOutlet`, inside `.input-group` only when a prefix or suffix is present (AGENTS.md). Addons are `span[hp-field-addon]` so the field can give them ids: an addon without `aria-hidden` ("km") joins the description; the design system's hidden `$` stays hidden because the label and the currency of every price imply it.
 - **D-13** *How does a single checkbox with an error fit?* `choice` mode: the field renders no label (the checkbox label asks the question, as in the design system's checkbox example), keeps the error and wiring, and still gives the summary a `label`.
 - **D-14** *Is the label an input or projected content?* An input string. The error summary needs its text, and a label holding links or controls would break the control's name; the optional marker is a separate input for the same reason.
-- **D-15** *Who sets ids?* The field generates `hp-field-{n}`; the control uses `hp-field-{n}-control` unless its own `id` input is set (for example `id="email"` so an old link or test can target it), and registers whichever it uses. Messages use `-hint`, `-error`, `-counter`, addons `-addon-prefix` and `-addon-suffix`.
+- **D-15** *Who sets ids?* The field generates `hp-field-{n}`; the control uses `hp-field-{n}-control` unless its own `id` input is set (for example `id="email"` so an old link or test can target it), and registers whichever it uses. Messages and addons append `-help`, `-error`, `-counter`, `-addon-prefix` and `-addon-suffix` to a base id: the control's own `id` input when set (`email-error`, `phone-help`, `price-addon-prefix`, as the mocks render them), for a group field the `id` attribute the consumer sets on the `fieldset` host (`<fieldset hp-form-field id="time">` gives `time-error`, as the booking mock renders it; the attribute stays on the fieldset), and otherwise the generated `hp-field-{n}` (`hp-field-3-help`).
 - **D-16** *How are required fields marked?* They are not; only the minority of optional fields carry "(optional)" (design system *Content*). The `required` attribute on the control exposes required state to assistive technology; with `novalidate` on the form it never triggers browser bubbles.

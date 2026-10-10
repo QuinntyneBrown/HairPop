@@ -70,8 +70,8 @@
   <h3>Submitting, offline, success</h3>
   {{example:[stack,start]Submitting keeps the label and sets <code>aria-busy</code> on the button only, with the status first in the actions (on phones it wraps below the full-width button); fields stay editable. Offline keeps the details and the button enabled and explains; success replaces the form with a confirmation.}}
 <div class="form-actions" style="width: 100%;"><p class="inline-status" role="status"><span class="dot dot--pulse" aria-hidden="true"></span>Sending your request to Nia…</p><button class="btn btn--primary" type="submit" aria-busy="true">Send request</button></div>
-<div style="width: 100%;"><div class="alert alert--warning">{{icon:wifi-off}}<div><p><strong>You’re offline.</strong> Your details stay here. Connect, then send your request.</p></div></div></div>
-<div style="width: 100%;"><div class="alert alert--success">{{icon:check-circle}}<div><p><strong>Request sent to Nia.</strong> This is a request, not a confirmed appointment. Nia will reply with the final time and price.</p></div></div></div>
+<div style="width: 100%;"><div class="alert alert--warning">{{icon:wifi-off}}<div class="alert__body"><p class="alert__title">You’re offline</p><p>Your details remain here. Connect before sending.</p></div></div></div>
+<div style="width: 100%;"><div class="alert alert--success">{{icon:check-circle}}<div class="alert__body"><p class="alert__title">Request sent to Nia</p><p>This is a request, not a confirmed appointment. Nia will reply with the final time and price.</p></div></div></div>
   {{/example}}
   <h3>Both themes</h3>
   {{themes:stack}}<div><div class="alert alert--danger form-summary" role="group">{{icon:alert-circle}}<div><strong>Check 1 field before saving</strong><ul><li><a href="#states">Email: Enter an email address like name@example.com.</a></li></ul></div></div></div><div class="form-actions"><button class="btn" type="button">Back</button><button class="btn btn--primary" type="button">Send request</button></div>{{/themes}}

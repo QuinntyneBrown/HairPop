@@ -110,7 +110,7 @@
 <div class="dialog dialog--inline">
   <div class="dialog__panel dialog__panel--sm" role="alertdialog" aria-labelledby="s-fail-title" aria-describedby="s-fail-desc">
     <div class="dialog__header"><span class="dialog__icon dialog__icon--danger">{{icon:alert-circle}}</span><div><h2 class="dialog__title" id="s-fail-title">Cancel request HP-1048?</h2><p id="s-fail-desc" class="text-muted">Nia will see that you no longer need this time.</p></div></div>
-    <div class="dialog__body"><div class="alert alert--danger" role="alert">{{icon:alert-circle}}<div><p class="alert__title">We couldn’t cancel this request.</p><p>Your request is unchanged. Check your connection and try again.</p></div></div></div>
+    <div class="dialog__body"><div class="alert alert--danger" role="alert">{{icon:alert-circle}}<div><p class="alert__title">We couldn’t cancel this request</p><p>Your request is unchanged. Check your connection and try again.</p></div></div></div>
     <div class="dialog__footer"><button class="btn" type="button">Keep request</button><button class="btn btn--danger" type="button">Try again</button></div>
   </div>
 </div>

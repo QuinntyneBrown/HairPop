@@ -174,12 +174,14 @@
 <section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
   <p>Extracted from these mocks:</p>
   <ul>
-    <li><a href="../../mocks/pages/booking-request/invalid.html">pages/booking-request/invalid</a> ("Choose an offered time.")</li>
+    <li><a href="../../mocks/pages/booking-request/invalid.html">pages/booking-request/invalid</a> ("Choose a time Nia offers. Her first slot on Sat 24 Oct is 10:00 am.")</li>
     <li><a href="../../mocks/pages/account-settings/invalid.html">pages/account-settings/invalid</a> (email format error)</li>
     <li><a href="../../mocks/pages/reset-password/invalid.html">pages/reset-password/invalid</a> (password length error)</li>
     <li><a href="../../mocks/dialogs/filter-braiders/invalid.html">dialogs/filter-braiders/invalid</a> (error inside a dialog)</li>
     <li><a href="../../mocks/pages/booking-request/submitting.html">pages/booking-request/submitting</a> ("Sending your request to Nia…" status beside the busy button)</li>
     <li><a href="../../mocks/pages/account-settings/submitting.html">pages/account-settings/submitting</a> ("Saving…" status beside the busy button)</li>
+    <li><a href="../../mocks/pages/account-settings/success.html">pages/account-settings/success</a> ("Saved just now" success status)</li>
+    <li><a href="../../mocks/pages/account-settings/failed.html">pages/account-settings/failed</a> ("Not saved" danger status)</li>
   </ul>
   <p>Drift fixed during extraction: the error <code>&lt;span&gt;</code> was nested inside the <code>&lt;label class="field"&gt;</code>, making it part of the field's accessible name (system: <code>div.field</code> with <code>label for</code> and the error outside); the "⚠" glyph was read aloud (now empty alternative text); the fallback error "Enter a valid value to continue." was vague; no field had a hint, so rules such as the 12-character password appeared only as errors; the hint, counter and inline-status variants were added from the core set.</p>
 </section>
