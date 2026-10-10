@@ -7,7 +7,7 @@
 | Status | planned |
 | Traces to | L2-034, L2-036, L2-041, L2-042 |
 | Design system | [`checkbox.html`](../../design-system/components/checkbox.html) |
-| Source mocks | [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html), [`dialogs/cookie-preferences/busy`](../../mocks/dialogs/cookie-preferences/busy.html), [`dialogs/cookie-preferences/invalid`](../../mocks/dialogs/cookie-preferences/invalid.html), [`dialogs/cookie-preferences/failed`](../../mocks/dialogs/cookie-preferences/failed.html) |
+| Source mocks | [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html), [`dialogs/cookie-preferences/busy`](../../mocks/dialogs/cookie-preferences/busy.html), [`dialogs/cookie-preferences/failed`](../../mocks/dialogs/cookie-preferences/failed.html) |
 | Rendering | [`checkbox.html`](checkbox.html) |
 
 ## Purpose and scope
@@ -36,7 +36,6 @@ Every use of `.choice` with a checkbox in `docs/mocks/`, plus the configurations
 |---|---|---|---|---|
 | `dialogs/cookie-preferences/default` | single, with description (D-4) | "Remember my optional usage choices"; description "Helps us improve search. You can change this any time." | checked, unchecked, hover, focus | raised (dialog panel) |
 | `dialogs/cookie-preferences/busy` | single, with description | as above | checked and still enabled while "Save preferences" is busy (D-7) | raised |
-| `dialogs/cookie-preferences/invalid` | single, with description, under the dialog's error summary | as above | invalid when the dialog flags it (`invalid` + `describedBy`); the mock shows the summary only | raised |
 | `dialogs/cookie-preferences/failed` | single, with description, under the dialog's "We couldn’t save this change." alert | as above | keeps the value Maya chose | raised |
 | Booking request policy confirmation (design system *Variants* and *States*; no mock yet) | single, `required`, no description, inside a form field with an error | "I’ve read Nia’s cancellation policy"; error "Confirm you’ve read the policy to send your request." | unchecked, checked, invalid, focus | surface (form panel) |
 | Notification choice (design system *Variants*) | single, `card`, with description | "Email me when Nia replies"; description "Updates about HP-1048 go to maya.chen@example.com." | checked, unchecked, hover, focus | surface |

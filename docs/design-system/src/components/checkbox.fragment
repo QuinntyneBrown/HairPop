@@ -1,4 +1,4 @@
-<!--meta {"lead": "Checkboxes turn independent options on or off before the person saves: remembering optional usage choices, confirming Nia's policy, picking several styles to filter by.", "description": "Single, grouped, described and card checkboxes with checked, indeterminate, invalid and disabled states in both themes.", "pills": ["Native <code>&lt;input type=\"checkbox\"&gt;</code>", "Status: stable"], "variants": "single, group in fieldset, with description, card", "states": "default, hover, focus, checked, indeterminate, disabled, invalid", "sources": ["dialogs/cookie-preferences/default", "dialogs/cookie-preferences/busy", "dialogs/cookie-preferences/invalid", "dialogs/cookie-preferences/failed"]} -->
+<!--meta {"lead": "Checkboxes turn independent options on or off before the person saves: remembering optional usage choices, confirming Nia's policy, picking several styles to filter by.", "description": "Single, grouped, described and card checkboxes with checked, indeterminate, invalid and disabled states in both themes.", "pills": ["Native <code>&lt;input type=\"checkbox\"&gt;</code>", "Status: stable"], "variants": "single, group in fieldset, with description, card", "states": "default, hover, focus, checked, indeterminate, disabled, invalid", "sources": ["dialogs/cookie-preferences/default", "dialogs/cookie-preferences/busy", "dialogs/cookie-preferences/failed"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use a checkbox for an option that is independent of the others and takes effect when the form is saved: "Remember my optional usage choices" in cookie preferences, "I’ve read Nia’s cancellation policy" on a booking request. Use a <a href="switch.html">switch</a> when the setting applies immediately, and a <a href="radio-group.html">radio group</a> when exactly one option must be chosen.</p>
 </section>
@@ -153,7 +153,6 @@
   <ul>
     {{mock:dialogs/cookie-preferences/default|single checkbox with its description}}
     {{mock:dialogs/cookie-preferences/busy|checkbox stays enabled while saving}}
-    {{mock:dialogs/cookie-preferences/invalid|checkbox under an error summary}}
     {{mock:dialogs/cookie-preferences/failed|checkbox keeps its value under the failure alert}}
   </ul>
   <p>Drift fixed during extraction: the cookie checkbox had no description (the mock now shows "Helps us improve search. You can change this any time."); the indeterminate bar was 0.65rem (off grid, now 0.75rem); the box had no hover state (now an accent edge); the kit's <code>.choice input:disabled + *</code> missed descriptions (now <code>~ *</code>).</p>

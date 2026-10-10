@@ -246,6 +246,7 @@
         "invalid",
         "submitting",
         "success",
+        "failed",
         "offline"
       ],
       "not_applicable": {
@@ -273,12 +274,12 @@
       "title": "Page not found",
       "route": "/404",
       "states": [
-        "default",
-        "loading",
-        "error"
+        "default"
       ],
       "not_applicable": {
-        "empty": "This screen has no collection to become empty."
+        "empty": "This screen has no collection to become empty.",
+        "loading": "An error page is a static response with nothing to load.",
+        "error": "An error page is itself the error response."
       }
     },
     {
@@ -287,12 +288,12 @@
       "title": "Access unavailable",
       "route": "/403",
       "states": [
-        "default",
-        "loading",
-        "error"
+        "default"
       ],
       "not_applicable": {
-        "empty": "This screen has no collection to become empty."
+        "empty": "This screen has no collection to become empty.",
+        "loading": "An error page is a static response with nothing to load.",
+        "error": "An error page is itself the error response."
       }
     },
     {
@@ -301,12 +302,12 @@
       "title": "Service error",
       "route": "/500",
       "states": [
-        "default",
-        "loading",
-        "error"
+        "default"
       ],
       "not_applicable": {
-        "empty": "This screen has no collection to become empty."
+        "empty": "This screen has no collection to become empty.",
+        "loading": "An error page is a static response with nothing to load.",
+        "error": "An error page is itself the error response."
       }
     },
     {
@@ -315,12 +316,12 @@
       "title": "Offline",
       "route": "/offline",
       "states": [
-        "default",
-        "loading",
-        "error"
+        "default"
       ],
       "not_applicable": {
-        "empty": "This screen has no collection to become empty."
+        "empty": "This screen has no collection to become empty.",
+        "loading": "An error page is a static response with nothing to load.",
+        "error": "An error page is itself the error response."
       }
     },
     {
@@ -372,24 +373,24 @@
       "states": [
         "default",
         "busy",
-        "invalid",
         "failed"
       ],
-      "not_applicable": {}
+      "not_applicable": {
+        "invalid": "This confirmation dialog has no inputs; the booking form validates before it opens."
+      }
     },
     {
       "id": "cancel-appointment",
       "kind": "dialog",
-      "title": "Cancel appointment",
+      "title": "Cancel request HP-1048?",
       "opens_from": "appointment-detail",
       "states": [
         "default",
         "busy",
-        "confirm",
         "failed"
       ],
       "not_applicable": {
-        "invalid": "This confirmation dialog has no inputs."
+        "invalid": "This destructive confirmation has no inputs."
       }
     },
     {
@@ -421,15 +422,14 @@
     {
       "id": "sign-out",
       "kind": "dialog",
-      "title": "Sign out",
+      "title": "Sign out?",
       "opens_from": "account-settings",
       "states": [
         "default",
-        "busy",
-        "confirm"
+        "busy"
       ],
       "not_applicable": {
-        "invalid": "This confirmation dialog has no inputs."
+        "invalid": "This destructive confirmation has no inputs."
       }
     },
     {
@@ -440,10 +440,11 @@
       "states": [
         "default",
         "busy",
-        "invalid",
         "failed"
       ],
-      "not_applicable": {}
+      "not_applicable": {
+        "invalid": "A single optional checkbox has no invalid answer."
+      }
     },
     {
       "id": "booking-update",

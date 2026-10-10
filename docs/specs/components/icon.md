@@ -235,7 +235,7 @@ Free to change: attribute order, and whether `aria-hidden` is written before or 
 
 - Grid `viewBox="0 0 24 24"`; live area 20 × 20 centred; optical, not mathematical, alignment (a circle touches the live-area edge, a square sits one unit inside).
 - Stroke width 2 units, `stroke-linecap: round`, `stroke-linejoin: round`, `fill: none`, `stroke: currentColor`; `.icon--fill` is `fill: currentColor; stroke: none`.
-- Box: 1 rem / 1.25 rem / 1.5 rem for sm / md / lg, `flex: none`. Because the stroke is in grid units, it scales with the box: 1.33 px at sm, 1.67 px at md, 2 px at lg.
+- Box: 1 rem / 1.25 rem / 1.5 rem for sm / md / lg, `flex: none`, `display: inline-block` with `vertical-align: -0.125em`, so an icon in a text run (the rating star in "4.9 ★ from 86 reviews") stays on the text line. The foundation reset `img, svg, video { display: block }` would otherwise push it onto a line of its own; flex and grid parents lay the icon out as an item either way. Because the stroke is in grid units, it scales with the box: 1.33 px at sm, 1.67 px at md, 2 px at lg.
 - Gap to a label: `--space-1` to `--space-2`, set by the parent (`.btn` uses `--space-2`, `.badge` and `.stat__delta` use `--space-1`).
 - Colour: `currentColor` only. No colour, size or stroke is ever written into the SVG.
 - Motion: none. Layer: none.

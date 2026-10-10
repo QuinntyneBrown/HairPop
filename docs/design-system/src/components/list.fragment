@@ -1,4 +1,4 @@
-<!--meta {"lead": "A list stacks short, similar items in one column: notifications, a braider's services, a help topic's articles. Each row is one line or two, with an optional avatar or icon.", "description": "Simple, two-line, avatar, interactive and unread list rows with dividers, in both themes.", "pills": ["<code>&lt;ul&gt;</code> / <code>&lt;ol&gt;</code>", "Status: stable"], "variants": "simple, two-line, with avatar or icon, interactive (link rows), unread, with dividers", "states": "default, hover, focus, current/selected, unread", "sources": ["pages/notification-center/default", "pages/notification-center/unread", "pages/notification-center/loading"]} -->
+<!--meta {"lead": "A list stacks short, similar items in one column: notifications, a braider's services, a help topic's articles. Each row is one line or two, with an optional avatar or icon.", "description": "Simple, two-line, avatar, interactive and unread list rows with dividers, in both themes.", "pills": ["<code>&lt;ul&gt;</code> / <code>&lt;ol&gt;</code>", "Status: stable"], "variants": "simple, two-line, with avatar or icon, interactive (link rows), unread, with dividers", "states": "default, hover, focus, current/selected, unread", "sources": ["pages/notification-center/default", "pages/notification-center/unread", "pages/notification-center/read", "pages/notification-center/loading"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use a list for a run of homogeneous items that people scan top to bottom and open one at a time. Use <a href="card.html">cards</a> when each item carries media or several actions, a <a href="table.html">table</a> when people compare fields across items, and a plain <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> in prose (the "Prepare for your visit" steps).</p>
   <ul>
@@ -126,7 +126,7 @@
 <section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
   <div class="ds-dodont">
     <figure class="ds-do"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card card--flush"><ul class="list"><li><a class="list__item list__item--interactive" href="../../mocks/pages/appointment-detail/default.html"><div class="list__body"><div class="list__title">Nia received your request</div><div class="list__meta">Today at 9:42 am</div></div></a></li></ul></div></div><figcaption>Make the whole row one link to the update.</figcaption></figure>
-    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card"><span class="badge badge--warning">Unread</span><p><b>Nia received your request</b></p><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div></div><figcaption>Give every notification its own card and primary button, as the notification-center mock does; several primaries compete on one page.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas ds-example__canvas--stack"><div class="card"><span class="badge badge--warning">Unread</span><p><b>Nia received your request</b></p><a class="btn btn--primary" href="../../mocks/pages/appointment-detail/default.html">View request</a></div></div><figcaption>Give every notification its own card and primary button, as the first notification-center mocks did; several primaries compete on one page.</figcaption></figure>
     <figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--info">Unread</span></div><figcaption>Say "Unread" in text alongside the dot: a visually hidden "Unread:" prefix, or one info badge, never both.</figcaption></figure>
     <figure class="ds-dont"><div class="ds-example__canvas"><span class="badge badge--info">Read</span></div><figcaption>Badge every row "Read"; mark the exception (unread), not the norm.</figcaption></figure>
   </div>
@@ -176,6 +176,7 @@
   <ul>
     {{mock:pages/notification-center/default|notifications as an interactive list in a flush card}}
     {{mock:pages/notification-center/unread|unread rows with the dot and a hidden "Unread:" prefix}}
+    {{mock:pages/notification-center/read|read rows with a trailing chevron and no badge}}
     {{mock:pages/notification-center/loading|skeleton rows in the same flush list}}
     {{mock:pages/appointment-detail/default|"Prepare for your visit" ordered list in prose (not this component)}}
   </ul>

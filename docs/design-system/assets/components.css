@@ -57,8 +57,8 @@ a:active, a[data-state="active"] { color: var(--color-fg-link-hover); text-decor
 /* The arrow never shrinks when the label wraps. */
 .link--standalone .link__arrow { flex: none; display: inline-flex; transition: translate var(--duration-fast) var(--ease-standard); }
 .link--standalone:hover .link__arrow, .link--standalone[data-state="hover"] .link__arrow { translate: var(--space-1) 0; }
-/* External: the icon sits on the text line after the last word (overrides the svg block reset). */
-.link--external .icon { display: inline-block; vertical-align: -0.125em; margin-left: var(--space-1); }
+/* External: the icon sits on the text line after the last word (the .icon rule puts it there). */
+.link--external .icon { margin-left: var(--space-1); }
 /* Inherit: takes the container's colour, stays underlined. Containers tune it with two knobs. */
 .link--inherit { color: inherit; font-weight: var(--link-inherit-font-weight, inherit); }
 .link--inherit:hover, .link--inherit[data-state="hover"], .link--inherit:active, .link--inherit[data-state="active"] { color: var(--link-inherit-hover-fg, currentColor); }
@@ -95,7 +95,8 @@ hr, .divider { border: 0; border-top: var(--border-width-hairline) solid var(--c
 .divider--label::before, .divider--label::after { content: ""; flex: 1; border-top: var(--border-width-hairline) solid var(--color-border-default); }
 
 /* ---------- Icon --------------------------------------------------------- */
-.icon { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+/* Icons sit on the text line inside a text run (the rating star); flex and grid parents lay them out as items. Overrides the svg block reset. */
+.icon { display: inline-block; vertical-align: -0.125em; width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 .icon--sm { width: 1rem; height: 1rem; }
 .icon--lg { width: 1.5rem; height: 1.5rem; }
 .icon--fill { fill: currentColor; stroke: none; }

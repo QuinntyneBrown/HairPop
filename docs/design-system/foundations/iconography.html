@@ -44,6 +44,7 @@
 &lt;span class=&quot;cluster&quot;&gt;&lt;svg class=&quot;icon icon--lg&quot; aria-hidden=&quot;true&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Large · 24px&lt;/span&gt;&lt;/span&gt;</code></pre></details></div>
   <ul>
     <li>Inside a button the icon is <code>1.25em</code>, so it scales with the button size.</li>
+    <li><code>.icon</code> is <code>inline-block</code> on the text baseline (<code>vertical-align: -0.125em</code>), so an icon inside a sentence, such as the rating star in “4.9 from 86 reviews”, stays on the line. Flex and grid parents lay it out as an item.</li>
     <li>Leave <code>--space-1</code> to <code>--space-2</code> between an icon and its label; buttons and badges set this gap for you.</li>
     <li>Do not scale icons with <code>transform</code>; change the size class so the stroke stays crisp.</li>
   </ul>
