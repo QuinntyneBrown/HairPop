@@ -65,20 +65,17 @@ let nextFieldId = 0;
     '(input)': 'onInput()',
   },
   template: `
+    <ng-template #marker>
+      @if (optionalMarker()) {
+        &ngsp;<span class="optional">{{ optionalMarker() }}</span>
+      }
+    </ng-template>
     @if (group) {
-      <legend>
-        {{ label() }}
-        @if (optionalMarker()) {
-          <span class="optional">{{ optionalMarker() }}</span>
-        }
-      </legend>
+      <legend>{{ label() }}<ng-container [ngTemplateOutlet]="marker" /></legend>
     } @else if (!choice()) {
-      <label class="field__label" [attr.for]="labelFor()">
-        {{ label() }}
-        @if (optionalMarker()) {
-          <span class="optional">{{ optionalMarker() }}</span>
-        }
-      </label>
+      <label class="field__label" [attr.for]="labelFor()"
+        >{{ label() }}<ng-container [ngTemplateOutlet]="marker"
+      /></label>
     }
     <ng-template #control>
       <ng-content select="[slot=prefix]" />
@@ -343,6 +340,7 @@ export class FormField implements FormFieldContext, OnInit, AfterContentInit, Af
         controlId: this.labelFor,
         element: this.host,
         focus: () => this.focus(),
+        control: this.formControl,
       });
       this.destroyRef.onDestroy(unregister);
     }
@@ -381,6 +379,9 @@ export class FormField implements FormFieldContext, OnInit, AfterContentInit, Af
     this.inputVersion.update((v) => v + 1);
     if (this.maxLength() !== undefined) this.scheduleAnnouncement();
   }
+
+  /** The registered control's forms control, for the form layout's submit. */
+  private readonly formControl = computed(() => this.control()?.ngControl?.control ?? null);
 
   /** Subscribes to the registered control's events, resubscribing when the control changes. */
   private connect(): void {

@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   ElementRef,
   Injectable,
   Injector,
@@ -29,6 +30,9 @@ export type FormLayoutKind = 'stack' | 'inline';
 export type FormLayoutSummaryTitle = (invalidCount: number) => string;
 
 let nextFormId = 0;
+
+/** How often a submit waiting on async validators re-checks whether they have settled. */
+const SETTLE_POLL_MS = 50;
 
 /** The registry the form layout offers the form fields inside it (`HP_FORM_LAYOUT`). */
 @Injectable()
@@ -148,6 +152,7 @@ export class FormLayout {
   private readonly registry = inject(FormLayoutRegistry);
   private readonly container = inject(ControlContainer, { self: true, optional: true });
   private readonly injector = inject(Injector);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly summary = viewChild('summary', { read: ElementRef });
 
   protected readonly titleId = `hp-form-${++nextFormId}-summary-title`;
@@ -215,9 +220,9 @@ export class FormLayout {
     const attempt = ++this.attempt;
     this.markAllTouched();
     this.registry.markSubmitted();
-    const control = this.container?.control;
-    if (control && control.pending) {
-      this.whenSettled(control, () => {
+    const pending = this.controls().filter((control) => control.pending);
+    if (pending.length) {
+      this.whenSettled(pending, () => {
         if (attempt === this.attempt) this.judge();
       });
       return;
@@ -255,15 +260,41 @@ export class FormLayout {
   }
 
   private markAllTouched(): void {
-    this.container?.control?.markAllAsTouched();
+    for (const control of this.controls()) control.markAllAsTouched();
   }
 
-  private whenSettled(control: AbstractControl, done: () => void): void {
-    const subscription = control.statusChanges.subscribe((status) => {
-      if (status !== 'PENDING') {
-        subscription.unsubscribe();
-        done();
-      }
+  /** The form's own control plus each registered field's control, without duplicates. */
+  private controls(): AbstractControl[] {
+    const controls = new Set<AbstractControl>();
+    const container = this.container?.control;
+    if (container) controls.add(container);
+    for (const field of untracked(this.registry.fields)) {
+      const control = field.control?.();
+      if (control) controls.add(control);
+    }
+    return [...controls];
+  }
+
+  /**
+   * Calls `done` once none of the controls is pending any more. Status events alone are not enough:
+   * a control bound by a forms directive re-runs its async validators with `emitEvent: false`, so the
+   * settled status can arrive silently. A short poll covers that case.
+   */
+  private whenSettled(controls: AbstractControl[], done: () => void): void {
+    let finished = false;
+    const check = () => {
+      if (finished || controls.some((control) => control.pending)) return;
+      finished = true;
+      clearInterval(timer);
+      for (const subscription of subscriptions) subscription.unsubscribe();
+      done();
+    };
+    const subscriptions = controls.map((control) => control.events.subscribe(check));
+    const timer = setInterval(check, SETTLE_POLL_MS);
+    this.destroyRef.onDestroy(() => {
+      finished = true;
+      clearInterval(timer);
+      for (const subscription of subscriptions) subscription.unsubscribe();
     });
   }
 }

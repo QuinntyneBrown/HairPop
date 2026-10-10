@@ -117,6 +117,11 @@ export const CHOICE_STYLES = `
     cursor: not-allowed;
   }
 
+  /* Disabled checked: the sunken box keeps its mark or dot visible. */
+  :host input:checked:disabled::before {
+    background: var(--color-fg-disabled);
+  }
+
   :host input:disabled ~ * {
     color: var(--color-fg-disabled);
   }

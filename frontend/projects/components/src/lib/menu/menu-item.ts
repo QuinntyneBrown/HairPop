@@ -1,5 +1,5 @@
 import { CdkMenuItem } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, input } from '@angular/core';
 
 /** Item tones: `danger` for destructive items, last, after a divider. */
 export type MenuItemTone = 'default' | 'danger';
@@ -23,6 +23,8 @@ export type MenuItemTone = 'default' | 'danger';
     class: 'menu__item',
     // D-6: a bare `disabled` attribute must not become native `disabled`; the item stays focusable.
     '[attr.disabled]': 'null',
+    // A button item never submits a surrounding form.
+    '[attr.type]': "isButton ? 'button' : null",
     '[class.menu__item--danger]': "tone() === 'danger'",
   },
   template: '<ng-content />',
@@ -30,4 +32,8 @@ export type MenuItemTone = 'default' | 'danger';
 export class MenuItem {
   /** `danger` adds `.menu__item--danger`. */
   readonly tone = input<MenuItemTone>('default');
+
+  /** The host tag, read once. */
+  protected readonly isButton =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName === 'BUTTON';
 }

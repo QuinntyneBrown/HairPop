@@ -17,6 +17,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   ],
   host: {
     class: 'menu__item',
+    type: 'button',
     // D-6: a bare `disabled` attribute must not become native `disabled`; the item stays focusable.
     '[attr.disabled]': 'null',
   },

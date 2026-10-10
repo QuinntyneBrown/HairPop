@@ -35,7 +35,7 @@ import { Router } from '@angular/router';
       align-items: flex-end;
       justify-content: space-between;
       gap: var(--space-4);
-      margin-block: 0 var(--space-6);
+      margin-bottom: var(--space-6);
     }
     .eyebrow {
       margin: 0 0 var(--space-2);

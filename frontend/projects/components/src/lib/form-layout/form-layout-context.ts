@@ -1,4 +1,5 @@
 import { InjectionToken, Signal } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 /** What each form field registers with its enclosing form layout (form layout CRD, *Field contract*). */
 export interface FormLayoutField {
@@ -14,6 +15,11 @@ export interface FormLayoutField {
   readonly element: HTMLElement;
   /** Focuses the control and scrolls it to the middle. */
   focus(): void;
+  /**
+   * The field's forms control, when it has one. The form marks it touched and waits for its pending
+   * validators on submit, so a field outside the form's `FormGroup` is judged like any other.
+   */
+  readonly control?: Signal<AbstractControl | null>;
 }
 
 /** What a form layout offers the form fields inside it. */

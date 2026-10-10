@@ -99,11 +99,17 @@ export const CHIP_ROW = new InjectionToken<ChipRowContext>('CHIP_ROW');
         border-color var(--duration-fast) var(--ease-standard);
     }
 
-    :host(:hover) {
+    /* A sunken well re-skins the chip (component tokens: .well .chip). */
+    :host-context(.well) {
+      --chip-bg: var(--color-bg-surface-raised);
+    }
+
+    /* Static and input chips are not controls: hover and press change nothing. */
+    :host(:not(.chip--static):hover) {
       --chip-bg: var(--color-bg-subtle);
     }
 
-    :host(:active) {
+    :host(:not(.chip--static):active) {
       --chip-bg: var(--color-bg-subtle-hover);
     }
 
@@ -125,11 +131,6 @@ export const CHIP_ROW = new InjectionToken<ChipRowContext>('CHIP_ROW');
     :host(.chip--static) {
       cursor: default;
       --chip-border: var(--color-border-default);
-    }
-
-    :host(.chip--static:hover),
-    :host(.chip--static:active) {
-      --chip-bg: var(--color-bg-surface);
     }
 
     :host(.chip--md) {

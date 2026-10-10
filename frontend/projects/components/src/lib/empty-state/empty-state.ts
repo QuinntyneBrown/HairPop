@@ -5,6 +5,7 @@ import {
   Injector,
   afterNextRender,
   booleanAttribute,
+  computed,
   effect,
   inject,
   input,
@@ -45,24 +46,16 @@ export type EmptyStateStatusRole = 'status' | 'alert';
   template: `<div class="empty__icon" aria-hidden="true"><ng-content select="[slot=icon]" /></div>
     @switch (headingLevel()) {
       @case (1) {
-        <h1 #title class="empty__title" [attr.tabindex]="focusOnRender() ? -1 : null">
-          {{ heading() }}
-        </h1>
+        <h1 #title class="empty__title" [attr.tabindex]="titleTabindex()">{{ heading() }}</h1>
       }
       @case (3) {
-        <h3 #title class="empty__title" [attr.tabindex]="focusOnRender() ? -1 : null">
-          {{ heading() }}
-        </h3>
+        <h3 #title class="empty__title" [attr.tabindex]="titleTabindex()">{{ heading() }}</h3>
       }
       @case (4) {
-        <h4 #title class="empty__title" [attr.tabindex]="focusOnRender() ? -1 : null">
-          {{ heading() }}
-        </h4>
+        <h4 #title class="empty__title" [attr.tabindex]="titleTabindex()">{{ heading() }}</h4>
       }
       @default {
-        <h2 #title class="empty__title" [attr.tabindex]="focusOnRender() ? -1 : null">
-          {{ heading() }}
-        </h2>
+        <h2 #title class="empty__title" [attr.tabindex]="titleTabindex()">{{ heading() }}</h2>
       }
     }
     @if (text()) {
@@ -220,6 +213,9 @@ export class EmptyState {
   readonly status = input<string | null>(null);
   /** Politeness of the live region. */
   readonly statusRole = input<EmptyStateStatusRole>('status');
+
+  /** `-1` when the heading takes programmatic focus (`focusOnRender`). */
+  protected readonly titleTabindex = computed(() => (this.focusOnRender() ? -1 : null));
 
   private readonly headingRef = viewChild.required<ElementRef<HTMLElement>>('title');
   private readonly live = viewChild<ElementRef<HTMLElement>>('live');
