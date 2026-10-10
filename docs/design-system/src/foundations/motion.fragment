@@ -18,13 +18,13 @@
     <div class="ds-motion-demo" style="--demo-duration: var(--duration-deliberate);"><button class="btn btn--sm" type="button" data-motion-run>Play deliberate · 500ms</button><span class="dot"></span></div>
   </div><div class="ds-example__caption"><span>Under reduced motion every demo snaps to its end position.</span></div></div>
   <div class="ds-table-wrap"><table class="ds-table">
-    <thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Use it for</th></tr></thead>
+    <thead><tr><th scope="col">Token and value</th><th scope="col">Use it for</th></tr></thead>
     <tbody>
-      <tr><td><code>--duration-instant</code></td><td>0ms</td><td>State that must not animate: focus rings, list selection, theme switches.</td></tr>
-      <tr><td><code>--duration-fast</code></td><td>120ms</td><td>Hover and press colour, borders, shadows; the button's 1px press; tooltips; the skip link dropping in.</td></tr>
-      <tr><td><code>--duration-base</code></td><td>200ms</td><td>Reveals: menus, toasts entering and leaving, the backdrop fade, switch thumbs.</td></tr>
-      <tr><td><code>--duration-slow</code></td><td>320ms</td><td>Large surfaces: dialogs, bottom sheets, page-level transitions.</td></tr>
-      <tr><td><code>--duration-deliberate</code></td><td>500ms</td><td>Progress-bar fill, where the change itself is the information.</td></tr>
+      <tr><td><code>--duration-instant</code><br><small class="text-muted">0ms</small></td><td>State that must not animate: focus rings, list selection, theme switches.</td></tr>
+      <tr><td><code>--duration-fast</code><br><small class="text-muted">120ms</small></td><td>Hover and press colour, borders, shadows; the button's 1px press; tooltips; the skip link dropping in.</td></tr>
+      <tr><td><code>--duration-base</code><br><small class="text-muted">200ms</small></td><td>Reveals: menus, toasts entering and leaving, the backdrop fade, switch thumbs.</td></tr>
+      <tr><td><code>--duration-slow</code><br><small class="text-muted">320ms</small></td><td>Large surfaces: dialogs, bottom sheets, page-level transitions.</td></tr>
+      <tr><td><code>--duration-deliberate</code><br><small class="text-muted">500ms</small></td><td>Progress-bar fill, where the change itself is the information.</td></tr>
     </tbody>
   </table></div>
 </section>
@@ -38,12 +38,12 @@
     <div class="ds-motion-demo" style="--demo-duration: var(--duration-slow); --demo-ease: var(--ease-spring);"><button class="btn btn--sm" type="button" data-motion-run>Play spring</button><span class="dot"></span></div>
   </div><div class="ds-example__caption"><span>Standard for changes in place, enter for arrivals, exit for departures, spring sparingly for playful confirmation.</span></div></div>
   <div class="ds-table-wrap"><table class="ds-table">
-    <thead><tr><th scope="col">Token</th><th scope="col">Curve</th><th scope="col">Use it for</th></tr></thead>
+    <thead><tr><th scope="col">Token and curve</th><th scope="col">Use it for</th></tr></thead>
     <tbody>
-      <tr><td><code>--ease-standard</code></td><td>Quick start, long settle</td><td>Anything that changes in place: hover, press, colour, size, progress.</td></tr>
-      <tr><td><code>--ease-enter</code></td><td>Decelerates to rest</td><td>Dialogs, sheets, menus, toasts and the backdrop arriving.</td></tr>
-      <tr><td><code>--ease-exit</code></td><td>Accelerates away</td><td>Toasts leaving, dialogs closing. Exits use the same or a shorter duration than the entrance.</td></tr>
-      <tr><td><code>--ease-spring</code></td><td>Overshoots slightly</td><td>Reserved for small confirmations such as a saved-braider toggle. Never on dialogs or text.</td></tr>
+      <tr><td><code>--ease-standard</code><br><small class="text-muted">Quick start, long settle</small></td><td>Anything that changes in place: hover, press, colour, size, progress.</td></tr>
+      <tr><td><code>--ease-enter</code><br><small class="text-muted">Decelerates to rest</small></td><td>Dialogs, sheets, menus, toasts and the backdrop arriving.</td></tr>
+      <tr><td><code>--ease-exit</code><br><small class="text-muted">Accelerates away</small></td><td>Toasts leaving, dialogs closing. Exits use the same or a shorter duration than the entrance.</td></tr>
+      <tr><td><code>--ease-spring</code><br><small class="text-muted">Overshoots slightly</small></td><td>Reserved for small confirmations such as a saved-braider toggle. Never on dialogs or text.</td></tr>
     </tbody>
   </table></div>
 </section>

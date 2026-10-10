@@ -1,26 +1,187 @@
-<!--meta {"lead": "Arrange related fields and actions in a readable form.", "description": "Arrange related fields and actions in a readable form.", "variants": "single column, paired fields, inline, actions bar, error summary", "states": "default, hover, focus, active, disabled, submitting, invalid", "sources": ["pages/account-settings/default"], "pills": ["Extracted"]} -->
-<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2><p>Arrange related fields and actions in a readable form. This component appears in <a href="../../mocks/pages/account-settings/default.html">pages/account-settings/default</a>.</p><p>Use it for this job; choose a different component when the interaction or information hierarchy changes.</p></section>
+<!--meta {"lead": "Form layout arranges fields, the error summary and actions into a readable form panel: one column, labels on top, one primary action, and a summary that links straight to each problem.", "description": "Form panel, paired fields, filter rows, actions bar and error summary, with invalid, submitting, offline and success states.", "pills": ["<code>&lt;form novalidate&gt;</code>", "Status: stable"], "variants": "single column panel, paired fields, inline filter row, actions bar, error summary", "states": "default, invalid, submitting, offline, success", "sources": ["pages/booking-request/default", "pages/booking-request/invalid", "pages/booking-request/submitting", "pages/booking-request/offline", "pages/account-settings/default", "pages/sign-in/invalid"]} -->
+<section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
+  <p>Every HairPop form (sign in, booking request, care and review, account settings) uses the same frame: a <code>.form-panel</code> card capped at <code>--layout-form-max</code> (38rem), a heading, an optional error summary, a single column of <a href="form-field.html">form fields</a> 16px apart, and a <code>.form-actions</code> bar with one primary action. Filter rows above results are the one inline form.</p>
+  <ul>
+    <li>Use a page form for multi-field tasks; use a <a href="dialog.html">dialog</a> form only for one or two fields tied to the page behind it ("Request a change").</li>
+    <li>Validate with <code>novalidate</code> and the system's messages, not the browser's bubbles, so copy and timing are consistent.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2><div class="ds-anatomy"><figure class="ds-anatomy__figure"><form class="form-layout"><label class="field">Name<input class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form></figure><ol class="ds-anatomy__list"><li><div><b>Semantic element</b><small>Preserves the native role and browser interaction.</small></div></li><li><div><b>Visible content</b><small>Names the action, value, or status in plain language.</small></div></li><li><div><b>Component class</b><small>Reads shared roles from the token stylesheet.</small></div></li></ol></div></section>
+<section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
+  <div class="ds-anatomy">
+    <figure class="ds-anatomy__figure">
+      <section class="card form-panel" aria-labelledby="fl-anat-title" style="max-width: 22rem;">
+        <h2 id="fl-anat-title">Your details</h2>
+        <form class="stack" action="#anatomy" novalidate>
+          <div class="field"><label class="field__label" for="fl-anat-email">Your email</label><input class="input" id="fl-anat-email" type="email" autocomplete="email" value="maya.chen@example.com"></div>
+          <p class="text-muted">Estimate: $180–$240 · about 5 hours.</p>
+          <div class="form-actions"><button class="btn btn--primary" type="submit">Send request</button></div>
+        </form>
+      </section>
+      <span class="ds-callout" style="left: 30%; top: 12%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 30%; top: 38%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 30%; top: 62%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 30%; top: 82%;" aria-hidden="true">4</span>
+    </figure>
+    <ol class="ds-anatomy__list">
+      <li><div><b>Panel and heading</b><small><code>.card.form-panel</code>, 38rem max, centred; heading in the h3 role.</small></div></li>
+      <li><div><b>Fields</b><small>One column in a <code>.stack</code>, 16px apart.</small></div></li>
+      <li><div><b>Context</b><small>Estimates or consequences, muted, just above the actions.</small></div></li>
+      <li><div><b>Actions bar</b><small><code>.form-actions</code>: primary full width on phones, end-aligned from 768px.</small></div></li>
+    </ol>
+  </div>
+</section>
 
-<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2><p>Choose the variant by meaning and context. Keep status or action labels explicit.</p><ul><li><strong>Single column</strong> — use this form when the surrounding content calls for single column presentation.</li><li><strong>Paired fields</strong> — use this form when the surrounding content calls for paired fields presentation.</li><li><strong>Inline</strong> — use this form when the surrounding content calls for inline presentation.</li><li><strong>Actions bar</strong> — use this form when the surrounding content calls for actions bar presentation.</li><li><strong>Error summary</strong> — use this form when the surrounding content calls for error summary presentation.</li></ul>{{example:Base specimen}}<form class="form-layout"><label class="field">Name<input class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form>{{/example}}</section>
+<section class="ds-section" id="variants"><h2><a href="#variants">Variants</a></h2>
+  <h3>Paired fields</h3>
+  {{example:[stack]From 768px short, related fields share a <code>.form-row</code>; below it they stack.}}
+<div class="form-row">
+<div class="field"><label class="field__label" for="fl-price">Maximum price</label><div class="input-group"><span class="addon" aria-hidden="true">$</span><input class="input" id="fl-price" type="number" value="240"></div></div>
+<div class="field"><label class="field__label" for="fl-dist">Distance from Toronto</label><select class="select" id="fl-dist"><option>Within 10 km</option><option>Within 25 km</option></select></div>
+</div>
+  {{/example}}
+  <h3>Inline filter row</h3>
+  {{example:[stack]A search with one action; it submits only when asked.}}
+<form class="filter-row" role="search" action="#variants"><div class="search search-box">{{icon:search}}<input class="input" type="search" value="knotless braids" aria-label="Search braiders"></div><button class="btn" type="submit">Find braiders</button></form>
+  {{/example}}
+  <h3>Actions bar with a secondary action</h3>
+  {{example:[stack]Primary first in the DOM on phones, last (rightmost) from 768px.}}
+<div class="form-actions"><a class="btn" href="../../mocks/pages/braider-profile/default.html">Back to Nia’s profile</a><button class="btn btn--primary" type="button">Send request</button></div>
+  {{/example}}
+</section>
 
-<section class="ds-section" id="sizes" data-na="This component has one size; it adapts through content and layout tokens."><h2><a href="#sizes">Sizes</a></h2></section>
+<section class="ds-section" id="sizes" data-na="Forms take one width (--layout-form-max) and the medium control size; dense forms are not part of HairPop's customer journey."><h2><a href="#sizes">Sizes</a></h2></section>
 
-<section class="ds-section" id="states"><h2><a href="#states">States</a></h2><p>The table forces pointer and focus states with <code>data-state</code> for review. Production interactions use native attributes and pseudo-classes.</p><div class="ds-matrix"><table><thead><tr><th scope="col">Specimen</th><th scope="col">default</th><th scope="col">hover</th><th scope="col">focus</th><th scope="col">active</th><th scope="col">disabled</th><th scope="col">submitting</th><th scope="col">invalid</th></tr></thead><tbody><tr><th scope="row">Form layout</th><td><form class="form-layout"><label class="field">Name<input class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form></td><td><form class="form-layout"><label class="field">Name<input data-state="hover" class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form></td><td><form class="form-layout"><label class="field">Name<input data-state="focus" class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form></td><td><form class="form-layout"><label class="field">Name<input data-state="active" class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form></td><td><form class="form-layout"><label class="field">Name<input data-state="disabled" disabled class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form></td><td><form class="form-layout"><label class="field">Name<input data-state="submitting" class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form></td><td><form class="form-layout"><label class="field">Name<input data-state="invalid" aria-invalid="true" class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form></td></tr></tbody></table></div>{{themes}}<form class="form-layout"><label class="field">Name<input class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form>{{/themes}}</section>
+<section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
+  <h3>Invalid: error summary</h3>
+  <p>On submit with errors, the summary appears at the top of the panel, receives focus (<code>tabindex="-1"</code>, focused by script) and links each error to its field. Field errors appear at the same time.</p>
+  {{example:[stack]The summary lists every error as a link; each link moves focus to its field.}}
+<section class="card form-panel" aria-labelledby="fl-inv-title">
+  <h2 id="fl-inv-title">Your details</h2>
+  <div class="alert alert--danger form-summary" tabindex="-1" aria-labelledby="fl-inv-sum">{{icon:alert-circle}}<div><p class="alert__title" id="fl-inv-sum">Check 2 answers</p><ul><li><a href="#fl-inv-time">Choose one of Nia’s offered times</a></li><li><a href="#fl-inv-email">Enter an email address like name@example.com</a></li></ul></div></div>
+  <form class="stack" action="#states" novalidate>
+    <div class="field"><label class="field__label" for="fl-inv-time">Preferred time</label><select class="select" id="fl-inv-time" aria-invalid="true" aria-describedby="fl-inv-time-e"><option value="">Choose a time</option><option>Sat 24 Oct, 10:00 am</option></select><span class="field__error" id="fl-inv-time-e">Choose one of Nia’s offered times.</span></div>
+    <div class="field"><label class="field__label" for="fl-inv-email">Your email</label><input class="input" id="fl-inv-email" type="email" value="maya.chen@" aria-invalid="true" aria-describedby="fl-inv-email-e"><span class="field__error" id="fl-inv-email-e">Enter an email address like name@example.com.</span></div>
+    <div class="form-actions"><button class="btn btn--primary" type="submit">Send request</button></div>
+  </form>
+</section>
+  {{/example}}
+  <h3>Submitting, offline, success</h3>
+  {{example:[stack,start]Submitting keeps the label and sets <code>aria-busy</code>; offline keeps the details and explains; success replaces the form with a confirmation.}}
+<div class="form-actions" style="width: 100%;"><button class="btn btn--primary" type="submit" aria-busy="true">Send request</button></div>
+<p class="inline-status" role="status"><span class="spinner spinner--sm" aria-hidden="true"></span>Sending your request to Nia…</p>
+<div class="alert alert--warning" style="width: 100%;">{{icon:wifi-off}}<div><p><strong>You’re offline.</strong> Your details stay here. Connect, then send your request.</p></div></div>
+<div class="alert alert--success" style="width: 100%;">{{icon:check-circle}}<div><p><strong>Request sent to Nia.</strong> This is a request, not a confirmed appointment. Nia will reply with the final time and price.</p></div></div>
+  {{/example}}
+  <h3>Both themes</h3>
+  {{themes:stack}}<div class="alert alert--danger form-summary">{{icon:alert-circle}}<div><p class="alert__title">Check 1 answer</p><ul><li><a href="#states">Enter an email address</a></li></ul></div></div><div class="form-actions"><button class="btn" type="button">Back</button><button class="btn btn--primary" type="button">Send request</button></div>{{/themes}}
+</section>
 
-<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive</a></h2><p>Use one column on phones. Pair only short, related fields at 768px and wider; keep the submit action after the fields.</p></section>
+<section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
+  <ul>
+    <li>Below 768px: one column, the panel spans the content width, the primary action is full width and first; secondary actions follow below it.</li>
+    <li>From 768px: <code>.form-row</code> may pair two short fields; actions align to the end with the primary last.</li>
+    <li>The panel never exceeds 38rem, so line length and eye travel stay short at every width.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2><p>The same markup appears in light and dark themes. Use the semantic roles in the token table; override a component token only for a local variation.</p>{{themes}}<form class="form-layout"><label class="field">Name<input class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form>{{/themes}}</section>
+<section class="ds-section" id="theming"><h2><a href="#theming">Theming</a></h2>
+  <p>The panel is a <a href="card.html">card</a> (<code>--card-bg</code>, <code>--card-padding</code>); the summary is a danger <a href="alert.html">alert</a> with a 4px leading edge (<code>--border-width-accent</code>). Form layout adds no colours of its own.</p>
+</section>
 
-<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2><h3>Role and keyboard</h3><p>Tab and Shift+Tab follow DOM order; Enter or Space activates native controls, while links use Enter. Static content remains in reading order.</p><h3>Focus and labelling</h3><p>Keep the shared visible focus ring. The visible text supplies the accessible name; icon-only actions need an explicit label. Associate help and errors with the relevant control.</p><h3>Contrast, motion, and touch</h3><p>Text uses a 4.5:1 minimum, meaningful controls and focus boundaries use 3:1, and all actions keep a 24px minimum target with comfortable spacing. Reduced motion removes decorative transitions. Check the actual foreground and background pair in both themes on the <a href="../foundations/color.html">Color foundation</a>.</p></section>
+<section class="ds-section" id="accessibility"><h2><a href="#accessibility">Accessibility</a></h2>
+  <h3>Role and pattern</h3>
+  <p><code>&lt;form novalidate&gt;</code> labelled by its panel heading; filter rows use <code>role="search"</code>. The error summary is a focusable region (<code>tabindex="-1"</code>) labelled by its title; it is focused by script after submit, not with <code>autofocus</code>.</p>
+  <h3>Keyboard</h3>
+  <table class="ds-table ds-keys"><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody>
+    <tr><td><kbd>Tab</kbd></td><td>Moves through fields in visual order, then the actions.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>In a single-line field, submits the form.</td></tr>
+    <tr><td><kbd>Enter</kbd> on a summary link</td><td>Moves focus to that field.</td></tr>
+  </tbody></table>
+  <h3>Focus</h3>
+  <p>After a failed submit focus lands on the summary; after success it lands on the confirmation heading. Focus is never sent back to the top of the page.</p>
+  <h3>Labelling</h3>
+  <p>The summary title counts the problems ("Check 2 answers"); each link repeats its field's error. Submitting progress is announced in a <code>role="status"</code> region; the button keeps its label (SC 4.1.3).</p>
+  <h3>Contrast</h3>
+  <div class="ds-example__canvas ds-example__canvas--stack" style="padding: 0; gap: var(--space-2);">
+    {{pair:Summary text|--color-danger-fg|--color-danger-bg|4.5}}
+    {{pair:Summary icon|--color-danger-icon|--color-danger-bg|3}}
+    {{pair:Context text on panel|--color-fg-muted|--color-bg-surface|4.5}}
+  </div>
+  <h3>Motion</h3>
+  <p>The summary appears without animation; the page does not scroll-animate to it (focus moves it into view).</p>
+  <h3>Touch</h3>
+  <p>The full-width primary action on phones is 40px tall or more; summary links are 24px targets.</p>
+</section>
 
-<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2><p>Use sentence case. For form layout, keep the wording concrete and close to the value or action it describes. Show “Awaiting reply” until the braider accepts; label a price estimate as an estimate.</p></section>
+<section class="ds-section" id="content"><h2><a href="#content">Content</a></h2>
+  <ul>
+    <li>Panel headings name the content ("Your details"), not the action.</li>
+    <li>Put consequences next to the action: "Estimate: $180–$240 · about 5 hours. Nia confirms the final price and time."</li>
+    <li>Summary title: "Check 1 answer" / "Check 2 answers"; each item says what to do.</li>
+    <li>Success says what happened and what happens next, and never calls a pending request an appointment.</li>
+  </ul>
+</section>
 
-<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do dont</a></h2><div class="ds-dodont"><figure class="ds-do"><div class="ds-example__canvas"><form class="form-layout"><label class="field">Name<input class="input" value="Maya Chen"></label><label class="field">Phone<input class="input" type="tel" value="416-555-0148"></label><div class="form-actions"><button class="btn btn--primary" type="submit">Save changes</button></div></form></div><figcaption>Use the form layout for its stated job: arrange related fields and actions in a readable form.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="text-muted">Unclear action</span></div><figcaption>Do not replace the semantic element with unlabelled text or a decorative shape.</figcaption></figure><figure class="ds-do"><div class="ds-example__canvas"><span class="badge badge--warning">Awaiting reply</span></div><figcaption>Pair colour with an explicit state label.</figcaption></figure><figure class="ds-dont"><div class="ds-example__canvas"><span class="dot" aria-hidden="true"></span></div><figcaption>Do not make colour or a dot the only carrier of status.</figcaption></figure></div></section>
+<section class="ds-section" id="do-dont"><h2><a href="#do-dont">Do and don't</a></h2>
+  <div class="ds-dodont">
+    <figure class="ds-do"><div class="ds-example__canvas"><div class="alert alert--danger form-summary">{{icon:alert-circle}}<div><p class="alert__title">Check 1 answer</p><ul><li><a href="#do-dont">Choose one of Nia’s offered times</a></li></ul></div></div></div><figcaption>The summary links to the field and repeats its fix.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><div class="alert alert--danger form-summary"><div><strong>Check the highlighted field</strong><p>Correct the information below and try again.</p></div></div></div><figcaption>The mocks' summary has no links and no count, and is focused with <code>autofocus</code> on page load.</figcaption></figure>
+    <figure class="ds-do"><div class="ds-example__canvas"><button class="btn btn--primary" type="button" aria-busy="true">Send request</button></div><figcaption>While sending, keep the label and let the live region speak.</figcaption></figure>
+    <figure class="ds-dont"><div class="ds-example__canvas"><button class="btn btn--primary" type="button" disabled>Working…</button></div><figcaption>The submitting and offline mocks disable the button and swap its label, which drops focus and hides why.</figcaption></figure>
+  </div>
+</section>
 
-<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead><tbody>{{tok:Layout form max|--layout-form-max}}{{tok:Space 4|--space-4}}{{tok:Space 6|--space-6}}{{tok:Color danger bg|--color-danger-bg}}</tbody></table></div></section>
+<section class="ds-section" id="tokens"><h2><a href="#tokens">Tokens</a></h2>
+  <div class="ds-table-wrap"><table class="ds-table">
+    <thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+    <tbody>
+      {{tok:Panel background|--color-bg-surface}}
+      {{tok:Summary background / text|--color-danger-bg|--color-danger-fg}}
+      {{tok:Summary edge|--color-danger-border}}
+      {{tok:Panel max width|--layout-form-max}}
+      {{tok:Panel padding|--space-6}}
+      {{tok:Gap between fields|--space-4}}
+      {{tok:Actions gap / top padding|--space-3|--space-4}}
+      {{tok:Summary leading edge|--border-width-accent}}
+      {{tok:Pairing breakpoint|--layout-breakpoint-md}}
+    </tbody>
+  </table></div>
+</section>
 
-<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2><p>Copy the semantic markup and product class; replace the sample content with real data.</p><pre><code>&lt;form class=&quot;form-layout&quot;&gt;&lt;label class=&quot;field&quot;&gt;Name&lt;input class=&quot;input&quot; value=&quot;Maya Chen&quot;&gt;&lt;/label&gt;&lt;label class=&quot;field&quot;&gt;Phone&lt;input class=&quot;input&quot; type=&quot;tel&quot; value=&quot;416-555-0148&quot;&gt;&lt;/label&gt;&lt;div class=&quot;form-actions&quot;&gt;&lt;button class=&quot;btn btn--primary&quot; type=&quot;submit&quot;&gt;Save changes&lt;/button&gt;&lt;/div&gt;&lt;/form&gt;</code></pre><p>Forced <code>data-state</code> values are for documentation snapshots only.</p></section>
+<section class="ds-section" id="code"><h2><a href="#code">Code</a></h2>
+  <pre><code>&lt;section class="card form-panel" aria-labelledby="details-title"&gt;
+  &lt;h2 id="details-title"&gt;Your details&lt;/h2&gt;
+  &lt;div class="alert alert--danger form-summary" tabindex="-1" aria-labelledby="summary-title"&gt;
+    &lt;svg class="icon" aria-hidden="true" …&gt;&lt;/svg&gt;
+    &lt;div&gt;&lt;p class="alert__title" id="summary-title"&gt;Check 1 answer&lt;/p&gt;
+      &lt;ul&gt;&lt;li&gt;&lt;a href="#email"&gt;Enter an email address like name@example.com&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;form class="stack" novalidate&gt;
+    &lt;div class="form-row"&gt;…two short fields…&lt;/div&gt;
+    &lt;div class="field"&gt;…&lt;/div&gt;
+    &lt;div class="form-actions"&gt;&lt;button class="btn btn--primary" type="submit"&gt;Send request&lt;/button&gt;&lt;/div&gt;
+  &lt;/form&gt;
+&lt;/section&gt;</code></pre>
+  <table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Effect</th></tr></thead><tbody>
+    <tr><td><code>.form-panel</code></td><td>38rem max, centred; heading in the h3 role.</td></tr>
+    <tr><td><code>.form-row</code></td><td>One column, two from 768px.</td></tr>
+    <tr><td><code>.filter-row</code></td><td>Inline search and action, wrapping.</td></tr>
+    <tr><td><code>.form-actions</code></td><td>Actions bar; primary full width and first on phones.</td></tr>
+    <tr><td><code>.form-summary</code></td><td>Error summary on a danger alert; style for its link list.</td></tr>
+    <tr><td><code>novalidate</code>, <code>tabindex="-1"</code></td><td>System validation; programmatic focus target.</td></tr>
+  </tbody></table>
+</section>
 
-<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2><ul>{{mock:pages/account-settings/default|visible specimen}}</ul><p>The examples use the corresponding selectors in <a href="../assets/components.css">components.css</a>.</p></section>
+<section class="ds-section" id="sources"><h2><a href="#sources">Sources</a></h2>
+  <ul>
+    {{mock:pages/booking-request/default|form panel with estimate}}
+    {{mock:pages/booking-request/invalid|error summary}}
+    {{mock:pages/booking-request/submitting|busy submit}}
+    {{mock:pages/booking-request/offline|offline banner and disabled submit}}
+    {{mock:pages/booking-request/success|confirmation}}
+    {{mock:pages/account-settings/default|settings form}}
+    {{mock:pages/sign-in/invalid|auth form summary}}
+  </ul>
+  <p>Drift fixed during extraction: the error summary had no links or count and used <code>autofocus</code> (now linked items, focused by script after submit); submitting and offline buttons were <code>disabled</code> and relabelled "Working…" (now <code>aria-busy</code> with the label kept, and an enabled button with an explanation offline); the submit button sat directly under the last field with no actions bar (now <code>.form-actions</code>); the panel heading used the 36px page h2 (now the h3 role inside cards).</p>
+</section>

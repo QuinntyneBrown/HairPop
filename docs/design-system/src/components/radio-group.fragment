@@ -67,7 +67,8 @@
 <fieldset aria-describedby="rg-inv-error"><legend>Rating, 1 to 5</legend><div class="choice-group choice-group--inline"><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>1</span></label><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>2</span></label><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>3</span></label><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>4</span></label><label class="choice"><input type="radio" name="rg-inv" aria-invalid="true"><span>5</span></label></div><span class="field__error" id="rg-inv-error">Choose a rating from 1 to 5.</span></fieldset>
   {{/example}}
   <h3>Both themes</h3>
-  {{themes:stack}}<label class="choice"><input type="radio" name="rt-l" checked><span>Medium</span></label><label class="choice"><input type="radio" name="rt-l"><span>Large</span></label><label class="choice choice--card"><input type="radio" name="rt-c" checked><span>Sat 24 Oct · 10:00 am</span></label>{{/themes}}
+  {{themes:stack}}<label class="choice"><input type="radio" data-state="checked"><span>Medium</span></label><label class="choice"><input type="radio"><span>Large</span></label><label class="choice choice--card" data-state="checked"><input type="radio" data-state="checked"><span>Sat 24 Oct · 10:00 am</span></label>{{/themes}}
+  <p>The theme previews force the checked look with <code>data-state="checked"</code> because the same markup appears twice and one radio group cannot hold two checked options.</p>
 </section>
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>
