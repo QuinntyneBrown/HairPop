@@ -156,3 +156,16 @@ main:focus {
 .form-panel .stack {
   gap: var(--space-4);
 }
+
+/* Sidebar layout: the sidebar navigation's column beside main from 1024px (sidebar-navigation CRD). */
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 100dvh;
+}
+
+@media (min-width: 64rem) {
+  .sidebar-layout {
+    grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr);
+  }
+}
