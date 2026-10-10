@@ -474,8 +474,8 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
 .list__item[aria-current="true"], .list__item[data-state="selected"] { background: var(--color-accent-subtle); }
 .list__item--unread .list__title::before { content: ""; display: inline-block; width: 0.5rem; height: 0.5rem; margin-right: var(--space-2); border-radius: var(--radius-full); background: var(--color-accent); vertical-align: middle; }
 .list__body { flex: 1; min-width: 0; }
-.list__title { font: var(--text-label); font-size: var(--font-size-md); }
-.list__meta { font: var(--text-body-sm); color: var(--color-fg-muted); }
+.list__title { display: block; font: var(--text-label); font-size: var(--font-size-md); }
+.list__meta { display: block; font: var(--text-body-sm); color: var(--color-fg-muted); }
 .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* ---------- Description list -------------------------------------------- */
@@ -570,7 +570,7 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
 .toast-region { position: fixed; z-index: var(--z-toast); bottom: calc(var(--space-4) + env(safe-area-inset-bottom)); left: var(--space-4); right: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); pointer-events: none; }
 @media (min-width: 40rem) { .toast-region { left: auto; width: 24rem; bottom: var(--space-6); right: var(--space-6); } }
 .toast-region--top { bottom: auto; top: var(--space-4); }
-.toast-region--inline { position: static; width: auto; max-width: 24rem; }
+.toast-region--inline { position: static; z-index: auto; width: auto; max-width: 24rem; }
 .toast {
   --toast-bg: var(--color-bg-inverse); --toast-fg: var(--color-fg-inverse); --toast-icon: var(--color-info-icon-inverse);
   position: relative; overflow: hidden; pointer-events: auto; display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4);
@@ -617,6 +617,7 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
 .skeleton--circle { border-radius: var(--radius-full); aspect-ratio: 1; width: var(--control-height-md); }
 .skeleton--rect { border-radius: var(--radius-md); }
 .skeleton--hero { aspect-ratio: 3 / 2; width: 100%; margin-bottom: var(--space-4); }
+.story-card .skeleton--hero { margin-bottom: 0; }
 
 /* ---------- Empty state and error page ---------------------------------- */
 .empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-3); padding: var(--space-12) var(--space-6); }
@@ -628,6 +629,7 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
 .empty--compact { padding: var(--space-8) var(--space-4); }
 .empty--compact .empty__icon { width: var(--control-height-lg); height: var(--control-height-lg); }
 .empty--error .empty__icon { --empty-icon-bg: var(--color-danger-bg); --empty-icon-fg: var(--color-danger-icon); }
+.empty--success .empty__icon { --empty-icon-bg: var(--color-success-bg); --empty-icon-fg: var(--color-success-icon); }
 .empty--warning .empty__icon { --empty-icon-bg: var(--color-warning-bg); --empty-icon-fg: var(--color-warning-icon); }
 .empty__reference { font: var(--text-code); font-size: var(--font-size-xs); color: var(--color-fg-subtle); }
 

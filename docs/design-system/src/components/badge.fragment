@@ -52,7 +52,7 @@
 
 <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
   <p>A badge is static: it has no hover, focus, active, disabled or selected state of its own and is never focusable. When it sits inside a link or card, the container owns the interaction; the matrix shows each tone in the places it appears, including a hovered container.</p>
-  <div class="ds-matrix"><table>
+  <div class="ds-matrix" style="position: relative;"><table>
     <thead><tr><th scope="col">Tone</th><th scope="col">On a card</th><th scope="col">On the page</th><th scope="col">Inside a link</th><th scope="col">Container hovered</th></tr></thead>
     <tbody>
       <tr><th scope="row">Neutral</th><td><div class="card"><span class="badge">Completed</span></div></td><td><span class="badge">Completed</span></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html">Past <span class="badge">3</span></a></td><td><a class="nav-link" href="../../mocks/pages/my-appointments/default.html" data-state="hover">Past <span class="badge">3</span></a></td></tr>

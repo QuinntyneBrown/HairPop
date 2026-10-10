@@ -50,7 +50,7 @@
   {{/example}}
 </section>
 
-<section class="ds-section" id="sizes" data-na="Forms take one width (--layout-form-max) and the medium control size; dense forms are not part of HairPop's customer journey."><h2><a href="#sizes">Sizes</a></h2></section>
+<section class="ds-section" id="sizes" data-na="Forms take one width (38rem, the form maximum) and the medium control size; dense forms are not part of HairPop's customer journey."><h2><a href="#sizes">Sizes</a></h2></section>
 
 <section class="ds-section" id="states"><h2><a href="#states">States</a></h2>
   <h3>Invalid: error summary</h3>
@@ -58,7 +58,7 @@
   {{example:[stack]The summary lists every error as a link; each link moves focus to its field.}}
 <section class="card form-panel" aria-labelledby="fl-inv-title">
   <h2 id="fl-inv-title">Your details</h2>
-  <div class="alert alert--danger form-summary" tabindex="-1" aria-labelledby="fl-inv-sum">{{icon:alert-circle}}<div><p class="alert__title" id="fl-inv-sum">Check 2 answers</p><ul><li><a href="#fl-inv-time">Choose one of Nia’s offered times</a></li><li><a href="#fl-inv-email">Enter an email address like name@example.com</a></li></ul></div></div>
+  <div class="alert alert--danger form-summary" tabindex="-1" aria-labelledby="fl-inv-sum">{{icon:alert-circle}}<div><p class="alert__title" id="fl-inv-sum">Check 2 answers</p><ul><li><a href="#fl-inv-time">Choose one of Nia’s offered times</a></li><li><a href="#fl-inv-email">Enter a full email address</a></li></ul></div></div>
   <form class="stack" action="#states" novalidate>
     <div class="field"><label class="field__label" for="fl-inv-time">Preferred time</label><select class="select" id="fl-inv-time" aria-invalid="true" aria-describedby="fl-inv-time-e"><option value="">Choose a time</option><option>Sat 24 Oct, 10:00 am</option></select><span class="field__error" id="fl-inv-time-e">Choose one of Nia’s offered times.</span></div>
     <div class="field"><label class="field__label" for="fl-inv-email">Your email</label><input class="input" id="fl-inv-email" type="email" value="maya.chen@" aria-invalid="true" aria-describedby="fl-inv-email-e"><span class="field__error" id="fl-inv-email-e">Enter an email address like name@example.com.</span></div>
@@ -70,11 +70,11 @@
   {{example:[stack,start]Submitting keeps the label and sets <code>aria-busy</code>; offline keeps the details and explains; success replaces the form with a confirmation.}}
 <div class="form-actions" style="width: 100%;"><button class="btn btn--primary" type="submit" aria-busy="true">Send request</button></div>
 <p class="inline-status" role="status"><span class="spinner spinner--sm" aria-hidden="true"></span>Sending your request to Nia…</p>
-<div class="alert alert--warning" style="width: 100%;">{{icon:wifi-off}}<div><p><strong>You’re offline.</strong> Your details stay here. Connect, then send your request.</p></div></div>
-<div class="alert alert--success" style="width: 100%;">{{icon:check-circle}}<div><p><strong>Request sent to Nia.</strong> This is a request, not a confirmed appointment. Nia will reply with the final time and price.</p></div></div>
+<div style="width: 100%;"><div class="alert alert--warning">{{icon:wifi-off}}<div><p><strong>You’re offline.</strong> Your details stay here. Connect, then send your request.</p></div></div></div>
+<div style="width: 100%;"><div class="alert alert--success">{{icon:check-circle}}<div><p><strong>Request sent to Nia.</strong> This is a request, not a confirmed appointment. Nia will reply with the final time and price.</p></div></div></div>
   {{/example}}
   <h3>Both themes</h3>
-  {{themes:stack}}<div class="alert alert--danger form-summary">{{icon:alert-circle}}<div><p class="alert__title">Check 1 answer</p><ul><li><a href="#states">Enter an email address</a></li></ul></div></div><div class="form-actions"><button class="btn" type="button">Back</button><button class="btn btn--primary" type="button">Send request</button></div>{{/themes}}
+  {{themes:stack}}<div><div class="alert alert--danger form-summary">{{icon:alert-circle}}<div><p class="alert__title">Check 1 answer</p><ul><li><a href="#states">Enter an email address</a></li></ul></div></div></div><div class="form-actions"><button class="btn" type="button">Back</button><button class="btn btn--primary" type="button">Send request</button></div>{{/themes}}
 </section>
 
 <section class="ds-section" id="responsive"><h2><a href="#responsive">Responsive behaviour</a></h2>

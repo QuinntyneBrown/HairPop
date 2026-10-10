@@ -34,7 +34,7 @@
   <h3>Inherit colour</h3>
   <p>Inside status containers a link takes the container's text colour and becomes semibold, so it keeps the alert's contrast pair and still reads as a link.</p>
   {{example:[stack]The partial-load alert on Nia’s profile with a retry link.}}
-<div class="alert alert--warning">{{icon:warning}}<div><p><strong>Some details are unavailable.</strong> Reviews could not load. <a href="../../mocks/pages/braider-profile/default.html">Retry reviews</a>.</p></div></div>
+<div><div class="alert alert--warning">{{icon:warning}}<div><p><strong>Some details are unavailable.</strong> Reviews could not load. <a href="../../mocks/pages/braider-profile/default.html">Retry reviews</a>.</p></div></div></div>
   {{/example}}
 </section>
 

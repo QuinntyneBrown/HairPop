@@ -19,10 +19,10 @@
         </div>
       </div>
       <span class="ds-callout" style="left: 4%; top: 6%;" aria-hidden="true">1</span>
-      <span class="ds-callout" style="left: 18%; top: 22%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 4%; top: 26%;" aria-hidden="true">2</span>
       <span class="ds-callout" style="left: 84%; top: 22%;" aria-hidden="true">3</span>
-      <span class="ds-callout" style="left: 18%; top: 50%;" aria-hidden="true">4</span>
-      <span class="ds-callout" style="left: 50%; top: 80%;" aria-hidden="true">5</span>
+      <span class="ds-callout" style="left: 4%; top: 52%;" aria-hidden="true">4</span>
+      <span class="ds-callout" style="left: 4%; top: 84%;" aria-hidden="true">5</span>
     </figure>
     <ol class="ds-anatomy__list">
       <li><div><b>Backdrop</b><small><code>--color-bg-backdrop</code> scrim at <code>--z-overlay</code>; the page behind is <code>inert</code>.</small></div></li>

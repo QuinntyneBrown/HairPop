@@ -22,11 +22,11 @@
           <a href="../../mocks/pages/style-detail/default.html">Explore Knotless braids <span aria-hidden="true">→</span></a>
         </div>
       </article>
-      <span class="ds-callout" style="left: 30%; top: 22%;" aria-hidden="true">1</span>
-      <span class="ds-callout" style="left: 30%; top: 52%;" aria-hidden="true">2</span>
-      <span class="ds-callout" style="left: 30%; top: 60%;" aria-hidden="true">3</span>
-      <span class="ds-callout" style="left: 66%; top: 70%;" aria-hidden="true">4</span>
-      <span class="ds-callout" style="left: 30%; top: 84%;" aria-hidden="true">5</span>
+      <span class="ds-callout" style="left: 21%; top: 22%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 21%; top: 50%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 21%; top: 59%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 76%; top: 68%;" aria-hidden="true">4</span>
+      <span class="ds-callout" style="left: 21%; top: 84%;" aria-hidden="true">5</span>
       <span class="ds-callout" style="left: 70%; top: 8%;" aria-hidden="true">6</span>
     </figure>
     <ol class="ds-anatomy__list">

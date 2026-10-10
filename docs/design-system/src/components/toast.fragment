@@ -12,13 +12,13 @@
 <section class="ds-section" id="anatomy"><h2><a href="#anatomy">Anatomy</a></h2>
   <div class="ds-anatomy">
     <figure class="ds-anatomy__figure">
-      <div class="toast-region toast-region--inline"><div class="toast toast--warning">{{icon:warning}}<div class="toast__body"><strong class="toast__title">Time needs a change</strong><span class="toast__text">Nia suggested Sun 25 Oct at 11:00 am.</span><button class="toast__action" type="button">View suggestion</button></div><button class="close" type="button" aria-label="Dismiss: Time needs a change">{{icon:close|icon--sm}}</button><span class="toast__progress" aria-hidden="true"></span></div></div>
-      <span class="ds-callout" style="left: 14%; top: 26%;" aria-hidden="true">1</span>
-      <span class="ds-callout" style="left: 40%; top: 20%;" aria-hidden="true">2</span>
-      <span class="ds-callout" style="left: 46%; top: 48%;" aria-hidden="true">3</span>
-      <span class="ds-callout" style="left: 32%; top: 70%;" aria-hidden="true">4</span>
-      <span class="ds-callout" style="left: 84%; top: 26%;" aria-hidden="true">5</span>
-      <span class="ds-callout" style="left: 62%; top: 82%;" aria-hidden="true">6</span>
+      <div class="toast-region toast-region--inline" style="z-index: auto;"><div class="toast toast--warning">{{icon:warning}}<div class="toast__body"><strong class="toast__title">Time needs a change</strong><span class="toast__text">Nia suggested Sun 25 Oct at 11:00 am.</span><button class="toast__action" type="button">View suggestion</button></div><button class="close" type="button" aria-label="Dismiss: Time needs a change">{{icon:close|icon--sm}}</button><span class="toast__progress" aria-hidden="true"></span></div></div>
+      <span class="ds-callout" style="left: 18%; top: 16%;" aria-hidden="true">1</span>
+      <span class="ds-callout" style="left: 50%; top: 16%;" aria-hidden="true">2</span>
+      <span class="ds-callout" style="left: 73%; top: 41%;" aria-hidden="true">3</span>
+      <span class="ds-callout" style="left: 49%; top: 57%;" aria-hidden="true">4</span>
+      <span class="ds-callout" style="left: 76%; top: 21%;" aria-hidden="true">5</span>
+      <span class="ds-callout" style="left: 26%; top: 74%;" aria-hidden="true">6</span>
     </figure>
     <ol class="ds-anatomy__list">
       <li><div><b>Status icon</b><small>20px, the tone's <code>--color-*-icon-inverse</code>; tone is never colour alone.</small></div></li>
