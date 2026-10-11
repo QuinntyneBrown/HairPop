@@ -13,6 +13,7 @@ export class SignInPage {
   readonly summary: Locator;
   readonly fieldErrors: Locator;
   readonly failure: Locator;
+  readonly rateLimited: Locator;
   readonly forgotPassword: Locator;
   readonly createAccount: Locator;
 
@@ -26,6 +27,7 @@ export class SignInPage {
     this.summary = this.form.locator('.form-summary');
     this.fieldErrors = this.form.locator('.field__error');
     this.failure = page.getByRole('alert').filter({ hasText: 'Check your email and password' });
+    this.rateLimited = page.locator('hp-alert', { hasText: 'Too many sign-in attempts' });
     this.forgotPassword = page.getByRole('link', { name: 'Forgot your password?' });
     this.createAccount = page.getByRole('link', { name: 'Create an account' });
   }

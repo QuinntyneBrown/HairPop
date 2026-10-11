@@ -99,15 +99,19 @@ test.describe('Style gallery criteria', () => {
   test('a pending request shows the loading region for styles', async ({ page, api }) => {
     await api.given(
       listStyles(gallery),
-      listStyles([passionTwists], { query: { category: 'twists' }, delayMs: 1500 }),
+      listStyles([passionTwists], { query: { category: 'twists' } }),
     );
     const galleryPage = new StyleGalleryPage(page);
     await galleryPage.open();
+    const release = api.hold('GET', '/api/styles');
 
     await galleryPage.chooseCategory('Twists');
 
     await expect(galleryPage.loading).toBeVisible();
     await expect(galleryPage.loading).toContainText('Loading styles');
+
+    release();
+
     await expect(galleryPage.cards).toHaveCount(1);
     await expect(galleryPage.loading).toHaveCount(0);
   });

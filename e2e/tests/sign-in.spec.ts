@@ -115,9 +115,7 @@ test.describe('Sign in', () => {
 
     await signIn.signIn('maya.chen@example.com', 'whatever it was');
 
-    await expect(
-      page.getByRole('alert').filter({ hasText: 'Too many sign-in attempts' }),
-    ).toContainText('Try again in 2 minutes.');
+    await expect(signIn.rateLimited).toContainText('Try again in 2 minutes.');
     await expect(signIn.email).toHaveValue('maya.chen@example.com');
   });
 
