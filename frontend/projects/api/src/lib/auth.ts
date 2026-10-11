@@ -21,6 +21,14 @@ export interface SignInCredentials {
   readonly audience: 'customer' | 'braider';
 }
 
+/** What a new customer enters (L2-010). */
+export interface RegisterDetails {
+  readonly name: string;
+  readonly email: string;
+  /** At least 12 characters. */
+  readonly password: string;
+}
+
 export interface AuthApi {
   /** Who is signed in; a 401 error when nobody is. */
   session(): Observable<{ user: SessionUser }>;
@@ -28,6 +36,11 @@ export interface AuthApi {
   signIn(credentials: SignInCredentials): Observable<{ user: SessionUser }>;
   /** Ends the session. */
   signOut(): Observable<void>;
+  /**
+   * Creates an account and starts email verification. The answer is the same whether or not the
+   * email was already registered; the key makes a retry safe (L2-010 AC3, AC4).
+   */
+  register(details: RegisterDetails, idempotencyKey: string): Observable<{ email: string }>;
 }
 
 export const AUTH_API = new InjectionToken<AuthApi>('AUTH_API');
@@ -47,6 +60,16 @@ export class HttpAuthApi implements AuthApi {
       .pipe(
         switchMap(() => this.http.post<{ user: SessionUser }>('/api/auth/sign-in', credentials)),
       );
+  }
+
+  register(details: RegisterDetails, idempotencyKey: string): Observable<{ email: string }> {
+    return this.csrf.ensure().pipe(
+      switchMap(() =>
+        this.http.post<{ email: string }>('/api/auth/register', details, {
+          headers: { 'Idempotency-Key': idempotencyKey },
+        }),
+      ),
+    );
   }
 
   signOut(): Observable<void> {

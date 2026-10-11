@@ -13,16 +13,10 @@ import {
   TextField,
 } from '@hairpop/components';
 
+import { waitText } from '../../shared/retry-wait';
+
 /** How the last attempt failed, so the right message shows above the form. */
 type Failure = { kind: 'refused' } | { kind: 'rate-limited'; wait: string } | { kind: 'unknown' };
-
-/** "2 minutes", "30 seconds": how long the API asks the visitor to wait. */
-function waitText(seconds: number | null): string {
-  if (seconds === null || seconds <= 0) return 'a few minutes';
-  if (seconds < 60) return `${seconds} ${seconds === 1 ? 'second' : 'seconds'}`;
-  const minutes = Math.ceil(seconds / 60);
-  return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
-}
 
 /** A return address stays on this site: a path, never another origin. */
 function safeReturnUrl(url: string | undefined): string {

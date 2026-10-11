@@ -47,6 +47,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/sign-in/sign-in.page').then((m) => m.SignInPage),
   },
   {
+    path: 'sign-up',
+    title: 'Create account · HairPop',
+    loadComponent: () => import('./pages/sign-up/sign-up.page').then((m) => m.SignUpPage),
+  },
+  {
     path: 'help',
     title: 'Help · HairPop',
     data: { nav: 'help' },

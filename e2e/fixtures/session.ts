@@ -42,3 +42,29 @@ export function signInRateLimited(retryAfter: number): ApiRule {
     body: { message: 'Too many attempts.', retryAfter },
   };
 }
+
+/** POST /api/auth/register answers the same whether or not the email was already registered. */
+export function registerAccepted(email: string): ApiRule {
+  return { method: 'POST', path: '/api/auth/register', status: 202, body: { email } };
+}
+
+/** POST /api/auth/register refuses fields, with the API's own wording. */
+export function registerRejected(errors: Record<string, string[]>): ApiRule {
+  return {
+    method: 'POST',
+    path: '/api/auth/register',
+    status: 422,
+    body: { message: 'The given data was invalid.', errors },
+  };
+}
+
+/** POST /api/auth/register is rate limited. */
+export function registerRateLimited(retryAfter: number): ApiRule {
+  return {
+    method: 'POST',
+    path: '/api/auth/register',
+    status: 429,
+    headers: { 'Retry-After': String(retryAfter) },
+    body: { message: 'Too many attempts.', retryAfter },
+  };
+}
