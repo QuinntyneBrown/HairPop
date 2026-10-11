@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video 01 Slides</title>
+<link rel="stylesheet" href="../assets/slides.css">
+</head>
+<body data-video-number="01" data-video-title="Discovering styles" data-parts="Introduction|Gallery|Criteria|Paging|Recovery|Style detail|Recap">
+
+<section id="title" data-part="0">
+  <div class="kicker">HairPop · Video 01</div>
+  <h1>Discovering styles</h1>
+  <p class="lead">The style gallery, categories, search and the style detail page, recorded from the customer web app.</p>
+</section>
+
+<section id="setup" data-part="0" data-cue="Everything on screen is the built app">
+  <h2>What you are watching</h2>
+  <div class="cols">
+    <div class="card">
+      <h3>The real app</h3>
+      <p>The built Angular customer app, server-rendered, at <code>/</code> and <code>/styles/:slug</code>.</p>
+    </div>
+    <div class="card">
+      <h3>A stubbed API</h3>
+      <p>The same fixtures the Playwright suite uses: <code>e2e/fixtures/styles.ts</code>.</p>
+    </div>
+    <div class="card">
+      <h3>The mock cast</h3>
+      <p>Names, prices and dates from <code>docs/mocks/README.md</code>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" data-part="1" data-cue="The gallery is the home page." data-clip="clips/gallery-overview.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>Style gallery</h3>
+    <ul>
+      <li>Typical time and price on every card</li>
+      <li>Illustrated panel when there is no photo</li>
+      <li>Missing prices are left out, never invented</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="categories" data-part="2" data-cue="The category buttons narrow the gallery" data-clip="clips/gallery-categories.mp4">
+  <aside class="clip-notes">
+    <h3>Categories</h3>
+    <ul>
+      <li>Braids, Twists, Locs, All styles</li>
+      <li>Selected button is pressed for screen readers too</li>
+      <li>The choice lives in the address</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="search" data-part="2" data-cue="Search works the same way." data-clip="clips/gallery-search.mp4">
+  <aside class="clip-notes">
+    <h3>Search</h3>
+    <ul>
+      <li>Results line counts the styles</li>
+      <li>Search and category combine</li>
+      <li>No matches offers Clear filters</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="pages" data-part="3" data-cue="When there are more styles than fit on one page" data-clip="clips/gallery-pages.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>Paging</h3>
+    <ul>
+      <li>Showing 1–2 of 3</li>
+      <li>Category and page kept in the address</li>
+      <li>No card repeats</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="recovery" data-part="4" data-cue="Real networks fail, and the gallery is honest about it." data-clip="clips/gallery-recovery.mp4">
+  <aside class="clip-notes">
+    <h3>Failure and offline</h3>
+    <ul>
+      <li>We couldn’t load styles, with Try again</li>
+      <li>You’re offline is its own state</li>
+      <li>Retries keep the chosen category</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="detail" data-part="5" data-cue="Opening a card takes you to the style's own page." data-clip="clips/style-detail.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>Style detail</h3>
+    <ul>
+      <li>Typical time, price and wear</li>
+      <li>Variations by size</li>
+      <li>What changes the final quote</li>
+      <li>Find a braider opens matching braiders</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="partial" data-part="5" data-cue="Sometimes only part of a style loads." data-clip="clips/style-detail-partial.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>Partial data</h3>
+    <ul>
+      <li>Shows what loaded</li>
+      <li>Names what didn’t</li>
+      <li>Retry fills the gap in place</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="recap" data-part="6" data-cue="Recap">
+  <h2>Things to remember</h2>
+  <ul class="recap">
+    <li>Every card shows typical time and price, and never invents a missing value</li>
+    <li>Category, search and page live in the address; <strong>Clear filters</strong> resets them together</li>
+    <li>Errors and offline explain themselves and retry without losing choices</li>
+    <li>Every style page leads to the braiders who offer it</li>
+  </ul>
+  <p class="muted small">Next: 02 · Finding a braider</p>
+</section>
+
+<script src="../assets/slides.js"></script>
+</body>
+</html>

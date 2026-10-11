@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video 03 Slides</title>
+<link rel="stylesheet" href="../assets/slides.css">
+</head>
+<body data-video-number="03" data-video-title="Accounts and signing in" data-parts="Introduction|Create account|Failures|Sign in|Signed in|Recap">
+
+<section id="title" data-part="0">
+  <div class="kicker">HairPop · Video 03</div>
+  <h1>Accounts and signing in</h1>
+  <p class="lead">Creating an account, signing in, and what HairPop deliberately does not reveal.</p>
+</section>
+
+<section id="routes" data-part="0" data-cue="Everything is recorded from the real app">
+  <h2>Where these screens live</h2>
+  <div class="cols">
+    <div class="card">
+      <h3>Create account</h3>
+      <p><code>/sign-up</code></p>
+      <p class="small muted">POST /api/auth/register</p>
+    </div>
+    <div class="card">
+      <h3>Sign in</h3>
+      <p><code>/sign-in</code></p>
+      <p class="small muted">POST /api/auth/sign-in</p>
+    </div>
+    <div class="card">
+      <h3>Session</h3>
+      <p>The top bar account link</p>
+      <p class="small muted">GET /api/session</p>
+    </div>
+  </div>
+</section>
+
+<section id="sign-up" data-part="1" data-cue="The create account page is titled Join HairPop." data-clip="clips/sign-up-validation.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>Join HairPop</h3>
+    <ul>
+      <li>Name, email, password of 12+ characters</li>
+      <li>Error summary links to fields</li>
+      <li>Nothing sent until valid</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="sign-up-failure" data-part="2" data-cue="With valid details, Maya presses Create account" data-clip="clips/sign-up-success.mp4">
+  <aside class="clip-notes">
+    <h3>Failure, then success</h3>
+    <ul>
+      <li>Nothing you entered was lost</li>
+      <li>Retry reuses the request key</li>
+      <li>Same answer for known emails</li>
+      <li>Verification link sent</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="sign-in" data-part="3" data-cue="The sign in page greets returning customers" data-clip="clips/sign-in-problems.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>Sign in problems</h3>
+    <ul>
+      <li>Validates before sending</li>
+      <li>Never says which credential was wrong</li>
+      <li>Password cleared, email kept</li>
+      <li>Rate limit says when to retry</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="signed-in" data-part="4" data-cue="From any page, Sign in in the top bar" data-clip="clips/sign-in-success.mp4">
+  <aside class="clip-notes">
+    <h3>Signed in</h3>
+    <ul>
+      <li>Forgot your password and Create an account</li>
+      <li>Top bar shows “Maya”</li>
+      <li>Links to account settings</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="return" data-part="4" data-cue="Two details are worth knowing.">
+  <h2>Two details worth knowing</h2>
+  <div class="cols">
+    <div class="card">
+      <h3>Safe return address</h3>
+      <p><code>/sign-in?returnUrl=/help</code> returns to Help.</p>
+      <p class="small muted">An address that leaves the site is ignored.</p>
+    </div>
+    <div class="card">
+      <h3>Existing sessions</h3>
+      <p>A valid session shows the customer’s first name on any page.</p>
+    </div>
+  </div>
+</section>
+
+<section id="recap" data-part="5" data-cue="Recap">
+  <h2>Things to remember</h2>
+  <ul class="recap">
+    <li>Name, email and a 12-character password, validated before sending</li>
+    <li>Failures keep every entry; retries make only one account</li>
+    <li>Sign in never reveals which credential was wrong</li>
+    <li>Rate limits say when to try again</li>
+    <li>The top bar shows the customer’s first name once signed in</li>
+  </ul>
+  <p class="muted small">Next: 04 · Help, privacy and recovery</p>
+</section>
+
+<script src="../assets/slides.js"></script>
+</body>
+</html>

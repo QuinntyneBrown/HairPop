@@ -1,0 +1,395 @@
+/* Shared stylesheet for every video deck (docs/videos/README.md). Slides are 1920x1080; the
+   runtime scales the stage to the window when browsing and renders 1:1 for the video builder. */
+@import url('../../design-system/tokens/tokens.css');
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../../design-system/assets/fonts/manrope-normal-200-800.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../design-system/assets/fonts/jetbrains-mono-normal-100-800.woff2') format('woff2');
+  font-weight: 100 800;
+  font-display: block;
+}
+
+:root {
+  --deck-bg: var(--palette-gray-25);
+  --deck-ink: var(--palette-gray-950);
+  --deck-muted: var(--palette-gray-600);
+  --deck-line: var(--palette-gray-200);
+  --deck-card: var(--palette-white);
+  --deck-accent: var(--palette-plum-600);
+  --deck-accent-soft: var(--palette-plum-50);
+  --deck-accent-strong: var(--palette-plum-800);
+  --deck-code-bg: var(--palette-gray-950);
+  --deck-code-ink: var(--palette-gray-100);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--palette-gray-900);
+  font-family: 'Manrope', system-ui, sans-serif;
+  color: var(--deck-ink);
+}
+
+.stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--deck-bg);
+  transform-origin: 0 0;
+}
+
+/* Header: deck label and part name. */
+.deck-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--deck-muted);
+  border-bottom: 1px solid var(--deck-line);
+  background: var(--deck-card);
+  z-index: 2;
+}
+
+.deck-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--deck-accent);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.deck-header .brand::before {
+  content: '✦';
+  font-size: 26px;
+}
+
+.deck-header .part {
+  color: var(--deck-ink);
+}
+
+/* Progress: one segment per part. */
+.deck-progress {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  bottom: 22px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.deck-progress span {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--deck-line);
+}
+
+.deck-progress span.done {
+  background: var(--palette-plum-300);
+}
+
+.deck-progress span.current {
+  background: var(--deck-accent);
+}
+
+section {
+  position: absolute;
+  inset: 96px 0 0 0;
+  padding: 72px 120px 120px;
+  display: none;
+  font-size: 36px;
+  line-height: 1.45;
+}
+
+section.active {
+  display: block;
+}
+
+/* Title slide. */
+section:first-of-type {
+  display: none;
+  padding-top: 200px;
+  background: radial-gradient(
+      circle at 85% 20%,
+      var(--palette-plum-100) 0,
+      transparent 45%
+    ),
+    var(--deck-bg);
+}
+
+section:first-of-type.active {
+  display: block;
+}
+
+.kicker {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--deck-accent);
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 112px;
+  line-height: 1.02;
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  margin: 0 0 32px;
+  max-width: 1500px;
+}
+
+h2 {
+  font-size: 68px;
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  margin: 0 0 40px;
+}
+
+h3 {
+  font-size: 38px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.lead {
+  font-size: 42px;
+  color: var(--deck-muted);
+  max-width: 1400px;
+  margin: 0;
+}
+
+.muted {
+  color: var(--deck-muted);
+}
+
+.small {
+  font-size: 28px;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+li {
+  margin: 0 0 18px;
+}
+
+li::marker {
+  color: var(--deck-accent);
+}
+
+code,
+.file {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.82em;
+  background: var(--deck-accent-soft);
+  color: var(--deck-accent-strong);
+  padding: 2px 10px;
+  border-radius: 8px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--palette-plum-300);
+  color: var(--deck-accent-strong);
+  background: var(--deck-accent-soft);
+  margin: 0 10px 10px 0;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.card {
+  background: var(--deck-card);
+  border: 1px solid var(--deck-line);
+  border-radius: 28px;
+  padding: 40px 44px;
+  box-shadow: 0 10px 30px rgb(20 24 30 / 6%);
+  font-size: 32px;
+}
+
+.card h3 {
+  color: var(--deck-accent);
+}
+
+.quote {
+  font-size: 52px;
+  line-height: 1.3;
+  font-weight: 300;
+  border-left: 8px solid var(--deck-accent);
+  padding-left: 48px;
+  max-width: 1500px;
+}
+
+.steps {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 88px;
+  margin-bottom: 30px;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 30px;
+  background: var(--deck-accent);
+  color: var(--palette-white);
+}
+
+.question {
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 1.2;
+  max-width: 1500px;
+}
+
+.recap li {
+  font-size: 38px;
+}
+
+pre.code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 28px;
+  line-height: 1.5;
+  background: var(--deck-code-bg);
+  color: var(--deck-code-ink);
+  border-radius: 24px;
+  padding: 36px 44px;
+  margin: 0;
+  white-space: pre;
+  overflow: hidden;
+}
+
+pre.code.tight {
+  font-size: 22px;
+}
+
+pre.code .mark {
+  display: inline-block;
+  width: 100%;
+  background: rgb(180 122 212 / 22%);
+}
+
+/* Progressive builds. */
+.item.pending {
+  visibility: hidden;
+}
+
+.item.dim {
+  opacity: 0.35;
+}
+
+/* Screen recordings: a 1408x792 frame with notes beside it. */
+section[data-clip] {
+  padding: 40px 48px 0;
+}
+
+section[data-clip] .clip-frame {
+  position: absolute;
+  left: 48px;
+  top: 40px;
+  width: 1408px;
+  height: 792px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--palette-gray-200);
+  box-shadow:
+    0 0 0 1px var(--deck-line),
+    0 24px 60px rgb(20 24 30 / 18%);
+}
+
+section[data-clip] video.clip {
+  display: block;
+  width: 1408px;
+  height: 792px;
+}
+
+section[data-clip] .clip-frame.phone {
+  left: 380px;
+  width: 390px;
+  height: 844px;
+  top: 20px;
+}
+
+section[data-clip] video.clip.phone {
+  width: 390px;
+  height: 844px;
+}
+
+aside.clip-notes {
+  position: absolute;
+  left: 1496px;
+  right: 48px;
+  top: 40px;
+  font-size: 27px;
+  line-height: 1.4;
+}
+
+aside.clip-notes h3 {
+  font-size: 34px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: var(--deck-ink);
+}
+
+aside.clip-notes ul {
+  padding-left: 0.9em;
+}
+
+aside.clip-notes li {
+  margin-bottom: 14px;
+}
+
+/* While the builder renders, the clip area stays empty for the recording to be laid over. */
+.render video.clip {
+  visibility: hidden;
+}
