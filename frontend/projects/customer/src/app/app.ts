@@ -6,6 +6,8 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Title } from '@angular/platform-browser';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {
@@ -89,6 +91,7 @@ export class App {
   protected readonly account = { label: 'Sign in', link: '/sign-in' };
 
   constructor() {
+    this.announceTitleOnNavigation();
     const injector = inject(Injector);
     this.router.events
       .pipe(
@@ -96,6 +99,26 @@ export class App {
         take(1),
       )
       .subscribe(() => afterNextRender(() => this.hydrated.set(true), { injector }));
+  }
+
+  /**
+   * Announces the page title after a client-side navigation to another page (L2-041); the first
+   * load and query-only changes such as searching stay quiet. The heading takes focus itself
+   * (page-header D-6).
+   */
+  private announceTitleOnNavigation(): void {
+    const announcer = inject(LiveAnnouncer);
+    const title = inject(Title);
+    const injector = inject(Injector);
+    let previous: string | null = null;
+    this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe((e) => {
+      const path = e.urlAfterRedirects.split(/[?#]/)[0];
+      if (previous !== null && path !== previous) {
+        // The router sets the document title after this event, so read it after the next render.
+        afterNextRender(() => void announcer.announce(title.getTitle()), { injector });
+      }
+      previous = path;
+    });
   }
 
   protected readonly current = toSignal(

@@ -12,6 +12,7 @@ export class Shell {
   readonly menuButton: Locator;
   readonly themeToggle: Locator;
   readonly root: Locator;
+  readonly announcements: Locator;
 
   constructor(readonly page: Page) {
     this.skipLink = page.locator('a.skip-link');
@@ -24,6 +25,7 @@ export class Shell {
     this.menuButton = this.topBar.locator('button.topbar__menu');
     this.themeToggle = this.topBar.locator('button.theme-toggle');
     this.root = page.locator('html');
+    this.announcements = page.locator('.cdk-live-announcer-element');
   }
 
   navLink(name: string): Locator {
