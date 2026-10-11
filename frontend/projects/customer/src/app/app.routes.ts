@@ -10,6 +10,24 @@ export const routes: Routes = [
       import('./pages/style-gallery/style-gallery.page').then((m) => m.StyleGalleryPage),
   },
   {
+    path: 'styles/:slug/braiders',
+    title: 'Matching braiders · HairPop',
+    data: { nav: 'braiders' },
+    loadComponent: () =>
+      import('./pages/matching-braiders/matching-braiders.page').then(
+        (m) => m.MatchingBraidersPage,
+      ),
+  },
+  {
+    path: 'braiders',
+    title: 'Braiders · HairPop',
+    data: { nav: 'braiders' },
+    loadComponent: () =>
+      import('./pages/matching-braiders/matching-braiders.page').then(
+        (m) => m.MatchingBraidersPage,
+      ),
+  },
+  {
     path: 'styles/:slug',
     title: 'Style · HairPop',
     data: { nav: 'styles' },
