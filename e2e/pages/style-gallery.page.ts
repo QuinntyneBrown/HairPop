@@ -1,6 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 
 import { Shell } from './shell';
+import { textsOf } from './texts';
 
 /** One story card in the gallery. */
 export class StyleCard {
@@ -30,6 +31,7 @@ export class StyleGalleryPage {
   readonly categories: Locator;
   readonly results: Locator;
   readonly cards: Locator;
+  readonly titles: Locator;
   readonly emptyState: Locator;
   readonly loading: Locator;
   readonly offline: Locator;
@@ -44,6 +46,7 @@ export class StyleGalleryPage {
     this.categories = page.getByRole('group', { name: 'Style category' });
     this.results = page.locator('section.feature-grid');
     this.cards = this.results.locator('article.story-card');
+    this.titles = this.cards.locator('.card__title');
     this.emptyState = page.locator('hp-empty-state');
     this.loading = page.locator('hp-skeleton-group');
     this.offline = page.locator('hp-alert', { hasText: 'You’re offline' });
@@ -62,7 +65,7 @@ export class StyleGalleryPage {
   }
 
   async cardTitles(): Promise<string[]> {
-    return this.cards.locator('.card__title').allInnerTexts();
+    return textsOf(this.cards.locator('.card__title'));
   }
 
   category(name: string): Locator {

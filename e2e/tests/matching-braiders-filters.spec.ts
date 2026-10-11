@@ -182,7 +182,7 @@ test.describe('Matching braiders filters', () => {
 
     await matching.emptyAction('Clear filters').click();
 
-    expect(await matching.cardTitles()).toEqual(['Nia Okafor', 'Aisha Mensah', 'Jules Baptiste']);
+    await expect(matching.titles).toHaveText(['Nia Okafor', 'Aisha Mensah', 'Jules Baptiste']);
     expect(await matching.activeFilterLabels()).toEqual(['Knotless braids']);
     await expect(page).toHaveURL(/\/styles\/knotless-braids\/braiders$/);
   });

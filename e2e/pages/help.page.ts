@@ -1,6 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 
 import { Shell } from './shell';
+import { textsOf } from './texts';
 
 /** Help at `/help` (docs/mocks/pages/help). */
 export class HelpPage {
@@ -27,7 +28,7 @@ export class HelpPage {
   }
 
   async topicTitles(): Promise<string[]> {
-    return this.topics.locator('.card__title').allInnerTexts();
+    return textsOf(this.topics.locator('.card__title'));
   }
 
   emptyHeading(): Locator {

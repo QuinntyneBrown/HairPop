@@ -1,6 +1,7 @@
 import { Locator, Page, Response } from '@playwright/test';
 
 import { Shell } from './shell';
+import { textsOf } from './texts';
 
 /** A style's detail at `/styles/:slug` (docs/mocks/pages/style-detail). */
 export class StyleDetailPage {
@@ -44,6 +45,6 @@ export class StyleDetailPage {
   }
 
   async factLabels(): Promise<string[]> {
-    return this.facts.locator('.fact__label').allInnerTexts();
+    return textsOf(this.facts.locator('.fact__label'));
   }
 }

@@ -1,6 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 
 import { Shell } from './shell';
+import { textsOf } from './texts';
 
 /** Terms of use at `/terms` and Privacy at `/privacy` (docs/mocks/pages/terms, privacy). */
 export class LegalPage {
@@ -25,7 +26,7 @@ export class LegalPage {
   }
 
   async sectionHeadings(): Promise<string[]> {
-    return this.copy.getByRole('heading', { level: 2 }).allInnerTexts();
+    return textsOf(this.copy.getByRole('heading', { level: 2 }));
   }
 
   emptyHeading(): Locator {

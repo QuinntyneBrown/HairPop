@@ -62,11 +62,7 @@ test.describe('Style gallery criteria', () => {
 
     await galleryPage.emptyAction('Clear filters').click();
 
-    expect(await galleryPage.cardTitles()).toEqual([
-      'Knotless braids',
-      'Passion twists',
-      'Cornrows',
-    ]);
+    await expect(galleryPage.titles).toHaveText(['Knotless braids', 'Passion twists', 'Cornrows']);
     await expect(galleryPage.searchBox).toHaveValue('');
     await expect(galleryPage.category('All styles')).toHaveAttribute('aria-pressed', 'true');
   });

@@ -1,6 +1,7 @@
 import { Locator, Page, Response } from '@playwright/test';
 
 import { Shell } from './shell';
+import { textsOf } from './texts';
 
 /** A braider's public profile at `/braiders/:slug` (docs/mocks/pages/braider-profile). */
 export class BraiderProfilePage {
@@ -49,12 +50,12 @@ export class BraiderProfilePage {
   }
 
   async serviceTitles(): Promise<string[]> {
-    return this.services.locator('.list__title').allInnerTexts();
+    return textsOf(this.services.locator('.list__title'));
   }
 
   /** The "Before you book" terms in order. */
   async policyTerms(): Promise<string[]> {
-    return this.beforeYouBook.locator('dt').allInnerTexts();
+    return textsOf(this.beforeYouBook.locator('dt'));
   }
 
   /** The value shown for one "Before you book" term. */
@@ -63,7 +64,7 @@ export class BraiderProfilePage {
   }
 
   async portfolioCaptions(): Promise<string[]> {
-    return this.portfolio.locator('.gallery__caption').allInnerTexts();
+    return textsOf(this.portfolio.locator('.gallery__caption'));
   }
 
   /** How many columns the portfolio grid lays out: the distinct left edges of its items. */

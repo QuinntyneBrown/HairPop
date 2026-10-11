@@ -1,6 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 
 import { Shell } from './shell';
+import { textsOf } from './texts';
 
 /** One result card. */
 export class BraiderCard {
@@ -27,6 +28,7 @@ export class MatchingBraidersPage {
   readonly heading: Locator;
   readonly subtitle: Locator;
   readonly cards: Locator;
+  readonly titles: Locator;
   readonly searchBox: Locator;
   readonly filtersButton: Locator;
   readonly activeFilters: Locator;
@@ -39,6 +41,7 @@ export class MatchingBraidersPage {
     this.heading = page.getByRole('heading', { level: 1 });
     this.subtitle = page.locator('hp-page-header .subtitle');
     this.cards = page.locator('section.feature-grid article.story-card');
+    this.titles = this.cards.locator('.card__title');
     this.searchBox = page.getByRole('searchbox', { name: 'Search matching braiders' });
     this.filtersButton = page.getByRole('button', { name: /^Filters/ });
     this.activeFilters = page.getByRole('group', { name: 'Active filters' });
@@ -53,7 +56,7 @@ export class MatchingBraidersPage {
 
   /** The text of each active-filter chip, in order. */
   async activeFilterLabels(): Promise<string[]> {
-    return this.activeFilterChips.allInnerTexts();
+    return textsOf(this.activeFilterChips);
   }
 
   async search(term: string): Promise<void> {
@@ -68,7 +71,7 @@ export class MatchingBraidersPage {
   }
 
   async cardTitles(): Promise<string[]> {
-    return this.cards.locator('.card__title').allInnerTexts();
+    return textsOf(this.cards.locator('.card__title'));
   }
 
   emptyHeading(): Locator {
