@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { Alert, Button, ToastService } from '@hairpop/components';
+import { Alert, Button, Link, ToastService } from '@hairpop/components';
 
+import { ConsentPreferences } from './consent-preferences';
 import { ConsentStore } from './consent.store';
 
 /**
@@ -10,7 +11,7 @@ import { ConsentStore } from './consent.store';
 @Component({
   selector: 'hp-cookie-banner',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Alert, Button],
+  imports: [Alert, Button, Link],
   template: `
     @if (consent.ready() && consent.choice() === null) {
       <hp-alert
@@ -42,6 +43,14 @@ import { ConsentStore } from './consent.store';
         >
           Essential only
         </button>
+        <a
+          hp-link
+          slot="actions"
+          href="/privacy"
+          aria-haspopup="dialog"
+          (click)="openPreferences($event)"
+          >Cookie preferences</a
+        >
       </hp-alert>
     }
   `,
@@ -49,20 +58,21 @@ import { ConsentStore } from './consent.store';
 export class CookieBanner {
   protected readonly consent = inject(ConsentStore);
   private readonly toasts = inject(ToastService);
+  private readonly preferences = inject(ConsentPreferences);
 
   protected readonly saving = signal(false);
+
+  protected openPreferences(event: Event): void {
+    event.preventDefault();
+    this.preferences.open();
+  }
 
   protected async choose(optionalUsage: boolean): Promise<void> {
     if (this.saving()) return;
     this.saving.set(true);
     try {
       await this.consent.save(optionalUsage);
-      this.toasts.show({
-        tone: 'success',
-        heading: 'Preferences saved',
-        text: `${optionalUsage ? 'Optional usage data allowed' : 'Essential only'}. You can change this in Cookie preferences.`,
-        key: 'cookie-consent',
-      });
+      this.preferences.confirmSaved(optionalUsage);
     } catch {
       this.toasts
         .show({

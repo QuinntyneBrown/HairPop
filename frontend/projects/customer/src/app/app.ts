@@ -22,6 +22,7 @@ import {
 } from '@hairpop/components';
 import { filter, map, take } from 'rxjs';
 
+import { ConsentPreferences } from './shared/consent-preferences';
 import { CookieBanner } from './shared/cookie-banner';
 
 /** The primary destinations, in top-bar order (top-bar.md). */
@@ -36,6 +37,7 @@ const FOOTER_LINKS: readonly FooterLink[] = [
   { id: 'help', label: 'Help', link: '/help' },
   { id: 'terms', label: 'Terms', link: '/terms' },
   { id: 'privacy', label: 'Privacy', link: '/privacy' },
+  { id: 'cookies', label: 'Cookie preferences', link: '/privacy', opensDialog: true },
 ];
 
 /** Reads the deepest route's `nav` data: the top-bar link marked current (top-bar.md D-2). */
@@ -76,12 +78,14 @@ function currentNav(route: ActivatedRouteSnapshot): string | null {
         slot="footer"
         brandLine="HairPop · Made for confident hair decisions"
         [links]="footerLinks"
+        (dialogRequested)="preferences.open()"
       ></footer>
     </hp-app-shell>
   `,
 })
 export class App {
   private readonly router = inject(Router);
+  protected readonly preferences = inject(ConsentPreferences);
 
   /**
    * Set once the first navigation's page has rendered in the browser, so e2e tests act only on

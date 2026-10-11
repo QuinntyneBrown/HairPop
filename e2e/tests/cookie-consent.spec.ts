@@ -6,7 +6,7 @@ import { expect, test } from '../fixtures/api';
 import { saveConsent } from '../fixtures/consent';
 import { serverError } from '../fixtures/errors';
 import { gallery, listStyles } from '../fixtures/styles';
-import { ConsentBanner } from '../pages/consent';
+import { ConsentBanner, CookiePreferencesDialog } from '../pages/consent';
 import { StyleGalleryPage } from '../pages/style-gallery.page';
 import { Toasts } from '../pages/toasts';
 
@@ -112,5 +112,124 @@ test.describe('Returning visitor', () => {
     await new StyleGalleryPage(page).open();
 
     await expect(new ConsentBanner(page).root).toBeHidden();
+  });
+});
+
+test.describe('Cookie preferences dialog', () => {
+  test.describe('on a first visit', () => {
+    test.use({ consent: null });
+
+    test('opens from the banner with nothing chosen and asks for an answer before saving', async ({
+      page,
+      api,
+    }) => {
+      await api.given(listStyles(gallery), saveConsent(true));
+      const banner = new ConsentBanner(page);
+      const dialog = new CookiePreferencesDialog(page);
+      await new StyleGalleryPage(page).open();
+
+      await banner.preferences.click();
+
+      await expect(dialog.root).toBeVisible();
+      await expect(dialog.allow).not.toBeChecked();
+      await expect(dialog.essentialOnly).not.toBeChecked();
+
+      await dialog.save.click();
+
+      await expect(dialog.summary).toContainText('Check 1 answer');
+      await expect(dialog.summary).toContainText('Choose whether to allow optional usage data');
+      await expect(dialog.fieldError).toHaveText('Choose whether to allow optional usage data.');
+      expect(api.requests('PUT', '/api/consent')).toEqual([]);
+
+      await dialog.allow.check();
+      await dialog.save.click();
+
+      await expect(dialog.root).toBeHidden();
+      await expect(banner.root).toBeHidden();
+      expect(api.requests('PUT', '/api/consent').map((request) => request.body)).toEqual([
+        { optionalUsage: true },
+      ]);
+      expect(await banner.savedChoice()).toBe('allow');
+    });
+
+    test('the Change action on the saved toast reopens the preferences', async ({ page, api }) => {
+      await api.given(listStyles(gallery), saveConsent(false));
+      const banner = new ConsentBanner(page);
+      const toasts = new Toasts(page);
+      const dialog = new CookiePreferencesDialog(page);
+      await new StyleGalleryPage(page).open();
+      await banner.essentialOnly.click();
+
+      await toasts.action('Preferences saved', 'Change').click();
+
+      await expect(dialog.root).toBeVisible();
+      await expect(dialog.essentialOnly).toBeChecked();
+    });
+  });
+
+  test('a returning visitor revises the choice from the footer', async ({ page, api }) => {
+    await api.given(listStyles(gallery), saveConsent(true));
+    const galleryPage = new StyleGalleryPage(page);
+    const banner = new ConsentBanner(page);
+    const dialog = new CookiePreferencesDialog(page);
+    await galleryPage.open();
+
+    await galleryPage.shell.footerLink('Cookie preferences').click();
+
+    await expect(dialog.essentialOnly).toBeChecked();
+
+    await dialog.allow.check();
+    await dialog.save.click();
+
+    await expect(dialog.root).toBeHidden();
+    expect(await banner.savedChoice()).toBe('allow');
+    await expect(galleryPage.shell.footerLink('Cookie preferences')).toBeFocused();
+  });
+
+  test('a failed save keeps the selection and the saved choice and does not claim success', async ({
+    page,
+    api,
+  }) => {
+    await api.given(
+      listStyles(gallery),
+      saveConsent(true),
+      serverError('PUT', '/api/consent', { times: 1 }),
+    );
+    const galleryPage = new StyleGalleryPage(page);
+    const banner = new ConsentBanner(page);
+    const toasts = new Toasts(page);
+    const dialog = new CookiePreferencesDialog(page);
+    await galleryPage.open();
+    await galleryPage.shell.footerLink('Cookie preferences').click();
+    await dialog.allow.check();
+
+    await dialog.save.click();
+
+    await expect(dialog.failure).toContainText('Your entries are still here');
+    await expect(dialog.allow).toBeChecked();
+    await expect(toasts.toast('Preferences saved')).toHaveCount(0);
+    expect(await banner.savedChoice()).toBe('essential');
+
+    await dialog.save.click();
+
+    await expect(dialog.root).toBeHidden();
+    expect(await banner.savedChoice()).toBe('allow');
+  });
+
+  test('a busy save sends the choice once however it is submitted again', async ({ page, api }) => {
+    await api.given(listStyles(gallery), saveConsent(true, { delayMs: 1500 }));
+    const galleryPage = new StyleGalleryPage(page);
+    const dialog = new CookiePreferencesDialog(page);
+    await galleryPage.open();
+    await galleryPage.shell.footerLink('Cookie preferences').click();
+    await dialog.allow.check();
+
+    await dialog.save.click();
+    await expect(dialog.save).toHaveAttribute('aria-busy', 'true');
+    await dialog.save.press('Enter');
+
+    await expect(dialog.root).toBeVisible();
+    expect(api.requests('PUT', '/api/consent')).toHaveLength(1);
+    await expect(dialog.root).toBeHidden();
   });
 });
