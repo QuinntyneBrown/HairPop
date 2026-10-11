@@ -66,3 +66,13 @@ export function clockTime(value: IsoDateTime, timeZone = 'America/Toronto'): str
 export function dateTime(value: IsoDateTime, timeZone = 'America/Toronto'): string {
   return `${shortDate(value, timeZone)} · ${clockTime(value, timeZone)}`;
 }
+
+/** "1 Oct 2026" for a date-only value such as "2026-10-01", with no time zone shift. */
+export function calendarDate(value: string): string {
+  return new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(value));
+}

@@ -41,6 +41,18 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/help/help.page').then((m) => m.HelpPage),
   },
   {
+    path: 'terms',
+    title: 'Terms of use · HairPop',
+    data: { slug: 'terms' },
+    loadComponent: () => import('./pages/legal/legal.page').then((m) => m.LegalPage),
+  },
+  {
+    path: 'privacy',
+    title: 'Privacy · HairPop',
+    data: { slug: 'privacy' },
+    loadComponent: () => import('./pages/legal/legal.page').then((m) => m.LegalPage),
+  },
+  {
     path: '403',
     title: 'Access unavailable · HairPop',
     loadComponent: () => import('./pages/errors/forbidden.page').then((m) => m.ForbiddenPage),
