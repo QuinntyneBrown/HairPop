@@ -16,7 +16,9 @@ HairPop connects customers with braiders through published styles, service offer
 | Route | `/404`, `/403`, `/500`, `/offline`, `**` |
 | Components | `CustomerRouteShell`, `NotFoundPage`, `ForbiddenPage`, `ServerErrorPage`, `OfflinePage` |
 | API token | all feature tokens |
-| Render mode | Server for error routes, with the matching HTTP status |
+| Render mode | Server for error routes, with the matching HTTP status (`/403` 403, `/500` 500, `/404` and the catch-all 404, `/offline` 200) |
+| Query | `/500?reference=<support reference>&at=<ISO time>` shows "Reference: … · Sat 10 Oct, 9:42 am"; both are optional |
+| Try again | On `/500` and `/offline` it goes back in history, so a failed state-changing request is never resent (L2-037 AC4) |
 | Mocks | `pages/not-found/*`, `pages/forbidden/*`, `pages/server-error/*`, `pages/offline/*` |
 
 **API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.

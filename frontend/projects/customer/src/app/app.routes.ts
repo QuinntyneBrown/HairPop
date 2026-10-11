@@ -35,6 +35,21 @@ export const routes: Routes = [
       import('./pages/style-detail/style-detail.page').then((m) => m.StyleDetailPage),
   },
   {
+    path: '403',
+    title: 'Access unavailable · HairPop',
+    loadComponent: () => import('./pages/errors/forbidden.page').then((m) => m.ForbiddenPage),
+  },
+  {
+    path: '500',
+    title: 'Something went wrong · HairPop',
+    loadComponent: () => import('./pages/errors/server-error.page').then((m) => m.ServerErrorPage),
+  },
+  {
+    path: 'offline',
+    title: 'Offline · HairPop',
+    loadComponent: () => import('./pages/errors/offline.page').then((m) => m.OfflinePage),
+  },
+  {
     path: '404',
     title: 'Page not found · HairPop',
     loadComponent: () => import('./pages/errors/not-found.page').then((m) => m.NotFoundPage),
