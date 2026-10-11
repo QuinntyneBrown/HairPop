@@ -2,6 +2,8 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 import {
+  CONTENT_API,
+  HttpContentApi,
   HttpMatchingApi,
   HttpStylesApi,
   MATCHING_API,
@@ -23,5 +25,6 @@ export const appConfig: ApplicationConfig = {
     provideHairPopHttp(),
     { provide: STYLES_API, useClass: HttpStylesApi },
     { provide: MATCHING_API, useClass: HttpMatchingApi },
+    { provide: CONTENT_API, useClass: HttpContentApi },
   ],
 };

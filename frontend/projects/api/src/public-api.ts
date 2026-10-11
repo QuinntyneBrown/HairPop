@@ -9,3 +9,4 @@ export * from './lib/http';
 export * from './lib/format';
 export * from './lib/styles';
 export * from './lib/matching';
+export * from './lib/content';

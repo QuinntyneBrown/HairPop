@@ -35,6 +35,12 @@ export const routes: Routes = [
       import('./pages/style-detail/style-detail.page').then((m) => m.StyleDetailPage),
   },
   {
+    path: 'help',
+    title: 'Help · HairPop',
+    data: { nav: 'help' },
+    loadComponent: () => import('./pages/help/help.page').then((m) => m.HelpPage),
+  },
+  {
     path: '403',
     title: 'Access unavailable · HairPop',
     loadComponent: () => import('./pages/errors/forbidden.page').then((m) => m.ForbiddenPage),

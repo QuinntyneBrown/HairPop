@@ -6,6 +6,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'styles/:slug', renderMode: RenderMode.Server },
   { path: 'styles/:slug/braiders', renderMode: RenderMode.Server },
   { path: 'braiders', renderMode: RenderMode.Server },
+  { path: 'help', renderMode: RenderMode.Server },
   { path: '403', renderMode: RenderMode.Server, status: 403 },
   { path: '500', renderMode: RenderMode.Server, status: 500 },
   { path: 'offline', renderMode: RenderMode.Server },
