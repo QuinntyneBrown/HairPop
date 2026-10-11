@@ -1,20 +1,24 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { ApiError, BraiderMatch, MATCHING_API, MatchQuery, money, shortDate } from '@hairpop/api';
 import {
   Alert,
   Button,
   Card,
   EmptyState,
+  FormLayout,
   Icon,
   PageHeader,
   Pagination,
   RatingSummary,
+  SearchBox,
   SkeletonGroup,
+  TextField,
 } from '@hairpop/components';
 
-type View = 'loading' | 'error' | 'offline' | 'empty' | 'results';
+type View = 'loading' | 'error' | 'offline' | 'empty' | 'no-results' | 'results';
 
 /** "Nia Okafor" → "Nia’s". */
 function possessiveFirstName(name: string): string {
@@ -30,16 +34,39 @@ function possessiveFirstName(name: string): string {
     Button,
     Card,
     EmptyState,
+    FormLayout,
     Icon,
     PageHeader,
     Pagination,
     RatingSummary,
+    ReactiveFormsModule,
     RouterLink,
+    SearchBox,
     SkeletonGroup,
+    TextField,
   ],
   template: `
     <hp-page-header eyebrow="Discover" [heading]="heading()" [subtitle]="subtitle()" />
     <div class="stack">
+      <form
+        hp-form-layout
+        layout="inline"
+        role="search"
+        [formGroup]="form"
+        (submitted)="applySearch()"
+      >
+        <div hp-search-box grow>
+          <svg hp-icon name="search"></svg>
+          <input
+            hp-text-field
+            type="search"
+            formControlName="q"
+            aria-label="Search matching braiders"
+            enterkeyhint="search"
+          />
+        </div>
+      </form>
+
       <p class="visually-hidden" role="status">{{ statusText() }}</p>
       @switch (view()) {
         @case ('loading') {
@@ -86,6 +113,20 @@ function possessiveFirstName(name: string): string {
             <a hp-button variant="primary" slot="actions" routerLink="/">Explore styles</a>
           </hp-empty-state>
         }
+        @case ('no-results') {
+          <hp-empty-state heading="No matches" [text]="noResultsText()">
+            <svg hp-icon slot="icon" name="search"></svg>
+            <button
+              hp-button
+              variant="primary"
+              slot="actions"
+              type="button"
+              (click)="clearFilters()"
+            >
+              Clear filters
+            </button>
+          </hp-empty-state>
+        }
         @case ('results') {
           <section class="feature-grid" [attr.aria-label]="heading()">
             @for (match of results(); track match.braider.slug) {
@@ -129,16 +170,21 @@ function possessiveFirstName(name: string): string {
 })
 export class MatchingBraidersPage {
   private readonly api = inject(MATCHING_API);
+  private readonly router = inject(Router);
 
   /** Route parameter; absent on `/braiders`. */
   readonly slug = input<string>();
   /** Query parameters. */
+  readonly q = input<string>();
   readonly page = input<string>();
+
+  protected readonly form = new FormGroup({ q: new FormControl('', { nonNullable: true }) });
 
   protected readonly firstName = possessiveFirstName;
 
   private readonly query = computed<MatchQuery>(() => ({
     style: this.slug() ?? null,
+    search: this.q()?.trim() || null,
     page: Math.max(1, Number(this.page()) || 1),
   }));
 
@@ -185,14 +231,29 @@ export class MatchingBraidersPage {
     if (this.matches.status() === 'error') {
       return ApiError.from(this.matches.error()).offline ? 'offline' : 'error';
     }
-    return this.results().length ? 'results' : 'empty';
+    if (this.results().length) return 'results';
+    return this.query().search ? 'no-results' : 'empty';
   });
 
   protected readonly statusText = computed(() => {
-    if (this.view() !== 'results') return '';
-    const total = this.meta()?.total ?? 0;
-    return `${total} ${total === 1 ? 'braider' : 'braiders'}`;
+    switch (this.view()) {
+      case 'results': {
+        const total = this.meta()?.total ?? 0;
+        return `${total} ${total === 1 ? 'braider' : 'braiders'}`;
+      }
+      case 'no-results':
+        return 'No matching braiders';
+      default:
+        return '';
+    }
   });
+
+  protected readonly noResultsText = computed(
+    () =>
+      `No braiders match “${this.query().search}”. Clear the search to see every braider${
+        this.styleName() ? ' for this style' : ''
+      }.`,
+  );
 
   protected readonly emptyHeading = computed(() =>
     this.styleName() ? 'No braiders offer this style yet' : 'No braiders to show yet',
@@ -203,6 +264,29 @@ export class MatchingBraidersPage {
       ? `No braiders near Toronto list ${style.toLowerCase()} right now. Try a related style.`
       : 'Braiders appear here once they publish their services.';
   });
+
+  constructor() {
+    // Keep the search box in step with the URL (back, forward and Clear filters).
+    effect(() => {
+      const term = this.q() ?? '';
+      if (this.form.controls.q.value !== term) {
+        this.form.controls.q.setValue(term, { emitEvent: false });
+      }
+    });
+  }
+
+  protected applySearch(): void {
+    const term = this.form.controls.q.value.trim();
+    void this.router.navigate([], {
+      queryParams: { q: term || null, page: null },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  protected clearFilters(): void {
+    this.form.controls.q.setValue('', { emitEvent: false });
+    void this.router.navigate([], { queryParams: {} });
+  }
 
   protected availability(match: BraiderMatch): string {
     return match.nextAvailable

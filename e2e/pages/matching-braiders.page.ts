@@ -38,7 +38,7 @@ export class MatchingBraidersPage {
     this.heading = page.getByRole('heading', { level: 1 });
     this.subtitle = page.locator('hp-page-header .subtitle');
     this.cards = page.locator('section.feature-grid article.story-card');
-    this.searchBox = page.getByRole('searchbox', { name: 'Search braiders' });
+    this.searchBox = page.getByRole('searchbox', { name: 'Search matching braiders' });
     this.filtersButton = page.getByRole('button', { name: /^Filters/ });
     this.activeFilters = page.getByRole('group', { name: 'Active filters' });
     this.emptyState = page.locator('hp-empty-state');
@@ -47,6 +47,11 @@ export class MatchingBraidersPage {
 
   async open(path = '/styles/knotless-braids/braiders'): Promise<void> {
     await this.page.goto(path);
+  }
+
+  async search(term: string): Promise<void> {
+    await this.searchBox.fill(term);
+    await this.searchBox.press('Enter');
   }
 
   card(name: string): BraiderCard {
