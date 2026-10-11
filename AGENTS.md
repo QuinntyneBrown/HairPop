@@ -39,6 +39,7 @@ Create planned folders as the corresponding work lands. If an implementation nee
 - **Read design tokens by role, never by value.** Use the design system's CSS custom properties for color and spacing, never hex values or magic numbers. Component-scoped custom properties use the component prefix.
 - **Declare each `ng-content` slot once.** A component that renders `<a>` or `<button>` by condition puts its slots in one `<ng-template>` and renders it with `ngTemplateOutlet` in both branches; slots repeated per `@if` branch project into one branch only. On the consumer side, an `@if` wrapping several `[slot=…]` nodes loses the slot (NG8011) — use one `@if` per node.
 - Every reusable component lives in the shared components library; applications import it and never copy it.
+- **Every component has stories.** A change that adds a component to the shared library adds `frontend/projects/components-examples/src/<component>/<component>-examples.ts` and registers it in `COMPONENT_EXAMPLES` in the same change. A change to a component's variants or states updates its stories. Browse them with `npm start` in `frontend/` (the storybook).
 - API services live in the API library with a contract and injection token; each application binds the tokens in its `app.config.ts`, and pages depend on the token, not the concrete implementation.
 - **No inline forms in pages.** Button-triggered editing opens a CDK Dialog or navigates to a screen.
 - Use Angular CDK Dialog/Overlay for modal behavior; do not hand-roll modals.
