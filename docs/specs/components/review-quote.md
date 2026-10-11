@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `figure[hp-review-quote]` |
 | Library path | `frontend/projects/components/src/lib/review-quote/` |
-| Status | planned |
+| Status | built (plain; `reportable` lands with the report-review dialog) |
 | Traces to | L2-007, L2-009, L2-039, L2-041, L2-042 |
 | Design system | [`review-quote.html`](../../design-system/components/review-quote.html) |
 | Source mocks | [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`dialogs/report-review/default`](../../mocks/dialogs/report-review/default.html) |

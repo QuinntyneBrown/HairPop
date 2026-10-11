@@ -59,6 +59,20 @@ export class Api {
     await this.sync();
   }
 
+  private readonly held: { method: Method; path: string; gate: Promise<void> }[] = [];
+
+  /**
+   * Keeps the browser's responses to a method and path back until the returned function is
+   * called, so a busy state can be examined without racing a timer. Once released, later
+   * requests to it are answered at once.
+   */
+  hold(method: Method, path: string): () => void {
+    let release = (): void => undefined;
+    const gate = new Promise<void>((resolve) => (release = resolve));
+    this.held.push({ method, path, gate });
+    return release;
+  }
+
   /** Requests the browser sent matching a method and path, oldest first. */
   requests(method: Method, path: string): RecordedRequest[] {
     return this.recorded.filter((r) => r.method === method && r.path === path);
@@ -91,6 +105,8 @@ export class Api {
       await route.fulfill({ status: 404, json: unmatchedBody(method, url) });
       return;
     }
+    const hold = this.held.find((h) => h.method === method && h.path === url.pathname);
+    if (hold) await hold.gate;
     if (rule.delayMs) await new Promise((r) => setTimeout(r, rule.delayMs));
     await route.fulfill({
       status: rule.status ?? 200,

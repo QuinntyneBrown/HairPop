@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, InjectionToken, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Image } from './common';
+import { Image, Page } from './common';
 import { Rating } from './matching';
+import { queryParams } from './styles';
 
 /** docs/detailed-designs/profiles/inspect-braider. */
 export interface BraiderService {
@@ -44,9 +45,23 @@ export interface BraiderProfile {
   readonly policies: BraiderPolicies;
 }
 
+/** One published review; removed and pending-moderation ones are never returned (L2-008). */
+export interface Review {
+  readonly id: string;
+  /** 1–5. */
+  readonly rating: number;
+  /** `YYYY-MM-DD`. */
+  readonly date: string;
+  readonly text: string;
+  readonly author: string;
+  readonly service: string;
+}
+
 export interface BraidersApi {
   /** A published braider's profile; a 404 error for an unknown or unpublished one. */
   get(slug: string): Observable<BraiderProfile>;
+  /** A page of the braider's published reviews, newest first. */
+  reviews(slug: string, page?: number): Observable<Page<Review>>;
 }
 
 export const BRAIDERS_API = new InjectionToken<BraidersApi>('BRAIDERS_API');
@@ -57,5 +72,11 @@ export class HttpBraidersApi implements BraidersApi {
 
   get(slug: string): Observable<BraiderProfile> {
     return this.http.get<BraiderProfile>(`/api/braiders/${encodeURIComponent(slug)}`);
+  }
+
+  reviews(slug: string, page?: number): Observable<Page<Review>> {
+    return this.http.get<Page<Review>>(`/api/braiders/${encodeURIComponent(slug)}/reviews`, {
+      params: queryParams({ page }),
+    });
   }
 }

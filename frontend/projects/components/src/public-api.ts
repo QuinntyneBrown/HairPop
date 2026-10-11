@@ -30,6 +30,7 @@ export * from './lib/pagination';
 export * from './lib/progress-bar';
 export * from './lib/radio-group';
 export * from './lib/rating-summary';
+export * from './lib/review-quote';
 export * from './lib/select';
 export * from './lib/sidebar-navigation';
 export * from './lib/skeleton';

@@ -2,9 +2,11 @@ import type {
   BraiderMatch,
   BraiderMatchPage,
   BraiderProfile,
+  Review,
 } from '../../frontend/projects/api/src/public-api';
 
 import type { ApiRule } from './api';
+import { page } from './styles';
 import { MEDIA_ORIGIN } from './urls';
 
 /** Braiders from the cast (docs/mocks/README.md), as knotless-braids matches. */
@@ -165,3 +167,32 @@ export const niaPortfolio: BraiderProfile['portfolio'] = [
   },
   { id: 'work-3', image: null, caption: 'Passion twists · Sep 2026' },
 ];
+
+/** Published reviews of Nia (docs/mocks/pages/braider-profile). */
+export const niaReviews: Review[] = [
+  {
+    id: 'review-1',
+    rating: 5,
+    date: '2026-10-03',
+    text: 'The parts were so neat and Nia checked that nothing felt too tight.',
+    author: 'Maya Chen',
+    service: 'Medium knotless braids',
+  },
+  {
+    id: 'review-2',
+    rating: 5,
+    date: '2026-09-26',
+    text: 'Quick, gentle and my braids lasted seven weeks.',
+    author: 'Kemi Adebayo',
+    service: 'Passion twists',
+  },
+];
+
+/** GET /api/braiders/{slug}/reviews. */
+export function getReviews(
+  slug: string,
+  reviews: readonly Review[],
+  extra: Partial<ApiRule> = {},
+): ApiRule {
+  return { method: 'GET', path: `/api/braiders/${slug}/reviews`, body: page(reviews), ...extra };
+}

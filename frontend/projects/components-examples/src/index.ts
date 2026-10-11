@@ -150,6 +150,11 @@ export const COMPONENT_EXAMPLES: readonly ComponentExamples[] = [
     load: () => import('./radio-group/radio-group-examples').then((m) => m.RadioGroupExamples),
   },
   {
+    id: 'review-quote',
+    title: 'Review quote',
+    load: () => import('./review-quote/review-quote-examples').then((m) => m.ReviewQuoteExamples),
+  },
+  {
     id: 'select',
     title: 'Select',
     load: () => import('./select/select-examples').then((m) => m.SelectExamples),

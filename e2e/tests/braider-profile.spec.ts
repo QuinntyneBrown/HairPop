@@ -7,8 +7,10 @@ import {
   findBraiders,
   getBraider,
   knotlessMatches,
+  getReviews,
   niaPortfolio,
   niaProfile,
+  niaReviews,
 } from '../fixtures/braiders';
 import { notFound, serverError } from '../fixtures/errors';
 import { BraiderProfilePage } from '../pages/braider-profile.page';
@@ -16,6 +18,10 @@ import { ErrorPage } from '../pages/error-page.page';
 import { MatchingBraidersPage } from '../pages/matching-braiders.page';
 
 test.describe('Braider profile', () => {
+  test.beforeEach(async ({ api }) => {
+    await api.given(getReviews('nia-okafor', []));
+  });
+
   test('shows identity, rating, services and what to know before booking', async ({
     page,
     api,
@@ -134,14 +140,18 @@ test.describe('Braider profile', () => {
   });
 
   test('while the profile loads a labelled loading state is shown', async ({ page, api }) => {
-    await api.given(findBraiders(knotlessMatches), getBraider(niaProfile, { delayMs: 1500 }));
+    await api.given(findBraiders(knotlessMatches), getBraider(niaProfile));
     const matching = new MatchingBraidersPage(page);
     await matching.open();
+    const release = api.hold('GET', '/api/braiders/nia-okafor');
 
     await matching.card('Nia Okafor').link.click();
 
     const profile = new BraiderProfilePage(page);
     await expect(profile.loading).toBeVisible();
+
+    release();
+
     await expect(profile.name).toHaveText('Nia Okafor');
   });
 
@@ -198,6 +208,105 @@ test.describe('Braider profile', () => {
       await expect(profile.portfolioItems).toHaveCount(3);
       expect(await profile.shell.scrollsHorizontally()).toBe(false);
       expect(await profile.portfolioColumns()).toBe(2);
+    });
+  });
+
+  test.describe('reviews', () => {
+    test('show each published review with its score, date, words and author', async ({
+      page,
+      api,
+    }) => {
+      await api.given(getBraider(niaProfile), getReviews('nia-okafor', niaReviews));
+      const profile = new BraiderProfilePage(page);
+
+      await profile.open('nia-okafor');
+
+      await expect(profile.reviewItems).toHaveCount(2);
+      await expect(profile.reviews).toContainText('4.9');
+      await expect(profile.reviews).toContainText('· 86 reviews');
+      const first = profile.review(0);
+      await expect(first.score).toHaveText('5');
+      await expect(first.spokenScore).toHaveText('Rated 5 out of 5');
+      await expect(first.date).toHaveText('3 Oct 2026');
+      await expect(first.date).toHaveAttribute('datetime', '2026-10-03');
+      await expect(first.quote).toHaveText(
+        'The parts were so neat and Nia checked that nothing felt too tight.',
+      );
+      await expect(first.author).toHaveText('Maya Chen · Medium knotless braids');
+      await expect(profile.review(1).author).toHaveText('Kemi Adebayo · Passion twists');
+    });
+
+    test('with none yet the section says so and the rest of the profile stays', async ({
+      page,
+      api,
+    }) => {
+      await api.given(getBraider({ ...niaProfile, rating: null }), getReviews('nia-okafor', []));
+      const profile = new BraiderProfilePage(page);
+
+      await profile.open('nia-okafor');
+
+      await expect(profile.reviews.locator('.empty__title')).toHaveText('No reviews yet');
+      await expect(profile.reviews).toContainText(
+        'Nia hasn’t received a published review yet. Their services and policies are below.',
+      );
+      expect(await profile.serviceTitles()).toEqual(['Medium knotless braids', 'Passion twists']);
+    });
+
+    test('that fail to load warn once, keep the profile and retry', async ({ page, api }) => {
+      await api.given(
+        getBraider(niaProfile),
+        getReviews('nia-okafor', niaReviews),
+        serverError('GET', '/api/braiders/nia-okafor/reviews', { times: 1 }),
+      );
+      const profile = new BraiderProfilePage(page);
+
+      await profile.open('nia-okafor');
+
+      await expect(profile.reviewsWarning).toContainText(
+        'Nia’s services, prices and policies are up to date.',
+      );
+      expect(await profile.serviceTitles()).toEqual(['Medium knotless braids', 'Passion twists']);
+      await expect(profile.book).toBeVisible();
+
+      await profile.reviewsWarning.getByRole('button', { name: 'Retry reviews' }).click();
+
+      await expect(profile.reviewItems).toHaveCount(2);
+      await expect(profile.reviewsWarning).toHaveCount(0);
+    });
+
+    test('are shown as text, so markup in a review runs nothing', async ({ page, api }) => {
+      const markup = '<img src=x onerror="window.pwned=true"><script>window.pwned=true</script>';
+      await api.given(
+        getBraider(niaProfile),
+        getReviews('nia-okafor', [{ ...niaReviews[0], text: markup }]),
+      );
+      const profile = new BraiderProfilePage(page);
+
+      await profile.open('nia-okafor');
+
+      await expect(profile.review(0).quote).toHaveText(markup);
+      expect(await page.evaluate(() => 'pwned' in window)).toBe(false);
+    });
+
+    test.describe('on a narrow phone', () => {
+      test.use({ viewport: { width: 320, height: 800 } });
+
+      test('a review with a very long link wraps instead of scrolling sideways', async ({
+        page,
+        api,
+      }) => {
+        const link = `https://example.com/${'a'.repeat(60)}`;
+        await api.given(
+          getBraider(niaProfile),
+          getReviews('nia-okafor', [{ ...niaReviews[0], text: `See ${link}` }]),
+        );
+        const profile = new BraiderProfilePage(page);
+
+        await profile.open('nia-okafor');
+
+        await expect(profile.review(0).quote).toContainText(link);
+        expect(await profile.shell.scrollsHorizontally()).toBe(false);
+      });
     });
   });
 });

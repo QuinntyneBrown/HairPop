@@ -107,13 +107,14 @@ test.describe('Matching braiders filters', () => {
   }) => {
     await api.given(
       findBraiders(knotlessMatches),
-      findBraiders([niaMatch], { query: { maxPrice: '200' }, delayMs: 1500 }),
+      findBraiders([niaMatch], { query: { maxPrice: '200' } }),
     );
     const matching = new MatchingBraidersPage(page);
     const dialog = new FilterBraidersDialog(page);
     await matching.open();
     await matching.filtersButton.click();
     await dialog.fill({ maxPrice: '200' });
+    const release = api.hold('GET', BRAIDERS);
 
     await dialog.apply.click();
     await expect(dialog.apply).toHaveAttribute('aria-busy', 'true');
@@ -122,6 +123,9 @@ test.describe('Matching braiders filters', () => {
 
     await expect(dialog.root).toBeVisible();
     expect(api.requests('GET', BRAIDERS).filter((r) => r.query.has('maxPrice'))).toHaveLength(1);
+
+    release();
+
     await expect(dialog.root).toBeHidden();
     await expect(matching.cards).toHaveCount(1);
   });

@@ -16,6 +16,9 @@ export class BraiderProfilePage {
   readonly beforeYouBook: Locator;
   readonly portfolio: Locator;
   readonly portfolioItems: Locator;
+  readonly reviews: Locator;
+  readonly reviewItems: Locator;
+  readonly reviewsWarning: Locator;
   readonly emptyState: Locator;
   readonly loading: Locator;
   readonly offline: Locator;
@@ -33,6 +36,9 @@ export class BraiderProfilePage {
     this.beforeYouBook = page.getByRole('complementary', { name: 'Before you book' });
     this.portfolio = page.getByRole('region', { name: 'Recent work' });
     this.portfolioItems = this.portfolio.locator('li.gallery__item');
+    this.reviews = page.getByRole('region', { name: 'Customer reviews' });
+    this.reviewItems = this.reviews.locator('figure.review');
+    this.reviewsWarning = this.reviews.locator('hp-alert', { hasText: 'Reviews couldn’t load' });
     this.emptyState = page.locator('hp-empty-state');
     this.loading = page.locator('hp-skeleton-group');
     this.offline = page.locator('hp-alert', { hasText: 'You’re offline' });
@@ -66,6 +72,24 @@ export class BraiderProfilePage {
       items.map((item) => Math.round(item.getBoundingClientRect().left)),
     );
     return new Set(lefts).size;
+  }
+
+  /** One review's parts: score, date, words and who wrote it. */
+  review(index: number): {
+    score: Locator;
+    spokenScore: Locator;
+    date: Locator;
+    quote: Locator;
+    author: Locator;
+  } {
+    const item = this.reviewItems.nth(index);
+    return {
+      score: item.locator('.rating__value'),
+      spokenScore: item.locator('.rating .visually-hidden'),
+      date: item.locator('time.review__date'),
+      quote: item.locator('blockquote.review__quote'),
+      author: item.locator('figcaption.review__author'),
+    };
   }
 
   emptyHeading(): Locator {

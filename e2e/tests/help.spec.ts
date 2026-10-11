@@ -86,14 +86,18 @@ test.describe('Help', () => {
     page,
     api,
   }) => {
-    await api.given(listStyles(gallery), getContent(helpContent, { delayMs: 1500 }));
+    await api.given(listStyles(gallery), getContent(helpContent));
     const galleryPage = new StyleGalleryPage(page);
     await galleryPage.open();
+    const release = api.hold('GET', '/api/content/help');
 
     await galleryPage.shell.navLink('Help').click();
 
     const help = new HelpPage(page);
     await expect(help.loading).toBeVisible();
+
+    release();
+
     await expect(help.topics).toHaveCount(4);
   });
 });

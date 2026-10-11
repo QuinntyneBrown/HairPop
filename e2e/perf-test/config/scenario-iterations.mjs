@@ -4,6 +4,7 @@
 export default {
   Button: 50,
   Gallery: 100,
+  ReviewQuote: 120,
   ThemeToggle: 400,
   TopBar: 50,
 };

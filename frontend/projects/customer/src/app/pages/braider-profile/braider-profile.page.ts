@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  afterNextRender,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { ApiError, BRAIDERS_API, BraiderProfile, hoursRange, money } from '@hairpop/api';
@@ -16,6 +24,7 @@ import {
   ListItem,
   PageHeader,
   RatingSummary,
+  ReviewQuote,
   Skeleton,
   SkeletonGroup,
 } from '@hairpop/components';
@@ -46,6 +55,7 @@ function firstName(name: string): string {
     NotFoundPage,
     PageHeader,
     RatingSummary,
+    ReviewQuote,
     RouterLink,
     Skeleton,
     SkeletonGroup,
@@ -111,6 +121,65 @@ function firstName(name: string): string {
               >
                 <svg hp-icon slot="icon" name="sparkle"></svg>
               </hp-empty-state>
+            }
+          </section>
+
+          <section hp-card aria-labelledby="reviews-title">
+            <h2 id="reviews-title">Customer reviews</h2>
+            @if (reviews.hasValue()) {
+              @if (reviews.value().data.length) {
+                <span
+                  hp-rating-summary
+                  [value]="p.rating?.average ?? null"
+                  [count]="p.rating?.count ?? 0"
+                ></span>
+                @for (review of reviews.value().data; track review.id) {
+                  <figure
+                    hp-review-quote
+                    [rating]="review.rating"
+                    [date]="review.date"
+                    [text]="review.text"
+                    [author]="review.author"
+                    [service]="review.service"
+                  ></figure>
+                }
+              } @else {
+                <hp-empty-state
+                  size="compact"
+                  [headingLevel]="3"
+                  heading="No reviews yet"
+                  [text]="
+                    first(p) +
+                    ' hasn’t received a published review yet. Their services and policies are below.'
+                  "
+                >
+                  <svg hp-icon slot="icon" name="star"></svg>
+                </hp-empty-state>
+              }
+            } @else if (reviews.status() === 'error') {
+              <hp-alert tone="warning" heading="Reviews couldn’t load">
+                <p>{{ first(p) }}’s services, prices and policies are up to date.</p>
+                <button
+                  hp-button
+                  slot="actions"
+                  variant="link"
+                  size="sm"
+                  type="button"
+                  (click)="reviews.reload()"
+                >
+                  Retry reviews
+                </button>
+              </hp-alert>
+            } @else {
+              <hp-skeleton-group
+                label="Loading reviews"
+                slowMessage="Still loading reviews…"
+                retryLabel="Try again"
+                (retried)="reviews.reload()"
+              >
+                <span hp-skeleton></span>
+                <span hp-skeleton></span>
+              </hp-skeleton-group>
             }
           </section>
         </div>
@@ -194,6 +263,16 @@ export class BraiderProfilePage {
     stream: ({ params }) => this.api.get(params),
   });
 
+  /**
+   * Reviews load in the browser once the profile has, so their failure is partial and never fails
+   * the page, and an unknown braider's reviews are never requested.
+   */
+  private readonly inBrowser = signal(false);
+  protected readonly reviews = rxResource({
+    params: () => (this.inBrowser() && this.profile.hasValue() ? this.slug() : undefined),
+    stream: ({ params }) => this.api.reviews(params),
+  });
+
   private readonly failure = computed(() =>
     this.profile.status() === 'error' ? ApiError.from(this.profile.error()) : null,
   );
@@ -206,6 +285,7 @@ export class BraiderProfilePage {
   }
 
   constructor() {
+    afterNextRender(() => this.inBrowser.set(true));
     responseStatus(() => (this.missing() ? 404 : null));
   }
 

@@ -217,12 +217,13 @@ test.describe('Cookie preferences dialog', () => {
   });
 
   test('a busy save sends the choice once however it is submitted again', async ({ page, api }) => {
-    await api.given(listStyles(gallery), saveConsent(true, { delayMs: 1500 }));
+    await api.given(listStyles(gallery), saveConsent(true));
     const galleryPage = new StyleGalleryPage(page);
     const dialog = new CookiePreferencesDialog(page);
     await galleryPage.open();
     await galleryPage.shell.footerLink('Cookie preferences').click();
     await dialog.allow.check();
+    const release = api.hold('PUT', '/api/consent');
 
     await dialog.save.click();
     await expect(dialog.save).toHaveAttribute('aria-busy', 'true');
@@ -230,6 +231,9 @@ test.describe('Cookie preferences dialog', () => {
 
     await expect(dialog.root).toBeVisible();
     expect(api.requests('PUT', '/api/consent')).toHaveLength(1);
+
+    release();
+
     await expect(dialog.root).toBeHidden();
   });
 });
