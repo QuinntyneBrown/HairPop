@@ -30,6 +30,7 @@ export class MatchingBraidersPage {
   readonly searchBox: Locator;
   readonly filtersButton: Locator;
   readonly activeFilters: Locator;
+  readonly activeFilterChips: Locator;
   readonly emptyState: Locator;
   readonly pagination: Locator;
 
@@ -41,12 +42,18 @@ export class MatchingBraidersPage {
     this.searchBox = page.getByRole('searchbox', { name: 'Search matching braiders' });
     this.filtersButton = page.getByRole('button', { name: /^Filters/ });
     this.activeFilters = page.getByRole('group', { name: 'Active filters' });
+    this.activeFilterChips = this.activeFilters.locator('.chip');
     this.emptyState = page.locator('hp-empty-state');
     this.pagination = page.getByRole('navigation', { name: 'Results pages' });
   }
 
   async open(path = '/styles/knotless-braids/braiders'): Promise<void> {
     await this.page.goto(path);
+  }
+
+  /** The text of each active-filter chip, in order. */
+  async activeFilterLabels(): Promise<string[]> {
+    return this.activeFilterChips.allInnerTexts();
   }
 
   async search(term: string): Promise<void> {

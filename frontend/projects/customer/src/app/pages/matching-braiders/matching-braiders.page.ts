@@ -7,6 +7,9 @@ import {
   Alert,
   Button,
   Card,
+  Chip,
+  ChipRow,
+  DialogService,
   EmptyState,
   FormLayout,
   Icon,
@@ -18,7 +21,16 @@ import {
   TextField,
 } from '@hairpop/components';
 
+import {
+  FilterBraidersData,
+  FilterBraidersDialog,
+  FilterBraidersResult,
+} from './filter-braiders.dialog';
+
 type View = 'loading' | 'error' | 'offline' | 'empty' | 'no-results' | 'results';
+
+/** Distances the API accepts, in km. */
+const DISTANCES: readonly number[] = [5, 10, 25];
 
 /** "Nia Okafor" → "Nia’s". */
 function possessiveFirstName(name: string): string {
@@ -33,6 +45,8 @@ function possessiveFirstName(name: string): string {
     Alert,
     Button,
     Card,
+    Chip,
+    ChipRow,
     EmptyState,
     FormLayout,
     Icon,
@@ -65,7 +79,18 @@ function possessiveFirstName(name: string): string {
             enterkeyhint="search"
           />
         </div>
+        <button hp-button type="button" aria-haspopup="dialog" (click)="openFilters()">
+          Filters
+        </button>
       </form>
+
+      @if (activeFilters().length) {
+        <hp-chip-row aria-label="Active filters">
+          @for (filter of activeFilters(); track filter) {
+            <span hp-chip>{{ filter }}</span>
+          }
+        </hp-chip-row>
+      }
 
       <p class="visually-hidden" role="status">{{ statusText() }}</p>
       @switch (view()) {
@@ -171,20 +196,35 @@ function possessiveFirstName(name: string): string {
 export class MatchingBraidersPage {
   private readonly api = inject(MATCHING_API);
   private readonly router = inject(Router);
+  private readonly dialog = inject(DialogService);
 
   /** Route parameter; absent on `/braiders`. */
   readonly slug = input<string>();
   /** Query parameters. */
   readonly q = input<string>();
+  readonly maxPrice = input<string>();
+  readonly distanceKm = input<string>();
   readonly page = input<string>();
 
   protected readonly form = new FormGroup({ q: new FormControl('', { nonNullable: true }) });
 
   protected readonly firstName = possessiveFirstName;
 
+  /** A price in the address counts only when it is a whole number of dollars above zero. */
+  private readonly appliedMaxPrice = computed(() => {
+    const value = Number(this.maxPrice());
+    return Number.isInteger(value) && value > 0 ? value : null;
+  });
+  private readonly appliedDistance = computed(() => {
+    const value = Number(this.distanceKm());
+    return DISTANCES.includes(value) ? value : null;
+  });
+
   private readonly query = computed<MatchQuery>(() => ({
     style: this.slug() ?? null,
     search: this.q()?.trim() || null,
+    maxPrice: this.appliedMaxPrice(),
+    distanceKm: this.appliedDistance(),
     page: Math.max(1, Number(this.page()) || 1),
   }));
 
@@ -232,7 +272,7 @@ export class MatchingBraidersPage {
       return ApiError.from(this.matches.error()).offline ? 'offline' : 'error';
     }
     if (this.results().length) return 'results';
-    return this.query().search ? 'no-results' : 'empty';
+    return this.hasCriteria() ? 'no-results' : 'empty';
   });
 
   protected readonly statusText = computed(() => {
@@ -248,12 +288,33 @@ export class MatchingBraidersPage {
     }
   });
 
-  protected readonly noResultsText = computed(
-    () =>
-      `No braiders match “${this.query().search}”. Clear the search to see every braider${
-        this.styleName() ? ' for this style' : ''
-      }.`,
+  private readonly hasFilters = computed(
+    () => this.appliedMaxPrice() !== null || this.appliedDistance() !== null,
   );
+  private readonly hasCriteria = computed(() => !!this.query().search || this.hasFilters());
+
+  protected readonly noResultsText = computed(() =>
+    this.hasFilters()
+      ? 'No braiders match these filters. Try a wider price range or distance.'
+      : `No braiders match “${this.query().search}”. Clear the search to see every braider${
+          this.styleName() ? ' for this style' : ''
+        }.`,
+  );
+
+  /** The style and the applied price and distance, as the chips under the search box. */
+  protected readonly activeFilters = computed(() => {
+    const chips: string[] = [];
+    const style = this.styleName();
+    if (style) chips.push(style);
+    const price = this.appliedMaxPrice();
+    const distance = this.appliedDistance();
+    const parts = [
+      price !== null ? `Under ${money(price)}` : null,
+      distance !== null ? `${price !== null ? 'within' : 'Within'} ${distance} km` : null,
+    ].filter((part) => part !== null);
+    if (parts.length) chips.push(parts.join(' · '));
+    return chips;
+  });
 
   protected readonly emptyHeading = computed(() =>
     this.styleName() ? 'No braiders offer this style yet' : 'No braiders to show yet',
@@ -280,6 +341,28 @@ export class MatchingBraidersPage {
     void this.router.navigate([], {
       queryParams: { q: term || null, page: null },
       queryParamsHandling: 'merge',
+    });
+  }
+
+  protected openFilters(): void {
+    const ref = this.dialog.open<FilterBraidersDialog, FilterBraidersData, FilterBraidersResult>(
+      FilterBraidersDialog,
+      {
+        data: {
+          style: this.slug() ?? null,
+          minPrice: this.meta()?.style?.minPrice ?? null,
+          search: this.query().search ?? null,
+          maxPrice: this.appliedMaxPrice(),
+          distanceKm: this.appliedDistance(),
+        },
+      },
+    );
+    ref.closed.subscribe((result) => {
+      if (!result) return;
+      void this.router.navigate([], {
+        queryParams: { maxPrice: result.maxPrice, distanceKm: result.distanceKm, page: null },
+        queryParamsHandling: 'merge',
+      });
     });
   }
 

@@ -17,6 +17,8 @@ HairPop connects customers with braiders through published styles, service offer
 | Components | `MatchingBraidersPage`, `FilterBraidersDialog` |
 | API token | `MATCHING_API` (`MatchingApi`) |
 | Render mode | Server |
+| Query | `q` (search), `maxPrice` (whole dollars), `distanceKm` (5, 10 or 25), `page`; the style stays in the path. Applied price and distance show as chips under the search box; Clear filters drops every query parameter |
+| Dialog | Show braiders asks the API for the filtered results first and closes only on success, so a rejected or failed request keeps every entry. The page then navigates and loads the same results again |
 | Mocks | `pages/matching-braiders/*`, `dialogs/filter-braiders/*` |
 
 **API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
