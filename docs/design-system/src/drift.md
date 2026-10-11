@@ -1,6 +1,6 @@
 ## Drift found in the mocks
 
-Every deviation corrected during extraction. "Resolution" says what the system now does; the mocks pick it up through the shared stylesheets (see Verification) or need a markup change in `docs/mocks/build.py` where noted.
+Every deviation corrected during extraction. "Resolution" says what the system now does; the mocks pick it up through the shared stylesheets (see Verification) or need a markup change in `docs/mocks/build.py` where noted. All markup changes noted below are now applied in `build.py` (revision of 2026-10-10), so the mocks and the system agree.
 
 | Mock | Issue | Resolution |
 |---|---|---|
@@ -49,3 +49,6 @@ Every deviation corrected during extraction. "Resolution" says what the system n
 | `pages/*/empty` | "Nothing here yet" and a ✦ on every empty screen; empty profile offers "Explore styles" instead of continuing to book. | Screen-specific title and icon; the action continues the task ("Request with Nia"). |
 | `pages/not-found`, `forbidden`, `server-error`, `offline` | Same glyph and accent tint for every cause; empty title is an `h2` repeating the page `h1`; loading/error states on static error responses; 500 has no reference id. | Icon and tint per cause; the empty title is the page's `h1`; those states dropped; `.empty__reference` with id and time. |
 | `pages/booking-request/offline`, `pages/*/partial` | Offline and partial banners have no icon and use a bold run-in instead of `.alert__title`. | Icon + title + text. |
+| `pages/matching-braiders/*`, `pages/braider-profile/*` | No unrated state; a braider without published reviews could only show a fabricated score (L2-008). | New [Rating summary](components/rating-summary.html) with "Not yet rated". |
+| `pages/braider-profile/default` | Reviews were an unstyled blockquote with one shared "Report a review" link; no portfolio although L2-007 requires one. | New [Review quote](components/review-quote.html) with a report action per review, and [Gallery](components/gallery.html) for portfolio work. |
+| all pages (top bar) | The only theme switch lived in the mock chrome (L2-042 AC3, L2-048). | New [Theme toggle](components/theme-toggle.html) in every product top bar. |

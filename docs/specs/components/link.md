@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `a[hp-link]` |
 | Library path | `frontend/projects/components/src/lib/link/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-001, L2-006, L2-009, L2-033, L2-036, L2-041, L2-042 |
 | Design system | [`link.html`](../../design-system/components/link.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`pages/help/default`](../../mocks/pages/help/default.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/style-detail/partial`](../../mocks/pages/style-detail/partial.html), [`pages/braider-profile/partial`](../../mocks/pages/braider-profile/partial.html), [`pages/appointment-detail/partial`](../../mocks/pages/appointment-detail/partial.html), [`pages/terms/default`](../../mocks/pages/terms/default.html), [`dialogs/report-review/default`](../../mocks/dialogs/report-review/default.html) |

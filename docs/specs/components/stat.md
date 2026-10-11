@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `div[hp-fact]`, `div[hp-fact-grid]`, `div[hp-stat]` |
 | Library path | `frontend/projects/components/src/lib/stat/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-003, L2-007, L2-035, L2-041, L2-042 |
 | Design system | [`stat.html`](../../design-system/components/stat.html) |
 | Source mocks | [`pages/style-detail/default`](../../mocks/pages/style-detail/default.html), [`pages/style-detail/partial`](../../mocks/pages/style-detail/partial.html), [`pages/style-detail/loading`](../../mocks/pages/style-detail/loading.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/braider-profile/edge`](../../mocks/pages/braider-profile/edge.html), [`dialogs/report-review/default`](../../mocks/dialogs/report-review/default.html) |

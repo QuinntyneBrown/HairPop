@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `svg[hp-icon]` |
 | Library path | `frontend/projects/components/src/lib/icon/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-031, L2-035, L2-037, L2-041, L2-042 |
 | Design system | [`iconography.html`](../../design-system/foundations/iconography.html) (foundation page; there is no component page) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`pages/matching-braiders/no-results`](../../mocks/pages/matching-braiders/no-results.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/style-detail/error`](../../mocks/pages/style-detail/error.html), [`pages/style-detail/empty`](../../mocks/pages/style-detail/empty.html), [`pages/booking-request/success`](../../mocks/pages/booking-request/success.html), [`dialogs/cancel-appointment/default`](../../mocks/dialogs/cancel-appointment/default.html), [`notifications/booking-update/success`](../../mocks/notifications/booking-update/success.html) |

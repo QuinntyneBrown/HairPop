@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `input[hp-text-field]`, `div[hp-search-box]` |
 | Library path | `frontend/projects/components/src/lib/text-field/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-002, L2-005, L2-011, L2-014, L2-041, L2-042 |
 | Design system | [`text-field.html`](../../design-system/components/text-field.html) |
 | Source mocks | [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html), [`pages/sign-in/invalid`](../../mocks/pages/sign-in/invalid.html), [`pages/sign-up/default`](../../mocks/pages/sign-up/default.html), [`pages/forgot-password/default`](../../mocks/pages/forgot-password/default.html), [`pages/reset-password/default`](../../mocks/pages/reset-password/default.html), [`pages/account-settings/default`](../../mocks/pages/account-settings/default.html), [`pages/account-settings/invalid`](../../mocks/pages/account-settings/invalid.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html), [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`pages/my-appointments/no-results`](../../mocks/pages/my-appointments/no-results.html), [`dialogs/filter-braiders/invalid`](../../mocks/dialogs/filter-braiders/invalid.html) |

@@ -6,7 +6,25 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`PasswordRecoveryPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ResetCustomerPassword` is the proposed Laravel application action. Its responsibility is to issue and consume a time-limited single-use reset challenge. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `PasswordReset` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`PasswordRecoveryPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ResetCustomerPassword` is the proposed Laravel application action. Its responsibility is to issue and consume a time-limited single-use reset challenge. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `PasswordReset` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** `PasswordRecoveryPage` in the earlier design is split into the two screens the mocks show.
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/forgot-password`, `/reset-password?token&email` |
+| Components | `ForgotPasswordPage`, `ResetPasswordPage` |
+| API token | `AUTH_API` (`AuthApi.forgotPassword`, `resetPassword`) |
+| Render mode | Server |
+| Mocks | `pages/forgot-password/*`, `pages/reset-password/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| POST | `/api/auth/forgot-password` | public | `{ email }` | 202 neutral | 422 `errors.email` (syntax only); 429 |
+| POST | `/api/auth/reset-password` | public | `{ token, email, password, passwordConfirmation }` | 200 | 422 `code: 'invalid_token'` or field errors |
 
 ## Requirements
 

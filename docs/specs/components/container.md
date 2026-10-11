@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-app-shell`; global layout classes `.container`, `.container--narrow`, `.product-main`, `.section`, `.stack`, `.cluster`, `.grid`, `.grid--auto`, `.span-full`, `.feature-grid`, `.detail-grid` |
 | Library path | `frontend/projects/components/src/lib/container/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-041, L2-042 |
 | Design system | [`container.html`](../../design-system/components/container.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`pages/style-detail/default`](../../mocks/pages/style-detail/default.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html), [`pages/help/default`](../../mocks/pages/help/default.html), [`dialogs/filter-braiders/default`](../../mocks/dialogs/filter-braiders/default.html) |

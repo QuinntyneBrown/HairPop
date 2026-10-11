@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `select[hp-select]` |
 | Library path | `frontend/projects/components/src/lib/select/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-005, L2-015, L2-021, L2-041, L2-042 |
 | Design system | [`select.html`](../../design-system/components/select.html) |
 | Source mocks | [`dialogs/filter-braiders/default`](../../mocks/dialogs/filter-braiders/default.html), [`dialogs/filter-braiders/invalid`](../../mocks/dialogs/filter-braiders/invalid.html), [`dialogs/change-appointment/default`](../../mocks/dialogs/change-appointment/default.html), [`dialogs/change-appointment/invalid`](../../mocks/dialogs/change-appointment/invalid.html), [`dialogs/request-review/default`](../../mocks/dialogs/request-review/default.html), [`dialogs/request-review/invalid`](../../mocks/dialogs/request-review/invalid.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html) |

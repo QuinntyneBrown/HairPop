@@ -6,7 +6,25 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`ChangeAppointmentDialog` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ProposeAppointmentChange` is the proposed Laravel application action. Its responsibility is to record an offered replacement while retaining the agreed time until acceptance. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `AppointmentChange` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`ChangeAppointmentDialog` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ProposeAppointmentChange` is the proposed Laravel application action. Its responsibility is to record an offered replacement while retaining the agreed time until acceptance. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `AppointmentChange` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** The current time stays authoritative and the detail shows the proposed time separately until the braider decides (L2-021 AC1).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | dialog over `/appointments/:ref` |
+| Components | `ChangeAppointmentDialog` |
+| API token | `APPOINTMENTS_API` (`AppointmentsApi.changeOptions`, `requestChange`) |
+| Render mode | Browser |
+| Mocks | `dialogs/change-appointment/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/appointments/{ref}/change-options` | customer (owner) | — | 200 `{ slots: { id: string; start: IsoDateTime }[] }` | 401; 404; 409 `not_changeable` |
+| POST | `/api/appointments/{ref}/change-requests` | customer (owner) | `{ slotId: string; note: string \| null }` | 201 `{ pendingChange: { start: IsoDateTime } }` | 409 `slot_unavailable` \| `not_changeable`; 422 `errors.slotId` |
 
 ## Requirements
 

@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `span[hp-inline-message]`, `p[hp-inline-message]` |
 | Library path | `frontend/projects/components/src/lib/inline-message/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-014, L2-036, L2-041, L2-042 |
 | Design system | [`inline-message.html`](../../design-system/components/inline-message.html) |
 | Source mocks | [`pages/booking-request/invalid`](../../mocks/pages/booking-request/invalid.html), [`pages/account-settings/invalid`](../../mocks/pages/account-settings/invalid.html), [`pages/reset-password/invalid`](../../mocks/pages/reset-password/invalid.html), [`pages/sign-in/invalid`](../../mocks/pages/sign-in/invalid.html), [`pages/care-and-review/invalid`](../../mocks/pages/care-and-review/invalid.html), [`dialogs/filter-braiders/invalid`](../../mocks/dialogs/filter-braiders/invalid.html), [`dialogs/report-review/invalid`](../../mocks/dialogs/report-review/invalid.html), [`pages/booking-request/submitting`](../../mocks/pages/booking-request/submitting.html), [`pages/account-settings/submitting`](../../mocks/pages/account-settings/submitting.html) |

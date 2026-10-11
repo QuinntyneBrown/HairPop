@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `article[hp-card]`, `section[hp-card]`, `aside[hp-card]`, `div[hp-card]` |
 | Library path | `frontend/projects/components/src/lib/card/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-001, L2-004, L2-006, L2-018, L2-019, L2-035, L2-041, L2-042 |
 | Design system | [`card.html`](../../design-system/components/card.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/style-gallery/edge`](../../mocks/pages/style-gallery/edge.html), [`pages/style-gallery/loading`](../../mocks/pages/style-gallery/loading.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`pages/matching-braiders/edge`](../../mocks/pages/matching-braiders/edge.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/style-detail/default`](../../mocks/pages/style-detail/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/appointment-detail/success`](../../mocks/pages/appointment-detail/success.html), [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/my-appointments/edge`](../../mocks/pages/my-appointments/edge.html), [`pages/notification-center/default`](../../mocks/pages/notification-center/default.html), [`pages/help/default`](../../mocks/pages/help/default.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html), [`pages/terms/default`](../../mocks/pages/terms/default.html) |

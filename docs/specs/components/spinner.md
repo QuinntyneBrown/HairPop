@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-spinner` |
 | Library path | `frontend/projects/components/src/lib/spinner/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-035, L2-036, L2-041, L2-042, L2-043 |
 | Design system | [`spinner.html`](../../design-system/components/spinner.html) |
 | Source mocks | [`pages/braider-profile/partial`](../../mocks/pages/braider-profile/partial.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`pages/booking-request/submitting`](../../mocks/pages/booking-request/submitting.html) (busy button only, not this component), [`dialogs/cancel-appointment/busy`](../../mocks/dialogs/cancel-appointment/busy.html) (busy button only, not this component) |

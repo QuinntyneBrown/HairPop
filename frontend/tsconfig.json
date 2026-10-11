@@ -4,7 +4,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@hairpop/components": ["./dist/components"]
+      "@hairpop/components": ["./dist/components"],
+      "@hairpop/api": ["./dist/api"]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -28,6 +29,15 @@
   "references": [
     {
       "path": "./projects/components/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/api/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/customer/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/perf-test/tsconfig.app.json"
     }
   ]
 }

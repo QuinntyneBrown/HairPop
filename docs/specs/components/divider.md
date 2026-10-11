@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hr[hp-divider]`, `div[hp-divider]`, `span[hp-divider]` |
 | Library path | `frontend/projects/components/src/lib/divider/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-041, L2-042 |
 | Design system | [`divider.html`](../../design-system/components/divider.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/notification-center/default`](../../mocks/pages/notification-center/default.html), [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html) |

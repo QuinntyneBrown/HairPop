@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-sidebar-navigation` |
 | Library path | `frontend/projects/components/src/lib/sidebar-navigation/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-018, L2-030, L2-041, L2-042 |
 | Design system | [`sidebar-navigation.html`](../../design-system/components/sidebar-navigation.html) |
 | Source mocks | none use it yet; link states from [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html) and the destinations it would group from [`pages/account-settings/default`](../../mocks/pages/account-settings/default.html), [`pages/notification-center/default`](../../mocks/pages/notification-center/default.html), [`pages/care-and-review/default`](../../mocks/pages/care-and-review/default.html), [`pages/terms/default`](../../mocks/pages/terms/default.html), [`pages/privacy/default`](../../mocks/pages/privacy/default.html) |

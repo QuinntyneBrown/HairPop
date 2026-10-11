@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `div[hp-form-field]`, `fieldset[hp-form-field]`, `span[hp-field-addon]` |
 | Library path | `frontend/projects/components/src/lib/form-field/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-005, L2-010, L2-015, L2-025, L2-036, L2-041, L2-042 |
 | Design system | [`form-field.html`](../../design-system/components/form-field.html) |
 | Source mocks | [`pages/booking-request/invalid`](../../mocks/pages/booking-request/invalid.html), [`pages/sign-in/invalid`](../../mocks/pages/sign-in/invalid.html), [`pages/sign-up/invalid`](../../mocks/pages/sign-up/invalid.html), [`pages/account-settings/invalid`](../../mocks/pages/account-settings/invalid.html), [`pages/reset-password/invalid`](../../mocks/pages/reset-password/invalid.html), [`pages/forgot-password/invalid`](../../mocks/pages/forgot-password/invalid.html), [`pages/care-and-review/invalid`](../../mocks/pages/care-and-review/invalid.html), [`dialogs/filter-braiders/invalid`](../../mocks/dialogs/filter-braiders/invalid.html), [`dialogs/change-appointment/invalid`](../../mocks/dialogs/change-appointment/invalid.html), [`dialogs/report-review/invalid`](../../mocks/dialogs/report-review/invalid.html), [`dialogs/request-review/invalid`](../../mocks/dialogs/request-review/invalid.html), [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html) |

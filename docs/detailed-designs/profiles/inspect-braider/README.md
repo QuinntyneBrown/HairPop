@@ -6,7 +6,36 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`BraiderProfilePage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetPublishedBraider` is the proposed Laravel application action. Its responsibility is to assemble published profile sections and ratings from published reviews. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `BraiderProfile` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`BraiderProfilePage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetPublishedBraider` is the proposed Laravel application action. Its responsibility is to assemble published profile sections and ratings from published reviews. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BraiderProfile` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** The private studio address is never part of the public profile (L2-027 AC3). The booking action links to `/book/:slug` with the braider's slug (L2-007 AC1).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/braiders/:slug` |
+| Components | `BraiderProfilePage` |
+| API token | `BRAIDERS_API` (`BraidersApi`) |
+| Render mode | Server; reviews load in the browser so their failure is partial |
+| Mocks | `pages/braider-profile/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/braiders/{slug}` | public | — | 200 `BraiderProfile` | 404 unknown or unpublished |
+| GET | `/api/braiders/{slug}/reviews?page` | public | query: `page` | 200 `Page<Review>` | 404 |
+
+```ts
+interface BraiderProfile {
+  slug: string; name: string; initials: string; photo: Image | null; area: string; travelKm: number | null; bio: string;
+  rating: { average: number; count: number } | null;
+  services: { id: string; name: string; styleSlug: string; startingPrice: number; typicalHours: number }[];
+  portfolio: { id: string; image: Image | null; caption: string }[];
+  policies: { preparation: string | null; changes: string | null; cancellation: string | null };
+}
+interface Review { id: string; rating: number; date: string /* YYYY-MM-DD */; text: string; author: string; service: string }
+```
 
 ## Requirements
 

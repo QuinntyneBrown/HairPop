@@ -6,7 +6,36 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`MatchingBraidersPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `FindEligibleBraiders` is the proposed Laravel application action. Its responsibility is to match published offerings to the style and valid location and price filters. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `BraiderService` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`MatchingBraidersPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `FindEligibleBraiders` is the proposed Laravel application action. Its responsibility is to match published offerings to the style and valid location and price filters. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BraiderService` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** The filter dialog validates `maxPrice` against `meta.style.minPrice` before applying, keeps entered values on failure and holds the confirm button busy while the request runs (L2-005).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/styles/:slug/braiders`; `/braiders` lists every matching braider without a style |
+| Components | `MatchingBraidersPage`, `FilterBraidersDialog` |
+| API token | `MATCHING_API` (`MatchingApi`) |
+| Render mode | Server |
+| Query | `q` (search), `maxPrice` (whole dollars), `distanceKm` (5, 10 or 25), `page`; the style stays in the path. Applied price and distance show as chips under the search box; Clear filters drops every query parameter |
+| Dialog | Show braiders asks the API for the filtered results first and closes only on success, so a rejected or failed request keeps every entry. The page then navigates and loads the same results again |
+| Mocks | `pages/matching-braiders/*`, `dialogs/filter-braiders/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/styles/{slug}/braiders?search&maxPrice&distanceKm&page` | public | query: `search`, `maxPrice` (whole dollars), `distanceKm` (5, 10, 25 or absent), `page` | 200 `Page<BraiderMatch> & { meta: { style: { slug: string; name: string; minPrice: number } } }` | 404 unknown style; 422 `errors.maxPrice`, `errors.distanceKm` |
+| GET | `/api/braiders?search&maxPrice&distanceKm&page` | public | as above, no style | 200 `Page<BraiderMatch>` | 422 |
+
+```ts
+interface BraiderMatch {
+  braider: { slug: string; name: string; area: string; photo: Image | null };
+  rating: { average: number; count: number } | null;       // published reviews only (L2-008)
+  service: { id: string; name: string; startingPrice: number; typicalHours: number };
+  nextAvailable: IsoDateTime | null;                        // null: no offered slot (L2-004 AC2)
+}
+```
 
 ## Requirements
 

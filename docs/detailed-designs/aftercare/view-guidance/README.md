@@ -6,7 +6,32 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`CareAndReviewPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetVisitGuidance` is the proposed Laravel application action. Its responsibility is to show available preparation or aftercare guidance for the booked service. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `CareGuidance` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`CareAndReviewPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetVisitGuidance` is the proposed Laravel application action. Its responsibility is to show available preparation or aftercare guidance for the booked service. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `CareGuidance` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** `guidance: null` shows the empty guidance state while the review form stays usable (L2-024 AC3).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/appointments/:ref/care` |
+| Components | `CareAndReviewPage` |
+| API token | `APPOINTMENTS_API` (`AppointmentsApi.care`) |
+| Render mode | Browser (signed in) |
+| Mocks | `pages/care-and-review/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/appointments/{ref}/care` | customer (owner) | — | 200 `CareDetail` | 401; 404 |
+
+```ts
+interface CareDetail {
+  reference: string; service: string; braider: { slug: string; name: string }; date: string;
+  guidance: { items: string[]; source: string } | null;
+  review: 'open' | 'submitted' | 'not_allowed';
+}
+```
 
 ## Requirements
 

@@ -4,8 +4,8 @@
 |---|---|
 | Selector | `header[hp-top-bar]` |
 | Library path | `frontend/projects/components/src/lib/top-bar/` |
-| Status | planned |
-| Traces to | L2-011, L2-018, L2-030, L2-032, L2-041, L2-042 |
+| Status | built |
+| Traces to | L2-011, L2-018, L2-030, L2-032, L2-041, L2-042, L2-046, L2-048 |
 | Design system | [`top-bar.html`](../../design-system/components/top-bar.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html), [`pages/help/default`](../../mocks/pages/help/default.html), [`pages/notification-center/unread`](../../mocks/pages/notification-center/unread.html), [`pages/notification-center/read`](../../mocks/pages/notification-center/read.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/sign-in/default`](../../mocks/pages/sign-in/default.html), [`dialogs/filter-braiders/default`](../../mocks/dialogs/filter-braiders/default.html), [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html), [`notifications/booking-update/info`](../../mocks/notifications/booking-update/info.html) |
 | Rendering | [`top-bar.html`](top-bar.html) |
@@ -72,10 +72,10 @@ Host: the component uses an attribute selector, so the host **is** the native `<
 | `brandLabel` | `string` | — | yes | Text of the brand link ("HairPop"); it is the link's accessible name. |
 | `brandLink` | `string \| readonly unknown[]` | — | yes | `RouterLink` commands for the style gallery (`'/'`). |
 | `navLabel` | `string` | — | yes | `aria-label` of the inline nav and of the menu panel ("Primary"). Must differ from any other `<nav>` label on the page. |
-| `links` | `readonly TopBarLink[]` | — | yes | The primary destinations in display order. HairPop passes four: Styles, Braiders, Appointments, Help. Each renders one `a.nav-link` inline and one in the menu panel. |
+| `links` | `readonly TopBarLink[]` | — | yes | The primary destinations in display order. The customer app passes four: Styles, Braiders, Appointments, Help; the braider app passes Requests, Services, Profile, Availability. Each renders one `a.nav-link` inline and one in the menu panel. An empty array renders no nav and no menu button (braider sign-in, D-15). |
 | `current` | `string \| null` | `null` | no | The `id` of the current destination. That link gets `aria-current="page"`; no other does. `null` marks none (detail pages, account pages, errors). An unknown id marks none. |
 | `updates` | `TopBarUpdates \| null` | `null` | no | The Updates link. `null` hides it (signed out, D-7). |
-| `account` | `TopBarAccount` | — | yes | The account link: "Maya" → account settings when signed in, "Sign in" → `/sign-in` when signed out. |
+| `account` | `TopBarAccount \| null` | — | yes | The account link: "Maya" → account settings when signed in, "Sign in" → `/sign-in` when signed out; "Nia" → profile content in the braider app. `null` renders no account link (braider sign-in, D-15). |
 | `menuLabel` | `string` | — | yes | `aria-label` of the menu button ("Menu"). The name does not change when expanded; `aria-expanded` carries the state. |
 | `menuOpen` | `boolean` (two-way `model`) | `false` | no | Whether the phone menu panel is open. The component sets it on every open and close; a consumer may bind it, for example to close the panel from a test. Setting it to `true` at 768 px or wider is ignored. |
 
@@ -112,7 +112,7 @@ Link activation is ordinary router navigation; the component emits nothing for i
 
 | Slot | Accepts | Rule |
 |---|---|---|
-| None | — | The top bar is data-driven: the same links render in two places (inline and in the menu panel), which projected content cannot do (AGENTS.md: a slot projects into one place only). |
+| `[slot=actions]` | One or two small controls, in practice the [theme toggle](theme-toggle.md) | Projected once, after the Updates link and before the menu button, at every width (D-16). The destinations stay data-driven: the same links render in two places (inline and in the menu panel), which projected content cannot do (AGENTS.md: a slot projects into one place only). |
 
 ## Variants and sizes
 
@@ -170,6 +170,7 @@ Rendered DOM. Classes and attributes are the e2e contract.
   </nav>
   <span class="topbar__spacer"></span>
   <a class="account-link" href="/notifications">Updates <span class="badge badge--count">2</span><span class="visually-hidden">, 2 unread</span></a>
+  <button class="btn btn--ghost btn--sm theme-toggle" type="button" aria-pressed="false">Dark theme</button><!-- [slot=actions] -->
   <button class="btn btn--ghost btn--icon topbar__menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="hp-top-bar-panel-1">
     <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
   </button>
@@ -376,7 +377,7 @@ Link fill and colour change over `--duration-fast`; under `prefers-reduced-motio
 
 ### Keyboard and focus
 
-- **AC-11** Given 1280 px and keyboard focus on the skip link, when Maya presses Tab repeatedly, then focus visits the brand, Styles, Braiders, Appointments, Help, Updates and "Maya" in that order and never the hidden menu button. (L2-041)
+- **AC-11** Given 1280 px with no `[slot=actions]` content and keyboard focus on the skip link, when Maya presses Tab repeatedly, then focus visits the brand, Styles, Braiders, Appointments, Help, Updates and "Maya" in that order and never the hidden menu button. (L2-041)
 - **AC-12** Given a nav link focused by keyboard, when the ring shows, then it is a 2 px `--color-focus-ring` outline offset by 2 px with contrast of at least 3:1 against `--color-bg-surface`. (L2-041)
 - **AC-13** Given the Braiders link (not current), when the pointer hovers it, then its fill becomes `--color-bg-subtle` and its label `--color-fg-default`, and hovering the current link fills it with `--color-accent-subtle-hover`. (L2-041)
 
@@ -405,6 +406,14 @@ Link fill and colour change over `--duration-fast`; under `prefers-reduced-motio
 ### Motion
 
 - **AC-27** Given `prefers-reduced-motion: reduce`, when a nav link is hovered and the menu panel is opened, then the colour change is instant and the panel appears without any transition. (L2-041)
+
+### Actions slot and braider app
+
+- **AC-28** Given the theme toggle projected into `[slot=actions]`, when the bar renders at 1280 px and at 360 px, then the toggle sits after Updates and before the menu button and the account link, and is rendered once. (L2-048)
+- **AC-29** Given 1280 px and keyboard focus on Help, when Maya presses Tab, then focus moves to Updates, then "Dark theme", then "Maya". (L2-041)
+- **AC-30** Given the braider app signed in as Nia with links Requests, Services, Profile and Availability, `updates` null and account "Nia", when the bar renders at 1280 px, then those four links, the toggle and "Nia" show and no Updates link is present. (L2-046)
+- **AC-31** Given the braider sign-in screen with `links` empty and `account` null, when the bar renders at any width, then only the brand and the projected toggle show, with no navigation landmark, menu button or account link. (L2-046)
+- **AC-32** Given a 320 px viewport with the toggle projected, when the bar renders, then the brand, Updates and the menu button stay on the first row, the toggle may wrap onto a second row, and the page does not scroll horizontally. (L2-042)
 
 ### Performance
 
@@ -438,3 +447,5 @@ Render cost is measured by the `TopBar` perf-test scenario and gated by `--fail-
 - **D-12** *Where does focus go after a link in the bar navigates?* The top bar does not move focus. The design system's top-bar page says the new page starts at the skip link, while the page-header page says a client-side route change moves focus to the new `<h1>`; the page header CRD implements the latter for client-side navigation, which is the only kind the bar's `RouterLink`s perform.
 - **D-13** *Do the Updates and account links get `aria-current` on their own pages?* No. The design system styles no current state for `.account-link` and the mocks mark none on the notification center or account settings; the page's `<h1>` names the page.
 - **D-14** *Is the menu button its own markup or the Button component?* The Button component (`button[hp-button]`, ghost, `iconOnly`) with the extra class `topbar__menu`, so it renders `btn btn--ghost btn--icon topbar__menu` exactly as the design system's code sample does and inherits the Button CRD's states and focus ring.
+- **D-15** *What does the braider sign-in screen show in the bar?* Brand and theme toggle only: there is no destination before sign-in, so an empty `links` array drops the nav landmark and menu button, and a `null` account drops the account link.
+- **D-16** *Where does the theme toggle live (L2-048)?* In a single `[slot=actions]` projected between Updates and the menu button at every width. A slot projects into one place, so the toggle is not repeated in the phone panel; it stays reachable in the bar. At 320 px the bar's existing wrapping (D-8) moves the toggle onto a second row rather than overflowing.

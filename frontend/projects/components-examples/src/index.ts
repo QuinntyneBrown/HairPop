@@ -99,6 +99,11 @@ export const COMPONENT_EXAMPLES: readonly ComponentExamples[] = [
     load: () => import('./form-layout/form-layout-examples').then((m) => m.FormLayoutExamples),
   },
   {
+    id: 'gallery',
+    title: 'Gallery',
+    load: () => import('./gallery/gallery-examples').then((m) => m.GalleryExamples),
+  },
+  {
     id: 'icon',
     title: 'Icon',
     load: () => import('./icon/icon-examples').then((m) => m.IconExamples),
@@ -143,6 +148,11 @@ export const COMPONENT_EXAMPLES: readonly ComponentExamples[] = [
     id: 'radio-group',
     title: 'Radio group',
     load: () => import('./radio-group/radio-group-examples').then((m) => m.RadioGroupExamples),
+  },
+  {
+    id: 'review-quote',
+    title: 'Review quote',
+    load: () => import('./review-quote/review-quote-examples').then((m) => m.ReviewQuoteExamples),
   },
   {
     id: 'select',
@@ -206,6 +216,11 @@ export const COMPONENT_EXAMPLES: readonly ComponentExamples[] = [
     id: 'toast',
     title: 'Toast',
     load: () => import('./toast/toast-examples').then((m) => m.ToastExamples),
+  },
+  {
+    id: 'theme-toggle',
+    title: 'Theme toggle',
+    load: () => import('./theme-toggle/theme-toggle-examples').then((m) => m.ThemeToggleExamples),
   },
   {
     id: 'tooltip',

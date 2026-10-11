@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `span[hp-skeleton]`, `hp-skeleton-group` |
 | Library path | `frontend/projects/components/src/lib/skeleton/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-001, L2-035, L2-036, L2-041, L2-042, L2-043 |
 | Design system | [`skeleton.html`](../../design-system/components/skeleton.html) |
 | Source mocks | [`pages/style-gallery/loading`](../../mocks/pages/style-gallery/loading.html), [`pages/matching-braiders/loading`](../../mocks/pages/matching-braiders/loading.html), [`pages/help/loading`](../../mocks/pages/help/loading.html), [`pages/my-appointments/loading`](../../mocks/pages/my-appointments/loading.html), [`pages/notification-center/loading`](../../mocks/pages/notification-center/loading.html), [`pages/style-detail/loading`](../../mocks/pages/style-detail/loading.html), [`pages/braider-profile/loading`](../../mocks/pages/braider-profile/loading.html), [`pages/appointment-detail/loading`](../../mocks/pages/appointment-detail/loading.html), [`pages/booking-request/loading`](../../mocks/pages/booking-request/loading.html), [`pages/care-and-review/loading`](../../mocks/pages/care-and-review/loading.html), [`pages/account-settings/loading`](../../mocks/pages/account-settings/loading.html), [`pages/sign-in/loading`](../../mocks/pages/sign-in/loading.html), [`pages/terms/loading`](../../mocks/pages/terms/loading.html), [`pages/not-found/loading`](../../mocks/pages/not-found/loading.html) |

@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `label[hp-checkbox]`, `hp-checkbox-group` |
 | Library path | `frontend/projects/components/src/lib/checkbox/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-034, L2-036, L2-041, L2-042 |
 | Design system | [`checkbox.html`](../../design-system/components/checkbox.html) |
 | Source mocks | [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html), [`dialogs/cookie-preferences/busy`](../../mocks/dialogs/cookie-preferences/busy.html), [`dialogs/cookie-preferences/invalid`](../../mocks/dialogs/cookie-preferences/invalid.html), [`dialogs/cookie-preferences/failed`](../../mocks/dialogs/cookie-preferences/failed.html) |

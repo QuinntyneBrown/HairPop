@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `hp-tabs`, `hp-tab`, `ng-template[hpTabContent]` |
 | Library path | `frontend/projects/components/src/lib/tabs/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-007, L2-018, L2-035, L2-041, L2-042 |
 | Design system | [`tabs.html`](../../design-system/components/tabs.html) |
 | Source mocks | none use it yet; the design system names [`pages/my-appointments/default`](../../mocks/pages/my-appointments/default.html) and [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html) as the screens that would use it, with states from [`pages/my-appointments/empty`](../../mocks/pages/my-appointments/empty.html) and [`pages/braider-profile/partial`](../../mocks/pages/braider-profile/partial.html) |

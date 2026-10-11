@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `dl[hp-description-list]` |
 | Library path | `frontend/projects/components/src/lib/description-list/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-003, L2-007, L2-016, L2-019, L2-041, L2-042 |
 | Design system | [`description-list.html`](../../design-system/components/description-list.html) |
 | Source mocks | [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/appointment-detail/success`](../../mocks/pages/appointment-detail/success.html), [`dialogs/request-review/default`](../../mocks/dialogs/request-review/default.html), [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/braider-profile/partial`](../../mocks/pages/braider-profile/partial.html), [`pages/style-detail/default`](../../mocks/pages/style-detail/default.html) |

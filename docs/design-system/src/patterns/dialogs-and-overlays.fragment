@@ -88,7 +88,7 @@
   <ul>
     {{mock:dialogs/change-appointment/default|form dialog}}
     {{mock:dialogs/cancel-appointment/default|destructive confirmation}}
-    {{mock:dialogs/cancel-appointment/confirm|warning stacked on danger}}
+    {{mock:dialogs/cancel-appointment/default|warning stacked on danger}}
     {{mock:dialogs/cancel-appointment/failed|failure in the body}}
     {{mock:dialogs/sign-out/busy|busy confirm}}
     {{mock:dialogs/request-review/default|review dialog}}

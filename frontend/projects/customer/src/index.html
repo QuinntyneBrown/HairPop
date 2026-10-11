@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>HairPop</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Find a hairstyle, compare braiders who offer it and request an appointment."
+    />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      try {
+        var t = localStorage.getItem('hp-theme');
+        if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <hp-root></hp-root>
+  </body>
+</html>

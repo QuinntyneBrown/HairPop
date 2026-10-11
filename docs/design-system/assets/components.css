@@ -373,7 +373,7 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
 /* ---------- Top bar ------------------------------------------------------ */
 .topbar {
   --topbar-bg: var(--color-bg-surface);
-  position: sticky; top: 0; z-index: var(--z-sticky); display: flex; align-items: center; gap: var(--space-3);
+  position: sticky; top: 0; z-index: var(--z-sticky); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); row-gap: 0;
   min-height: var(--layout-topbar-height); padding-inline: var(--layout-margin); background: var(--topbar-bg); border-bottom: var(--border-width-hairline) solid var(--color-border-default);
 }
 .topbar__brand { font: var(--text-h4); color: var(--color-fg-accent); text-decoration: none; display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; min-height: var(--target-comfortable); }
@@ -382,8 +382,9 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
 .topbar__nav .nav-link { white-space: nowrap; }
 .topbar__spacer { flex: 1; }
 .topbar__menu { display: inline-flex; }
+.topbar .topbar__account { display: none; }
 .topbar .search { flex: 1; min-width: 0; max-width: 28rem; }
-@media (min-width: 48rem) { .topbar__nav { display: flex; } .topbar__menu { display: none; } }
+@media (min-width: 48rem) { .topbar__nav { display: flex; } .topbar__menu { display: none; } .topbar .topbar__account { display: inline-flex; } }
 .account-link { color: var(--color-fg-default); min-height: var(--target-comfortable); display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--font-size-sm); white-space: nowrap; }
 @media (min-width: 48rem) { .account-link { font-size: var(--font-size-md); } }
 .nav-link {
@@ -633,6 +634,34 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
 .empty--warning .empty__icon { --empty-icon-bg: var(--color-warning-bg); --empty-icon-fg: var(--color-warning-icon); }
 .empty__reference { font: var(--text-code); font-size: var(--font-size-xs); color: var(--color-fg-subtle); }
 
+/* ---------- Rating summary ----------------------------------------------- */
+/* Published-review score: one star, the score and the count; "Not yet rated" when there are none. */
+.rating { --rating-star: var(--color-warning-icon); display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); font: var(--text-body-sm); color: var(--color-fg-muted); }
+.rating__visual { display: inline-flex; align-items: center; gap: var(--space-1); }
+.rating__star { color: var(--rating-star); }
+.rating__value { font: var(--text-label); color: var(--color-fg-default); font-variant-numeric: tabular-nums; }
+.rating__count { font-variant-numeric: tabular-nums; }
+.rating--unrated { font-style: italic; }
+
+/* ---------- Review quote ------------------------------------------------- */
+/* One published review: score and date, the quoted text, the author and service, one report action. */
+.review { display: flex; flex-direction: column; gap: var(--space-2); margin: 0; padding-block: var(--space-4); border-bottom: var(--border-width-hairline) solid var(--color-border-default); }
+.review:last-of-type { border-bottom: 0; }
+.review__header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.review__date { font: var(--text-caption); color: var(--color-fg-subtle); }
+.review__quote { margin: 0; padding: 0; border: 0; font: var(--text-body); color: var(--color-fg-default); overflow-wrap: anywhere; }
+.review__author { font: var(--text-body-sm); color: var(--color-fg-muted); }
+.review__actions { display: flex; gap: var(--space-3); }
+
+/* ---------- Gallery (portfolio) ------------------------------------------ */
+/* Portfolio photos in a responsive grid; each item is a figure with a caption and optional actions. */
+.gallery { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr)); gap: var(--space-3); }
+.gallery__item { margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.gallery__photo, .gallery__art { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-md); }
+.gallery__art { display: grid; place-items: center; color: var(--color-fg-accent); background: var(--color-accent-subtle); }
+.gallery__caption { font: var(--text-caption); color: var(--color-fg-muted); overflow-wrap: anywhere; }
+.gallery__actions { display: flex; gap: var(--space-2); }
+
 /* ---------- Legal and long-form copy ------------------------------------ */
 .legal-copy { max-width: var(--layout-measure); }
 .legal-copy h2:not(:first-child) { margin-top: var(--space-6); }
@@ -650,9 +679,10 @@ legend { font: var(--text-label); padding: 0; margin-bottom: var(--space-2); }
 
 /* ---------- Forced colours and print ------------------------------------ */
 @media (forced-colors: active) {
-  .btn, .input, .select, .textarea, .card, .chip, .badge, .alert, .toast { border: var(--border-width-hairline) solid CanvasText; }
+  .btn, .input, .select, .textarea, .card, .chip, .badge, .alert, .toast, .gallery__photo { border: var(--border-width-hairline) solid CanvasText; }
   .btn--primary { forced-color-adjust: none; background: Highlight; color: HighlightText; }
   .nav-link[aria-current="page"], .tab[aria-selected="true"], .chip[aria-pressed="true"] { outline: var(--border-width-thick) solid Highlight; }
   .choice input:checked { forced-color-adjust: none; background: Highlight; }
+  .rating__star { color: CanvasText; }
 }
 @media print { .topbar, .sidebar, .toast-region, .skip-link { display: none !important; } }

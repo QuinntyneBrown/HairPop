@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `ul[hp-menu]`, `button[hp-menu-item]`, `a[hp-menu-item]`, `button[hp-menu-item-radio]`, `button[hp-menu-item-checkbox]`, `li[hpMenuGroupLabel]`, `li[hpMenuDivider]`, `button[hpMenuTriggerFor]` |
 | Library path | `frontend/projects/components/src/lib/menu/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-011, L2-022, L2-041, L2-042 |
 | Design system | [`menu.html`](../../design-system/components/menu.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/appointment-detail/default`](../../mocks/pages/appointment-detail/default.html), [`pages/matching-braiders/default`](../../mocks/pages/matching-braiders/default.html), [`dialogs/sign-out/default`](../../mocks/dialogs/sign-out/default.html) |

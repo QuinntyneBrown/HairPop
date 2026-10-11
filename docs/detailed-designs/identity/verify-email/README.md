@@ -6,7 +6,25 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`VerifyEmailPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `VerifyCustomerEmail` is the proposed Laravel application action. Its responsibility is to consume a single-use verification challenge or issue a controlled resend. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `EmailVerification` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`VerifyEmailPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `VerifyCustomerEmail` is the proposed Laravel application action. Its responsibility is to consume a single-use verification challenge or issue a controlled resend. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `EmailVerification` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** With a `token` the page verifies on load; without one it explains the next step and offers Resend email.
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/verify-email?token` |
+| Components | `VerifyEmailPage` |
+| API token | `AUTH_API` (`AuthApi.verifyEmail`, `resendVerification`) |
+| Render mode | Server |
+| Mocks | `pages/verify-email/*`, `notifications/account-feedback/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| POST | `/api/email/verify` | public | `{ token }` | 200 `{ email: string }` | 422 `code: 'invalid_token'` (expired, altered or used) |
+| POST | `/api/email/verification-notification` | public | `{ email }` | 202 | 429 `retryAfter` |
 
 ## Requirements
 

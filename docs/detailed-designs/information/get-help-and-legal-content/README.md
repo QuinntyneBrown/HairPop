@@ -6,7 +6,32 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`HelpAndLegalPages` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetPublishedContent` is the proposed Laravel application action. Its responsibility is to deliver current approved help, terms and privacy text through public pages. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `PublishedContent` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`HelpAndLegalPages` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetPublishedContent` is the proposed Laravel application action. Its responsibility is to deliver current approved help, terms and privacy text through public pages. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `PublishedContent` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** Help builds its contact link as `mailto:` with the reference from `?ref=` when present, so only the customer's own reference is used (L2-032 AC2).
+
+| Part | Value |
+|------|-------|
+| Application | customer |
+| Route | `/help`, `/terms`, `/privacy` |
+| Components | `HelpPage`, `LegalPage` |
+| API token | `CONTENT_API` (`ContentApi`) |
+| Render mode | Server |
+| Mocks | `pages/help/*`, `pages/terms/*`, `pages/privacy/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/content/{slug}` | public | `slug`: `help` \| `terms` \| `privacy` | 200 `PublishedContent` | 404 |
+
+```ts
+interface PublishedContent {
+  slug: 'help' | 'terms' | 'privacy'; title: string; effectiveDate: string | null;
+  sections: { id: string; heading: string; paragraphs: string[] }[];
+  supportEmail: string | null;
+}
+```
 
 ## Requirements
 

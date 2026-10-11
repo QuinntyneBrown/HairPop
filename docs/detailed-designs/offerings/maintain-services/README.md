@@ -6,13 +6,39 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`BraiderServicesPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `MaintainBraiderService` is the proposed Laravel application action. Its responsibility is to publish or revise an owned style-linked service with valid price and duration. The API route and request and response schema are <TO SUPPLY>. A thin Laravel controller validates the request and delegates to the action. The `BraiderService` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`BraiderServicesPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `MaintainBraiderService` is the proposed Laravel application action. Its responsibility is to publish or revise an owned style-linked service with valid price and duration. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BraiderService` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+
+**Frontend.** Publish and Unpublish send a `PATCH` with only `published` and `version`.
+
+| Part | Value |
+|------|-------|
+| Application | braider |
+| Route | `/manage/services` |
+| Components | `BraiderServicesPage`, `EditServiceDialog`, `RemoveServiceDialog` |
+| API token | `BRAIDER_SERVICES_API` (`BraiderServicesApi`) |
+| Render mode | Browser (braider app) |
+| Mocks | `pages/braider-services/*`, `dialogs/edit-service/*`, `dialogs/remove-service/*` |
+
+**API contract.** All paths are relative to the API origin; JSON bodies; errors use `ApiErrorBody`.
+
+| Method | Path | Access | Request | Success | Errors |
+|--------|------|--------|---------|---------|--------|
+| GET | `/api/braider/services` | braider | — | 200 `{ data: BraiderService[]; styles: { slug: string; name: string }[] }` | 401; 403 |
+| POST | `/api/braider/services` | braider | `ServiceInput` | 201 `BraiderService` | 422 |
+| PATCH | `/api/braider/services/{id}` | braider (owner) | `ServiceInput & { version }` | 200 `BraiderService` | 403; 409 `stale`; 422 |
+| DELETE | `/api/braider/services/{id}` | braider (owner) | — | 204 | 403 |
+
+```ts
+interface ServiceInput { styleSlug: string; name: string; startingPrice: number; typicalHours: number; preparation: string | null; published: boolean }
+interface BraiderService extends ServiceInput { id: string; styleName: string; version: number }
+```
 
 ## Requirements
 
 | L2 ID | Refines (L1) | Requirement |
 |-------|--------------|-------------|
 | `L2-026` | `L1-008` | An authenticated braider must be able to add, revise, unpublish, and remove their own style-linked offerings, including a starting price or range, typical duration, and service-specific preparation details. |
+| `L2-047` | `L1-015` | Each braider management screen and dialog must implement the states listed for it in the mock manifest, edit through dialogs or dedicated screens rather than inline page forms, and report conflicts without overwriting newer data. |
 
 ## Diagrams
 

@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { TopBar, TopBarAccount, TopBarLink, TopBarUpdates } from '@hairpop/components';
+import {
+  Button,
+  ThemeToggle,
+  TopBar,
+  TopBarAccount,
+  TopBarLink,
+  TopBarUpdates,
+} from '@hairpop/components';
 
 import { Example } from '../shared';
 
@@ -27,7 +34,7 @@ function updates(unreadCount: number): TopBarUpdates {
 @Component({
   selector: 'hp-top-bar-examples',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Example, TopBar],
+  imports: [Button, Example, ThemeToggle, TopBar],
   template: `
     <hp-example
       heading="Signed in"
@@ -63,6 +70,25 @@ function updates(unreadCount: number): TopBarUpdates {
         [links]="links"
         [account]="signIn"
       ></header>
+    </hp-example>
+
+    <hp-example
+      heading="With actions"
+      description="The theme toggle projected into [slot=actions], after Updates and before the menu button at every width."
+    >
+      <header
+        hp-top-bar
+        class="story-block"
+        brandLabel="HairPop"
+        brandLink="/"
+        navLabel="Primary"
+        menuLabel="Menu"
+        [links]="links"
+        [updates]="twoUnread"
+        [account]="maya"
+      >
+        <button slot="actions" hp-button variant="ghost" size="sm" hpThemeToggle>Dark theme</button>
+      </header>
     </hp-example>
 
     <hp-example heading="No unread" description="A zero count hides the badge and the hidden text.">

@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `textarea[hp-textarea]` |
 | Library path | `frontend/projects/components/src/lib/textarea/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-009, L2-025, L2-036, L2-039, L2-041, L2-042 |
 | Design system | [`textarea.html`](../../design-system/components/textarea.html) |
 | Source mocks | [`pages/care-and-review/default`](../../mocks/pages/care-and-review/default.html), [`pages/care-and-review/invalid`](../../mocks/pages/care-and-review/invalid.html), [`pages/booking-request/default`](../../mocks/pages/booking-request/default.html), [`dialogs/report-review/default`](../../mocks/dialogs/report-review/default.html), [`dialogs/report-review/invalid`](../../mocks/dialogs/report-review/invalid.html), [`dialogs/report-review/failed`](../../mocks/dialogs/report-review/failed.html) |

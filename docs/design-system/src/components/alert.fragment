@@ -1,4 +1,4 @@
-<!--meta {"lead": "An alert explains a condition that affects part of the page, and stays until it no longer applies: you're offline, some details could not load, check the highlighted field.", "description": "Inline alerts in four tones, page banners, alerts with actions and dismissible alerts, in both themes.", "pills": ["Icon + title + text", "Status: stable"], "variants": "inline alert (info, success, warning, danger); page banner; with actions; dismissible; error summary", "states": "default, link hover, link focus, dismiss hover, dismiss focus, persistent", "sources": ["pages/booking-request/offline", "pages/style-detail/partial", "pages/sign-in/invalid", "dialogs/cancel-appointment/failed", "dialogs/sign-out/confirm"]} -->
+<!--meta {"lead": "An alert explains a condition that affects part of the page, and stays until it no longer applies: you're offline, some details could not load, check the highlighted field.", "description": "Inline alerts in four tones, page banners, alerts with actions and dismissible alerts, in both themes.", "pills": ["Icon + title + text", "Status: stable"], "variants": "inline alert (info, success, warning, danger); page banner; with actions; dismissible; error summary", "states": "default, link hover, link focus, dismiss hover, dismiss focus, persistent", "sources": ["pages/booking-request/offline", "pages/style-detail/partial", "pages/sign-in/invalid", "dialogs/cancel-appointment/failed", "dialogs/sign-out/default"]} -->
 <section class="ds-section" id="overview"><h2><a href="#overview">Overview</a></h2>
   <p>Use an alert when a message belongs to the page, or to one region of it, and must stay visible while it is true: "You're offline", "Some details are unavailable", "We couldn't save this change". Use a <a href="toast.html">toast</a> for passing feedback about an action, an <a href="inline-message.html">inline message</a> for one field, and an <a href="empty-state.html">empty state</a> when the whole region failed to load.</p>
   <ul>
@@ -185,7 +185,7 @@
     {{mock:pages/style-detail/partial|partial data with a retry link}}
     {{mock:pages/sign-in/invalid|error summary}}
     {{mock:dialogs/cancel-appointment/failed|danger alert in a dialog}}
-    {{mock:dialogs/sign-out/confirm|warning before a confirm}}
+    {{mock:dialogs/sign-out/default|warning before a confirm}}
   </ul>
   <p>Drift fixed during extraction: offline and partial alerts had no icon and used a bold run-in instead of <code>.alert__title</code> (system: icon + title + text); the error summary had no links to the invalid fields and no list (system: one link per error); alerts inserted after an action carried no live role (system: <code>role="status"</code> or <code>role="alert"</code>); the confirm-state warning used generic copy ("This action updates your account") instead of naming the consequence.</p>
 </section>

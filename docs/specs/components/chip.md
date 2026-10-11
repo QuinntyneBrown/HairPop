@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `button[hp-chip]`, `span[hp-chip]`, `hp-chip-row` |
 | Library path | `frontend/projects/components/src/lib/chip/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-002, L2-005, L2-035, L2-041, L2-042 |
 | Design system | [`chip.html`](../../design-system/components/chip.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/style-gallery/edge`](../../mocks/pages/style-gallery/edge.html), [`pages/style-gallery/long`](../../mocks/pages/style-gallery/long.html), [`pages/style-gallery/offline`](../../mocks/pages/style-gallery/offline.html), [`pages/style-gallery/no-results`](../../mocks/pages/style-gallery/no-results.html), [`pages/matching-braiders/no-results`](../../mocks/pages/matching-braiders/no-results.html), [`dialogs/cookie-preferences/default`](../../mocks/dialogs/cookie-preferences/default.html), [`notifications/cookie-consent/info`](../../mocks/notifications/cookie-consent/info.html) |
