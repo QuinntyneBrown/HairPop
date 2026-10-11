@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Injector,
+  afterNextRender,
+  inject,
+  signal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {
@@ -11,7 +18,7 @@ import {
   TopBar,
   TopBarLink,
 } from '@hairpop/components';
-import { filter, map } from 'rxjs';
+import { filter, map, take } from 'rxjs';
 
 /** The primary destinations, in top-bar order (top-bar.md). */
 const NAV_LINKS: readonly TopBarLink[] = [
@@ -40,6 +47,7 @@ function currentNav(route: ActivatedRouteSnapshot): string | null {
 @Component({
   selector: 'hp-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[attr.data-hydrated]': "hydrated() ? '' : null" },
   imports: [AppShell, Button, Footer, RouterOutlet, SkipLink, ThemeToggle, TopBar],
   template: `
     <a hp-skip-link>Skip to content</a>
@@ -70,9 +78,25 @@ function currentNav(route: ActivatedRouteSnapshot): string | null {
 export class App {
   private readonly router = inject(Router);
 
+  /**
+   * Set once the first navigation's page has rendered in the browser, so e2e tests act only on
+   * an interactive app: a lazy page hydrates after the shell does.
+   */
+  protected readonly hydrated = signal(false);
+
   protected readonly links = NAV_LINKS;
   protected readonly footerLinks = FOOTER_LINKS;
   protected readonly account = { label: 'Sign in', link: '/sign-in' };
+
+  constructor() {
+    const injector = inject(Injector);
+    this.router.events
+      .pipe(
+        filter((e) => e instanceof NavigationEnd),
+        take(1),
+      )
+      .subscribe(() => afterNextRender(() => this.hydrated.set(true), { injector }));
+  }
 
   protected readonly current = toSignal(
     this.router.events.pipe(

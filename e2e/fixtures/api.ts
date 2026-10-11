@@ -139,6 +139,18 @@ async function install(context: BrowserContext, page: Page, api: Api): Promise<v
 }
 
 export const test = base.extend<{ api: Api }>({
+  // A navigation resolves once the server-rendered document loads, but the app is only
+  // interactive after hydration: input sent earlier is lost to a native form submit or a full
+  // page load. Wait for the marker the shell sets once the browser has rendered.
+  page: async ({ page }, use) => {
+    const goto = page.goto.bind(page);
+    page.goto = async (...args: Parameters<typeof goto>) => {
+      const response = await goto(...args);
+      await page.locator('hp-root[data-hydrated]').waitFor({ state: 'attached' });
+      return response;
+    };
+    await use(page);
+  },
   api: async ({ context, page }, use, testInfo) => {
     const api = new Api(`${testInfo.workerIndex}-${testInfo.testId}-${testInfo.retry}`, context);
     const consoleErrors: string[] = [];
