@@ -7,6 +7,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'styles/:slug/braiders', renderMode: RenderMode.Server },
   { path: 'braiders', renderMode: RenderMode.Server },
   { path: 'braiders/:slug', renderMode: RenderMode.Server },
+  { path: 'sign-in', renderMode: RenderMode.Server },
   { path: 'help', renderMode: RenderMode.Server },
   { path: 'terms', renderMode: RenderMode.Server },
   { path: 'privacy', renderMode: RenderMode.Server },

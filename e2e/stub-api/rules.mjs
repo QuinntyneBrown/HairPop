@@ -41,7 +41,12 @@ function queryMatches(expected, actual) {
 
 /** Rules every state starts with: CSRF cookie available, nobody signed in. */
 export const DEFAULT_RULES = [
-  { method: 'GET', path: '/sanctum/csrf-cookie', status: 204 },
+  {
+    method: 'GET',
+    path: '/sanctum/csrf-cookie',
+    status: 204,
+    headers: { 'set-cookie': 'XSRF-TOKEN=e2e-xsrf-token; Path=/' },
+  },
   { method: 'GET', path: '/api/session', status: 401, body: { message: 'Unauthenticated.' } },
 ];
 

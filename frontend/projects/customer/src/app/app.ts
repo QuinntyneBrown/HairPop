@@ -3,12 +3,14 @@ import {
   Component,
   Injector,
   afterNextRender,
+  computed,
   inject,
   signal,
 } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Title } from '@angular/platform-browser';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { SessionStore } from '@hairpop/api';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {
   AppShell,
@@ -68,7 +70,7 @@ function currentNav(route: ActivatedRouteSnapshot): string | null {
         menuLabel="Menu"
         [links]="links"
         [current]="current()"
-        [account]="account"
+        [account]="account()"
       >
         <button slot="actions" hp-button variant="ghost" size="sm" hpThemeToggle>Dark theme</button>
       </header>
@@ -95,7 +97,15 @@ export class App {
 
   protected readonly links = NAV_LINKS;
   protected readonly footerLinks = FOOTER_LINKS;
-  protected readonly account = { label: 'Sign in', link: '/sign-in' };
+  private readonly session = inject(SessionStore);
+
+  /** The person's first name once signed in; otherwise the way to sign in. */
+  protected readonly account = computed(() => {
+    const user = this.session.user();
+    return user
+      ? { label: user.firstName, link: '/settings', panelLabel: `${user.firstName} · account` }
+      : { label: 'Sign in', link: '/sign-in' };
+  });
 
   constructor() {
     this.announceTitleOnNavigation();
