@@ -19,6 +19,7 @@ export * from './lib/error-page';
 export * from './lib/footer';
 export * from './lib/form-field';
 export * from './lib/form-layout';
+export * from './lib/gallery';
 export * from './lib/icon';
 export * from './lib/inline-message';
 export * from './lib/link';

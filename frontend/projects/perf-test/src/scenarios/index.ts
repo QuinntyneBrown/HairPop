@@ -1,6 +1,7 @@
 import { Type } from '@angular/core';
 
 import Button from './Button';
+import Gallery from './Gallery';
 import ThemeToggle from './ThemeToggle';
 import TopBar from './TopBar';
 
@@ -11,6 +12,7 @@ import TopBar from './TopBar';
  */
 export const scenarios: Record<string, Type<unknown>> = {
   Button,
+  Gallery,
   ThemeToggle,
   TopBar,
 };

@@ -9,6 +9,8 @@ import {
   Card,
   DescriptionList,
   EmptyState,
+  Gallery,
+  GalleryItem,
   Icon,
   List,
   ListItem,
@@ -37,6 +39,7 @@ function firstName(name: string): string {
     Card,
     DescriptionList,
     EmptyState,
+    Gallery,
     Icon,
     List,
     ListItem,
@@ -90,6 +93,25 @@ function firstName(name: string): string {
                 </li>
               }
             </ul>
+          </section>
+
+          <section hp-card aria-labelledby="work-title">
+            <h2 id="work-title">Recent work</h2>
+            @if (p.portfolio.length) {
+              <ul hp-gallery [items]="portfolio(p)"></ul>
+            } @else {
+              <hp-empty-state
+                size="compact"
+                [headingLevel]="3"
+                heading="No portfolio photos yet"
+                [text]="
+                  first(p) +
+                  ' hasn’t added portfolio work yet. You can still read their services and policies.'
+                "
+              >
+                <svg hp-icon slot="icon" name="sparkle"></svg>
+              </hp-empty-state>
+            }
           </section>
         </div>
 
@@ -189,6 +211,15 @@ export class BraiderProfilePage {
 
   protected first(profile: BraiderProfile): string {
     return firstName(profile.name);
+  }
+
+  protected portfolio(profile: BraiderProfile): readonly GalleryItem[] {
+    return profile.portfolio.map((item) => ({
+      id: item.id,
+      src: item.image?.src ?? null,
+      alt: item.image?.alt ?? '',
+      caption: item.caption,
+    }));
   }
 
   protected areaLine(profile: BraiderProfile): string {

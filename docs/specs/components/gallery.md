@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `ul[hp-gallery]` |
 | Library path | `frontend/projects/components/src/lib/gallery/` |
-| Status | planned |
+| Status | built (read-only; `removable` lands with the braider profile content screen) |
 | Traces to | L2-007, L2-027, L2-041, L2-042 |
 | Design system | [`gallery.html`](../../design-system/components/gallery.html) |
 | Source mocks | [`pages/braider-profile/default`](../../mocks/pages/braider-profile/default.html), [`pages/braider-profile-content/default`](../../mocks/pages/braider-profile-content/default.html), [`pages/braider-profile-content/empty`](../../mocks/pages/braider-profile-content/empty.html) |
@@ -68,7 +68,7 @@ Host: the native `<ul>`.
 | Read-only | — | Public profile. |
 | Editable | — (`removable`) | Braider profile content. |
 
-One item size, set by the grid (`minmax(min(100%, 10rem), 1fr)`).
+One item size, set by the grid (`minmax(min(100%, 8rem), 1fr)`, see D-4).
 
 ## States
 
@@ -118,7 +118,7 @@ Component tokens: none.
 
 ## Responsive behaviour
 
-- Two columns at 360 px inside a card; three or more at 768 px and wider, never narrower than 10 rem per column.
+- Two columns at 360 px inside a card (278 px of content), growing to more columns as the card widens, never narrower than 8 rem per column.
 - At 320 px nothing scrolls horizontally or clips; at 200 % zoom everything stays available; remove buttons keep a 44 × 44 CSS px target.
 
 ## Accessibility
@@ -198,10 +198,11 @@ Render cost is measured by the perf-test scenarios named under *Performance* and
 
 ## Implementation notes
 
-- Planned: folder `src/lib/gallery/` with `gallery.ts` and `index.ts`. Composes `Button` and `Icon`.
+- Folder `src/lib/gallery/` with `gallery.ts` and `index.ts`. Composes `Button` and `Icon`.
 
 ## Decisions
 
 - **D-1** *Empty items?* The component renders an empty list and logs nothing; pages show an empty state instead (design-system do/don't).
 - **D-2** *Focus after removal?* The component owns it while items remain, because only it knows the button order; the consumer owns the empty case.
+- **D-4** *Track minimum?* 8 rem, not the 10 rem first drawn. A card at 360 px has 278 px of content, which holds two 10 rem columns only if the gap were negative, so AC-10 could not hold. 8 rem fits two columns there. The design system stylesheet's `.gallery` rule still says 10 rem and needs the same change.
 - **D-3** *Confirm before removing?* No dialog. Removing a portfolio photo is reversible by uploading it again, and the page reports the result with a toast.

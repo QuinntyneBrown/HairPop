@@ -46,6 +46,13 @@ export class Shell {
     return this.page.locator('body').evaluate((body) => getComputedStyle(body).backgroundColor);
   }
 
+  /** Whether the page scrolls sideways, which a narrow screen must never need. */
+  async scrollsHorizontally(): Promise<boolean> {
+    return this.page.evaluate(
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    );
+  }
+
   heading(): Locator {
     return this.page.getByRole('heading', { level: 1 });
   }

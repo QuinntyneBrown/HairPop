@@ -3,7 +3,13 @@
 // Description: A public braider profile shows identity, honest rating, services, policies and a booking route, or a safe error.
 
 import { expect, test } from '../fixtures/api';
-import { findBraiders, getBraider, knotlessMatches, niaProfile } from '../fixtures/braiders';
+import {
+  findBraiders,
+  getBraider,
+  knotlessMatches,
+  niaPortfolio,
+  niaProfile,
+} from '../fixtures/braiders';
 import { notFound, serverError } from '../fixtures/errors';
 import { BraiderProfilePage } from '../pages/braider-profile.page';
 import { ErrorPage } from '../pages/error-page.page';
@@ -137,5 +143,61 @@ test.describe('Braider profile', () => {
     const profile = new BraiderProfilePage(page);
     await expect(profile.loading).toBeVisible();
     await expect(profile.name).toHaveText('Nia Okafor');
+  });
+
+  test('recent work shows the portfolio in order, with a panel for a missing photo', async ({
+    page,
+    api,
+  }) => {
+    await api.given(getBraider({ ...niaProfile, portfolio: niaPortfolio }));
+    const profile = new BraiderProfilePage(page);
+
+    await profile.open('nia-okafor');
+
+    expect(await profile.portfolioCaptions()).toEqual([
+      'Medium knotless braids · Oct 2026',
+      'Nia at the studio · Sep 2026',
+      'Passion twists · Sep 2026',
+    ]);
+    await expect(
+      profile.portfolio.getByRole('img', {
+        name: 'Medium knotless braids shown from the back, with neat square parts',
+      }),
+    ).toBeVisible();
+    await expect(profile.portfolio.getByRole('img')).toHaveCount(2);
+    await expect(profile.portfolio.locator('.gallery__art')).toHaveCount(1);
+    await expect(profile.portfolio.getByRole('button')).toHaveCount(0);
+  });
+
+  test('with no portfolio photos the section says so and the rest of the profile stays', async ({
+    page,
+    api,
+  }) => {
+    await api.given(getBraider(niaProfile));
+    const profile = new BraiderProfilePage(page);
+
+    await profile.open('nia-okafor');
+
+    await expect(profile.portfolio.locator('.empty__title')).toHaveText('No portfolio photos yet');
+    await expect(profile.portfolio).toContainText(
+      'Nia hasn’t added portfolio work yet. You can still read their services and policies.',
+    );
+    expect(await profile.serviceTitles()).toEqual(['Medium knotless braids', 'Passion twists']);
+    await expect(profile.book).toBeVisible();
+  });
+
+  test.describe('on a phone', () => {
+    test.use({ viewport: { width: 360, height: 800 } });
+
+    test('the portfolio fits the card without scrolling sideways', async ({ page, api }) => {
+      await api.given(getBraider({ ...niaProfile, portfolio: niaPortfolio }));
+      const profile = new BraiderProfilePage(page);
+
+      await profile.open('nia-okafor');
+
+      await expect(profile.portfolioItems).toHaveCount(3);
+      expect(await profile.shell.scrollsHorizontally()).toBe(false);
+      expect(await profile.portfolioColumns()).toBe(2);
+    });
   });
 });

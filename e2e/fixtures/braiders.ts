@@ -147,3 +147,21 @@ export const niaProfile: BraiderProfile = {
 export function getBraider(profile: BraiderProfile, extra: Partial<ApiRule> = {}): ApiRule {
   return { method: 'GET', path: `/api/braiders/${profile.slug}`, body: profile, ...extra };
 }
+
+/** Nia's published portfolio: two photos and one item whose photo is missing. */
+export const niaPortfolio: BraiderProfile['portfolio'] = [
+  {
+    id: 'work-1',
+    image: {
+      src: `${MEDIA_ORIGIN}/styles/knotless-braids.png`,
+      alt: 'Medium knotless braids shown from the back, with neat square parts',
+    },
+    caption: 'Medium knotless braids · Oct 2026',
+  },
+  {
+    id: 'work-2',
+    image: { src: `${MEDIA_ORIGIN}/braiders/nia.jpg`, alt: 'Nia Okafor smiling in her studio' },
+    caption: 'Nia at the studio · Sep 2026',
+  },
+  { id: 'work-3', image: null, caption: 'Passion twists · Sep 2026' },
+];

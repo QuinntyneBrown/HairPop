@@ -99,6 +99,11 @@ export const COMPONENT_EXAMPLES: readonly ComponentExamples[] = [
     load: () => import('./form-layout/form-layout-examples').then((m) => m.FormLayoutExamples),
   },
   {
+    id: 'gallery',
+    title: 'Gallery',
+    load: () => import('./gallery/gallery-examples').then((m) => m.GalleryExamples),
+  },
+  {
     id: 'icon',
     title: 'Icon',
     load: () => import('./icon/icon-examples').then((m) => m.IconExamples),

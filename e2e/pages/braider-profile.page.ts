@@ -14,6 +14,8 @@ export class BraiderProfilePage {
   readonly book: Locator;
   readonly services: Locator;
   readonly beforeYouBook: Locator;
+  readonly portfolio: Locator;
+  readonly portfolioItems: Locator;
   readonly emptyState: Locator;
   readonly loading: Locator;
   readonly offline: Locator;
@@ -29,6 +31,8 @@ export class BraiderProfilePage {
     this.book = page.getByRole('link', { name: 'Request an appointment' });
     this.services = page.getByRole('region', { name: 'Services' }).getByRole('listitem');
     this.beforeYouBook = page.getByRole('complementary', { name: 'Before you book' });
+    this.portfolio = page.getByRole('region', { name: 'Recent work' });
+    this.portfolioItems = this.portfolio.locator('li.gallery__item');
     this.emptyState = page.locator('hp-empty-state');
     this.loading = page.locator('hp-skeleton-group');
     this.offline = page.locator('hp-alert', { hasText: 'You’re offline' });
@@ -50,6 +54,18 @@ export class BraiderProfilePage {
   /** The value shown for one "Before you book" term. */
   policy(term: string): Locator {
     return this.beforeYouBook.locator('dt', { hasText: term }).locator('+ dd');
+  }
+
+  async portfolioCaptions(): Promise<string[]> {
+    return this.portfolio.locator('.gallery__caption').allInnerTexts();
+  }
+
+  /** How many columns the portfolio grid lays out: the distinct left edges of its items. */
+  async portfolioColumns(): Promise<number> {
+    const lefts = await this.portfolioItems.evaluateAll((items) =>
+      items.map((item) => Math.round(item.getBoundingClientRect().left)),
+    );
+    return new Set(lefts).size;
   }
 
   emptyHeading(): Locator {
