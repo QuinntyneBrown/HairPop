@@ -2,7 +2,9 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 import {
+  CONSENT_API,
   CONTENT_API,
+  HttpConsentApi,
   HttpContentApi,
   HttpMatchingApi,
   HttpStylesApi,
@@ -10,6 +12,8 @@ import {
   STYLES_API,
   provideHairPopHttp,
 } from '@hairpop/api';
+
+import { provideToasts } from '@hairpop/components';
 
 import { routes } from './app.routes';
 
@@ -26,5 +30,7 @@ export const appConfig: ApplicationConfig = {
     { provide: STYLES_API, useClass: HttpStylesApi },
     { provide: MATCHING_API, useClass: HttpMatchingApi },
     { provide: CONTENT_API, useClass: HttpContentApi },
+    { provide: CONSENT_API, useClass: HttpConsentApi },
+    provideToasts({ dismissLabel: (heading) => `Dismiss: ${heading}` }),
   ],
 };

@@ -123,10 +123,22 @@ export class Api {
   }
 }
 
-async function install(context: BrowserContext, page: Page, api: Api): Promise<void> {
+/** The optional-usage choice a returning visitor has saved: `null` is a first visit. */
+export type ConsentChoice = 'allow' | 'essential' | null;
+
+async function install(
+  context: BrowserContext,
+  page: Page,
+  api: Api,
+  consent: ConsentChoice,
+): Promise<void> {
   await context.addCookies(
     [CUSTOMER_URL, BRAIDER_URL].map((url) => ({ name: 'hp-e2e', value: api.id, url })),
   );
+  if (consent) {
+    // Most specs are about something else, so the visitor has already answered the banner.
+    await context.addCookies([{ name: 'hp-consent', value: consent, url: CUSTOMER_URL }]);
+  }
   await page.route(/\/(api|sanctum)\//, (route, request) => api.handle(route, request));
   // Fixture media URLs resolve to the mock photos (docs/mocks/assets/photos).
   await page.route(`${MEDIA_ORIGIN}/**`, (route, request) => {
@@ -138,7 +150,8 @@ async function install(context: BrowserContext, page: Page, api: Api): Promise<v
   await api.sync();
 }
 
-export const test = base.extend<{ api: Api }>({
+export const test = base.extend<{ api: Api; consent: ConsentChoice }>({
+  consent: ['essential', { option: true }],
   // A navigation resolves once the server-rendered document loads, but the app is only
   // interactive after hydration: input sent earlier is lost to a native form submit or a full
   // page load. Wait for the marker the shell sets once the browser has rendered.
@@ -151,7 +164,7 @@ export const test = base.extend<{ api: Api }>({
     };
     await use(page);
   },
-  api: async ({ context, page }, use, testInfo) => {
+  api: async ({ context, page, consent }, use, testInfo) => {
     const api = new Api(`${testInfo.workerIndex}-${testInfo.testId}-${testInfo.retry}`, context);
     const consoleErrors: string[] = [];
     page.on('console', (message) => {
@@ -161,7 +174,7 @@ export const test = base.extend<{ api: Api }>({
       }
     });
     page.on('pageerror', (error) => consoleErrors.push(error.message));
-    await install(context, page, api);
+    await install(context, page, api, consent);
     await use(api);
     await api.dispose();
     if (api.missing.length) {

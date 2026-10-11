@@ -10,3 +10,4 @@ export * from './lib/format';
 export * from './lib/styles';
 export * from './lib/matching';
 export * from './lib/content';
+export * from './lib/consent';

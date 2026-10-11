@@ -22,6 +22,8 @@ import {
 } from '@hairpop/components';
 import { filter, map, take } from 'rxjs';
 
+import { CookieBanner } from './shared/cookie-banner';
+
 /** The primary destinations, in top-bar order (top-bar.md). */
 const NAV_LINKS: readonly TopBarLink[] = [
   { id: 'styles', label: 'Styles', link: '/' },
@@ -50,9 +52,10 @@ function currentNav(route: ActivatedRouteSnapshot): string | null {
   selector: 'hp-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[attr.data-hydrated]': "hydrated() ? '' : null" },
-  imports: [AppShell, Button, Footer, RouterOutlet, SkipLink, ThemeToggle, TopBar],
+  imports: [AppShell, Button, CookieBanner, Footer, RouterOutlet, SkipLink, ThemeToggle, TopBar],
   template: `
     <a hp-skip-link>Skip to content</a>
+    <hp-cookie-banner />
     <hp-app-shell>
       <header
         hp-top-bar
