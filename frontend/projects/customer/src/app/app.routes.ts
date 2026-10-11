@@ -28,6 +28,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'braiders/:slug',
+    title: 'Braider · HairPop',
+    data: { nav: 'braiders' },
+    loadComponent: () =>
+      import('./pages/braider-profile/braider-profile.page').then((m) => m.BraiderProfilePage),
+  },
+  {
     path: 'styles/:slug',
     title: 'Style · HairPop',
     data: { nav: 'styles' },

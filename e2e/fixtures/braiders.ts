@@ -1,4 +1,8 @@
-import type { BraiderMatch, BraiderMatchPage } from '../../frontend/projects/api/src/public-api';
+import type {
+  BraiderMatch,
+  BraiderMatchPage,
+  BraiderProfile,
+} from '../../frontend/projects/api/src/public-api';
 
 import type { ApiRule } from './api';
 import { MEDIA_ORIGIN } from './urls';
@@ -103,4 +107,43 @@ export function findBraiders(
     body: matchPage(matches, style ? options.meta : { ...options.meta, style: undefined }),
     delayMs: options.delayMs,
   };
+}
+
+/** Nia's public profile as published, with no portfolio or reviews yet. */
+export const niaProfile: BraiderProfile = {
+  slug: 'nia-okafor',
+  name: 'Nia Okafor',
+  initials: 'NO',
+  photo: null,
+  area: 'Toronto West',
+  travelKm: 10,
+  bio: 'I specialize in comfortable, neat braids. Bring inspiration photos and we’ll confirm the details together.',
+  rating: { average: 4.9, count: 86 },
+  services: [
+    {
+      id: 'svc-nia-knotless-m',
+      name: 'Medium knotless braids',
+      styleSlug: 'knotless-braids',
+      startingPrice: 180,
+      typicalHours: 5,
+    },
+    {
+      id: 'svc-nia-passion',
+      name: 'Passion twists',
+      styleSlug: 'passion-twists',
+      startingPrice: 160,
+      typicalHours: 4,
+    },
+  ],
+  portfolio: [],
+  policies: {
+    preparation: 'Arrive with washed, detangled hair.',
+    changes: 'Request a change at least 48 hours before.',
+    cancellation: 'Free up to 48 hours before; later cancellations may be charged $40.',
+  },
+};
+
+/** GET /api/braiders/{slug}. */
+export function getBraider(profile: BraiderProfile, extra: Partial<ApiRule> = {}): ApiRule {
+  return { method: 'GET', path: `/api/braiders/${profile.slug}`, body: profile, ...extra };
 }
