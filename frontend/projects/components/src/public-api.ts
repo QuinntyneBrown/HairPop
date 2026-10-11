@@ -40,6 +40,7 @@ export * from './lib/table';
 export * from './lib/tabs';
 export * from './lib/text-field';
 export * from './lib/textarea';
+export * from './lib/theme-toggle';
 export * from './lib/toast';
 export * from './lib/tooltip';
 export * from './lib/top-bar';

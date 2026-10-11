@@ -65,7 +65,7 @@ let nextPanelId = 0;
 
 /**
  * The banner on every HairPop screen (top-bar.md): brand, the primary destinations, Updates
- * with the unread count and the account link. Below 48 rem the destinations and the account
+ * with the unread count, `[slot=actions]` (the theme toggle) and the account link. Below 48 rem the destinations and the account
  * move into a non-modal disclosure panel in a CDK Overlay under the bar (D-3, D-4, D-5).
  * The host is the native `<header>`, so it stays sticky and is the banner landmark (D-1).
  */
@@ -97,6 +97,7 @@ let nextPanelId = 0;
         }
       </a>
     }
+    <ng-content select="[slot=actions]" />
     <button
       #menuButton
       hp-button

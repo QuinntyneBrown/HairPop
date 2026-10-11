@@ -1,6 +1,8 @@
 import { Type } from '@angular/core';
 
 import Button from './Button';
+import ThemeToggle from './ThemeToggle';
+import TopBar from './TopBar';
 
 /**
  * Every scenario the perf test renders, by name. Each default export is a standalone component
@@ -9,4 +11,6 @@ import Button from './Button';
  */
 export const scenarios: Record<string, Type<unknown>> = {
   Button,
+  ThemeToggle,
+  TopBar,
 };

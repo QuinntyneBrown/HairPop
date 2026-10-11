@@ -1,7 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { AppShell, Footer, FooterLink, SkipLink, TopBar, TopBarLink } from '@hairpop/components';
+import {
+  AppShell,
+  Button,
+  Footer,
+  FooterLink,
+  SkipLink,
+  ThemeToggle,
+  TopBar,
+  TopBarLink,
+} from '@hairpop/components';
 import { filter, map } from 'rxjs';
 
 /** The primary destinations, in top-bar order (top-bar.md). */
@@ -31,7 +40,7 @@ function currentNav(route: ActivatedRouteSnapshot): string | null {
 @Component({
   selector: 'hp-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AppShell, Footer, RouterOutlet, SkipLink, TopBar],
+  imports: [AppShell, Button, Footer, RouterOutlet, SkipLink, ThemeToggle, TopBar],
   template: `
     <a hp-skip-link>Skip to content</a>
     <hp-app-shell>
@@ -45,7 +54,9 @@ function currentNav(route: ActivatedRouteSnapshot): string | null {
         [links]="links"
         [current]="current()"
         [account]="account"
-      ></header>
+      >
+        <button slot="actions" hp-button variant="ghost" size="sm" hpThemeToggle>Dark theme</button>
+      </header>
       <router-outlet />
       <footer
         hp-footer

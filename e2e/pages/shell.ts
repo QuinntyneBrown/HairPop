@@ -11,6 +11,7 @@ export class Shell {
   readonly accountLink: Locator;
   readonly menuButton: Locator;
   readonly themeToggle: Locator;
+  readonly root: Locator;
 
   constructor(readonly page: Page) {
     this.skipLink = page.locator('a.skip-link');
@@ -22,6 +23,7 @@ export class Shell {
     this.accountLink = this.topBar.locator('a.topbar__account');
     this.menuButton = this.topBar.locator('button.topbar__menu');
     this.themeToggle = this.topBar.locator('button.theme-toggle');
+    this.root = page.locator('html');
   }
 
   navLink(name: string): Locator {
@@ -35,6 +37,11 @@ export class Shell {
 
   footerLink(name: string): Locator {
     return this.footer.getByRole('link', { name, exact: true });
+  }
+
+  /** The colour the page paints behind its content: it differs between the two themes. */
+  async pageBackground(): Promise<string> {
+    return this.page.locator('body').evaluate((body) => getComputedStyle(body).backgroundColor);
   }
 
   heading(): Locator {

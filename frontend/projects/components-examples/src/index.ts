@@ -208,6 +208,11 @@ export const COMPONENT_EXAMPLES: readonly ComponentExamples[] = [
     load: () => import('./toast/toast-examples').then((m) => m.ToastExamples),
   },
   {
+    id: 'theme-toggle',
+    title: 'Theme toggle',
+    load: () => import('./theme-toggle/theme-toggle-examples').then((m) => m.ThemeToggleExamples),
+  },
+  {
     id: 'tooltip',
     title: 'Tooltip',
     load: () => import('./tooltip/tooltip-examples').then((m) => m.TooltipExamples),

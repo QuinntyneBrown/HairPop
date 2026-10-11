@@ -3,4 +3,6 @@
 // iteration count to clear a regression flag. Scenarios not listed render 50 times.
 export default {
   Button: 50,
+  ThemeToggle: 400,
+  TopBar: 50,
 };

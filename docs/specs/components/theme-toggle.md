@@ -4,7 +4,7 @@
 |---|---|
 | Selector | `button[hp-button][hpThemeToggle]` (directive) and `ThemeService` |
 | Library path | `frontend/projects/components/src/lib/theme-toggle/` |
-| Status | planned |
+| Status | built |
 | Traces to | L2-041, L2-042, L2-048 |
 | Design system | [`theme-toggle.html`](../../design-system/components/theme-toggle.html) |
 | Source mocks | [`pages/style-gallery/default`](../../mocks/pages/style-gallery/default.html), [`pages/braider-requests/default`](../../mocks/pages/braider-requests/default.html) |
@@ -193,7 +193,7 @@ Render cost is measured by the perf-test scenarios named under *Performance* and
 
 ## Implementation notes
 
-- Planned: folder `src/lib/theme-toggle/` with `theme.service.ts`, `theme-toggle.ts` (directive) and `index.ts`.
+- Folder `src/lib/theme-toggle/` with `theme.service.ts`, `theme-toggle.ts` (directive) and `index.ts`.
 - SSR: the service reads `localStorage` and `matchMedia` only in the browser (`isPlatformBrowser`); the server renders without `data-theme`, so CSS `prefers-color-scheme` applies until the init script runs.
 
 ## Decisions
