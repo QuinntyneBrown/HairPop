@@ -164,9 +164,7 @@ describe('Braider profile content', () => {
       '/api/braiders/nia-okafor',
     );
     expect(profile.body.portfolio.map((item) => item.id)).toEqual([response.body.id]);
-    const image = await fetch(
-      `${process.env.API_TEST_URL ?? 'http://localhost:8001'}${response.body.image?.src}`,
-    );
+    const image = await fetch(`${API_URL}${response.body.image?.src}`);
     expect(image.status).toBe(200);
     expect(image.headers.get('content-type')).toBe('image/png');
     expect(image.headers.get('x-content-type-options')).toBe('nosniff');
