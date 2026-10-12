@@ -42,3 +42,10 @@ model RateLimit {
   hits    Int
   resetAt DateTime
 }
+
+/// A visitor's saved optional-usage choice (L2-034). Kept as a record of each save; it holds no identity.
+model ConsentPreference {
+  id            String   @id @default(cuid())
+  optionalUsage Boolean
+  savedAt       DateTime @default(now())
+}
