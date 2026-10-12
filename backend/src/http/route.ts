@@ -1,5 +1,6 @@
 import type { AuthenticatedContext, Handler, NextHandler } from './context';
 import { withAuth } from './with-auth';
+import { withCsrf } from './with-csrf';
 import { withErrors } from './with-errors';
 import { withRequestLog } from './with-request-log';
 
@@ -10,7 +11,7 @@ interface AnonymousRoute {
 
 /**
  * Builds a route handler from the standard wrappers, outermost first:
- * request log → error mapping → auth → handler.
+ * request log → error mapping → CSRF (mutations only) → auth → handler.
  *
  * Routes require a session (deny by default). A public route opts out with `{ anonymous: true }`.
  */
@@ -23,5 +24,5 @@ export function route(
   const guarded = options?.anonymous
     ? (handler as Handler)
     : withAuth(handler as Handler<AuthenticatedContext>);
-  return withRequestLog(withErrors(guarded));
+  return withRequestLog(withErrors(withCsrf(guarded)));
 }
