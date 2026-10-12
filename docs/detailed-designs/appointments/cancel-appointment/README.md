@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** The destructive dialog shows the reference and current terms before confirmation; dismissing leaves the status unchanged (L2-022).
 
+**Backend.** `CancelOwnedAppointment` cancels the owner's awaiting or confirmed item before its time with a conditional update, so a double submit cancels once and both calls answer 200 `{ status: 'cancelled' }`. It releases the slot and withdraws any pending change (releasing that slot too), and moves the `version` on, so the braider's view drops the request and an answer in flight is `stale`. A declined, completed or started item is 409 `not_cancellable`; another customer's reference is 404. Success records "Request cancelled" or "Appointment cancelled" (L2-029). The current terms the dialog shows come from the appointment detail's `policy`, the terms accepted at submission.
+
 | Part | Value |
 |------|-------|
 | Application | customer |
