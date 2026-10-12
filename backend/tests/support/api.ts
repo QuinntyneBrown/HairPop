@@ -37,6 +37,14 @@ export class Api {
     return this.send<T>('PUT', path, body, headers);
   }
 
+  patch<T = unknown>(path: string, body?: unknown, headers: Record<string, string> = {}) {
+    return this.send<T>('PATCH', path, body, headers);
+  }
+
+  delete<T = unknown>(path: string, headers: Record<string, string> = {}) {
+    return this.send<T>('DELETE', path, undefined, headers);
+  }
+
   /** Fetches the CSRF cookie the way `Csrf.ensure()` does before a mutation. */
   async csrf(): Promise<void> {
     await this.get('/api/auth/csrf');
