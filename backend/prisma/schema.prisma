@@ -207,6 +207,10 @@ model BraiderService {
   /// Aftercare the braider gives for this service, one item each (L2-024 AC2).
   careGuidance  String[]      @default([])
   published     Boolean       @default(false)
+  /// Bumped on every edit; an edit must name the version it saw (L2-047 AC4).
+  version       Int           @default(1)
+  /// Removed by the braider; kept so past appointments and reviews still resolve (L2-026 AC3).
+  removedAt     DateTime?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   reviews       Review[]

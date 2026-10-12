@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** Publish and Unpublish send a `PATCH` with only `published` and `version`.
 
+**Backend.** `MaintainBraiderServices` is braider-only (403 `not_braider` for a customer or a braider account without a profile) and acts on the braider's own services; another braider's service is 403, an unknown or removed one 404. `styleSlug` must name a published style; `startingPrice` is a whole-dollar amount from 0, `typicalHours` is more than 0 and at most 24, and a blank `preparation` is `null` (L2-026 AC2). Edits apply with a conditional update on `version`; an edit based on an older version is 409 `stale` and keeps the newer values (L2-047 AC4). A `PATCH` changes only the fields it sends. Remove is a soft delete (`removedAt`, unpublished), so past appointments and reviews still resolve while the service leaves the list, matching and booking (L2-026 AC3). Appointments snapshot the service name, duration and estimate at submission.
+
 | Part | Value |
 |------|-------|
 | Application | braider |
