@@ -29,6 +29,7 @@ model User {
   braider         Braider?
   reviews         Review[]
   reviewReports   ReviewReport[]
+  appointments    Appointment[]
   verifications   EmailVerification[]
   passwordResets  PasswordReset[]
   notifications   CustomerNotification[]
@@ -188,6 +189,7 @@ model Braider {
   slots              OfferedSlot[]
   reviews            Review[]
   portfolio          PortfolioItem[]
+  appointments       Appointment[]
 }
 
 /// A style a braider offers, with their starting price (whole dollars) and typical hours.
@@ -204,6 +206,7 @@ model BraiderService {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   reviews       Review[]
+  appointments  Appointment[]
 
   @@index([styleSlug, published])
   @@index([braiderId])
@@ -214,11 +217,61 @@ model OfferedSlot {
   id        String   @id @default(cuid())
   braiderId String
   braider   Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
-  start     DateTime
-  maxHours  Float
-  createdAt DateTime @default(now())
+  start        DateTime
+  maxHours     Float
+  createdAt    DateTime      @default(now())
+  appointments Appointment[]
 
   @@index([braiderId, start])
+}
+
+/// `completed` is not stored: a confirmed appointment is completed once its time has passed.
+enum AppointmentStatus {
+  awaiting_reply
+  confirmed
+  declined
+  cancelled
+}
+
+/// A booking request and, once the braider accepts it, the appointment (L2-017 – L2-022). It
+/// snapshots the service, estimate and policies the customer reviewed (L2-026 AC3, L2-027 AC2).
+model Appointment {
+  id                 String            @id @default(cuid())
+  /// Shown as the reference HP-1048; the sequence starts at 1001.
+  number             Int               @unique @default(autoincrement())
+  customerId         String
+  customer           User              @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  braiderId          String
+  braider            Braider           @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  serviceId          String
+  service            BraiderService    @relation(fields: [serviceId], references: [id])
+  slotId             String?
+  slot               OfferedSlot?      @relation(fields: [slotId], references: [id], onDelete: SetNull)
+  /// The slot while the request or appointment is active; unique, so one slot holds one booking.
+  heldSlotId         String?           @unique
+  serviceName        String
+  start              DateTime
+  durationHours      Float
+  /// Whole dollars. A null maximum means "from" the minimum.
+  estimateMin        Int
+  estimateMax        Int?
+  agreedAmount       Int?
+  email              String
+  phone              String?
+  hairDetails        String
+  policyVersion      String
+  changePolicy       String
+  cancellationPolicy String
+  status             AppointmentStatus @default(awaiting_reply)
+  /// Bumped on every transition; a response must name the version it saw (L2-020 AC3).
+  version            Int               @default(1)
+  idempotencyKey     String
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  @@unique([customerId, idempotencyKey])
+  @@index([customerId, start])
+  @@index([braiderId, status])
 }
 
 enum ReviewStatus {

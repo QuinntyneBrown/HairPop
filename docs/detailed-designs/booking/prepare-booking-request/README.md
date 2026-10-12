@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** Review request opens a CDK dialog with the current values; closing it keeps every entry (L2-016 AC2). No slots renders the empty state.
 
+**Backend.** `PrepareBookingRequest` returns the braider's published services for published styles, with `estimate: { min: startingPrice, max: null }` (a service has a starting price), and the braider's future offered slots that no active request, appointment or pending change holds, soonest first. `policy.version` is a 12-character fingerprint of the change and cancellation policies and every bookable service's price and duration; any of those changing invalidates a reviewed request (L2-016 AC3). A missing policy is `''`. `contact` is the signed-in customer's email and phone. The endpoint is customer-only (403 `not_customer` for a braider); an unknown or unpublished braider is 404.
+
 | Part | Value |
 |------|-------|
 | Application | customer |

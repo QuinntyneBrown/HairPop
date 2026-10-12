@@ -220,3 +220,11 @@ export function createNotification(
     },
   });
 }
+
+/** An instant `days` from now at `hourUtc`:00 UTC, with no milliseconds. */
+export function daysFromNow(days: number, hourUtc = 14): Date {
+  const date = new Date();
+  date.setUTCDate(date.getUTCDate() + days);
+  date.setUTCHours(hourUtc, 0, 0, 0);
+  return date;
+}
