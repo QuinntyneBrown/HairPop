@@ -124,6 +124,7 @@ model Braider {
   services           BraiderService[]
   slots              OfferedSlot[]
   reviews            Review[]
+  portfolio          PortfolioItem[]
 }
 
 /// A style a braider offers, with their starting price (whole dollars) and typical hours.
@@ -178,4 +179,17 @@ model Review {
   createdAt DateTime       @default(now())
 
   @@index([braiderId, status, createdAt])
+}
+
+/// A photo of the braider's work on their public profile; newest first.
+model PortfolioItem {
+  id        String   @id @default(cuid())
+  braiderId String
+  braider   Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  imageSrc  String?
+  imageAlt  String?
+  caption   String
+  createdAt DateTime @default(now())
+
+  @@index([braiderId, createdAt])
 }
