@@ -10,15 +10,22 @@ const prisma = new PrismaClient();
 const MEDIA = 'https://media.hairpop.example';
 const PASSWORD = process.env.SEED_PASSWORD ?? 'hairpop-dev-password';
 
-async function user(id: string, name: string, email: string, role: 'customer' | 'braider') {
+async function user(
+  id: string,
+  name: string,
+  email: string,
+  role: 'customer' | 'braider',
+  phone: string | null = null,
+) {
   return prisma.user.upsert({
     where: { email },
-    update: { name, role },
+    update: { name, role, phone },
     create: {
       id,
       name,
       email,
       role,
+      phone,
       emailVerifiedAt: new Date('2026-09-01T12:00:00Z'),
       passwordHash: await hashPassword(PASSWORD),
     },
@@ -212,7 +219,7 @@ async function braiders() {
       distanceKm: 8,
       travelKm: 10,
       bio: 'I specialize in comfortable, neat braids. Bring inspiration photos and we’ll confirm the details together.',
-      studioAddress: '214 Ossington Ave, Toronto',
+      studioAddress: '1246 Bloor Street West, Toronto',
       preparationPolicy: 'Arrive with washed, detangled hair.',
       changePolicy: 'Request a change at least 48 hours before.',
       cancellationPolicy: 'Free up to 48 hours before; later cancellations may be charged $40.',
@@ -251,16 +258,34 @@ async function braiders() {
   }
 
   const services = [
-    ['svc-nia-knotless-m', 'braider-nia', 'knotless-braids', 'Medium knotless braids', 180, 5],
-    ['svc-nia-passion', 'braider-nia', 'passion-twists', 'Passion twists', 160, 4],
-    ['svc-aisha-knotless', 'braider-aisha', 'knotless-braids', 'Knotless braids', 195, 6],
-    ['svc-jules-knotless', 'braider-jules', 'knotless-braids', 'Knotless braids', 170, 5],
-    ['svc-amara-knotless', 'braider-amara', 'knotless-braids', 'Knotless braids', 210, 6],
+    [
+      'svc-nia-knotless-m',
+      'braider-nia',
+      'knotless-braids',
+      'Medium knotless braids',
+      180,
+      5,
+      true,
+    ],
+    ['svc-nia-passion', 'braider-nia', 'passion-twists', 'Passion twists', 160, 4, true],
+    ['svc-nia-boho', 'braider-nia', 'knotless-braids', 'Boho knotless braids', 220, 6, false],
+    ['svc-aisha-knotless', 'braider-aisha', 'knotless-braids', 'Knotless braids', 195, 6, true],
+    ['svc-jules-knotless', 'braider-jules', 'knotless-braids', 'Knotless braids', 170, 5, true],
+    ['svc-amara-knotless', 'braider-amara', 'knotless-braids', 'Knotless braids', 210, 6, true],
   ] as const;
-  for (const [id, braiderId, styleSlug, name, startingPrice, typicalHours] of services) {
-    const data = { braiderId, styleSlug, name, startingPrice, typicalHours, published: true };
+  for (const [id, braiderId, styleSlug, name, startingPrice, typicalHours, published] of services) {
+    const data = { braiderId, styleSlug, name, startingPrice, typicalHours, published };
     await prisma.braiderService.upsert({ where: { id }, update: data, create: { id, ...data } });
   }
+  const knotlessCare = {
+    preparation: 'Bring 6 packs of pre-stretched extensions in your colour.',
+    careGuidance: [
+      'Keep your scalp moisturized with a light oil twice a week.',
+      'Sleep with a satin bonnet or pillowcase.',
+      'Book a take-down within 8 weeks.',
+    ],
+  };
+  await prisma.braiderService.update({ where: { id: 'svc-nia-knotless-m' }, data: knotlessCare });
 
   const portfolio = [
     [
@@ -290,9 +315,16 @@ async function braiders() {
     await prisma.portfolioItem.upsert({ where: { id }, update: data, create: { id, ...data } });
   }
 
+  // Toronto times: 10:00 am on 24 and 31 Oct, 11:00 am and 1:00 pm on 25 Oct, 9:00 am on 16
+  // and 17 Oct.
   const slots = [
+    ['slot-nia-1016', 'braider-nia', '2026-10-16T13:00:00Z', 6],
+    ['slot-nia-1017', 'braider-nia', '2026-10-17T13:00:00Z', 6],
     ['slot-nia-1024', 'braider-nia', '2026-10-24T14:00:00Z', 6],
+    ['slot-nia-1025-am', 'braider-nia', '2026-10-25T15:00:00Z', 2],
+    ['slot-nia-1025-pm', 'braider-nia', '2026-10-25T17:00:00Z', 4],
     ['slot-nia-1031', 'braider-nia', '2026-10-31T14:00:00Z', 6],
+    ['slot-jules-1016', 'braider-jules', '2026-10-16T13:00:00Z', 6],
     ['slot-jules-1025', 'braider-jules', '2026-10-25T15:00:00Z', 6],
   ] as const;
   for (const [id, braiderId, start, maxHours] of slots) {
@@ -302,7 +334,13 @@ async function braiders() {
 }
 
 async function reviews() {
-  const maya = await user('cust-maya', 'Maya Chen', 'maya.chen@example.com', 'customer');
+  const maya = await user(
+    'cust-maya',
+    'Maya Chen',
+    'maya.chen@example.com',
+    'customer',
+    '416-555-0148',
+  );
   const kemi = await user('cust-kemi', 'Kemi Adebayo', 'kemi.adebayo@example.com', 'customer');
   const zara = await user('cust-zara', 'Zara Ali', 'zara.ali@example.com', 'customer');
   const rows = [
@@ -348,11 +386,188 @@ async function reviews() {
   }
 }
 
+const NIA_POLICIES = {
+  changePolicy: 'Request a change at least 48 hours before.',
+  cancellationPolicy: 'Free up to 48 hours before; later cancellations may be charged $40.',
+};
+
+async function appointments() {
+  const rows = [
+    {
+      id: 'appt-1048',
+      number: 1048,
+      customerId: 'cust-maya',
+      braiderId: 'braider-nia',
+      serviceId: 'svc-nia-knotless-m',
+      slotId: 'slot-nia-1024',
+      heldSlotId: 'slot-nia-1024',
+      serviceName: 'Medium knotless braids',
+      start: new Date('2026-10-24T14:00:00Z'),
+      durationHours: 5,
+      estimateMin: 180,
+      estimateMax: 240,
+      agreedAmount: null,
+      email: 'maya.chen@example.com',
+      phone: '416-555-0148',
+      hairDetails: 'Shoulder length; bringing my own extensions',
+      status: 'awaiting_reply' as const,
+      createdAt: new Date('2026-10-10T13:42:00Z'),
+    },
+    {
+      id: 'appt-0992',
+      number: 992,
+      customerId: 'cust-maya',
+      braiderId: 'braider-nia',
+      serviceId: 'svc-nia-knotless-m',
+      slotId: null,
+      heldSlotId: null,
+      serviceName: 'Medium knotless braids',
+      start: new Date('2026-10-03T14:00:00Z'),
+      durationHours: 5,
+      estimateMin: 180,
+      estimateMax: 240,
+      agreedAmount: 205,
+      email: 'maya.chen@example.com',
+      phone: '416-555-0148',
+      hairDetails: 'Shoulder length; bringing my own extensions',
+      status: 'confirmed' as const,
+      createdAt: new Date('2026-09-20T15:00:00Z'),
+    },
+    {
+      id: 'appt-1040',
+      number: 1040,
+      customerId: 'cust-maya',
+      braiderId: 'braider-jules',
+      serviceId: 'svc-jules-knotless',
+      slotId: 'slot-jules-1016',
+      heldSlotId: null,
+      serviceName: 'Extra-long boho knotless braids with curly ends',
+      start: new Date('2026-10-16T13:00:00Z'),
+      durationHours: 5,
+      estimateMin: 170,
+      estimateMax: null,
+      agreedAmount: null,
+      email: 'maya.chen@example.com',
+      phone: '416-555-0148',
+      hairDetails: 'Waist length; extensions included',
+      status: 'declined' as const,
+      createdAt: new Date('2026-10-05T15:00:00Z'),
+    },
+    {
+      id: 'appt-1052',
+      number: 1052,
+      customerId: 'cust-kemi',
+      braiderId: 'braider-nia',
+      serviceId: 'svc-nia-passion',
+      slotId: 'slot-nia-1025-pm',
+      heldSlotId: 'slot-nia-1025-pm',
+      serviceName: 'Passion twists',
+      start: new Date('2026-10-25T17:00:00Z'),
+      durationHours: 4,
+      estimateMin: 160,
+      estimateMax: 220,
+      agreedAmount: null,
+      email: 'kemi.adebayo@example.com',
+      phone: null,
+      hairDetails: 'Mid-back length; no extensions',
+      status: 'awaiting_reply' as const,
+      createdAt: new Date('2026-10-10T16:00:00Z'),
+    },
+    {
+      id: 'appt-1031',
+      number: 1031,
+      customerId: 'cust-zara',
+      braiderId: 'braider-nia',
+      serviceId: 'svc-nia-knotless-m',
+      slotId: 'slot-nia-1016',
+      heldSlotId: 'slot-nia-1016',
+      serviceName: 'Medium knotless braids',
+      start: new Date('2026-10-16T13:00:00Z'),
+      durationHours: 5,
+      estimateMin: 180,
+      estimateMax: 240,
+      agreedAmount: 210,
+      email: 'zara.ali@example.com',
+      phone: null,
+      hairDetails: 'Wants a change of day',
+      status: 'confirmed' as const,
+      createdAt: new Date('2026-10-01T15:00:00Z'),
+    },
+  ];
+  for (const { id, ...row } of rows) {
+    const data = {
+      ...row,
+      ...NIA_POLICIES,
+      policyVersion: 'seed',
+      idempotencyKey: `seed-${id}`,
+      version: 2,
+    };
+    await prisma.appointment.upsert({ where: { id }, update: data, create: { id, ...data } });
+  }
+  // Explicit references must not collide with the next generated one.
+  await prisma.$executeRaw`SELECT setval('"Appointment_number_seq"', GREATEST((SELECT max("number") FROM "Appointment"), 1000))`;
+
+  const change = {
+    appointmentId: 'appt-1031',
+    slotId: 'slot-nia-1017',
+    heldSlotId: 'slot-nia-1017',
+    start: new Date('2026-10-17T13:00:00Z'),
+    note: 'Friday no longer works for me.',
+    status: 'pending' as const,
+  };
+  await prisma.appointmentChange.upsert({
+    where: { id: 'change-1031' },
+    update: change,
+    create: { id: 'change-1031', ...change },
+  });
+  // Maya's review of her 3 Oct visit belongs to that appointment.
+  await prisma.review.update({ where: { id: 'review-1' }, data: { appointmentId: 'appt-0992' } });
+}
+
+async function notifications() {
+  const rows = [
+    {
+      id: 'note-maya-1',
+      title: 'Your email is verified',
+      body: 'maya.chen@example.com is confirmed for appointment updates.',
+      link: '/settings',
+      createdAt: new Date('2026-10-08T14:00:00Z'),
+      readAt: new Date('2026-10-08T14:05:00Z'),
+    },
+    {
+      id: 'note-maya-2',
+      title: 'Review your visit with Nia',
+      body: 'Share how your knotless braids turned out.',
+      link: '/appointments/HP-0992/care',
+      createdAt: new Date('2026-10-09T22:10:00Z'),
+      readAt: null,
+    },
+    {
+      id: 'note-maya-3',
+      title: 'Nia received your request',
+      body: 'HP-1048 · Nia will confirm the time and final price.',
+      link: '/appointments/HP-1048',
+      createdAt: new Date('2026-10-10T13:42:00Z'),
+      readAt: null,
+    },
+  ];
+  for (const { id, ...row } of rows) {
+    const data = { ...row, userId: 'cust-maya' };
+    await prisma.customerNotification.upsert({
+      where: { id },
+      update: data,
+      create: { id, ...data },
+    });
+  }
+}
+
 async function main() {
   await styles();
   await content();
   await braiders();
   await reviews();
+  await appointments();
+  await notifications();
 }
 
 main()
