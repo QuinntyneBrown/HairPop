@@ -38,6 +38,11 @@ export async function findEligibleBraidersForStyle(
   };
 }
 
+/** Every eligible braider when no style is chosen; any whole-dollar maximum price is accepted. */
+export async function findEligibleBraiders(query: MatchQuery): Promise<Page<BraiderMatch>> {
+  return toPage(await findMatches({ ...query, styleSlug: null }), query.page);
+}
+
 function toPage(rows: readonly MatchRow[], page: number): Page<BraiderMatch> {
   const start = (page - 1) * PER_PAGE;
   return {
