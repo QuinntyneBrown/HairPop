@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`BraiderServicesPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `MaintainBraiderService` is the proposed Laravel application action. Its responsibility is to publish or revise an owned style-linked service with valid price and duration. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BraiderService` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`BraiderServicesPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `MaintainBraiderService` is the proposed application action in the Next.js API. Its responsibility is to publish or revise an owned style-linked service with valid price and duration. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `BraiderService` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** Publish and Unpublish send a `PATCH` with only `published` and `version`.
 
@@ -50,7 +50,7 @@ The braider uses HairPop for this capability. HairPop owns the state and publish
 
 ### Containers
 
-The braider management surface calls the Laravel API. The API reads or changes the HairPop database.
+The braider management surface calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for maintain services](diagrams/c4-container.png)
 

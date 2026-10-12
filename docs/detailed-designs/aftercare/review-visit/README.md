@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`CareAndReviewPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `SubmitVisitReview` is the proposed Laravel application action. Its responsibility is to save one valid rating and written review for an owned completed visit. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `Review` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`CareAndReviewPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `SubmitVisitReview` is the proposed application action in the Next.js API. Its responsibility is to save one valid rating and written review for an owned completed visit. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `Review` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** The rating is a horizontal radio group and the text a textarea; both keep their values after a failure (L2-025 AC5).
 
@@ -41,7 +41,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for review visit](diagrams/c4-container.png)
 

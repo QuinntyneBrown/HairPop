@@ -4,7 +4,8 @@ HairPop connects customers with professional hair braiders. Customers can explor
 
 ## Tech stack
 
-- **Backend:** PHP 8.3 / Laravel 11 — owns persistence, authentication, and business workflows.
+- **Backend:** Node.js 22 / Next.js 15 (App Router route handlers, API only) — owns persistence, authentication, and business workflows ([ADR 0007](docs/adr/0007-backend-nextjs-postgres-prisma.md)).
+- **Database:** PostgreSQL 16 through the Prisma ORM.
 - **Frontend:** Angular — provides the web applications.
 - **E2E:** Playwright — covers behavior and visual parity with the design reference.
 
@@ -22,11 +23,11 @@ Create planned folders as the corresponding work lands. If an implementation nee
 
 ## Backend conventions
 
-- Business rules live in domain services, actions, and jobs — not controllers.
-- The API does **not** run database migrations on startup. Run them explicitly.
-- Seed data is idempotent and safe to re-run.
-- Endpoints require authentication by default. Preserve intentional anonymous access and middleware ordering when changing API auth.
-- Keep request logging outside the exception-handling middleware so handled response statuses are logged correctly.
+- Business rules live in domain services, application actions, and worker jobs — not route handlers.
+- The API does **not** run database migrations on startup. Run them explicitly with `prisma migrate deploy`.
+- Seed data (`prisma db seed`) is idempotent and safe to re-run.
+- Endpoints require authentication by default: route handlers are wrapped deny-by-default, and anonymous routes opt in explicitly. Preserve intentional anonymous access and wrapper ordering when changing API auth.
+- Keep the request-logging wrapper outside the error-handling wrapper so handled response statuses are logged correctly.
 - User-owned data must remain scoped to the current user; resources belonging to other users must never be exposed.
 - Backend tests are integration tests against the API. Follow existing test patterns when adding coverage.
 

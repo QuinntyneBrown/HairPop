@@ -3,10 +3,10 @@
 LAYOUT_WITH_LEGEND()
 title Components — Cancel appointment
 Container_Boundary(api, "HairPop API") {
-  Component(endpoint, "Feature endpoint", "Laravel controller", "Validates HTTP input")
+  Component(endpoint, "Feature endpoint", "Next.js route handler", "Validates HTTP input")
   Component(action, "CancelOwnedAppointment", "Application action", "Apply permitted cancellation once after the owner reviews current terms")
   Component(model, "Appointment", "Domain model", "Holds slice state")
-  ComponentDb(db, "HairPop database", "<TO SUPPLY>", "Stores records")
+  ComponentDb(db, "HairPop database", "PostgreSQL 16 (Prisma)", "Stores records")
 }
 Rel(endpoint, action, "Delegates")
 Rel(action, model, "Applies rules")

@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`BookingRequestPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `SubmitBookingRequest` is the proposed Laravel application action. Its responsibility is to create one pending request for a reviewed attempt and return its stable reference. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BookingRequest` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`BookingRequestPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `SubmitBookingRequest` is the proposed application action in the Next.js API. Its responsibility is to create one pending request for a reviewed attempt and return its stable reference. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `BookingRequest` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** One idempotency key is created when the review dialog opens and reused for every retry of that attempt (L2-017 AC2). `terms_changed` reloads the options and returns to review (L2-016 AC3); `slot_unavailable` and `service_unavailable` mark the field to reselect (L2-015 AC2).
 
@@ -41,7 +41,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for submit booking request](diagrams/c4-container.png)
 

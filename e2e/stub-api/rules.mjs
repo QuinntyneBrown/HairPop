@@ -43,7 +43,7 @@ function queryMatches(expected, actual) {
 export const DEFAULT_RULES = [
   {
     method: 'GET',
-    path: '/sanctum/csrf-cookie',
+    path: '/api/auth/csrf',
     status: 204,
     headers: { 'set-cookie': 'XSRF-TOKEN=e2e-xsrf-token; Path=/' },
   },

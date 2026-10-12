@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`HelpAndLegalPages` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetPublishedContent` is the proposed Laravel application action. Its responsibility is to deliver current approved help, terms and privacy text through public pages. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `PublishedContent` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`HelpAndLegalPages` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetPublishedContent` is the proposed application action in the Next.js API. Its responsibility is to deliver current approved help, terms and privacy text through public pages. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `PublishedContent` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** Help builds its contact link as `mailto:` with the reference from `?ref=` when present, so only the customer's own reference is used (L2-032 AC2).
 
@@ -50,7 +50,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for get help and legal content](diagrams/c4-container.png)
 

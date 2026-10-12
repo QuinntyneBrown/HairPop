@@ -155,7 +155,7 @@ async function install(
     // Most specs are about something else, so the visitor has already answered the banner.
     await context.addCookies([{ name: 'hp-consent', value: consent, url: CUSTOMER_URL }]);
   }
-  await page.route(/\/(api|sanctum)\//, (route, request) => api.handle(route, request));
+  await page.route(/\/api\//, (route, request) => api.handle(route, request));
   // Fixture media URLs resolve to the mock photos (docs/mocks/assets/photos).
   await page.route(`${MEDIA_ORIGIN}/**`, (route, request) => {
     const name = new URL(request.url()).pathname.split('/').pop() ?? '';

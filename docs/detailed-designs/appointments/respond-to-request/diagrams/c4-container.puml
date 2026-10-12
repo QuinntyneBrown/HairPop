@@ -5,8 +5,8 @@ title Containers — Respond to request
 Person(person, "Braider", "Uses this capability")
 System_Boundary(hairpop, "HairPop") {
   Container(web, "Braider management surface", "Angular", "Presents the workflow")
-  Container(api, "HairPop API", "Laravel 11", "Applies application and domain rules")
-  ContainerDb(db, "HairPop database", "<TO SUPPLY>", "Persists domain records")
+  Container(api, "HairPop API", "Node.js 22 / Next.js 15", "Applies application and domain rules")
+  ContainerDb(db, "HairPop database", "PostgreSQL 16", "Persists domain records")
 }
 Rel(person, web, "Uses", "HTTPS")
 Rel(web, api, "Requests", "JSON/HTTPS")

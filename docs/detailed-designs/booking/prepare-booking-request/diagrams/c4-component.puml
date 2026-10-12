@@ -3,10 +3,10 @@
 LAYOUT_WITH_LEGEND()
 title Components — Prepare booking request
 Container_Boundary(api, "HairPop API") {
-  Component(endpoint, "Feature endpoint", "Laravel controller", "Validates HTTP input")
+  Component(endpoint, "Feature endpoint", "Next.js route handler", "Validates HTTP input")
   Component(action, "PrepareBookingRequest", "Application action", "Validate the selected service and slot and present current terms for review")
   Component(model, "BookingDraft", "Domain model", "Holds slice state")
-  ComponentDb(db, "HairPop database", "<TO SUPPLY>", "Stores records")
+  ComponentDb(db, "HairPop database", "PostgreSQL 16 (Prisma)", "Stores records")
 }
 Rel(endpoint, action, "Delegates")
 Rel(action, model, "Applies rules")

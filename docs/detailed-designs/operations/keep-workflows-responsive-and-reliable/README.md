@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`CustomerRouteShell` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ExecuteReliableWorkflow` is the proposed Laravel application action. Its responsibility is to measure reads, reconcile durable mutations and protect offline appointment summaries. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `OperationRecord` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`CustomerRouteShell` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ExecuteReliableWorkflow` is the proposed application action in the Next.js API. Its responsibility is to measure reads, reconcile durable mutations and protect offline appointment summaries. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `OperationRecord` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** On the server, `API_ORIGIN` prefixes relative `/api` URLs and the incoming `Cookie` header is forwarded; in the browser the API is same-origin (ADR 0002). Offline is detected from `navigator.onLine` and failed requests.
 
@@ -43,7 +43,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for keep workflows responsive and reliable](diagrams/c4-container.png)
 

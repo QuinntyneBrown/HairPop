@@ -10,7 +10,7 @@ The customer journey also covers appointment requests, updates, and care after a
 
 ## Project status
 
-HairPop is being redesigned. The requirements, detailed designs, and customer journey mocks are in the repository. The existing Angular workspace is an earlier prototype and does not yet implement the full redesigned journey. The Laravel backend described in [AGENTS.md](AGENTS.md) has not landed.
+HairPop is being redesigned. The requirements, detailed designs, and customer journey mocks are in the repository. The existing Angular workspace is an earlier prototype and does not yet implement the full redesigned journey. The Node.js / Next.js backend described in [AGENTS.md](AGENTS.md) has not landed.
 
 | Area | Location | Status |
 | --- | --- | --- |
@@ -19,7 +19,7 @@ HairPop is being redesigned. The requirements, detailed designs, and customer jo
 | Screen and state mocks | [`docs/mocks/`](docs/mocks/README.md) | Available for review |
 | Design tokens | [`docs/design-system/`](docs/design-system/) | In progress |
 | Angular applications | [`src/WebApp/`](src/WebApp/README.md) | Earlier prototype |
-| Laravel API and Playwright suite for the redesign | Planned | Not yet available |
+| Next.js API and Playwright suite for the redesign | Planned | Not yet available |
 
 ## Explore the project
 
@@ -43,7 +43,7 @@ Open <http://localhost:4200/>. To run the admin prototype instead, use `npm run 
 
 ## Target architecture
 
-The intended platform uses Angular web applications and a PHP 8.3 / Laravel 11 API. Laravel owns persistence, authentication, and business workflows. Playwright covers customer behavior and visual parity with the mocks in Chromium. Its API responses are mocked, so browser tests do not depend on Laravel, a database, or Docker. Backend behavior is covered by API integration tests. The [feature designs](docs/detailed-designs/) describe the planned behavior in more detail.
+The intended platform uses Angular web applications and a Node.js 22 / Next.js 15 API backed by PostgreSQL through Prisma. The API owns persistence, authentication, and business workflows. Playwright covers customer behavior and visual parity with the mocks in Chromium. Its API responses are mocked, so browser tests do not depend on the API, a database, or Docker. Backend behavior is covered by API integration tests. The [feature designs](docs/detailed-designs/) describe the planned behavior in more detail.
 
 ## Repository layout
 

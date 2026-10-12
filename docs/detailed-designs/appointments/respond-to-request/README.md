@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`BraiderRequestsPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `RespondToBookingRequest` is the proposed Laravel application action. Its responsibility is to accept or decline an assigned pending request against its current version. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BookingRequest` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`BraiderRequestsPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `RespondToBookingRequest` is the proposed application action in the Next.js API. Its responsibility is to accept or decline an assigned pending request against its current version. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `BookingRequest` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** A change request is answered with the same dialog; accepting it moves the agreed time (L2-021 AC3). `stale` keeps the dialog open with a refresh action (L2-020 AC3, L2-047 AC4).
 
@@ -51,7 +51,7 @@ The braider uses HairPop for this capability. HairPop owns the state and publish
 
 ### Containers
 
-The braider management surface calls the Laravel API. The API reads or changes the HairPop database.
+The braider management surface calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for respond to request](diagrams/c4-container.png)
 
