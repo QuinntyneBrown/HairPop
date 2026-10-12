@@ -108,3 +108,21 @@ export function preparationChecklist(...guidance: (string | null)[]): string[] |
   );
   return items.length > 0 ? items : null;
 }
+
+const LOCAL_PARTS = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'America/Toronto',
+  weekday: 'short',
+  day: 'numeric',
+  month: 'short',
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: true,
+});
+
+/** A start in Toronto time as the mocks write it: "Sat 24 Oct at 10:00 am". */
+export function localWhen(instant: Date): string {
+  const part = (type: Intl.DateTimeFormatPartTypes) =>
+    LOCAL_PARTS.formatToParts(instant).find((p) => p.type === type)?.value ?? '';
+  const period = part('dayPeriod').toLowerCase();
+  return `${part('weekday')} ${part('day')} ${part('month')} at ${part('hour')}:${part('minute')} ${period}`;
+}
