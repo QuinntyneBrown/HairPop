@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`NotificationCenterPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `RecordCustomerUpdate` is the proposed Laravel application action. Its responsibility is to create owned notifications from durable account, booking, review and privacy events. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `CustomerNotification` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`NotificationCenterPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `RecordCustomerUpdate` is the proposed application action in the Next.js API. Its responsibility is to create owned notifications from durable account, booking, review and privacy events. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `CustomerNotification` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** Toast copy names the completed action and only claims what the response confirmed (L2-029 AC2, L2-031).
 
@@ -41,7 +41,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for record updates](diagrams/c4-container.png)
 

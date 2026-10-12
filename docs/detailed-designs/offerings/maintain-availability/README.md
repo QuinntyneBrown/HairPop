@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`BraiderAvailabilityPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `MaintainOfferedSlot` is the proposed Laravel application action. Its responsibility is to publish or withdraw owned slots and prevent conflicting confirmations. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `OfferedSlot` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`BraiderAvailabilityPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `MaintainOfferedSlot` is the proposed application action in the Next.js API. Its responsibility is to publish or withdraw owned slots and prevent conflicting confirmations. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `OfferedSlot` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** A requested slot shows its reference and offers no withdraw action.
 
@@ -48,7 +48,7 @@ The braider uses HairPop for this capability. HairPop owns the state and publish
 
 ### Containers
 
-The braider management surface calls the Laravel API. The API reads or changes the HairPop database.
+The braider management surface calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for maintain availability](diagrams/c4-container.png)
 

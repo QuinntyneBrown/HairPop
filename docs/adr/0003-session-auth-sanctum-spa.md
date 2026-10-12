@@ -1,6 +1,6 @@
 # 0003 — Session authentication with Sanctum SPA cookies
 
-- Status: accepted
+- Status: superseded by [0008](0008-session-auth-db-sessions-csrf.md)
 - Date: 2026-10-10
 
 ## Context

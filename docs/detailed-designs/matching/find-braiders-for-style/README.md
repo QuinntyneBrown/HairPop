@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`MatchingBraidersPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `FindEligibleBraiders` is the proposed Laravel application action. Its responsibility is to match published offerings to the style and valid location and price filters. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BraiderService` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`MatchingBraidersPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `FindEligibleBraiders` is the proposed application action in the Next.js API. Its responsibility is to match published offerings to the style and valid location and price filters. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `BraiderService` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** The filter dialog validates `maxPrice` against `meta.style.minPrice` before applying, keeps entered values on failure and holds the confirm button busy while the request runs (L2-005).
 
@@ -55,7 +55,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for find braiders for style](diagrams/c4-container.png)
 

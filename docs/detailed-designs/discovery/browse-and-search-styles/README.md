@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`StyleGalleryPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ListPublishedStyles` is the proposed Laravel application action. Its responsibility is to select published styles using the current search and category. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `Style` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`StyleGalleryPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ListPublishedStyles` is the proposed application action in the Next.js API. Its responsibility is to select published styles using the current search and category. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `Style` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** The search box updates the `search` query parameter after 300 ms of inactivity or on submit; the category chips set `category`; both are reflected in the URL so a reload keeps the criteria. The next page keeps both parameters (L2-002).
 
@@ -50,7 +50,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for browse and search styles](diagrams/c4-container.png)
 

@@ -3,10 +3,10 @@
 LAYOUT_WITH_LEGEND()
 title Components — Review visit
 Container_Boundary(api, "HairPop API") {
-  Component(endpoint, "Feature endpoint", "Laravel controller", "Validates HTTP input")
+  Component(endpoint, "Feature endpoint", "Next.js route handler", "Validates HTTP input")
   Component(action, "SubmitVisitReview", "Application action", "Save one valid rating and written review for an owned completed visit")
   Component(model, "Review", "Domain model", "Holds slice state")
-  ComponentDb(db, "HairPop database", "<TO SUPPLY>", "Stores records")
+  ComponentDb(db, "HairPop database", "PostgreSQL 16 (Prisma)", "Stores records")
 }
 Rel(endpoint, action, "Delegates")
 Rel(action, model, "Applies rules")

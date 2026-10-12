@@ -12,7 +12,7 @@ Discovery, Help, legal and error pages are public and benefit from server render
 - The customer app uses `@angular/ssr` with server route configuration:
   - `RenderMode.Server` for `/`, `/styles/**`, `/braiders/**`, `/help`, `/terms`, `/privacy`, `/sign-in`, `/sign-up`, `/forgot-password`, `/reset-password`, `/verify-email`, `/404`, `/403`, `/500`, `/offline` and the catch-all, with `status` 404/403/500 on the error routes and 404 on the catch-all.
   - `RenderMode.Client` for `/book/**`, `/appointments/**`, `/notifications` and `/settings`.
-- In the browser the API is same-origin: requests go to relative `/api/...` and `/sanctum/...` URLs.
+- In the browser the API is same-origin: requests go to relative `/api/...` URLs.
 - On the server, `apiOriginInterceptor` prefixes those URLs with the `API_ORIGIN` environment variable and forwards the incoming request's `Cookie` header, so the shell can read the session. Responses are transferred to the browser by the HTTP transfer cache, so hydration does not refetch.
 - The braider app is browser-only; it is a static build.
 

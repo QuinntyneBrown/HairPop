@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`BraiderProfileEditor` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `MaintainBraiderProfile` is the proposed Laravel application action. Its responsibility is to publish permitted portfolio, area and policy fields under visibility rules. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BraiderProfile` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`BraiderProfileEditor` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `MaintainBraiderProfile` is the proposed application action in the Next.js API. Its responsibility is to publish permitted portfolio, area and policy fields under visibility rules. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `BraiderProfile` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** The editor is a dedicated screen, so its form is not an inline page form. The dialog checks type and size before upload and the API checks again (L2-027 AC4).
 
@@ -51,7 +51,7 @@ The braider uses HairPop for this capability. HairPop owns the state and publish
 
 ### Containers
 
-The braider management surface calls the Laravel API. The API reads or changes the HairPop database.
+The braider management surface calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for maintain profile content](diagrams/c4-container.png)
 

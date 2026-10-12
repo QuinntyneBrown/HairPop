@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`ReportReviewDialog` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ReportPublishedReview` is the proposed Laravel application action. Its responsibility is to record a reason against a published review for moderation. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `ReviewReport` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`ReportReviewDialog` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ReportPublishedReview` is the proposed application action in the Next.js API. Its responsibility is to record a reason against a published review for moderation. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `ReviewReport` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** A signed-out visitor who chooses Report review is sent to `/sign-in?returnUrl=…` before the dialog opens (L2-009 AC4).
 
@@ -41,7 +41,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for report review](diagrams/c4-container.png)
 

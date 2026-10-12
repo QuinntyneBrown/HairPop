@@ -3,10 +3,10 @@
 LAYOUT_WITH_LEGEND()
 title Components — Maintain profile content
 Container_Boundary(api, "HairPop API") {
-  Component(endpoint, "Feature endpoint", "Laravel controller", "Validates HTTP input")
+  Component(endpoint, "Feature endpoint", "Next.js route handler", "Validates HTTP input")
   Component(action, "MaintainBraiderProfile", "Application action", "Publish permitted portfolio, area and policy fields under visibility rules")
   Component(model, "BraiderProfile", "Domain model", "Holds slice state")
-  ComponentDb(db, "HairPop database", "<TO SUPPLY>", "Stores records")
+  ComponentDb(db, "HairPop database", "PostgreSQL 16 (Prisma)", "Stores records")
 }
 Rel(endpoint, action, "Delegates")
 Rel(action, model, "Applies rules")

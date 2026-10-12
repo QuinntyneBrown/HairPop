@@ -6,9 +6,9 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`SignInPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ManageCustomerSession` is the proposed Laravel application action. Its responsibility is to authenticate credentials or invalidate the confirmed session. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `CustomerSession` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`SignInPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ManageCustomerSession` is the proposed application action in the Next.js API. Its responsibility is to authenticate credentials or invalidate the confirmed session. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `CustomerSession` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
-**Frontend.** Sanctum SPA session cookies with `X-XSRF-TOKEN` (ADR 0003). Protected routes use `authGuard`, which redirects to sign-in with `returnUrl` (L2-037 AC2); the braider app's guard also requires `role: 'braider'` (L2-046).
+**Frontend.** An HTTP-only session cookie backed by a Postgres session row, with CSRF double-submit through the `XSRF-TOKEN` cookie echoed as `X-XSRF-TOKEN` (ADR 0008). Protected routes use `authGuard`, which redirects to sign-in with `returnUrl` (L2-037 AC2); the braider app's guard also requires `role: 'braider'` (L2-046).
 
 | Part | Value |
 |------|-------|
@@ -23,7 +23,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 | Method | Path | Access | Request | Success | Errors |
 |--------|------|--------|---------|---------|--------|
-| GET | `/sanctum/csrf-cookie` | public | — | 204 sets `XSRF-TOKEN` | — |
+| GET | `/api/auth/csrf` | public | — | 204 sets `XSRF-TOKEN` | — |
 | GET | `/api/session` | public | — | 200 `{ user: SessionUser }` | 401 no session |
 | POST | `/api/auth/sign-in` | public | `{ email, password, audience: 'customer' \| 'braider' }` | 200 `{ user: SessionUser }` | 422 `{ message }` without naming the field; 403 `not_braider` for a customer on the braider app (no session); 429 `retryAfter` |
 | POST | `/api/auth/sign-out` | signed in | — | 204 | — |
@@ -49,7 +49,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for manage session](diagrams/c4-container.png)
 

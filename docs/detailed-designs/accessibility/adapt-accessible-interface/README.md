@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`CustomerRouteShell` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ResolveInterfacePreferences` is the proposed Laravel application action. Its responsibility is to keep keyboard, screen-reader, responsive and theme behavior across customer surfaces. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `InterfacePreference` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`CustomerRouteShell` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ResolveInterfacePreferences` is the proposed application action in the Next.js API. Its responsibility is to keep keyboard, screen-reader, responsive and theme behavior across customer surfaces. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `InterfacePreference` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** The route shell moves focus to the page heading after client-side navigation and announces the page title.
 
@@ -43,7 +43,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for adapt accessible interface](diagrams/c4-container.png)
 

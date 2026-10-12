@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`BraiderProfilePage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetPublishedBraider` is the proposed Laravel application action. Its responsibility is to assemble published profile sections and ratings from published reviews. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `BraiderProfile` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`BraiderProfilePage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `GetPublishedBraider` is the proposed application action in the Next.js API. Its responsibility is to assemble published profile sections and ratings from published reviews. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `BraiderProfile` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** The private studio address is never part of the public profile (L2-027 AC3). The booking action links to `/book/:slug` with the braider's slug (L2-007 AC1).
 
@@ -54,7 +54,7 @@ The braider uses HairPop for this capability. HairPop owns the state and publish
 
 ### Containers
 
-The braider management surface calls the Laravel API. The API reads or changes the HairPop database.
+The braider management surface calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for inspect braider](diagrams/c4-container.png)
 

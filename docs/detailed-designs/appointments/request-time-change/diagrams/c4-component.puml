@@ -3,10 +3,10 @@
 LAYOUT_WITH_LEGEND()
 title Components — Request time change
 Container_Boundary(api, "HairPop API") {
-  Component(endpoint, "Feature endpoint", "Laravel controller", "Validates HTTP input")
+  Component(endpoint, "Feature endpoint", "Next.js route handler", "Validates HTTP input")
   Component(action, "ProposeAppointmentChange", "Application action", "Record an offered replacement while retaining the agreed time until acceptance")
   Component(model, "AppointmentChange", "Domain model", "Holds slice state")
-  ComponentDb(db, "HairPop database", "<TO SUPPLY>", "Stores records")
+  ComponentDb(db, "HairPop database", "PostgreSQL 16 (Prisma)", "Stores records")
 }
 Rel(endpoint, action, "Delegates")
 Rel(action, model, "Applies rules")

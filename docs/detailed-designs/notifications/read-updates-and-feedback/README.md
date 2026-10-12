@@ -6,7 +6,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 ## Description
 
-`NotificationCenterPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ReadCustomerUpdates` is the proposed Laravel application action. Its responsibility is to present recent owned records and acknowledge read state with accurate feedback. The API contract for this slice is listed below. A thin Laravel controller validates the request and delegates to the action. The `CustomerNotification` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Laravel data access.
+`NotificationCenterPage` is the proposed Angular screen or dialog for this slice. It reads a typed API contract through an injection token and presents the states represented in the mocks. `ReadCustomerUpdates` is the proposed application action in the Next.js API. Its responsibility is to present recent owned records and acknowledge read state with accurate feedback. The API contract for this slice is listed below. A thin Next.js route handler validates the request and delegates to the action. The `CustomerNotification` model holds the persisted state relevant to the action. Ownership and publication checks run before private fields are returned or changed. The repository persists or reads records through Prisma.
 
 **Frontend.** The top bar's Updates count reads `UnreadCountStore`, refreshed after sign-in and after each read (L2-030 AC2).
 
@@ -49,7 +49,7 @@ The customer uses HairPop for this capability. HairPop owns the state and publis
 
 ### Containers
 
-The customer web application calls the Laravel API. The API reads or changes the HairPop database.
+The customer web application calls the Next.js API. The API reads or changes the HairPop database.
 
 ![C4 container view for read updates and feedback](diagrams/c4-container.png)
 
