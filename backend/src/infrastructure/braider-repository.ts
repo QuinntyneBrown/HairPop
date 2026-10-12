@@ -23,3 +23,23 @@ export async function publishedRatingTotals(braiderId: string) {
   });
   return { sum: totals._sum.rating ?? 0, count: totals._count };
 }
+
+export function findPublishedBraiderId(slug: string) {
+  return prisma.braider.findFirst({ where: { slug, published: true }, select: { id: true } });
+}
+
+/** A page of the braider's published reviews, newest first, and how many there are. */
+export async function findPublishedReviews(braiderId: string, skip: number, take: number) {
+  const where = { braiderId, status: 'published' as const };
+  const [reviews, total] = await prisma.$transaction([
+    prisma.review.findMany({
+      where,
+      orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
+      skip,
+      take,
+      include: { author: { select: { name: true } }, service: { select: { name: true } } },
+    }),
+    prisma.review.count({ where }),
+  ]);
+  return { reviews, total };
+}
