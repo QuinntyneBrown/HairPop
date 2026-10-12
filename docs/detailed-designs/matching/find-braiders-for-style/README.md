@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** The filter dialog validates `maxPrice` against `meta.style.minPrice` before applying, keeps entered values on failure and holds the confirm button busy while the request runs (L2-005).
 
+**Backend.** `FindEligibleBraiders` returns one match per published braider, carrying their cheapest published service for a published style, ordered by rating (published reviews only, average rounded to one decimal) then review count then name. `search` matches the braider's name or area, case-insensitively. `distanceKm` keeps braiders whose stored distance from central Toronto is within it (the dialog's "Distance from Toronto"). `maxPrice` keeps services starting at or below it, and must be at least `meta.style.minPrice`, the style's lowest typical price; a lower value answers 422 `errors.maxPrice`. `nextAvailable` is the earliest offered slot still in the future.
+
 | Part | Value |
 |------|-------|
 | Application | customer |

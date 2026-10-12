@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: hairpop
+      POSTGRES_PASSWORD: hairpop
+      POSTGRES_DB: hairpop
+    ports:
+      - '5433:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./backend/docker/create-test-db.sql:/docker-entrypoint-initdb.d/create-test-db.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U hairpop -d hairpop']
+      interval: 2s
+      retries: 20
+
+  api:
+    build: ./backend
+    command: sh -c "npm ci && npx prisma generate && npm run dev"
+    environment:
+      DATABASE_URL: postgresql://hairpop:hairpop@db:5432/hairpop
+      TEST_DATABASE_URL: postgresql://hairpop:hairpop@db:5432/hairpop_test
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./backend:/app
+      # Linux-native dependencies stay in the container, separate from the host's node_modules.
+      - api-node-modules:/app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:
+  api-node-modules:

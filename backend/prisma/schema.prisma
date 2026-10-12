@@ -1,0 +1,195 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  customer
+  braider
+}
+
+model User {
+  id              String    @id @default(cuid())
+  name            String
+  /// Stored normalized: trimmed and lower-cased.
+  email           String    @unique
+  emailVerifiedAt DateTime?
+  passwordHash    String
+  role            Role      @default(customer)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  sessions        Session[]
+  braider         Braider?
+  reviews         Review[]
+}
+
+/// A signed-in browser (ADR 0008). The cookie holds an opaque token; only its SHA-256 is stored.
+model Session {
+  id        String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+/// Fixed-window counters for abuse controls (L2-040).
+model RateLimit {
+  key     String   @id
+  hits    Int
+  resetAt DateTime
+}
+
+/// A visitor's saved optional-usage choice (L2-034). Kept as a record of each save; it holds no identity.
+model ConsentPreference {
+  id            String   @id @default(cuid())
+  optionalUsage Boolean
+  savedAt       DateTime @default(now())
+}
+
+/// Help, Terms and Privacy copy (L2-032, L2-033). `sections` is [{ id, heading, paragraphs[] }].
+model ContentPage {
+  slug          String    @id
+  title         String
+  effectiveDate DateTime? @db.Date
+  sections      Json
+  supportEmail  String?
+  published     Boolean   @default(false)
+  updatedAt     DateTime  @updatedAt
+}
+
+enum StyleCategory {
+  braids
+  twists
+  locs
+}
+
+/// A published hairstyle (L2-001 – L2-003). Ranges are stored as min/max pairs; a null min means "not known".
+model Style {
+  slug            String           @id
+  name            String
+  category        StyleCategory
+  eyebrow         String
+  imageSrc        String?
+  imageAlt        String?
+  typicalHoursMin Float?
+  typicalHoursMax Float?
+  /// Whole dollars.
+  typicalPriceMin Int?
+  typicalPriceMax Int?
+  intro           String           @default("")
+  /// Weeks.
+  typicalWearMin  Int?
+  typicalWearMax  Int?
+  /// [{ name, description }]
+  variations      Json             @default("[]")
+  quoteFactors    String[]         @default([])
+  published       Boolean          @default(false)
+  sortOrder       Int              @default(0)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  services        BraiderService[]
+
+  @@index([published, sortOrder])
+}
+
+/// A braider's public profile. Studio address and contact details never leave the API publicly (L2-039).
+model Braider {
+  id                 String           @id @default(cuid())
+  slug               String           @unique
+  userId             String?          @unique
+  user               User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name               String
+  photoSrc           String?
+  photoAlt           String?
+  /// Public service area, such as "Toronto West".
+  area               String
+  /// Distance from central Toronto, used by the matching distance filter (L2-005).
+  distanceKm         Float
+  /// How far the braider travels to a customer, when they do.
+  travelKm           Int?
+  bio                String           @default("")
+  studioAddress      String?
+  preparationPolicy  String?
+  changePolicy       String?
+  cancellationPolicy String?
+  published          Boolean          @default(false)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  services           BraiderService[]
+  slots              OfferedSlot[]
+  reviews            Review[]
+  portfolio          PortfolioItem[]
+}
+
+/// A style a braider offers, with their starting price (whole dollars) and typical hours.
+model BraiderService {
+  id            String   @id @default(cuid())
+  braiderId     String
+  braider       Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  styleSlug     String
+  style         Style    @relation(fields: [styleSlug], references: [slug])
+  name          String
+  startingPrice Int
+  typicalHours  Float
+  published     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  reviews       Review[]
+
+  @@index([styleSlug, published])
+  @@index([braiderId])
+}
+
+/// A start time the braider offers for requests.
+model OfferedSlot {
+  id        String   @id @default(cuid())
+  braiderId String
+  braider   Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  start     DateTime
+  maxHours  Float
+  createdAt DateTime @default(now())
+
+  @@index([braiderId, start])
+}
+
+enum ReviewStatus {
+  published
+  pending
+  removed
+}
+
+/// A customer's review of a visit. Only published reviews are public or rated (L2-008).
+model Review {
+  id        String         @id @default(cuid())
+  braiderId String
+  braider   Braider        @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  serviceId String
+  service   BraiderService @relation(fields: [serviceId], references: [id])
+  authorId  String
+  author    User           @relation(fields: [authorId], references: [id])
+  rating    Int
+  text      String
+  status    ReviewStatus   @default(pending)
+  createdAt DateTime       @default(now())
+
+  @@index([braiderId, status, createdAt])
+}
+
+/// A photo of the braider's work on their public profile; newest first.
+model PortfolioItem {
+  id        String   @id @default(cuid())
+  braiderId String
+  braider   Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  imageSrc  String?
+  imageAlt  String?
+  caption   String
+  createdAt DateTime @default(now())
+
+  @@index([braiderId, createdAt])
+}

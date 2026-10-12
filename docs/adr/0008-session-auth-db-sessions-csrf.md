@@ -12,7 +12,8 @@ ADR 0007 moves the backend to Next.js, so Laravel Sanctum's SPA mode is no longe
 
 - Sessions are rows in PostgreSQL (a Prisma `Session` model). `POST /api/auth/sign-in` creates a row and sets an HTTP-only, Secure, SameSite=Lax cookie holding an opaque random session id. `POST /api/auth/sign-out` deletes the row and clears the cookie.
 - Passwords are hashed with argon2id.
-- CSRF uses the double-submit cookie pattern. `GET /api/auth/csrf` returns 204 and sets a JavaScript-readable `XSRF-TOKEN` cookie. Every mutating request must echo it as `X-XSRF-TOKEN`; Angular's `withXsrfConfiguration` does this.
+- CSRF uses the double-submit cookie pattern. `GET /api/auth/csrf` returns 204 and sets a JavaScript-readable `XSRF-TOKEN` cookie. Every mutating request must echo it as `X-XSRF-TOKEN`; Angular's `withXsrfConfiguration` does this. A missing or mismatched header answers 419 `{ message: 'CSRF token mismatch.', code: 'csrf_mismatch' }` before authentication or any other work.
+- The session cookie is `hp_session`; it holds a random token and the database stores only its SHA-256. Sessions expire 14 days after sign-in.
 - No token is stored in JavaScript-readable storage.
 - `GET /api/session` returns the signed-in user or 401; `SessionStore` (a signal store in the `api` library) holds it. Guards read the store; a 401 from any request clears it and sends the person to sign-in with `returnUrl`.
 - Sign-in sends `audience: 'customer' | 'braider'`; the API refuses a customer on the braider app with 403 `not_braider` and creates no session (L2-046 AC2).

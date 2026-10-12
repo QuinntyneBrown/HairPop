@@ -1,0 +1,68 @@
+name: Backend
+
+# Lints, type-checks and builds the API, then runs its integration tests against PostgreSQL 16.
+# The tests apply migrations to the test database and start their own API on :8001 (backend/README.md).
+
+on:
+  pull_request:
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend.yml"
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: backend
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: hairpop
+          POSTGRES_PASSWORD: hairpop
+          POSTGRES_DB: hairpop_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U hairpop -d hairpop_test"
+          --health-interval 2s
+          --health-retries 20
+    env:
+      DATABASE_URL: postgresql://hairpop:hairpop@localhost:5432/hairpop_test
+      TEST_DATABASE_URL: postgresql://hairpop:hairpop@localhost:5432/hairpop_test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - run: npm ci
+      - run: npx prisma generate
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+      - name: Seed twice
+        run: |
+          npx prisma db seed
+          npx prisma db seed
