@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** User text renders through Angular interpolation only; no `innerHTML` binds user content (L2-039 AC2).
 
+**Backend.** `route()` is deny-by-default; public routes opt in with `{ anonymous: true }` and role-scoped routes add `{ role }`, which runs after authentication: customer-owned endpoints (`/api/account`, `/api/appointments*`, `/api/booking-requests`, `/api/notifications*`, review reports, booking options) answer a braider 403 `not_customer`, and `/api/braider/*` answers a customer — or a braider account without a profile — 403 `not_braider`. Customer records are always read with the signed-in customer's id, so another customer's reference is 404 with no details (L2-038 AC2); braider records check the owning braider and answer 403 (AC3). Link tokens are stored only as SHA-256 hashes and email text is cleared after delivery (L2-039 AC3); request logs record method, path, status, duration and correlation id, never bodies, cookies or query strings (L2-044 AC3). Abuse limits: sign-in failures, registrations, verification resends, reset requests, review reports and booking submissions (L2-040).
+
 | Part | Value |
 |------|-------|
 | Application | customer and braider |
