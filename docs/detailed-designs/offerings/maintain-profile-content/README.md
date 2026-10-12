@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** The editor is a dedicated screen, so its form is not an inline page form. The dialog checks type and size before upload and the API checks again (L2-027 AC4).
 
+**Backend.** `MaintainBraiderProfile` is braider-only and edits the signed-in braider's own profile. `PATCH` applies with a conditional update on `Braider.version`; an older version is 409 `stale` and keeps the newer values (L2-047 AC4). `area` is required (1–120 characters); `bio` is at most 600 characters and the address and policies at most 1,000; an empty optional field is stored as "not given" and read back as `''`. The public profile and new booking options read the new values at once, while existing requests keep the policies they were sent with (L2-027 AC2); the studio address never appears publicly (AC3). An upload's type is decided from the file's bytes, not its name or declared type: only JPG, PNG and WebP up to 5 MB are stored, anything else is 422 `errors.photo` and nothing is saved (AC4). The image is kept in PostgreSQL (`MediaFile`) and served publicly from `/api/media/{id}` with its checked type and `X-Content-Type-Options: nosniff`; the item's `image.alt` is its caption (1–120 characters). `styleSlug` is optional and must name a published style; items added before styles were recorded read `styleSlug: null`. Removing a photo deletes its stored image; another braider's photo is 403.
+
 | Part | Value |
 |------|-------|
 | Application | braider |

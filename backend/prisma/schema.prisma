@@ -183,6 +183,8 @@ model Braider {
   changePolicy       String?
   cancellationPolicy String?
   published          Boolean          @default(false)
+  /// Bumped on every profile edit; an edit must name the version it saw (L2-047 AC4).
+  version            Int              @default(1)
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
   services           BraiderService[]
@@ -344,13 +346,18 @@ model ReviewReport {
 
 /// A photo of the braider's work on their public profile; newest first.
 model PortfolioItem {
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   braiderId String
-  braider   Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  braider   Braider    @relation(fields: [braiderId], references: [id], onDelete: Cascade)
   imageSrc  String?
   imageAlt  String?
   caption   String
-  createdAt DateTime @default(now())
+  /// The style the photo shows, when the braider chose one.
+  styleSlug String?
+  /// The uploaded photo, when the image is stored by HairPop.
+  mediaId   String?    @unique
+  media     MediaFile? @relation(fields: [mediaId], references: [id], onDelete: SetNull)
+  createdAt DateTime   @default(now())
 
   @@index([braiderId, createdAt])
 }
@@ -379,4 +386,14 @@ model AppointmentChange {
   decidedAt     DateTime?
 
   @@index([appointmentId, status])
+}
+
+/// An uploaded image, served publicly from /api/media/{id} (L2-027 AC4). Only checked JPG, PNG
+/// and WebP files up to 5 MB are stored.
+model MediaFile {
+  id          String         @id @default(cuid())
+  contentType String
+  bytes       Bytes
+  createdAt   DateTime       @default(now())
+  portfolio   PortfolioItem?
 }

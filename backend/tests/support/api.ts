@@ -45,6 +45,11 @@ export class Api {
     return this.send<T>('DELETE', path, undefined, headers);
   }
 
+  /** Posts multipart form data, as a file upload does. */
+  postForm<T = unknown>(path: string, form: FormData) {
+    return this.send<T>('POST', path, form);
+  }
+
   /** Fetches the CSRF cookie the way `Csrf.ensure()` does before a mutation. */
   async csrf(): Promise<void> {
     await this.get('/api/auth/csrf');
@@ -62,12 +67,13 @@ export class Api {
     }
     const xsrf = this.jar.get('XSRF-TOKEN');
     if (method !== 'GET' && xsrf) headers['X-XSRF-TOKEN'] = decodeURIComponent(xsrf);
-    if (body !== undefined) headers['Content-Type'] = 'application/json';
+    const form = body instanceof FormData;
+    if (body !== undefined && !form) headers['Content-Type'] = 'application/json';
 
     const response = await fetch(`${API_URL}${path}`, {
       method,
       headers: { ...headers, ...extraHeaders },
-      body: body === undefined ? undefined : JSON.stringify(body),
+      body: body === undefined ? undefined : form ? body : JSON.stringify(body),
       redirect: 'manual',
     });
 
