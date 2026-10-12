@@ -9,6 +9,7 @@ export function freeSlots(now = new Date()) {
   return {
     start: { gt: now },
     appointments: { none: { heldSlotId: { not: null } } },
+    changes: { none: { heldSlotId: { not: null } } },
   } as const;
 }
 

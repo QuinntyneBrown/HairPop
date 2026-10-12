@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** A change request is answered with the same dialog; accepting it moves the agreed time (L2-021 AC3). `stale` keeps the dialog open with a refresh action (L2-020 AC3, L2-047 AC4).
 
+**Backend.** `RespondToBookingRequest` is braider-only: a customer session gets 403 `not_braider`, as does a braider account without a profile; another braider's reference is 403 without details and an unknown one 404. Requests list the braider's awaiting requests and active appointments with a pending change, soonest first by the time being decided. An answer applies with a conditional update on `version`, an active status and a future start, so an answer to anything that has since been cancelled, answered, changed or passed is 409 `stale` and changes nothing (L2-020 AC3). Accepting a booking stores `agreedAmount` (`null` confirms the estimate); declining releases the slot. When a change is pending the answer applies to the change: accepting moves the appointment to the proposed slot and releases the old one, declining keeps the agreed time; the response's `status` is then the appointment's own (`confirmed`, or `awaiting_reply` for a change to a request not yet accepted). Each answer records the customer's update: "Time confirmed", "Request declined", "New time confirmed" or "Change declined" (L2-029). `errors.agreedAmount` means a negative, fractional or implausibly large amount.
+
 | Part | Value |
 |------|-------|
 | Application | braider |

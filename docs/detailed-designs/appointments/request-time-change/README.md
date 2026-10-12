@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** The current time stays authoritative and the detail shows the proposed time separately until the braider decides (L2-021 AC1).
 
+**Backend.** `ProposeAppointmentChange` allows a change on an awaiting or confirmed item at least 48 hours before its time with no change already pending; otherwise 409 `not_changeable` (L2-021 AC4). Change options are the braider's free future slots at least as long as the appointment. Proposing locks the slot, re-checks it inside the transaction and holds it through the change's unique `heldSlotId`, so it is no longer offered to anyone else; the appointment's `version` moves on, so a braider answer to the earlier state is stale. The appointment keeps its time until the braider accepts (`appointments/respond-to-request`). A blank `note` is stored as `null`; notes over 500 characters answer 422 `errors.note`.
+
 | Part | Value |
 |------|-------|
 | Application | customer |

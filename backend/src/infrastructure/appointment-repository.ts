@@ -6,6 +6,7 @@ export const appointmentInclude = {
     select: { slug: true, name: true, area: true, studioAddress: true, preparationPolicy: true },
   },
   service: { select: { preparation: true, styleSlug: true, published: true } },
+  changes: { where: { status: 'pending' }, take: 1 },
 } satisfies Prisma.AppointmentInclude;
 
 /** The customer's own appointment by reference number, or null (no disclosure, L2-019 AC4). */

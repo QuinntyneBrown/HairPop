@@ -221,8 +221,9 @@ model OfferedSlot {
   braider   Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
   start        DateTime
   maxHours     Float
-  createdAt    DateTime      @default(now())
+  createdAt    DateTime            @default(now())
   appointments Appointment[]
+  changes      AppointmentChange[]
 
   @@index([braiderId, start])
 }
@@ -268,8 +269,9 @@ model Appointment {
   /// Bumped on every transition; a response must name the version it saw (L2-020 AC3).
   version            Int               @default(1)
   idempotencyKey     String
-  createdAt          DateTime          @default(now())
-  updatedAt          DateTime          @updatedAt
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  changes            AppointmentChange[]
 
   @@unique([customerId, idempotencyKey])
   @@index([customerId, start])
@@ -340,4 +342,30 @@ model PortfolioItem {
   createdAt DateTime @default(now())
 
   @@index([braiderId, createdAt])
+}
+
+enum ChangeStatus {
+  pending
+  accepted
+  declined
+  withdrawn
+}
+
+/// A customer's proposed new time (L2-021). The appointment keeps its time until the braider
+/// accepts; at most one change per appointment is pending.
+model AppointmentChange {
+  id            String       @id @default(cuid())
+  appointmentId String
+  appointment   Appointment  @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  slotId        String?
+  slot          OfferedSlot? @relation(fields: [slotId], references: [id], onDelete: SetNull)
+  /// The proposed slot while the change is pending; unique, so one slot holds one change.
+  heldSlotId    String?      @unique
+  start         DateTime
+  note          String?
+  status        ChangeStatus @default(pending)
+  createdAt     DateTime     @default(now())
+  decidedAt     DateTime?
+
+  @@index([appointmentId, status])
 }

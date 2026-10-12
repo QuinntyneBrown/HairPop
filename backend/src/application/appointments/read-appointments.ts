@@ -65,6 +65,7 @@ export async function getOwnedAppointment(
 
   const now = new Date();
   const status = lifecycle(record, now);
+  const pending = record.changes[0] ?? null;
   const accepted = status === 'confirmed' || status === 'completed';
   return {
     ...toSummary(record, now),
@@ -76,9 +77,9 @@ export async function getOwnedAppointment(
     contact: { email: record.email, phone: record.phone },
     policy: { changes: record.changePolicy, cancellation: record.cancellationPolicy },
     preparation: preparationChecklist(record.braider.preparationPolicy, record.service.preparation),
-    pendingChange: null,
+    pendingChange: pending ? { start: pending.start.toISOString() } : null,
     allowed: {
-      change: canChange(record, false, now),
+      change: canChange(record, pending !== null, now),
       cancel: canCancel(record, now),
       rebook: status === 'completed',
       review: status === 'completed',
