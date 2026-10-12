@@ -107,3 +107,90 @@ export const starterLocs = {
   typicalPriceMax: 250,
   sortOrder: 3,
 } satisfies Partial<StyleData>;
+
+type BraiderData = Parameters<ReturnType<typeof db>['braider']['create']>[0]['data'];
+
+/** A published braider, Nia Okafor from the cast unless overridden. */
+export function createBraider(overrides: Partial<BraiderData> = {}) {
+  return db().braider.create({
+    data: {
+      slug: 'nia-okafor',
+      name: 'Nia Okafor',
+      photoSrc: 'https://media.hairpop.example/braiders/nia.jpg',
+      photoAlt: 'Nia Okafor smiling in her studio',
+      area: 'Toronto West',
+      distanceKm: 8,
+      travelKm: 10,
+      bio: 'I specialize in comfortable, neat braids. Bring inspiration photos and we’ll confirm the details together.',
+      studioAddress: '214 Ossington Ave, Toronto',
+      preparationPolicy: 'Arrive with washed, detangled hair.',
+      changePolicy: 'Request a change at least 48 hours before.',
+      cancellationPolicy: 'Free up to 48 hours before; later cancellations may be charged $40.',
+      published: true,
+      ...overrides,
+    },
+  });
+}
+
+/** A published service the braider offers for a style. */
+export function createService(
+  braiderId: string,
+  overrides: Partial<{
+    id: string;
+    styleSlug: string;
+    name: string;
+    startingPrice: number;
+    typicalHours: number;
+    published: boolean;
+  }> = {},
+) {
+  return db().braiderService.create({
+    data: {
+      braiderId,
+      styleSlug: 'knotless-braids',
+      name: 'Medium knotless braids',
+      startingPrice: 180,
+      typicalHours: 5,
+      published: true,
+      ...overrides,
+    },
+  });
+}
+
+export function createSlot(braiderId: string, start: Date, maxHours = 6) {
+  return db().offeredSlot.create({ data: { braiderId, start, maxHours } });
+}
+
+let reviewers = 0;
+
+/** A review of the service by a new customer; published unless a status is given. */
+export async function createReview(
+  service: { id: string; braiderId: string },
+  overrides: Partial<{
+    rating: number;
+    text: string;
+    status: 'published' | 'pending' | 'removed';
+    createdAt: Date;
+    authorName: string;
+  }> = {},
+) {
+  reviewers += 1;
+  const author = await db().user.create({
+    data: {
+      name: overrides.authorName ?? `Reviewer ${reviewers}`,
+      email: `reviewer${reviewers}-${Date.now()}@example.com`,
+      passwordHash: 'not-used',
+    },
+  });
+  return db().review.create({
+    data: {
+      braiderId: service.braiderId,
+      serviceId: service.id,
+      authorId: author.id,
+      rating: overrides.rating ?? 5,
+      text: overrides.text ?? 'Neat parts and a gentle touch.',
+      status: overrides.status ?? 'published',
+      createdAt: overrides.createdAt,
+    },
+  });
+}

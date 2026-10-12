@@ -23,6 +23,8 @@ model User {
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   sessions        Session[]
+  braider         Braider?
+  reviews         Review[]
 }
 
 /// A signed-in browser (ADR 0008). The cookie holds an opaque token; only its SHA-256 is stored.
@@ -69,7 +71,7 @@ enum StyleCategory {
 
 /// A published hairstyle (L2-001 – L2-003). Ranges are stored as min/max pairs; a null min means "not known".
 model Style {
-  slug            String        @id
+  slug            String           @id
   name            String
   category        StyleCategory
   eyebrow         String
@@ -80,17 +82,100 @@ model Style {
   /// Whole dollars.
   typicalPriceMin Int?
   typicalPriceMax Int?
-  intro           String        @default("")
+  intro           String           @default("")
   /// Weeks.
   typicalWearMin  Int?
   typicalWearMax  Int?
   /// [{ name, description }]
-  variations      Json          @default("[]")
-  quoteFactors    String[]      @default([])
-  published       Boolean       @default(false)
-  sortOrder       Int           @default(0)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  variations      Json             @default("[]")
+  quoteFactors    String[]         @default([])
+  published       Boolean          @default(false)
+  sortOrder       Int              @default(0)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  services        BraiderService[]
 
   @@index([published, sortOrder])
+}
+
+/// A braider's public profile. Studio address and contact details never leave the API publicly (L2-039).
+model Braider {
+  id                 String           @id @default(cuid())
+  slug               String           @unique
+  userId             String?          @unique
+  user               User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name               String
+  photoSrc           String?
+  photoAlt           String?
+  /// Public service area, such as "Toronto West".
+  area               String
+  /// Distance from central Toronto, used by the matching distance filter (L2-005).
+  distanceKm         Float
+  /// How far the braider travels to a customer, when they do.
+  travelKm           Int?
+  bio                String           @default("")
+  studioAddress      String?
+  preparationPolicy  String?
+  changePolicy       String?
+  cancellationPolicy String?
+  published          Boolean          @default(false)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  services           BraiderService[]
+  slots              OfferedSlot[]
+  reviews            Review[]
+}
+
+/// A style a braider offers, with their starting price (whole dollars) and typical hours.
+model BraiderService {
+  id            String   @id @default(cuid())
+  braiderId     String
+  braider       Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  styleSlug     String
+  style         Style    @relation(fields: [styleSlug], references: [slug])
+  name          String
+  startingPrice Int
+  typicalHours  Float
+  published     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  reviews       Review[]
+
+  @@index([styleSlug, published])
+  @@index([braiderId])
+}
+
+/// A start time the braider offers for requests.
+model OfferedSlot {
+  id        String   @id @default(cuid())
+  braiderId String
+  braider   Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  start     DateTime
+  maxHours  Float
+  createdAt DateTime @default(now())
+
+  @@index([braiderId, start])
+}
+
+enum ReviewStatus {
+  published
+  pending
+  removed
+}
+
+/// A customer's review of a visit. Only published reviews are public or rated (L2-008).
+model Review {
+  id        String         @id @default(cuid())
+  braiderId String
+  braider   Braider        @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  serviceId String
+  service   BraiderService @relation(fields: [serviceId], references: [id])
+  authorId  String
+  author    User           @relation(fields: [authorId], references: [id])
+  rating    Int
+  text      String
+  status    ReviewStatus   @default(pending)
+  createdAt DateTime       @default(now())
+
+  @@index([braiderId, status, createdAt])
 }
