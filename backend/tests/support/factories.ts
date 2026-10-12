@@ -197,3 +197,26 @@ export async function createReview(
     },
   });
 }
+
+/** An update in a customer's notification center; unread unless `readAt` is given. */
+export function createNotification(
+  userId: string,
+  overrides: Partial<{
+    title: string;
+    body: string;
+    link: string | null;
+    createdAt: Date;
+    readAt: Date;
+  }> = {},
+) {
+  return db().customerNotification.create({
+    data: {
+      userId,
+      title: overrides.title ?? 'Nia received your request',
+      body: overrides.body ?? 'She will confirm the time and final price.',
+      link: overrides.link === undefined ? '/appointments/HP-1048' : overrides.link,
+      createdAt: overrides.createdAt,
+      readAt: overrides.readAt,
+    },
+  });
+}

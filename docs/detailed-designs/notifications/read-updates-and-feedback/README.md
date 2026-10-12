@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** The top bar's Updates count reads `UnreadCountStore`, refreshed after sign-in and after each read (L2-030 AC2).
 
+**Backend.** `ReadCustomerUpdates` lists the customer's own notifications newest first, twelve per page, with `meta.unreadCount`. Marking an item read is idempotent: a repeat leaves the count unchanged (L2-030 AC2). Another customer's or an unknown id answers 404 and changes nothing (L2-029 AC3). The endpoints are customer-only (403 `not_customer` for a braider).
+
 | Part | Value |
 |------|-------|
 | Application | customer |
