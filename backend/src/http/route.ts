@@ -1,17 +1,27 @@
-import type { Handler, NextHandler } from './context';
+import type { AuthenticatedContext, Handler, NextHandler } from './context';
+import { withAuth } from './with-auth';
 import { withErrors } from './with-errors';
 import { withRequestLog } from './with-request-log';
 
-interface RouteOptions {
-  /** Opt this route out of authentication. Routes require a session unless this is set. */
+interface AnonymousRoute {
+  /** Opt this route out of authentication. */
   readonly anonymous: true;
 }
 
 /**
  * Builds a route handler from the standard wrappers, outermost first:
- * request log → error mapping → handler.
+ * request log → error mapping → auth → handler.
+ *
+ * Routes require a session (deny by default). A public route opts out with `{ anonymous: true }`.
  */
-export function route(handler: Handler, options: RouteOptions): NextHandler {
-  void options;
-  return withRequestLog(withErrors(handler));
+export function route(handler: Handler<AuthenticatedContext>): NextHandler;
+export function route(handler: Handler, options: AnonymousRoute): NextHandler;
+export function route(
+  handler: Handler<AuthenticatedContext> | Handler,
+  options?: AnonymousRoute,
+): NextHandler {
+  const guarded = options?.anonymous
+    ? (handler as Handler)
+    : withAuth(handler as Handler<AuthenticatedContext>);
+  return withRequestLog(withErrors(guarded));
 }

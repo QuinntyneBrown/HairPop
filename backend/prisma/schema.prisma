@@ -6,3 +6,32 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Role {
+  customer
+  braider
+}
+
+model User {
+  id              String    @id @default(cuid())
+  name            String
+  /// Stored normalized: trimmed and lower-cased.
+  email           String    @unique
+  emailVerifiedAt DateTime?
+  passwordHash    String
+  role            Role      @default(customer)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  sessions        Session[]
+}
+
+/// A signed-in browser (ADR 0008). The cookie holds an opaque token; only its SHA-256 is stored.
+model Session {
+  id        String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
