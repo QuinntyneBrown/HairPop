@@ -22,6 +22,8 @@ docker compose exec api npx prisma migrate deploy   # migrations never run on st
 docker compose exec api npx prisma db seed          # idempotent; safe to re-run
 ```
 
+The seed loads the cast from `docs/mocks/README.md`: four styles, Help/Terms/Privacy, Nia Okafor, Aisha Mensah, Jules Baptiste and Amara Adeyemi-Williams with services, Nia's portfolio and offered times, and published reviews. Seeded accounts — `maya.chen@example.com` (customer) and `nia.okafor@example.com` (braider), among others — share the development password `hairpop-dev-password`, or `SEED_PASSWORD` when set. Passwords are hashed only when an account is first created.
+
 ## Test it
 
 ```bash
