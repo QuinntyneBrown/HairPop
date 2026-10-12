@@ -49,3 +49,14 @@ model ConsentPreference {
   optionalUsage Boolean
   savedAt       DateTime @default(now())
 }
+
+/// Help, Terms and Privacy copy (L2-032, L2-033). `sections` is [{ id, heading, paragraphs[] }].
+model ContentPage {
+  slug          String    @id
+  title         String
+  effectiveDate DateTime? @db.Date
+  sections      Json
+  supportEmail  String?
+  published     Boolean   @default(false)
+  updatedAt     DateTime  @updatedAt
+}
