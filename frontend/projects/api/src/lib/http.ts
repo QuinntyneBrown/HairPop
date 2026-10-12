@@ -13,7 +13,7 @@ import { EnvironmentProviders, InjectionToken, REQUEST, inject } from '@angular/
  */
 export const API_ORIGIN = new InjectionToken<string>('API_ORIGIN');
 
-const API_PATH = /^\/(api|sanctum)\//;
+const API_PATH = /^\/api\//;
 
 /**
  * On the server, prefixes relative API URLs with `API_ORIGIN` and forwards the incoming request's
@@ -33,11 +33,11 @@ export const apiOriginInterceptor: HttpInterceptorFn = (req, next) => {
   );
 };
 
-/** Asks for JSON so Laravel answers errors as JSON. */
+/** Asks for JSON responses from the API. */
 const jsonInterceptor: HttpInterceptorFn = (req, next) =>
   next(API_PATH.test(req.url) ? req.clone({ setHeaders: { Accept: 'application/json' } }) : req);
 
-/** HttpClient for HairPop APIs: fetch, Sanctum XSRF cookie names (ADR 0003), origin handling. */
+/** HttpClient for HairPop APIs: fetch, XSRF cookie names (ADR 0008), origin handling. */
 export function provideHairPopHttp(): EnvironmentProviders {
   return provideHttpClient(
     withFetch(),

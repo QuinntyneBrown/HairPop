@@ -30,7 +30,7 @@ test.describe('Sign in', () => {
     await expect(page).toHaveURL('/');
     await expect(signIn.shell.accountLink).toHaveText('Maya');
     await expect(signIn.shell.accountLink).toHaveAttribute('href', '/settings');
-    expect(api.requests('GET', '/sanctum/csrf-cookie')).toHaveLength(1);
+    expect(api.requests('GET', '/api/auth/csrf')).toHaveLength(1);
     expect(api.requests('POST', '/api/auth/sign-in')[0].headers['x-xsrf-token']).toBe(
       'e2e-xsrf-token',
     );
