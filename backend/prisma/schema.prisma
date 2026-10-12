@@ -60,3 +60,37 @@ model ContentPage {
   published     Boolean   @default(false)
   updatedAt     DateTime  @updatedAt
 }
+
+enum StyleCategory {
+  braids
+  twists
+  locs
+}
+
+/// A published hairstyle (L2-001 – L2-003). Ranges are stored as min/max pairs; a null min means "not known".
+model Style {
+  slug            String        @id
+  name            String
+  category        StyleCategory
+  eyebrow         String
+  imageSrc        String?
+  imageAlt        String?
+  typicalHoursMin Float?
+  typicalHoursMax Float?
+  /// Whole dollars.
+  typicalPriceMin Int?
+  typicalPriceMax Int?
+  intro           String        @default("")
+  /// Weeks.
+  typicalWearMin  Int?
+  typicalWearMax  Int?
+  /// [{ name, description }]
+  variations      Json          @default("[]")
+  quoteFactors    String[]      @default([])
+  published       Boolean       @default(false)
+  sortOrder       Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([published, sortOrder])
+}
