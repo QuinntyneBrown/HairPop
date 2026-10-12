@@ -28,6 +28,7 @@ model User {
   sessions        Session[]
   braider         Braider?
   reviews         Review[]
+  reviewReports   ReviewReport[]
   verifications   EmailVerification[]
   passwordResets  PasswordReset[]
   notifications   CustomerNotification[]
@@ -239,8 +240,38 @@ model Review {
   text      String
   status    ReviewStatus   @default(pending)
   createdAt DateTime       @default(now())
+  reports   ReviewReport[]
 
   @@index([braiderId, status, createdAt])
+}
+
+enum ReportReason {
+  not_real_visit
+  offensive
+  private_info
+  other
+}
+
+enum ReportStatus {
+  open
+  upheld
+  dismissed
+}
+
+/// A customer's report of a published review, waiting for moderation (L2-009). It never changes
+/// the review by itself.
+model ReviewReport {
+  id         String       @id @default(cuid())
+  reviewId   String
+  review     Review       @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  reporterId String
+  reporter   User         @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  reason     ReportReason
+  details    String?
+  status     ReportStatus @default(open)
+  createdAt  DateTime     @default(now())
+
+  @@unique([reviewId, reporterId])
 }
 
 /// A photo of the braider's work on their public profile; newest first.

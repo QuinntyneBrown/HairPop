@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** A signed-out visitor who chooses Report review is sent to `/sign-in?returnUrl=…` before the dialog opens (L2-009 AC4).
 
+**Backend.** `ReportPublishedReview` records an `open` `ReviewReport` for a published review of a published braider and leaves the review untouched (L2-009 AC1). One report per customer per review: a repeat — or a concurrent duplicate — answers 201 with the first `reportId`. A customer may file ten new reports an hour (L2-040 AC2). Blank `details` are stored as `null`; details over 1,000 characters answer 422 `errors.details`. The endpoint is customer-only (403 `not_customer` for a braider).
+
 | Part | Value |
 |------|-------|
 | Application | customer |
