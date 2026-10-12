@@ -82,7 +82,7 @@ export async function getOwnedAppointment(
       change: canChange(record, pending !== null, now),
       cancel: canCancel(record, now),
       rebook: status === 'completed',
-      review: status === 'completed',
+      review: status === 'completed' && record.review === null,
     },
     unavailable: [],
     updatedAt: record.updatedAt.toISOString(),

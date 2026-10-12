@@ -13,18 +13,18 @@ enum Role {
 }
 
 model User {
-  id              String    @id @default(cuid())
+  id              String                 @id @default(cuid())
   name            String
   /// Stored normalized: trimmed and lower-cased.
-  email           String    @unique
+  email           String                 @unique
   emailVerifiedAt DateTime?
   /// A changed email waiting for its verification link (L2-014); normalized like `email`.
   pendingEmail    String?
   phone           String?
   passwordHash    String
-  role            Role      @default(customer)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  role            Role                   @default(customer)
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
   sessions        Session[]
   braider         Braider?
   reviews         Review[]
@@ -194,19 +194,21 @@ model Braider {
 
 /// A style a braider offers, with their starting price (whole dollars) and typical hours.
 model BraiderService {
-  id            String   @id @default(cuid())
+  id            String        @id @default(cuid())
   braiderId     String
-  braider       Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  braider       Braider       @relation(fields: [braiderId], references: [id], onDelete: Cascade)
   styleSlug     String
-  style         Style    @relation(fields: [styleSlug], references: [slug])
+  style         Style         @relation(fields: [styleSlug], references: [slug])
   name          String
   startingPrice Int
   typicalHours  Float
   /// Service-specific preparation shown on the customer's checklist (L2-024, L2-026).
   preparation   String?
-  published     Boolean  @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  /// Aftercare the braider gives for this service, one item each (L2-024 AC2).
+  careGuidance  String[]      @default([])
+  published     Boolean       @default(false)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   reviews       Review[]
   appointments  Appointment[]
 
@@ -216,9 +218,9 @@ model BraiderService {
 
 /// A start time the braider offers for requests.
 model OfferedSlot {
-  id        String   @id @default(cuid())
-  braiderId String
-  braider   Braider  @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  id           String              @id @default(cuid())
+  braiderId    String
+  braider      Braider             @relation(fields: [braiderId], references: [id], onDelete: Cascade)
   start        DateTime
   maxHours     Float
   createdAt    DateTime            @default(now())
@@ -239,19 +241,19 @@ enum AppointmentStatus {
 /// A booking request and, once the braider accepts it, the appointment (L2-017 – L2-022). It
 /// snapshots the service, estimate and policies the customer reviewed (L2-026 AC3, L2-027 AC2).
 model Appointment {
-  id                 String            @id @default(cuid())
+  id                 String              @id @default(cuid())
   /// Shown as the reference HP-1048; the sequence starts at 1001.
-  number             Int               @unique @default(autoincrement())
+  number             Int                 @unique @default(autoincrement())
   customerId         String
-  customer           User              @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customer           User                @relation(fields: [customerId], references: [id], onDelete: Cascade)
   braiderId          String
-  braider            Braider           @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  braider            Braider             @relation(fields: [braiderId], references: [id], onDelete: Cascade)
   serviceId          String
-  service            BraiderService    @relation(fields: [serviceId], references: [id])
+  service            BraiderService      @relation(fields: [serviceId], references: [id])
   slotId             String?
-  slot               OfferedSlot?      @relation(fields: [slotId], references: [id], onDelete: SetNull)
+  slot               OfferedSlot?        @relation(fields: [slotId], references: [id], onDelete: SetNull)
   /// The slot while the request or appointment is active; unique, so one slot holds one booking.
-  heldSlotId         String?           @unique
+  heldSlotId         String?             @unique
   serviceName        String
   start              DateTime
   durationHours      Float
@@ -265,13 +267,14 @@ model Appointment {
   policyVersion      String
   changePolicy       String
   cancellationPolicy String
-  status             AppointmentStatus @default(awaiting_reply)
+  status             AppointmentStatus   @default(awaiting_reply)
   /// Bumped on every transition; a response must name the version it saw (L2-020 AC3).
-  version            Int               @default(1)
+  version            Int                 @default(1)
   idempotencyKey     String
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   changes            AppointmentChange[]
+  review             Review?
 
   @@unique([customerId, idempotencyKey])
   @@index([customerId, start])
@@ -286,18 +289,22 @@ enum ReviewStatus {
 
 /// A customer's review of a visit. Only published reviews are public or rated (L2-008).
 model Review {
-  id        String         @id @default(cuid())
-  braiderId String
-  braider   Braider        @relation(fields: [braiderId], references: [id], onDelete: Cascade)
-  serviceId String
-  service   BraiderService @relation(fields: [serviceId], references: [id])
-  authorId  String
-  author    User           @relation(fields: [authorId], references: [id])
-  rating    Int
-  text      String
-  status    ReviewStatus   @default(pending)
-  createdAt DateTime       @default(now())
-  reports   ReviewReport[]
+  id             String         @id @default(cuid())
+  braiderId      String
+  braider        Braider        @relation(fields: [braiderId], references: [id], onDelete: Cascade)
+  serviceId      String
+  service        BraiderService @relation(fields: [serviceId], references: [id])
+  authorId       String
+  author         User           @relation(fields: [authorId], references: [id])
+  /// The visit reviewed; one review per appointment (L2-025 AC4). Older reviews may have none.
+  appointmentId  String?        @unique
+  appointment    Appointment?   @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+  idempotencyKey String?
+  rating         Int
+  text           String
+  status         ReviewStatus   @default(pending)
+  createdAt      DateTime       @default(now())
+  reports        ReviewReport[]
 
   @@index([braiderId, status, createdAt])
 }
