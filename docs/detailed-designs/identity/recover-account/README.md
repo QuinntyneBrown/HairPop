@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** `PasswordRecoveryPage` in the earlier design is split into the two screens the mocks show.
 
+**Backend.** `ResetCustomerPassword` stores only the SHA-256 of each link token (L2-039 AC3). A link lasts 60 minutes and works once, for the email it was sent to; using it also retires the account's other open links and signs out every session. Success records the "Your password was changed" notification (L2-029). Forgot password answers 202 with no body whether or not the address has an account and is limited to three requests per address per hour (L2-040); the link leaves through the outbox ([ADR 0009](../../../adr/0009-email-outbox-worker.md)). Reset field errors are `errors.password` (fewer than 12 characters) and `errors.passwordConfirmation` (mismatch); a valid reset answers 200 `{ email }`.
+
 | Part | Value |
 |------|-------|
 | Application | customer |

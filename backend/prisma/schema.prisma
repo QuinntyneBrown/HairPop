@@ -29,6 +29,7 @@ model User {
   braider         Braider?
   reviews         Review[]
   verifications   EmailVerification[]
+  passwordResets  PasswordReset[]
   notifications   CustomerNotification[]
 }
 
@@ -39,6 +40,18 @@ model EmailVerification {
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   /// The address the link verifies: the account email or its pending replacement.
   email     String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+/// A single-use password reset link (L2-012). Only the SHA-256 of the token is stored (L2-039).
+model PasswordReset {
+  id        String    @id
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   expiresAt DateTime
   usedAt    DateTime?
   createdAt DateTime  @default(now())
