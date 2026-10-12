@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video 02 Slides</title>
+<link rel="stylesheet" href="../assets/slides.css">
+</head>
+<body data-video-number="02" data-video-title="Finding a braider" data-parts="Introduction|Matching|Search|Filters|Braiders|Profile|Edge cases|Recap">
+
+<section id="title" data-part="0">
+  <div class="kicker">HairPop · Video 02</div>
+  <h1>Finding a braider</h1>
+  <p class="lead">Matching braiders, search, filters and the public braider profile, recorded from the customer web app.</p>
+</section>
+
+<section id="routes" data-part="0" data-cue="As before, this is the real app">
+  <h2>Where these screens live</h2>
+  <div class="cols">
+    <div class="card">
+      <h3>Matching braiders</h3>
+      <p><code>/styles/:slug/braiders</code></p>
+      <p class="small muted">and <code>/braiders</code> without a style</p>
+    </div>
+    <div class="card">
+      <h3>Filter dialog</h3>
+      <p>A CDK Dialog opened from <strong>Filters</strong></p>
+    </div>
+    <div class="card">
+      <h3>Braider profile</h3>
+      <p><code>/braiders/:slug</code></p>
+      <p class="small muted">Cast: Nia, Aisha, Jules</p>
+    </div>
+  </div>
+</section>
+
+<section id="matching" data-part="1" data-cue="Find a braider on a style page opens the braiders" data-clip="clips/matching-overview.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>Matching braiders</h3>
+    <ul>
+      <li>Availability or “No times offered yet”</li>
+      <li>Rating read as one sentence</li>
+      <li>“Not yet rated” instead of a number</li>
+      <li>Area and service price</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="search" data-part="2" data-cue="The search box narrows the list by name" data-clip="clips/matching-search.mp4">
+  <aside class="clip-notes">
+    <h3>Search</h3>
+    <ul>
+      <li>Keeps the selected style</li>
+      <li>Term kept in the address</li>
+      <li>No matches offers Clear filters</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="filters" data-part="3" data-cue="Filters opens a dialog rather than an inline form." data-clip="clips/filters-apply.mp4">
+  <aside class="clip-notes">
+    <h3>Filter braiders</h3>
+    <ul>
+      <li>Maximum price and distance</li>
+      <li>Active filters shown as chips</li>
+      <li>Reopening shows what is applied</li>
+      <li>Cancel changes nothing</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="validation" data-part="3" data-cue="The dialog checks answers before it sends anything." data-clip="clips/filters-validation.mp4">
+  <aside class="clip-notes">
+    <h3>Validation and failure</h3>
+    <ul>
+      <li>Error summary links to the field</li>
+      <li>Lowest price for the style named</li>
+      <li>A failed save keeps every entry</li>
+      <li>Try again applies</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="no-results" data-part="3" data-cue="If valid filters simply match nobody" data-clip="clips/filters-no-results.mp4">
+  <aside class="clip-notes">
+    <h3>No matches</h3>
+    <ul>
+      <li>Suggests a wider range</li>
+      <li>Clear filters restores the style</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="destination" data-part="4" data-cue="You do not have to start from a style." data-clip="clips/braiders-destination.mp4">
+  <aside class="clip-notes">
+    <h3>Braiders</h3>
+    <ul>
+      <li>Braiders near Toronto</li>
+      <li>Same cards, no style needed</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="profile" data-part="5" data-cue="The profile starts with identity." data-clip="clips/profile-overview.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>Braider profile</h3>
+    <ul>
+      <li>Identity, rating, area, travel</li>
+      <li>Services with prices</li>
+      <li>Before you book</li>
+      <li>Recent work and reviews</li>
+      <li>Studio address stays private</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="reviews-retry" data-part="6" data-cue="If reviews fail to load" data-clip="clips/profile-reviews-retry.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>Reviews failed</h3>
+    <ul>
+      <li>One warning, profile stays</li>
+      <li>Retry reviews in place</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="new-braider" data-part="6" data-cue="A braider who is just starting out" data-clip="clips/profile-new-braider.mp4" data-clip-delay="1">
+  <aside class="clip-notes">
+    <h3>New braider</h3>
+    <ul>
+      <li>Not yet rated</li>
+      <li>No portfolio photos yet</li>
+      <li>No reviews yet</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="recap" data-part="7" data-cue="Recap">
+  <h2>Things to remember</h2>
+  <ul class="recap">
+    <li>Cards show availability, an honest rating, area and price</li>
+    <li>Search and filters keep the style; filters live in a dialog</li>
+    <li>The dialog validates, survives failures and keeps entries</li>
+    <li>Profiles keep the studio address private until a request is accepted</li>
+    <li>Missing reviews or photos get honest empty states</li>
+  </ul>
+  <p class="muted small">Next: 03 · Accounts and signing in</p>
+</section>
+
+<script src="../assets/slides.js"></script>
+</body>
+</html>
