@@ -35,3 +35,10 @@ model Session {
 
   @@index([userId])
 }
+
+/// Fixed-window counters for abuse controls (L2-040).
+model RateLimit {
+  key     String   @id
+  hits    Int
+  resetAt DateTime
+}

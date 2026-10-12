@@ -20,3 +20,9 @@ export class ApiError extends Error {
 
 export const notFound = () => new ApiError(404, { message: 'Not found.' });
 export const unauthenticated = () => new ApiError(401, { message: 'Unauthenticated.' });
+export const tooManyAttempts = (retryAfter: number) =>
+  new ApiError(
+    429,
+    { message: 'Too many attempts.', retryAfter },
+    { 'Retry-After': String(retryAfter) },
+  );

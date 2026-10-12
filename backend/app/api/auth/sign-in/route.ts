@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { setSessionCookie } from '@/application/auth/session-cookie';
 import { signIn } from '@/application/auth/sign-in';
-import { ApiError } from '@/http/api-error';
+import { ApiError, tooManyAttempts } from '@/http/api-error';
 import { route } from '@/http/route';
 import { parseBody } from '@/http/validation';
 
@@ -17,6 +17,8 @@ export const POST = route(
     const result = await signIn(await parseBody(request, SignInBody));
 
     switch (result.outcome) {
+      case 'rate_limited':
+        throw tooManyAttempts(result.retryAfter);
       case 'invalid_credentials':
         throw new ApiError(422, { message: 'These credentials do not match our records.' });
       case 'not_braider':
