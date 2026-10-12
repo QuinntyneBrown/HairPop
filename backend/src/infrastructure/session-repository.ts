@@ -23,3 +23,7 @@ export async function createSession(userId: string): Promise<{ token: string; ex
   await prisma.session.create({ data: { id: hash(token), userId, expiresAt } });
   return { token, expiresAt };
 }
+
+export async function deleteSession(token: string): Promise<void> {
+  await prisma.session.deleteMany({ where: { id: hash(token) } });
+}
