@@ -37,3 +37,38 @@ export function toStyleSummary(style: StyleRecord): StyleSummary {
     typicalPrice: range(style.typicalPriceMin, style.typicalPriceMax),
   };
 }
+
+export interface StyleVariation {
+  readonly name: string;
+  readonly description: string;
+}
+
+export type StyleOptionalFact = 'typicalWear' | 'variations' | 'quoteFactors';
+
+export interface StyleDetail extends StyleSummary {
+  readonly intro: string;
+  readonly typicalWear: Range | null;
+  readonly variations: readonly StyleVariation[];
+  readonly quoteFactors: readonly string[];
+  /** Optional facts that failed to load; every fact comes from one row, so this is always empty. */
+  readonly unavailable: readonly StyleOptionalFact[];
+}
+
+interface StyleDetailRecord extends StyleRecord {
+  readonly intro: string;
+  readonly typicalWearMin: number | null;
+  readonly typicalWearMax: number | null;
+  readonly variations: unknown;
+  readonly quoteFactors: readonly string[];
+}
+
+export function toStyleDetail(style: StyleDetailRecord): StyleDetail {
+  return {
+    ...toStyleSummary(style),
+    intro: style.intro,
+    typicalWear: range(style.typicalWearMin, style.typicalWearMax),
+    variations: style.variations as StyleVariation[],
+    quoteFactors: style.quoteFactors,
+    unavailable: [],
+  };
+}

@@ -24,3 +24,7 @@ export async function findPublishedStyles(criteria: StyleCriteria, skip: number,
   ]);
   return { styles, total };
 }
+
+export function findPublishedStyle(slug: string) {
+  return prisma.style.findFirst({ where: { slug, published: true } });
+}
