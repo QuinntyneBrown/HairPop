@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** A requested slot shows its reference and offers no withdraw action.
 
+**Backend.** `MaintainBraiderAvailability` is braider-only and lists the braider's own future slots, soonest first, with the reference of any request or pending change holding each one. `date` and `time` are Toronto wall-clock values converted to an instant with the zone's offset on that date; a start that is not in the future is 422 `errors.date`, and `maxHours` is more than 0 and at most 12. Additions for one braider are serialized with an advisory lock, and a slot that overlaps another of the braider's slots is 409 `overlap`. Withdrawing locks the slot row: a slot held by an awaiting or confirmed request or a pending change is 409 `requested` (L2-028 AC2), another braider's slot is 403. Booking and change requests re-check the slot inside their own transactions (`booking/submit-booking-request`, `appointments/request-time-change`).
+
 | Part | Value |
 |------|-------|
 | Application | braider |
