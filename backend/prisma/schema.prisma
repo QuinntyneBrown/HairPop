@@ -18,6 +18,9 @@ model User {
   /// Stored normalized: trimmed and lower-cased.
   email           String    @unique
   emailVerifiedAt DateTime?
+  /// A changed email waiting for its verification link (L2-014); normalized like `email`.
+  pendingEmail    String?
+  phone           String?
   passwordHash    String
   role            Role      @default(customer)
   createdAt       DateTime  @default(now())
@@ -25,6 +28,52 @@ model User {
   sessions        Session[]
   braider         Braider?
   reviews         Review[]
+  verifications   EmailVerification[]
+  notifications   CustomerNotification[]
+}
+
+/// A single-use email verification link (L2-013). Only the SHA-256 of the token is stored (L2-039).
+model EmailVerification {
+  id        String    @id
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// The address the link verifies: the account email or its pending replacement.
+  email     String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+/// An email waiting for the worker (ADR 0009). The text is cleared once it is delivered.
+model OutboundEmail {
+  id            String    @id @default(cuid())
+  to            String
+  subject       String
+  text          String
+  attempts      Int       @default(0)
+  nextAttemptAt DateTime  @default(now())
+  lastError     String?
+  sentAt        DateTime?
+  createdAt     DateTime  @default(now())
+
+  @@index([sentAt, nextAttemptAt])
+}
+
+/// An update in the customer's notification center (L2-029, L2-030).
+model CustomerNotification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  body      String
+  /// An app path such as /appointments/HP-1048, or null when there is no destination.
+  link      String?
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, createdAt])
 }
 
 /// A signed-in browser (ADR 0008). The cookie holds an opaque token; only its SHA-256 is stored.

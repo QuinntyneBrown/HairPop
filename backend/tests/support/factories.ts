@@ -4,12 +4,15 @@ import { db } from './db';
 export const PASSWORD = 'correct horse battery';
 
 /** Maya Chen, the customer cast in docs/mocks/README.md. */
-export async function createCustomer(overrides: { email?: string; name?: string } = {}) {
+export async function createCustomer(
+  overrides: { email?: string; name?: string; verified?: boolean; phone?: string | null } = {},
+) {
   return db().user.create({
     data: {
       name: overrides.name ?? 'Maya Chen',
       email: overrides.email ?? 'maya.chen@example.com',
-      emailVerifiedAt: new Date('2026-10-01T12:00:00Z'),
+      emailVerifiedAt: overrides.verified === false ? null : new Date('2026-10-01T12:00:00Z'),
+      phone: overrides.phone === undefined ? '416-555-0148' : overrides.phone,
       passwordHash: await hashPassword(PASSWORD),
       role: 'customer',
     },
