@@ -10,6 +10,20 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** Toast copy names the completed action and only claims what the response confirmed (L2-029 AC2, L2-031).
 
+**Backend.** `RecordCustomerUpdate` writes a `CustomerNotification` in the same transaction as the event it describes, so an update never claims a change that was rolled back (L2-029 AC2). Links are app paths to the customer's own destination, or `null`.
+
+| Event | Title | Link |
+|-------|-------|------|
+| Request submitted | "<Braider> received your request" | `/appointments/{ref}` |
+| Request accepted / declined | "Time confirmed" / "Request declined" | `/appointments/{ref}` |
+| Change accepted / declined | "New time confirmed" / "Change declined" | `/appointments/{ref}` |
+| Request or appointment cancelled | "Request cancelled" / "Appointment cancelled" | `/appointments/{ref}` |
+| Review published / held | "Review posted" / "Review held for checks" | `/braiders/{slug}` |
+| Email verified | "Your email is verified" | `/settings` |
+| Details saved / new email pending | "Details updated" / "Verify your new email" | `/settings` |
+| Password reset | "Your password was changed" | `/settings` |
+| Cookie choice saved while signed in | "Preferences saved" | `null` |
+
 | Part | Value |
 |------|-------|
 | Application | customer |
