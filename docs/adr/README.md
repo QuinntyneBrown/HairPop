@@ -10,3 +10,4 @@
 | [0006](0006-theme-persistence.md) | Theme persistence |
 | [0007](0007-backend-nextjs-postgres-prisma.md) | Backend on Node.js, Next.js, PostgreSQL and Prisma |
 | [0008](0008-session-auth-db-sessions-csrf.md) | Session authentication with database sessions and double-submit CSRF |
+| [0009](0009-email-outbox-worker.md) | Email through a transactional outbox drained by the worker |

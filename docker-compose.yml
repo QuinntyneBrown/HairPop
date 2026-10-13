@@ -21,6 +21,7 @@ services:
     environment:
       DATABASE_URL: postgresql://hairpop:hairpop@db:5432/hairpop
       TEST_DATABASE_URL: postgresql://hairpop:hairpop@db:5432/hairpop_test
+      APP_ORIGIN: http://localhost:4200
     ports:
       - '8000:8000'
     volumes:
@@ -30,6 +31,28 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  # Delivers queued emails (ADR 0009). Starts after the API has installed dependencies.
+  worker:
+    build: ./backend
+    command: sh -c "until [ -d node_modules/.prisma/client ]; do sleep 2; done && npm run worker"
+    environment:
+      DATABASE_URL: postgresql://hairpop:hairpop@db:5432/hairpop
+      SMTP_URL: smtp://mailpit:1025
+    volumes:
+      - ./backend:/app
+      - api-node-modules:/app/node_modules
+    depends_on:
+      api:
+        condition: service_started
+      mailpit:
+        condition: service_started
+
+  # Catches development email; open http://localhost:8025.
+  mailpit:
+    image: axllent/mailpit:v1.21
+    ports:
+      - '8025:8025'
 
 volumes:
   db-data:

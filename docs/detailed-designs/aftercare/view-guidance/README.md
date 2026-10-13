@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** `guidance: null` shows the empty guidance state while the review form stays usable (L2-024 AC3).
 
+**Backend.** `GetVisitGuidance` reads the owner's appointment (404 for any other reference). Care guidance is the booked service's `careGuidance`, written by its braider, with `source` "<Braider name>, for <service name>"; it is shown only after a completed visit and is `null` when the list is empty (L2-024 AC3). `date` is the visit's Toronto date. `review` is `submitted` once a review exists, `open` for a completed visit and `not_allowed` otherwise. The preparation checklist before a visit is on the appointment detail (`appointments/view-appointments`).
+
 | Part | Value |
 |------|-------|
 | Application | customer |

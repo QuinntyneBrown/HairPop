@@ -10,7 +10,7 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** Success shows the next step and links to `/verify-email`; a registered email receives a sign-in reminder instead, so the response reveals nothing (L2-010 AC3).
 
-**Backend.** `RegisterCustomer` inserts with `ON CONFLICT DO NOTHING` on the normalized email, so a retry — with the same `Idempotency-Key` or not — never creates a second account and never changes an existing one (L2-010 AC3, AC4); no idempotency record is stored for this endpoint. Registrations are limited to five per email per hour (L2-040). Sending the verification challenge and the sign-in reminder lands with `identity/verify-email`.
+**Backend.** `RegisterCustomer` inserts with `ON CONFLICT DO NOTHING` on the normalized email, so a retry — with the same `Idempotency-Key` or not — never creates a second account and never changes an existing one (L2-010 AC3, AC4); no idempotency record is stored for this endpoint. Registrations are limited to five per email per hour (L2-040). The same transaction queues the verification link for a new account or a sign-in reminder for a known address (`identity/verify-email`).
 
 | Part | Value |
 |------|-------|

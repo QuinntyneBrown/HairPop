@@ -4,12 +4,15 @@ import { db } from './db';
 export const PASSWORD = 'correct horse battery';
 
 /** Maya Chen, the customer cast in docs/mocks/README.md. */
-export async function createCustomer(overrides: { email?: string; name?: string } = {}) {
+export async function createCustomer(
+  overrides: { email?: string; name?: string; verified?: boolean; phone?: string | null } = {},
+) {
   return db().user.create({
     data: {
       name: overrides.name ?? 'Maya Chen',
       email: overrides.email ?? 'maya.chen@example.com',
-      emailVerifiedAt: new Date('2026-10-01T12:00:00Z'),
+      emailVerifiedAt: overrides.verified === false ? null : new Date('2026-10-01T12:00:00Z'),
+      phone: overrides.phone === undefined ? '416-555-0148' : overrides.phone,
       passwordHash: await hashPassword(PASSWORD),
       role: 'customer',
     },
@@ -142,6 +145,7 @@ export function createService(
     startingPrice: number;
     typicalHours: number;
     published: boolean;
+    preparation: string | null;
   }> = {},
 ) {
   return db().braiderService.create({
@@ -193,4 +197,89 @@ export async function createReview(
       createdAt: overrides.createdAt,
     },
   });
+}
+
+/** An update in a customer's notification center; unread unless `readAt` is given. */
+export function createNotification(
+  userId: string,
+  overrides: Partial<{
+    title: string;
+    body: string;
+    link: string | null;
+    createdAt: Date;
+    readAt: Date;
+  }> = {},
+) {
+  return db().customerNotification.create({
+    data: {
+      userId,
+      title: overrides.title ?? 'Nia received your request',
+      body: overrides.body ?? 'She will confirm the time and final price.',
+      link: overrides.link === undefined ? '/appointments/HP-1048' : overrides.link,
+      createdAt: overrides.createdAt,
+      readAt: overrides.readAt,
+    },
+  });
+}
+
+/** An instant `days` from now at `hourUtc`:00 UTC, with no milliseconds. */
+export function daysFromNow(days: number, hourUtc = 14): Date {
+  const date = new Date();
+  date.setUTCDate(date.getUTCDate() + days);
+  date.setUTCHours(hourUtc, 0, 0, 0);
+  return date;
+}
+
+type AppointmentData = Parameters<ReturnType<typeof db>['appointment']['create']>[0]['data'];
+
+let attempts = 0;
+
+/** A request for the service by the customer; awaiting reply two weeks out unless overridden. */
+export function createAppointment(
+  customerId: string,
+  service: {
+    id: string;
+    braiderId: string;
+    name: string;
+    startingPrice: number;
+    typicalHours: number;
+  },
+  overrides: Partial<{
+    number: number;
+    status: 'awaiting_reply' | 'confirmed' | 'declined' | 'cancelled';
+    start: Date;
+    slotId: string | null;
+    agreedAmount: number | null;
+    estimateMax: number | null;
+    version: number;
+  }> = {},
+) {
+  attempts += 1;
+  const status = overrides.status ?? 'awaiting_reply';
+  const slotId = overrides.slotId ?? null;
+  const active = status === 'awaiting_reply' || status === 'confirmed';
+  const data: AppointmentData = {
+    customerId,
+    braiderId: service.braiderId,
+    serviceId: service.id,
+    slotId,
+    heldSlotId: active ? slotId : null,
+    serviceName: service.name,
+    start: overrides.start ?? daysFromNow(14),
+    durationHours: service.typicalHours,
+    estimateMin: service.startingPrice,
+    estimateMax: overrides.estimateMax ?? null,
+    agreedAmount: overrides.agreedAmount ?? null,
+    email: 'maya.chen@example.com',
+    phone: '416-555-0148',
+    hairDetails: 'Shoulder length; bringing my own extensions',
+    policyVersion: 'test',
+    changePolicy: 'Request a change at least 48 hours before.',
+    cancellationPolicy: 'Free up to 48 hours before; later cancellations may be charged $40.',
+    status,
+    version: overrides.version ?? 1,
+    idempotencyKey: `attempt-${attempts}`,
+    ...(overrides.number === undefined ? {} : { number: overrides.number }),
+  };
+  return db().appointment.create({ data });
 }

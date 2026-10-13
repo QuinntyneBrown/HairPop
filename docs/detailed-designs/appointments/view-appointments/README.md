@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** A 404 for a reference renders the access-unavailable page (L2-019 AC4, L2-037 AC3). The last successful detail per reference is kept in session storage for the offline state and cleared at sign-out (L2-045).
 
+**Backend.** `ReadOwnedAppointments` reads only the signed-in customer's `Appointment` rows; any other reference — another customer's, unknown or malformed — is 404 `{ message: 'Not found.' }`. `completed` is not stored: a confirmed appointment reads as completed once its start plus duration has passed. `upcoming` means a start from now on (soonest first); `past` and `all` list the latest first. `search` matches the service or braider name case-insensitively, or a reference such as `HP-1048` or `1048`. `price` is the snapshot estimate, or `{ kind: 'agreed', min: amount, max: amount }` once the braider agreed an amount. `location.address` is the studio address only for confirmed or completed appointments (L2-027 AC3). `preparation` lists the braider's preparation guidance and the service's own, one item per line, or `null` when neither exists (L2-024 AC3). `allowed.change` needs an active item at least 48 hours away with no pending change; `allowed.cancel` needs an active item that has not started; `rebook` and `review` need a completed visit (`review` also needs no review yet). Every fact comes from one read, so `unavailable` is always empty.
+
 | Part | Value |
 |------|-------|
 | Application | customer |

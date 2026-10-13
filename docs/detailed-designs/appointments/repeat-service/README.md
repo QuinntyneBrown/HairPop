@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** Book again navigates to the booking form with the service preselected and no slot chosen (L2-023 AC1). `service_unavailable` opens the braider's profile with a warning toast (L2-023 AC2).
 
+**Backend.** `PrepareRepeatBooking` answers for the owner's completed visit only (409 `not_completed` otherwise; 404 for another customer's reference). It returns the visit's braider and service when the service is still published for a published style and the braider is published, and 409 `service_unavailable` otherwise (L2-023 AC2). It creates nothing and carries no time over.
+
 | Part | Value |
 |------|-------|
 | Application | customer |

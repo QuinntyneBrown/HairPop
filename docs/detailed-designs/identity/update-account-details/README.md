@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** A changed email comes back as `pendingEmail` until verified (L2-014 AC3).
 
+**Backend.** `UpdateCustomerDetails` trims the name, normalizes the email and stores a blank phone as `null`. An email equal to the account's clears `pendingEmail`; a new address becomes `pendingEmail` and is emailed a verification link in the same transaction — or, when it belongs to another account, a sign-in reminder, so the response never reveals it. Opening the link moves it to `email` (`identity/verify-email`). Each save records "Details updated" or, after a new email, "Verify your new email" (L2-029). The endpoints are customer-only: a braider session gets 403 `not_customer`. Field errors are `errors.name`, `errors.email` and `errors.phone`.
+
 | Part | Value |
 |------|-------|
 | Application | customer |

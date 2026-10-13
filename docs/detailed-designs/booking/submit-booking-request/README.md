@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** One idempotency key is created when the review dialog opens and reused for every retry of that attempt (L2-017 AC2). `terms_changed` reloads the options and returns to review (L2-016 AC3); `slot_unavailable` and `service_unavailable` mark the field to reselect (L2-015 AC2).
 
+**Backend.** `SubmitBookingRequest` locks the chosen `OfferedSlot` row for its transaction, so competing requests for one slot serialize; then it re-checks the attempt's `Idempotency-Key` (unique per customer), the published service, the slot (offered by that braider, in the future, free, and at least as long as the service) and the `policyVersion`, in that order. The new `Appointment` snapshots the service name, duration, estimate (`estimateMin` = starting price), contact, hair details and the change and cancellation policies the customer reviewed (L2-027 AC2), and holds the slot through the unique `heldSlotId` until it is declined or cancelled (L2-028 AC3). References come from a sequence starting at 1001 and render as `HP-` plus at least four digits. Success records "<Braider> received your request" (L2-029). A customer may create ten requests an hour (L2-040 AC2); a missing or malformed key answers 422 `code: 'idempotency_key_required'`. Field errors are `errors.serviceId`, `errors.slotId`, `errors.email`, `errors.phone` and `errors.hairDetails` (1–500 characters).
+
 | Part | Value |
 |------|-------|
 | Application | customer |

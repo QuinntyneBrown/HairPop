@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** The saved choice is also written to the essential cookie `hp-consent` after a successful save, so the banner stays away on return (L2-034 AC2). Nothing optional is stored before a choice (L2-034 AC1).
 
+**Backend.** `PUT /api/consent` stays anonymous (L2-034 AC4). When the request carries a customer's session, the saved choice is also recorded as a "Preferences saved" update (`notifications/record-updates`).
+
 | Part | Value |
 |------|-------|
 | Application | customer |

@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** The rating is a horizontal radio group and the text a textarea; both keep their values after a failure (L2-025 AC5).
 
+**Backend.** `SubmitVisitReview` stores one `Review` per appointment (unique `appointmentId`), tied to the visit's braider and service. A repeat with the attempt's `Idempotency-Key` — or a concurrent duplicate — answers 201 with the first review; a second review under another key is 409 `already_reviewed` (L2-025 AC4). Only a completed visit can be reviewed: anything else is 403 `not_completed`, and another customer's reference is 404 so the visit is not disclosed (L2-038 AC2). Text with a link, an email address or a phone number is saved as `pending` for moderation; other reviews publish at once and count in ratings (L2-008). Success records "Review posted" or "Review held for checks" (L2-029). Field errors are `errors.rating` and `errors.text` (1–1,000 characters after trimming).
+
 | Part | Value |
 |------|-------|
 | Application | customer |

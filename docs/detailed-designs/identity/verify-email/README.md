@@ -10,6 +10,8 @@ HairPop connects customers with braiders through published styles, service offer
 
 **Frontend.** With a `token` the page verifies on load; without one it explains the next step and offers Resend email.
 
+**Backend.** `VerifyCustomerEmail` stores only the SHA-256 of each link token (L2-039 AC3); a link lasts 24 hours and is consumed with a conditional update, so two concurrent opens verify once. A link for the account's `pendingEmail` moves that address to `email` (L2-014 AC3); a link for any other address — superseded by a later change — is `invalid_token`. Success records the "Your email is verified" notification (L2-029). Registration queues the link for a new account and a sign-in reminder for a known address in the same transaction as the insert; mail leaves through the outbox ([ADR 0009](../../../adr/0009-email-outbox-worker.md)). Resend answers 202 with no body whether or not the address needs verifying, and is limited to three per address per 15 minutes (L2-040).
+
 | Part | Value |
 |------|-------|
 | Application | customer |

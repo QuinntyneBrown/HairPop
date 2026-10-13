@@ -20,3 +20,15 @@ const torontoDate = new Intl.DateTimeFormat('en-CA', {
 export function localDate(instant: Date): string {
   return torontoDate.format(instant);
 }
+
+/**
+ * Whether a new review is held for moderation before it is public: text that carries a link,
+ * an email address or a phone number may advertise or expose private details (L2-039).
+ */
+export function needsChecks(text: string): boolean {
+  return (
+    /(https?:\/\/|www\.)/i.test(text) ||
+    /[\w.+-]+@[\w-]+\.[\w.]+/.test(text) ||
+    /(\d[\s().-]?){7,}/.test(text)
+  );
+}
