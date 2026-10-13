@@ -175,7 +175,13 @@ export const test = base.extend<{ api: Api; consent: ConsentChoice }>({
     const goto = page.goto.bind(page);
     page.goto = async (...args: Parameters<typeof goto>) => {
       const response = await goto(...args);
-      await page.locator('hp-root[data-hydrated]').waitFor({ state: 'attached' });
+      await page
+        .locator(
+          page.url().startsWith(BRAIDER_URL)
+            ? 'app-root, hp-root[data-hydrated]'
+            : 'hp-root[data-hydrated]',
+        )
+        .waitFor({ state: 'attached' });
       return response;
     };
     await use(page);

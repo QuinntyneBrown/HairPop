@@ -23,6 +23,7 @@ export class BraiderProfilePage {
   readonly emptyState: Locator;
   readonly loading: Locator;
   readonly offline: Locator;
+  readonly reportDialog: Locator;
 
   constructor(readonly page: Page) {
     this.shell = new Shell(page);
@@ -43,6 +44,11 @@ export class BraiderProfilePage {
     this.emptyState = page.locator('hp-empty-state');
     this.loading = page.locator('hp-skeleton-group');
     this.offline = page.locator('hp-alert', { hasText: 'You’re offline' });
+    this.reportDialog = page.getByRole('dialog', { name: 'Report a review' });
+  }
+
+  reportReview(index: number): Locator {
+    return this.reviews.getByRole('button', { name: 'Report review' }).nth(index);
   }
 
   async open(slug: string): Promise<Response | null> {

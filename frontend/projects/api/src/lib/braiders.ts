@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, InjectionToken, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 import { Image, Page } from './common';
 import { Rating } from './matching';
 import { queryParams } from './styles';
+import { Csrf } from './csrf';
 
 /** docs/detailed-designs/profiles/inspect-braider. */
 export interface BraiderService {
@@ -62,6 +63,13 @@ export interface BraidersApi {
   get(slug: string): Observable<BraiderProfile>;
   /** A page of the braider's published reviews, newest first. */
   reviews(slug: string, page?: number): Observable<Page<Review>>;
+  reportReview(
+    id: string,
+    details: {
+      reason: 'not_real_visit' | 'offensive' | 'private_info' | 'other';
+      details: string | null;
+    },
+  ): Observable<{ reportId: string }>;
 }
 
 export const BRAIDERS_API = new InjectionToken<BraidersApi>('BRAIDERS_API');
@@ -69,6 +77,7 @@ export const BRAIDERS_API = new InjectionToken<BraidersApi>('BRAIDERS_API');
 @Injectable()
 export class HttpBraidersApi implements BraidersApi {
   private readonly http = inject(HttpClient);
+  private readonly csrf = inject(Csrf);
 
   get(slug: string): Observable<BraiderProfile> {
     return this.http.get<BraiderProfile>(`/api/braiders/${encodeURIComponent(slug)}`);
@@ -78,5 +87,24 @@ export class HttpBraidersApi implements BraidersApi {
     return this.http.get<Page<Review>>(`/api/braiders/${encodeURIComponent(slug)}/reviews`, {
       params: queryParams({ page }),
     });
+  }
+
+  reportReview(
+    id: string,
+    details: {
+      reason: 'not_real_visit' | 'offensive' | 'private_info' | 'other';
+      details: string | null;
+    },
+  ): Observable<{ reportId: string }> {
+    return this.csrf
+      .ensure()
+      .pipe(
+        switchMap(() =>
+          this.http.post<{ reportId: string }>(
+            `/api/reviews/${encodeURIComponent(id)}/reports`,
+            details,
+          ),
+        ),
+      );
   }
 }

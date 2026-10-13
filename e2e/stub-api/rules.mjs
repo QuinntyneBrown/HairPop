@@ -48,6 +48,7 @@ export const DEFAULT_RULES = [
     headers: { 'set-cookie': 'XSRF-TOKEN=e2e-xsrf-token; Path=/' },
   },
   { method: 'GET', path: '/api/session', status: 401, body: { message: 'Unauthenticated.' } },
+  { method: 'GET', path: '/api/notifications/unread-count', body: { count: 0 } },
 ];
 
 /** The body sent when no rule matches, so a missing stub is obvious. */

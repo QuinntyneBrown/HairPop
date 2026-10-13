@@ -41,6 +41,19 @@ export interface AuthApi {
    * email was already registered; the key makes a retry safe (L2-010 AC3, AC4).
    */
   register(details: RegisterDetails, idempotencyKey: string): Observable<{ email: string }>;
+  /** Sends a neutral response whether or not the account exists. */
+  forgotPassword(email: string): Observable<void>;
+  /** Consumes a single-use reset link and ends existing sessions. */
+  resetPassword(details: {
+    token: string;
+    email: string;
+    password: string;
+    passwordConfirmation: string;
+  }): Observable<{ email: string }>;
+  /** Consumes a single-use email-verification link. */
+  verifyEmail(token: string): Observable<{ email: string }>;
+  /** Reissues a verification email with a neutral response. */
+  resendVerification(email: string): Observable<void>;
 }
 
 export const AUTH_API = new InjectionToken<AuthApi>('AUTH_API');
@@ -70,6 +83,39 @@ export class HttpAuthApi implements AuthApi {
         }),
       ),
     );
+  }
+
+  forgotPassword(email: string): Observable<void> {
+    return this.csrf
+      .ensure()
+      .pipe(switchMap(() => this.http.post<void>('/api/auth/forgot-password', { email })));
+  }
+
+  resetPassword(details: {
+    token: string;
+    email: string;
+    password: string;
+    passwordConfirmation: string;
+  }): Observable<{ email: string }> {
+    return this.csrf
+      .ensure()
+      .pipe(
+        switchMap(() => this.http.post<{ email: string }>('/api/auth/reset-password', details)),
+      );
+  }
+
+  verifyEmail(token: string): Observable<{ email: string }> {
+    return this.csrf
+      .ensure()
+      .pipe(switchMap(() => this.http.post<{ email: string }>('/api/email/verify', { token })));
+  }
+
+  resendVerification(email: string): Observable<void> {
+    return this.csrf
+      .ensure()
+      .pipe(
+        switchMap(() => this.http.post<void>('/api/email/verification-notification', { email })),
+      );
   }
 
   signOut(): Observable<void> {
