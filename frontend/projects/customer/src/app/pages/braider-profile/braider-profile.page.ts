@@ -8,14 +8,22 @@ import {
   signal,
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
-import { ApiError, BRAIDERS_API, BraiderProfile, hoursRange, money } from '@hairpop/api';
+import { Router, RouterLink } from '@angular/router';
+import {
+  ApiError,
+  BRAIDERS_API,
+  BraiderProfile,
+  SessionStore,
+  hoursRange,
+  money,
+} from '@hairpop/api';
 import {
   Alert,
   Avatar,
   Button,
   Card,
   DescriptionList,
+  DialogService,
   EmptyState,
   Gallery,
   GalleryItem,
@@ -31,6 +39,7 @@ import {
 
 import { NotFoundPage } from '../errors/not-found.page';
 import { responseStatus } from '../../shared/response-status';
+import { ReportReviewDialog } from './report-review.dialog';
 
 /** "Nia Okafor" → "Nia". */
 function firstName(name: string): string {
@@ -134,14 +143,25 @@ function firstName(name: string): string {
                   [count]="p.rating?.count ?? 0"
                 ></span>
                 @for (review of reviews.value().data; track review.id) {
-                  <figure
-                    hp-review-quote
-                    [rating]="review.rating"
-                    [date]="review.date"
-                    [text]="review.text"
-                    [author]="review.author"
-                    [service]="review.service"
-                  ></figure>
+                  <div>
+                    <figure
+                      hp-review-quote
+                      [rating]="review.rating"
+                      [date]="review.date"
+                      [text]="review.text"
+                      [author]="review.author"
+                      [service]="review.service"
+                    ></figure>
+                    <button
+                      hp-button
+                      variant="link"
+                      size="sm"
+                      type="button"
+                      (click)="report(review.id)"
+                    >
+                      Report review
+                    </button>
+                  </div>
                 }
               } @else {
                 <hp-empty-state
@@ -254,6 +274,9 @@ function firstName(name: string): string {
 })
 export class BraiderProfilePage {
   private readonly api = inject(BRAIDERS_API);
+  private readonly session = inject(SessionStore);
+  private readonly router = inject(Router);
+  private readonly dialogs = inject(DialogService);
 
   /** Route parameter. */
   readonly slug = input.required<string>();
@@ -306,5 +329,13 @@ export class BraiderProfilePage {
     return profile.travelKm === null
       ? profile.area
       : `${profile.area} · travels up to ${profile.travelKm} km`;
+  }
+
+  protected report(reviewId: string): void {
+    if (this.session.user()?.role !== 'customer') {
+      void this.router.navigate(['/sign-in'], { queryParams: { returnUrl: this.router.url } });
+      return;
+    }
+    this.dialogs.open<ReportReviewDialog, string, boolean>(ReportReviewDialog, { data: reviewId });
   }
 }

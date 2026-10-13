@@ -6,7 +6,7 @@
     "start": "ng serve storybook",
     "build": "npm run build:libs && npm run build:apps",
     "build:libs": "ng build components && ng build api",
-    "build:apps": "ng build customer",
+    "build:apps": "ng build customer && ng build braider",
     "build:storybook": "ng build storybook",
     "watch": "ng build components --watch --configuration development",
     "lint": "ng lint",

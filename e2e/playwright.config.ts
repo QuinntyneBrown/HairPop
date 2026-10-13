@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import { CUSTOMER_PORT, CUSTOMER_URL, STUB_API_PORT } from './fixtures/urls';
+import { BRAIDER_PORT, CUSTOMER_PORT, CUSTOMER_URL, STUB_API_PORT } from './fixtures/urls';
 
 const frontendDist = '../frontend/dist';
 
@@ -31,6 +31,12 @@ export default defineConfig({
       command: `node ${frontendDist}/customer/server/server.mjs`,
       port: CUSTOMER_PORT,
       env: { PORT: String(CUSTOMER_PORT), API_ORIGIN: `http://localhost:${STUB_API_PORT}` },
+      reuseExistingServer: !process.env['CI'],
+    },
+    {
+      command: 'node static-braider/server.mjs',
+      url: `http://localhost:${BRAIDER_PORT}/__e2e/health`,
+      env: { BRAIDER_PORT: String(BRAIDER_PORT) },
       reuseExistingServer: !process.env['CI'],
     },
   ],

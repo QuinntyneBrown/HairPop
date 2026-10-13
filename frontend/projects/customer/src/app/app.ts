@@ -4,6 +4,7 @@ import {
   Injector,
   afterNextRender,
   computed,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -26,6 +27,7 @@ import { filter, map, take } from 'rxjs';
 
 import { ConsentPreferences } from './shared/consent-preferences';
 import { CookieBanner } from './shared/cookie-banner';
+import { UnreadCountStore } from './shared/unread-count.store';
 
 /** The primary destinations, in top-bar order (top-bar.md). */
 const NAV_LINKS: readonly TopBarLink[] = [
@@ -71,6 +73,7 @@ function currentNav(route: ActivatedRouteSnapshot): string | null {
         [links]="links"
         [current]="current()"
         [account]="account()"
+        [updates]="updates()"
       >
         <button slot="actions" hp-button variant="ghost" size="sm" hpThemeToggle>Dark theme</button>
       </header>
@@ -98,6 +101,17 @@ export class App {
   protected readonly links = NAV_LINKS;
   protected readonly footerLinks = FOOTER_LINKS;
   private readonly session = inject(SessionStore);
+  private readonly unread = inject(UnreadCountStore);
+  protected readonly updates = computed(() =>
+    this.session.user()?.role === 'customer'
+      ? {
+          label: 'Updates',
+          link: '/notifications',
+          unreadCount: this.unread.count(),
+          unreadText: `, ${this.unread.count()} unread`,
+        }
+      : null,
+  );
 
   /** The person's first name once signed in; otherwise the way to sign in. */
   protected readonly account = computed(() => {
@@ -109,6 +123,13 @@ export class App {
 
   constructor() {
     this.announceTitleOnNavigation();
+    effect(() => {
+      if (this.session.user()?.role === 'customer') {
+        afterNextRender(() => void this.unread.refresh(), { injector: this.injector });
+      } else {
+        this.unread.set(0);
+      }
+    });
     const injector = inject(Injector);
     this.router.events
       .pipe(
@@ -117,6 +138,8 @@ export class App {
       )
       .subscribe(() => afterNextRender(() => this.hydrated.set(true), { injector }));
   }
+
+  private readonly injector = inject(Injector);
 
   /**
    * Announces the page title after a client-side navigation to another page (L2-041); the first

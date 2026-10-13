@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { customerAuthGuard } from './shared/customer-auth.guard';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,70 @@ export const routes: Routes = [
     path: 'sign-up',
     title: 'Create account · HairPop',
     loadComponent: () => import('./pages/sign-up/sign-up.page').then((m) => m.SignUpPage),
+  },
+  {
+    path: 'forgot-password',
+    title: 'Reset your password · HairPop',
+    loadComponent: () =>
+      import('./pages/password-recovery/forgot-password.page').then((m) => m.ForgotPasswordPage),
+  },
+  {
+    path: 'reset-password',
+    title: 'Choose a new password · HairPop',
+    loadComponent: () =>
+      import('./pages/password-recovery/reset-password.page').then((m) => m.ResetPasswordPage),
+  },
+  {
+    path: 'verify-email',
+    title: 'Check your email · HairPop',
+    loadComponent: () =>
+      import('./pages/verify-email/verify-email.page').then((m) => m.VerifyEmailPage),
+  },
+  {
+    path: 'settings',
+    title: 'Account settings · HairPop',
+    canActivate: [customerAuthGuard],
+    data: { nav: 'account' },
+    loadComponent: () =>
+      import('./pages/account-settings/account-settings.page').then((m) => m.AccountSettingsPage),
+  },
+  {
+    path: 'book/:braiderSlug',
+    title: 'Request your appointment · HairPop',
+    canActivate: [customerAuthGuard],
+    loadComponent: () =>
+      import('./pages/booking-request/booking-request.page').then((m) => m.BookingRequestPage),
+  },
+  {
+    path: 'appointments',
+    title: 'My appointments · HairPop',
+    canActivate: [customerAuthGuard],
+    data: { nav: 'appointments' },
+    loadComponent: () =>
+      import('./pages/appointments/appointments.page').then((m) => m.AppointmentsPage),
+  },
+  {
+    path: 'notifications',
+    title: 'Notifications · HairPop',
+    canActivate: [customerAuthGuard],
+    loadComponent: () =>
+      import('./pages/notifications/notifications.page').then((m) => m.NotificationsPage),
+  },
+  {
+    path: 'appointments/:ref',
+    title: 'Your appointment · HairPop',
+    canActivate: [customerAuthGuard],
+    data: { nav: 'appointments' },
+    loadComponent: () =>
+      import('./pages/appointments/appointment-detail.page').then((m) => m.AppointmentDetailPage),
+  },
+  {
+    path: 'appointments/:ref/care',
+    title: 'Care and review · HairPop',
+    canActivate: [customerAuthGuard],
+    data: { nav: 'appointments' },
+    loadComponent: () =>
+      import('./pages/care-and-review/care-and-review.page').then((m) => m.CareAndReviewPage),
   },
   {
     path: 'help',
