@@ -10,6 +10,8 @@ The customer journey also covers appointment requests, updates, and care after a
 
 ## Project status
 
+The [end-to-end completion audit](docs/audits/2026-10-13-end-to-end-completion-audit.md) scores what is complete and lays out the roadmap to finish the product.
+
 HairPop is being redesigned. The requirements, detailed designs, and customer journey mocks are in the repository. The existing Angular workspace is an earlier prototype and does not yet implement the full redesigned journey. The Node.js / Next.js backend described in [AGENTS.md](AGENTS.md) has not landed.
 
 | Area | Location | Status |
