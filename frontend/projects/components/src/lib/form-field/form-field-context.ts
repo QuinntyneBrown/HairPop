@@ -1,7 +1,7 @@
 import { InjectionToken, Signal } from '@angular/core';
 import type { NgControl } from '@angular/forms';
 
-/** What a control inside a form field registers with it (form field CRD, *Control contract*). */
+/** What a control inside a form field registers with it. */
 export interface FormFieldControl {
   /** Id of the element the label targets and the summary link moves to: the input itself, or the checked (else first) option of a group. */
   readonly id: Signal<string>;

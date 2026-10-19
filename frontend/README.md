@@ -4,7 +4,7 @@ Angular 21 workspace for HairPop's web applications. It currently holds:
 
 | Project               | Path                           | Purpose                                                                                                                                   |
 | --------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `components`          | `projects/components`          | `@hairpop/components`, the shared components library built to the CRDs in [`docs/specs/components/`](../docs/specs/components/README.md). |
+| `components`          | `projects/components`          | `@hairpop/components`, the shared components library. |
 | `storybook`           | `projects/storybook`           | The component storybook: browse every component's stories in light and dark. See [its README](projects/storybook/README.md).              |
 | `components-examples` | `projects/components-examples` | One examples page per component, rendered by the storybook. A source folder, not a built project.                                         |
 

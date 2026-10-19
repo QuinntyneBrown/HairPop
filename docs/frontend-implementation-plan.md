@@ -28,6 +28,6 @@ Complete the customer journey and separate braider management app defined in `do
 
 ## Implementation rules
 
-For each production-behavior slice, align L2 acceptance criteria, detailed design, and mocks first. Write a Given-When-Then Playwright test using a page object and confirm it fails for the expected reason before writing production code. Implement one working increment, run its relevant regression checks, then continue. API services belong in `@hairpop/api` behind contracts and injection tokens. Both applications bind their tokens. Reuse shared components; update a component's CRD before changing it, and update its stories and perf scenario with the change. Use CDK Dialog for button-triggered editing.
+For each production-behavior slice, align L2 acceptance criteria, detailed design, and mocks first. Write a Given-When-Then Playwright test using a page object and confirm it fails for the expected reason before writing production code. Implement one working increment, run its relevant regression checks, then continue. API services belong in `@hairpop/api` behind contracts and injection tokens. Both applications bind their tokens. Reuse shared components; when changing one, update its stories and perf scenario with the change. Use CDK Dialog for button-triggered editing.
 
 Frontend e2e tests run in Chromium against mocked API responses, including the SSR stub. Cover applicable loading, empty, validation, failure, offline, success, and conflict states from the mock manifest. Preserve the existing unrelated `AGENTS.md` working-tree modification.

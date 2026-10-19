@@ -8,7 +8,7 @@ const LINKS: readonly TopBarLink[] = [
   { id: 'help', label: 'Help', link: '/help' },
 ];
 
-/** The signed-in customer bar with Updates and the theme toggle (top-bar CRD, Performance). */
+/** The signed-in customer bar with Updates and the theme toggle. */
 @Component({
   selector: 'hp-top-bar-scenario',
   changeDetection: ChangeDetectionStrategy.OnPush,

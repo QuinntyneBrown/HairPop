@@ -17,7 +17,7 @@ const NIA_WORK: readonly GalleryItem[] = [
   { id: 'work-3', src: null, alt: '', caption: 'Passion twists · Sep 2026' },
 ];
 
-/** Nia's three portfolio items on her public profile (gallery CRD, Performance). */
+/** Nia's three portfolio items on her public profile. */
 @Component({
   selector: 'hp-gallery-scenario',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -4,7 +4,7 @@ import { Button, FieldAddon, FormField, Icon, SearchBox, TextField } from '@hair
 
 import { Example } from '../shared';
 
-/** Stories for the text field (text field CRD): types, sizes, states and the search box. */
+/** Stories for the text field: types, sizes, states and the search box. */
 @Component({
   selector: 'hp-text-field-examples',
   changeDetection: ChangeDetectionStrategy.OnPush,

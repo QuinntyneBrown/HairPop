@@ -16,7 +16,7 @@ export type TextFieldSize = 'sm' | 'md' | 'lg';
 
 /**
  * One short typed answer: the native `<input>` with the design system's look and the
- * form field wiring (text field CRD). The host is the input; the template is empty.
+ * form field wiring. The host is the input; the template is empty.
  */
 @Component({
   selector: 'input[hp-text-field]',
@@ -121,7 +121,7 @@ export class TextField implements OnInit {
   /** With `type="password"`, renders `type="text"` so the password is visible (D-5). */
   readonly revealed = input(false, { transform: booleanAttribute });
   /** Host id; defaults to the form field's control id, else `hp-text-field-{n}`. */
-  // eslint-disable-next-line @angular-eslint/no-input-rename -- the native `id` attribute is the input (CRD API); `id` itself is the rendered-id getter.
+  // eslint-disable-next-line @angular-eslint/no-input-rename -- the native `id` attribute is the input (component API); `id` itself is the rendered-id getter.
   readonly idInput = input<string | undefined>(undefined, { alias: 'id' });
   /** Ids the consumer adds; the form field's ids are appended after them (D-8). */
   // eslint-disable-next-line @angular-eslint/no-input-rename -- aliased so a static `aria-describedby` reaches the component (text field D-8).

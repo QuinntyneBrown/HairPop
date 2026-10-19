@@ -6,7 +6,7 @@ export type SelectSize = 'sm' | 'md' | 'lg';
 
 /**
  * One value from a known list: the native `<select>` with the design system's chevron, sizes and
- * states, and the form field wiring (select CRD). Projected `<option>` and `<optgroup>` children
+ * states, and the form field wiring. Projected `<option>` and `<optgroup>` children
  * stay in place.
  */
 @Component({
@@ -111,7 +111,7 @@ export class Select implements OnInit {
   /** Adds `.select--sm` or `.select--lg`; md adds no modifier. Not `size` (D-3). */
   readonly fieldSize = input<SelectSize>('md');
   /** Host id; defaults to the form field's control id, else `hp-select-{n}`. */
-  // eslint-disable-next-line @angular-eslint/no-input-rename -- the native `id` attribute is the input (CRD API); `id` itself is the rendered-id getter.
+  // eslint-disable-next-line @angular-eslint/no-input-rename -- the native `id` attribute is the input (component API); `id` itself is the rendered-id getter.
   readonly idInput = input<string | undefined>(undefined, { alias: 'id' });
   /** Ids the consumer adds; the form field's ids are appended after them. */
   // eslint-disable-next-line @angular-eslint/no-input-rename -- aliased so a static `aria-describedby` reaches the component (text field D-8).

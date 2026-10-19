@@ -12,7 +12,6 @@ HairPop connects customers with professional hair braiders. Customers can explor
 ## Repository and documentation conventions
 
 - `docs/specs/` — requirements (`L1.md` high-level, `L2.md` detailed with acceptance criteria).
-- `docs/specs/components/` — component requirements documents (CRDs): `<component>.md` and `<component>.html`, tracing to L2.
 - `docs/detailed-designs/` — detailed designs grouped by subsystem and feature.
 - `docs/mocks/` — static design references for every page and state, in light and dark themes.
 - `docs/design-system/` — tokens, foundations, components, and patterns extracted from the mocks.
@@ -56,8 +55,6 @@ Create planned folders as the corresponding work lands. If an implementation nee
 Mocks and the design system are design artifacts. ATDD does not apply to their development. Do not write tests for mocks or the design system.
 
 Every new feature or change to production behavior **must** have a requirement, a detailed design, and a mock before implementation begins. This includes behavioral changes to existing features. This requirement applies to production-code changes only; documentation-only, design-system-only, mock-only, and test-only changes are out of scope unless they are part of implementing a production behavior change.
-
-A component in the shared components library also **must** have a CRD in `docs/specs/components/` before it is built or changed. Write it with the `writing-component-requirements-documents` skill, and only after L1/L2 and the design system or mocks exist. The CRD must be complete enough to build the whole component without later API changes. Its Given-When-Then criteria are the slices' acceptance criteria. If a component's behavior changes, update the CRD first.
 
 Every production behavior implementation **must** invoke and follow the `implementing-incrementally` skill before writing code, combined with acceptance test-driven development. Plan small, reviewable slices, then complete one slice at a time: write Given-When-Then acceptance criteria, write the acceptance test, and run it to prove it fails for the expected reason before writing production code. Implement only what satisfies that slice, refactor with tests green, and run the relevant regression checks. Do not move to the next slice until those checks pass. Do not bulk-implement, add tests afterward, or weaken tests to manufacture a pass. Keep the requirement, detailed design, mock, criteria, tests, and implementation aligned until the entire change is complete.
 

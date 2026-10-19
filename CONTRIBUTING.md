@@ -18,7 +18,7 @@ Do not post a security vulnerability in a public issue. Follow [SECURITY.md](SEC
 ## Development workflow
 
 1. Fork the repository and create a focused branch.
-2. For production behavior changes, update the requirement, detailed design, and mock **before** writing production code. A shared component also needs a component requirements document in `docs/specs/components/`.
+2. For production behavior changes, update the requirement, detailed design, and mock **before** writing production code.
 3. Follow the `implementing-incrementally` skill in [`.agents/skills/`](.agents/skills/): write Given-When-Then criteria, add an acceptance test, confirm it fails for the expected reason, then implement one slice and run the relevant regression checks.
 4. Keep the requirements, design, mock, tests, and implementation aligned. Open a pull request that explains the user-facing change, links the relevant requirement, and records the checks you ran.
 
