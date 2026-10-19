@@ -1,7 +1,7 @@
 import { InjectionToken, Signal } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
-/** What each form field registers with its enclosing form layout (form layout CRD, *Field contract*). */
+/** What each form field registers with its enclosing form layout. */
 export interface FormLayoutField {
   /** The field's label text. */
   readonly label: Signal<string>;

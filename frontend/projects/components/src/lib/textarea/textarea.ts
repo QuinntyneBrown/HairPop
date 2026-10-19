@@ -3,7 +3,7 @@ import { injectNativeFieldControl, optionalBooleanAttribute } from '../form-fiel
 
 /**
  * A few sentences in the customer's own words: the native `<textarea>` with the design system's
- * look, an auto-grow variant and the form field wiring (textarea CRD). The template is empty.
+ * look, an auto-grow variant and the form field wiring. The template is empty.
  */
 @Component({
   selector: 'textarea[hp-textarea]',
@@ -98,7 +98,7 @@ export class Textarea implements OnInit {
   /** Adds `.textarea--auto-grow`: grows with the text from 100 px up to 240 px, no resize handle. */
   readonly autoGrow = input(false, { transform: booleanAttribute });
   /** Host id; defaults to the form field's control id, else `hp-textarea-{n}`. */
-  // eslint-disable-next-line @angular-eslint/no-input-rename -- the native `id` attribute is the input (CRD API); `id` itself is the rendered-id getter.
+  // eslint-disable-next-line @angular-eslint/no-input-rename -- the native `id` attribute is the input (component API); `id` itself is the rendered-id getter.
   readonly idInput = input<string | undefined>(undefined, { alias: 'id' });
   /** Ids the consumer adds; the form field's ids are appended after them. */
   // eslint-disable-next-line @angular-eslint/no-input-rename -- aliased so a static `aria-describedby` reaches the component (text field D-8).

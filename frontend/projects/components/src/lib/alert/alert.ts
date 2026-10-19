@@ -73,7 +73,7 @@ const FOCUSABLE = [
       --alert-fg: var(--color-info-fg);
       --alert-border: var(--color-info-border);
       --alert-icon: var(--color-info-icon);
-      /* Projected inherit links are semibold in the tone colour (D-6, link CRD D-3). */
+      /* Projected inherit links are semibold in the tone colour (D-6). */
       --link-inherit-font-weight: var(--font-weight-semibold);
       display: flex;
       gap: var(--space-3);

@@ -157,7 +157,7 @@ main:focus {
   gap: var(--space-4);
 }
 
-/* Sidebar layout: the sidebar navigation's column beside main from 1024px (sidebar-navigation CRD). */
+/* Sidebar layout: the sidebar navigation's column beside main from 1024px. */
 .sidebar-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

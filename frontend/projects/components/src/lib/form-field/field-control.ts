@@ -18,7 +18,7 @@ export interface NativeFieldControl {
 
 /**
  * Implements the single-control rules of the form field contract for a component whose host is
- * the native form element (form field CRD, *Control contract*). Call in an injection context.
+ * the native form element. Call in an injection context.
  */
 export function injectNativeFieldControl(
   prefix: string,

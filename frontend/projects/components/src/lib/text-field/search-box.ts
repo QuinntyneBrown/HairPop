@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, input } from '@an
 
 /**
  * The search box part of the text field: positions a projected search icon at the start of a
- * projected `input[hp-text-field] type="search"` (text field CRD). The host is the native `<div>`.
+ * projected `input[hp-text-field] type="search"`. The host is the native `<div>`.
  */
 @Component({
   selector: 'div[hp-search-box]',

@@ -10,7 +10,7 @@ const LONG_REVIEW =
   'what she quoted. I already booked my next visit and would recommend her to anyone in ' +
   'Toronto looking for neat, lightweight knotless braids that last.';
 
-/** Stories for the textarea (textarea CRD): variants, the counter and every state. */
+/** Stories for the textarea: variants, the counter and every state. */
 @Component({
   selector: 'hp-textarea-examples',
   changeDetection: ChangeDetectionStrategy.OnPush,

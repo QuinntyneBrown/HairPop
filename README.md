@@ -51,7 +51,7 @@ The intended platform uses Angular web applications and a Node.js 22 / Next.js 1
 .
 ├── assets/                  Logo and shared assets
 ├── docs/
-│   ├── specs/               Product and component requirements
+│   ├── specs/               Product requirements
 │   ├── detailed-designs/    Feature designs
 │   ├── mocks/               Static customer journey references
 │   ├── design-system/       Tokens, foundations, components, and patterns
@@ -64,7 +64,7 @@ The intended platform uses Angular web applications and a Node.js 22 / Next.js 1
 
 ## Implementation workflow
 
-Every production behavior change starts with [L1 and L2 requirements](docs/specs/), a [detailed design](docs/detailed-designs/), and a [mock](docs/mocks/README.md). Reusable Angular components also need a component requirements document in `docs/specs/components/` before implementation. Keep those artifacts aligned when behavior changes.
+Every production behavior change starts with [L1 and L2 requirements](docs/specs/), a [detailed design](docs/detailed-designs/), and a [mock](docs/mocks/README.md). Keep those artifacts aligned when behavior changes.
 
 Implementation proceeds in small acceptance test driven slices: write Given/When/Then criteria, add an acceptance test and confirm it fails for the expected reason, implement that slice, then run its regression checks. Backend acceptance tests exercise the API. Frontend acceptance tests use Playwright page objects and mocked API fixtures. Mocks and design-system artifacts are design work and do not require acceptance tests.
 

@@ -48,7 +48,7 @@ let nextFieldId = 0;
 
 /**
  * Keeps one question together: label (or legend), the projected control, hint, error and
- * counter, wired so assistive technology hears all of it (form field CRD). The host is the
+ * counter, wired so assistive technology hears all of it. The host is the
  * native `<div>` (one control) or `<fieldset>` (a checkbox or radio group) and carries `.field`.
  */
 @Component({

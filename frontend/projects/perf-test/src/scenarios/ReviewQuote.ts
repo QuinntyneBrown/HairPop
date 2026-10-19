@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ReviewQuote } from '@hairpop/components';
 
-/** One of Nia's published reviews on her profile (review-quote CRD, Performance). */
+/** One of Nia's published reviews on her profile. */
 @Component({
   selector: 'hp-review-quote-scenario',
   changeDetection: ChangeDetectionStrategy.OnPush,

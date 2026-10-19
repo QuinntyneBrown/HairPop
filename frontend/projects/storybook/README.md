@@ -22,5 +22,5 @@ npm run build:storybook   # static build → dist/storybook/browser
 ## Add stories for a component
 
 1. Create `projects/components-examples/src/<component>/<component>-examples.ts`, a standalone OnPush component named `<Component>Examples` with selector `hp-<component>-examples`.
-2. Render one `<hp-example heading="…">` per variant, size and state in the component's CRD (`docs/specs/components/<component>.md`). Use cast and copy from `docs/mocks/README.md`.
+2. Render one `<hp-example heading="…">` per variant, size and state in the component's design-system page and mocks. Use cast and copy from `docs/mocks/README.md`.
 3. Add an entry to `COMPONENT_EXAMPLES`. Its `id` is the component's folder name and becomes the route, for example `/button`.

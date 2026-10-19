@@ -5,7 +5,7 @@
 
 ## Context
 
-Discovery, Help, legal and error pages are public and benefit from server rendering (first paint, link previews, real HTTP statuses for 404/403/500 as the error-page CRD requires). Signed-in pages hold private data that must never be cached or rendered for the wrong person. AGENTS.md requires e2e tests to stub server-side API calls with a server configured as the SSR server's `API_ORIGIN`.
+Discovery, Help, legal and error pages are public and benefit from server rendering (first paint, link previews, real HTTP statuses for 404/403/500 as the error pages require). Signed-in pages hold private data that must never be cached or rendered for the wrong person. AGENTS.md requires e2e tests to stub server-side API calls with a server configured as the SSR server's `API_ORIGIN`.
 
 ## Decision
 
